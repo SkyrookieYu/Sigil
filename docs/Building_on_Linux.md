@@ -1,17 +1,17 @@
 # <center>Building Sigil on Linux</center>
-## <center>Systems like Ubuntu 16.04 (and its derivatives) or newer</center>
+## <center>Systems like Ubuntu 18.04 (and its derivatives) or newer</center>
 
-If you're looking for instructions on how to build on systems older than Ubuntu 16.04 (systems whose repo version of Qt5 is less than 5.4.2), you should look at the [Building_on_older_Linux](./Building_on_older_Linux.md) documentation.
+If you're looking for instructions on how to build on systems older than Ubuntu 18.04 (systems whose repo version of Qt5 is less than 5.9.4), you should look at the [Building_on_older_Linux](./Building_on_older_Linux.md) documentation.
 
 ## General Overview
 
-The requirements for building Sigil on newer Linux systems like Ubuntu 16.04, Mint 18, Arch Linux, etc., should be able to be installed entirely from your system's software repositories.
+The requirements for building Sigil on newer Linux systems like Ubuntu 18.04, Mint 19, Arch Linux, etc., should be able to be installed entirely from your system's software repositories.
 
 To build Sigil on newer Linux systems, you need to get/do the following things:
 
 1. [A Linux build-toolchain](#gcc) with a C++11 capable compiler (gcc 4.9.x or higher recommended)
 2. [CMake](#cmake) (3.0 or higher)
-3. [Qt5.4.2 or higher](#qt5) (with QtWebKit)
+3. [Qt5.9.4 or higher](#qt5) (with QtWebEngine)
 4. [3rd-party dependencies](#thirdparty) (an optional step)
 5. [Python 3.4](#python) (or higher)
 6. [The Sigil source code](#sigil) (downloaded tarball/zipfile or a git clone)
@@ -36,20 +36,18 @@ to get pretty-much everything you need to configure/compile/install C++ projects
 Once again: `sudo apt-get install cmake` will get you what you need on Ubuntu-type systems.
 
 ## <a name="qt5"/>Getting Qt5
-<center>**If your repos don't provide at lease Qt5.4.2, use the [Building_on_older_Linux](./Building_on_older_Linux.md) documentation**</center>
-
+<center>**If your repos don't provide at lease Qt5.9.4, use the [Building_on_older_Linux](./Building_on_older_Linux.md) documentation**</center>
 To get Sigil's Qt5 requirements, `sudo apt-get install` the following packages:
 
 + qtbase5-dev
 + qttools5-dev
 + qttools5-dev-tools
-+ libqt5webkit5-dev
-+ libqt5svg5-dev
-+ libqt5xmlpatterns5-dev
++ qtwebengine5-dev
+
 
 The folllowing command can be copied and pasted for convenience:
 
-`sudo apt-get install qtbase5-dev qttools5-dev qttools5-dev-tools libqt5webkit5-dev libqt5svg5-dev libqt5xmlpatterns5-dev`
+`sudo apt-get install qtbase5-dev qttools5-dev qttools5-dev-tools qtwebengine5-dev`
 
 ## <a name="thirdparty"/>3rd-Party Dependencies (optional step)
 Sigil will provide the extra third-party libs if you do nothing, but most (if not all) of Sigil's third-party dependencies should be avialable in your software repos. If you want to make use of them, `sudo apt-get install` the following packages.
@@ -71,10 +69,12 @@ On Ubuntu/Debian `sudo apt-get install` (at a minimum) the following packages:
 + python3-pip
 + python3-lxml
 + python3-six
++ python3-css-parser (may have to use `pip3 install css-parser` if your distro has no package for this)
++ python3-dulwich (unless your distro has very recent version (0.19.x) in its repos, you'll probably need to use `pip3 install dulwich` to install a new enough version that will work with Sigil. dulwich requires that the urllib3 and certifi modules be installed as well)
 
 The folllowing command can be copied and pasted for convenience:
 
-`sudo apt-get install python3-dev python3-pip python3-lxml python3-six`
+`sudo apt-get install python3-dev python3-pip python3-lxml python3-six python3-css-parser python3-dulwich`
 
 That's all the Python 3.4 (or higher) stuff you will need to get Sigil "up and running", but if you want to make use of Sigil plugins that people are developing, you will also want to install the "standard" modules that ship with the binary version of Sigil on Windows and OS X. These should all be able to be installed with `sudo apt-get install`.
 
@@ -84,12 +84,11 @@ That's all the Python 3.4 (or higher) stuff you will need to get Sigil "up and r
 + python3-regex
 + python3-pillow (could be python3-pil)
 + python3-cssselect
-+ python3-cssutils
 + python3-chardet
 
 The folllowing command can be copied and pasted for convenience:
 
-`sudo apt-get install python3-tk python3-pyqt5 python3-html5lib python3-regex python3-pillow python3-cssselect python3-cssutils python3-chardet`
+`sudo apt-get install python3-tk python3-pyqt5 python3-html5lib python3-regex python3-pillow python3-cssselect python3-chardet`
 
 If you run into any that won't install with `sudo apt-get install` you can still use pip3 to install them.
 
@@ -167,9 +166,13 @@ There are several configuration and environment variable options that can tailor
 
 ### CMake options
 
+-DQt5_DIR=`<path>` Configures cmake to use a Qt5 installation other than the normal system version of Qt5 (ex. /opt/Qt5.12.3/5.12/gcc_64/lib/cmake/Qt5 - the path should alays end in /lib/cmake/Qt5)
+
 -DCMAKE_INSTALL_PREFIX=`<path>` Configures the prefix where Sigil will be installed to (default is /usr/local)
 
 -DSHARE_INSTALL_PREFIX=`<path>` Configures the prefix where Sigil's support files will be installed to (default is /usr/local meaning the support files will be installed in /usr/local/share/sigil)
+
+-DCMAKE_INSTALL_LIBDIR=(lib|lib64) Use to override GnuInstallDirs if it doesn't choose the correct lib directory for your distro.
 
 -DUSE_SYSTEM_LIBS=(0|1) Tells cmake to try and use the system libraries when building Sigil instead of the ones bundled with Sigil in the 3rdParty directory. If a system version of a 3rd-party can't be found, Sigil falls back on the bundled version -- unless -DSYSTEM_LIBS_REQUIRED=1 is also specified (default is 0).
 
@@ -178,6 +181,8 @@ There are several configuration and environment variable options that can tailor
 -DINSTALL_BUNDLED_DICTS=(0|1) Default is 1. Can be used to enable/disable the installation of the bundled Hunspell dictionaries used for spellchecking. If this is disabled (-DINSTALL_BUNDLED_DICTS=0), then the standard system spell-check dictionary location of /usr/share/hunspell will be searched for eligible dictionaries. If additional system paths need to be searched for dictionaries, they can be added using the -DEXTRA_DICT_DIRS option. Setting this to 0 will require that you manually install the language-specific hunspell dictionaries (from your software repos) yourself (e.g. `sudo apt-get install hunspell-en-us`).
 
 -DEXTRA_DICT_DIRS=`<path1>`:`<path2>` Path(s) that should be searched for eligible spellcheck dictionaries (in addition to /usr/share/hunspell). Multiple paths should be separated by colons. This option is only relevant if -DINSTALL_BUNDLED_DICTS=0 is also specified.
+
+-DMATHJAX_DIR=`<path>` If you would like use your system's MathJax implementation instead of the one that comes bundled with Sigil, use this cmake directive when first configuring. A minimum of MathJax v2.7.0 is required to work with Sigil. NOTE: if -DMATHJAX_DIR=`<path>` is used, Sigil will install a config script to `<path>`/config/local. This file is required for Sigil's Preview to be able properly render MathML. This feature was added between Sigil 0.9.12 and 0.9.13.
 
 The following three cmake options are used to manually specify which Python3 you want to use when building Sigil instead of relying on the included cmake utilities to try and automatically find a suitable version.
 
@@ -199,6 +204,8 @@ SIGIL_EXTRA_ROOT - Handy for relocating the Sigil support files. For instance yo
 
 SIGIL_DICTIONARIES - Used to tell Sigil what directories are to be searched for Hunspell dictionary files. Multiple directories can be specified by separating the paths with a colon. i.e. SIGIL_DICTIONARIES="/usr/share/hunspell" or SIGIL_DICTIONARIES="/usr/share/hunspell:/usr/share/hunspellextra" Setting this variable at run time will override all compile-time dictionary search paths (except for any user-supplied dictionaries manually added to their preference directory's hunspell_dictionary location).
 
-SIGIL_ICON_SCALE_FACTOR - Valid values: 1.0 to 3.0. The default value (with no variable set) is 1.8. Sigil scales its menu icons based on font-size. This can sometimes result in icons being a bit too large (or too small) depending on the system Qt theme. Use this variable to tweak the icon size if deemed necessary. (Only works with Sigil v0.9.7 and earlier; v0.9.8 has a preference setting to adjust icons)
+FORCE_SIGIL_DARKMODE_PALETTE - If this variable is set at runtime, it tells Sigil to ignore any defined platform themes/styles (QT_QPA_PLATFORMTHEME, or QT_STYLE_OVERRIDE) and to use the dark color palette provided by Sigil (starting with Sigil v1.1).
+
+SIGIL_ICON_SCALE_FACTOR - Valid values: 1.0 to 3.0. The default value (with no variable set) is 1.8. Sigil scales its menu icons based on font-size. This can sometimes result in icons being a bit too large (or too small) depending on the system Qt theme. Use this variable to tweak the icon size if deemed necessary. **(Only works with Sigil v0.9.7 and earlier; v0.9.8 has a preference setting to adjust icons)**
 
 The Sigil launch script also sets a SIGIL_SHARE_PREFIX environment variable, but it is automatically set to be the same as the cmake SHARE_INSTALL_PREFIX build-time option. It would be unwise to change this environment variable. Use the SIGIL_EXTRA_ROOT environment variable instead, if you need to alter the location of Sigil's support files after building Sigil.

@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -31,23 +32,31 @@ ContentTab::ContentTab(Resource *resource, QWidget *parent)
     :
     QWidget(parent),
     m_Resource(resource),
-    m_Layout(new QVBoxLayout(this))
+    m_Layout(new QVBoxLayout(this)),
+    m_resource_was_deleted(false)
 {
-    connect(resource, SIGNAL(Deleted(const Resource *)),          this, SLOT(EmitDeleteMe()));
+    connect(resource, SIGNAL(Deleted(const Resource *)),          this, SLOT(UnderlyingResourceDeleted()));
     connect(resource, SIGNAL(Renamed(const Resource *, QString)), this, SLOT(EmitTabRenamed()));
+    connect(resource, SIGNAL(Moved(const Resource *, QString)), this, SLOT(EmitTabRenamed()));
     m_Layout->setContentsMargins(0, 0, 0, 0);
     setLayout(m_Layout);
 }
 
 ContentTab::~ContentTab()
 {
-   delete m_Layout; 
+   delete m_Layout;
+   m_Resource = NULL;
 }
-
 
 QString ContentTab::GetFilename()
 {
     return m_Resource->Filename();
+}
+
+
+QString ContentTab::GetShortPathName()
+{
+    return m_Resource->ShortPathName();
 }
 
 
@@ -102,6 +111,17 @@ void ContentTab::ContentChangedExternally()
 
 void ContentTab::ChangeCasing(const Utility::Casing casing)
 {
+}
+
+bool ContentTab::GetResourceWasDeleted()
+{  
+    return m_resource_was_deleted;
+}
+
+void ContentTab::UnderlyingResourceDeleted()
+{
+      m_resource_was_deleted = true;
+      EmitDeleteMe();
 }
 
 void ContentTab::EmitDeleteMe()

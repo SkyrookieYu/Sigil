@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -34,9 +35,12 @@
 #include "Misc/Utility.h"
 #include "sigil_exception.h"
 
+#if(0)
 static const QBrush INFO_BRUSH    = QBrush(QColor(224, 255, 255));
 static const QBrush WARNING_BRUSH = QBrush(QColor(255, 255, 230));
 static const QBrush ERROR_BRUSH   = QBrush(QColor(255, 230, 230));
+#endif
+
 const QString ValidationResultsView::SEP = QString(QChar(31));
 
 ValidationResultsView::ValidationResultsView(QWidget *parent)
@@ -45,7 +49,7 @@ ValidationResultsView::ValidationResultsView(QWidget *parent)
     m_ResultTable(new QTableWidget(this))
 {
     setWidget(m_ResultTable);
-    setAllowedAreas(Qt::BottomDockWidgetArea);
+    setAllowedAreas(Qt::BottomDockWidgetArea | Qt::TopDockWidgetArea);
     SetUpTable();
     connect(m_ResultTable, SIGNAL(itemDoubleClicked(QTableWidgetItem *)),
             this,           SLOT(ResultDoubleClicked(QTableWidgetItem *)));
@@ -95,6 +99,7 @@ void ValidationResultsView::ValidateCurrentBook()
     foreach (Resource * resource, resources) {
         if (resource->Type() == Resource::HTMLResourceType) {
             QString apath = resource->GetFullPath();
+	    QString bookpath = resource->GetRelativePath();
             QStringList reslst = ValidateFile(apath);
             if (!reslst.isEmpty()) {
                 foreach (QString res, reslst) {
@@ -114,7 +119,7 @@ void ValidationResultsView::ValidateCurrentBook()
                     int lineno = details[2].toInt();
                     int charoffset = details[3].toInt();
                     QString msg = details[4];
-                    results.append(ValidationResult(vtype,filename,lineno,charoffset,msg));
+                    results.append(ValidationResult(vtype,bookpath,lineno,charoffset,msg));
                 }
             }
         }
@@ -159,7 +164,8 @@ void ValidationResultsView::ResultDoubleClicked(QTableWidgetItem *item)
         return;
     }
 
-    QString filename = QFileInfo(path_item->text()).fileName();
+    QString shortname = path_item->text();
+    QString bookpath = path_item->data(Qt::UserRole+1).toString();
     QTableWidgetItem *line_item = m_ResultTable->item(row, 1);
     QTableWidgetItem *offset_item = m_ResultTable->item(row, 2);
 
@@ -172,12 +178,12 @@ void ValidationResultsView::ResultDoubleClicked(QTableWidgetItem *item)
     int charoffset = offset_item->text().toInt();
 
     try {
-        Resource *resource = m_Book->GetFolderKeeper()->GetResourceByFilename(filename);
+        Resource *resource = m_Book->GetFolderKeeper()->GetResourceByBookPath(bookpath);
         // if character offset info exists, use it in preference to just the line number
         if (charoffset != -1) {
-            emit OpenResourceRequest(resource, line, charoffset, QString(), MainWindow::ViewState_CodeView);
+            emit OpenResourceRequest(resource, line, charoffset, QString());
         } else {
-            emit OpenResourceRequest(resource, line, -1, QString(), MainWindow::ViewState_CodeView);
+            emit OpenResourceRequest(resource, line, -1, QString());
         }
     } catch (ResourceDoesNotExist) {
         return;
@@ -210,30 +216,43 @@ void ValidationResultsView::DisplayResults(const QList<ValidationResult> &result
         int rownum = m_ResultTable->rowCount();
         QTableWidgetItem *item = NULL;
 
-        QBrush row_brush = INFO_BRUSH;
+        QBrush row_brush = Utility::ValidationResultBrush(Utility::INFO_BRUSH);
         if (result.Type() == ValidationResult::ResType_Warn) {
-            row_brush = WARNING_BRUSH;
+            row_brush = Utility::ValidationResultBrush(Utility::WARNING_BRUSH);
         } else if (result.Type() == ValidationResult::ResType_Error) {
-            row_brush = ERROR_BRUSH;
+            row_brush = Utility::ValidationResultBrush(Utility::ERROR_BRUSH);
         }
 
         m_ResultTable->insertRow(rownum);
-
-        QString path = result.Filename();
+ 
+	QString path;
+	QString bookpath = result.BookPath();
+	try {
+	    Resource * resource = m_Book->GetFolderKeeper()->GetResourceByBookPath(bookpath);
+	    path = resource->ShortPathName();
+	} catch (ResourceDoesNotExist) {
+            if (bookpath.isEmpty()) {
+	        path = "***Invalid Book Path Provided ***";
+            } else {
+                path = bookpath;
+	    }
+	}
+	
         item = new QTableWidgetItem(RemoveEpubPathPrefix(path));
-        item->setBackground(row_brush);
+        item->setData(Qt::UserRole+1, bookpath);
+        SetItemPalette(item, row_brush);
         m_ResultTable->setItem(rownum, 0, item);
 
         item = result.LineNumber() > 0 ? new QTableWidgetItem(QString::number(result.LineNumber())) : new QTableWidgetItem(tr("N/A"));
-        item->setBackground(row_brush);
+        SetItemPalette(item, row_brush);
         m_ResultTable->setItem(rownum, 1, item);
 
         item = result.CharOffset() > 0 ? new QTableWidgetItem(QString::number(result.CharOffset())) : new QTableWidgetItem(tr("N/A"));
-        item->setBackground(row_brush);
+        SetItemPalette(item, row_brush);
         m_ResultTable->setItem(rownum, 2, item);
 
         item = new QTableWidgetItem(result.Message());
-        item->setBackground(row_brush);
+        SetItemPalette(item, row_brush);
         m_ResultTable->setItem(rownum, 3, item);
     }
 
@@ -275,5 +294,14 @@ void ValidationResultsView::ConfigureTableForResults()
 QString ValidationResultsView::RemoveEpubPathPrefix(const QString &path)
 {
     return QString(path).remove(QRegularExpression("^[\\w-]+\\.epub/?"));
+}
+
+void ValidationResultsView::SetItemPalette(QTableWidgetItem * item, QBrush &row_brush)
+{
+    if (Utility::IsDarkMode()) {
+        item->setForeground(row_brush);
+    } else {
+        item->setBackground(row_brush);
+    }   
 }
 

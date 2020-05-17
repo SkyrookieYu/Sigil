@@ -1,8 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2018 Kevin Hendricks, Statford, ON 
-**  Copyright (C) 2012 Dave Heiland
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
+**  Copyright (C) 2015-2019 Kevin Hendricks, Statford, ON 
+**  Copyright (C) 2012      Dave Heiland
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **
 **  This file is part of Sigil.
 **
@@ -57,6 +57,11 @@ ImageFilesWidget::ImageFilesWidget()
     ReadSettings();
 }
 
+ImageFilesWidget::~ImageFilesWidget()
+{
+    delete m_ItemModel;
+}
+
 void ImageFilesWidget::CreateReport(QSharedPointer<Book> book)
 {
     m_Book = book;
@@ -102,13 +107,13 @@ void ImageFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
     int total_links = 0;
     QHash<QString, QStringList> image_html_files_hash = m_Book->GetHTMLFilesUsingImages();
     foreach(Resource * resource, m_AllImageResources) {
-        QString filepath = "../" + resource->GetRelativePathToOEBPS();
+        QString filepath = resource->GetRelativePath();
         QString path = resource->GetFullPath();
         QImage image(path);
         QList<QStandardItem *> rowItems;
         // Filename
         QStandardItem *name_item = new QStandardItem();
-        name_item->setText(resource->Filename());
+        name_item->setText(resource->ShortPathName());
         name_item->setToolTip(filepath);
         name_item->setData(filepath);
         rowItems << name_item;
@@ -323,11 +328,16 @@ void ImageFilesWidget::Save()
     QString filter_string = "*.csv;;*.txt;;*.*";
     QString default_filter = "";
     QString save_path = m_LastDirSaved + "/" + m_LastFileSaved;
+    QFileDialog::Options options = QFileDialog::Options();
+#ifdef Q_OS_MAC
+    options = options | QFileDialog::DontUseNativeDialog;
+#endif
     QString destination = QFileDialog::getSaveFileName(this,
                           tr("Save Report As Comma Separated File"),
                           save_path,
                           filter_string,
-                          &default_filter
+			  &default_filter,
+                          options
                                                       );
 
     if (destination.isEmpty()) {
@@ -388,7 +398,7 @@ void ImageFilesWidget::DoubleClick()
     QModelIndex index = ui.fileTree->selectionModel()->selectedRows(0).first();
 
     if (index.row() != m_ItemModel->rowCount() - 1) {
-        QString filename = m_ItemModel->itemFromIndex(index)->data().toString();
+        QString filename = m_ItemModel->itemFromIndex(index)->text();
         emit FindTextInTags(filename);
     }
 }
@@ -399,7 +409,10 @@ void ImageFilesWidget::Delete()
 
     if (ui.fileTree->selectionModel()->hasSelection()) {
         foreach(QModelIndex index, ui.fileTree->selectionModel()->selectedRows(0)) {
-            files_to_delete.append(m_ItemModel->itemFromIndex(index)->text());
+	    QString bookpath = m_ItemModel->itemFromIndex(index)->data().toString();
+	    if (!bookpath.isEmpty()) {
+	        files_to_delete.append(bookpath);
+	    }
         }
     }
     emit DeleteFilesRequest(files_to_delete);

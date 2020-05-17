@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -71,6 +72,10 @@ public:
      */
     ~FolderKeeper();
 
+
+    QString DetermineFileGroup(const QString &filepath, const QString &mimetype);
+
+
     /**
      * Adds a content file to the book folder and returns the
      * corresponding Resource object. The file type is recognized
@@ -80,12 +85,16 @@ public:
      * @param update_opf If set to \c true, then the OPF will be notified
      *                   that a file was added. This will add entries in the
      *                   OPF manifest and potentially the spine as well.
-     * @param mimetype The mimetype for the associated file.
+     * @param mimetype   The mimetype for the associated file.
+     * @param bookpath   The ebook root file relative href
+     * @param folderpath The ebook root folder relative href
      * @return The newly created resource.
      */
     Resource *AddContentFileToFolder(const QString &fullfilepath,
                                      bool update_opf = true,
-                                     const QString &mimetype = QString());
+                                     const QString &mimetype = QString(),
+				     const QString &bookpath = QString(),
+				     const QString &folderpath = QString("\\"));
 
     /**
      * Returns the highest reading order number present in the book.
@@ -104,15 +113,6 @@ public:
      * @return The unique filename.
      */
     QString GetUniqueFilenameVersion(const QString &filename) const;
-
-    /**
-     * Returns a sorted list of all the content filepaths.
-     * The paths returned are relative to the OEBPS directory,
-     * and the sort is alphabetical.
-     *
-     * @return The sorted filepaths.
-     */
-    QStringList GetSortedContentFilesList() const;
 
     /**
      * Returns a list of all the resources in the book.
@@ -153,18 +153,16 @@ public:
      */
     Resource *GetResourceByIdentifier(const QString &identifier) const;
 
-    /**
-     * Returns the resource with the given filename.
-     * @note NOTE THAT RESOURCE FILENAMES CAN CHANGE,
-     *       while identifiers don't. Also, retrieving
-     *       resources by identifier is O(1), this is O(n)
-     *       (and a \b very slow O(n) since we query the filesystem).
-     * @throws ResourceDoesNotExist if the filename is not found.
-     *
-     * @param filename The filename to search for.
-     * @return The searched-for resource.
-     */
-    Resource *GetResourceByFilename(const QString &filename) const;
+    // this is O(1) as is held in a QHash m_Path2Resource
+    // @throws ResourceDoesNotExist if bookpath is not found.
+    Resource *GetResourceByBookPath(const QString &bookpath) const;
+
+    // this is O(n) but no filesystem is queried
+    QString GetBookPathByPathEnd(const QString& path_end) const;
+    
+
+    OPFResource* AddOPFToFolder(const QString &version, const QString& bookpath=QString());
+    static void UpdateContainerXML(const QString &FullPathToMainFolder, const QString& opfbookpath);
 
     /**
      * Returns the book's OPF file.
@@ -180,6 +178,18 @@ public:
      */
     NCXResource *GetNCX() const;
 
+    NCXResource* AddNCXToFolder(const QString &version,
+				const QString& bookpath=QString(),
+				const QString& first_textdir=QString("\\"));
+
+    void RemoveNCXFromFolder();
+
+    QStringList GetFoldersForGroup(const QString &group);
+    void SetFoldersForGroup(const QString &group, const QStringList &folders);
+
+    QString GetDefaultFolderForGroup(const QString &group);
+    QString GetStdFolderForGroup(const QString &group);
+
     /**
      * Returns the full path to the main folder of the publication.
      *
@@ -188,35 +198,21 @@ public:
     QString GetFullPathToMainFolder() const;
 
     /**
-     * Returns the full path to the OEBPS folder of the publication.
-     *
-     * @return The full path.
-     */
-    QString GetFullPathToOEBPSFolder() const;
-
-    /**
-     * Returns the full path to the Text folder of the publication.
-     *
-     * @return The full path.
-     */
-    QString GetFullPathToTextFolder() const;
-
-    /**
-     * Returns the full path to the Image folder of the publication.
-     *
-     * @return The full path.
-     */
-    QString GetFullPathToImageFolder() const;
-
-    QString GetFullPathToAudioFolder() const;
-    QString GetFullPathToVideoFolder() const;
-
-    /**
      * Returns a list of all the resource filenames in the book.
      *
      * @return The filename list.
      */
     QStringList GetAllFilenames() const;
+
+    QStringList GetAllBookPaths() const;
+
+    void updateShortPathNames();
+
+    void PerformInitialLoads();
+
+    void RefreshGroupFolders();
+
+    void SetGroupFolders(const QStringList &bookpaths, const QStringList &mtypes, bool update_only = false);
 
     /**
      * Registers certain file types to be watched for external modifications.
@@ -261,7 +257,10 @@ private slots:
      * Tell the OPF object to updated itself,
      * and (optionally) register the new file with the FS watcher.
      */
+
     void ResourceRenamed(const Resource *resource, const QString &old_full_path);
+
+    void ResourceMoved(const Resource *resource, const QString &old_full_path);
 
     /**
      * Called by the FSWatcher when a watched file has changed on disk.
@@ -270,18 +269,11 @@ private slots:
 
 private:
 
-    /**
-     * Creates the required subfolders of each book.
-     */
-    void CreateFolderStructure();
+    void CreateGroupToFoldersMap();
 
-    /**
-     * Creates the book's infrastructure files, like
-     * the NCX and the OPF.
-     */
-    void CreateInfrastructureFiles();
+    void CreateStdGroupToFoldersMap();
 
-    void CreateExtensionToMediaTypeMap();
+    QString buildShortName(const QString &bookpath, int lvl);
 
     /**
      * Dereferences two pointers and compares the values with "<".
@@ -320,6 +312,8 @@ private:
      */
     QHash<QString, Resource *> m_Resources;
 
+    QHash<QString, Resource *> m_Path2Resource;
+
     /**
      * Ensures thread-safe access to the m_Resources hash.
      */
@@ -336,22 +330,10 @@ private:
     QFileSystemWatcher *m_FSWatcher;
     QStringList m_SuspendedWatchedFiles;
 
-    // Full paths to all the folders in the publication
     QString m_FullPathToMainFolder;
-    QString m_FullPathToMetaInfFolder;
-    QString m_FullPathToOEBPSFolder;
 
-    QString m_FullPathToAudioFolder;
-    QString m_FullPathToVideoFolder;
-    QString m_FullPathToImagesFolder;
-    QString m_FullPathToFontsFolder;
-    QString m_FullPathToTextFolder;
-    QString m_FullPathToStylesFolder;
-    QString m_FullPathToMiscFolder;
-    QHash<QString, QString> m_ExtToMType;
-
-
-
+    QHash<QString, QStringList> m_GrpToFold;
+    QHash<QString, QStringList> m_StdGrpToFold;
 };
 
 
@@ -408,12 +390,12 @@ QList<T *> FolderKeeper::ListResourceSort(const QList<T *> &resource_list)  cons
 template<> inline
 QList<HTMLResource *> FolderKeeper::ListResourceSort<HTMLResource>(const QList<HTMLResource *> &resource_list) const
 {
-    QStringList spine_order_filenames = GetOPF()->GetSpineOrderFilenames();
+    QStringList spine_order_filenames = GetOPF()->GetSpineOrderBookPaths();
     QList<HTMLResource *> htmls = resource_list;
     QList<HTMLResource *> sorted_htmls;
     foreach(const QString & spine_filename, spine_order_filenames) {
         for (int i = 0; i < htmls.count(); ++i) {
-            if (spine_filename == htmls[ i ]->Filename()) {
+            if (spine_filename == htmls[ i ]->GetRelativePath()) {
                 sorted_htmls.append(htmls.takeAt(i));
                 break;
             }

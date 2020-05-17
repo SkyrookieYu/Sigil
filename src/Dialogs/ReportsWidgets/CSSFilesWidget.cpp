@@ -1,8 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2018 Kevin B. Hendricks, Stratford, ON
-**  Copyright (C) 2012 Dave Heiland
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, ON
+**  Copyright (C) 2012      Dave Heiland
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **
 **  This file is part of Sigil.
 **
@@ -54,6 +54,11 @@ CSSFilesWidget::CSSFilesWidget()
     connectSignalsSlots();
 }
 
+CSSFilesWidget::~CSSFilesWidget() {
+    delete m_ItemModel;
+}
+
+
 void CSSFilesWidget::CreateReport(QSharedPointer<Book> book)
 {
     m_Book = book;
@@ -77,8 +82,8 @@ void CSSFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
     // Get all a count of all the linked stylesheets
     QHash<QString, int> linked_stylesheets_hash;
     foreach(HTMLResource * html_resource, m_HTMLResources) {
-        QString html_filename = html_resource->Filename();
         // Get the linked stylesheets for this file
+        // linked_stylesheets now uses book paths to each stylesheets
         QStringList linked_stylesheets = m_Book->GetStylesheetsInHTMLFile(html_resource);
         foreach(QString stylesheet, linked_stylesheets) {
             if (linked_stylesheets.contains(stylesheet)) {
@@ -91,13 +96,14 @@ void CSSFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
     double total_size = 0;
     int total_links = 0;
     foreach(CSSResource * css_resource, m_CSSResources) {
-        QString filepath = "../" + css_resource->GetRelativePathToOEBPS();
+        QString filepath = css_resource->GetRelativePath();
         QString path = css_resource->GetFullPath();
         QList<QStandardItem *> rowItems;
-        // Filename
+        // ShortPathName
         QStandardItem *name_item = new QStandardItem();
-        name_item->setText(css_resource->Filename());
+        name_item->setText(css_resource->ShortPathName());
         name_item->setToolTip(filepath);
+	name_item->setData(filepath);
         rowItems << name_item;
         // File Size
         double ffsize = QFile(path).size() / 1024.0;
@@ -199,8 +205,8 @@ void CSSFilesWidget::DoubleClick()
     QModelIndex index = ui.fileTree->selectionModel()->selectedRows(0).first();
 
     if (index.row() != m_ItemModel->rowCount() - 1) {
-        QString filename = m_ItemModel->itemFromIndex(index)->text();
-        emit OpenFileRequest(filename, 1);
+        QString filepath = m_ItemModel->itemFromIndex(index)->data().toString();
+        emit OpenFileRequest(filepath, 1);
     }
 }
 
@@ -210,7 +216,8 @@ void CSSFilesWidget::Delete()
 
     if (ui.fileTree->selectionModel()->hasSelection()) {
         foreach(QModelIndex index, ui.fileTree->selectionModel()->selectedRows(0)) {
-            files_to_delete.append(m_ItemModel->itemFromIndex(index)->text());
+	    QString bookpath = m_ItemModel->itemFromIndex(index)->data().toString();
+	    files_to_delete.append(bookpath);
         }
     }
 
@@ -264,11 +271,17 @@ void CSSFilesWidget::Save()
     QString filter_string = "*.csv;;*.txt;;*.*";
     QString default_filter = "";
     QString save_path = m_LastDirSaved + "/" + m_LastFileSaved;
+    QFileDialog::Options options = QFileDialog::Options();
+#ifdef Q_OS_MAC
+    options = options | QFileDialog::DontUseNativeDialog;
+#endif
+
     QString destination = QFileDialog::getSaveFileName(this,
                           tr("Save Report As Comma Separated File"),
                           save_path,
                           filter_string,
-                          &default_filter
+			  &default_filter,
+                          options
                                                       );
 
     if (destination.isEmpty()) {

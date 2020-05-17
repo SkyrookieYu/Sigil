@@ -1,7 +1,9 @@
 /************************************************************************
 **
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012 Dave Heiland
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2020      Doug Massay
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012      Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -24,19 +26,33 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QMenu>
 
+#include "Misc/Utility.h"
 #include "Tabs/TabBar.h"
 
 TabBar::TabBar(QWidget *parent)
     : QTabBar(parent),
-      m_TabManager(parent),
       m_TabIndex(-1)
 {
+#if defined(Q_OS_MAC)
+    // work around Qt MacOSX bug missing tab close icons
+    // see:  https://bugreports.qt.io/browse/QTBUG-61092
+    // still broken in document mode in Qt.5.12.2 !!!!
+    const QString FORCE_TAB_CLOSE_BUTTON = 
+        "QTabBar::close-button { "
+            "background-image: url(:/qt-project.org/styles/commonstyle/images/standardbutton-closetab-16.png);"
+        "}"
+        "QTabBar::close-button:hover { "
+            "background-image: url(:/qt-project.org/styles/commonstyle/images/standardbutton-closetab-hover-16.png);"
+        "}";
+    setStyleSheet(FORCE_TAB_CLOSE_BUTTON);
+#endif
 }
 
 void TabBar::mouseDoubleClickEvent(QMouseEvent *event)
 {
     emit TabBarDoubleClicked();
 }
+
 
 void TabBar::mousePressEvent(QMouseEvent *event)
 {
@@ -67,7 +83,15 @@ void TabBar::ShowContextMenu(QMouseEvent *event, int tab_index)
     QAction *closeOtherTabsAction = new QAction(tr("Close Other Tabs"), menu);
     menu->addAction(closeOtherTabsAction);
     connect(closeOtherTabsAction, SIGNAL(triggered()), this, SLOT(EmitCloseOtherTabs()));
-    menu->exec(mapToGlobal(event->pos()));
+    QPoint p;
+    p = mapToGlobal(event->pos());
+#ifdef Q_OS_WIN32
+    // Relocate the context menu slightly down and right to prevent "automatic" action 
+    // highlight on Windows, which then closes all other tabs when the mouse is released.
+    p.setX(p.x() + 2);
+    p.setY(p.y() + 4);
+#endif
+    menu->exec(p);
     delete menu;
 }
 

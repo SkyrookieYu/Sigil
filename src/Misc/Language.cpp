@@ -157,7 +157,7 @@ void Language::SetLanguageMap()
          "en-IN" << tr("English") + QString(" - ") + tr("India") <<
          "en-IE" << tr("English") + QString(" - ") + tr("Ireland") <<
          "en-JM" << tr("English") + QString(" - ") + tr("Jamaica") <<
-         "en-PH" << tr("English") + QString(" - ") + tr("Phillippines") <<
+         "en-PH" << tr("English") + QString(" - ") + tr("Philippines") <<
          "en-TT" << tr("English") + QString(" - ") + tr("Trinidad") <<
          "en-ZA" << tr("English") + QString(" - ") + tr("South Africa") <<
          "en-US" << tr("English") + QString(" - ") + tr("United States") <<
@@ -572,6 +572,7 @@ void Language::SetLanguageMap()
          "pag"   << tr("Pangasinan") <<
          "pap"   << tr("Papiamento") <<
          "paa"   << tr("Papuan languages") <<
+         "gug"   << tr("Paraguayan Guaraní") <<
          "peo"   << tr("Persian- Old (ca.600-400 B.C.)") <<
          "phi"   << tr("Philippine languages") <<
          "phn"   << tr("Phoenician") <<

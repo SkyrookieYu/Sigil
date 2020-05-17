@@ -4,7 +4,7 @@
 from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
-import sys, os, inspect, shutil, platform, textwrap, py_compile, site
+import sys, os, glob, inspect, shutil, platform, textwrap, py_compile, site
 from python_paths import py_ver, py_lib, sys_dlls, py_exe, py_inc, py_dest, tmp_prefix, proj_name, include_pyqt5
 
 # Python standard modules location
@@ -17,7 +17,7 @@ dll_dir = os.path.join(tmp_prefix, 'DLLs')
 site_dest = os.path.join(lib_dir, 'site-packages')
 
 PYQT_MODULES = ['%s.pyd' % x for x in (
-    'Qt', 'QtCore', 'QtGui', 'QtNetwork', 'QtPrintSupport', 'QtSvg', 'QtWidgets', 'sip'
+    'Qt', 'QtCore', 'QtGui', 'QtNetwork', 'QtPrintSupport', 'QtSvg', 'QtWidgets'
     )]
 EXCLUDED_UIC_WIDGET_PLUGINS = ['%s.py' % x for x in (
     'qaxcontainer', 'qscintilla', 'qtcharts', 'qtquickwidgets', 'qtwebenginewidgets', 'qtwebkit'
@@ -28,18 +28,27 @@ site_packages = [ ('lxml', 'd'),
                   ('six.py', 'f'), 
                   ('html5lib','d'), 
                   ('PIL', 'd'), 
-                  ('regex.py','f'),
-                  ('_regex.pyd','f'),
-                  ('_regex_core.py','f'),
-                  ('test_regex.py', 'f'),
+                  ('regex','d'),
                   ('cssselect', 'd'),
+                  ('urllib3', 'd'),
+                  ('certifi', 'd'),
+                  ('dulwich', 'd'),
                   ('encutils', 'd'),
-                  ('cssutils', 'd'),
+                  ('css_parser', 'd'),
                   ('webencodings', 'd'), # needed by html5lib
                   ('chardet', 'd')]
 
 if include_pyqt5:
+    # Catch older sip.pyd versions in site packages root
     site_packages.extend([('sip.pyd', 'f'), ('PyQt5', 'd')])
+    # Catch newer versions of PyQt5-sip that include architecture data in sip filename
+    site_pkg_dir = os.path.join(sys.prefix, 'Lib', 'site-packages')
+    pyqt_sip_path = os.path.join(site_pkg_dir, 'PyQt5')
+    pyqt_sip_path = pyqt_sip_path + '/sip*.pyd'
+    sipfiles = glob.glob(pyqt_sip_path)
+    if sipfiles:
+        for sipfile in sipfiles:
+            PYQT_MODULES.append(os.path.basename(sipfile))
 
 
 

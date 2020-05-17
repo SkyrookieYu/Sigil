@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -55,13 +56,10 @@
 const QString BODY_START = "<\\s*body[^>]*>";
 const QString BODY_END   = "</\\s*body\\s*>";
 
-const QString OPF_FILE_NAME            = "content.opf";
-const QString NCX_FILE_NAME            = "toc.ncx";
 const QString CONTAINER_XML_FILE_NAME  = "container.xml";
 const QString ENCRYPTION_XML_FILE_NAME = "encryption.xml";
 
 static const QString METAINF_FOLDER_SUFFIX = "/META-INF";
-static const QString OEBPS_FOLDER_SUFFIX   = "/OEBPS";
 
 static const char * EPUB_MIME_DATA = "application/epub+zip";
 
@@ -143,13 +141,13 @@ void ExportEPUB::SaveFolderAsEpubToLocation(const QString &fullfolderpath, const
     fileInfo.tmz_date.tm_year = timeNow.date().year();
 
     // Write the mimetype. This must be uncompressed and the first entry in the archive.
-    if (zipOpenNewFileInZip64(zfile, "mimetype", &fileInfo, NULL, 0, NULL, 0, NULL, Z_NO_COMPRESSION, 0, 0) != Z_OK) {
+    if (zipOpenNewFileInZip64(zfile, "mimetype", &fileInfo, NULL, 0, NULL, 0, NULL, Z_NO_COMPRESSION, 0, 0) != ZIP_OK) {
         zipClose(zfile, NULL);
         QFile::remove(tempFile);
         throw(CannotStoreFile("mimetype"));
     }
 
-    if (zipWriteInFileInZip(zfile, EPUB_MIME_DATA, (unsigned int)strlen(EPUB_MIME_DATA)) != Z_OK) {
+    if (zipWriteInFileInZip(zfile, EPUB_MIME_DATA, (unsigned int)strlen(EPUB_MIME_DATA)) != ZIP_OK) {
         zipCloseFileInZip(zfile);
         zipClose(zfile, NULL);
         QFile::remove(tempFile);
@@ -170,7 +168,7 @@ void ExportEPUB::SaveFolderAsEpubToLocation(const QString &fullfolderpath, const
 
         // Add the file entry to the archive.
         // We should check the uncompressed file size. If it's over >= 0xffffffff the last parameter (zip64) should be 1.
-        if (zipOpenNewFileInZip4_64(zfile, relpath.toUtf8().constData(), &fileInfo, NULL, 0, NULL, 0, NULL, Z_DEFLATED, 8, 0, 15, 8, Z_DEFAULT_STRATEGY, NULL, 0, 0x0b00, 1<<11, 0) != Z_OK) {
+        if (zipOpenNewFileInZip4_64(zfile, relpath.toUtf8().constData(), &fileInfo, NULL, 0, NULL, 0, NULL, Z_DEFLATED, 8, 0, 15, 8, Z_DEFAULT_STRATEGY, NULL, 0, 0x0b00, 1<<11, 0) != ZIP_OK) {
             zipClose(zfile, NULL);
             QFile::remove(tempFile);
             throw(CannotStoreFile(relpath.toStdString()));
@@ -192,7 +190,7 @@ void ExportEPUB::SaveFolderAsEpubToLocation(const QString &fullfolderpath, const
         qint64 read = 0;
 
         while ((read = dfile.read(buff, BUFF_SIZE)) > 0) {
-            if (zipWriteInFileInZip(zfile, buff, read) != Z_OK) {
+            if (zipWriteInFileInZip(zfile, buff, read) != ZIP_OK) {
                 dfile.close();
                 zipCloseFileInZip(zfile);
                 zipClose(zfile, NULL);
@@ -211,7 +209,7 @@ void ExportEPUB::SaveFolderAsEpubToLocation(const QString &fullfolderpath, const
             throw(CannotStoreFile(relpath.toStdString()));
         }
 
-        if (zipCloseFileInZip(zfile) != Z_OK) {
+        if (zipCloseFileInZip(zfile) != ZIP_OK) {
             zipClose(zfile, NULL);
             QFile::remove(tempFile);
             throw(CannotStoreFile(relpath.toStdString()));
@@ -293,7 +291,7 @@ void ExportEPUB::ObfuscateFonts(const QString &fullfolderpath)
             continue;
         }
 
-        QString font_path = fullfolderpath + "/" + font_resource->GetRelativePathToRoot();
+        QString font_path = fullfolderpath + "/" + font_resource->GetRelativePath();
 
         if (algorithm == ADOBE_FONT_ALGO_ID) {
             FontObfuscation::ObfuscateFile(font_path, algorithm, uuid_id);

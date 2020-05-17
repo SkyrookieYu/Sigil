@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada 
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -41,11 +42,16 @@ public:
      *                     resource is representing.
      * @param parent The object's parent.
      */
-    NCXResource(const QString &mainfolder, const QString &fullfilepath, QObject *parent = NULL);
+    NCXResource(const QString &mainfolder, 
+		const QString &fullfilepath, 
+                const QString &version = QString(),
+		QObject *parent = NULL);
 
     // inherited
 
     virtual bool RenameTo(const QString &new_filename);
+
+    virtual bool MoveTo(const QString &newbookpath);
 
     virtual ResourceType Type() const;
 
@@ -54,13 +60,8 @@ public:
     bool GenerateNCXFromBookContents(const Book *book);
     void GenerateNCXFromTOCContents(const Book *book, TOCModel *toc_model);
     void GenerateNCXFromTOCEntries(const Book *book, TOCModel::TOCEntry toc_root_entry);
-
-    QString GetRelativePathToRoot() const;
-
-private:
-
-    void FillWithDefaultText();
-
+    void FillWithDefaultText(const QString &version, const QString &default_text_folder);
+    void FillWithDefaultTextToBookPath(const QString &version, const QString &start_bookpath);
 };
 
 #endif // NCXRESOURCE_H

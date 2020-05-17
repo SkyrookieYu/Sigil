@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -26,6 +27,8 @@
 #include "BookManipulation/Headings.h"
 #include "Exporters/XMLWriter.h"
 #include "MainUI/TOCModel.h"
+
+class Resource;
 
 /**
  * Writes the NCX file of the EPUB publication.
@@ -100,6 +103,7 @@ private:
 
     TOCModel::TOCEntry ConvertHeadingWalker(const Headings::Heading &heading);
 
+    QString ConvertBookPathToNCXRelative(const QString & bookpath); 
 
     ///////////////////////////////
     // PRIVATE MEMBER VARIABLES
@@ -113,6 +117,7 @@ private:
     TOCModel::TOCEntry m_TOCRootEntry;
 
     QString m_version;
+    const Resource * m_ncxresource;
 };
 
 #endif // NCXWRITER_H

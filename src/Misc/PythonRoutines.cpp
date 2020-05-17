@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2016, Kevin B. Hendricks, Stratford, Ontario
+**  Copyright (C) 2016-2020 Kevin B. Hendricks, Stratford Ontario Canada
 **
 **  This file is part of Sigil.
 **
@@ -27,15 +27,17 @@
 #include "Misc/PythonRoutines.h"
 
 
-QString PythonRoutines::GenerateNcxInPython(const QString &navdata, const QString &navname, 
-                                            const QString &doctitle, const QString & mainid)
+QString PythonRoutines::GenerateNcxInPython(const QString &navdata, const QString &navbkpath, 
+                                            const QString &ncxdir, const QString &doctitle, 
+					    const QString &mainid)
 {
     QString results;
     int rv = -1;
     QString error_traceback;
     QList<QVariant> args;
     args.append(QVariant(navdata));
-    args.append(QVariant(navname));
+    args.append(QVariant(navbkpath));
+    args.append(QVariant(ncxdir));
     args.append(QVariant(doctitle));
     args.append(QVariant(mainid));
 
@@ -51,39 +53,6 @@ QString PythonRoutines::GenerateNcxInPython(const QString &navdata, const QStrin
     }
     return results;
 }
-
-
-QList<QStringList> PythonRoutines::UpdateGuideFromNavInPython(const QString &navdata, const QString &navname)
-{
-    QList<QStringList> results;
-    int rv = -1;
-    QString error_traceback;
-    QList<QVariant> args;
-    args.append(QVariant(navdata));
-    args.append(QVariant(navname));
-
-    EmbeddedPython * epython  = EmbeddedPython::instance();
-
-    QVariant res = epython->runInPython( QString("ncxgenerator"),
-                                         QString("generateGuideEntries"),
-                                         args,
-                                         &rv,
-                                         error_traceback);
-    if (rv == 0) {
-        QList<QVariant> lst = res.toList();
-        foreach(QVariant qv, lst) {
-            results.append(qv.toStringList());
-        }
-        return results;
-    }
-
-    // The return value is the following sequence of value stored in a list 
-    // (guide_type, href (unquoted), title)  
-    QStringList gentry = QStringList() << "" << "" << "";
-    results.append(gentry);
-    return results;
-}
-
 
 
 MetadataPieces PythonRoutines::GetMetadataInPython(const QString& opfdata, const QString& version) 
@@ -153,3 +122,274 @@ QString PythonRoutines::SetNewMetadataInPython(const MetadataPieces& mdp, const 
     return newopfdata;
 }
 
+
+QString PythonRoutines::PerformRepoCommitInPython(const QString &localRepo, 
+						  const QString &bookid, 
+						  const QStringList &bookinfo,
+						  const QString &bookroot, 
+						  const QStringList &bookfiles) 
+{
+    QString results;
+    int rv = -1;
+    QString error_traceback;
+    QList<QVariant> args;
+    args.append(QVariant(localRepo));
+    args.append(QVariant(bookid));
+    args.append(QVariant(bookinfo));
+    args.append(QVariant(bookroot));
+    args.append(QVariant(bookfiles));
+
+    EmbeddedPython * epython  = EmbeddedPython::instance();
+
+    QVariant res = epython->runInPython( QString("repomanager"),
+                                         QString("performCommit"),
+                                         args,
+                                         &rv,
+                                         error_traceback);
+    if (rv == 0) {
+        results = res.toString();
+    }
+    return results;
+}
+
+
+bool PythonRoutines::PerformRepoEraseInPython(const QString& localRepo, const QString& bookid)
+{
+    bool results = false;
+    int rv = -1;
+    QString error_traceback;
+    QList<QVariant> args;
+    args.append(QVariant(localRepo));
+    args.append(QVariant(bookid));
+
+    EmbeddedPython * epython  = EmbeddedPython::instance();
+
+    QVariant res = epython->runInPython( QString("repomanager"),
+                                         QString("eraseRepo"),
+                                         args,
+                                         &rv,
+                                         error_traceback);
+    if (rv == 0) {
+        results = (res.toInt() > 0);
+    }
+    return results;
+}
+
+QStringList PythonRoutines::GetRepoTagsInPython(const QString& localRepo, const QString& bookid)
+{
+    QStringList results;
+    int rv = -1;
+    QString error_traceback;
+    QList<QVariant> args;
+    args.append(QVariant(localRepo));
+    args.append(QVariant(bookid));
+
+    EmbeddedPython * epython  = EmbeddedPython::instance();
+
+    QVariant res = epython->runInPython( QString("repomanager"),
+                                         QString("get_tag_list"),
+                                         args,
+                                         &rv,
+                                         error_traceback);
+    if (rv == 0) {
+        results = res.toStringList();
+    }
+    return results;
+}
+
+
+QString PythonRoutines::GenerateEpubFromTagInPython(const QString& localRepo,
+				                    const QString& bookid,
+				                    const QString& tagname,
+				                    const QString& filename,
+				                    const QString& destpath)
+{
+    QString results;
+    int rv = -1;
+    QString error_traceback;
+    QList<QVariant> args;
+    args.append(QVariant(localRepo));
+    args.append(QVariant(bookid));
+    args.append(QVariant(tagname));
+    args.append(QVariant(filename));
+    args.append(QVariant(destpath));
+
+    EmbeddedPython * epython  = EmbeddedPython::instance();
+
+    QVariant res = epython->runInPython( QString("repomanager"),
+                                         QString("generate_epub_from_tag"),
+                                         args,
+                                         &rv,
+                                         error_traceback);
+    if (rv == 0) {
+        results = res.toString();
+    }
+    return results;
+}
+
+
+QString PythonRoutines::GenerateDiffFromCheckPoints(const QString& localRepo,
+                                    const QString& bookid,
+                                    const QString& leftchkpoint,
+                                    const QString& rightchkpoint)
+{
+    QString results;
+    int rv = -1;
+    QString error_traceback;
+    QList<QVariant> args;
+    args.append(QVariant(localRepo));
+    args.append(QVariant(bookid));
+    args.append(QVariant(leftchkpoint));
+    args.append(QVariant(rightchkpoint));
+
+    EmbeddedPython * epython  = EmbeddedPython::instance();
+
+    QVariant res = epython->runInPython( QString("repomanager"),
+                                         QString("generate_diff_from_checkpoints"),
+                                         args,
+                                         &rv,
+                                         error_traceback);
+    if (rv == 0) {
+        results = res.toString();
+    }
+    return results;
+}
+
+QString PythonRoutines::GenerateRepoLogSummaryInPython(const QString& localRepo,
+						       const QString& bookid)
+{
+    QString results;
+    int rv = -1;
+    QString error_traceback;
+    QList<QVariant> args;
+    args.append(QVariant(localRepo));
+    args.append(QVariant(bookid));
+
+    EmbeddedPython * epython  = EmbeddedPython::instance();
+
+    QVariant res = epython->runInPython( QString("repomanager"),
+                                         QString("generate_log_summary"),
+                                         args,
+                                         &rv,
+                                         error_traceback);
+    if (rv == 0) {
+        results = res.toString();
+    }
+    return results;
+}
+
+
+QList<DiffRecord::DiffRec> PythonRoutines::GenerateParsedNDiffInPython(const QString& path1,
+						                  const QString& path2)
+{
+    QList<DiffRecord::DiffRec> results;
+    int rv = -1;
+    QString error_traceback;
+    QList<QVariant> args;
+    args.append(QVariant(path1));
+    args.append(QVariant(path2));
+
+    EmbeddedPython * epython  = EmbeddedPython::instance();
+
+    QVariant res = epython->runInPython( QString("repomanager"),
+                                         QString("generate_parsed_ndiff"),
+                                         args,
+                                         &rv,
+                                         error_traceback);
+    if (rv == 0) {
+	QVariantList vlist = res.toList();
+	foreach(QVariant qv, vlist) {
+	    QStringList fields = qv.toStringList();
+	    DiffRecord::DiffRec dr;
+	    dr.code = fields.at(0);
+	    dr.line = fields.at(1);
+	    dr.newline = fields.at(2);
+	    dr.leftchanges = fields.at(3);
+	    dr.rightchanges = fields.at(4);
+	    results << dr;
+	}
+    }
+    return results;
+}
+
+
+
+QString PythonRoutines::GenerateUnifiedDiffInPython(const QString& path1, const QString& path2)
+{
+    QString results;
+    int rv = -1;
+    QString error_traceback;
+    QList<QVariant> args;
+    args.append(QVariant(path1));
+    args.append(QVariant(path2));
+
+    EmbeddedPython * epython  = EmbeddedPython::instance();
+
+    QVariant res = epython->runInPython( QString("repomanager"),
+                                         QString("generate_unified_diff"),
+                                         args,
+                                         &rv,
+                                         error_traceback);
+    if (rv == 0) {
+        results = res.toString();
+    }
+    return results;
+}
+
+
+// returns 3 string lists: deleted, added, and modified (in that order)
+QList<QStringList> PythonRoutines::GetCurrentStatusVsDestDirInPython(const QString&bookroot,
+						                     const QStringList& bookfiles,
+						                     const QString& destdir)
+{
+    QList<QStringList> results;
+    int rv = -1;
+    QString error_traceback;
+    QList<QVariant> args;
+    args.append(QVariant(bookroot));
+    args.append(QVariant(bookfiles));
+    args.append(QVariant(destdir));
+
+    EmbeddedPython * epython  = EmbeddedPython::instance();
+
+    QVariant res = epython->runInPython( QString("repomanager"),
+                                         QString("get_current_status_vs_destdir"),
+                                         args,
+                                         &rv,
+                                         error_traceback);
+    if (rv == 0) {
+	QVariantList vlist = res.toList();
+	foreach(QVariant qv, vlist) {
+	    results << qv.toStringList();
+	}
+    }
+    return results;
+}
+
+
+QString PythonRoutines::CopyTagToDestDirInPython(const QString& localRepo,
+				                 const QString& bookid,
+				                 const QString& tagname,
+				                 const QString& destdir)
+{
+    QString results;
+    int rv = -1;
+    QString error_traceback;
+    QList<QVariant> args;
+    args.append(QVariant(localRepo));
+    args.append(QVariant(bookid));
+    args.append(QVariant(tagname));
+    args.append(QVariant(destdir));
+
+    EmbeddedPython * epython  = EmbeddedPython::instance();
+
+    QVariant res = epython->runInPython( QString("repomanager"),
+                                         QString("copy_tag_to_destdir"),
+                                         args,
+                                         &rv,
+                                         error_traceback);
+    if (rv == 0) {
+        results = res.toString();
+    }
+    return results;
+}

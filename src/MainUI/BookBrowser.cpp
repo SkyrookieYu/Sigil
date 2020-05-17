@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -33,6 +34,9 @@
 #include "Dialogs/DeleteFiles.h"
 #include "Dialogs/RenameTemplate.h"
 #include "Dialogs/AddSemantics.h"
+#include "Dialogs/SelectFolder.h"
+#include "Dialogs/RERenamer.h"
+#include "Dialogs/RETable.h"
 #include "Importers/ImportHTML.h"
 #include "MainUI/BookBrowser.h"
 #include "MainUI/MainWindow.h"
@@ -41,6 +45,7 @@
 #include "Misc/KeyboardShortcutManager.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
+#include "Misc/MediaTypes.h"
 #include "Misc/OpenExternally.h"
 #include "Misc/GuideItems.h"
 #include "Misc/Landmarks.h"
@@ -55,6 +60,10 @@ static const QString SETTINGS_GROUP = "bookbrowser";
 static const QString OPF_NCX_EDIT_WARNING_KEY = SETTINGS_GROUP + "-opfncx-warning";
 static const int COLUMN_INDENTATION = 10;
 
+// This needs to be kept in sync with FolderKeeper
+const QStringList folderkeys = QStringList() << "Text" << "Styles" << "Images" << "Fonts" <<
+					        "Audio" << "Video" << "Misc"  << "na" << "na";
+
 BookBrowser::BookBrowser(QWidget *parent)
     :
     QDockWidget(tr("Book Browser"), parent),
@@ -64,8 +73,10 @@ BookBrowser::BookBrowser(QWidget *parent)
     m_ContextMenu(new QMenu(this)),
     m_FontObfuscationContextMenu(new QMenu(this)),
     m_OpenWithContextMenu(new QMenu(this)),
+    m_openWithMapper(new QSignalMapper(this)),
     m_LastContextMenuType(Resource::GenericResourceType),
-    m_RenamedResource(NULL)
+    m_RenamedResource(NULL),
+    m_MovedResource(NULL)
 {
     m_FontObfuscationContextMenu->setTitle(tr("Font Obfuscation"));
     m_OpenWithContextMenu->setTitle(tr("Open With"));
@@ -75,7 +86,11 @@ BookBrowser::BookBrowser(QWidget *parent)
     SetupTreeView();
     CreateContextMenuActions();
     ConnectSignalsToSlots();
-    m_OpenWithContextMenu->addAction(m_OpenWithEditor);
+    m_OpenWithContextMenu->addAction(m_OpenWithEditor0);
+    m_OpenWithContextMenu->addAction(m_OpenWithEditor1);
+    m_OpenWithContextMenu->addAction(m_OpenWithEditor2);
+    m_OpenWithContextMenu->addAction(m_OpenWithEditor3);
+    m_OpenWithContextMenu->addAction(m_OpenWithEditor4);
     m_OpenWithContextMenu->addAction(m_OpenWith);
 }
 
@@ -115,12 +130,17 @@ void BookBrowser::SetBook(QSharedPointer<Book> book)
 
 void BookBrowser::RefreshCounts()
 {
+    int  mainfolder_length = m_Book->GetFolderKeeper()->GetFullPathToMainFolder().length();
     for (int i = 0; i < m_OPFModel->invisibleRootItem()->rowCount(); i++) {
         QStandardItem *folder = m_OPFModel->invisibleRootItem()->child(i);
-        int count = folder->rowCount();
-        QString tooltip = QString(tr("%n file(s)","", count));
-
-        folder->setToolTip(tooltip);
+	QString tooltip;
+	QString key = folderkeys.at(i);
+	if (key != "na") {
+            tooltip = m_Book->GetFolderKeeper()->GetDefaultFolderForGroup(folderkeys.at(i));
+            int count = folder->rowCount();
+            tooltip = tooltip + " " + QString(tr("%n file(s)","", count));
+            folder->setToolTip(tooltip);
+	}
     }
 }
 
@@ -159,6 +179,19 @@ void BookBrowser::SelectRenamedResource()
     // Make sure Book Browser has focus so keyboard navigation works as expected
     qobject_cast<QWidget *>(m_TreeView)->setFocus();
     m_RenamedResource = NULL;
+}
+
+void BookBrowser::SelectMovedResource()
+{
+    if (m_MovedResource == NULL) {
+        return;
+    }
+
+    // Set the selection to the resource that was being renamed
+    UpdateSelection(m_MovedResource);
+    // Make sure Book Browser has focus so keyboard navigation works as expected
+    qobject_cast<QWidget *>(m_TreeView)->setFocus();
+    m_MovedResource = NULL;
 }
 
 void BookBrowser::UpdateSelection(Resource *resource)
@@ -228,18 +261,26 @@ void BookBrowser::RenumberTOC()
 
 Resource *BookBrowser::GetUrlResource(const QUrl &url)
 {
-    const QString &filename = QFileInfo(url.path()).fileName();
-
-    try {
-        Resource *resource = m_Book->GetFolderKeeper()->GetResourceByFilename(filename);
-        return resource;
-    } catch (ResourceDoesNotExist) {
-        Utility::DisplayStdErrorDialog(tr("The file \"%1\" does not exist.").arg(filename));
+    QString bookpath;
+    if (url.scheme() == "book") {
+        // handle our own internal links (strip root / from absolute path to make it relative)
+        bookpath = url.path().remove(0,1);
+    } else if (url.scheme() == "file") {
+        QString fullfilepath = url.toLocalFile();
+        QString main_folder_path = m_Book->GetFolderKeeper()->GetFullPathToMainFolder();
+        // Note main_folder_path *never* ends with a path separator - see Misc/TempFolder.cpp
+        bookpath = fullfilepath.right(fullfilepath.length() - main_folder_path.length() - 1);
     }
-
+    if (!bookpath.isEmpty()) {
+        try {
+            Resource *resource = m_Book->GetFolderKeeper()->GetResourceByBookPath(bookpath);
+            return resource;
+        } catch (ResourceDoesNotExist) {
+            Utility::DisplayStdErrorDialog(tr("The file \"%1\" does not exist.").arg(bookpath));
+        }
+    }
     return NULL;
 }
-
 
 void BookBrowser::EmitResourceActivated(const QModelIndex &index)
 {
@@ -265,6 +306,8 @@ void BookBrowser::OpenContextMenu(const QPoint &point)
     m_Delete->setEnabled(true);
     m_Merge->setEnabled(true);
     m_Rename->setEnabled(true);
+    m_RERename->setEnabled(true);
+    m_Move->setEnabled(true);
 }
 
 QList <Resource *> BookBrowser::ValidSelectedHTMLResources()
@@ -392,7 +435,7 @@ QList <Resource *> BookBrowser::ValidSelectedResources()
     QList <Resource *> all_resources = m_OPFModel->GetResourceListInFolder(resource_type);
     foreach(Resource * all_resource, all_resources) {
         foreach(Resource * resource, resources) {
-            if (all_resource->Filename() == resource->Filename()) {
+	    if (all_resource->GetRelativePath() == resource->GetRelativePath()) {
                 sorted_resources.append(all_resource);
                 break;
             }
@@ -438,11 +481,12 @@ int BookBrowser::ValidSelectedItemCount()
     return count;
 }
 
-void BookBrowser::AddFile(QString filepath)
+Resource* BookBrowser::AddFile(QString filepath)
 {
-    m_Book->GetFolderKeeper()->AddContentFileToFolder(filepath);
+    Resource * resource = m_Book->GetFolderKeeper()->AddContentFileToFolder(filepath);
     emit BookContentModified();
     Refresh();
+    return resource;
 }
 
 void BookBrowser::AddNew()
@@ -466,9 +510,11 @@ void BookBrowser::CopyHTML()
         return;
     }
 
+    QString destfolder = Utility::startingDir(current_resource->GetRelativePath());
+
     HTMLResource *current_html_resource = qobject_cast<HTMLResource *>(current_resource);
     // Create an empty file
-    HTMLResource *new_html_resource = m_Book->CreateEmptyHTMLFile(current_html_resource);
+    HTMLResource *new_html_resource = m_Book->CreateEmptyHTMLFile(current_html_resource, destfolder);
     m_Book->MoveResourceAfter(new_html_resource, current_html_resource);
     // Copy the text from the current file
     new_html_resource->SetText(current_html_resource->GetText());
@@ -484,9 +530,13 @@ void BookBrowser::AddNewHTML()
 {
     Resource *current_resource = GetCurrentResource();
     HTMLResource *current_html_resource = qobject_cast<HTMLResource *>(current_resource);
-    HTMLResource *new_html_resource = m_Book->CreateEmptyHTMLFile(current_html_resource);
+    QString destfolder = "\\";
+    if (current_html_resource) {
+        destfolder = Utility::startingDir(current_html_resource->GetRelativePath());
+    }
+    HTMLResource *new_html_resource = m_Book->CreateEmptyHTMLFile(current_html_resource, destfolder);
 
-    if (current_resource != NULL) {
+    if ((current_resource != NULL) && (current_html_resource != NULL)) {
         m_Book->MoveResourceAfter(new_html_resource, current_html_resource);
     }
 
@@ -505,8 +555,10 @@ void BookBrowser::CopyCSS()
     }
 
     CSSResource *current_css_resource = qobject_cast<CSSResource *>(current_resource);
+    QString destfolder = Utility::startingDir(current_resource->GetRelativePath());
+
     // Create an empty file
-    CSSResource *new_resource = m_Book->CreateEmptyCSSFile();
+    CSSResource *new_resource = m_Book->CreateEmptyCSSFile(destfolder);
     // Copy the text from the current file
     new_resource->SetText(current_css_resource->GetText());
     // Open the new file in a tab
@@ -533,39 +585,52 @@ void BookBrowser::AddNewSVG()
     Refresh();
 }
 
-void BookBrowser::CreateHTMLTOCCSSFile()
+CSSResource* BookBrowser::CreateHTMLTOCCSSFile()
 {
     CSSResource *css_resource = m_Book->CreateHTMLTOCCSSFile();
     m_OPFModel->RenameResource(css_resource, SGC_TOC_CSS_FILENAME);
     emit BookContentModified();
     Refresh();
+    return css_resource;
 }
 
-void BookBrowser::CreateIndexCSSFile()
+CSSResource* BookBrowser::CreateIndexCSSFile()
 {
     CSSResource *css_resource = m_Book->CreateIndexCSSFile();
     m_OPFModel->RenameResource(css_resource, SGC_INDEX_CSS_FILENAME);
     emit BookContentModified();
     Refresh();
+    return css_resource;
 }
 
 QStringList BookBrowser::AddExisting(bool only_multimedia, bool only_images)
 {
-    QStringList added_files;
+    QStringList added_book_paths;
 
     QString filter_string = "";
     if (!QFileInfo(m_LastFolderOpen).exists()) {
         m_LastFolderOpen = "";
     }
 
-    QStringList filepaths = QFileDialog::getOpenFileNames(this, tr("Add Existing Files"), m_LastFolderOpen, filter_string);
+    QFileDialog::Options options = QFileDialog::Options();
+#ifdef Q_OS_MAC
+    options = options | QFileDialog::DontUseNativeDialog;
+#endif
+    
+    // filepaths are full absolute file paths to the files to be added
+    QStringList filepaths = QFileDialog::getOpenFileNames(this, 
+							  tr("Add Existing Files"), 
+							  m_LastFolderOpen, 
+							  filter_string,
+							  NULL,
+							  options
+                                                          );
 
     if (filepaths.isEmpty()) {
-        return added_files;
+        return added_book_paths;
     }
 
     m_LastFolderOpen = QFileInfo(filepaths.first()).absolutePath();
-    QStringList current_filenames = m_Book->GetFolderKeeper()->GetAllFilenames();
     QStringList invalid_filenames;
     HTMLResource *current_html_resource = qobject_cast<HTMLResource *>(GetCurrentResource());
     Resource *open_resource = NULL;
@@ -578,6 +643,8 @@ QStringList BookBrowser::AddExisting(bool only_multimedia, bool only_images)
         progress.setMinimumDuration(PROGRESS_BAR_MINIMUM_DURATION);
         progress.setValue(progress_value);
     }
+    bool yes_to_all = false;
+    bool no_to_all = false;
     foreach(QString filepath, filepaths) {
         if (file_count > 1) {
             // Set progress value and ensure dialog has time to display when doing extensive updates
@@ -606,24 +673,45 @@ QStringList BookBrowser::AddExisting(bool only_multimedia, bool only_images)
         }
 
         QString filename = QFileInfo(filepath).fileName();
+	bool CoverImageSemanticsSet = false;
+	// try to see if an existing file has this filename and allow overwriting
+	QString existing_book_path = m_Book->GetFolderKeeper()->GetBookPathByPathEnd(filename);
 
-        if (current_filenames.contains(filename, Qt::CaseInsensitive )) {
+        if (!existing_book_path.isEmpty()) {
             // If this is an image prompt to replace it.
             if (IMAGE_EXTENSIONS.contains(QFileInfo(filepath).suffix().toLower()) ||
                 SVG_EXTENSIONS.contains(QFileInfo(filepath).suffix().toLower()) ||
                 VIDEO_EXTENSIONS.contains(QFileInfo(filepath).suffix().toLower()) ||
                 AUDIO_EXTENSIONS.contains(QFileInfo(filepath).suffix().toLower())) {
-                QMessageBox::StandardButton button_pressed;
-                button_pressed = QMessageBox::warning(this,
-                                                      tr("Sigil"), tr("The multimedia file \"%1\" already exists in the book.\n\nOK to replace?").arg(filename),
-                                                      QMessageBox::Ok | QMessageBox::Cancel);
+		bool do_replacement = false;
+		if (yes_to_all) do_replacement = true;
+		if (no_to_all) do_replacement = false;
+		if (!yes_to_all && !no_to_all) {
+                   QMessageBox::StandardButton button_pressed;
+                   button_pressed = QMessageBox::warning(this, tr("Sigil"), 
+			tr("The multimedia file \"%1\" already exists in the book.\n\nOK to replace?").arg(filename),
+				  QMessageBox::Yes | QMessageBox::YesToAll | QMessageBox::No | QMessageBox::NoToAll);
 
-                if (button_pressed != QMessageBox::Ok) {
-                    continue;
-                }
+		   if (button_pressed == QMessageBox::YesToAll) {
+		       yes_to_all = true;
+		       do_replacement = true;
+		   }
+		   if (button_pressed == QMessageBox::NoToAll) {
+		       no_to_all = true;
+		       do_replacement = false;
+		   }
+		   if (button_pressed == QMessageBox::Yes) do_replacement = true;
+		   if (button_pressed == QMessageBox::No) do_replacement = false;
+		}
+
+		if (!do_replacement) continue; 
 
                 try {
-                    Resource *old_resource = m_Book->GetFolderKeeper()->GetResourceByFilename(filename);
+                    Resource *old_resource = m_Book->GetFolderKeeper()->GetResourceByBookPath(existing_book_path);
+		    ImageResource* image_resource = qobject_cast<ImageResource *>(old_resource);
+		    if (image_resource) {
+		        CoverImageSemanticsSet = m_Book->GetOPF()->IsCoverImage(image_resource);
+		    }
                     old_resource->Delete();
                 } catch (ResourceDoesNotExist) {
                     Utility::DisplayStdErrorDialog(tr("Unable to delete or replace file \"%1\".").arg(filename)
@@ -637,7 +725,8 @@ QStringList BookBrowser::AddExisting(bool only_multimedia, bool only_images)
         }
 
         if (QFileInfo(filepath).fileName() == "page-map.xml") {
-          m_Book->GetFolderKeeper()->AddContentFileToFolder(filepath, true, QString("application/oebps-page-map+xml"));
+            Resource * res = m_Book->GetFolderKeeper()->AddContentFileToFolder(filepath, true, QString("application/oebps-page-map+xml"));
+	    added_book_paths << res->GetRelativePath(); 
         } else if (TEXT_EXTENSIONS.contains(QFileInfo(filepath).suffix().toLower())) {
             ImportHTML html_import(filepath);
             XhtmlDoc::WellFormedError error = html_import.CheckValidToLoad();
@@ -652,9 +741,10 @@ QStringList BookBrowser::AddExisting(bool only_multimedia, bool only_images)
             // this call merely mutates our Book.
             bool extract_metadata = false;
             html_import.GetBook(extract_metadata);
-            Resource *added_resource = m_Book->GetFolderKeeper()->GetResourceByFilename(filename);
+	    QStringList importedbookpaths = html_import.GetAddedBookPaths();
+            Resource *added_resource = m_Book->GetFolderKeeper()->GetResourceByBookPath(importedbookpaths.at(0));
             HTMLResource *added_html_resource = qobject_cast<HTMLResource *>(added_resource);
-
+	    added_book_paths.append(importedbookpaths);
             if (current_html_resource && added_html_resource) {
                 m_Book->MoveResourceAfter(added_html_resource, current_html_resource);
                 current_html_resource = added_html_resource;
@@ -667,15 +757,22 @@ QStringList BookBrowser::AddExisting(bool only_multimedia, bool only_images)
                 }
             }
         } else {
-            // TODO: adding a CSS file should add the referenced fonts too
             Resource *resource = m_Book->GetFolderKeeper()->AddContentFileToFolder(filepath);
+            added_book_paths << resource->GetRelativePath();
+	    // if replacing a cover image, set the cover image semantics
+	    if (CoverImageSemanticsSet) {
+		ImageResource* new_image_resource = qobject_cast<ImageResource *>(resource);
+		if (new_image_resource) {
+		    m_Book->GetOPF()->SetResourceAsCoverImage(new_image_resource);
+		}
+	    }
+            // TODO: adding a CSS file should add the referenced fonts too
             if (resource->Type() == Resource::CSSResourceType) {
                 CSSResource *css_resource = qobject_cast<CSSResource *> (resource);
                 css_resource->InitialLoad();
             }
         }
 
-        added_files.append(filepath);
     }
 
     if (!invalid_filenames.isEmpty()) {
@@ -685,7 +782,7 @@ QStringList BookBrowser::AddExisting(bool only_multimedia, bool only_images)
                              .arg(invalid_filenames.join("\n")));
     }
 
-    if (!added_files.isEmpty()) {
+    if (!added_book_paths.isEmpty()) {
         QApplication::setOverrideCursor(Qt::WaitCursor);
         emit ResourcesAdded();
 
@@ -699,7 +796,7 @@ QStringList BookBrowser::AddExisting(bool only_multimedia, bool only_images)
         QApplication::restoreOverrideCursor();
     }
 
-    return added_files;
+    return added_book_paths;
 }
 
 void BookBrowser::SaveAsUrl(const QUrl &url)
@@ -729,12 +826,18 @@ void BookBrowser::SaveAsFile(Resource *resource)
     QString save_path = m_LastFolderSaveAs + "/" + filename;
     QString filter_string = "";
     QString default_filter = "";
+    QFileDialog::Options options = QFileDialog::Options();
+#ifdef Q_OS_MAC
+    options = options | QFileDialog::DontUseNativeDialog;
+#endif
+    
     QString destination = QFileDialog::getSaveFileName(this,
                           tr("Save As File"),
                           save_path,
                           filter_string,
-                          &default_filter
-                                                      );
+			  &default_filter,
+                          options
+						       );
 
     if (destination.isEmpty()) {
         return;
@@ -759,9 +862,17 @@ void BookBrowser::SaveAsFile(Resource *resource)
 void BookBrowser::SaveAsFiles()
 {
     QList <Resource *> resources = ValidSelectedResources();
-    QString dirname = QFileDialog::getExistingDirectory(this,
+    QFileDialog::Options options = QFileDialog::Options() | QFileDialog::ShowDirsOnly;
+#ifdef Q_OS_MAC
+    options = options | QFileDialog::DontUseNativeDialog;
+#endif
+
+    QString dirname = QFileDialog::getExistingDirectory(
+		      this,
                       tr("Choose the directory to save the files to"),
-                      m_LastFolderSaveAs);
+		      m_LastFolderSaveAs,
+                      options
+							);
 
     if (dirname.isEmpty()) {
         return;
@@ -812,7 +923,7 @@ void BookBrowser::SaveAsFiles()
     m_Book->GetFolderKeeper()->ResumeWatchingResources();
 }
 
-void BookBrowser::OpenWith() const
+void BookBrowser::OpenWith()
 {
     Resource *resource = GetCurrentResource();
 
@@ -820,7 +931,7 @@ void BookBrowser::OpenWith() const
         m_Book->GetFolderKeeper()->SuspendWatchingResources();
         resource->SaveToDisk();
         m_Book->GetFolderKeeper()->ResumeWatchingResources();
-        const QString &editorPath = OpenExternally::selectEditorForResourceType(resource->Type());
+        const QString &editorPath = OpenExternally::selectEditorForResourceType(resource->Type(), this);
 
         if (!editorPath.isEmpty()) {
             if (OpenExternally::openFile(resource->GetFullPath(), editorPath)) {
@@ -830,7 +941,7 @@ void BookBrowser::OpenWith() const
     }
 }
 
-void BookBrowser::OpenWithEditor() const
+void BookBrowser::OpenWithEditor(int slotnum) const
 {
     Resource *resource = GetCurrentResource();
 
@@ -838,15 +949,37 @@ void BookBrowser::OpenWithEditor() const
         m_Book->GetFolderKeeper()->SuspendWatchingResources();
         resource->SaveToDisk();
         m_Book->GetFolderKeeper()->ResumeWatchingResources();
-        const QVariant &editorPathData = m_OpenWithEditor->data();
-
-        if (editorPathData.isValid()) {
-            if (OpenExternally::openFile(resource->GetFullPath(), editorPathData.toString())) {
-                m_Book->GetFolderKeeper()->WatchResourceFile(resource);
+	QAction * oeaction = NULL;
+	if (slotnum == 0) oeaction = m_OpenWithEditor0;
+	if (slotnum == 1) oeaction = m_OpenWithEditor1;
+	if (slotnum == 2) oeaction = m_OpenWithEditor2;
+	if (slotnum == 3) oeaction = m_OpenWithEditor3;
+	if (slotnum == 4) oeaction = m_OpenWithEditor4;
+	if (oeaction) {
+            const QVariant &editorPathData = oeaction->data();
+            if (editorPathData.isValid()) {
+                if (OpenExternally::openFile(resource->GetFullPath(), editorPathData.toString())) {
+                    m_Book->GetFolderKeeper()->WatchResourceFile(resource);
+                }
             }
-        }
+	}
     }
 }
+
+// automate wholesale renaming
+void BookBrowser::RenameResourceList(const QList<Resource*> &resources, const QStringList &newfilenames)
+{
+    m_OPFModel->RenameResourceList(resources, newfilenames);
+    // Refresh();
+}
+
+// automate wholesale moves
+void BookBrowser::MoveResourceList(const QList<Resource*> &resources, const QStringList & newbookpaths)
+{
+    m_OPFModel->MoveResourceList(resources, newbookpaths);
+    // Refresh();
+}
+
 
 void BookBrowser::Rename()
 {
@@ -858,10 +991,6 @@ void BookBrowser::Rename()
 
     Resource::ResourceType resource_type = resources.first()->Type();
 
-    if (resource_type == Resource::OPFResourceType || resource_type == Resource::NCXResourceType) {
-        return;
-    }
-
     if (resources.count() == 1) {
         // Save the resource so it can be re-selected
         m_RenamedResource = GetCurrentResource();
@@ -870,6 +999,72 @@ void BookBrowser::Rename()
     } else {
         RenameSelected();
     }
+}
+
+void BookBrowser::REXRename()
+{
+    QList <Resource *> resources = ValidSelectedResources();
+
+    if (resources.isEmpty()) {
+        return;
+    }
+
+    Resource::ResourceType resource_type = resources.first()->Type();
+
+    QString retext;
+    QString replacetext;
+    int trycnt = 4;
+    bool done = false;
+    QStringList new_filenames;
+
+    while(!done && (trycnt > 0)) {
+
+        // Get the regular expression and its replacement from the user
+        RERenamer renamer(retext, replacetext,this);
+        if (renamer.exec() != QDialog::Accepted) {
+            return;
+        }
+
+        retext = renamer.GetREText();
+        replacetext = renamer.GetReplaceText();
+
+        // Now make sure the user approves of the name changes
+        RETable renametable(resources, retext, replacetext, this);
+        if (renametable.exec() != QDialog::Accepted) {
+            trycnt--;
+        } else {
+	    new_filenames = renametable.GetNewNames();
+            done = true;
+	}
+    }
+
+    if (!done) return;
+
+    // After a rename we want to keep the resources in the identical position.
+    int scrollY = m_TreeView->verticalScrollBar()->value();
+
+    // Rename the resources
+    m_OPFModel->RenameResourceList(resources, new_filenames);
+
+    SelectResources(resources);
+    m_TreeView->verticalScrollBar()->setSliderPosition(scrollY);
+}
+
+
+void BookBrowser::Move()
+{
+    QList <Resource *> resources = ValidSelectedResources();
+
+    if (resources.isEmpty()) {
+        return;
+    }
+
+    if (resources.count() == 1) {
+        // Save the resource so it can be re-selected
+        m_MovedResource = GetCurrentResource();
+    }
+
+    MoveSelected();
 }
 
 QString BookBrowser::GetFirstAvailableTemplateName(QString base, QString number_string)
@@ -1020,6 +1215,93 @@ void BookBrowser::RenameSelected()
 }
 
 
+void BookBrowser::MoveSelected()
+{
+    QList <Resource *> resources = ValidSelectedResources();
+
+    if (resources.isEmpty()) {
+        return;
+    }
+
+    QString mediatype = resources.first()->GetMediaType();
+    QString group = MediaTypes::instance()->GetGroupFromMediaType(mediatype);
+
+    SelectFolder select_folder(group, m_Book, this);
+
+    // Get the destination folder from the user
+    if (select_folder.exec() != QDialog::Accepted) {
+        return;
+    }
+
+    QString folder_path = select_folder.GetFolder();
+    // Make sure folder_path is valid if abort
+    bool valid_path = folder_path.indexOf("..") == -1;
+    valid_path = valid_path && folder_path.indexOf("\\") == -1;
+    valid_path = valid_path && !folder_path.startsWith("/");
+    valid_path = valid_path && !folder_path.startsWith("./");
+    valid_path = valid_path && !folder_path.startsWith(".");
+    valid_path = valid_path && folder_path.indexOf("/.") == -1;
+    valid_path = valid_path && !folder_path.startsWith("META-INF");
+    valid_path = valid_path && folder_path.indexOf("META-INF") == -1;
+    
+    if (!valid_path) {
+        Utility::DisplayStdErrorDialog(
+	    tr("Destination Folder has invalid path \"%1\"").arg(folder_path));
+	return;  
+    }
+
+    // Make sure that any new folder gets created
+    QString MainFolder = m_Book->GetFolderKeeper()->GetFullPathToMainFolder();
+    QDir epub_root(MainFolder);
+    if (!folder_path.isEmpty()) {
+        epub_root.mkpath(folder_path);
+    }
+
+    // if a new path tell FolderKeeper to add it
+    QStringList group_folders = m_Book->GetFolderKeeper()->GetFoldersForGroup(group);
+    if (!group_folders.contains(folder_path)) {
+        group_folders << folder_path;
+        m_Book->GetFolderKeeper()->SetFoldersForGroup(group, group_folders);
+    }
+
+    // Get the list of moves that will be done
+    int resources_count = resources.count();
+    
+    QStringList new_bookpaths;
+    QStringList existing_bookpaths = m_Book->GetFolderKeeper()->GetAllBookPaths();
+    int num = 0;
+
+    for (int i = 0; i < resources_count; i++) {
+        QString filename = resources[i]->Filename();
+	QString newbookpath = filename;
+	if (!folder_path.isEmpty()) {
+	    newbookpath = folder_path + "/" + filename;
+	}
+
+        // Stop if the new bookpath already exists or will be used by a different entry
+        if (existing_bookpaths.contains(newbookpath) || new_bookpaths.contains(newbookpath)) {
+            QMessageBox::critical(this, tr("Sigil"), tr("Cannot move files since this would result in duplicate filenames."));
+            return;
+        }
+
+        new_bookpaths.append(newbookpath);
+
+        num++;
+    }
+
+
+    // After a move we want to keep the resources in the identical position.
+    int scrollY = m_TreeView->verticalScrollBar()->value();
+
+    // Move the resources
+    m_OPFModel->MoveResourceList(resources, new_bookpaths);
+
+    SelectResources(resources);
+    m_TreeView->verticalScrollBar()->setSliderPosition(scrollY);
+    emit ResourcesMoved();
+}
+
+
 void BookBrowser::Delete()
 {
     emit RemoveResourcesRequest();
@@ -1038,6 +1320,8 @@ void BookBrowser::RemoveResources(QList<Resource *> tab_resources, QList<Resourc
         return;
     }
 
+    QString version = m_Book->GetConstOPF()->GetEpubVersion();
+
     Resource *next_resource = NULL;
 
     Resource * nav_resource =  m_Book->GetConstOPF()->GetNavResource();
@@ -1047,14 +1331,23 @@ void BookBrowser::RemoveResources(QList<Resource *> tab_resources, QList<Resourc
         );
         return;
     }
-    Resource::ResourceType resource_type = resources.first()->Type();
-    if (resource_type == Resource::OPFResourceType ||
-        resource_type == Resource::NCXResourceType) {
+    // do the same for ncx under epub2
+    NCXResource * ncx_resource = m_Book->GetNCX();
+    if (ncx_resource && resources.contains(ncx_resource)) {
         Utility::DisplayStdErrorDialog(
-            tr("Neither the NCX nor the OPF can be removed.")
+            tr("The NCX can not be removed.")
         );
         return;
-    } else if (resource_type == Resource::HTMLResourceType &&
+    }
+    Resource::ResourceType resource_type = resources.first()->Type();
+    if (resource_type == Resource::OPFResourceType) {
+        Utility::DisplayStdErrorDialog(
+            tr("The OPF is required for epub and can not be removed.")
+        );
+        return;
+    }
+
+    if (resource_type == Resource::HTMLResourceType &&
                resources.count() == m_Book->GetFolderKeeper()->GetResourceTypeList<HTMLResource>().count()) {
         {
             Utility::DisplayStdErrorDialog(
@@ -1067,9 +1360,10 @@ void BookBrowser::RemoveResources(QList<Resource *> tab_resources, QList<Resourc
 
     QStringList files_to_delete;
     foreach(Resource * resource, resources) {
-        files_to_delete.append(resource->Filename());
+        files_to_delete.append(resource->GetRelativePath());
     }
     // Confirm and select which files to delete
+    // Note: DeleteFiles requires bookpaths for safety
     DeleteFiles delete_files(files_to_delete, this);
     connect(&delete_files, SIGNAL(OpenFileRequest(QString, int)), this, SIGNAL(OpenFileRequest(QString, int)));
 
@@ -1086,7 +1380,7 @@ void BookBrowser::RemoveResources(QList<Resource *> tab_resources, QList<Resourc
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
     foreach(Resource * resource, resources) {
-        if (!files_to_delete.contains(resource->Filename())) {
+      if (!files_to_delete.contains(resource->GetRelativePath())) {
             resources.removeOne(resource);
         }
     }
@@ -1161,7 +1455,7 @@ Resource *BookBrowser::ResourceToSelectAfterRemove(QList<Resource *> selected_re
     foreach(Resource * all_resource, all_resources) {
         bool found = false;
         foreach(Resource * selected_resource, selected_resources) {
-            if (all_resource->Filename() == selected_resource->Filename()) {
+            if (all_resource->GetRelativePath() == selected_resource->GetRelativePath()) {
                 in_delete = true;
                 found = true;
                 break;
@@ -1225,27 +1519,39 @@ void BookBrowser::AddSemanticCode()
     }
     HTMLResource *html_resource = qobject_cast<HTMLResource *>(resource);
 
-    QStringList codes;
     QString version = m_Book->GetConstOPF()->GetEpubVersion();
+    HTMLResource * nav_resource = NULL;
     if (version.startsWith('3')) {
-        AddSemantics addmeaning(Landmarks::instance()->GetCodeMap(), this);
+        nav_resource = m_Book->GetConstOPF()->GetNavResource();
+    }
+
+    QStringList codes;
+    QString current_code;
+
+    if (version.startsWith('3')) {
+        NavProcessor navproc(nav_resource);
+        current_code = navproc.GetLandmarkCodeForResource(resource);
+    } else { 
+        current_code = m_Book->GetOPF()->GetGuideSemanticCodeForResource(resource);
+    }
+
+    if (version.startsWith('3')) {
+        AddSemantics addmeaning(Landmarks::instance()->GetCodeMap(), current_code, this);
         if (addmeaning.exec() == QDialog::Accepted) {
             codes = addmeaning.GetSelectedEntries();
             if (!codes.isEmpty()) {
                 QString new_code = codes.at(0);
-                NavProcessor navproc(m_Book->GetConstOPF()->GetNavResource());
-                navproc.AddLandmarkCode(html_resource, new_code);
-                // if new_code is valid for guide as well, update the guide too
-                QString guide_code = Landmarks::instance()->GuideLandMapping(new_code);
-                if (!guide_code.isEmpty()) {
-                    m_Book->GetOPF()->AddGuideSemanticCode(html_resource, guide_code);
+		// do allow a user to change only the toc semantics on the nav resource
+		if ((html_resource != nav_resource) || (new_code == "toc")) {
+                    NavProcessor navproc(nav_resource);
+                    navproc.AddLandmarkCode(html_resource, new_code);
                     m_OPFModel->Refresh();
-                }
-                emit BookContentModified();
+                    emit BookContentModified();
+		} 
             }
         }
     } else {
-        AddSemantics addmeaning(GuideItems::instance()->GetCodeMap(), this);
+        AddSemantics addmeaning(GuideItems::instance()->GetCodeMap(), current_code, this);
         if (addmeaning.exec() == QDialog::Accepted) {
             codes = addmeaning.GetSelectedEntries();
             if (!codes.isEmpty()) {
@@ -1377,6 +1683,7 @@ void BookBrowser::SetupTreeView()
 
     m_TreeView->setIndentation(COLUMN_INDENTATION);
     m_TreeView->setHeaderHidden(true);
+    m_TreeView->setTextElideMode(Qt::ElideMiddle);
 }
 
 
@@ -1391,6 +1698,8 @@ void BookBrowser::CreateContextMenuActions()
     m_CopyHTML                = new QAction(tr("Add Copy"),              this);
     m_CopyCSS                 = new QAction(tr("Add Copy"),              this);
     m_Rename                  = new QAction(tr("Rename") + "...",        this);
+    m_RERename                = new QAction(tr("RegEx Rename") + "...",  this);
+    m_Move                    = new QAction(tr("Move") + "...",          this);
     m_Delete                  = new QAction(tr("Delete") + "...",        this);
     m_CoverImage              = new QAction(tr("Cover Image"),           this);
     m_Merge                   = new QAction(tr("Merge"),                 this);
@@ -1404,7 +1713,11 @@ void BookBrowser::CreateContextMenuActions()
     m_ValidateWithW3C         = new QAction(tr("Validate with W3C"),     this);
     m_OpenWith                = new QAction(tr("Open With") + "...",     this);
     m_SaveAs                  = new QAction(tr("Save As") + "...",       this);
-    m_OpenWithEditor          = new QAction("",                            this);
+    m_OpenWithEditor0          = new QAction("",                            this);
+    m_OpenWithEditor1          = new QAction("",                            this);
+    m_OpenWithEditor2          = new QAction("",                            this);
+    m_OpenWithEditor3          = new QAction("",                            this);
+    m_OpenWithEditor4          = new QAction("",                            this);
     m_CoverImage             ->setCheckable(true);
     m_NoObfuscationMethod    ->setCheckable(true);
     m_AdobesObfuscationMethod->setCheckable(true);
@@ -1418,6 +1731,11 @@ void BookBrowser::CreateContextMenuActions()
     m_Rename->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_R));
     m_Rename->setToolTip(tr("Rename selected file(s)"));
     sm->registerAction(this, m_Rename, "MainWindow.BookBrowser.Rename");
+    m_RERename->setToolTip(tr("Use Regular Expressions to Rename selected file(s)"));
+    sm->registerAction(this, m_RERename, "MainWindow.BookBrowser.RERename");
+    // m_Move->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_R));
+    m_Move->setToolTip(tr("Move selected file(s) to a new folder"));
+    sm->registerAction(this, m_Move, "MainWindow.BookBrowser.Move");
     m_LinkStylesheets->setToolTip(tr("Link Stylesheets to selected file(s)."));
     sm->registerAction(this, m_LinkStylesheets, "MainWindow.BookBrowser.LinkStylesheets");
     m_AddSemantics->setToolTip(tr("Add Semantics to selected file(s)."));
@@ -1428,6 +1746,8 @@ void BookBrowser::CreateContextMenuActions()
     addAction(m_Delete);
     addAction(m_Merge);
     addAction(m_Rename);
+    addAction(m_RERename);
+    addAction(m_Move);
     addAction(m_LinkStylesheets);
     addAction(m_AddSemantics);
 }
@@ -1456,15 +1776,16 @@ bool BookBrowser::SuccessfullySetupContextMenu(const QPoint &point)
     if (resource) {
         m_ContextMenu->addSeparator();
 
-        // Delete and Rename
+        // Normal case handle Delete, Rename, and Move
         if (m_LastContextMenuType != Resource::OPFResourceType &&
             m_LastContextMenuType != Resource::NCXResourceType) {
             m_ContextMenu->addAction(m_Delete);
             m_Delete->setEnabled(m_LastContextMenuType != Resource::HTMLResourceType ||
                                  (AllHTMLResources().count() > 1 && resources.count() != item_count));
             m_ContextMenu->addAction(m_Rename);
+            m_ContextMenu->addAction(m_RERename);
+	    m_ContextMenu->addAction(m_Move);
         }
-
         if (resource->Type() == Resource::HTMLResourceType) {
             m_ContextMenu->addAction(m_Merge);
             m_Merge->setEnabled(item_count > 1 ||
@@ -1481,8 +1802,15 @@ bool BookBrowser::SuccessfullySetupContextMenu(const QPoint &point)
             SetupFontObfuscationMenu();
         }
 
+        if (resource->Type() == Resource::OPFResourceType) {
+            m_ContextMenu->addAction(m_Rename);
+	    m_ContextMenu->addAction(m_Move);
+        }
+
         if (resource->Type() == Resource::NCXResourceType) {
             m_ContextMenu->addAction(m_RenumberTOC);
+            m_ContextMenu->addAction(m_Rename);
+	    m_ContextMenu->addAction(m_Move);
         }
 
         if (resource->Type() == Resource::CSSResourceType) {
@@ -1497,21 +1825,52 @@ bool BookBrowser::SuccessfullySetupContextMenu(const QPoint &point)
 
         // Open With
         if (OpenExternally::mayOpen(resource->Type())) {
-            const QString &editorPath = OpenExternally::editorForResourceType(resource->Type());
-            const QString &editorDescription = OpenExternally::editorDescriptionForResourceType(resource->Type());
-
-            if (editorPath.isEmpty()) {
-                m_OpenWithEditor->setData(QVariant::Invalid);
+            const QStringList editor_paths = OpenExternally::editorsForResourceType(resource->Type());
+            const QStringList editor_names = OpenExternally::editorDescriptionsForResourceType(resource->Type());
+            if (editor_paths.isEmpty()) {
+                m_OpenWithEditor0->setData(QVariant::Invalid);
+                m_OpenWithEditor1->setData(QVariant::Invalid);
+                m_OpenWithEditor2->setData(QVariant::Invalid);
+                m_OpenWithEditor3->setData(QVariant::Invalid);
+                m_OpenWithEditor4->setData(QVariant::Invalid);
                 m_OpenWith->setText(tr("Open With") + "...");
                 m_ContextMenu->addAction(m_OpenWith);
             } else {
-                m_OpenWithEditor->setText(editorDescription);
-                m_OpenWithEditor->setData(editorPath);
-                m_OpenWithEditor->setEnabled(item_count == 1);
+	        // clear previous open with action info
+	        for (int k = 0; k < 5; k++) {
+		    QAction * oeaction = NULL;
+		    if (k==0) oeaction = m_OpenWithEditor0;
+		    if (k==1) oeaction = m_OpenWithEditor1;
+		    if (k==2) oeaction = m_OpenWithEditor2;
+		    if (k==3) oeaction = m_OpenWithEditor3;
+		    if (k==4) oeaction = m_OpenWithEditor4;
+		    if (oeaction) {
+		        oeaction->setData(QVariant::Invalid);
+		        oeaction->setText("");
+		        oeaction->setEnabled(false);
+		        oeaction->setVisible(false);
+		    }
+		}
+	        int i = 0;
+	        foreach(QString apath, editor_paths) {
+		    QString aprettyname = editor_names[i];
+		    QAction * oeaction = NULL;
+		    if (i == 0) oeaction = m_OpenWithEditor0;
+		    if (i == 1) oeaction = m_OpenWithEditor1;
+		    if (i == 2) oeaction = m_OpenWithEditor2;
+		    if (i == 3) oeaction = m_OpenWithEditor3;
+		    if (i == 4) oeaction = m_OpenWithEditor4;
+		    if (oeaction) {
+                        oeaction->setText(aprettyname);
+                        oeaction->setData(apath);
+                        oeaction->setEnabled(item_count == 1);
+			oeaction->setVisible(true);
+		    }
+		    i = i + 1;
+		}
                 m_OpenWith->setText(tr("Other Application") + "...");
                 m_ContextMenu->addMenu(m_OpenWithContextMenu);
             }
-
             m_OpenWith->setEnabled(item_count == 1);
             m_OpenWithContextMenu->setEnabled(item_count == 1);
         }
@@ -1609,6 +1968,8 @@ void BookBrowser::ConnectSignalsToSlots()
             this,        SLOT(OpenContextMenu(const QPoint &)));
     connect(m_OPFModel, SIGNAL(ResourceRenamed()),
             this,        SLOT(SelectRenamedResource()));
+    connect(m_OPFModel, SIGNAL(ResourceMoved()),
+            this,        SLOT(SelectMovedResource()));
     connect(m_SelectAll,               SIGNAL(triggered()), this, SLOT(SelectAll()));
     connect(m_CopyHTML,                SIGNAL(triggered()), this, SLOT(CopyHTML()));
     connect(m_CopyCSS,                 SIGNAL(triggered()), this, SLOT(CopyCSS()));
@@ -1619,6 +1980,8 @@ void BookBrowser::ConnectSignalsToSlots()
     connect(m_AddNewSVG,               SIGNAL(triggered()), this, SLOT(AddNewSVG()));
     connect(m_AddExisting,             SIGNAL(triggered()), this, SLOT(AddExisting()));
     connect(m_Rename,                  SIGNAL(triggered()), this, SLOT(Rename()));
+    connect(m_RERename,                SIGNAL(triggered()), this, SLOT(REXRename()));
+    connect(m_Move,                    SIGNAL(triggered()), this, SLOT(Move()));
     connect(m_Delete,                  SIGNAL(triggered()), this, SLOT(Delete()));
     connect(m_CoverImage,              SIGNAL(triggered()), this, SLOT(SetCoverImage()));
     connect(m_Merge,                   SIGNAL(triggered()), this, SLOT(Merge()));
@@ -1627,7 +1990,17 @@ void BookBrowser::ConnectSignalsToSlots()
     connect(m_SaveAs,                  SIGNAL(triggered()), this, SLOT(SaveAs()));
     connect(m_ValidateWithW3C,         SIGNAL(triggered()), this, SLOT(ValidateStylesheetWithW3C()));
     connect(m_OpenWith,                SIGNAL(triggered()), this, SLOT(OpenWith()));
-    connect(m_OpenWithEditor,          SIGNAL(triggered()), this, SLOT(OpenWithEditor()));
+    connect(m_OpenWithEditor0, SIGNAL(triggered()),  m_openWithMapper, SLOT(map()));
+    m_openWithMapper->setMapping(m_OpenWithEditor0, 0);
+    connect(m_OpenWithEditor1, SIGNAL(triggered()),  m_openWithMapper, SLOT(map()));
+    m_openWithMapper->setMapping(m_OpenWithEditor1, 1);
+    connect(m_OpenWithEditor2, SIGNAL(triggered()),  m_openWithMapper, SLOT(map()));
+    m_openWithMapper->setMapping(m_OpenWithEditor2, 2);
+    connect(m_OpenWithEditor3, SIGNAL(triggered()),  m_openWithMapper, SLOT(map()));
+    m_openWithMapper->setMapping(m_OpenWithEditor3, 3);
+    connect(m_OpenWithEditor4, SIGNAL(triggered()),  m_openWithMapper, SLOT(map()));
+    m_openWithMapper->setMapping(m_OpenWithEditor4, 4);
+    connect(m_openWithMapper, SIGNAL(mapped(int)), this, SLOT(OpenWithEditor(int)));
     connect(m_AdobesObfuscationMethod, SIGNAL(triggered()), this, SLOT(AdobesObfuscationMethod()));
     connect(m_IdpfsObfuscationMethod,  SIGNAL(triggered()), this, SLOT(IdpfsObfuscationMethod()));
     connect(m_NoObfuscationMethod,     SIGNAL(triggered()), this, SLOT(NoObfuscationMethod()));

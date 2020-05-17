@@ -67,7 +67,15 @@
      <addaction name="actionNewCSSFile"/>
      <addaction name="actionNewSVGFile"/>
     </widget>
-    <addaction name="actionNew"/>
+    <widget class="QMenu" name="menuNew">
+     <property name="title">
+      <string>&amp;New</string>
+     </property>
+     <addaction name="actionNew"/>
+     <addaction name="actionNewEpub2"/>
+     <addaction name="actionNewEpub3"/>
+    </widget>
+    <addaction name="menuNew" />
     <addaction name="actionOpen"/>
     <addaction name="separator"/>
     <addaction name="menuAdd"/>
@@ -141,6 +149,31 @@
      <addaction name="actionClip19"/>
      <addaction name="actionClip20"/>
     </widget>
+    <widget class="QMenu" name="menuClip2">
+     <property name="title">
+      <string>Cli&amp;p2</string>
+     </property>
+     <addaction name="actionClip21"/>
+     <addaction name="actionClip22"/>
+     <addaction name="actionClip23"/>
+     <addaction name="actionClip24"/>
+     <addaction name="actionClip25"/>
+     <addaction name="actionClip26"/>
+     <addaction name="actionClip27"/>
+     <addaction name="actionClip28"/>
+     <addaction name="actionClip29"/>
+     <addaction name="actionClip30"/>
+     <addaction name="actionClip31"/>
+     <addaction name="actionClip32"/>
+     <addaction name="actionClip33"/>
+     <addaction name="actionClip34"/>
+     <addaction name="actionClip35"/>
+     <addaction name="actionClip36"/>
+     <addaction name="actionClip37"/>
+     <addaction name="actionClip38"/>
+     <addaction name="actionClip39"/>
+     <addaction name="actionClip40"/>
+    </widget>
     <addaction name="actionInsertSGFSectionMarker"/>
     <addaction name="separator"/>
     <addaction name="actionInsertFile"/>
@@ -152,6 +185,7 @@
     <addaction name="actionInsertClosingTag"/>
     <addaction name="separator"/>
     <addaction name="menuClip"/>
+    <addaction name="menuClip2"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -205,7 +239,6 @@
     <addaction name="actionTextDirectionRTL"/>
     <addaction name="actionTextDirectionDefault"/>
     <addaction name="separator"/>
-    <addaction name="actionShowTag"/>
     <addaction name="actionRemoveFormatting"/>
    </widget>
    <widget class="QMenu" name="menuView">
@@ -219,9 +252,6 @@
     </widget>
     <addaction name="menuToolbars"/>
     <addaction name="separator"/>
-    <addaction name="actionBookView"/>
-    <addaction name="actionCodeView"/>
-    <addaction name="actionToggleViewState"/>
     <addaction name="separator"/>
     <addaction name="actionZoomIn"/>
     <addaction name="actionZoomOut"/>
@@ -324,11 +354,14 @@
       <string>Epub&amp;3 Tools</string>
      </property>
      <addaction name="actionUpdateManifestProperties"/>
-     <addaction name="actionNCXFromNav"/>
+     <addaction name="actionNCXGuideFromNav"/>
+     <addaction name="actionRemoveNCXGuide"/>
     </widget>
     <addaction name="actionAddCover"/>
     <addaction name="actionMetaEditor"/>
     <addaction name="menuTOC"/>
+    <addaction name="actionStandardize" />
+    <addaction name="actionCustomLayout" />
     <addaction name="menuIndex"/>
     <addaction name="separator"/>
     <addaction name="menuSpellCheckMenu"/>
@@ -350,6 +383,15 @@
     </property>
     <addaction name="actionManage_Plugins"/>
    </widget>
+   <widget class="QMenu" name="menuCheckpoints">
+    <property name="title">
+     <string>Checkpoints</string>
+    </property>
+    <addaction name="actionCommit"/>
+    <addaction name="actionCheckout"/>
+    <addaction name="actionDiff"/>
+    <addaction name="actionManageRepo"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuInsert"/>
@@ -359,8 +401,10 @@
    <addaction name="menuView"/>
    <addaction name="menuWindow"/>
    <addaction name="menuPlugins"/>
+   <addaction name="menuCheckpoints"/>
    <addaction name="menuHelp"/>
   </widget>
+
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBarFileActions">
    <property name="windowTitle">
@@ -372,11 +416,44 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionNew"/>
+   <addaction name="actionNewEpub2"/>
+   <addaction name="actionNewEpub3"/>
    <addaction name="actionOpen"/>
    <addaction name="actionAddExistingFile"/>
    <addaction name="actionSave"/>
   </widget>
+
+  <widget class="QToolBar" name="toolBarRepoActions">
+   <property name="windowTitle">
+    <string>Checkpoints</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionCommit"/>
+   <addaction name="actionCheckout"/>
+   <addaction name="actionDiff"/>
+   <addaction name="actionManageRepo"/>
+  </widget>
+  <widget class="QToolBar" name="toolBarIndexActions">
+   <property name="windowTitle">
+    <string>Index</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionIndexEditor"/>
+   <addaction name="actionAddToIndex"/>
+   <addaction name="actionMarkForIndex"/>
+   <addaction name="actionCreateIndex"/>
+  </widget>
+
   <widget class="QToolBar" name="toolBarTextManip">
    <property name="windowTitle">
     <string>Edit</string>
@@ -394,20 +471,9 @@
    <addaction name="actionCopy"/>
    <addaction name="actionPaste"/>
    <addaction name="separator"/>
+   <addaction name="actionXEditor"/>
+   <addaction name="separator"/>
    <addaction name="actionFind"/>
-  </widget>
-  <widget class="QToolBar" name="toolBarViews">
-   <property name="windowTitle">
-    <string>View</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="actionBookView"/>
-   <addaction name="actionCodeView"/>
   </widget>
   <widget class="QToolBar" name="toolBarInsertions">
    <property name="windowTitle">
@@ -463,6 +529,14 @@
    <addaction name="actionMetaEditor"/>
    <addaction name="actionGenerateTOC"/>
    <addaction name="actionSpellcheckEditor"/>
+  </widget>
+  <widget class="QToolBar" name="toolBarPlugins">
+   <property name="windowTitle">
+    <string>Plugins Set 1</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
@@ -471,6 +545,22 @@
    <addaction name="actionPlugin3"/>
    <addaction name="actionPlugin4"/>
    <addaction name="actionPlugin5"/>
+  </widget>
+  <widget class="QToolBar" name="toolBarPlugins2">
+   <property name="windowTitle">
+    <string>Plugins Set 2</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionPlugin6"/>
+   <addaction name="actionPlugin7"/>
+   <addaction name="actionPlugin8"/>
+   <addaction name="actionPlugin9"/>
+   <addaction name="actionPlugin10"/>
   </widget>
   <widget class="QToolBar" name="toolBarHeadings">
    <property name="windowTitle">
@@ -482,13 +572,22 @@
    <attribute name="toolBarBreak">
     <bool>true</bool>
    </attribute>
-   <addaction name="actionHeading1"/>
-   <addaction name="actionHeading2"/>
-   <addaction name="actionHeading3"/>
-   <addaction name="actionHeading4"/>
-   <addaction name="actionHeading5"/>
-   <addaction name="actionHeading6"/>
-   <addaction name="actionHeadingNormal"/>
+   <widget class="QToolButton" name="tbHeadings">
+    <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/heading-all_48px.png</normaloff>:/main/heading-all_48px.png</iconset>
+   </property>
+    <property name="toolTip">
+      <string>set Heading Level of Selected Text</string>
+   </property>
+    <addaction name="actionHeading1"/>
+    <addaction name="actionHeading2"/>
+    <addaction name="actionHeading3"/>
+    <addaction name="actionHeading4"/>
+    <addaction name="actionHeading5"/>
+    <addaction name="actionHeading6"/>
+    <addaction name="actionHeadingNormal"/>
+  </widget>
   </widget>
   <widget class="QToolBar" name="toolBarTextFormats">
    <property name="windowTitle">
@@ -558,10 +657,19 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="actionCasingLowercase"/>
-   <addaction name="actionCasingUppercase"/>
-   <addaction name="actionCasingTitlecase"/>
-   <addaction name="actionCasingCapitalize"/>
+   <widget class="QToolButton" name="tbCase">
+    <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/case-change_48px.png</normaloff>:/main/case-change_48px.png</iconset>
+   </property>
+    <property name="toolTip">
+     <string>set Case of Selected Text</string>
+    </property>
+    <addaction name="actionCasingLowercase"/>
+    <addaction name="actionCasingUppercase"/>
+    <addaction name="actionCasingTitlecase"/>
+    <addaction name="actionCasingCapitalize"/>
+   </widget>
   </widget>
   <widget class="QToolBar" name="toolBarTextDirection">
    <property name="windowTitle">
@@ -608,23 +716,86 @@
    <addaction name="actionClip19"/>
    <addaction name="actionClip20"/>
   </widget>
+  <widget class="QToolBar" name="toolBarClips2">
+   <property name="windowTitle">
+    <string>Clip Bar2</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+   <addaction name="actionClip21"/>
+   <addaction name="actionClip22"/>
+   <addaction name="actionClip23"/>
+   <addaction name="actionClip24"/>
+   <addaction name="actionClip25"/>
+   <addaction name="actionClip26"/>
+   <addaction name="actionClip27"/>
+   <addaction name="actionClip28"/>
+   <addaction name="actionClip29"/>
+   <addaction name="actionClip30"/>
+   <addaction name="actionClip31"/>
+   <addaction name="actionClip32"/>
+   <addaction name="actionClip33"/>
+   <addaction name="actionClip34"/>
+   <addaction name="actionClip35"/>
+   <addaction name="actionClip36"/>
+   <addaction name="actionClip37"/>
+   <addaction name="actionClip38"/>
+   <addaction name="actionClip39"/>
+   <addaction name="actionClip40"/>
+  </widget>
+
   <action name="actionNew">
    <property name="icon">
     <iconset resource="../Resource_Files/main/main.qrc">
      <normaloff>:/main/document-new_48px.png</normaloff>:/main/document-new_48px.png</iconset>
    </property>
    <property name="text">
-    <string>&amp;New</string>
+    <string>New Default</string>
    </property>
    <property name="toolTip">
     <string>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new book.&lt;/p&gt;</string>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new default book.&lt;/p&gt;</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
    </property>
   </action>
+
+  <action name="actionNewEpub2">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/document-new-epub2_48px.png</normaloff>:/main/document-new-epub2_48px.png</iconset>
+   </property>
+   <property name="text">
+    <string>ePub&amp;2</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New ePub2&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new ePub2 book.&lt;/p&gt;</string>
+   </property>
+  </action>
+
+  <action name="actionNewEpub3">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/document-new-epub3_48px.png</normaloff>:/main/document-new-epub3_48px.png</iconset>
+   </property>
+   <property name="text">
+    <string>ePub&amp;3</string>
+   </property>
+   <property name="toolTip">
+    <string>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New ePub3&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new ePub3 book.&lt;/p&gt;</string>
+   </property>
+  </action>
+
   <action name="actionSave">
    <property name="icon">
     <iconset resource="../Resource_Files/main/main.qrc">
@@ -906,6 +1077,9 @@
     <iconset resource="../Resource_Files/main/main.qrc">
      <normaloff>:/main/process-stop_48px.png</normaloff>:/main/process-stop_48px.png</iconset>
    </property>
+   <property name="menuRole">
+     <enum>QAction::QuitRole</enum>
+   </property>
    <property name="text">
     <string>&amp;Quit</string>
    </property>
@@ -920,6 +1094,9 @@
    <property name="icon">
     <iconset resource="../Resource_Files/main/main.qrc">
      <normaloff>:/main/help-browser_48px.png</normaloff>:/main/help-browser_48px.png</iconset>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
    </property>
    <property name="text">
     <string>&amp;About...</string>
@@ -980,51 +1157,6 @@
     <string>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Edit Table of Contents&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Directly edit the existing Table of Contents.&lt;/p&gt;</string>
-   </property>
-  </action>
-  <action name="actionBookView">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../Resource_Files/main/main.qrc">
-     <normaloff>:/main/view-book_48px.png</normaloff>:/main/view-book_48px.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Book View</string>
-   </property>
-   <property name="toolTip">
-    <string>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Book View&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edit and display the files in your book as they will appear to readers.&lt;/p&gt;</string>
-   </property>
-  </action>
-  <action name="actionCodeView">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset resource="../Resource_Files/main/main.qrc">
-     <normaloff>:/main/view-code_48px.png</normaloff>:/main/view-code_48px.png</iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Code View</string>
-   </property>
-   <property name="toolTip">
-    <string>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Code View&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edit and display the actual contents of the files in your book, including the formatting codes that control how your book will appear to readers.&lt;/p&gt;</string>
-   </property>
-  </action>
-  <action name="actionToggleViewState">
-   <property name="text">
-    <string>&amp;Toggle View State</string>
-   </property>
-   <property name="toolTip">
-    <string>Toggle Book View to Code View or Code View to Book View</string>
-   </property>
-   <property name="shortcut">
-    <string>F2</string>
    </property>
   </action>
   <action name="actionSplitSection">
@@ -1231,6 +1363,14 @@
     <string>Ctrl+Shift+W</string>
    </property>
   </action>
+  <action name="actionStandardize">
+   <property name="text">
+    <string>Restructure Epub to Sigil Norm</string>
+   </property>
+   <property name="toolTip">
+    <string>Restructure Epub to Sigil Standard Form</string>
+   </property>
+  </action>
   <action name="actionZoomIn">
    <property name="icon">
     <iconset resource="../Resource_Files/main/main.qrc">
@@ -1259,17 +1399,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+-</string>
-   </property>
-  </action>
-  <action name="actionShowTag">
-   <property name="text">
-    <string>Sho&amp;w Tag</string>
-   </property>
-   <property name="toolTip">
-    <string>Show the enclosing tag HTML for the cursor position in Book View.</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Alt+T</string>
    </property>
   </action>
   <action name="actionFind">
@@ -1617,6 +1746,11 @@
    <property name="text">
     <string>&amp;Index Editor...</string>
    </property>
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/index-edit_48px.png</normaloff>:/main/index-edit_48px.png</iconset>
+   </property>
+
    <property name="shortcut">
     <string>Ctrl+Alt+I</string>
    </property>
@@ -1963,7 +2097,172 @@
     <string>Insert Clip 20</string>
    </property>
   </action>
+
+  <action name="actionClip21">
+   <property name="text">
+    <string>Clip 21</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 21</string>
+   </property>
+  </action>
+  <action name="actionClip22">
+   <property name="text">
+    <string>Clip 22</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 22</string>
+   </property>
+  </action>
+  <action name="actionClip23">
+   <property name="text">
+    <string>Clip 23</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 23</string>
+   </property>
+  </action>
+  <action name="actionClip24">
+   <property name="text">
+    <string>Clip 24</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 24</string>
+   </property>
+  </action>
+  <action name="actionClip25">
+   <property name="text">
+    <string>Clip 25</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 25</string>
+   </property>
+  </action>
+  <action name="actionClip26">
+   <property name="text">
+    <string>Clip 26</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 26</string>
+   </property>
+  </action>
+  <action name="actionClip27">
+   <property name="text">
+    <string>Clip 27</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 27</string>
+   </property>
+  </action>
+  <action name="actionClip28">
+   <property name="text">
+    <string>Clip 28</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 28</string>
+   </property>
+  </action>
+  <action name="actionClip29">
+   <property name="text">
+    <string>Clip 29</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 29</string>
+   </property>
+  </action>
+  <action name="actionClip30">
+   <property name="text">
+    <string>Clip 30</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 30</string>
+   </property>
+  </action>
+  <action name="actionClip31">
+   <property name="text">
+    <string>Clip 31</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 31</string>
+   </property>
+  </action>
+  <action name="actionClip32">
+   <property name="text">
+    <string>Clip 32</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 32</string>
+   </property>
+  </action>
+  <action name="actionClip33">
+   <property name="text">
+    <string>Clip 33</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 33</string>
+   </property>
+  </action>
+  <action name="actionClip34">
+   <property name="text">
+    <string>Clip 34</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 34</string>
+   </property>
+  </action>
+  <action name="actionClip35">
+   <property name="text">
+    <string>Clip 35</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 35</string>
+   </property>
+  </action>
+  <action name="actionClip36">
+   <property name="text">
+    <string>Clip 36</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 36</string>
+   </property>
+  </action>
+  <action name="actionClip37">
+   <property name="text">
+    <string>Clip 37</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 37</string>
+   </property>
+  </action>
+  <action name="actionClip38">
+   <property name="text">
+    <string>Clip 38</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 38</string>
+   </property>
+  </action>
+  <action name="actionClip39">
+   <property name="text">
+    <string>Clip 39</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 39</string>
+   </property>
+  </action>
+  <action name="actionClip40">
+   <property name="text">
+    <string>Clip 40</string>
+   </property>
+   <property name="toolTip">
+    <string>Insert Clip 40</string>
+   </property>
+  </action>
+
   <action name="actionPreferences">
+   <property name="menuRole">
+    <enum>QAction::PreferencesRole</enum>
+   </property>
    <property name="text">
     <string>&amp;Preferences...</string>
    </property>
@@ -1988,7 +2287,7 @@
    </property>
    <property name="icon">
     <iconset resource="../Resource_Files/main/main.qrc">
-     <normaloff>:/main/heading-1_48px.png</normaloff>:/main/heading-1_43px.png</iconset>
+     <normaloff>:/main/heading-1_48px.png</normaloff>:/main/heading-1_48px.png</iconset>
    </property>
    <property name="text">
     <string>Heading &amp;1</string>
@@ -2197,6 +2496,10 @@
    <property name="text">
     <string>&amp;Add To Index Editor</string>
    </property>
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/index-add_48px.png</normaloff>:/main/index-add_48px.png</iconset>
+   </property>
    <property name="toolTip">
     <string>Add the selected text to the Index Editor.</string>
    </property>
@@ -2204,6 +2507,10 @@
   <action name="actionMarkForIndex">
    <property name="text">
     <string>&amp;Mark For Index</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/index-mark_48px.png</normaloff>:/main/index-mark_48px.png</iconset>
    </property>
    <property name="toolTip">
     <string>Mark the selected text for inclusion in the Index.</string>
@@ -2215,6 +2522,10 @@
   <action name="actionCreateIndex">
    <property name="text">
     <string>&amp;Create Index</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/index-create_48px.png</normaloff>:/main/index-create_48px.png</iconset>
    </property>
    <property name="toolTip">
     <string>Generate a new Index HTML file.</string>
@@ -2328,6 +2639,63 @@
     <string>Run Plugin 5</string>
    </property>
   </action>
+  <action name="actionPlugin6">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/plugin_48px_6pips.png</normaloff>:/main/plugin_48px_6pips.png</iconset>
+   </property>
+   <property name="text">
+    <string>Run Plugin 6</string>
+   </property>
+  </action>
+  <action name="actionPlugin7">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/plugin_48px_7pips.png</normaloff>:/main/plugin_48px_7pips.png</iconset>
+   </property>
+   <property name="text">
+    <string>Run Plugin 7</string>
+   </property>
+  </action>
+  <action name="actionPlugin8">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/plugin_48px_8pips.png</normaloff>:/main/plugin_48px_8pips.png</iconset>
+   </property>
+   <property name="text">
+    <string>Run Plugin 8</string>
+   </property>
+  </action>
+  <action name="actionPlugin9">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/plugin_48px_9pips.png</normaloff>:/main/plugin_48px_9pips.png</iconset>
+   </property>
+   <property name="text">
+    <string>Run Plugin 9</string>
+   </property>
+  </action>
+  <action name="actionPlugin10">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/plugin_48px_10pips.png</normaloff>:/main/plugin_48px_10pips.png</iconset>
+   </property>
+   <property name="text">
+    <string>Run Plugin 10</string>
+   </property>
+  </action>
+  <action name="actionXEditor">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/document-edit_48px.png</normaloff>:/main/document-edit_48px.png</iconset>
+   </property>
+   <property name="text">
+    <string>Launch External Xhtml Editor</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
   <action name="actionMendPrettifyHTML">
    <property name="text">
     <string>Mend and &amp;Prettify All HTML Files</string>
@@ -2343,9 +2711,55 @@
     <string>&amp;Update Manifest Properties</string>
    </property>
   </action>
-  <action name="actionNCXFromNav">
+  <action name="actionNCXGuideFromNav">
    <property name="text">
-    <string>Generate NC&amp;X from Nav</string>
+    <string>Generate &amp;NCX/Guide for epub2 e-readers</string>
+   </property>
+  </action>
+  <action name="actionCustomLayout">
+   <property name="text">
+    <string>Create a Custom Empty Epub</string>
+   </property>
+  </action>
+  <action name="actionRemoveNCXGuide">
+   <property name="text">
+    <string>Remove the NCX and Guide</string>
+   </property>
+  </action>
+  <action name="actionCommit">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/git-commit_48px.png</normaloff>:/main/git-commit_48px.png</iconset>
+   </property>
+   <property name="text">
+    <string>Create Checkpoint for Epub</string>
+   </property>
+  </action>
+  <action name="actionCheckout">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/git-checkout_48px.png</normaloff>:/main/git-checkout_48px.png</iconset>
+   </property>
+   <property name="text">
+    <string>Create Epub from previous Checkpoint</string>
+   </property>
+  </action>
+  <action name="actionDiff">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/git-diff_48px.png</normaloff>:/main/git-diff_48px.png</iconset>
+   </property>
+   <property name="text">
+    <string>Compare Epub against Checkpoint</string>
+   </property>
+  </action>
+  <action name="actionManageRepo">
+   <property name="icon">
+    <iconset resource="../Resource_Files/main/main.qrc">
+     <normaloff>:/main/git-manage_48px.png</normaloff>:/main/git-manage_48px.png</iconset>
+   </property>
+   <property name="text">
+    <string>Manage Checkpoint Repositories</string>
    </property>
   </action>
  </widget>

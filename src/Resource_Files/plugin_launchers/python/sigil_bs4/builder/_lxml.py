@@ -1,6 +1,8 @@
 from __future__ import unicode_literals, division, absolute_import, print_function
 
 import sys
+from collections import OrderedDict
+
 PY3 = sys.version_info[0] >= 3
 if PY3:
     text_type = str
@@ -77,7 +79,7 @@ class LXMLTreeBuilderForXML(TreeBuilder):
         if self._default_parser is not None:
             return self._default_parser
         return etree.XMLParser(
-            target=self, strip_cdata=False, recover=True, encoding=encoding)
+            target=self, strip_cdata=False, recover=True, encoding=encoding, resolve_entities=False)
 
     def parser_for(self, encoding):
         # Use the default parser.
@@ -85,7 +87,10 @@ class LXMLTreeBuilderForXML(TreeBuilder):
 
         if isinstance(parser, collections.Callable):
             # Instantiate the parser with default arguments
-            parser = parser(target=self, strip_cdata=False, encoding=encoding)
+            if self.is_xml:
+                parser = parser(target=self, strip_cdata=False, encoding=encoding, resolve_entities=False)
+            else:
+                parser = parser(target=self, strip_cdata=False, encoding=encoding)
         return parser
 
     def __init__(self, parser=None, empty_element_tags=None):
@@ -164,9 +169,19 @@ class LXMLTreeBuilderForXML(TreeBuilder):
 
     def start(self, name, attrs, nsmap={}):
         # Make sure attrs is a mutable dict--lxml may send an immutable dictproxy.
-        attrs = dict(attrs)
+        attrs = OrderedDict(attrs)
         nsprefix = None
 
+        # ARRGGHH lxml 4.4.X has changes empty prefixes on namespaces to be the null string 
+        # and not None which all prior versions used! So remap '' prefixes to be None
+        # so we can work with all lxml versions
+        new_nsmap = {}
+        for pfx, ns in list(nsmap.items()):
+            if pfx is not None and pfx == '':
+                pfx = None
+            new_nsmap[pfx] = ns
+        nsmap = new_nsmap
+        
         # Fix bug in bs4 _lxml.py that ignores attributes that specify namespaces on this tag
         # Invert each namespace map as it comes in.
         if len(nsmap) > 0:
@@ -202,7 +217,7 @@ class LXMLTreeBuilderForXML(TreeBuilder):
         # Namespaces are in play. Find any attributes that came in
         # from lxml with namespaces attached to their names, and
         # turn then into NamespacedAttribute objects.
-        new_attrs = {}
+        new_attrs = OrderedDict()
         for attr, value in list(attrs.items()):
             namespace, attr = self._getNsTag(attr)
             if namespace is None:

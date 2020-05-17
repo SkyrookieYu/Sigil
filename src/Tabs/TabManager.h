@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -24,7 +25,6 @@
 #define TABMANAGER_H
 
 #include <QtCore/QUrl>
-#include <QtCore/QPointer>
 #include <QtWidgets/QTabWidget>
 
 #include "MainUI/MainWindow.h"
@@ -65,7 +65,7 @@ public:
     int GetTabCount();
 
     void CloseAllTabs(bool all=false);
-    void CloseTabForResource(const Resource *resource);
+    void CloseTabForResource(const Resource *resource, bool force=false);
 
     /**
      * Returns \c true if all open tabs data is well-formed.
@@ -81,7 +81,7 @@ public:
     /**
      * Close and reopen all tabs
      */
-    void ReopenTabs(MainWindow::ViewState view_state);
+    void ReopenTabs();
 
     void UpdateTabDisplay();
 
@@ -106,7 +106,6 @@ public slots:
      * @param line_to_scroll_to - To which line should the resource scroll (CV).
      * @param position_to_scroll_to - To which position should the resource scroll (CV).
      * @param caret_location_to_scroll_to - To which stored caret location should the resource scroll (BV/PV).
-     * @param view_state - In which View should the resource open or switch to.
      * @param fragment - The fragment ID to which the new tab should be scrolled to.
      * @param precede_current_tab - Should the new tab precede the currently opened one.
      */
@@ -114,7 +113,6 @@ public slots:
                       int line_to_scroll_to = -1,
                       int position_to_scroll_to = -1,
                       const QString &caret_location_to_scroll_to = QString(),
-                      MainWindow::ViewState view_state = MainWindow::ViewState_Unknown,
                       const QUrl &fragment = QUrl(),
                       bool precede_current_tab = false);
 
@@ -159,8 +157,6 @@ public slots:
     void LinkClicked(const QUrl &url);
 
 signals:
-    void ToggleViewStateRequest();
-
     /**
      * Emitted whenever the user switches from one tab to the next.
      *
@@ -193,7 +189,7 @@ private slots:
     /**
      * Emits the TabChanged signal.
      */
-    void EmitTabChanged();
+    void EmitTabChanged(int new_index);
 
     /**
      * Deletes the specified tab.
@@ -259,7 +255,6 @@ private:
      *
      * @param resource The resource for which we want to create a tab.
      * @param line_to_scroll_to To which line should the resource scroll.
-     * @param view_state In which View should the resource open or switch to.
      * @param fragment The fragment ID to which the tab should scroll after load.
      * @return The newly created tab.
      */
@@ -267,7 +262,6 @@ private:
                                      int line_to_scroll_to,
                                      int position_to_scroll_to,
                                      const QString &caret_location_to_scroll_to,
-                                     MainWindow::ViewState view_state,
                                      const QUrl &fragment,
                                      bool grab_focus = true);
 
@@ -291,11 +285,12 @@ private:
      * Stores a reference to the tab used before the current one.
      * Needed for the TabChanged signal.
      */
-    QPointer<ContentTab> m_LastContentTab;
+    ContentTab* m_LastContentTab;
 
     bool m_CheckWellFormedErrors;
 
-    QTabBar *m_TabBar;
+    QList<ContentTab*> m_TabsToDelete;
+    bool m_tabs_deletion_in_use;
 };
 
 #endif // TABMANAGER_H

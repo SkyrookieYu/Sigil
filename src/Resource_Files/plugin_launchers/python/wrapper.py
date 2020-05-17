@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 
-# Copyright (c) 2014 Kevin B. Hendricks, John Schember, and Doug Massay
+# Copyright (c) 2014-2020 Kevin B. Hendricks and Doug Massay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification,
@@ -26,16 +26,22 @@
 # WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from __future__ import unicode_literals, division, absolute_import, print_function
-from compatibility_utils import PY3, PY2, text_type, binary_type, utf8_str, unicode_str, iswindows, quoteurl, unquoteurl
 
+
+from compatibility_utils import PY3, PY2, text_type, binary_type, utf8_str, unicode_str, iswindows
+from collections import OrderedDict
 import sys
 import os
+
+from hrefutils import quoteurl, unquoteurl, buildBookPath, startingDir, buildRelativePath
+from hrefutils import ext_mime_map, mime_group_map
+
 import re
 import unipath
 from unipath import pathof
 import unicodedata
 
-_launcher_version=20190115
+_launcher_version=20200326
 
 _PKG_VER = re.compile(r'''<\s*package[^>]*version\s*=\s*["']([^'"]*)['"][^>]*>''',re.IGNORECASE)
 
@@ -48,70 +54,9 @@ _guide_types = ['cover','title-page','toc','index','glossary','acknowledgements'
                 'bibliography','colophon','copyright-page','dedication',
                 'epigraph','foreward','loi','lot','notes','preface','text']
 
-ext_mime_map = {
-                '.jpg'   : 'image/jpeg',
-                '.jpeg'  : 'image/jpeg',
-                '.png'   : 'image/png',
-                '.gif'   : 'image/gif',
-                '.svg'   : 'image/svg+xml',
-                '.xhtml' : 'application/xhtml+xml',
-                '.html'  : 'application/xhtml+xml',
-                '.htm'   : 'application/xhtml+xml',
-                '.otf'   : 'application/vnd.ms-opentype',
-                #'.otf'  : 'application/x-font-opentype',
-                #'.otf'  : 'application/font-sfnt',
-                '.ttf'   : 'application/x-font-ttf',
-                '.woff'  : 'application/font-woff',
-                '.woff2' : 'font/woff2',
-                '.mp3'   : 'audio/mpeg',
-                '.m4a'   : 'audio/mp4',
-                '.mp4'   : 'video/mp4',
-                '.m4v'   : 'video/mp4',
-                '.css'   : 'text/css',
-                '.ncx'   : 'application/x-dtbncx+xml',
-                '.xml'   : 'application/oebs-page-map+xml',
-                '.opf'   : 'application/oebps-package+xml',
-                '.smil'  : 'application/smil+xml',
-                '.pls'   : 'application/pls+xml',
-                '.xpgt'  : 'application/adobe-page-template+xml',
-                #'.js'   : 'text/javascript',
-                '.js'    : 'application/javascript',
-                '.epub'  : 'application/epub+zip',
-                }
-
-mime_base_map = {
-                'image/jpeg'                              : 'Images',
-                'image/png'                               : 'Images',
-                'image/gif'                               : 'Images',
-                'image/svg+xml'                           : 'Images',
-                'application/xhtml+xml'                   : 'Text',
-                'application/x-font-ttf'                  : 'Fonts',
-                'application/x-font-opentype'             : 'Fonts',
-                'application/vnd.ms-opentype'             : 'Fonts',
-                'application/font-woff'                   : 'Fonts',
-                'application/font-sfnt'                   : 'Fonts',
-                'font/woff2'                              : 'Fonts',
-                'audio/mpeg'                              : 'Audio',
-                'audio/mp3'                               : 'Audio',
-                'audio/mp4'                               : 'Audio',
-                'video/mp4'                               : 'Video',
-                'text/css'                                : 'Styles',
-                'application/x-dtbncx+xml'                : '',
-                'application/oebps-package+xml'           : '',
-                'application/oebs-page-map+xml'           : 'Misc',
-                'application/smil+xml'                    : 'Misc',
-                'application/adobe-page-template+xml'     : 'Misc',
-                'application/vnd.adobe-page-template+xml' : 'Misc',
-                'text/javascript'                         : 'Misc',
-                'application/javascript'                  : 'Misc',
-                'application/pls+xml'                     : 'Misc',
-                }
-
-
 PROTECTED_FILES = [
     'mimetype',
     'META-INF/container.xml',
-    'OEBPS/content.opf'
 ]
 
 TEXT_MIMETYPES = [
@@ -143,6 +88,7 @@ class Wrapper(object):
         self.outdir = pathof(outdir)
 
         # initialize the sigil cofiguration info passed in outdir with sigil.cfg
+        self.opfbookpath = None
         self.appdir = None
         self.usrsupdir = None
         # Location of directory containing hunspell dictionaries on Linux
@@ -154,14 +100,17 @@ class Wrapper(object):
         # status of epub inside Sigil (isDirty) and CurrentFilePath of current epub file
         self.epub_isDirty = False
         self.epub_filepath = ""
-        # File selected in Sigil's Book Browser
+        self.colormode = None
+        self.colors = None
+         # File selected in Sigil's Book Browser
         self.selected = []
         cfg = ''
         with open(os.path.join(self.outdir, 'sigil.cfg'), 'rb') as f:
             cfg = f.read().decode('utf-8')
         cfg = cfg.replace("\r", "")
         cfg_lst = cfg.split("\n")
-        if len(cfg_lst) >= 2:
+        if len(cfg_lst) >= 7:
+            self.opfbookpath = cfg_lst.pop(0)
             self.appdir = cfg_lst.pop(0)
             self.usrsupdir = cfg_lst.pop(0)
             if not sys.platform.startswith('darwin') and not sys.platform.startswith('win'):
@@ -170,16 +119,22 @@ class Wrapper(object):
             self.sigil_spellcheck_lang = cfg_lst.pop(0)
             self.epub_isDirty = (cfg_lst.pop(0) == "True")
             self.epub_filepath = cfg_lst.pop(0)
+            self.colormode = cfg_lst.pop(0)
+            self.colors = cfg_lst.pop(0)
+            self.highdpi = cfg_lst.pop(0)
+            self.uifont = cfg_lst.pop(0)
             self.selected = cfg_lst
         os.environ['SigilGumboLibPath'] = self.get_gumbo_path()
 
         # dictionaries used to map opf manifest information
-        self.id_to_href = {}
-        self.id_to_mime = {}
-        self.href_to_id = {}
-        self.id_to_props = {}
-        self.id_to_fall = {}
-        self.id_to_over = {}
+        self.id_to_href = OrderedDict()
+        self.id_to_mime = OrderedDict()
+        self.id_to_props = OrderedDict()
+        self.id_to_fall = OrderedDict()
+        self.id_to_over = OrderedDict()
+        self.id_to_bookpath = OrderedDict()
+        self.href_to_id = OrderedDict()
+        self.bookpath_to_id = OrderedDict()
         self.spine_ppd = None
         self.spine = []
         self.guide = []
@@ -192,26 +147,34 @@ class Wrapper(object):
         self.op = op
         if self.op is not None:
             # copy in data from parsing of initial opf
-            self.opfname = op.opfname
+            self.opf_dir = op.opf_dir
             self.id_to_href = op.get_manifest_id_to_href_dict().copy()
             self.id_to_mime = op.get_manifest_id_to_mime_dict().copy()
-            self.href_to_id = op.get_href_to_manifest_id_dict().copy()
             self.id_to_props = op.get_manifest_id_to_properties_dict().copy()
             self.id_to_fall = op.get_manifest_id_to_fallback_dict().copy()
             self.id_to_over = op.get_manifest_id_to_overlay_dict().copy()
+            self.id_to_bookpath = op.get_manifest_id_to_bookpath_dict().copy()
+            self.group_paths = op.get_group_paths().copy()
             self.spine_ppd = op.get_spine_ppd()
             self.spine = op.get_spine()
             self.guide = op.get_guide()
             self.package_tag = op.get_package_tag()
             self.epub_version = op.get_epub_version()
             self.bindings = op.get_bindings()
+            self.metadataxml = op.get_metadataxml()
+            # invert key dictionaries to allow for reverse access
+            for k, v in self.id_to_href.items():
+                self.href_to_id[v] = k
+            for k, v in self.id_to_bookpath.items():
+                self.bookpath_to_id[v] = k
+            # self.href_to_id = {v: k for k, v in self.id_to_href.items()}
+            # self.bookpath_to_id = {v: k for k, v in self.id_to_bookpath.items()}
             # self.metadata = op.get_metadata()
             # self.metadata_attr = op.get_metadata_attr()
-            self.metadataxml = op.get_metadataxml()
         self.other = []  # non-manifest file information
-        self.id_to_filepath = {}
-        self.book_href_to_filepath = {}
-        self.modified = {}
+        self.id_to_filepath = OrderedDict()
+        self.book_href_to_filepath = OrderedDict()
+        self.modified = OrderedDict()
         self.added = []
         self.deleted = []
 
@@ -223,10 +186,7 @@ class Wrapper(object):
             # spec requires all text including filenames to be in NFC form.
             book_href = unicodedata.normalize('NFC', book_href)
             # if book_href file in manifest convert to manifest id
-            id = None
-            if book_href.startswith('OEBPS/'):
-                href = book_href[6:]
-                id = self.href_to_id.get(href,None)
+            id = self.bookpath_to_id.get(book_href,None)
             if id is None:
                 self.other.append(book_href)
                 self.book_href_to_filepath[book_href] = filepath
@@ -240,7 +200,7 @@ class Wrapper(object):
     def getepubversion(self):
         return self.epub_version
 
-    # utility routine to get mime from href
+    # utility routine to get mime from href (book href or opf href)
     def getmime(self,  href):
         href = unicode_str(href)
         href = unquoteurl(href)
@@ -250,8 +210,84 @@ class Wrapper(object):
         return ext_mime_map.get(ext, "")
 
 
-    # routines to rebuild the opf on the fly from current information
+    # New in Sigil 1.1
+    # ------------------
 
+    # returns color mode of Sigil "light" or "dark"
+    def colorMode(self):
+        return unicode_str(self.colormode)
+
+    # returns color as css or javascript hex color string #xxxxxx
+    # Accepts the following color roles "Window", "Base", "Text", "Highlight", "HighlightedText"
+    def color(self, role):
+        role = unicode_str(role)
+        role = role.lower()
+        color_roles = ["window", "base", "text", "highlight", "highlightedtext"]
+        colors = self.colors.split(',')
+        if role in color_roles:
+            idx = color_roles.index(role)
+            return unicode_str(colors[idx])
+        return None
+
+    # New in Sigil 1.0
+    # ----------------
+
+    # A book path (aka "bookpath" or "book_path") is a unique relative path 
+    # from the ebook root to a specific file.  As a relative path meant to
+    # be used in an href or src link it only uses forward slashes "/"
+    # as path segment separators.  Since all files exist inside the
+    # epub root (folder the epub was unzipped into), book paths will NEVER
+    # have or use "./" or "../" ie they are in always in canonical form
+
+    # We will use the terms book_href (aka "bookhref") interchangeabily
+    # with bookpath with the following convention:
+    #   - use book_href when working with "other" files outside of the manifest
+    #   - use bookpath when working with files in the manifest
+    #   - use either when the file in question in the OPF as it exists in the intersection
+
+    # returns the bookpath/book_href to the opf file 
+    def get_opfbookpath(self):
+        return self.opfbookpath
+
+    # returns the book path to the folder containing this bookpath
+    def get_startingdir(self, bookpath):
+        bookpath = unicode_str(bookpath)
+        return startingDir(bookpath)
+
+    # return a bookpath for the file pointed to by the href from
+    # the specified bookpath starting directory
+    def build_bookpath(self, href, starting_dir):
+        href = unicode_str(href)
+        href = unquoteurl(href)
+        starting_dir = unicode_str(starting_dir)
+        return buildBookPath(href, starting_dir)
+
+    # returns the href relative path from source bookpath to target bookpath
+    def get_relativepath(self, from_bookpath, to_bookpath):
+        from_bookpath = unicode_str(from_bookpath)
+        to_bookpath = unicode_str(to_bookpath)
+        return buildRelativePath(from_bookpath, to_bookpath)
+
+    # ----------
+
+    # routine to detect if the current epub is in Sigil standard epub form
+    def epub_is_standard(self):
+        groups = ["Text", "Styles", "Fonts", "Images", "Audio", "Video", "Misc"]
+        paths = ["OEBPS/Text", "OEBPS/Styles", "OEBPS/Fonts", "OEBPS/Images", "OEBPS/Audio", "OEBPS/Video", "OEBPS/Misc"]
+        std_epub = self.opfbookpath == "OEBPS/content.opf"
+        tocid = self.gettocid()
+        if tocid is not None:
+            std_epub = std_epub and self.id_to_bookpath[tocid] == "OEBPS/toc.ncx";
+        if self.epub_version.startswith("2"):
+            std_epub = std_epub and tocid is not None
+        for g, p in zip(groups, paths):
+            folders = self.group_paths[g]
+            std_epub = std_epub and folders[0] == p and len(folders) == 1
+        return std_epub
+
+
+    # routines to rebuild the opf on the fly from current information
+        
     def build_package_starttag(self):
         return self.package_tag
 
@@ -335,7 +371,8 @@ class Wrapper(object):
 
     def write_opf(self):
         if self.op is not None:
-            filepath = pathof(os.path.join(self.outdir, 'OEBPS', self.opfname))
+            platpath = self.opfbookpath.replace('/',os.sep)
+            filepath = pathof(os.path.join(self.outdir, platpath))
             base = os.path.dirname(filepath)
             if not unipath.exists(base):
                 os.makedirs(base)
@@ -361,6 +398,19 @@ class Wrapper(object):
         return None
 
 
+    # routines to help find the manifest id of the nav
+    def getnavid(self):
+        if self.epub_version == "2.0":
+            return None
+        for id in self.id_to_mime:
+            mime = self.id_to_mime[id]
+            if mime == "application/xhtml+xml":
+                properties = self.id_to_props[id]
+                if properties is not None and "nav" in properties:
+                    return id
+        return None
+
+
     # routines to manipulate the spine
 
     def getspine(self):
@@ -383,7 +433,7 @@ class Wrapper(object):
                     raise Exception('Improper Spine Linear Attribute')
             spine.append((sid, linear, properties))
         self.spine = spine
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
 
     def getspine_epub3(self):
         return self.spine
@@ -406,7 +456,7 @@ class Wrapper(object):
                 properties = properties.lower()
             spine.append((sid, linear, properties))
         self.spine = spine
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
 
     def getbindings_epub3(self):
         return self.bindings
@@ -424,7 +474,7 @@ class Wrapper(object):
                 raise WrapperException('Handler not in Manifest')
             bindings.append((mtype, handler))
         self.bindings = bindings
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
 
     def spine_insert_before(self, pos, sid, linear, properties=None):
         sid = unicode_str(sid)
@@ -441,7 +491,7 @@ class Wrapper(object):
             self.spine.append((sid, linear, properties))
         else:
             self.spine = self.spine[0:pos] + [(sid, linear, properties)] + self.spine[pos:]
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
 
     def getspine_ppd(self):
         return self.spine_ppd
@@ -451,7 +501,7 @@ class Wrapper(object):
         if ppd not in ['rtl', 'ltr', None]:
             raise WrapperException('incorrect page-progression direction')
         self.spine_ppd = ppd
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
 
     def setspine_itemref_epub3_attributes(idref, linear, properties):
         idref = unicode_str(idref)
@@ -469,7 +519,7 @@ class Wrapper(object):
         if pos == -1:
             raise WrapperException('that idref is not exist in the spine')
         self.spine[pos] = (sid, linear, properties)
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
 
 
     # routines to get and set the guide
@@ -493,7 +543,7 @@ class Wrapper(object):
                 raise WrapperException('guide href not in manifest')
             guide.append((type, title, href))
         self.guide = guide
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
 
 
     # routines to get and set metadata xml fragment
@@ -503,7 +553,7 @@ class Wrapper(object):
 
     def setmetadataxml(self, new_metadata):
         self.metadataxml = unicode_str(new_metadata)
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
 
 
     # routines to get and set the package tag
@@ -519,7 +569,7 @@ class Wrapper(object):
         if version != self.epub_version:
             raise WrapperException('Illegal to change the package version attribute')
         self.package_tag = pkgtag
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
 
 
     # routines to manipulate files in the manifest (updates the opf automagically)
@@ -564,8 +614,11 @@ class Wrapper(object):
             fp.write(data)
         self.modified[id] = 'file'
 
+
     def addfile(self, uniqueid, basename, data, mime=None, properties=None, fallback=None, overlay=None):
         uniqueid = unicode_str(uniqueid)
+        if uniqueid in self.id_to_href:
+            raise WrapperException('Manifest Id is not unique')
         basename = unicode_str(basename)
         mime = unicode_str(mime)
         if mime is None:
@@ -574,20 +627,18 @@ class Wrapper(object):
             mime = ext_mime_map.get(ext, None)
         if mime is None:
             raise WrapperException("Mime Type Missing")
-        if mime.startswith("audio"):
-            base = 'Audio'
-        elif mime.startswith("video"):
-            base = "Video"
-        else:
-            base = mime_base_map.get(mime,'Misc')
-        href = base + "/" + basename
-        if uniqueid in self.id_to_href:
-            raise WrapperException('Manifest Id is not unique')
+        if mime == "application/x-dtbncx+xml" and self.epub_version.startswith("2"):
+            raise WrapperException('Can not add or remove an ncx under epub2')
+        group = mime_group_map.get(mime,"Misc")
+        default_path = self.group_paths[group][0]
+        bookpath = basename
+        if default_path != "":
+            bookpath = default_path + "/" + basename
+        href = buildRelativePath(self.opfbookpath, bookpath)
         if href in self.href_to_id:
-            raise WrapperException('Basename is not unique')
+            raise WrapperException('Basename already exists')
         # now actually write out the new file
-        filepath = href.replace("/",os.sep)
-        filepath = os.path.join('OEBPS', filepath)
+        filepath = bookpath.replace("/",os.sep)
         self.id_to_filepath[uniqueid] = filepath
         filepath = os.path.join(self.outdir,filepath)
         base = os.path.dirname(filepath)
@@ -602,10 +653,58 @@ class Wrapper(object):
         self.id_to_props[uniqueid] = properties
         self.id_to_fall[uniqueid] = fallback
         self.id_to_over[uniqueid] = overlay
+        self.id_to_bookpath[uniqueid] = bookpath
         self.href_to_id[href] = uniqueid
+        self.bookpath_to_id[bookpath] = uniqueid
         self.added.append(uniqueid)
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
         return uniqueid
+
+
+    # new in Sigil 1.0
+
+    # adds bookpath specified file to the manifest with given uniqueid data, and mime
+    def addbookpath(self, uniqueid, bookpath, data, mime=None):
+        uniqueid = unicode_str(uniqueid)
+        if uniqueid in self.id_to_href:
+            raise WrapperException('Manifest Id is not unique')
+        bookpath = unicode_str(bookpath)
+        basename = bookpath.split("/")[-1]
+        mime = unicode_str(mime)
+        if mime is None:
+            ext = os.path.splitext(basename)[1]
+            ext = ext.lower()
+            mime = ext_mime_map.get(ext, None)
+        if mime is None:
+            raise WrapperException("Mime Type Missing")
+        if mime == "application/x-dtbncx+xml" and self.epub_version.startswith("2"):
+            raise WrapperException('Can not add or remove an ncx under epub2')
+        href = buildRelativePath(self.opfbookpath, bookpath)
+        if href in self.href_to_id:
+            raise WrapperException('bookpath already exists')
+        # now actually write out the new file
+        filepath = bookpath.replace("/",os.sep)
+        self.id_to_filepath[uniqueid] = filepath
+        filepath = os.path.join(self.outdir,filepath)
+        base = os.path.dirname(filepath)
+        if not unipath.exists(base):
+            os.makedirs(base)
+        if mime in TEXT_MIMETYPES or isinstance(data, text_type):
+            data = utf8_str(data)
+        with open(filepath,'wb') as fp:
+            fp.write(data)
+        self.id_to_href[uniqueid] = href
+        self.id_to_mime[uniqueid] = mime
+        self.id_to_props[uniqueid] = None
+        self.id_to_fall[uniqueid] = None
+        self.id_to_over[uniqueid] = None
+        self.id_to_bookpath[uniqueid] = bookpath
+        self.href_to_id[href] = uniqueid
+        self.bookpath_to_id[bookpath] = uniqueid
+        self.added.append(uniqueid)
+        self.modified[self.opfbookpath] = 'file'
+        return uniqueid
+
 
     def deletefile(self, id):
         id = unicode_str(id)
@@ -614,6 +713,8 @@ class Wrapper(object):
         filepath = self.id_to_filepath.get(id, None)
         if id is None:
             raise WrapperException('Id does not exist in manifest')
+        if self.epub_version.startswith("2") and id == self.gettocid():
+            raise WrapperException('Can not add or remove an ncx under epub2')
         add_to_deleted = True
         # if file was added or modified, delete file from outdir
         if id in self.added or id in self.modified:
@@ -628,12 +729,15 @@ class Wrapper(object):
         # remove from manifest
         href = self.id_to_href[id]
         mime = self.id_to_mime[id]
+        bookpath = self.id_to_bookpath[id]
         del self.id_to_href[id]
         del self.id_to_mime[id]
         del self.id_to_props[id]
         del self.id_to_fall[id]
         del self.id_to_over[id]
+        del self.id_to_bookpath[id]
         del self.href_to_id[href]
+        del self.bookpath_to_id[bookpath]
         # remove from spine
         new_spine = []
         was_modified = False
@@ -645,8 +749,8 @@ class Wrapper(object):
         if was_modified:
             self.setspine_epub3(new_spine)
         if add_to_deleted:
-            self.deleted.append(('manifest', id, href))
-            self.modified['OEBPS/content.opf'] = 'file'
+            self.deleted.append(('manifest', id, bookpath))
+            self.modified[self.opfbookpath] = 'file'
         del self.id_to_filepath[id]
 
     def set_manifest_epub3_attributes(self, id, properties=None, fallback=None, overlay=None):
@@ -660,7 +764,7 @@ class Wrapper(object):
         overlay = unicode_str(overlay)
         if overlay is not None and overlay == "":
             overlay = None
-        if id not in self.id_to_props:
+        if id not in self.id_to_href:
             raise WrapperException('Id does not exist in manifest')
         del self.id_to_props[id]
         del self.id_to_fall[id]
@@ -668,7 +772,7 @@ class Wrapper(object):
         self.id_to_props[id] = properties
         self.id_to_fall[id] = fallback
         self.id_to_over[id] = overlay
-        self.modified['OEBPS/content.opf'] = 'file'
+        self.modified[self.opfbookpath] = 'file'
 
 
     # helpful mapping routines for file info from the opf manifest
@@ -678,26 +782,26 @@ class Wrapper(object):
         href = unquoteurl(href)
         return self.href_to_id.get(href,ow)
 
+    # new in Sigil 1.0
+    def map_bookpath_to_id(self, bookpath, ow):
+        bookpath = unicode_str(bookpath)
+        return self.bookpath_to_id.get(bookpath,ow)
+
     def map_basename_to_id(self, basename, ow):
-        basename = unicode_str(basename)
-        ext = os.path.splitext(basename)[1]
-        ext = ext.lower()
-        mime = ext_mime_map.get(ext,"")
-        if mime.startswith("audio"):
-            base = 'Audio'
-        elif mime.startswith("video"):
-            base = "Video"
-        else:
-            base = mime_base_map.get(mime,'Misc')
-        if base == "":
-            href = basename
-        else:
-            href = base + "/" + basename
-        return self.href_to_id.get(href,ow)
+        for bookpath in self.bookpath_to_id:
+            filename = bookpath.split("/")[-1]
+            if filename == basename:
+                return self.bookpath_to_id[bookpath]
+        return ow
 
     def map_id_to_href(self, id, ow):
         id = unicode_str(id)
         return self.id_to_href.get(id, ow)
+
+    # new in Sigil 1.0
+    def map_id_to_bookpath(self, id, ow):
+        id = unicode_str(id)
+        return self.id_to_bookpath.get(id, ow)
 
     def map_id_to_mime(self, id, ow):
         id = unicode_str(id)
@@ -715,9 +819,24 @@ class Wrapper(object):
         id = unicode_str(id)
         return self.id_to_over.get(id, ow)
 
+    # new in Sigil 1.0
+    # returns a sorted folder list for that group
+    # valid groups: Text, Styles, Images, Fonts, Audio, Video, ncx, opf, Misc
+    def map_group_to_folders(self, group, ow):
+        group = unicode_str(group)
+        return self.group_paths.get(group, ow)
+
+    # new in Sigil 1.0
+    def map_mediatype_to_group(self, mtype, ow):
+        mtype = unicode_str(mtype)
+        return mime_group_map.get(mtype, ow)
+
 
     # routines to work on ebook files that are not part of an opf manifest
     # their "id" is actually their unique relative path from book root
+    # this is called either a book href or a book path
+    # we use book_href or bookhref  when working with "other" files
+    # we use bookpath when working with files in the manifest
 
     def readotherfile(self, book_href):
         id = unicode_str(book_href)
@@ -727,7 +846,7 @@ class Wrapper(object):
         if id not in self.other and id in self.id_to_href:
             raise WrapperException('Incorrect interface routine - use readfile')
         # handle special case of trying to read the opf after it has been modified
-        if id == "OEBPS/content.opf":
+        if id == self.opfbookpath:
             if id in self.modified:
                 return self.build_opf()
         filepath = self.book_href_to_filepath.get(id, None)
@@ -760,7 +879,7 @@ class Wrapper(object):
         filepath = self.book_href_to_filepath.get(id, None)
         if filepath is None:
             raise WrapperException('Book href does not exist')
-        if id in PROTECTED_FILES:
+        if id in PROTECTED_FILES or id == self.opfbookpath:
             raise WrapperException('Attempt to modify protected file')
         filepath = os.path.join(self.outdir, filepath)
         base = os.path.dirname(filepath)
@@ -804,7 +923,7 @@ class Wrapper(object):
         filepath = self.book_href_to_filepath.get(id, None)
         if filepath is None:
             raise WrapperException('Book href does not exist')
-        if id in PROTECTED_FILES:
+        if id in PROTECTED_FILES or id == self.opfbookpath:
             raise WrapperException('attempt to delete protected file')
         add_to_deleted = True
         # if file was added or modified delete file from outdir
@@ -893,3 +1012,4 @@ class Wrapper(object):
             lib_dir = unipath.abspath(self.appdir)
             lib_name = 'libhunspell.so'
         return os.path.join(lib_dir, lib_name)
+

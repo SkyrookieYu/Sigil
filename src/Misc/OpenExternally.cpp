@@ -1,5 +1,7 @@
 /************************************************************************
 **
+**  Copyright (C) 2019  Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2019  Doug Massay
 **  Copyright (C) 2012  Daniel Pavel <daniel.pavel@gmail.com>
 **
 **  This file is part of Sigil.
@@ -21,18 +23,23 @@
 
 #include <QtCore/QProcess>
 #if defined(Q_OS_WIN32)
-#include <QProcessEnvironment>
+#include "Windows.h"
 #endif
 #include <QtCore/QStandardPaths>
 #include <QtWidgets/QFileDialog>
+#include <QWidget>
+#include <QDebug>
 
 #include "Dialogs/OpenWithName.h"
 #include "Misc/OpenExternally.h"
 #include "Misc/SettingsStore.h"
+#include "Misc/Utility.h"
 
+#define DBG if(0)
 
 static const QString SETTINGS_GROUP = "open_with";
 static const QString EMPTY;
+static const QString SEP = QString(QChar(31));
 
 // resource types that are watched for modifications from outside Sigil
 // only watch certain types of resources (auxiliaries)
@@ -100,6 +107,50 @@ bool OpenExternally::openFile(const QString &filePath, const QString &applicatio
         return QProcess::startDetached("/usr/bin/open", arguments);
     }
 
+#elif defined(Q_OS_WIN32)
+
+    if (QFile::exists(filePath) && QFile::exists(application)) {
+        QProcess proc;
+        bool batch;
+        // Handle bat|cmd files differently than exes
+        if (QFileInfo(application).suffix() == "bat" || QFileInfo(application).suffix() == "cmd") {
+            DBG qDebug() << "External bat|cmd file being launched: " << application;
+            batch = true;
+            proc.setProgram("C:\\Windows\\System32\\cmd.exe");
+            proc.setArguments(QStringList("/c"));
+            // Filename only. No other way to get the cmd string properly quoted/escaped otherwise. We'll change
+            // the working directory to the directory where the scripts resides so that it can be found/launched.
+            proc.setNativeArguments(QFileInfo(application).fileName() + " \"" + QDir::toNativeSeparators(filePath) + "\"");
+        } else {
+            // binary files are launched "normally."
+            DBG qDebug() << "External binary program being launched: " << application;
+            batch = false;
+            proc.setProgram(application);
+            proc.setArguments(QStringList(QDir::toNativeSeparators(filePath)));
+        }
+        // Change to the directory of the application/script first. This is
+        // very important for batch files, but doesn't matter much for exes.
+        proc.setWorkingDirectory(QDir::toNativeSeparators(QFileInfo(application).canonicalPath()));
+        if (batch) {
+            // This nonsense (which requires including Windows.h) is necessary to launch a new
+            // console window (which must subsequently be hidden) because Qt gui apps don't have
+            // a console for the new process to inherit (which is default for QProcess::startDetached).
+            // See: https://doc-snapshots.qt.io/qt5-5.13/qprocess.html#CreateProcessArgumentModifier-typedef
+            proc.setCreateProcessArgumentsModifier([] (QProcess::CreateProcessArguments *args)
+            {
+                args->flags |= CREATE_NEW_CONSOLE;
+                args->startupInfo->dwFlags = STARTF_USESHOWWINDOW;
+                args->startupInfo->wShowWindow = SW_HIDE;
+            });
+        }
+        DBG qDebug() << "QProcess program: " << proc.program();
+        DBG qDebug() << "QProcess arguments: " << proc.arguments();
+        if (batch) {
+            DBG qDebug() << "QProcess Native arguments: " << proc.nativeArguments();
+        }
+        return proc.startDetached();
+    }
+
 #else
 
     if (QFile::exists(filePath) && QFile::exists(application)) {
@@ -111,42 +162,47 @@ bool OpenExternally::openFile(const QString &filePath, const QString &applicatio
     return false;
 }
 
-const QString OpenExternally::editorForResourceType(const Resource::ResourceType type)
+const QStringList OpenExternally::editorsForResourceType(const Resource::ResourceType type)
 {
+    QStringList editorPaths = QStringList();
     if (mayOpen(type)) {
         SettingsStore settings;
         settings.beginGroup(SETTINGS_GROUP);
-        const QString &editorKey = QString("editor_") + RESOURCE_TYPE_NAME(type);
-
-        if (settings.contains(editorKey)) {
-            const QString &editorPath = settings.value(editorKey).toString();
-            return QFile::exists(editorPath) ? editorPath : EMPTY;
+        const QString editorsKey = QString("editors_") + RESOURCE_TYPE_NAME(type);
+        if (settings.contains(editorsKey)) {
+	    QStringList editors = settings.value(editorsKey).toStringList();
+	    foreach(QString editor, editors) {
+  	        const QStringList edata = editor.split(SEP);
+		const QString editor_name = edata[nameField];
+		const QString editor_path = edata[pathField];
+	        if (QFile::exists(editor_path)) editorPaths.append(editor_path);
+	    }
         }
     }
-
-    return EMPTY;
+    return editorPaths;
 }
 
-const QString OpenExternally::editorDescriptionForResourceType(const Resource::ResourceType type)
+const QStringList OpenExternally::editorDescriptionsForResourceType(const Resource::ResourceType type)
 {
-    QString editorDescription;
-
+    QStringList editorDescriptions = QStringList();
     if (mayOpen(type)) {
         SettingsStore settings;
         settings.beginGroup(SETTINGS_GROUP);
-        const QString &editorDescriptionKey = QString("editor_description_") + RESOURCE_TYPE_NAME(type);
-        const QString &editorKey = QString("editor_") + RESOURCE_TYPE_NAME(type);
-
-        if (settings.contains(editorDescriptionKey)) {
-            editorDescription = settings.value(editorDescriptionKey).toString();
-        }
-
-        if (editorDescription.isEmpty()) {
-            editorDescription = prettyApplicationName(settings.value(editorKey).toString());
+        const QString editorsKey = QString("editors_") + RESOURCE_TYPE_NAME(type);
+        if (settings.contains(editorsKey)) {
+	    QStringList editors = settings.value(editorsKey).toStringList();
+	    foreach(QString editor, editors) {
+  	        const QStringList edata = editor.split(SEP);
+		QString editor_name = edata[nameField];
+		const QString editor_path = edata[pathField];
+	        if (QFile::exists(editor_path)) {
+  		    if (editor_name.isEmpty()) editor_name = prettyApplicationName(editor_path);
+		    editorDescriptions.append(editor_name);
+		}
+	    }
         }
     }
-
-    return editorDescription;
+    return editorDescriptions;
 }
 
 const QString OpenExternally::prettyApplicationName(const QString &applicationpath)
@@ -154,29 +210,34 @@ const QString OpenExternally::prettyApplicationName(const QString &applicationpa
     return QFileInfo(applicationpath).completeBaseName();
 }
 
-const QString OpenExternally::selectEditorForResourceType(const Resource::ResourceType type)
+const QString OpenExternally::selectEditorForResourceType(const Resource::ResourceType type, QWidget *parent)
 {
     if (!mayOpen(type)) {
         return EMPTY;
     }
 
-    const QString &editorKey = QString("editor_") + RESOURCE_TYPE_NAME(type);
-    const QString &editorDescriptionKey = QString("editor_description_") + RESOURCE_TYPE_NAME(type);
+    const QString editorsKey = QString("editors_") + RESOURCE_TYPE_NAME(type);
     SettingsStore settings;
     settings.beginGroup(SETTINGS_GROUP);
 #if defined(Q_OS_WIN32)
-    // Windows barks about getenv or _wgetenv. This elicits no warnings and works with unicode paths
-    static QString LAST_LOCATION = QProcessEnvironment::systemEnvironment().value("PROGRAMFILES", "").trimmed();
+    static QString LAST_LOCATION = Utility::GetEnvironmentVar("PROGRAMFILES");
 #else
     static QString LAST_LOCATION = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
 #endif
-    QString lastEditor = settings.value(editorKey).toString();
+    QStringList EmptyList = QStringList();
+    QStringList editors = settings.value(editorsKey, EmptyList).toStringList();
+    QString last_editor;
+    QString last_name;
+    if (!editors.isEmpty()) {
+        QStringList edata = editors[0].split(SEP);
+	last_name = edata[nameField];
+	last_editor = edata[pathField];
+    }
+    if (last_editor.isEmpty() || !QFile::exists(last_editor)) {
+        last_editor = LAST_LOCATION;
 
-    if (!QFile::exists(lastEditor)) {
-        lastEditor = LAST_LOCATION;
-
-        if (!QFile::exists(lastEditor)) {
-            lastEditor = LAST_LOCATION = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+        if (!QFile::exists(last_editor)) {
+            last_editor = LAST_LOCATION = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
         }
     }
 
@@ -189,16 +250,22 @@ const QString OpenExternally::selectEditorForResourceType(const Resource::Resour
                                        + " (*)"
 #endif
                                        ;
-    const QString selectedFile = QFileDialog::getOpenFileName(0,
+#ifdef Q_OS_MAC
+    QFileDialog::Options options = QFileDialog::Options() | QFileDialog::ReadOnly;
+#else
+    QFileDialog::Options options = QFileDialog::Options() | QFileDialog::ReadOnly | QFileDialog::HideNameFilterDetails;
+#endif
+
+    // Qt Bug, must use native FileDialog here otherwise treats .app as normal directory
+
+    const QString selectedFile = QFileDialog::getOpenFileName(parent,
                                  QObject::tr("Open With"),
-                                 lastEditor,
+                                 last_editor,
                                  NAME_FILTER,
                                  0,
-                                 QFileDialog::ReadOnly | QFileDialog::HideNameFilterDetails);
+				 options);
 
     if (!selectedFile.isEmpty()) {
-        settings.setValue(editorKey, selectedFile);
-        LAST_LOCATION = selectedFile;
         // Let the user choose a friendly menu name for the application
         QString editorDescription;
         QString prettyName = prettyApplicationName(selectedFile);
@@ -209,8 +276,15 @@ const QString OpenExternally::selectEditorForResourceType(const Resource::Resour
         if (editorDescription.isEmpty()) {
             editorDescription = prettyName;
         }
-
-        settings.setValue(editorDescriptionKey, editorDescription);
+        const QString editor_data = editorDescription + SEP + selectedFile;
+	editors.removeOne(editor_data);
+	editors.prepend(editor_data);
+	// limit of 5 editors per resource type
+	while(editors.size() > 5) {
+	    editors.removeLast();
+	}
+        settings.setValue(editorsKey, editors);
+        LAST_LOCATION = selectedFile;
     }
 
     return selectedFile;

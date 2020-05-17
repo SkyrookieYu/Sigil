@@ -1,15 +1,31 @@
 <RCC>
     <qresource prefix="/main">
+        <file>back.png</file>
+        <file>forward.png</file>
+        <file>arrow-down.png</file>
+        <file>arrow-up.png</file>
         <file>back-to-link-style_22px.png</file>
         <file>back-to-link-style_48px.png</file>
+        <file>case-change_16px.png</file>
+        <file>case-change_22px.png</file>
+        <file>case-change_48px.png</file>
         <file>chevron-down_16px.png</file>
         <file>chevron-up_16px.png</file>
         <file>document-add_16px.png</file>
         <file>document-add_22px.png</file>
         <file>document-add_48px.png</file>
+        <file>document-edit_16px.png</file>
+        <file>document-edit_22px.png</file>
+        <file>document-edit_48px.png</file>
         <file>document-new_16px.png</file>
         <file>document-new_22px.png</file>
         <file>document-new_48px.png</file>
+        <file>document-new-epub2_16px.png</file>
+        <file>document-new-epub2_22px.png</file>
+        <file>document-new-epub2_48px.png</file>
+        <file>document-new-epub3_16px.png</file>
+        <file>document-new-epub3_22px.png</file>
+        <file>document-new-epub3_48px.png</file>
         <file>document-open_16px.png</file>
         <file>document-open_22px.png</file>
         <file>document-open_48px.png</file>
@@ -49,6 +65,9 @@
         <file>edit-redo_16px.png</file>
         <file>edit-redo_22px.png</file>
         <file>edit-redo_48px.png</file>
+        <file>edit-select-all_16px.png</file>
+        <file>edit-select-all_22px.png</file>
+        <file>edit-select-all_48px.png</file>
         <file>edit-undo_16px.png</file>
         <file>edit-undo_22px.png</file>
         <file>edit-undo_48px.png</file>
@@ -115,6 +134,18 @@
         <file>generate-toc_16px.png</file>
         <file>generate-toc_22px.png</file>
         <file>generate-toc_48px.png</file>
+        <file>git-checkout_16px.png</file>
+        <file>git-checkout_22px.png</file>
+        <file>git-checkout_48px.png</file>
+        <file>git-commit_16px.png</file>
+        <file>git-commit_22px.png</file>
+        <file>git-commit_48px.png</file>
+        <file>git-diff_16px.png</file>
+        <file>git-diff_22px.png</file>
+        <file>git-diff_48px.png</file>
+        <file>git-manage_16px.png</file>
+        <file>git-manage_22px.png</file>
+        <file>git-manage_48px.png</file>
         <file>heading-1_16px.png</file>
         <file>heading-1_22px.png</file>
         <file>heading-1_48px.png</file>
@@ -133,12 +164,27 @@
         <file>heading-6_16px.png</file>
         <file>heading-6_22px.png</file>
         <file>heading-6_48px.png</file>
+        <file>heading-all_16px.png</file>
+        <file>heading-all_22px.png</file>
+        <file>heading-all_48px.png</file>
         <file>heading-normal_16px.png</file>
         <file>heading-normal_22px.png</file>
         <file>heading-normal_48px.png</file>
         <file>help-browser_16px.png</file>
         <file>help-browser_22px.png</file>
         <file>help-browser_48px.png</file>
+        <file>index-add_16px.png</file>
+        <file>index-add_22px.png</file>
+        <file>index-add_48px.png</file>
+        <file>index-create_16px.png</file>
+        <file>index-create_22px.png</file>
+        <file>index-create_48px.png</file>
+        <file>index-edit_16px.png</file>
+        <file>index-edit_22px.png</file>
+        <file>index-edit_48px.png</file>
+        <file>index-mark_16px.png</file>
+        <file>index-mark_22px.png</file>
+        <file>index-mark_48px.png</file>
         <file>insert-bullet-list_16px.png</file>
         <file>insert-bullet-list_22px.png</file>
         <file>insert-bullet-list_48px.png</file>
@@ -154,6 +200,9 @@
         <file>insert-numbered-list_48px.png</file>
         <file>insert-special-character_22px.png</file>
         <file>insert-special-character_48px.png</file>
+        <file>inspect_16px.png</file>
+        <file>inspect_22px.png</file>
+        <file>inspect_48px.png</file>
         <file>list-add_16px.png</file>
         <file>list-add_22px.png</file>
         <file>list-add_48px.png</file>
@@ -168,14 +217,27 @@
         <file>plugin_22px_3pips.png</file>
         <file>plugin_22px_4pips.png</file>
         <file>plugin_22px_5pips.png</file>
+        <file>plugin_22px_6pips.png</file>
+        <file>plugin_22px_7pips.png</file>
+        <file>plugin_22px_8pips.png</file>
+        <file>plugin_22px_9pips.png</file>
+        <file>plugin_22px_10pips.png</file>
         <file>plugin_48px_1pips.png</file>
         <file>plugin_48px_2pips.png</file>
         <file>plugin_48px_3pips.png</file>
         <file>plugin_48px_4pips.png</file>
         <file>plugin_48px_5pips.png</file>
+        <file>plugin_48px_6pips.png</file>
+        <file>plugin_48px_7pips.png</file>
+        <file>plugin_48px_8pips.png</file>
+        <file>plugin_48px_9pips.png</file>
+        <file>plugin_48px_10pips.png</file>
         <file>process-stop_16px.png</file>
         <file>process-stop_22px.png</file>
         <file>process-stop_48px.png</file>
+        <file>reload-page_16px.png</file>
+        <file>reload-page_22px.png</file>
+        <file>reload-page_48px.png</file>
         <file>split-section_16px.png</file>
         <file>split-section_22px.png</file>
         <file>split-section_48px.png</file>

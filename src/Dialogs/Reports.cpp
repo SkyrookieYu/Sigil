@@ -1,7 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2011  John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012  Dave Heiland
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2012      Dave Heiland
+**  Copyright (C) 2011      John Schember <john@nachtimwald.com>
 **
 **  This file is part of Sigil.
 **
@@ -19,9 +20,9 @@
 **  along with Sigil.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
-
 #include <QtWidgets/QScrollArea>
 #include <QtWidgets/QProgressDialog>
+// #include <QDebug>
 
 #include "Dialogs/Reports.h"
 #include "Misc/SettingsStore.h"
@@ -34,6 +35,15 @@
 #include "ReportsWidgets/ClassesInHTMLFilesWidget.h"
 #include "ReportsWidgets/StylesInCSSFilesWidget.h"
 #include "ReportsWidgets/CharactersInHTMLFilesWidget.h"
+
+static const QStringList REPORT_TYPES = QStringList() << "AllFiles"
+						      << "HTMLFiles" 
+						      << "Links"
+						      << "ImageFiles"
+						      << "CSSFiles"
+						      << "ClassesInHTMLFiles"
+						      << "StylesInCSSFiles"
+						      << "CharactersInHTMLFiles";
 
 static const QString SETTINGS_GROUP = "reports_dialog";
 
@@ -109,39 +119,59 @@ Reports::~Reports()
 
 void Reports::CreateReports(QSharedPointer<Book> book)
 {
-    QApplication::setOverrideCursor(Qt::WaitCursor);
+    // qDebug() << "Setting Up Progress Dialog";
     // Display progress dialog
-    QProgressDialog progress(QObject::tr("Creating reports..."), 0, 0, ui.availableWidgets->count(), this);
-    progress.setMinimumDuration(0);
+    QProgressDialog progress(QObject::tr("Creating reports..."), 0, 0, REPORT_TYPES.count(), NULL);
     int progress_value = 0;
-    progress.setValue(progress_value++);
+    progress.setMinimumDuration(0);
+    progress.setValue(progress_value);
+
+    foreach(QString report_type, REPORT_TYPES) {
+        progress.setValue(++progress_value);
+        qApp->processEvents();
+        // qDebug() << "Creating Report: " << report_type;
+        CreateReport(book, report_type);
+    }
+    progress.setValue(REPORT_TYPES.count());
     qApp->processEvents();
-    // Populate all of our report widgets
-    m_AllFilesWidget->CreateReport(book);
-    progress.setValue(progress_value++);
-    qApp->processEvents();
-    m_HTMLFilesWidget->CreateReport(book);
-    progress.setValue(progress_value++);
-    qApp->processEvents();
-    m_LinksWidget->CreateReport(book);
-    progress.setValue(progress_value++);
-    qApp->processEvents();
-    m_ImageFilesWidget->CreateReport(book);
-    progress.setValue(progress_value++);
-    qApp->processEvents();
-    m_CSSFilesWidget->CreateReport(book);
-    progress.setValue(progress_value++);
-    qApp->processEvents();
-    m_ClassesInHTMLFilesWidget->CreateReport(book);
-    progress.setValue(progress_value++);
-    qApp->processEvents();
-    m_StylesInCSSFilesWidget->CreateReport(book);
-    progress.setValue(progress_value++);
-    qApp->processEvents();
-    m_CharactersInHTMLFilesWidget->CreateReport(book);
-    progress.setValue(progress_value++);
-    qApp->processEvents();
-    QApplication::restoreOverrideCursor();
+
+}
+
+
+void Reports::CreateReport(QSharedPointer<Book> book, QString report)
+{
+    if (report == "AllFiles") {
+        m_AllFilesWidget->CreateReport(book);
+        return;
+    }
+    if (report == "HTMLFiles") {
+        m_HTMLFilesWidget->CreateReport(book);
+        return;
+    }
+    if (report == "Links") {
+        m_LinksWidget->CreateReport(book);
+        return;
+    }
+    if (report == "ImageFiles") {
+        m_ImageFilesWidget->CreateReport(book);
+        return;
+    }
+    if (report == "CSSFiles") {
+        m_CSSFilesWidget->CreateReport(book);
+        return;
+    }
+    if (report == "ClassesInHTMLFiles") {
+        m_ClassesInHTMLFilesWidget->CreateReport(book);
+        return;
+    }
+    if (report == "StylesInCSSFiles") {
+        m_StylesInCSSFilesWidget->CreateReport(book);
+        return;
+    }
+    if (report == "CharactersInHTMLFiles") {
+        m_CharactersInHTMLFilesWidget->CreateReport(book);
+        return;
+    }
 }
 
 void Reports::selectPWidget(QListWidgetItem *current, QListWidgetItem *previous)

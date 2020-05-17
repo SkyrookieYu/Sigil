@@ -1,8 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2017       Kevin B, Hendricks, Stratford, ON Canada
-**  Copyright (C) 2012, 2013 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012, 2013 Dave Heiland
+**  Copyright (C) 2015-2020 Kevin B, Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2012-2013 John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012-2013 Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -22,17 +22,20 @@
 *************************************************************************/
 
 #include <QApplication>
+#include <QGuiApplication>
 #include <QtCore/QFileInfo>
+#include <QEventLoop>
 #include <QImage>
 #include <QPixmap>
 #include <QtWidgets/QLayout>
-#include <QtWebKitWidgets/QWebFrame>
-#include <QtWebKitWidgets/QWebView>
+#include <QtWebEngineWidgets/QWebEngineView>
+#include <QtWebEngineWidgets/QWebEngineSettings>
 
 #include "MainUI/MainWindow.h"
-#include "Dialogs/SelectFiles.h"
 #include "Misc/SettingsStore.h"
 #include "sigil_constants.h"
+#include "ViewEditors/SimplePage.h"
+#include "Dialogs/SelectFiles.h"
 
 static const int COL_NAME = 0;
 static const int COL_IMAGE = 1;
@@ -49,10 +52,38 @@ const QString IMAGE_HTML_BASE_PREVIEW =
     "body { -webkit-user-select: none; }"
     "img { display: block; margin-left: auto; margin-right: auto; border-style: solid; border-width: 1px; max-width: 95%; max-height: 95%}"
     "</style>"
+    "</head>"
     "<body>"
-    "<div><img src=\"%2\" /></div>"
+    "<div><img src=\"%1\" /></div>"
     "</body>"
     "</html>";
+
+const QString AUDIO_HTML_BASE =
+    "<html>"
+    "<head>"
+    "<style type=\"text/css\">"
+    "body { -webkit-user-select: none; }"
+    "audio { display: block; margin-left: auto; margin-right: auto; }"
+    "</style>"
+    "</head>"
+    "<body>"
+    "<p><audio controls=\"controls\" src=\"%1\"></audio></p>"
+    "</body>"
+    "</html>";
+
+const QString VIDEO_HTML_BASE =
+    "<html>"
+    "<head>"
+    "<style type=\"text/css\">"
+    "body { -webkit-user-select: none; }"
+    "video { display: block; margin-left: auto; margin-right: auto; }"
+    "</style>"
+    "</head>"
+    "<body>"
+    "<p><video controls=\"controls\" width=\"560\" src=\"%1\"></video></p>"
+    "</body>"
+    "</html>";
+
 
 SelectFiles::SelectFiles(QString title, QList<Resource *> media_resources, QString default_selected_image, QWidget *parent) :
     QDialog(parent),
@@ -63,16 +94,17 @@ SelectFiles::SelectFiles(QString title, QList<Resource *> media_resources, QStri
     m_DefaultSelectedImage(default_selected_image),
     m_ThumbnailSize(THUMBNAIL_SIZE),
     m_IsInsertFromDisk(false),
-    m_WebView(new QWebView(this))
+    m_WebView(new QWebEngineView(this))
 {
     ui.setupUi(this);
     setWindowTitle(title);
-
+    m_WebView->setPage(new SimplePage(m_WebView));
     m_WebView->setContextMenuPolicy(Qt::NoContextMenu);
     m_WebView->setFocusPolicy(Qt::NoFocus);
     m_WebView->setAcceptDrops(false);
-    m_WebView->page()->mainFrame()->setScrollBarPolicy(Qt::Horizontal, Qt::ScrollBarAlwaysOff);
-    m_WebView->page()->mainFrame()->setScrollBarPolicy(Qt::Vertical, Qt::ScrollBarAlwaysOff);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    m_WebView->page()->settings()->setAttribute(QWebEngineSettings::ShowScrollBars,false);
+#endif
     ui.avLayout->addWidget(m_WebView);
 
     ReadSettings();
@@ -120,7 +152,11 @@ QStringList SelectFiles::SelectedImages()
 void SelectFiles::SetImages()
 {
     ui.Details->clear();
-    m_WebView->setHtml("", QUrl());
+    QString html = "<html><head><title></title></head><body></body></html>";
+    if (Utility::IsDarkMode()) {
+        html = Utility::AddDarkCSS(html);
+    }
+    m_WebView->setHtml(html, QUrl());
 
     m_SelectFilesModel->clear();
     QStringList header;
@@ -147,11 +183,11 @@ void SelectFiles::SetImages()
             continue;
         }
 
-        QString filepath = "../" + resource->GetRelativePathToOEBPS();
+        QString filepath = resource->GetRelativePath();
         QList<QStandardItem *> rowItems;
         QStandardItem *name_item = new QStandardItem();
-        name_item->setText(resource->Filename());
-        name_item->setToolTip(filepath);
+        name_item->setText(filepath);
+        name_item->setToolTip(resource->ShortPathName());
         name_item->setData(static_cast<int>(type), Qt::UserRole);
         name_item->setData(resource->GetFullPath(), Qt::UserRole + 1);
         name_item->setEditable(false);
@@ -258,7 +294,11 @@ void SelectFiles::SetPreviewImage()
     QStandardItem *item = GetLastSelectedImageItem();
     
     ui.Details->clear();
-    m_WebView->setHtml("", QUrl());
+    QString html = "<html><head><title></title></head><body></body></html>";
+    if (Utility::IsDarkMode()) {
+        html = Utility::AddDarkCSS(html);
+    }
+    m_WebView->setHtml(html, QUrl());
 
     if (!item || item->text().isEmpty()) {
         m_PreviewReady = true;
@@ -296,9 +336,13 @@ void SelectFiles::SetPreviewImage()
         details = QString("%2x%3px | %4 KB | %5%6").arg(img.width()).arg(img.height())
                   .arg(fsize).arg(grayscale_color).arg(colorsInfo);
 
-        MainWindow::clearMemoryCaches();
+        // MainWindow::clearMemoryCaches();
         const QUrl resourceUrl = QUrl::fromLocalFile(path);
         QString html = IMAGE_HTML_BASE_PREVIEW.arg(resourceUrl.toString());
+	if (Utility::IsDarkMode()) {
+            html = Utility::AddDarkCSS(html);
+	}
+        m_WebView->page()->setBackgroundColor(Utility::WebViewBackgroundColor());
         m_PreviewLoaded = false;
         m_WebView->setHtml(html, resourceUrl);
         loading_resources = true;
@@ -310,14 +354,23 @@ void SelectFiles::SetPreviewImage()
         MainWindow::clearMemoryCaches();
         html = VIDEO_HTML_BASE.arg(resourceUrl.toString());
         m_PreviewLoaded = false;
+	if (Utility::IsDarkMode()) {
+            html = Utility::AddDarkCSS(html);
+	}
+        m_WebView->page()->setBackgroundColor(Utility::WebViewBackgroundColor());
+        m_PreviewLoaded = false;
         m_WebView->setHtml(html, resourceUrl);
         loading_resources = true;
         details = QString("%1 MB").arg(fmbsize);
     } else if (resource_type == Resource::AudioResourceType) {
         QString html;
         const QUrl resourceUrl = QUrl::fromLocalFile(path);
-        MainWindow::clearMemoryCaches();
+        // MainWindow::clearMemoryCaches();
         html = AUDIO_HTML_BASE.arg(resourceUrl.toString());
+	if (Utility::IsDarkMode()) {
+            html = Utility::AddDarkCSS(html);
+	}
+        m_WebView->page()->setBackgroundColor(Utility::WebViewBackgroundColor());
         m_PreviewLoaded = false;
         m_WebView->setHtml(html, resourceUrl);
         loading_resources = true;
@@ -328,7 +381,7 @@ void SelectFiles::SetPreviewImage()
     // because setHtml loads external resources asynchronously
     if (loading_resources) {
         while(!IsPreviewLoaded()) {
-            qApp->processEvents();
+            qApp->processEvents(QEventLoop::ExcludeUserInputEvents);
         }
     }
     ui.Details->setText(details);

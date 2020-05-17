@@ -1,3 +1,24 @@
+/************************************************************************
+ **
+ **  Copyright (C) 2014-2020 Kevin B. Hendricks, Stratford Ontario Canada
+ **  Copyright (C) 2020      Doug Massay
+ **
+ **  This file is part of Sigil.
+ **
+ **  Sigil is free software: you can redistribute it and/or modify
+ **  it under the terms of the GNU General Public License as published by
+ **  the Free Software Foundation, either version 3 of the License, or
+ **  (at your option) any later version.
+ **
+ **  Sigil is distributed in the hope that it will be useful,
+ **  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ **  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ **  GNU General Public License for more details.
+ **
+ **  You should have received a copy of the GNU General Public License
+ **  along with Sigil.  If not, see <http://www.gnu.org/licenses/>.
+ **
+ *************************************************************************/
 #include <Qt>
 #include <QString>
 #include <QDir>
@@ -9,6 +30,8 @@
 #include <QMessageBox>
 #include <QStandardPaths>
 #include <QProcessEnvironment>
+#include <QApplication>
+#include <QPalette>
 
 #include "MainUI/MainWindow.h"
 #include "MainUI/BookBrowser.h"
@@ -28,8 +51,6 @@
 //const QString IDPF_FONT_ALGO_ID          = "http://www.idpf.org/2008/embedding";
 
 const QString PluginRunner::SEP = QString(QChar(31));
-const QString PluginRunner::OPFFILEINFO = "OEBPS/content.opf" + SEP + SEP + "application/oebps-package+xml";
-const QString PluginRunner::NCXFILEINFO = "OEBPS/toc.ncx" + SEP + SEP + "application/x-dtbncx+xml";
 const QStringList PluginRunner::CHANGESTAGS = QStringList() << "deleted" << "added" << "modified";
 
 
@@ -50,7 +71,7 @@ PluginRunner::PluginRunner(TabManager *tabMgr, QWidget *parent)
     m_book = m_mainWindow->GetCurrentBook();
     m_bookBrowser = m_mainWindow->GetBookBrowser();
     m_bookRoot = m_book->GetFolderKeeper()->GetFullPathToMainFolder();
-
+    
     // set default font obfuscation algorithm to use
     // ADOBE_FONT_ALGO_ID or IDPF_FONT_ALGO_ID ??
     QList<Resource *> fonts = m_book->GetFolderKeeper()->GetResourceListByType(Resource::FontResourceType);
@@ -66,7 +87,7 @@ PluginRunner::PluginRunner(TabManager *tabMgr, QWidget *parent)
     // build hashes of href (book root relative path) to resources
     QList<Resource *> resources = m_book->GetFolderKeeper()->GetResourceList();
     foreach (Resource * resource, resources) {
-        QString href = resource->GetRelativePathToRoot();
+        QString href = resource->GetRelativePath();
         if (resource->Type() == Resource::HTMLResourceType) {
             m_xhtmlFiles[href] = resource;
         }
@@ -193,7 +214,9 @@ void PluginRunner::showConsole()
 
 void PluginRunner::writeSigilCFG()
 {
-    QStringList cfg = QStringList() << QCoreApplication::applicationDirPath();
+    // start cfg list with the book path to the opf file
+    QStringList cfg = QStringList() << m_book->GetConstOPF()->GetRelativePath();
+    cfg << QStringList() << QCoreApplication::applicationDirPath();
     SettingsStore settings;
     cfg << Utility::DefinePrefsDir();
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
@@ -207,9 +230,35 @@ void PluginRunner::writeSigilCFG()
         cfg << QString("False");
     }
     cfg << m_mainWindow->GetCurrentFilePath();
+    if (Utility::IsDarkMode()) {
+        cfg << QString("dark");
+    } else {
+        cfg << QString("light");
+    }
+    QStringList colors;
+    QPalette pal = qApp->palette();
+    colors << pal.color(QPalette::Window).name();
+    colors << pal.color(QPalette::Base).name();
+    colors << pal.color(QPalette::Text).name();
+    colors << pal.color(QPalette::Highlight).name();
+    colors << pal.color(QPalette::HighlightedText).name();
+    cfg << colors.join(",");
+    switch (settings.highDPI())
+    {
+        case 0:
+            cfg << "detect";
+            break;
+        case 1:
+            cfg << "on";
+            break;
+        case 2:
+            cfg << "off";
+            break;
+    }
+    cfg << qApp->font().toString();
     QList <Resource *> selected_resources = m_bookBrowser->AllSelectedResources();
     foreach(Resource * resource, selected_resources) {
-        cfg << resource->GetRelativePathToRoot();
+        cfg << resource->GetRelativePath();
     }
     Utility::WriteUnicodeTextFile(cfg.join("\n"), m_outputDir + "/sigil.cfg");
 }
@@ -247,7 +296,7 @@ void PluginRunner::startPlugin()
 #ifdef Q_OS_MAC
         args.append(QString("-EBu"));
 #elif defined(Q_OS_WIN32)
-        args.append(QString("-Ou"));
+        args.append(QString("-Bu"));
 #elif !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
         args.append(QString("-Ou"));
 #endif
@@ -269,8 +318,13 @@ void PluginRunner::startPlugin()
     // so that python getpreferredencoding() and stdout/stderr/stdin encodings to get properly set
     QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
     if (settings.useBundledInterp()) {
-        env.insert("QT_PLUGIN_PATH", QDir(QCoreApplication::applicationDirPath() + "/../PlugIns").absolutePath());
-        env.insert("QT_QPA_PLATFORM_PLUGIN_PATH", QDir(QCoreApplication::applicationDirPath() + "/../PlugIns/platforms").absolutePath());
+         // determine path to site-packages/certifi/cacert.pem to set SSL_CERT_FILE
+         QDir exedir(QCoreApplication::applicationDirPath());
+	 exedir.cdUp();
+         QString cert_path = exedir.absolutePath() + PYTHON_SITE_PACKAGES + "/certifi/cacert.pem";
+	 env.insert("SSL_CERT_FILE", cert_path);
+         env.insert("QT_PLUGIN_PATH", QDir(QCoreApplication::applicationDirPath() + "/../PlugIns").absolutePath());
+         env.insert("QT_QPA_PLATFORM_PLUGIN_PATH", QDir(QCoreApplication::applicationDirPath() + "/../PlugIns/platforms").absolutePath());
     }
     m_process.setProcessEnvironment(env);
 #elif defined(Q_OS_WIN32)
@@ -304,10 +358,9 @@ void PluginRunner::startPlugin()
         env.insert("PATH", QDir::toNativeSeparators(QCoreApplication::applicationDirPath() + PATH_LIST_DELIM + env.value("PATH")));
         // Set bundled Python environment.
         m_process.setProcessEnvironment(env);
-        // If launched by another program, the new working directory could mess with how the
-        // bundled interpreter finds/loads PyQt5. So set it manually to the bundled interpreter's directory.
-        m_process.setWorkingDirectory(QDir::toNativeSeparators(QFileInfo(m_enginePath).absolutePath()));
     }
+    //Whether bundled or external, set working dir to the directory of the interpreter being used.
+    m_process.setWorkingDirectory(QDir::toNativeSeparators(QFileInfo(m_enginePath).absolutePath()));
 #elif !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
     QString appdir = QCoreApplication::applicationDirPath();
     if (settings.useBundledInterp()) {  // Linux bundled Python settings
@@ -476,7 +529,7 @@ void PluginRunner::pluginFinished(int exitcode, QProcess::ExitStatus exitstatus)
             m_bookBrowser->Refresh();
             m_book->SetModified();
             // clearMemoryCaches() and updates current tab
-            m_mainWindow->ResourcesAddedOrDeleted();
+            m_mainWindow->ResourcesAddedOrDeletedOrMoved();
         }
 #ifdef Q_OS_MAC
     }
@@ -519,12 +572,27 @@ void PluginRunner::processError(QProcess::ProcessError error)
     ui.statusLbl->setText(tr("Status: error"));
 }
 
+// should cover both escape key use and using x to close the runner dialog
+void PluginRunner::reject()
+{
+    // qDebug() << "in reject";
+    cancelPlugin();
+    QDialog::reject();
+}
 
 void PluginRunner::cancelPlugin()
 {
+    // qDebug() << "in cancelPlugin()";
+    if (m_process.state() == QProcess::Running) {
+        m_process.terminate();
+    }
+    m_process.waitForFinished(2000);
+
     if (m_process.state() == QProcess::Running) {
         m_process.kill();
     }
+    m_process.waitForFinished(2000);
+
     ui.okButton->setEnabled(true);
 
     ui.progressBar->setRange(0,100);
@@ -619,7 +687,7 @@ bool PluginRunner::processResultXML()
                     vcharoffset = -1;
                 }
 
-                m_validationResults.append(ValidationResult(vtype, attr.value("filename").toString(), vlinenumber, vcharoffset, attr.value("message").toString()));
+                m_validationResults.append(ValidationResult(vtype, attr.value("bookpath").toString(), vlinenumber, vcharoffset, attr.value("message").toString()));
             }
         }
     }
@@ -746,6 +814,14 @@ bool PluginRunner::deleteFiles(const QStringList &files)
         }
         if (mime == "application/x-dtbncx+xml") {
 	    if (m_hrefToRes.contains(href)) {
+	        QString version = m_book->GetConstOPF()->GetEpubVersion();
+	        NCXResource * ncx_resource = m_book->GetNCX();
+	        if (ncx_resource && version.startsWith('3')) {
+		    m_book->GetOPF()->RemoveNCXOnSpine();
+		    m_book->GetFolderKeeper()->RemoveNCXFromFolder();
+		    ncx_resource->Delete();
+                    changes_made = true;
+	        }
                 continue;
 	    }
         }
@@ -756,7 +832,7 @@ bool PluginRunner::deleteFiles(const QStringList &files)
             continue;
         }
         if (resource) {
-            ui.statusLbl->setText(tr("Status: deleting") + " " + resource->Filename());
+            ui.statusLbl->setText(tr("Status: deleting") + " " + resource->ShortPathName());
 
             if (tabResources.contains(resource)) {
                 m_tabManager->CloseTabForResource(resource);
@@ -797,8 +873,16 @@ bool PluginRunner::addFiles(const QStringList &files)
             QFileInfo fi(epubPath);
             ui.statusLbl->setText(tr("Status: Loading") + " " + fi.fileName());
 #ifdef Q_OS_MAC
-            MainWindow *new_window = new MainWindow(epubPath, true);
+            // creating a new MainWindow inside a modal QDialog seems to have issues
+            // about mouse pointer location and focus that may cause a segfault in 
+            // showModal() -> isBlockingWindow() -> isAncestorOf() when a
+            // Preferences Dialog is invoked in that New Window before focus is outside
+            // of the Plugin Runner and in the new Window.  The segfault is due
+            // to stale pointers in qApplication::modalWindowList().
+            MainWindow *new_window = new MainWindow(epubPath, "", true);
             new_window->show();
+            // will this be allowed if PluginRunner is Application Modal
+	    new_window->activateWindow();
 #else
             // For Linux and Windows will replace current book
             // So Throw Up a Dialog to See if they want to proceed
@@ -827,6 +911,20 @@ bool PluginRunner::addFiles(const QStringList &files)
             continue;
         }
         if (mime == "application/x-dtbncx+xml") {
+	    // under epub3 you can add an ncx
+            QString version = m_book->GetConstOPF()->GetEpubVersion();
+	    NCXResource * ncx_resource = m_book->GetNCX();
+	    if (!ncx_resource && version.startsWith('3')) {
+                QString inpath = m_outputDir + "/" + href;
+                QFileInfo fi(inpath);
+                ui.statusLbl->setText(tr("Status: adding") + " " + fi.fileName());
+	        ncx_resource = m_book->GetFolderKeeper()->AddNCXToFolder(version, href);
+		ncx_resource->SetText(Utility::ReadUnicodeTextFile(inpath));
+		ncx_resource->SaveToDisk();
+		// now add it to the opf with the preferred id
+                // QString ncx_id = m_book->GetOPF()->AddNCXItem(ncx_resource->GetFullPath(),id);
+		// m_book->GetOPF()->UpdateNCXOnSpine(ncx_id);
+	    }
             continue;
         }
 
@@ -835,14 +933,11 @@ bool PluginRunner::addFiles(const QStringList &files)
         QFileInfo fi(inpath);
         ui.statusLbl->setText(tr("Status: adding") + " " + fi.fileName());
 
-        Resource *resource = m_book->GetFolderKeeper()->AddContentFileToFolder(inpath,false);
+        Resource *resource = m_book->GetFolderKeeper()->AddContentFileToFolder(inpath,false, mime, href);
 
         // AudioResource, VideoResource, FontResource, ImageResource do not appear to be cached
-
         // For new Editable Resources must do the equivalent of the InitialLoad
         // Order is important as some resource types inherit from other resource types
-
-        // NOTE! AddContentFileToFolder returns a resource reference and not a pointer
 
         if (resource->Type() == Resource::FontResourceType && !m_algorithm.isEmpty()) {
             FontResource *font_resource = qobject_cast<FontResource *>(resource);
@@ -851,7 +946,7 @@ bool PluginRunner::addFiles(const QStringList &files)
             HTMLResource *html_resource = qobject_cast<HTMLResource *>(resource);
             html_resource->SetText(Utility::ReadUnicodeTextFile(inpath));
             // remember to add this new file to the list of remaining xhtml resources
-            QString href = resource->GetRelativePathToRoot();
+            QString href = resource->GetRelativePath();
             m_xhtmlFiles[href] = resource;
             m_hrefToRes[href] = resource;
         } else if (resource->Type() == Resource::CSSResourceType) {
@@ -876,9 +971,17 @@ bool PluginRunner::modifyFiles(const QStringList &files)
 {
     ui.statusLbl->setText(tr("Status: cleaning up - modifying files"));
     // rearrange list to force content.opf and toc.ncx modifications to be done last
+    // qDebug() << files;
     QStringList newfiles;
     QString modifyopf;
     QString modifyncx;
+    QString OPFFILEINFO = m_book->GetConstOPF()->GetRelativePath() + SEP + SEP + "application/oebps-package+xml";
+    // Under epub3 there may not be an ncx resource
+    QString NCXFILEINFO = "NO_NCX_EXISTS";
+    const NCXResource * ncxres = m_book->GetConstNCX();
+    if (ncxres) {
+        NCXFILEINFO = ncxres->GetRelativePath() + SEP + SEP +  "application/x-dtbncx+xml";
+    }
     foreach (QString fileinfo, files) {
         if (fileinfo == OPFFILEINFO) {
             modifyopf = fileinfo;

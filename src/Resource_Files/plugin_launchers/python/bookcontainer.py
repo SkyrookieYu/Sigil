@@ -59,6 +59,9 @@ class BookContainer(object):
     def epub_version(self):
         return self._w.getepubversion()
 
+    def epub_is_standard(self):
+        return self._w.epub_is_standard()
+
     @property    
     def sigil_ui_lang(self):
         if self._w.sigil_ui_lang is None:
@@ -80,6 +83,11 @@ class BookContainer(object):
 
     def getpagemapid(self):
         return self._w.getpagemapid()
+
+# nav access routines
+
+    def getnavid(self):
+        return self._w.getnavid()
 
 # spine get/set and access routines
 
@@ -241,7 +249,7 @@ class BookContainer(object):
         # yields manifest id, href, and mimetype
         for id in sorted(self._w.id_to_mime):
             mime = self._w.id_to_mime[id]
-            if mime.find('font-') > -1 or mime.endswith('-ttf') or mime.endswith('truetype') or mime.endswith('opentype'):
+            if 'font-' in mime or 'truetype' in mime or 'opentype' in mime or mime.startswith('font/'):
                 href = self._w.id_to_href[id]
                 yield id, href, mime
 
@@ -310,12 +318,9 @@ class BookContainer(object):
         for book_href in self._w.selected:
             id_type = 'other'
             id = book_href
-            href = book_href
-            if href.startswith('OEBPS/'):
-                href = href[6:]
-            if href in self._w.href_to_id:
-                id = self._w.href_to_id[href]
+            if book_href in self._w.bookpath_to_id:
                 id_type = 'manifest'
+                id = self._w.bookpath_to_id[book_href]
             yield id_type, id
 
 
@@ -370,3 +375,97 @@ class BookContainer(object):
     def id_to_overlay(self, id, ow=None):
         return self._w.map_id_to_over.get(id, ow)
 
+
+    # New in Sigil 1.1
+    # ----------------
+    
+    # returns "light" or "dark"
+    def colorMode(self):
+        return self._w.colorMode()
+
+    # returns color as css or javascript hex color string #xxxxxx
+    # acccepts the following color roles in a case insensitive manner:
+    #    "Window", "Base", "Text", "Highlight", "HighlightedText"
+    def color(self, role):
+        return self._w.color(role)
+
+
+    # New in Sigil 1.0
+    # ----------------
+
+    # A book path (aka bookpath) is a unique relative path from the
+    # ebook root to a specific file in the epub.  As a relative path meant
+    # to be used in an href or src "link", it only uses forward slashes "/"
+    # as path separators.  Since all files exist inside the
+    # epub root (folder the epub was unzipped into), bookpaths will NEVER
+    # have or use "./" or "../" ie they are in always in canonical form
+
+    # For example under Sigil pre 1.0, all epubs were put into a standard
+    # structure.  Under this standard structure book paths would look like
+    # the following:
+    #   OEBPS/content.opf
+    #   OEBPS/toc.ncx
+    #   OEBPS/Text/Section0001.xhtml
+    #   OEBPS/Images/cover.jpg
+    # 
+
+    # and src and hrefs always looked like the following:
+    #    from Section0001.xhtml to Section0002.xhtml: ../Text/Section0002.xhtml
+    #    from Section0001.xhtml to cover.jpg:         ../Images/cover.jpg
+    #    from content.opf to Section0001.xhtml        Text/Section0001.xhtml
+    #    from toc.ncx to Section0001.xhtml            Text/Section0001.xhtml
+
+    # Under Sigil 1.0 and later, the original epub structure can be preserved
+    # meaning that files like content.opf could be named package.opf, and be placed
+    # almost anyplace inside the epub.  This is true for almost all files.
+
+    # So to uniquely identify a file, you need to know the bookpath of the OPF
+    # and the manifest href to the specific file, or the path from the epub 
+    # root to the file itself (ie. its bookpath)
+
+    # so the Sigil plugin interface for Sigil 1.0 has been extended to allow 
+    # the plugin developer to more easily work with bookpaths, create links
+    # between bookpaths, etc.
+
+    # we will use the terms book_href (or bookhref) interchangeably
+    # with bookpath with the following convention:
+    #    - use book_href when working with "other" files outside the manifest
+    #    - use bookpath when working with files in the opf manifest
+    #    - use either when working with the OPF file as it is at the intersection
+
+    # returns the bookpath/book_href to the opf file
+    def get_opfbookpath(self):
+        return self._w.get_opfbookpath()
+
+    # returns the book path of the folder containing this bookpath
+    def get_startingdir(self, bookpath):
+        return self._w.get_startingdir(bookpath)
+
+    # return a bookpath for the file pointed to by the href
+    # from the specified bookpath starting directory
+    def build_bookpath(self, href, starting_dir):
+        return self._w.build_bookpath(href, starting_dir)
+
+    # returns the href relative path from source bookpath to target bookpath
+    def get_relativepath(self, from_bookpath, to_bookpath):
+        return self._w.get_relativepath(from_bookpath, to_bookpath)
+
+    # adds a new file to the *manifest* with the stated bookpath with the provided
+    # uniqueid, data, (and mediatype if specified)
+    def addbookpath(self, uniqueid, bookpath, data, mime=None):
+        return self._w.addbookpath(uniqueid, bookpath, data, mime)
+
+    # functions for converting from  manifest id to bookpath and back
+    def bookpath_to_id(self, bookpath, ow=None):
+        return self._w.map_bookpath_to_id(bookpath,ow)
+
+    def id_to_bookpath(self, id, ow=None):
+        return self._w.map_id_to_bookpath(id, ow)
+
+    # valid groups: Text, Styles, Images, Fonts, Audio, Video, ncx, opf, Misc
+    # returns a sorted folder list of ebook paths for a group
+    def group_to_folders(self, group, ow=None):
+        return self._w.map_group_to_folders(group, ow)
+
+    def mediatype_to_group(self, mediatype, ow=None):
+        return self._w.map_mediatype_to_group(mediatype, ow)

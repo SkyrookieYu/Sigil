@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015  Kevin B. Hendricks, Stratford Ontario
+**  Copyright (C) 2015-2019  Kevin B. Hendricks, Stratford Ontario
 **
 **  This file is part of Sigil.
 **
@@ -44,7 +44,7 @@ static std::unordered_set<std::string> nonbreaking_inline  = {
 
 
 static std::unordered_set<std::string> preserve_whitespace = {
-  "pre","textarea","script","style"
+  "code", "pre","textarea","script","style"
 };
 
 
@@ -118,10 +118,11 @@ GumboInterface::GumboInterface(const QString &source, const QString &version)
           m_utf8src(""),
           m_sourceupdates(EmptyHash),
           m_newcsslinks(""),
+          m_currentbkpath(""),
           m_currentdir(""),
           m_newbody(""),
-          m_hasnbsp(false),
-          m_version(version)
+          m_version(version),
+	  m_newbookpath("")
 {
 }
 
@@ -132,10 +133,11 @@ GumboInterface::GumboInterface(const QString &source, const QString &version, co
           m_utf8src(""),
           m_sourceupdates(source_updates),
           m_newcsslinks(""),
+          m_currentbkpath(""),
           m_currentdir(""),
           m_newbody(""),
-          m_hasnbsp(false),
-          m_version(version)
+          m_version(version),
+	  m_newbookpath("")
 {
 }
 
@@ -153,10 +155,7 @@ GumboInterface::~GumboInterface()
 void GumboInterface::parse()
 {
     if (!m_source.isEmpty() && (m_output == NULL)) {
-  
-        if (!m_version.startsWith('3')) {
-            m_hasnbsp = m_source.contains("&nbsp;");
-        }
+
         m_utf8src = m_source.toStdString();
         // remove any xml header line and any trailing whitespace
         if (m_utf8src.compare(0,5,"<?xml") == 0) {
@@ -244,9 +243,12 @@ QStringList GumboInterface::get_all_properties()
 }
 
 
-QString GumboInterface::perform_source_updates(const QString& my_current_book_relpath)
+QString GumboInterface::perform_source_updates(const QString& my_current_book_relpath,
+					       const QString& newbookpath)
 {
-    m_currentdir = QFileInfo(my_current_book_relpath).dir().path();
+    m_currentbkpath = my_current_book_relpath;
+    m_currentdir = QFileInfo(m_currentbkpath).dir().path();
+    m_newbookpath = newbookpath;
     QString result = "";
     if (!m_source.isEmpty()) {
         if (m_output == NULL) {
@@ -261,9 +263,13 @@ QString GumboInterface::perform_source_updates(const QString& my_current_book_re
 }
 
 
-QString GumboInterface::perform_style_updates(const QString& my_current_book_relpath)
+QString GumboInterface::perform_style_updates(const QString& my_current_book_relpath,
+					      const QString& newbookpath)
 {
-    m_currentdir = QFileInfo(my_current_book_relpath).dir().path();
+    m_currentbkpath = my_current_book_relpath;
+    m_currentdir = QFileInfo(m_currentbkpath).dir().path();
+    m_newbookpath = newbookpath;
+    
     QString result = "";
     if (!m_source.isEmpty()) {
         if (m_output == NULL) {
@@ -320,6 +326,22 @@ QString GumboInterface::get_body_contents()
     enum UpdateTypes doupdates = NoUpdates;
     std::string results = serialize_contents(nodes.at(0), doupdates);
     return QString::fromStdString(results);
+}
+
+QString GumboInterface::get_body_text() 
+{
+    if (!m_source.isEmpty()) {
+        if (m_output == NULL) {
+            parse();
+        }
+    }
+    QList<GumboTag> tags = QList<GumboTag>() << GUMBO_TAG_BODY;
+    QList<GumboNode*> nodes = get_all_nodes_with_tags(tags);
+    if (nodes.count() != 1) {
+        return QString();
+    }
+    QString results = get_local_text_of_node(nodes.at(0));
+    return results;
 }
 
 
@@ -396,7 +418,7 @@ GumboNode* GumboInterface::get_node_from_qwebpath(QString webpath)
                 // It also requires document.normalize() to be done to merge adjacent text pieces
                 // but doing so will remove the cursor/highlight if it is on a text node merged away
                 // so restrict this to something same in that same parent element
-                if (index >= children->length) index = children->length - 1;
+	        if (index >= (int)(children->length)) index = children->length - 1;
                 if (index < 0) index = 0;
                 next_node = static_cast<GumboNode*>(children->data[index]);
             } else {
@@ -530,6 +552,47 @@ QList<GumboWellFormedError> GumboInterface::error_check()
         std::string errmsg(text.data, text.length);
         gperror.message = QString::fromStdString(errmsg);
         // qDebug() << gperror.message;
+        gumbo_string_buffer_destroy(&text);
+        errlist.append(gperror);
+    }
+    return errlist;
+}
+
+QList<GumboWellFormedError> GumboInterface::fragment_error_check()
+{
+    QList<GumboWellFormedError> errlist;
+
+    // In case we ever have to revert to earlier versions, please note the following
+    // additional initialization is needed because Microsoft Visual Studio 2013 (and earlier?)
+    // do not properly initialize myoptions from the static const kGumboDefaultOptions defined
+    // in the gumbo library.  Instead whatever was in memory at the time is used causing random 
+    // issues later on so if reverting remember to keep these specific changes as the bug 
+    // they work around took a long long time to track down
+    GumboOptions myoptions = kGumboDefaultOptions;
+    myoptions.tab_stop = 4;
+    myoptions.use_xhtml_rules = true;
+    myoptions.stop_on_first_error = false;
+    myoptions.max_tree_depth = 400;
+    myoptions.max_errors = -1;
+
+    if (!m_source.isEmpty() && (m_output == NULL)) {
+
+        m_utf8src = m_source.toStdString();
+        m_output = gumbo_parse_fragment(&myoptions, m_utf8src.data(), m_utf8src.length(),
+					GUMBO_TAG_BODY, GUMBO_NAMESPACE_HTML);
+    }
+    const GumboVector* errors  = &m_output->errors;
+    for (unsigned int i=0; i< errors->length; ++i) {
+        GumboError* er = static_cast<GumboError*>(errors->data[i]);
+        GumboWellFormedError gperror;
+        gperror.line = er->position.line;
+        gperror.column = er->position.column;
+        // unsigned int typenum = er->type;
+        GumboStringBuffer text;
+        gumbo_string_buffer_init(&text);
+        gumbo_error_to_string(er, &text);
+        std::string errmsg(text.data, text.length);
+        gperror.message = QString::fromStdString(errmsg);
         gumbo_string_buffer_destroy(&text);
         errlist.append(gperror);
     }
@@ -758,22 +821,31 @@ void GumboInterface::replace_all(std::string &s, const char * s1, const char * s
 
 std::string GumboInterface::update_attribute_value(const std::string &attvalue)
 {
-    std::string result = attvalue; 
+    std::string result = attvalue;
+    if (attvalue.find(":") != std::string::npos) return attvalue;
     QString attpath = Utility::URLDecodePath(QString::fromStdString(attvalue));
-    int fragpos = attpath.lastIndexOf(POUND_SIGN);
-    bool has_fragment = fragpos != -1;
-    QString fragment = "";
-    if (has_fragment) {
-        fragment = attpath.mid(fragpos, -1);
-        attpath = attpath.mid(0, fragpos);
+
+    // handle purely local hrefs here as they do not need to be updated at all
+    if (attpath.startsWith("#")) return result;
+
+    std::pair<QString, QString> parts = Utility::parseHREF(attpath);
+    QString fragment = parts.second;
+    attpath = parts.first;
+    QString dest_oldbkpath;
+    if (attpath.isEmpty()) {
+        dest_oldbkpath = m_currentbkpath;
+    } else {
+        dest_oldbkpath = Utility::buildBookPath(attpath, m_currentdir);
     }
-    QString search_key = QDir::cleanPath(m_currentdir + FORWARD_SLASH + attpath);
-    QString new_href;
-    if (m_sourceupdates.contains(search_key)) {
-        new_href = m_sourceupdates.value(search_key);
-    }
-    if (!new_href.isEmpty()) {
+    // note destination may not have moved but we still need to update
+    // the link since we may have moved
+    QString dest_newbkpath = m_sourceupdates.value(dest_oldbkpath, dest_oldbkpath);
+    if (!dest_newbkpath.isEmpty() && !m_newbookpath.isEmpty()) {
+        QString new_href = Utility::buildRelativePath(m_newbookpath, dest_newbkpath);
         new_href += fragment;
+        // if empty then internal link to the top
+	if (new_href.isEmpty()) new_href = QFileInfo(dest_newbkpath).fileName();
+	// if (new_href.isEmpty()) new_href="#";
         new_href = Utility::URLEncodePath(new_href);
         result =  new_href.toStdString();
     } 
@@ -800,18 +872,25 @@ std::string GumboInterface::update_style_urls(const std::string &source)
             if (mo.captured(i).trimmed().isEmpty()) {
                 continue;
             }
+            if (mo.captured(i).indexOf(":") != -1) continue;
             QString apath = Utility::URLDecodePath(mo.captured(i));
-            QString search_key = QDir::cleanPath(m_currentdir + FORWARD_SLASH + apath);
-            QString new_href;
-            if (m_sourceupdates.contains(search_key)) {
-                new_href = m_sourceupdates.value(search_key);
-            }
-            if (!new_href.isEmpty()) {
-                new_href = Utility::URLEncodePath(new_href);
+	    QString dest_oldbkpath;
+	    if (apath.isEmpty()) {
+	      dest_oldbkpath = m_currentbkpath;
+	    } else {
+	      dest_oldbkpath = Utility::buildBookPath(apath, m_currentdir);
+	    }
+            // note destination may not have moved but we still need to update
+            // the link
+            QString dest_newbkpath = m_sourceupdates.value(dest_oldbkpath, dest_oldbkpath);
+	    if (!dest_newbkpath.isEmpty() && !m_newbookpath.isEmpty()) {
+		QString new_href = Utility::buildRelativePath(m_newbookpath, dest_newbkpath);
+		if (new_href.isEmpty()) new_href = QFileInfo(dest_newbkpath).fileName();
+		new_href = Utility::URLEncodePath(new_href);
                 result.replace(mo.capturedStart(i), mo.capturedLength(i), new_href);
             }
         }
-        start_index += mo.capturedLength();
+	start_index = mo.capturedEnd();
         mo = reference.match(result, start_index);
     } while (mo.hasMatch());
 
@@ -827,13 +906,6 @@ std::string GumboInterface::substitute_xml_entities_into_text(const std::string 
     replace_all(result, "&", "&amp;");
     replace_all(result, "<", "&lt;");
     replace_all(result, ">", "&gt;");
-    // convert non-breaking spaces to entities to prevent their loss for later editing
-    // See the strange//buggy behaviour of Qt QTextDocument toPlainText() routine 
-    if (m_hasnbsp) {
-        replace_all(result, "\xc2\xa0", "&nbsp;");
-    } else {
-        replace_all(result, "\xc2\xa0", "&#160;");
-    }
     return result;
 }
 

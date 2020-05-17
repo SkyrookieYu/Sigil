@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -18,8 +19,6 @@
 **  along with Sigil.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
-
-#include <QtGui/QTextDocument>
 
 #include "BookManipulation/CleanSource.h"
 #include "BookManipulation/FolderKeeper.h"
@@ -49,9 +48,16 @@ ImportTXT::ImportTXT(const QString &fullfilepath)
 // and returns the created Book
 QSharedPointer<Book> ImportTXT::GetBook(bool extract_metadata)
 {
+    
     if (!Utility::IsFileReadable(m_FullFilePath)) {
         throw(CannotReadFile(m_FullFilePath.toStdString()));
     }
+
+    // First handle any new created Books by making sure there is 
+    // an OPF in the current Book
+    if (!m_Book->GetConstOPF()) {
+        m_Book->GetFolderKeeper()->AddOPFToFolder(m_EpubVersion);
+    } 
 
     QString source = LoadSource();
     InitializeHTMLResource(source, CreateHTMLResource(source));

@@ -1,20 +1,26 @@
-version: '0.9.10-{build}'
+version: '1.0.0-{build}'
 
 branches:
   only:
   - master
+  - appearance
   - /\d+\.\d+\.\d+(-\d+)?/
   
 clone_folder: c:\project\sigil
 
 image:
-- Visual Studio 2015
+- Visual Studio 2019
 
 configuration: Release
 
 platform:
-- x86
 - x64
+
+init:
+  - set /p RedistVersion=<"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\Microsoft.VCRedistVersion.default.txt"
+  - ps: $commit = $env:appveyor_repo_commit.SubString(0,7)
+  - ps: $timestamp = $env:appveyor_repo_commit_timestamp.SubString(0,10)
+  - ps: Update-AppveyorBuild -Version ("{0}-{1}-{2}" -f $env:appveyor_repo_branch, $commit, $timestamp)
 
 clone_script:
 - ps: >-
@@ -29,24 +35,31 @@ clone_script:
     
     Set-Location $env:appveyor_build_folder
 
+install:
+  - choco install ninja
 
 environment:
   global:
-      INNO: C:\Program Files (x86)\Inno Setup 5
-      REDIST: C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\redist\1033\vcredist_%PLATFORM%.exe
-      DOWNLOAD: https://github.com/dougmassay/win-qtwebkit-5.212/releases/download/v5.212-1/qt5.11-custom-webkit-%PLATFORM%.zip
+      INNO: C:\Program Files (x86)\Inno Setup 6
+      REDIST: C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Redist\MSVC\%RedistVersion%\vcredist_%PLATFORM%.exe
+      DOWNLOAD: https://github.com/dougmassay/win-qtwebkit-5.212/releases/download/v5.212-1/MyQt%PLATFORM%_5.12.7_VS2017_WE.7z
+      GDRIVE: https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-windows-x64.exe
+      GDRIVE_REFRESH_TOKEN:
+        secure: +J2q/4lkiBXik5Ttvt06vpNiWBjNIXx+jFnYw1rOR9sLkyksyXGj+NeNKQB8kPwE
+      GDRIVE_DIR:
+        secure: e/trZFJnPzo9saqwWWn6+E3ZPoItqflSviT92eeH3Qk76GuEHrPk9DrcG1bh3SNX
   matrix:
     - PYTHON: C:\Python37
-      QT: C:\Qt\5.11\msvc2015
+      QT: C:\MyQt32\Qt5.12.2
       CMAKE64BIT:
     - PYTHON: C:\Python37-x64
-      QT: C:\Qt\5.11\msvc2015_64
+      QT: C:\MyQtx64_WE\Qt5.12.7
       CMAKE64BIT: -DWIN_INSTALLER_USE_64BIT_CRT=1
 
 matrix:
   exclude:
     - platform: x86
-      PYTHON: C:\Python37-x64
+      PYTHON: C:\Python37
     - platform: x64
       PYTHON: C:\Python37
   fast_finish: true
@@ -70,37 +83,51 @@ before_build:
     cp '%REDIST%' installer/
     mkdir build
     cd ..\..
-    curl.exe -L -o webkit.zip %DOWNLOAD%
-    7z x webkit.zip -y
-    set PATH=%PYTHON%;%PYTHON%\Scripts;%PATH%
+    curl.exe -L -o webkit.7z %DOWNLOAD%
+    7z x webkit.7z -y
+    set PATH=%PYTHON%;%PYTHON%\Scripts;%QT%\bin;%INNO%;%PATH%
+    echo 'PATH = %PATH%'
     python -m pip install --upgrade pip
-    pip3.7 install six==1.12.0
+    pip3.7 install six==1.13.0
     pip3.7 install html5lib==1.0.1
-    pip3.7 install regex==2018.11.22
-    pip3.7 install cssutils==1.0.2
+    pip3.7 install regex==2019.11.1
+    pip3.7 install css-parser==1.0.4
     pip3.7 install cssselect==1.0.3
+    pip3.7 install urllib3==1.25.8
+    pip3.7 install certifi==2019.11.28
+    pip3.7 install dulwich==0.19.15 --global-option="--pure"
     pip3.7 install chardet==3.0.4
-    pip3.7 install pillow==5.4.1
-    pip3.7 install PyQt5==5.11.3
-    pip3.7 install lxml==4.2.6
+    pip3.7 install pillow==6.2.1
+    pip3.7 install PyQt5==5.12.3 PyQt5-sip==4.19.18
+    pip3.7 install lxml==4.4.2
     cd project\sigil\build
-    call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %PLATFORM%
-    cmake .. -G "NMake Makefiles" -DCMAKE_BUILD_TYPE=%configuration% -DCMAKE_PREFIX_PATH=%QT% %CMAKE64BIT%
+    curl.exe -L -o gdrive.exe %GDRIVE%
+    c:\project\sigil\build\gdrive.exe version
+    call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvarsall.bat" %PLATFORM% -vcvars_ver=14.1
+    echo 'LIB = %LIB%'
+    echo 'LIBPATH = %LIBPATH%'
+    echo 'INCLUDE = %INCLUDE%'
+    echo 'CL = %CL%'
+    cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=%configuration% -DQt5_DIR=%QT%\lib\cmake\Qt5 %CMAKE64BIT%
 
     
 build_script:
 - cmd: |-
-    set PATH=%PYTHON%;%PATH%
-    call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %PLATFORM%
-    nmake
+    ninja -j4
  
 
 after_build:
 - cmd: |-
-    set PATH=%PYTHON%;%QT%\bin;%INNO%;%PATH%
-    call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" %PLATFORM%
-    nmake makeinstaller
+    ninja -j4 makeinstaller
 
-artifacts:
-    path: build\installer\*.exe
+deploy_script:
+- ps: >-
+    if(-not $env:appveyor_pull_request_number) {
+        python --version
+        c:\project\sigil\build\gdrive.exe version
+        python ..\ci_scripts\gddeploy.py
+    }
+
+#artifacts:
+#    path: build\installer\*.exe
 

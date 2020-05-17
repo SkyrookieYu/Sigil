@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2016 Kevin B. Hendricks, Stratford, Ontario, Canada
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2016-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -29,6 +29,7 @@
 #include "Exporters/NCXWriter.h"
 #include "ResourceObjects/NCXResource.h"
 #include "Misc/SettingsStore.h"
+#include "Misc/Utility.h"
 #include "sigil_constants.h"
 
 static const QString TEMPLATE_TEXT =
@@ -50,7 +51,7 @@ static const QString TEMPLATE_TEXT =
     "  <navLabel>\n"
     "    <text>%1</text>\n"
     "  </navLabel>\n"
-    "  <content src=\"Text/%2\" />\n"
+    "  <content src=\"%2\" />\n"
     "</navPoint>\n"
     "</navMap>\n"
     "</ncx>";
@@ -74,27 +75,36 @@ static const QString TEMPLATE3_TEXT =
     "  <navLabel>\n"
     "    <text>%1</text>\n"
     "  </navLabel>\n"
-    "  <content src=\"Text/%2\" />\n"
+    "  <content src=\"%2\" />\n"
     "</navPoint>\n"
     "</navMap>\n"
     "</ncx>";
 
 
-NCXResource::NCXResource(const QString &mainfolder, const QString &fullfilepath, QObject *parent)
+NCXResource::NCXResource(const QString &mainfolder, 
+			 const QString &fullfilepath, 
+			 const QString & version, 
+			 QObject *parent)
     : XMLResource(mainfolder, fullfilepath, parent)
 {
-    FillWithDefaultText();
-    // Make sure the file exists on disk.
-    // Among many reasons, this also solves the problem
-    // with the Book Browser not displaying an icon for this resource.
-    SaveToDisk();
+    FillWithDefaultText(version, "OEBPS/Text");
+}
+
+// a rename of the ncx should only need updating in the opf
+// which should happen automagically via signals and slots here
+bool NCXResource::RenameTo(const QString &new_filename)
+{
+    bool successful = Resource::RenameTo(new_filename);
+    return successful;
 }
 
 
-bool NCXResource::RenameTo(const QString &new_filename)
+// a move of the ncx should need updating in the ncx and opf
+// which should happen automagically via signals and slots here
+bool NCXResource::MoveTo(const QString &newbookpath)
 {
-    // The user is not allowed to rename the NCX file.
-    return false;
+    bool successful = Resource::MoveTo(newbookpath);
+    return successful;
 }
 
 
@@ -151,22 +161,32 @@ void NCXResource::GenerateNCXFromTOCEntries(const Book *book, TOCModel::TOCEntry
 }
 
 
-void NCXResource::FillWithDefaultText()
+void NCXResource::FillWithDefaultText(const QString &version, const QString &default_text_folder)
 {
-    SettingsStore ss;
-    QString version = ss.defaultVersion();
-    if (version.startsWith('2')) {
-        SetText(TEMPLATE_TEXT.arg(tr("Start")).arg(FIRST_SECTION_NAME));
-      } else {
-        SetText(TEMPLATE3_TEXT.arg(tr("Start")).arg(FIRST_SECTION_NAME));
-      }
+    QString first_section_bookpath = FIRST_SECTION_NAME;
+    if (!default_text_folder.isEmpty()) first_section_bookpath = default_text_folder + "/" + FIRST_SECTION_NAME;
+    FillWithDefaultTextToBookPath(version, first_section_bookpath);
+    SaveToDisk();
 }
 
 
-QString NCXResource::GetRelativePathToRoot() const
+void NCXResource::FillWithDefaultTextToBookPath(const QString &version, const QString &start_bookpath)
 {
-    QFileInfo info(GetFullPath());
-    QDir parent_dir = info.dir();
-    QString parent_name = parent_dir.dirName();
-    return parent_name + "/" + Filename();
+    QString epubversion = version;
+    if (epubversion.isEmpty()) {
+        SettingsStore ss;
+        epubversion = ss.defaultVersion();
+    }
+    QString ncxbookpath = GetRelativePath();
+    QString texthref = Utility::URLEncodePath(Utility::buildRelativePath(ncxbookpath, start_bookpath));
+    if (epubversion.startsWith('2')) {
+        SetText(TEMPLATE_TEXT.arg(tr("Start")).arg(texthref));
+    } else {
+        SetText(TEMPLATE3_TEXT.arg(tr("Start")).arg(texthref));
+    }
+    // Make sure the file exists on disk.
+    // Among many reasons, this also solves the problem
+    // with the Book Browser not displaying an icon for this resource.
+    SaveToDisk();
 }
+

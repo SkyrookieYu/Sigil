@@ -24,27 +24,36 @@
 
 #include "Dialogs/AddSemantics.h"
 #include "Misc/SettingsStore.h"
+#include "Misc/Utility.h"
 
 static const QString SETTINGS_GROUP = "add_semantics";
 
-AddSemantics::AddSemantics(const QHash<QString, DescriptiveInfo> &infomap, QWidget *parent)
+AddSemantics::AddSemantics(const QHash<QString, DescriptiveInfo> &infomap, const QString & current_code, QWidget *parent)
     :
     QDialog(parent),
     m_SemanticsInfo(infomap)
 {
     ui.setupUi(this);
+
     connect(ui.lwProperties, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
             this,	          SLOT(UpdateDescription(QListWidgetItem *)));
     connect(this, SIGNAL(accepted()), this, SLOT(WriteSettings()));
     connect(ui.lwProperties, SIGNAL(doubleClicked(const QModelIndex &)), this, SLOT(accept()));
+
     // Fill the dialog with sorted translated semantics property names
     QStringList names;
     foreach (QString code, m_SemanticsInfo.keys()) {
         QString name = m_SemanticsInfo.value(code, DescriptiveInfo()).name;
+        // add a space and check mark to the end of the name if current semantic set 
+        if (code == current_code) {
+	    name.append(' ');
+            name.append(QChar(10003));
+	}
         m_Name2Code[name] = code;
         names.append(name);
     }
-    names.sort();
+    names = Utility::LocaleAwareSort(names);
+
     foreach(QString name, names) {
         ui.lwProperties->addItem(name);
     }

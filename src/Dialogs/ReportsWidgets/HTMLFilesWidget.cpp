@@ -1,8 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2018 Kevin B. Hendricks, Stratford, ON
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012 Dave Heiland
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, ON
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012      Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -36,6 +36,7 @@
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
 #include "ResourceObjects/HTMLResource.h"
+#include "ResourceObjects/Resource.h"
 
 static const QString SETTINGS_GROUP = "reports";
 static const QString DEFAULT_REPORT_FILE = "HTMLFilesReport.csv";
@@ -52,6 +53,11 @@ HTMLFilesWidget::HTMLFilesWidget()
     ui.fileTree->setContextMenuPolicy(Qt::CustomContextMenu);
     CreateContextMenuActions();
     connectSignalsSlots();
+}
+
+HTMLFilesWidget::~HTMLFilesWidget()
+{
+    delete m_ItemModel;
 }
 
 void HTMLFilesWidget::CreateReport(QSharedPointer<Book> book)
@@ -92,15 +98,17 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
     QHash<QString, QStringList> image_names_hash = m_Book->GetImagesInHTMLFiles();
     QHash<QString, QStringList> video_names_hash = m_Book->GetVideoInHTMLFiles();
     QHash<QString, QStringList> audio_names_hash = m_Book->GetAudioInHTMLFiles();
+    QHash<QString, std::pair<int, int> > word_count_hash = m_Book->GetSpellWordCountsInHTMLFiles();
     foreach(HTMLResource *html_resource, m_HTMLResources) {
-        QString filepath = "../" + html_resource->GetRelativePathToOEBPS();
+        QString filepath = html_resource->GetRelativePath();
         QString path = html_resource->GetFullPath();
-        QString filename = html_resource->Filename();
+        QString filename = html_resource->ShortPathName();
         QList<QStandardItem *> rowItems;
         // Filename
         QStandardItem *name_item = new QStandardItem();
         name_item->setText(filename);
         name_item->setToolTip(filepath);
+	name_item->setData(filepath);
         rowItems << name_item;
         // File Size
         double ffsize = QFile(path).size() / 1024.0;
@@ -110,20 +118,19 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         size_item->setText(fsize);
         rowItems << size_item;
         // All words
-        int all_words = HTMLSpellCheck::CountAllWords(html_resource->GetText());
-        total_all_words += all_words;
+	std::pair<int, int> counts = word_count_hash[filepath];
+        total_all_words += counts.first;
         NumericItem *words_item = new NumericItem();
-        words_item->setText(QString::number(all_words));
+        words_item->setText(QString::number(counts.first));
         rowItems << words_item;
         // Misspelled words
-        int misspelled_words = HTMLSpellCheck::CountMisspelledWords(html_resource->GetText());
-        total_misspelled_words += misspelled_words;
+        total_misspelled_words += counts.second;
         NumericItem *misspelled_item = new NumericItem();
-        misspelled_item->setText(QString::number(misspelled_words));
+        misspelled_item->setText(QString::number(counts.second));
         rowItems << misspelled_item;
         // Images
         NumericItem *image_item = new NumericItem();
-        QStringList image_names = image_names_hash[filename];
+        QStringList image_names = image_names_hash[filepath];
         total_images += image_names.count();
         image_item->setText(QString::number(image_names.count()));
         if (!image_names.isEmpty()) {
@@ -132,7 +139,7 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         rowItems << image_item;
         // Video
         NumericItem *video_item = new NumericItem();
-        QStringList video_names = video_names_hash[filename];
+        QStringList video_names = video_names_hash[filepath];
         total_video += video_names.count();
         video_item->setText(QString::number(video_names.count()));
         if (!video_names.isEmpty()) {
@@ -141,7 +148,7 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         rowItems << video_item;
         // Audio
         NumericItem *audio_item = new NumericItem();
-        QStringList audio_names = audio_names_hash[filename];
+        QStringList audio_names = audio_names_hash[filepath];
         total_audio += audio_names.count();
         audio_item->setText(QString::number(audio_names.count()));
         if (!audio_names.isEmpty()) {
@@ -150,7 +157,7 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         rowItems << audio_item;
         // Linked Stylesheets
         NumericItem *stylesheet_item = new NumericItem();
-        QStringList stylesheet_names = stylesheet_names_hash[filename];
+        QStringList stylesheet_names = stylesheet_names_hash[filepath];
         total_stylesheets += stylesheet_names.count();
         stylesheet_item->setText(QString::number(stylesheet_names.count()));
         if (!stylesheet_names.isEmpty()) {
@@ -271,8 +278,8 @@ void HTMLFilesWidget::DoubleClick()
     QModelIndex index = ui.fileTree->selectionModel()->selectedRows(0).first();
 
     if (index.row() != m_ItemModel->rowCount() - 1) {
-        QString filename = m_ItemModel->itemFromIndex(index)->text();
-        emit OpenFileRequest(filename, 1);
+        QString filepath = m_ItemModel->itemFromIndex(index)->data().toString();
+        emit OpenFileRequest(filepath, 1);
     }
 }
 
@@ -322,11 +329,17 @@ void HTMLFilesWidget::Save()
     QString filter_string = "*.csv;;*.txt;;*.*";
     QString default_filter = "";
     QString save_path = m_LastDirSaved + "/" + m_LastFileSaved;
+    QFileDialog::Options options = QFileDialog::Options();
+#ifdef Q_OS_MAC
+    options = options | QFileDialog::DontUseNativeDialog;
+#endif
+
     QString destination = QFileDialog::getSaveFileName(this,
                           tr("Save Report As Comma Separated File"),
                           save_path,
                           filter_string,
-                          &default_filter
+			  &default_filter,
+                          options
                                                       );
 
     if (destination.isEmpty()) {
@@ -350,7 +363,8 @@ void HTMLFilesWidget::Delete()
 
     if (ui.fileTree->selectionModel()->hasSelection()) {
         foreach(QModelIndex index, ui.fileTree->selectionModel()->selectedRows(0)) {
-            files_to_delete.append(m_ItemModel->itemFromIndex(index)->text());
+	    QString bookpath = m_ItemModel->itemFromIndex(index)->data().toString();
+	    files_to_delete.append(bookpath);
         }
     }
 

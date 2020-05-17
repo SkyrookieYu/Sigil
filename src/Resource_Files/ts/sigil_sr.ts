@@ -131,77 +131,77 @@
         <translation>Филтер:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="68"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="73"/>
         <source>Directory</source>
         <translation>Фасцикла</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="69"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="74"/>
         <source>Name</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="70"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="75"/>
         <source>File Size (KB)</source>
         <translation>Величина датотеке (KB)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="71"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="76"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="72"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="77"/>
         <source>Semantics</source>
         <translation>Семантика</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="74"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="79"/>
         <source>Properties</source>
         <translation>Својства</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="143"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="149"/>
         <source>%n file(s)</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>%n датотека</numerusform><numerusform>%n датотека</numerusform><numerusform>%n датотека</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="256"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="267"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Сачувај извештај као датотеку раздвојену зарезима</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="269"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="281"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="269"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="281"/>
         <source>Cannot save report file.</source>
         <translation>Није могуће сачувати извештај.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="294"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="306"/>
         <source>Image</source>
         <translation>Слика</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="299"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="311"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="304"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="316"/>
         <source>Video</source>
         <translation>Видео</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="309"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="321"/>
         <source>Font</source>
         <translation>Фонт</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="336"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="348"/>
         <source>Unknown</source>
         <translation>Непознато</translation>
     </message>
@@ -214,244 +214,347 @@
         <translation>Изглед</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="24"/>
-        <source>Fonts / Colors</source>
-        <translation>Фонтови / Боје</translation>
-    </message>
-    <message>
         <location filename="../../Form_Files/PAppearanceWidget.ui" line="30"/>
-        <source>Book View / Preview:</source>
-        <translation>Приказ књиге / Преглед:</translation>
+        <source>Code View</source>
+        <translation>Приказ кода</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="39"/>
-        <source>If no font is specified in the CSS for your page, the following font will be used to display within Sigil. These fonts will not be used in your actual ebook.</source>
-        <translation>Ако CSS за вашу страну не наводи фонт, овај фонт ће да се користи за приказ унутар програма Сигил. Ови фонтови неће бити коришћени у вашим стварним е-књигама.</translation>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="36"/>
+        <source>Monospaced Code Font:</source>
+        <translation>Фонт фиксне ширине за код</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="59"/>
-        <source>Default font size to be used for Book View and Preview
-if no font-size specified in your CSS</source>
-        <translation>Подразумевана величина фонта за Приказ књиге и Преглед
-ако font-size није наведен у вашем CSS</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="63"/>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="197"/>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="313"/>
-        <source>Font Size:</source>
-        <translation>Величина фонта:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="93"/>
-        <source>Default font family to be used for Book View and Preview
-if no font-family specified in your CSS</source>
-        <translation>Подразумевана фамилија фонтова за Приказ књиге и Преглед
-ако font-family није наведен у вашем CSS</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="97"/>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="227"/>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="346"/>
-        <source>Standard Font:</source>
-        <translation>Стандардни фонт:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="107"/>
-        <source>Default font family to be used for Book View and Preview
-if a serif font-family specified in your CSS</source>
-        <translation>Подразумевана фамилија фонтова за Приказ књиге и Преглед
-ако је серифна font-family наведена у вашем CSS</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="111"/>
-        <source>Serif Font:</source>
-        <translation>Серифни фонт:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="121"/>
-        <source>Default font family to be used for Book View and Preview
-if a sans-serif font-family specified in your CSS</source>
-        <translation>Подразумевана фамилија фонтова за Приказ књиге и Преглед
-ако је бесерифна font-family наведена у вашем CSS</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="125"/>
-        <source>Sans-Serif Font:</source>
-        <translation>Бесерифни фонт:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="171"/>
-        <source>CSS / Code View:</source>
-        <translation>CSS / Приказ кода:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="181"/>
-        <source>Item Colors:</source>
-        <translation>Боје ставке:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="194"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="50"/>
         <source>Font size to be used for text in Code View.</source>
         <translation>Величина фонта која се користи за текст у Приказу кода.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="224"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="53"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="119"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="309"/>
+        <source>Font Size:</source>
+        <translation>Величина фонта:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="67"/>
         <source>Font family to be used for text in Code View.</source>
         <translation>Породица фонтова која се користи за текст у Приказу кода.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="263"/>
-        <source>Select an alternative color for this display item</source>
-        <translation>Одаберите алтернативну боју за приказ ове ставке</translation>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="70"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="136"/>
+        <source>Font:</source>
+        <translation>Фонт:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="266"/>
-        <source>Custom Color...</source>
-        <translation>Прилагођена боја...</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="296"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="102"/>
         <source>Insert Special Characters:</source>
         <translation>Уметни специјалне карактере:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="310"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="116"/>
         <source>Font size to be used for Insert Special Characters window</source>
         <translation>Величина фонта у прозору за уметање специјалних карактера </translation>
     </message>
     <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="164"/>
+        <source>Colors:</source>
+        <translation>Боје:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="172"/>
+        <source>Item Colors:</source>
+        <translation>Боје ставке:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="191"/>
+        <source>Select an alternative color for this display item</source>
+        <translation>Одаберите алтернативну боју за приказ ове ставке</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="194"/>
+        <source>Custom Color...</source>
+        <translation>Прилагођена боја...</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="260"/>
+        <source>Preview</source>
+        <translation>Преглед</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="266"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="497"/>
+        <source>Fonts:</source>
+        <translation>Фонтови:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="275"/>
+        <source>If no font is specified in the CSS for your page, the following font will be used to display within Sigil. These fonts will not be used in your actual ebook.</source>
+        <translation>Ако CSS за вашу страну не наводи фонт, овај фонт ће да се користи за приказ унутар програма Сигил. Ови фонтови неће бити коришћени у вашим стварним е-књигама.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="305"/>
+        <source>Default font size to be used for Preview
+if no font-size specified in your CSS</source>
+        <translation>Подразумевана величина фонта за Преглед
+ако font-size није наведен у вашем CSS</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="316"/>
+        <source>Default font family to be used for Preview
+if no font-family specified in your CSS</source>
+        <translation>Подразумевана фамилија фонтова за Преглед
+ако font-family није наведен у вашем CSS</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="320"/>
+        <source>Standard:</source>
+        <translation>Стандардни:</translation>
+    </message>
+    <message>
         <location filename="../../Form_Files/PAppearanceWidget.ui" line="343"/>
-        <source>Font family to be used for Insert Special Characters window</source>
-        <translation>Породица фонтова која се користи у прозору за уметање специјалних карактера</translation>
+        <source>Default font family to be used for Preview
+if a serif font-family specified in your CSS</source>
+        <translation>Подразумевана фамилија фонтова за Преглед
+ако је серифна font-family наведена у вашем CSS</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="388"/>
-        <source>Menus</source>
-        <translation>Менији</translation>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="347"/>
+        <source>Serif:</source>
+        <translation>Серифни:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="394"/>
-        <source>Main Menu Icon Size</source>
-        <translation>Величина иконе главног менија</translation>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="360"/>
+        <source>Default font family to be used for Preview
+if a sans-serif font-family specified in your CSS</source>
+        <translation>Подразумевана фамилија фонтова за Преглед
+ако је бесерифна font-family наведена у вашем CSS</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="400"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="364"/>
+        <source>Sans-Serif:</source>
+        <translation>Бесерифни:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="391"/>
+        <source>Make Preview simulate a dark appearance in dark mode</source>
+        <translation>Нека Преглед симулира тамни изглед у тамном режиму</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="415"/>
+        <source>Main UI</source>
+        <translation>Главни КИ</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="421"/>
+        <source>Main Menu Icon Size:</source>
+        <translation>Величина икона главног менија:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="427"/>
         <source>Adjust the size of the icons in the main menu.</source>
         <translation>Подеси величину икона у главном менију</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="476"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="465"/>
+        <source>High DPI Setting:</source>
+        <translation>Поставка високе густине пиксела:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="474"/>
+        <source>(Needs Sigil Restart)</source>
+        <translation>(неопходно поновно покретање Сигила)</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="503"/>
+        <source>UI Font:</source>
+        <translation>КИ фонт</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="513"/>
+        <source>Change the font used by Sigil&apos;s menus, buttons, etc...</source>
+        <translation>Мења фонт који програм Сигил користи за меније, дугмиће, итд...</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="516"/>
+        <source>Change Font (Needs Sigil Restart)</source>
+        <translation>Измена фонта (неопходно поновно покретање Сигила)</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="539"/>
+        <source>Determine if the BookBrowser should show full paths</source>
+        <translation>Одређује да ли Истраживач књиге треба да прикаже пуне путање</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="542"/>
+        <source>Control Book Browser Appearance:</source>
+        <translation>Управљање изгледом Истраживача књиге:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="551"/>
+        <source>Check to make BookBrowser show full paths.</source>
+        <translation>Штиклирајте ако желите да Истраживач књиге приказује пуне путање.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="554"/>
+        <source>BookBrowser should show full paths.</source>
+        <translation>Истраживач књиге би требало да приказује пуне путање.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="567"/>
+        <source>Tweak Drag Distance (Needs Sigil Restart):</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="600"/>
         <source>Reset all fonts and colors to the default values</source>
         <translation>Поставља све фонтове и боје на подразумеване вредности</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="479"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="603"/>
         <source>Reset All</source>
         <translation>Ресетуј све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="204"/>
-        <source>Background</source>
-        <translation>Позадина</translation>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="92"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="93"/>
+        <source>Detect</source>
+        <translation>Детектуј</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="205"/>
-        <source>Foreground</source>
-        <translation>Предњи план</translation>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="92"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="95"/>
+        <source>On</source>
+        <translation>Укљ.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="206"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="92"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="97"/>
+        <source>Off</source>
+        <translation>Искљ.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="93"/>
+        <source>Detect whether any high dpi scaling should take place.</source>
+        <translation>Детектује да ли је потребно скалирање услед високе густине пиксела.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="94"/>
+        <source>Defers to any Qt environment variables that are set to control high dpi behavior.</source>
+        <translation>Преусмерава на евентуално постављене Qt променљиве окружења за контролу понашања код високе густине пиксела.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="95"/>
+        <source>Turns on high dpi scaling and ignores any Qt environment variables</source>
+        <translation>Укључује скалирање за високу густину пиксела и игнорише евентуалне Qt променљиве окружења</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="96"/>
+        <source>that are set controlling high dpi behavior.</source>
+        <translation>које су постављене за контролу понашања код високе густине пиксела.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="97"/>
+        <source>Turns off high dpi scaling regardless if any Qt environment</source>
+        <translation>Искључује скалирање за високу густину пиксела без обзира на евентуалне Qt</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="98"/>
+        <source>variables controlling high dpi behavior are set.</source>
+        <translation>променљиве окружења које контролишу понашање за високу густину пиксела.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="102"/>
+        <source>Adjust the distance necessary to drag an item before a move event is triggered.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="103"/>
+        <source>-20 to +20 pixel range</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="287"/>
         <source>CSS Comment</source>
         <translation>CSS коментар</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="207"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="288"/>
         <source>CSS Property</source>
         <translation>CSS својство</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="208"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="289"/>
         <source>CSS Quote</source>
         <translation>CSS наводник</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="209"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="290"/>
         <source>CSS Selector</source>
         <translation>CSS селектор</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="210"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="291"/>
         <source>CSS Value</source>
         <translation>CSS вредност</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="211"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="292"/>
         <source>Line Highlight</source>
         <translation>Наглашавање линије</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="212"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="293"/>
         <source>Line# Background</source>
         <translation>Линије# позадина</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="213"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="294"/>
         <source>Line# Foreground</source>
         <translation>Линије# предњи план</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="214"/>
-        <source>Selection Background</source>
-        <translation>Позадина избора</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="215"/>
-        <source>Selection Foreground</source>
-        <translation>Предњи план избора</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="216"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="295"/>
         <source>Spelling Underline</source>
         <translation>Подвлачење код провере правописа</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="217"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="296"/>
         <source>XHTML Attribute Name</source>
         <translation>XHTML име атрибута</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="218"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="297"/>
         <source>XHTML Attribute Value</source>
         <translation>XHTML вредност атрибута</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="219"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="298"/>
         <source>XHTML CSS</source>
         <translation>XHTML CSS</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="220"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="299"/>
         <source>XHTML CSS Comment</source>
         <translation>XHTML CSS коментар</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="221"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="300"/>
         <source>XHTML DocType</source>
         <translation>XHTML DocType</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="222"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="301"/>
         <source>XHTML Entity</source>
         <translation>XHTML ентитет</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="223"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="302"/>
         <source>XHTML HTML Tag</source>
         <translation>XHTML HTML ознака</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="224"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="303"/>
         <source>XHTML HTML Comment</source>
         <translation>XHTML HTML коментар</translation>
     </message>
@@ -459,7 +562,7 @@ if a sans-serif font-family specified in your CSS</source>
 <context>
     <name>Book</name>
     <message>
-        <location filename="../../BookManipulation/Book.cpp" line="399"/>
+        <location filename="../../BookManipulation/Book.cpp" line="415"/>
         <source>Start</source>
         <translation>Почетак</translation>
     </message>
@@ -467,59 +570,60 @@ if a sans-serif font-family specified in your CSS</source>
 <context>
     <name>BookBrowser</name>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="60"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="69"/>
         <source>Book Browser</source>
-        <translation>Прегледач књиге</translation>
+        <translation>Истраживач књиге</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="70"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="81"/>
         <source>Font Obfuscation</source>
         <translation>Маскирање фонта</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="71"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1405"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1505"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="82"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1714"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1836"/>
         <source>Open With</source>
         <translation>Отвори помоћу</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../MainUI/BookBrowser.cpp" line="121"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="141"/>
         <source>%n file(s)</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>%n датотека</numerusform><numerusform>%n датотека</numerusform><numerusform>%n датотека</numerusform></translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="211"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="618"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="634"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="683"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="783"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="983"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="244"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="691"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="722"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="780"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="894"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1178"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1283"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="211"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="244"/>
         <source>Are you sure you want to sort the selected files alphanumerically?</source>
         <translation>Да ли сте сигурни да желите да алфанумерички сортирате изабране датотеке?</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="211"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="244"/>
         <source>This action cannot be reversed.</source>
         <translation>Ова акција не може да се поништи.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="237"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="279"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Датотека &quot;%1&quot; не постоји.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="561"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="622"/>
         <source>Add Existing Files</source>
         <translation>Додај постојеће датотеке</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="594"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="661"/>
         <source>File is not an image and cannot be used:
 
 &quot;%1&quot;.</source>
@@ -528,7 +632,7 @@ if a sans-serif font-family specified in your CSS</source>
 &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="603"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="670"/>
         <source>File is not multimedia (image, video, audio) and cannot be inserted:
 
 &quot;%1&quot;.</source>
@@ -537,7 +641,7 @@ if a sans-serif font-family specified in your CSS</source>
 &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="618"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="692"/>
         <source>The multimedia file &quot;%1&quot; already exists in the book.
 
 OK to replace?</source>
@@ -546,12 +650,12 @@ OK to replace?</source>
 Да је заменим?</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="629"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="717"/>
         <source>Unable to delete or replace file &quot;%1&quot;.</source>
         <translation>Датотека &quot;%1&quot; не може да се обрише или замени.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="634"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="722"/>
         <source>Unable to load &quot;%1&quot;
 
 A file with this name already exists in the book.</source>
@@ -560,7 +664,7 @@ A file with this name already exists in the book.</source>
 Датотека са овим именом већ постоји у књизи.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="684"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="781"/>
         <source>The following file(s) were not loaded due to invalid content or not well formed XML:
 
 %1</source>
@@ -569,312 +673,279 @@ A file with this name already exists in the book.</source>
 %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="698"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="795"/>
         <source>File(s) added.</source>
         <translation>Датотека додато.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="733"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="835"/>
         <source>Save As File</source>
         <translation>Сачувај датотеку као</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="755"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="858"/>
         <source>Unable to save the file.</source>
         <translation>Не могу да сачувам датотеку.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="763"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="872"/>
         <source>Choose the directory to save the files to</source>
         <translation>Одабери фасциклу за чување датотека</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="783"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="894"/>
         <source>One or more files already exists.  OK to overwrite?</source>
         <translation>Једна или више датотека већ постоји. Да их препишем?</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="800"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="911"/>
         <source>Unable to save files.  Destination may be a directory.</source>
         <translation>Не могу да сачувам датотеке. Одредиште је можда фасцикла.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="808"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="919"/>
         <source>Unable to save files.</source>
         <translation>Не могу да сачувам датотеке.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="983"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1178"/>
         <source>Cannot rename files since this would result in duplicate filenames.</source>
         <translation>Не могу да преименујем датотеке јер би то могло да доведе до датотека са истим именима.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1046"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1249"/>
+        <source>Destination Folder has invalid path &quot;%1&quot;</source>
+        <translation>Циљни фолдер има неисправну путању &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1283"/>
+        <source>Cannot move files since this would result in duplicate filenames.</source>
+        <translation>Не могу да преместим датотеке јер би то могло да доведе до датотека са истим именима.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1330"/>
         <source>The Nav document can not be removed.</source>
         <translation>Nav документ не може да се уклони.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1054"/>
-        <source>Neither the NCX nor the OPF can be removed.</source>
-        <translation>Ни NCX ни OPF не могу да се уклоне.</translation>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1338"/>
+        <source>The NCX can not be removed.</source>
+        <translation>NCX не може да се уклони.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1061"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1345"/>
+        <source>The OPF is required for epub and can not be removed.</source>
+        <translation>OPF је неопходан за epub и не може да се уклони.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1354"/>
         <source>You cannot remove all html files.
 There always has to be at least one.</source>
         <translation>Не можете да уклоните све html датотеке.
 Увек мора да постоји макар један.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1201"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1495"/>
         <source>Unable to set file as cover image.</source>
         <translation>Не могу да поставим датотеку као слику корица.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1386"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1693"/>
         <source>Select All</source>
         <translation>Одабери све</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1387"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1694"/>
         <source>Add Blank HTML File</source>
-        <translation>Додај празану HTML датотеку</translation>
+        <translation>Додај празну HTML датотеку</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1388"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1695"/>
         <source>Add Blank Stylesheet</source>
         <translation>Додај празан опис стилова</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1389"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1696"/>
         <source>Add Blank SVG Image</source>
         <translation>Додај празну SVG слику</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1390"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1697"/>
         <source>Add Existing Files...</source>
         <translation>Додај постојеће датотеке...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1391"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1392"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1698"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1699"/>
         <source>Add Copy</source>
         <translation>Додај копију</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1393"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1700"/>
         <source>Rename</source>
         <translation>Преименуј</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1394"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1701"/>
+        <source>RegEx Rename</source>
+        <translation>Регизраз преименовање</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1702"/>
+        <source>Move</source>
+        <translation>Премештање</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1703"/>
         <source>Delete</source>
         <translation>Обриши</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1395"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1704"/>
         <source>Cover Image</source>
         <translation>Слика корица</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1396"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1705"/>
         <source>Merge</source>
         <translation>Споји</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1397"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1706"/>
         <source>None</source>
         <translation>Ниједан</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1398"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1707"/>
         <source>Use Adobe&apos;s Method</source>
         <translation>Користи Adobe-јев метод</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1399"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1708"/>
         <source>Use IDPF&apos;s Method</source>
         <translation>Користи IDPF-ов метод</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1400"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1709"/>
         <source>Sort</source>
         <translation>Сортирај</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1401"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1710"/>
         <source>Renumber TOC Entries</source>
         <translation>Ренумериши ставке садржаја</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1402"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1711"/>
         <source>Link Stylesheets...</source>
         <translation>Повежи описе стилова</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1403"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1712"/>
         <source>Add Semantics...</source>
         <translation>Додај семантику...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1404"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1713"/>
         <source>Validate with W3C</source>
         <translation>Провери исправност са W3C</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1406"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1715"/>
         <source>Save As</source>
         <translation>Сачувај као</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1416"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1729"/>
         <source>Merge with previous file, or merge multiple files into one.</source>
         <translation>Спаја са претходном датотеком, или спаја више датотека у једну.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1419"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1732"/>
         <source>Rename selected file(s)</source>
         <translation>Преименује одабране датотеке</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1421"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1734"/>
+        <source>Use Regular Expressions to Rename selected file(s)</source>
+        <translation>Користи регуларне изразе за промену имена изабран(е/их) датотек(е/а)</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1737"/>
+        <source>Move selected file(s) to a new folder</source>
+        <translation>Премешта изабране датотеке у нови фолдер</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1739"/>
         <source>Link Stylesheets to selected file(s).</source>
         <translation>Повезује описе стилова са одабраним датотекама.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1423"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1741"/>
         <source>Add Semantics to selected file(s).</source>
         <translation>Додаје семантичко значење одабранима датотекама.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1511"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1871"/>
         <source>Other Application</source>
         <translation>Друга апликација</translation>
     </message>
 </context>
 <context>
-    <name>BookViewEditor</name>
+    <name>CPCompare</name>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="700"/>
-        <source>Clipboard contains HTML formatting</source>
-        <translation>Клипборд садржи HTML форматирање</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="81"/>
+        <source>Files Only in Checkpoint</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="701"/>
-        <source>Do you want to paste clipboard data as plain text?</source>
-        <translation>Да ли желите да налепите податке из клипборда као чист текст?</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="81"/>
+        <location filename="../../Dialogs/CPCompare.cpp" line="82"/>
+        <location filename="../../Dialogs/CPCompare.cpp" line="83"/>
+        <source>View</source>
+        <translation>Приказ</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="897"/>
-        <source>Open Tab For</source>
-        <translation>Отвори картицу за</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="82"/>
+        <source>Files Only in Current ePub</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="911"/>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1084"/>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1086"/>
-        <source>Open With</source>
-        <translation>Отвори помоћу</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="83"/>
+        <source>Modified since Checkpoint</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="918"/>
-        <source>Other Application</source>
-        <translation>Друга апликација</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="84"/>
+        <location filename="../../Dialogs/CPCompare.cpp" line="191"/>
+        <source>Results of Comparison</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="966"/>
-        <source>Clips</source>
-        <translation>Шаблони</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="85"/>
+        <source>Done</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="976"/>
-        <source>Add To Clips</source>
-        <translation>Додај у шаблоне</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="193"/>
+        <source>These binary files differ in content:</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1074"/>
-        <source>Insert File</source>
-        <translation>Уметни датотеку</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="194"/>
+        <source>Checkpoint:</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1075"/>
-        <source>Undo</source>
-        <translation>Опозови</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="194"/>
+        <location filename="../../Dialogs/CPCompare.cpp" line="195"/>
+        <source>bytes</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1076"/>
-        <source>Redo</source>
-        <translation>Понови</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1077"/>
-        <source>Cut</source>
-        <translation>Исеци</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1078"/>
-        <source>Copy</source>
-        <translation>Копирај</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1079"/>
-        <source>Copy Image</source>
-        <translation>Копирај слику</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1080"/>
-        <source>Paste</source>
-        <translation>Налепи</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1081"/>
-        <source>Select All</source>
-        <translation>Изабери све</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1082"/>
-        <source>Open</source>
-        <translation>Отвори</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1085"/>
-        <source>Save As</source>
-        <translation>Сачувај као</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1089"/>
-        <source>Inspect Element</source>
-        <translation>Прегледај елемент</translation>
-    </message>
-</context>
-<context>
-    <name>BookViewPreview</name>
-    <message>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="259"/>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="324"/>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="330"/>
-        <source>Unsupported</source>
-        <translation>Није подржано</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="259"/>
-        <source>Spellcheck mode is not supported in Book View at this time.  Switch to Code View.</source>
-        <translation>У овом тренутку режим провере правописа није подржан у Приказу књиге. Пређите на Приказ кода.</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="324"/>
-        <source>Replace is not supported in this view. Switch to Code View.</source>
-        <translation>Замена није подржана у овом приказу. Пређите на Приказ кода.</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="330"/>
-        <source>Replace All for the current file is not supported in this view. Switch to Code View.</source>
-        <translation>Замена свих појављивања за тренутну датотеку није подржана у овом приказу. Пређите на Приказ кода.</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="750"/>
-        <source>Inspect Element</source>
-        <translation>Прегледај елемент</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="195"/>
+        <source>Current:</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -895,47 +966,47 @@ There always has to be at least one.</source>
         <translation>Филтер:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="70"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="75"/>
         <source>Name</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="71"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="76"/>
         <source>Size (KB)</source>
         <translation>Величина (KB)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="72"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="77"/>
         <source>Times Used</source>
         <translation>Употребљено пута</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="137"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="143"/>
         <source>%n file(s)</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>%n датотека</numerusform><numerusform>%n датотека</numerusform><numerusform>%n датотека</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="141"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="147"/>
         <source>KB</source>
         <translation>KB</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="268"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="280"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Сачувај извештај као датотеку раздвојену зарезима</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="281"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="294"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="281"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="294"/>
         <source>Cannot save report file.</source>
         <translation>Не могу да сачувам датотеку извештаја.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="292"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="305"/>
         <source>Delete From Book</source>
         <translation>Уклони из књиге</translation>
     </message>
@@ -962,8 +1033,8 @@ There always has to be at least one.</source>
     <name>CharactersInHTMLFilesWidget</name>
     <message>
         <location filename="../../Form_Files/ReportsCharactersInHTMLFilesWidget.ui" line="14"/>
-        <source>Characters in HTML Files</source>
-        <translation>Знакови текста у HTML датотекама</translation>
+        <source>Characters Used</source>
+        <translation>Употребљени карактери</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ReportsCharactersInHTMLFilesWidget.ui" line="34"/>
@@ -981,47 +1052,47 @@ There always has to be at least one.</source>
         <translation>Знакови:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="74"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="78"/>
         <source>Character</source>
         <translation>Знак</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="75"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="79"/>
         <source>Decimal</source>
         <translation>Децимално</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="76"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="80"/>
         <source>Hexadecimal</source>
         <translation>Хексадецимално</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="77"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="81"/>
         <source>Entity Name</source>
         <translation>Име ентитета</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="78"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="82"/>
         <source>Entity Description</source>
         <translation>Опис ентитета</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="84"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="88"/>
         <source>&lt;p&gt;This is a list of the characters used in all HTML files.&lt;p&gt;</source>
         <translation>&lt;p&gt;Ово је листа знакова коришћених у свим HTML датотекама.&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="265"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="254"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Сачувај извештај као датотеку раздвојену зарезима</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="278"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="268"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="278"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="268"/>
         <source>Cannot save report file.</source>
         <translation>Не могу да сачувам датотеку извештаја.</translation>
     </message>
@@ -1030,8 +1101,8 @@ There always has to be at least one.</source>
     <name>ClassesInHTMLFilesWidget</name>
     <message>
         <location filename="../../Form_Files/ReportsClassesInHTMLFilesWidget.ui" line="14"/>
-        <source>Style Classes in HTML Files</source>
-        <translation>Стилске класе у HTML датотекама</translation>
+        <source>Classes Used</source>
+        <translation>Употребљене класе</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ReportsClassesInHTMLFilesWidget.ui" line="34"/>
@@ -1044,57 +1115,57 @@ There always has to be at least one.</source>
         <translation>Филтер</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="77"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="83"/>
         <source>HTML File</source>
         <translation>HTML датотека</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="78"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="84"/>
         <source>Element</source>
         <translation>Елемент</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="79"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="85"/>
         <source>Class</source>
         <translation>Класа</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="80"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="86"/>
         <source>Matched Selector</source>
         <translation>Упарени селектор</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="81"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="87"/>
         <source>Found In</source>
         <translation>Пронађено у</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="87"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="93"/>
         <source>&lt;p&gt;This is a list of the style classes used in all HTML files and whether or not the style matched a selector in a linked stylesheet.&lt;p&gt;</source>
         <translation>&lt;p&gt;Ово је листа стилских класа које су коришћене у свим HTML датотекама и да ли је стил упарен са селектором у повезаном опису стилова или не.&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="88"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="94"/>
         <source>&lt;p&gt;NOTE:&lt;/p&gt;</source>
         <translation>&lt;p&gt;НАПОМЕНА:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="89"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="95"/>
         <source>&lt;p&gt;Due to the complexities of CSS you must check your code manually to be certain if a style is used or not.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Због сложености CSS-а морате ручно да проверите ваш код како би били сигурни да ли је стил коришћен или не.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="223"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="242"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Сачувај извештај као датотеку раздвојену зарезима</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="236"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="256"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="236"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="256"/>
         <source>Cannot save report file.</source>
         <translation>Не могу да сачувам датотеку извештаја.</translation>
     </message>
@@ -1103,7 +1174,7 @@ There always has to be at least one.</source>
     <name>ClipEditor</name>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="14"/>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="503"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="538"/>
         <source>Clip Editor</source>
         <translation>Едитор шаблона</translation>
     </message>
@@ -1134,13 +1205,13 @@ There always has to be at least one.</source>
     </message>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="91"/>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="614"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="649"/>
         <source>Add Entry</source>
         <translation>Додај ставку</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="98"/>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="615"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="650"/>
         <source>Add Group</source>
         <translation>Додај групу</translation>
     </message>
@@ -1173,167 +1244,167 @@ There always has to be at least one.</source>
         <translation>Помера ставку за једну наниже у групи.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="72"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="73"/>
         <source>Right click on an entry to see a context menu of actions.</source>
         <translation>Урадите десни клик на ставку да бисте видели контекстни мени са акцијама.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="73"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="74"/>
         <source>You can also right click in your document to select an entry.</source>
         <translation>Ставку такође можете одабрати десним кликом у вашем документу.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="75"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="76"/>
         <source>Name</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="75"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="76"/>
         <source>Name of your entry or group.</source>
         <translation>Име ваше ставке или групе.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="76"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="77"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="76"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="77"/>
         <source>The text to insert. The text is treated like a Regex replacement expression so \1 can be used to insert the text selected in Code View when you paste the clip.</source>
         <translation>Текст који треба да се уметне. Текст се третира као израз за замену код регуларних израза, тако да може да се користи \1 како би се уметнуо текст изабран у Приказу кода када налепљујете шаблон.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="80"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="81"/>
         <source>Save</source>
         <translation>Сачувај</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="80"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="81"/>
         <source>Save your changes.</source>
         <translation>Сачувајте ваше промене.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="80"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="81"/>
         <source>If any other instances of Sigil are running they will be automatically updated with your changes.</source>
         <translation>Ако је покренута још нека инстанца Сигила, ваше промене ће аутоматски бити примењене и у њима. </translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="90"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="91"/>
         <source>Cannot save entries.</source>
         <translation>Не могу да сачувам ставке.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="132"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="135"/>
         <source>Clip entries loaded from file.</source>
         <translation>Ставке шаблона су учитане из датотеке.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="188"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="195"/>
         <source>You cannot select an entry and a group containing the entry.</source>
         <translation>Не можете да изаберете ставку и групи која садржи ту ставку.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="270"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="282"/>
         <source>You cannot Copy or Cut groups - use drag-and-drop.</source>
         <translation>Не можете да копирате или исечете групе - користите  превлачење мишем.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="336"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="354"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="336"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="354"/>
         <source>Are you sure you want to reload all entries?  This will overwrite any unsaved changes.</source>
         <translation>Да ли сте сигурни да желите поново да учитате све ставке? Ово ће преписати све несачуване промене.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="352"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="375"/>
         <source>Import Entries</source>
         <translation>Увези ставке</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="425"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="456"/>
         <source>Export Selected Entries</source>
         <translation>Извези одабране ставке</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/ClipEditor.cpp" line="503"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="538"/>
         <source>CSS entries added: %n</source>
         <translation><numerusform>Додата је %n CSS ставка</numerusform><numerusform>Додато је %n CSS ставки</numerusform><numerusform>Додато је %n CSS ставки</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="616"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="651"/>
         <source>Edit</source>
         <translation>Уреди</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="617"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="652"/>
         <source>Cut</source>
         <translation>Исеци</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="618"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="653"/>
         <source>Copy</source>
         <translation>Копирај</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="619"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="654"/>
         <source>Paste</source>
         <translation>Налепи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="620"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="655"/>
         <source>Delete</source>
         <translation>Обриши</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="621"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="656"/>
         <source>Import</source>
         <translation>Увези</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="622"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="657"/>
         <source>Reload</source>
         <translation>Поново учитај</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="623"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="658"/>
         <source>Export</source>
         <translation>Извези</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="624"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="659"/>
         <source>Export All</source>
         <translation>Извези све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="625"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="660"/>
         <source>Collapse All</source>
         <translation>Скупи све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="626"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="661"/>
         <source>Expand All</source>
         <translation>Прошири све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="627"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="662"/>
         <source>Autofill</source>
         <translation>Ауто попуна</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="707"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="742"/>
         <source>Clip entries saved.</source>
         <translation>Ставке шаблона су сачуване.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="736"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="771"/>
         <source>Sigil: Clip Editor</source>
         <translation>Сигил: Едитор шаблона</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="737"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="772"/>
         <source>The Clip entries may have been modified.
 Do you want to save your changes?</source>
         <translation>Ставке шаблона су можда измењене.
@@ -1343,17 +1414,17 @@ Do you want to save your changes?</source>
 <context>
     <name>ClipEditorModel</name>
     <message>
-        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="64"/>
+        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="65"/>
         <source>Name</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="65"/>
+        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="66"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="681"/>
+        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="680"/>
         <source>Unable to create file %1</source>
         <translation>Датотеку %1 не може да се креира</translation>
     </message>
@@ -1371,12 +1442,12 @@ Do you want to save your changes?</source>
         <translation>Скорашњи клипборди:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipboardHistorySelector.cpp" line="338"/>
+        <location filename="../../Dialogs/ClipboardHistorySelector.cpp" line="340"/>
         <source>Paste</source>
         <translation>Налепи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipboardHistorySelector.cpp" line="340"/>
+        <location filename="../../Dialogs/ClipboardHistorySelector.cpp" line="342"/>
         <source>Save</source>
         <translation>Сачувај</translation>
     </message>
@@ -1384,17 +1455,17 @@ Do you want to save your changes?</source>
 <context>
     <name>ClipsWindow</name>
     <message>
-        <location filename="../../MainUI/ClipsWindow.cpp" line="34"/>
+        <location filename="../../MainUI/ClipsWindow.cpp" line="36"/>
         <source>Clips</source>
         <translation>Шаблони</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ClipsWindow.cpp" line="99"/>
+        <location filename="../../MainUI/ClipsWindow.cpp" line="101"/>
         <source>Collapse All</source>
         <translation>Скупи све</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ClipsWindow.cpp" line="100"/>
+        <location filename="../../MainUI/ClipsWindow.cpp" line="102"/>
         <source>Expand All</source>
         <translation>Прошири све</translation>
     </message>
@@ -1402,112 +1473,112 @@ Do you want to save your changes?</source>
 <context>
     <name>CodeViewEditor</name>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="418"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="441"/>
         <source>Cannot insert closing tag at this position.</source>
         <translation>На ово место не може да се уметне затварајућа ознака.</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="427"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="450"/>
         <source>No open tags found at this position.</source>
         <translation>На овом месту нису пронађене отворене ознаке.</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1175"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1233"/>
         <source>Add To Default Dictionary</source>
         <translation>Додај у подразумевани речник</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1188"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1246"/>
         <source>Add To Dictionary</source>
         <translation>Додај у речник</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1205"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1263"/>
         <source>Ignore</source>
         <translation>Игнориши</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1267"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1325"/>
         <source>Reformat CSS</source>
         <translation>Поново форматирај CSS</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1268"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1327"/>
         <source>Multiple Lines Per Style</source>
         <translation>Вишеструке линије по стилу</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1269"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1328"/>
         <source>Single Line Per Style</source>
         <translation>Једна линија по стилу</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1294"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1353"/>
         <source>Reformat HTML</source>
         <translation>Поновно форматирај HTML</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1295"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1355"/>
         <source>Mend and Prettify Code</source>
         <translation>Поправи и улепшај код</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1296"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1356"/>
         <source>Mend and Prettify Code - All HTML Files</source>
         <translation>Поправи и улепшај код - све HTML датотеке</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1297"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1357"/>
         <source>Mend Code</source>
         <translation>Поправи код</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1298"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1358"/>
         <source>Mend Code - All HTML Files</source>
         <translation>Поправи код - све HTML датотеке</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1328"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1388"/>
         <source>Go To Link Or Style</source>
         <translation>Иди на линк или стил</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1351"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1410"/>
         <source>View Image</source>
         <translation>Прикажи слику</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1352"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1411"/>
         <source>Open Tab For Image</source>
         <translation>Отвори картицу за слику</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1378"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1437"/>
         <source>Mark Selected Text</source>
         <translation>Означи изабрани текст</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1380"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1439"/>
         <source>Unmark Marked Text</source>
         <translation>Скини ознаку са означеног текста</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1406"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1465"/>
         <source>Clips</source>
         <translation>Шаблони</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1416"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1475"/>
         <source>Add To Clips</source>
         <translation>Додај у шаблоне</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1542"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1601"/>
         <source>You must be in an opening HTML tag to use this feature.</source>
         <translation>Морате да се налазите у отварајућој HTML ознаци како бисте користили ову могућност.</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1552"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1611"/>
         <source>You must be inside an opening HTML tag to use this feature.</source>
         <translation>Морате да се налазите унутар отварајуће HTML ознаке како бисте користили ову могућност.</translation>
     </message>
@@ -1515,22 +1586,22 @@ Do you want to save your changes?</source>
 <context>
     <name>ColorSwatchDelegate</name>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="56"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="59"/>
         <source>Background</source>
         <translation>Позадина</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="58"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="61"/>
         <source>Foreground</source>
         <translation>Предњи план</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="60"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="63"/>
         <source>Selection Background</source>
         <translation>Позадина избора</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="62"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="65"/>
         <source>Selection Foreground</source>
         <translation>Предњи план избора</translation>
     </message>
@@ -1543,17 +1614,17 @@ Do you want to save your changes?</source>
         <translation>Обриши датотеке</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteFiles.cpp" line="66"/>
+        <location filename="../../Dialogs/DeleteFiles.cpp" line="68"/>
         <source>Delete Marked Files</source>
         <translation>Обриши означене датотеке</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteFiles.cpp" line="67"/>
+        <location filename="../../Dialogs/DeleteFiles.cpp" line="69"/>
         <source>Delete</source>
         <translation>Уклони</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteFiles.cpp" line="68"/>
+        <location filename="../../Dialogs/DeleteFiles.cpp" line="70"/>
         <source>File</source>
         <translation>Датотека</translation>
     </message>
@@ -1566,22 +1637,22 @@ Do you want to save your changes?</source>
         <translation>Уклони стилове</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteStyles.cpp" line="79"/>
+        <location filename="../../Dialogs/DeleteStyles.cpp" line="80"/>
         <source>Delete Marked Styles</source>
         <translation>Уклони означене стилове</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteStyles.cpp" line="80"/>
+        <location filename="../../Dialogs/DeleteStyles.cpp" line="81"/>
         <source>Delete</source>
         <translation>Уклони</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteStyles.cpp" line="81"/>
+        <location filename="../../Dialogs/DeleteStyles.cpp" line="82"/>
         <source>File</source>
         <translation>Датотека</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteStyles.cpp" line="82"/>
+        <location filename="../../Dialogs/DeleteStyles.cpp" line="83"/>
         <source>Style</source>
         <translation>Стил</translation>
     </message>
@@ -1620,7 +1691,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../Form_Files/EditTOC.ui" line="75"/>
-        <location filename="../../Dialogs/EditTOC.cpp" line="443"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="465"/>
         <source>Delete</source>
         <translation>Уклони</translation>
     </message>
@@ -1655,37 +1726,37 @@ You can also use the right arrow key.</source>
 Можете такође да користите и тастер десне стрелице.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="85"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="97"/>
         <source>TOC Entry</source>
         <translation>Ставка садржаја</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="86"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="98"/>
         <source>Target</source>
         <translation>Циљ</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="442"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="464"/>
         <source>Rename</source>
         <translation>Преименуј</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="450"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="472"/>
         <source>Move Up</source>
         <translation>Помери горе</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="451"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="473"/>
         <source>Move Down</source>
         <translation>Помери доле</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="457"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="479"/>
         <source>Expand All</source>
         <translation>Прошири све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="458"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="480"/>
         <source>Collapse All</source>
         <translation>Скупи све</translation>
     </message>
@@ -1693,10 +1764,247 @@ You can also use the right arrow key.</source>
 <context>
     <name>EmbeddedPython</name>
     <message>
-        <location filename="../../Misc/EmbeddedPython.cpp" line="614"/>
-        <location filename="../../Misc/EmbeddedPythonPkg.cpp" line="613"/>
+        <location filename="../../Misc/EmbeddedPython.cpp" line="617"/>
         <source>Embedded Python Error</source>
         <translation>Грешка уграђеног Python интерпретера</translation>
+    </message>
+</context>
+<context>
+    <name>EmptyLayout</name>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="22"/>
+        <source>Design Custom Epub Layout</source>
+        <translation>Дизајнирање прилагођеног Epub распореда </translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="62"/>
+        <source>Load a previously saved design from an ini file.</source>
+        <translation>Учитава претходно сачувани дизајн из ini датотеке.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="65"/>
+        <source>Load</source>
+        <translation>Учитај</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="73"/>
+        <source>Save the current design to an ini file.</source>
+        <translation>Чува текући дизајн у ini датотеку.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="76"/>
+        <source>Save</source>
+        <translation>Чувања</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="98"/>
+        <source>Add a new folder to parent.</source>
+        <translation>Додаје нови фолдер родитељском.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="101"/>
+        <source>Add Folder</source>
+        <translation>Додај фолдер</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="109"/>
+        <source>Add an allowed file type marker to an existing folder.</source>
+        <translation>Додаје дозвољени маркер типа датотеке у постојећем фолдеру.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="112"/>
+        <source>Add Marker</source>
+        <translation>Додај маркер</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="120"/>
+        <source>Remove an existing file type marker or folder.</source>
+        <translation>Уклања постојећи маркер типа датотеке или фолдер.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="123"/>
+        <source>Remove</source>
+        <translation>Уклони</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="131"/>
+        <source>Rename a folder or OPF, NCX or Nav marker.</source>
+        <translation>Преименује фолдер или OPF, NCX или Nav маркер.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="134"/>
+        <source>Rename</source>
+        <translation>Преименуј</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="167"/>
+        <source>Add folders/subfolders and file markers that determine 
+the types of files that can be stored in each folder.  
+The file type markers can also be used to specify 
+locations and names for the OPF, NCX and/or Nav.</source>
+        <translation>Додаје фолдере/подфолдере и маркере датотеке који одређују 
+типове датотека који могу да се чувају у сваком од фолдера. 
+Маркери типова датотека такође могу да се користе за 
+навођење локација и имена за OPF, NCX и/или Nav.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="179"/>
+        <source>Use OK to commit your custom epub design, otherwise use Cancel.</source>
+        <translation>Користите ОК да унесете ваше промене прилагођеног epub дизајна, у супротном употребите Откажи.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="144"/>
+        <source>Xhtml files</source>
+        <translation>Xhtml датотеке</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="144"/>
+        <source>Style files</source>
+        <translation>Датотеке стилова</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="145"/>
+        <source>Image files</source>
+        <translation>Датотеке слика</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="145"/>
+        <source>Font files</source>
+        <translation>Датотеке фонтова</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="146"/>
+        <source>Audio files</source>
+        <translation>Аудио датотеке</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="146"/>
+        <source>Video files</source>
+        <translation>Видео датотеке</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="147"/>
+        <source>Javascript files</source>
+        <translation>Јаваскрипт датотеке</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="147"/>
+        <source>Misc files</source>
+        <translation>Разне датотеке</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="148"/>
+        <source>OPF file</source>
+        <translation>OPF датотека</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="148"/>
+        <source>NCX file</source>
+        <translation>NCX датотека</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="149"/>
+        <source>Nav file</source>
+        <translation>Nav датотека</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="224"/>
+        <source>Select previously saved layout design ini File</source>
+        <translation>Изаберите претходно сачувану ini датотеку дизајна распореда</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="226"/>
+        <source>Settings Files (*.ini)</source>
+        <translation>Датотеке подешавања (*.ini)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="326"/>
+        <source>Save current design to an ini File</source>
+        <translation>Чување текућег дизајна у ini датотеку</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="358"/>
+        <source>Add a Folder</source>
+        <translation>Додај фолдер</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="358"/>
+        <source>New Folder Name?</source>
+        <translation>Име новог фолдера?</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="358"/>
+        <source>untitled_folder</source>
+        <translation>неименовани_фолдер</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="395"/>
+        <source>Rename a Folder</source>
+        <translation>Преименуј фолдер</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="395"/>
+        <source>New Name for Folder?</source>
+        <translation>Ново име за фолдер?</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="406"/>
+        <source>Rename a File</source>
+        <translation>Преименуј датотеку</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="406"/>
+        <source>New Name for File?</source>
+        <translation>Ново име за датотеку?</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="464"/>
+        <source>A single OPF file is required.</source>
+        <translation>Неопходна је једна OPF датотека.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="465"/>
+        <source>At least one xhtml marker must exist.</source>
+        <translation>Мора да постоји барем један xhtml маркер.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="466"/>
+        <source>At least one image marker must exist.</source>
+        <translation>Мора да постоји барем један маркер слике.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="467"/>
+        <source>At least one css marker must exist.</source>
+        <translation>Мора да постоји барем један css  маркер.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="469"/>
+        <source>A single NCX file is required.</source>
+        <translation>Неопходна је једна NCX датотека.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="471"/>
+        <source>A single NAV file is required.</source>
+        <translation>Неопходна је једна NAV датотека.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="475"/>
+        <source>Errors Detected</source>
+        <translation>Откривене су грешке</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="481"/>
+        <source>Sigil</source>
+        <translation>Сигил</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="482"/>
+        <source>Do you want to set this layout as the default empty Epub layout for Sigil?
+
+</source>
+        <translation>Да ли желите да овај распоред поставите као подразумевани распоред програма Сигил за празан Epub?
+
+</translation>
     </message>
 </context>
 <context>
@@ -1839,170 +2147,170 @@ other end to continue searching.</source>
         <translation>Режим:</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="178"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1430"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="179"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1431"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1432"/>
         <source>Current File</source>
         <translation>Тренутна датотека</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../MainUI/FindReplace.cpp" line="333"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1253"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="334"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1254"/>
         <source>Matches found: %n</source>
         <translation><numerusform>Пронађено је %n подударање</numerusform><numerusform>Пронађено је %n подударања</numerusform><numerusform>Пронађено је %n подударања</numerusform></translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="417"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1277"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="418"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1278"/>
         <source>No replacements made</source>
         <translation>Ништа није замењено</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../MainUI/FindReplace.cpp" line="419"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1279"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="420"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1280"/>
         <source>Replacements made: %n</source>
         <translation><numerusform>Извршена је %n замена</numerusform><numerusform>Извршено је %n замена</numerusform><numerusform>Извршено је %n замена</numerusform></translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="620"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="617"/>
         <source>No matches found</source>
         <translation>Нема подударања</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1135"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1132"/>
         <source>This tab cannot be searched</source>
         <translation>Ову картицу није могуће претражити</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1167"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1164"/>
         <source>Unnamed search loaded</source>
         <translation>Неименована претрага је учитана</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1170"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1167"/>
         <source>Loaded</source>
         <translation>Учитано</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1179"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1199"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1217"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1237"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1263"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1180"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1200"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1218"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1238"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1264"/>
         <source>No searches selected</source>
         <translation>Није изабрана ниједна претрага</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1420"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1421"/>
         <source>What to search for</source>
         <translation>Шта да се тражи</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1421"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1422"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1423"/>
         <source>Normal</source>
         <translation>Нормално</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1422"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1423"/>
         <source>Case in-sensitive search of exactly what you type.</source>
         <translation>Претрага тачно онога што напишете, не водећи рачуна о малим/великим словима.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1423"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1424"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1425"/>
         <source>Case Sensitive</source>
         <translation>Разликуј мала и велика слова</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1424"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1425"/>
         <source>Case sensitive search of exactly what you type.</source>
         <translation>Претрага тачно онога што напишете, водећи рачуна о малим/великим словима.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1425"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1426"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1427"/>
         <source>Regex</source>
         <translation>Регуларни израз</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1426"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1427"/>
         <source>Search for a pattern using Regular Expression syntax.</source>
         <translation>Тражи шаблон користећи синтаксу регуларних израза</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1429"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1441"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1430"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1442"/>
         <source>Where to search</source>
         <translation>Где претражити</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1431"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1432"/>
         <source>Restrict the find or replace to the opened file.  Hold the Ctrl key down while clicking any search buttons to temporarily restrict the search to the Current File.</source>
         <translation>Ограничи претрагу или замену на отворену датотеку. Држите притиснут Ctrl тастер док кликћете на било које дугме за претрагу како бисте привремено ограничили претрагу на Текућу датотеку.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1432"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1433"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1434"/>
         <source>All HTML Files</source>
         <translation>Све HTML датотеке</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1433"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1434"/>
         <source>Find or replace in all HTML files in Code View.</source>
         <translation>Пронађи или замени у свим HTML датотекама у Приказу кода</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1434"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1435"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1436"/>
         <source>Selected HTML Files</source>
         <translation>Одабране HTML датотеке</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1435"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1436"/>
         <source>Restrict the find or replace to the HTML files selected in the Book Browser in Code View.</source>
-        <translation>Ограничи претрагу и замену на HTML датотеке изабране у Прегледачу књиге у Приказу кода.</translation>
+        <translation>Ограничи претрагу и замену на HTML датотеке изабране у Истраживачу књиге у Приказу кода.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1437"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1438"/>
         <source>To restrict search to selected text, use Search&amp;rarr;Mark Selected Text.</source>
-        <translation type="unfinished"/>
+        <translation>Да бисте ограничили претрагу на изабрани текст, користите Претражи&amp;rarr;Означи Изабрани Текст.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1442"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1443"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1444"/>
         <source>Marked Text</source>
         <translation>Означени текст</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1443"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1444"/>
         <source>Restrict the find or replace to the text marked by Search&amp;rarr;Mark Selected Text.  Cleared if you use Undo, enter text, or change views or tabs.</source>
         <translation>Ограничи претрагу или замену на текст који је обележила функција Претражи&amp;rarr;Означи изабрани текст. Уклониће се ако користите функцију Опозови, унесете текст или промените погледе или картице.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1447"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1451"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1448"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1452"/>
         <source>Up</source>
         <translation>Горе</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1448"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1452"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1449"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1453"/>
         <source>Down</source>
         <translation>Доле</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1449"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1450"/>
         <source>Direction to search</source>
         <translation>Смер за претрагу</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1451"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1452"/>
         <source>Search for the previous match from your current position.</source>
         <translation>Тражи прво подударање испред ваше тренутне позиције.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1452"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1453"/>
         <source>Search for the next match from your current position.</source>
         <translation>Тражи прво подударање испод ваше тренутне позиције.</translation>
     </message>
@@ -2010,12 +2318,12 @@ other end to continue searching.</source>
 <context>
     <name>FindReplaceQLineEdit</name>
     <message>
-        <location filename="../../Misc/FindReplaceQLineEdit.cpp" line="58"/>
+        <location filename="../../Misc/FindReplaceQLineEdit.cpp" line="60"/>
         <source>Tokenise Selection</source>
         <translation>Токенизуј избор.</translation>
     </message>
     <message>
-        <location filename="../../Misc/FindReplaceQLineEdit.cpp" line="71"/>
+        <location filename="../../Misc/FindReplaceQLineEdit.cpp" line="73"/>
         <source>Save Search</source>
         <translation>Сачувај претрагу</translation>
     </message>
@@ -2023,9 +2331,17 @@ other end to continue searching.</source>
 <context>
     <name>FlowTab</name>
     <message>
-        <location filename="../../Tabs/FlowTab.cpp" line="1161"/>
+        <location filename="../../Tabs/FlowTab.cpp" line="853"/>
         <source>Print %1</source>
         <translation>Штампај %1</translation>
+    </message>
+</context>
+<context>
+    <name>FontResource</name>
+    <message>
+        <location filename="../../ResourceObjects/FontResource.cpp" line="74"/>
+        <source>No reliable font data</source>
+        <translation>Нема поузданих података о фонту</translation>
     </message>
 </context>
 <context>
@@ -2036,191 +2352,250 @@ other end to continue searching.</source>
         <translation>Општа подешавања</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="20"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="30"/>
+        <source>Basics</source>
+        <translation>Основе</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="42"/>
         <source>Choose which version of Epub to use
 when creating new or empty Epubs in Sigil.</source>
         <translation>Изаберите која Epub верзија ће да се користи
 када се креира нов или празан Epub у Сигилу.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="24"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="46"/>
         <source>Create New or Empty Epubs as:</source>
         <translation>Креирај нове или празне Epube као:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="30"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="55"/>
         <source>Epub Version 2.</source>
         <translation>Epub Верзија 2.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="33"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="58"/>
         <source>Version 2</source>
         <translation>Верзија 2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="43"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="68"/>
         <source>Epub Version 3.</source>
         <translation>Epub Верзија 3.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="46"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="71"/>
         <source>Version 3</source>
         <translation>Верзија 3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="59"/>
-        <source>Choose when your HTML code is automatically 
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="103"/>
+        <source>Choose when your not well formed HTML code is automatically 
 mended.</source>
-        <translation>Изаберите када се ваш HTML код аутоматски
+        <translation>Изаберите када се ваш лоше формиран HTML код аутоматски 
 поправља.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="63"/>
-        <source>Mend XHTML Source Code On:</source>
-        <translation>Поправи XHTML код приликом:</translation>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="107"/>
+        <source>Mend Not Well Formed HTML Source Code On:</source>
+        <translation>Поправи лоше формирани HTML изворни код при:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="69"/>
-        <source>Mend when opening an Epub or HTML file, 
-and when switching from Book View to Code View.</source>
-        <translation>Поправи приликом отварања Epub или HTML датотеке,
-и када се прелази између Приказа књиге и Приказа кода. </translation>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="116"/>
+        <source>Mend Not Well Formed HTML when opening an Epub or HTML file.</source>
+        <translation>Поправи лоше формиран HTML приликом отварања Epub или HTML датотеке. </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="73"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="119"/>
         <source>Open</source>
         <translation>Отварања</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="80"/>
-        <source>Mend when saving an Epub.</source>
-        <translation>Поправи приликом чувања Epuba.</translation>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="126"/>
+        <source>Mend Not Well Formed HTML when saving an Epub.</source>
+        <translation>Поправи лоше формирани HTML приликом чувања Epuba.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="83"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="129"/>
         <source>Save</source>
         <translation>Чувања</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="93"/>
-        <source>Determine if Epubs are allowed to access non-multimedia remote resources.</source>
-        <translation>Одредите да ли је Epub-има дозвољено да приступају не-мултимедијалним удаљеним ресурсима.</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="96"/>
-        <source> Control Access by Epubs to non-multimedia remote resources.</source>
-        <translation>Контрола приступа Epub-има не-мултимедијалним удаљеним ресурсима.</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="105"/>
-        <source>Check to allow Epubs to access non-multimedia remote resources.</source>
-        <translation>Штиклирајте како бисте Epub-има дозволили приступ не-мултимедијалним удаљеним ресурсима.</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="108"/>
-        <source>Epubs may access all remote resources types.</source>
-        <translation>Epub-и могу да приступе свим типовима удаљених ресурса.</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="127"/>
-        <source>What CSS level to specify for W3C stylesheet validation tool (EPUB2)</source>
-        <translation>Који CSS ниво да се наведе W3C алату за валидацију описа стилова (EPUB2)</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="130"/>
-        <source>EPUB2 W3C Stylesheet Validation Level:</source>
-        <translation>Ниво EPUB2 W3C валидације описа стилова:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="139"/>
-        <source>W3C stylesheet validator will use CSS level 2 for EPUB2</source>
-        <translation>W3C валидатор описа стилова ће да користи CSS ниво 2 за EPUB2</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="142"/>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="199"/>
-        <source>CSS Level 2</source>
-        <translation>CSS ниво 2</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="149"/>
-        <source>W3C stylesheet validator will use CSS level 2.1 for EPUB2</source>
-        <translation>W3C валидатор описа стилова ће да користи CSS ниво 2.1 за EPUB2</translation>
-    </message>
-    <message>
         <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="152"/>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="209"/>
-        <source>CSS Level 2.1</source>
-        <translation>CSS ниво 2.1</translation>
+        <source>Number of clipboard history items to save (0 disables):</source>
+        <translation>Број старих ставки из привремене оставе који се чувају (0 онемогућава чување):</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="162"/>
-        <source>W3C stylesheet validator will use CSS level 3 for EPUB2</source>
-        <translation>W3C валидатор описа стилова ће да користи CSS ниво 3 за EPUB2</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="165"/>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="222"/>
-        <source>CSS Level 3</source>
-        <translation>CSS ниво 3</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="184"/>
-        <source>What CSS Level to specify for W3C stylesheet validation tool (EPUB3)</source>
-        <translation>Који CSS ниво да се наведе W3C алату за валидацију описа стилова (EPUB3)</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="187"/>
-        <source>EPUB3 W3C Stylesheet Validation Level:</source>
-        <translation>Ниво EPUB3 W3C валидације описа стилова:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="196"/>
-        <source>W3C stylesheet validator will use CSS level 2 for EPUB3</source>
-        <translation>W3C валидатор описа стилова ће да користи CSS ниво 2 за EPUB3</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="206"/>
-        <source>W3C stylesheet validator will use CSS level 2.1 for EPUB3</source>
-        <translation>W3C валидатор описа стилова ће да користи CSS ниво 2.1 за EPUB3</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="219"/>
-        <source>W3C stylesheet validator will use CSS level 3 for EPUB3</source>
-        <translation>W3C валидатор описа стилова ће да користи CSS ниво 3 за EPUB3</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="235"/>
-        <source>Number of clipboard history items to save between sessions (0 disables):</source>
-        <translation>Број старих ставки из привремене оставе који се чувају између сесија (0 онемогућава чување):</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="247"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="167"/>
         <source>Use to limit (or disable) clipboard history saving between sessions</source>
         <translation>Користите да ограничите (или потпуно онемогућите) чување старих ставки привремене оставе између сесија</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="279"/>
-        <source>Set Folder where temporary files should be created</source>
-        <translation>Подесите фасциклу у којој ће бити креиране привремене датотеке</translation>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="186"/>
+        <source>Set your preferred external xhtml editor:</source>
+        <translation>Поставите свој омиљени спољни xhtml едитор:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="290"/>
-        <source>Auto</source>
-        <translation>Аутоматски</translation>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="203"/>
+        <source>Clear</source>
+        <translation>Ништа</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="297"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="210"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="524"/>
         <source>Browse</source>
         <translation>Пронађи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="132"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="236"/>
+        <source>Security</source>
+        <translation>Безбедност</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="242"/>
+        <source>Determine if Epubs are allowed to access non-multimedia remote resources.</source>
+        <translation>Одредите да ли је Epub-има дозвољено да приступају не-мултимедијалним удаљеним ресурсима.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="245"/>
+        <source> Control Access by Epubs to non-multimedia remote resources:</source>
+        <translation>Контрола приступа Epub-има не-мултимедијалним удаљеним ресурсима:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="260"/>
+        <source>Check to allow Epubs to access non-multimedia remote resources.</source>
+        <translation>Штиклирајте како бисте Epub-има дозволили приступ не-мултимедијалним удаљеним ресурсима.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="263"/>
+        <source>Epubs may access all remote resources types.</source>
+        <translation>Epub-и могу да приступе свим типовима удаљених ресурса.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="276"/>
+        <source>Determine if javascript is allowed to be used by Epubs</source>
+        <translation>Одредите да ли је дозвољена употреба јаваскрипта у Epub документима</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="279"/>
+        <source> Control Use of Javascript by Epubs.</source>
+        <translation>Контролиши употребу Јаваскрипта у Epub</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="294"/>
+        <source>Check to allow Epubs to use javascript.</source>
+        <translation>Штиклирајте да дозволите Epub документима коришћење јаваскрипта</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="297"/>
+        <source>Epubs may use javascript.</source>
+        <translation>Epub документи могу да користе јаваскрипт.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="324"/>
+        <source>Validation</source>
+        <translation>Потврђивање</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="336"/>
+        <source>What CSS level to specify for W3C stylesheet validation tool (EPUB2)</source>
+        <translation>Који CSS ниво да се наведе W3C алату за валидацију описа стилова (EPUB2)</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="339"/>
+        <source>EPUB2 W3C Stylesheet Validation Level:</source>
+        <translation>Ниво EPUB2 W3C валидације описа стилова:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="348"/>
+        <source>W3C stylesheet validator will use CSS level 2 for EPUB2</source>
+        <translation>W3C валидатор описа стилова ће да користи CSS ниво 2 за EPUB2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="351"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="421"/>
+        <source>CSS Level 2</source>
+        <translation>CSS ниво 2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="358"/>
+        <source>W3C stylesheet validator will use CSS level 2.1 for EPUB2</source>
+        <translation>W3C валидатор описа стилова ће да користи CSS ниво 2.1 за EPUB2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="361"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="431"/>
+        <source>CSS Level 2.1</source>
+        <translation>CSS ниво 2.1</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="371"/>
+        <source>W3C stylesheet validator will use CSS level 3 for EPUB2</source>
+        <translation>W3C валидатор описа стилова ће да користи CSS ниво 3 за EPUB2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="374"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="444"/>
+        <source>CSS Level 3</source>
+        <translation>CSS ниво 3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="406"/>
+        <source>What CSS Level to specify for W3C stylesheet validation tool (EPUB3)</source>
+        <translation>Који CSS ниво да се наведе W3C алату за валидацију описа стилова (EPUB3)</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="409"/>
+        <source>EPUB3 W3C Stylesheet Validation Level:</source>
+        <translation>Ниво EPUB3 W3C валидације описа стилова:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="418"/>
+        <source>W3C stylesheet validator will use CSS level 2 for EPUB3</source>
+        <translation>W3C валидатор описа стилова ће да користи CSS ниво 2 за EPUB3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="428"/>
+        <source>W3C stylesheet validator will use CSS level 2.1 for EPUB3</source>
+        <translation>W3C валидатор описа стилова ће да користи CSS ниво 2.1 за EPUB3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="441"/>
+        <source>W3C stylesheet validator will use CSS level 3 for EPUB3</source>
+        <translation>W3C валидатор описа стилова ће да користи CSS ниво 3 за EPUB3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="484"/>
+        <source>Advanced</source>
+        <translation>Напредно</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="490"/>
+        <source>Unless you know exactly what you&apos;re doing, there&apos;s very little reason to ever change this setting. Use extreme caution!</source>
+        <translation>Осим у случају да тачно знате шта радите, постоји веома мало разлога да било када измените ово подешавање. Будите крајње пажљиви!</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="500"/>
+        <source>Set folder where temporary files should be created:</source>
+        <translation>Подесите фасциклу у којој ће бити креиране привремене датотеке:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="517"/>
+        <source>Auto</source>
+        <translation>Аутоматски</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="197"/>
+        <source>Incorrect Path for External Xhtml Editor selected</source>
+        <translation>Изабрана је неисправна путања за спољни xhtml едитор</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="217"/>
         <source>Select Folder for Temporary Files</source>
         <translation>Изаберите фасциклу за привремене датотеке</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="147"/>
+        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="234"/>
         <source>Incorrect Folder for Temporary Files selected</source>
         <translation>Изабрана је неисправна фасцикла за привремене датотеке</translation>
     </message>
@@ -2228,172 +2603,362 @@ and when switching from Book View to Code View.</source>
 <context>
     <name>GuideItems</name>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="110"/>
+        <location filename="../../Misc/GuideItems.cpp" line="154"/>
         <source>Acknowledgements</source>
         <translation>Признања</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="110"/>
+        <location filename="../../Misc/GuideItems.cpp" line="154"/>
         <source>A passage containing acknowledgments to entities involved in the realization of the work.</source>
         <translation>Пасаж који садржи признања ентитетима укљученим у реализацију дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="111"/>
+        <location filename="../../Misc/GuideItems.cpp" line="155"/>
+        <source>Afterword [other.]</source>
+        <translation>Поговор [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="155"/>
+        <source>A closing statement from the author or a person of importance to the story, typically providing insight into how the story came to be written, its significance or related events that have transpired since its timeline.</source>
+        <translation>Завршна изјава аутора или особе од важности за причу, која типично даје увид у то како је прича написана, њену важност, или повезане догађаје који су се догодили од када је почео њен временски ток.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="156"/>
+        <source>Appendix [other.]</source>
+        <translation>Додатак [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="156"/>
+        <source>Supplemental information.</source>
+        <translation>Додатне информације.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="157"/>
+        <source>Back Matter [other.]</source>
+        <translation>Позадинска материја [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="157"/>
+        <source>Ancillary material occurring after the main content of a publication, such as indices, appendices, etc.</source>
+        <translation>Допунски материјал који се јавља иза главног садржаја публикације, као што су индекси, додаци, итд.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="158"/>
         <source>Bibliography</source>
         <translation>Библиографија</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="111"/>
+        <location filename="../../Misc/GuideItems.cpp" line="158"/>
         <source>A list of works cited.</source>
         <translation>Листа цитираних дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="112"/>
+        <location filename="../../Misc/GuideItems.cpp" line="159"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="112"/>
+        <location filename="../../Misc/GuideItems.cpp" line="159"/>
         <source>The start of the main text content of a publication.</source>
         <translation>Почетак главног текста садржаја публикације</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="113"/>
+        <location filename="../../Misc/GuideItems.cpp" line="160"/>
         <source>Colophon</source>
         <translation>Колофон</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="113"/>
+        <location filename="../../Misc/GuideItems.cpp" line="160"/>
         <source>A brief description usually located at the end of a publication, describing production notes relevant to the edition.</source>
         <translation>Кратак опис који се обично налази на крају публикацје, описује напомене o изради које се тичу издања.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="114"/>
+        <location filename="../../Misc/GuideItems.cpp" line="161"/>
+        <source>Conclusion [other.]</source>
+        <translation>Закључак [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="161"/>
+        <source>An ending section that typically wraps up the work.</source>
+        <translation>Завршни одељак који типично завршава дело.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="162"/>
+        <source>Contributors [other.]</source>
+        <translation>Сарадници [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="162"/>
+        <source>A list of contributors to the work.</source>
+        <translation>Листа сарадника који су допринели делу.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="163"/>
         <source>Copyright Page</source>
         <translation>Страна о ауторским правима</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="114"/>
+        <location filename="../../Misc/GuideItems.cpp" line="163"/>
         <source>The copyright page of the work.</source>
         <translation>Страна о ауторским правима дела </translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="115"/>
+        <location filename="../../Misc/GuideItems.cpp" line="164"/>
         <source>Cover</source>
         <translation>Корице</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="115"/>
+        <location filename="../../Misc/GuideItems.cpp" line="164"/>
         <source>The publications cover(s), jacket information, etc.</source>
         <translation>Корица(е) публикације, информације на омоту, итд. </translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="116"/>
+        <location filename="../../Misc/GuideItems.cpp" line="165"/>
         <source>Dedication</source>
         <translation>Посвета</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="116"/>
+        <location filename="../../Misc/GuideItems.cpp" line="165"/>
         <source>An inscription addressed to one or several particular person(s).</source>
         <translation>Натпис упућен једној или више одређених особа</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="117"/>
+        <location filename="../../Misc/GuideItems.cpp" line="166"/>
+        <source>Epilogue [other.]</source>
+        <translation>Епилог [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="166"/>
+        <source>A concluding section that is typically written from a later point in time than the main story, although still part of the narrative.</source>
+        <translation>Завршни одељак који је типично писан касније него главна прича, иако је и даље део нарације.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="167"/>
         <source>Epigraph</source>
         <translation>Епиграф</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="117"/>
+        <location filename="../../Misc/GuideItems.cpp" line="167"/>
         <source>A quotation that is pertinent but not integral to the text.</source>
         <translation>Навод који се тиче текста, али није његов интегрални део.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="118"/>
+        <location filename="../../Misc/GuideItems.cpp" line="168"/>
+        <source>Errata [other.]</source>
+        <translation>Исправке [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="168"/>
+        <source>Publication errata, in printed works typically a loose sheet inserted by hand; sometimes a bound page that contains corrections for mistakes in the work.</source>
+        <translation>Штампарске грешке у публикацији. У штампаном делу, најчешће неувезан лист; понекад и увезана страна која садржи исправке штампарских грешака у делу.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="169"/>
+        <source>Footnotes [other.]</source>
+        <translation>Фусноте [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="169"/>
+        <source>A collection of notes appearing at the bottom of a page.</source>
+        <translation>Колекција белешки која се јавља на дну странице.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="170"/>
         <source>Foreword</source>
         <translation>Уводна реч</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="118"/>
+        <location filename="../../Misc/GuideItems.cpp" line="170"/>
         <source>An introductory section that precedes the work, typically not written by the work&apos;s author.</source>
         <translation>Уводни одељак који претходи делу, обично га није написао сам аутор дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="119"/>
+        <location filename="../../Misc/GuideItems.cpp" line="171"/>
+        <source>Front Matter [other.]</source>
+        <translation>Уводна материја [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="171"/>
+        <source>Preliminary material to the main content of a publication, such as tables of contents, dedications, etc.</source>
+        <translation>Материјал који претходи главном садржају публикације, као што су садржај, посвете итд.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="172"/>
         <source>Glossary</source>
         <translation>Речник</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="119"/>
+        <location filename="../../Misc/GuideItems.cpp" line="172"/>
         <source>An alphabetical list of terms in a particular domain of knowledge, with the definitions for those terms.</source>
         <translation>Азбучна листа израза у одређеном домену знања, са дефиницијама тих израза.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="120"/>
+        <location filename="../../Misc/GuideItems.cpp" line="173"/>
+        <source>Half Title Page [other.]</source>
+        <translation>Полунасловна страна [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="173"/>
+        <source>The half title page of the work which carries just the title itself.</source>
+        <translation>Полунасловна страна дела која садржи једино сам наслов.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="174"/>
+        <source>Imprimatur [other.]</source>
+        <translation>Имприматур [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="174"/>
+        <source>A formal statement authorizing the publication of the work.</source>
+        <translation>Формална изјава која ауторизује издање дела.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="175"/>
+        <source>Imprint [other.]</source>
+        <translation>Импринт [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="175"/>
+        <source>Information relating to the publication or distribution of the work.</source>
+        <translation>Информације које се тичу издавања или дистрибуције дела.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="176"/>
         <source>Index</source>
         <translation>Индекс</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="120"/>
+        <location filename="../../Misc/GuideItems.cpp" line="176"/>
         <source>A detailed list, usually arranged alphabetically, of the specific information in a publication.</source>
         <translation>Детаљна листа специфичних информација у публикацији, обично поређана по азбучном реду.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="121"/>
+        <location filename="../../Misc/GuideItems.cpp" line="177"/>
+        <source>Introduction [other.]</source>
+        <translation>Увод [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="177"/>
+        <source>A section in the beginning of the work, typically introducing the reader to the scope or nature of the work&apos;s content.</source>
+        <translation>Одељак на почетку дела који најчешће уводи читаоца у тему или природу садржаја дела.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="178"/>
         <source>List of Illustrations</source>
         <translation>Листа илустрација</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="121"/>
+        <location filename="../../Misc/GuideItems.cpp" line="178"/>
         <source>A listing of illustrations included in the work.</source>
         <translation>Списак илустрација укључених у дело.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="122"/>
+        <location filename="../../Misc/GuideItems.cpp" line="179"/>
+        <source>List of Audio Clips [other.]</source>
+        <translation>Листа аудио клипова [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="179"/>
+        <source>A listing of audio clips included in the work.</source>
+        <translation>Списак аудио клипова укључених у дело.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="180"/>
         <source>List of Tables</source>
         <translation>Листа табела</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="122"/>
+        <location filename="../../Misc/GuideItems.cpp" line="180"/>
         <source>A listing of tables included in the work.</source>
         <translation>Списак табела укључених у дело</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="123"/>
+        <location filename="../../Misc/GuideItems.cpp" line="181"/>
+        <source>List of Video Clips [other.]</source>
+        <translation>Листа видео клипова [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="181"/>
+        <source>A listing of video clips included in the work.</source>
+        <translation>Списак видеклипова укључених у дело.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="182"/>
         <source>Notes</source>
         <translation>Белешке</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="123"/>
+        <location filename="../../Misc/GuideItems.cpp" line="182"/>
         <source>A collection of notes. It can be used to identify footnotes, rear notes, marginal notes, inline notes, and similar when legacy naming conventions are not desired. Status: Deprecated - Replaced by: &apos;footnotes&apos;, &apos;rearnotes&apos;</source>
         <translation>Скуп белешки. Може да се користи да идентификује фусноте, белешке на крају, белешке на маргинама, белешке у самом тексту и слично када није пожељно да се користе застареле конвенције именовања. Статус: Застарело - Замењено са: &quot;фусноте&quot;, &quot;белешке на крају&quot;</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="124"/>
+        <location filename="../../Misc/GuideItems.cpp" line="183"/>
+        <source>Other Credits [other.]</source>
+        <translation>Остале заслуге [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="183"/>
+        <source>Acknowledgments of previously published parts of the work, illustration credits, and permission to quote from copyrighted material.</source>
+        <translation>Признања претходно објављених делова рада, заслуге за илустрације, и дозволе за навођење материјала заштићеног аутосрким правима.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="184"/>
+        <source>Preamble [other.]</source>
+        <translation>Преамбула [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="184"/>
+        <source>A section in the beginning of the work, typically containing introductory and/or explanatory prose regarding the scope or nature of the work&apos;s content</source>
+        <translation>Одељак на почетку дела који најчешће садржи уводну и/или објашњујућу прозу која се тиче теме или природе садржаја дела.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="185"/>
         <source>Preface</source>
         <translation>Предговор</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="124"/>
+        <location filename="../../Misc/GuideItems.cpp" line="185"/>
         <source>An introductory section that precedes the work, typically written by the work&apos;s author.</source>
         <translation>Уводни одељак који претходи делу, обично га је написао сам аутор дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="125"/>
+        <location filename="../../Misc/GuideItems.cpp" line="186"/>
+        <source>Prologue [other.]</source>
+        <translation>Пролог [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="186"/>
+        <source>An introductory section that sets the background to a story, typically part of the narrative.</source>
+        <translation>Уводни одељак који даје позадину приче, обично је део наратива.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="187"/>
+        <source>Rear Notes [other.]</source>
+        <translation>Белешке на крају [остало.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="187"/>
+        <source>A collection of notes appearing at the rear (backmatter) of the work, or at the end of a section.</source>
+        <translation>Колекција белешки која се јавља на крају дела (у позадинској материји), или на крају одељка.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="188"/>
         <source>Title Page</source>
         <translation>Насловна страна</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="125"/>
+        <location filename="../../Misc/GuideItems.cpp" line="188"/>
         <source>A page at the beginning of a book giving its title, authors, publisher and other publication information.</source>
         <translation>Страна на почетку књиге која на којој се наводи њен наслов, аутори, издавач и остале информације о издању. </translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="126"/>
+        <location filename="../../Misc/GuideItems.cpp" line="189"/>
         <source>Table of Contents</source>
         <translation>Садржај</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="126"/>
+        <location filename="../../Misc/GuideItems.cpp" line="189"/>
         <source>A table of contents which is a list of the headings or parts of the book or document, organized in the order in which they appear. Typically appearing in the work&apos;s frontmatter, or at the beginning of a section.</source>
         <translation>Садржај, тј. листа наслова или делова књиге или документа, организована у редоследу у којем се појављују. Типично се налази испред главног дела рада, или на почетку одељка.</translation>
     </message>
@@ -2416,82 +2981,82 @@ and when switching from Book View to Code View.</source>
         <translation>Филтер:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="69"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="75"/>
         <source>Name</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="70"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="76"/>
         <source>File Size (KB)</source>
         <translation>Величина датотеке (KB)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="71"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="77"/>
         <source>All Words</source>
         <translation>Све речи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="72"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="78"/>
         <source>Misspelled Words</source>
         <translation>Погрешно написане речи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="73"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="79"/>
         <source>Images</source>
         <translation>Слике</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="74"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="80"/>
         <source>Video</source>
         <translation>Видео</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="75"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="81"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="76"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="82"/>
         <source>Stylesheets</source>
         <translation>Описи стилова</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="77"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="83"/>
         <source>Well Formed</source>
         <translation>Добро формиран</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="166"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="173"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="166"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="173"/>
         <source>No</source>
         <translation>Не</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="185"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="192"/>
         <source>%n file(s)</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>%n датотека</numerusform><numerusform>%n датотека</numerusform><numerusform>%n датотека</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="326"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="338"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Сачувај извештај као датотеку раздвојену зарезима</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="339"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="352"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="339"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="352"/>
         <source>Cannot save report file.</source>
         <translation>Не могу да сачувам датотеку извештаја.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="363"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="377"/>
         <source>Delete From Book</source>
         <translation>Уклони из књиге</translation>
     </message>
@@ -2625,72 +3190,72 @@ You can then check or uncheck individual headings in the list above.</source>
         <translation>Величина сличица:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="83"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="88"/>
         <source>Name</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="84"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="89"/>
         <source>File Size (KB)</source>
         <translation>Величина датотеке (KB)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="85"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="90"/>
         <source>Times Used</source>
         <translation>Употребљено пута</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="86"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="91"/>
         <source>Width</source>
         <translation>Ширина</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="87"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="92"/>
         <source>Height</source>
         <translation>Висина</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="88"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="93"/>
         <source>Pixels</source>
         <translation>Пиксели</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="89"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="94"/>
         <source>Color</source>
         <translation>Боја</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="92"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="97"/>
         <source>Image</source>
         <translation>Слика</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="179"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="184"/>
         <source>%n file(s)</source>
-        <translation type="unfinished"><numerusform></numerusform><numerusform></numerusform><numerusform></numerusform></translation>
+        <translation><numerusform>%n датотека</numerusform><numerusform>%n датотека</numerusform><numerusform>%n датотека</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="183"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="188"/>
         <source>KB</source>
         <translation>KB</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="327"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="336"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Сачувај извештај као датотеку раздвојену зарезима</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="340"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="350"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="340"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="350"/>
         <source>Cannot save report file.</source>
         <translation>Не могу да сачувам датотеку извештаја.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="412"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="425"/>
         <source>Delete From Book</source>
         <translation>Уклони из књиге</translation>
     </message>
@@ -2698,49 +3263,49 @@ You can then check or uncheck individual headings in the list above.</source>
 <context>
     <name>ImageTab</name>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="155"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="186"/>
         <source>shades</source>
         <translation>нијансе</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="155"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="186"/>
         <source>colors</source>
         <translation>боје</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="156"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="187"/>
         <source>Grayscale</source>
         <translation>Сиви тонови</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="156"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="187"/>
         <source>Color</source>
         <translation>Боја</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="246"/>
-        <location filename="../../Tabs/ImageTab.cpp" line="271"/>
-        <location filename="../../Tabs/ImageTab.cpp" line="274"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="307"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="365"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="368"/>
         <source>Open With</source>
         <translation>Отвори помоћу</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="253"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="343"/>
         <source>Other Application</source>
         <translation>Друга апликација</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="272"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="366"/>
         <source>Save As</source>
         <translation>Сачувај као</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="273"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="367"/>
         <source>Copy Image</source>
         <translation>Копирај слику</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="307"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="415"/>
         <source>Print %1</source>
         <translation>Штампај %1</translation>
     </message>
@@ -2748,30 +3313,40 @@ You can then check or uncheck individual headings in the list above.</source>
 <context>
     <name>ImportEPUB</name>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="165"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="148"/>
+        <source>Files exist in epub that are not listed in the manifest, they will be ignored</source>
+        <translation>epub садржи фајлове који нису наведени у манифесту, биће игнорисани </translation>
+    </message>
+    <message>
+        <location filename="../../Importers/ImportEPUB.cpp" line="186"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="166"/>
-        <source>This EPUB has HTML files that are not well formed. Sigil can attempt to automatically fix these files, although this can result in data loss.
+        <location filename="../../Importers/ImportEPUB.cpp" line="187"/>
+        <source>This EPUB has HTML files that are not well formed. Sigil can attempt to automatically fix these files, although this can result in minor data loss.
 
 Do you want to automatically fix the files?</source>
-        <translation>Ovaj EPUB има HTML датотеке који нису добро обликоване. Сигил може да покуша да аутоматски поправи ове датотеке, мада то може да доведе до губитка података.
+        <translation>Овај EPUB има HTML датотеке који нису добро обликоване. Сигил може да покуша да аутоматски поправи ове датотеке, мада то може да доведе до незнатног губитка података.
 
 Да ли желите да аутоматски поправим ове датотеке?</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="500"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="557"/>
         <source>Epub has missing or improperly specified OPF.</source>
         <translation>Epubu недостаје OPF или је неправилно наведен.</translation>
+    </message>
+    <message>
+        <location filename="../../Importers/ImportEPUB.cpp" line="597"/>
+        <source>This epub has multiple renditions (multiple OPF files). Editing this epub in Sigil will produce a normal single rendition epub using only the main (first) OPF file found.</source>
+        <translation>Овај epub има више приказа (више OPF фајлова). Уређивање овог epub у Сигилу ће да створи обичан epub са једним приказом користећи само главни (први) OPF фајл који се пронађе.</translation>
     </message>
 </context>
 <context>
     <name>IndexEditor</name>
     <message>
         <location filename="../../Form_Files/IndexEditor.ui" line="14"/>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="287"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="288"/>
         <source>Index Editor</source>
         <translation>Едитор индекса</translation>
     </message>
@@ -2787,157 +3362,157 @@ Do you want to automatically fix the files?</source>
     </message>
     <message>
         <location filename="../../Form_Files/IndexEditor.ui" line="55"/>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="421"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="435"/>
         <source>Add Entry</source>
         <translation>Додај ставку</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="66"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="67"/>
         <source>Right click on an entry to see a context menu of actions.</source>
         <translation>Урадите десни клик на ставку да бисте видели контекстни мени са акцијама.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="67"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="68"/>
         <source>You can also right click in your document to add selected text to the Index.</source>
         <translation>Изабрани текст у вашем документу такође можете десним кликом да додате у индекс</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="69"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="70"/>
         <source>Text to Include</source>
         <translation>Текст за укључење</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="69"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="70"/>
         <source>The pattern to match in your document, e.g. &quot;Gutenberg&quot;. This is a regex pattern so &quot;(?i)Gutenberg&quot; ignores case when matching.</source>
         <translation>Шаблон који треба да има поклапања у вашем документу, нпр. &quot;Гутенберг&quot;. Ово је шаблон регуларног израза тако да &quot;(?I)Гутенберг&quot; не узима у обзир мала/велика слова приликом подударања.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="70"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="71"/>
         <source>Index Entries</source>
         <translation>Ставке индекса</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="70"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="71"/>
         <source>The entry to create in the Index. Leave blank to use text as is, or enter text to display.  Create multi-level entries by using &apos;/&apos; after a level name, e.g. &quot;Books/Fantasy/Alice in Wonderland&quot; or &quot;Books/Fantasy/&quot;.</source>
         <translation>Ставка која треба да се креира у Индексу. Оставите празно како би се користио текст онакав какав је, или унесите текст који желите да буде приказан. Користите &apos;/&apos; након имена нивоа да бисте креирали ставке са вишеструким нивоима. Нпр. &quot;Књиге/Фикција/Алиса у Земљи чуда&quot; или &quot;Књиге/Фикција/&quot;.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="74"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="75"/>
         <source>Save</source>
         <translation>Сачувај</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="74"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="75"/>
         <source>Save your changes.</source>
         <translation>Сачувајте ваше промене.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="74"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="75"/>
         <source>If any other instances of Sigil are running they will be automatically updated with your changes.</source>
         <translation>Ако је покренута још нека инстанца Сигила, ваше промене ће аутоматски бити примењене и у њима. </translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="84"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="85"/>
         <source>Cannot save entries.</source>
         <translation>Не могу да сачувам ставке.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="126"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="127"/>
         <source>Index entries loaded from file.</source>
         <translation>Ставке индекса су учитане из датотеке.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/IndexEditor.cpp" line="287"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="288"/>
         <source>Entries added: %n</source>
         <translation><numerusform>Додата је %n ставка</numerusform><numerusform>Додато је %n ставки</numerusform><numerusform>Додато је %n ставки</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="293"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="294"/>
         <source>Index files: *.ini *.txt (*.ini *.txt)</source>
         <translation>Индекс датотеке: *.ini *.txt (*.ini *.txt)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="295"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="301"/>
         <source>Load Entries From File</source>
         <translation>Учитај ставке из датотеке</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="311"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="319"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="311"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="319"/>
         <source>Are you sure you want to reload all entries?  This will overwrite any unsaved changes.</source>
         <translation>Да ли сте сигурни да желите поново да учитате све ставке? Ово ће преписати све несачуване промене.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="329"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="342"/>
         <source>Save Entries to File</source>
         <translation>Сачувај ставке у датотеку</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="422"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="436"/>
         <source>Edit</source>
         <translation>Уреди</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="423"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="437"/>
         <source>Cut</source>
         <translation>Исеци</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="424"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="438"/>
         <source>Copy</source>
         <translation>Копирај</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="425"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="439"/>
         <source>Paste</source>
         <translation>Налепи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="426"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="440"/>
         <source>Delete</source>
         <translation>Уклони</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="427"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="441"/>
         <source>Autofill</source>
         <translation>Ауто попуна</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="428"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="442"/>
         <source>Open</source>
         <translation>Отвори</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="429"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="443"/>
         <source>Reload</source>
         <translation>Поново учитај</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="430"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="444"/>
         <source>Save As</source>
         <translation>Сачувај као</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="431"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="445"/>
         <source>Select All</source>
         <translation>Изабери све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="506"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="520"/>
         <source>Index entries saved.</source>
         <translation>Ставке индекса су сачуване.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="535"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="549"/>
         <source>Sigil: Index Editor</source>
         <translation>Сигил: Едитор индекса</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="536"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="550"/>
         <source>The Index entries may have been modified.
 Do you want to save your changes?</source>
         <translation>Могуће је да су ставке индекса промењене.
@@ -2947,19 +3522,32 @@ Do you want to save your changes?</source>
 <context>
     <name>IndexEditorModel</name>
     <message>
-        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="60"/>
+        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="61"/>
         <source>Text to Include</source>
         <translation>Текст за укључење</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="61"/>
+        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="62"/>
         <source>Index Entries</source>
         <translation>Ставке индекса</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="342"/>
+        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="347"/>
         <source>Unable to create file %1</source>
         <translation>Датотека %1 не може да се креира</translation>
+    </message>
+</context>
+<context>
+    <name>Inspector</name>
+    <message>
+        <location filename="../../Dialogs/Inspector.cpp" line="54"/>
+        <source>Inspect Page or Element</source>
+        <translation>Прегледајте страницу или елемент</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/Inspector.cpp" line="153"/>
+        <source>The Inspector functionality is not supported before Qt 5.11</source>
+        <translation>Функционалност Инспектора није подржана пре Qt 5.11</translation>
     </message>
 </context>
 <context>
@@ -3036,7 +3624,7 @@ Do you want to save your changes?</source>
         <translation>Уклони</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/KeyboardShortcutsWidget.cpp" line="343"/>
+        <location filename="../../Dialogs/PreferenceWidgets/KeyboardShortcutsWidget.cpp" line="365"/>
         <source>Conflicts with: &lt;b&gt;</source>
         <translation>Сукоб са: &lt;b&gt;</translation>
     </message>
@@ -3044,482 +3632,482 @@ Do you want to save your changes?</source>
 <context>
     <name>Landmarks</name>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="117"/>
+        <location filename="../../Misc/Landmarks.cpp" line="152"/>
         <source>Acknowledgments</source>
         <translation>Признања</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="117"/>
+        <location filename="../../Misc/Landmarks.cpp" line="152"/>
         <source>A passage containing acknowledgments to entities involved in the realization of the work.</source>
         <translation>Пасаж који садржи признања ентитетима укљученим у реализацију дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="118"/>
+        <location filename="../../Misc/Landmarks.cpp" line="153"/>
         <source>Afterword</source>
         <translation>Поговор</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="118"/>
+        <location filename="../../Misc/Landmarks.cpp" line="153"/>
         <source>A closing statement from the author or a person of importance to the story, typically providing insight into how the story came to be written, its significance or related events that have transpired since its timeline.</source>
         <translation>Завршна изјава аутора или особе од важности за причу, која типично даје увид у то како је прича написана, њену важност, или повезане догађаје који су се догодили од када је почео њен временски ток.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="119"/>
+        <location filename="../../Misc/Landmarks.cpp" line="154"/>
         <source>Annotation</source>
         <translation>Белешка</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="119"/>
+        <location filename="../../Misc/Landmarks.cpp" line="154"/>
         <source>Explanatory information about passages in the work. Status: Deprecated</source>
         <translation>Објашњујућа инфорамција о пасажима у делу. Статус: Застарело</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="120"/>
+        <location filename="../../Misc/Landmarks.cpp" line="155"/>
         <source>Appendix</source>
         <translation>Додатак</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="120"/>
+        <location filename="../../Misc/Landmarks.cpp" line="155"/>
         <source>Supplemental information.</source>
         <translation>Додатне информације.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="121"/>
+        <location filename="../../Misc/Landmarks.cpp" line="156"/>
         <source>Assessment</source>
         <translation>Процена</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="121"/>
+        <location filename="../../Misc/Landmarks.cpp" line="156"/>
         <source>A test, quiz, or other activity that helps measure a student&apos;s understanding of what is being taught.</source>
         <translation>Тест, квиз или нека друга активност која помаже да се оцени учениково разумевање онога што учи.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="122"/>
+        <location filename="../../Misc/Landmarks.cpp" line="157"/>
         <source>Back Matter</source>
         <translation>Позадинска материја</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="122"/>
+        <location filename="../../Misc/Landmarks.cpp" line="157"/>
         <source>Ancillary material occurring after the main content of a publication, such as indices, appendices, etc.</source>
         <translation>Допунски материјал који се јавља иза главног садржаја публикације, као што су индекси, додаци, итд.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="123"/>
+        <location filename="../../Misc/Landmarks.cpp" line="158"/>
         <source>Bibliography</source>
         <translation>Библиографија</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="123"/>
+        <location filename="../../Misc/Landmarks.cpp" line="158"/>
         <source>A list of works cited.</source>
         <translation>Листа цитираних дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="124"/>
+        <location filename="../../Misc/Landmarks.cpp" line="159"/>
         <source>Body Matter</source>
         <translation>Главна материја</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="124"/>
+        <location filename="../../Misc/Landmarks.cpp" line="159"/>
         <source>The main content of a publication.</source>
         <translation>Главни садржај публикације.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="125"/>
+        <location filename="../../Misc/Landmarks.cpp" line="160"/>
         <source>Chapter</source>
         <translation>Поглавље</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="125"/>
+        <location filename="../../Misc/Landmarks.cpp" line="160"/>
         <source>A major structural division of a piece of writing.</source>
         <translation>Главна структурална подела писаног дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="126"/>
+        <location filename="../../Misc/Landmarks.cpp" line="161"/>
         <source>Colophon</source>
         <translation>Колофон</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="126"/>
+        <location filename="../../Misc/Landmarks.cpp" line="161"/>
         <source>A brief description usually located at the end of a publication, describing production notes relevant to the edition.</source>
         <translation>Кратак опис који се обично налази на крају публикацје, описује напомене o изради које се тичу издања.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="127"/>
+        <location filename="../../Misc/Landmarks.cpp" line="162"/>
         <source>Conclusion</source>
         <translation>Закључак</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="127"/>
+        <location filename="../../Misc/Landmarks.cpp" line="162"/>
         <source>An ending section that typically wraps up the work.</source>
         <translation>Завршни одељак који типично завршава дело.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="128"/>
+        <location filename="../../Misc/Landmarks.cpp" line="163"/>
         <source>Contributors</source>
         <translation>Сарадници</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="128"/>
+        <location filename="../../Misc/Landmarks.cpp" line="163"/>
         <source>A list of contributors to the work.</source>
         <translation>Листа сарадника који су допринели делу.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="129"/>
+        <location filename="../../Misc/Landmarks.cpp" line="164"/>
         <source>Copyright Page</source>
         <translation>Страна о ауторским правима</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="129"/>
+        <location filename="../../Misc/Landmarks.cpp" line="164"/>
         <source>The copyright page of the work.</source>
         <translation>Страна о ауторским правима дела </translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="130"/>
+        <location filename="../../Misc/Landmarks.cpp" line="165"/>
         <source>Cover</source>
         <translation>Корице</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="130"/>
+        <location filename="../../Misc/Landmarks.cpp" line="165"/>
         <source>The publications cover(s), jacket information, etc.</source>
         <translation>Насловна(е) страна(е) публикације, информације на омоту, итд. </translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="131"/>
+        <location filename="../../Misc/Landmarks.cpp" line="166"/>
         <source>Dedication</source>
         <translation>Посвета</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="131"/>
+        <location filename="../../Misc/Landmarks.cpp" line="166"/>
         <source>An inscription addressed to one or several particular person(s).</source>
         <translation>Натпис упућен једној или више одређених особа</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="132"/>
+        <location filename="../../Misc/Landmarks.cpp" line="167"/>
         <source>Division</source>
         <translation>Параграф</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="132"/>
+        <location filename="../../Misc/Landmarks.cpp" line="167"/>
         <source>A major structural division that may also appear as a substructure of a part (esp. in legislation).</source>
         <translation>Главна структурална подела која такође може да се јави и као подструктура једног дела рада (посебно у законодавству).</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="133"/>
+        <location filename="../../Misc/Landmarks.cpp" line="168"/>
         <source>Epigraph</source>
         <translation>Епиграф</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="133"/>
+        <location filename="../../Misc/Landmarks.cpp" line="168"/>
         <source>A quotation that is pertinent but not integral to the text.</source>
         <translation>Навод који се тиче текста, али није његов интегрални део.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="134"/>
+        <location filename="../../Misc/Landmarks.cpp" line="169"/>
         <source>Epilogue</source>
         <translation>Епилог</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="134"/>
+        <location filename="../../Misc/Landmarks.cpp" line="169"/>
         <source>A concluding section that is typically written from a later point in time than the main story, although still part of the narrative.</source>
         <translation>Завршни одељак који је типично писан касније него главна прича, иако је и даље део нарације.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="135"/>
+        <location filename="../../Misc/Landmarks.cpp" line="170"/>
         <source>Errata</source>
         <translation>Ерата</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="135"/>
+        <location filename="../../Misc/Landmarks.cpp" line="170"/>
         <source>Publication errata, in printed works typically a loose sheet inserted by hand; sometimes a bound page that contains corrections for mistakes in the work.</source>
         <translation>Штампарске грешке у публикацији. У штампаном делу, најчешће неувезан лист; понекад и увезана страна која садржи исправке штампарских грешака у делу.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="136"/>
+        <location filename="../../Misc/Landmarks.cpp" line="171"/>
         <source>Footnotes</source>
         <translation>Фусноте</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="136"/>
+        <location filename="../../Misc/Landmarks.cpp" line="171"/>
         <source>A collection of notes appearing at the bottom of a page.</source>
         <translation>Колекција белешки која се јавља на дну странице.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="137"/>
+        <location filename="../../Misc/Landmarks.cpp" line="172"/>
         <source>Foreword</source>
         <translation>Предговор</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="137"/>
+        <location filename="../../Misc/Landmarks.cpp" line="172"/>
         <source>An introductory section that precedes the work, typically not written by the work&apos;s author.</source>
         <translation>Уводни одељак који претходи делу, обично га није написао сам аутор дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="138"/>
+        <location filename="../../Misc/Landmarks.cpp" line="173"/>
         <source>Front Matter</source>
         <translation>Уводна материја</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="138"/>
+        <location filename="../../Misc/Landmarks.cpp" line="173"/>
         <source>Preliminary material to the main content of a publication, such as tables of contents, dedications, etc.</source>
         <translation>Материјал који претходи главном садржају публикације, као што су садржај, посвете итд.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="139"/>
+        <location filename="../../Misc/Landmarks.cpp" line="174"/>
         <source>Glossary</source>
         <translation>Речник</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="139"/>
+        <location filename="../../Misc/Landmarks.cpp" line="174"/>
         <source>An alphabetical list of terms in a particular domain of knowledge, with the definitions for those terms.</source>
         <translation>Азбучна листа израза у одређеном домену знања, са дефиницијама тих израза.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="140"/>
+        <location filename="../../Misc/Landmarks.cpp" line="175"/>
         <source>Half Title Page</source>
         <translation>Полунасловна страна</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="140"/>
+        <location filename="../../Misc/Landmarks.cpp" line="175"/>
         <source>The half title page of the work which carries just the title itself.</source>
         <translation>Полунасловна страна дела која садржи једино сам наслов.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="141"/>
+        <location filename="../../Misc/Landmarks.cpp" line="176"/>
         <source>Imprimatur</source>
         <translation>Имприматур</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="141"/>
+        <location filename="../../Misc/Landmarks.cpp" line="176"/>
         <source>A formal statement authorizing the publication of the work.</source>
         <translation>Формална изјава која ауторизује издање дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="142"/>
+        <location filename="../../Misc/Landmarks.cpp" line="177"/>
         <source>Imprint</source>
         <translation>Импринт</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="142"/>
+        <location filename="../../Misc/Landmarks.cpp" line="177"/>
         <source>Information relating to the publication or distribution of the work.</source>
         <translation>Информације које се тичу издавања или дистрибуције дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="143"/>
+        <location filename="../../Misc/Landmarks.cpp" line="178"/>
         <source>Index</source>
         <translation>Индекс</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="143"/>
+        <location filename="../../Misc/Landmarks.cpp" line="178"/>
         <source>A detailed list, usually arranged alphabetically, of the specific information in a publication.</source>
         <translation>Детаљна листа специфичних информација у публикацији, обично поређана по азбучном реду.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="144"/>
+        <location filename="../../Misc/Landmarks.cpp" line="179"/>
         <source>Introduction</source>
         <translation>Увод</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="144"/>
+        <location filename="../../Misc/Landmarks.cpp" line="179"/>
         <source>A section in the beginning of the work, typically introducing the reader to the scope or nature of the work&apos;s content.</source>
         <translation>Одељак на почетку дела који најчешће уводи читаоца у тему или природу садржаја дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="145"/>
+        <location filename="../../Misc/Landmarks.cpp" line="180"/>
         <source>Landmarks</source>
         <translation>Оријентири</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="145"/>
+        <location filename="../../Misc/Landmarks.cpp" line="180"/>
         <source>A collection of references to well-known/recurring components within the publication</source>
         <translation>Колекција референци на општепознате/понављајуће компоненте у публикацији.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="146"/>
+        <location filename="../../Misc/Landmarks.cpp" line="181"/>
         <source>List of Audio Clips</source>
         <translation>Листа аудио клипова</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="146"/>
+        <location filename="../../Misc/Landmarks.cpp" line="181"/>
         <source>A listing of audio clips included in the work.</source>
         <translation>Списак аудио клипова укључених у дело.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="147"/>
+        <location filename="../../Misc/Landmarks.cpp" line="182"/>
         <source>List of Illustrations</source>
         <translation>Листа илустрација</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="147"/>
+        <location filename="../../Misc/Landmarks.cpp" line="182"/>
         <source>A listing of illustrations included in the work.</source>
         <translation>Списак илустрација укључених у дело.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="148"/>
+        <location filename="../../Misc/Landmarks.cpp" line="183"/>
         <source>List of Tables</source>
         <translation>Листа табела</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="148"/>
+        <location filename="../../Misc/Landmarks.cpp" line="183"/>
         <source>A listing of tables included in the work.</source>
         <translation>Списак табела укључених у дело</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="149"/>
+        <location filename="../../Misc/Landmarks.cpp" line="184"/>
         <source>List of Video Clips</source>
         <translation>Листа видео клипова</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="149"/>
+        <location filename="../../Misc/Landmarks.cpp" line="184"/>
         <source>A listing of video clips included in the work.</source>
         <translation>Списак видеклипова укључених у дело.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="150"/>
+        <location filename="../../Misc/Landmarks.cpp" line="185"/>
         <source>Notice</source>
         <translation>Објава</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="150"/>
+        <location filename="../../Misc/Landmarks.cpp" line="185"/>
         <source>Information that requires special attention, and that must not be skipped or suppressed. Examples include: alert, warning, caution, danger, important.</source>
         <translation>Информација која захтева посебну пажњу и која не сме да се прескочи или скрајне. На пример: опрез, упозорење, узбуна, опасност, важно. </translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="151"/>
+        <location filename="../../Misc/Landmarks.cpp" line="186"/>
         <source>Other Credits</source>
         <translation>Остале заслуге</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="151"/>
+        <location filename="../../Misc/Landmarks.cpp" line="186"/>
         <source>Acknowledgments of previously published parts of the work, illustration credits, and permission to quote from copyrighted material.</source>
         <translation>Признања претходно објављених делова рада, заслуге за илустрације, и дозволе за навођење материјала заштићеног аутосрким правима.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="152"/>
+        <location filename="../../Misc/Landmarks.cpp" line="187"/>
         <source>Page List</source>
         <translation>Листа страна</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="152"/>
+        <location filename="../../Misc/Landmarks.cpp" line="187"/>
         <source>A list of references to pagebreaks (start locations) from a print version of the ebook</source>
         <translation>Листа референци на преломе страна (места почетка) у штампаној верзији е-књиге.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="153"/>
+        <location filename="../../Misc/Landmarks.cpp" line="188"/>
         <source>Part</source>
         <translation>Део</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="153"/>
+        <location filename="../../Misc/Landmarks.cpp" line="188"/>
         <source>A major structural division of a piece of writing, typically encapsulating a set of related chapters.</source>
         <translation>Главна структурална подела писаног дела, која обично обухвата скуп повезаних поглавља.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="154"/>
+        <location filename="../../Misc/Landmarks.cpp" line="189"/>
         <source>Preamble</source>
         <translation>Преамбула</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="154"/>
+        <location filename="../../Misc/Landmarks.cpp" line="189"/>
         <source>A section in the beginning of the work, typically containing introductory and/or explanatory prose regarding the scope or nature of the work&apos;s content</source>
         <translation>Одељак на почетку дела који најчешће садржи уводну и/или објашњујућу прозу која се тиче теме или природе садржаја дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="155"/>
+        <location filename="../../Misc/Landmarks.cpp" line="190"/>
         <source>Preface</source>
         <translation>Предговор</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="155"/>
+        <location filename="../../Misc/Landmarks.cpp" line="190"/>
         <source>An introductory section that precedes the work, typically written by the work&apos;s author.</source>
         <translation>Уводни одељак који претходи делу, обично га је написао сам аутор дела.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="156"/>
+        <location filename="../../Misc/Landmarks.cpp" line="191"/>
         <source>Prologue</source>
         <translation>Пролог</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="156"/>
+        <location filename="../../Misc/Landmarks.cpp" line="191"/>
         <source>An introductory section that sets the background to a story, typically part of the narrative.</source>
         <translation>Уводни одељак који даје позадину приче, обично је део наратива.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="157"/>
+        <location filename="../../Misc/Landmarks.cpp" line="192"/>
         <source>Questions and Answers</source>
         <translation>Питања и одговори</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="157"/>
+        <location filename="../../Misc/Landmarks.cpp" line="192"/>
         <source>A question and answer section.</source>
         <translation>Одељак питања и одговора.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="158"/>
+        <location filename="../../Misc/Landmarks.cpp" line="193"/>
         <source>Rear Notes</source>
         <translation>Белешке на крају</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="158"/>
+        <location filename="../../Misc/Landmarks.cpp" line="193"/>
         <source>A collection of notes appearing at the rear (backmatter) of the work, or at the end of a section.</source>
         <translation>Колекција белешки која се јавља на крају дела (у позадинској материји), или на крају одељка.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="159"/>
+        <location filename="../../Misc/Landmarks.cpp" line="194"/>
         <source>Revision History</source>
         <translation>Историја ревизија</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="159"/>
+        <location filename="../../Misc/Landmarks.cpp" line="194"/>
         <source>A record of changes made to a work.</source>
         <translation>Евиденција промена које су урађене на делу.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="160"/>
+        <location filename="../../Misc/Landmarks.cpp" line="195"/>
         <source>Subchapter</source>
         <translation>Подпоглавље</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="160"/>
+        <location filename="../../Misc/Landmarks.cpp" line="195"/>
         <source>A major sub-division of a chapter.</source>
         <translation>Главна подподела поглавља.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="161"/>
+        <location filename="../../Misc/Landmarks.cpp" line="196"/>
         <source>Title Page</source>
         <translation>Насловна страна</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="161"/>
+        <location filename="../../Misc/Landmarks.cpp" line="196"/>
         <source>A page at the beginning of a book giving its title, authors, publisher and other publication information.</source>
         <translation>Страна на почетку књиге која на којој се наводи њен наслов, аутори, издавач и остале информације о издању. </translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="162"/>
+        <location filename="../../Misc/Landmarks.cpp" line="197"/>
         <source>Table of Contents</source>
         <translation>Садржај</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="162"/>
+        <location filename="../../Misc/Landmarks.cpp" line="197"/>
         <source>A table of contents which is a list of the headings or parts of the book or document, organized in the order in which they appear. Typically appearing in the work&apos;s frontmatter, or at the beginning of a section.</source>
         <translation>Садржај, тј. листа наслова или делова књиге или документа, организована у редоследу у којем се појављују. Типично се налази испред главног дела рада, или на почетку одељка.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="163"/>
+        <location filename="../../Misc/Landmarks.cpp" line="198"/>
         <source>Volume</source>
         <translation>Том</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="163"/>
+        <location filename="../../Misc/Landmarks.cpp" line="198"/>
         <source>A component of a collection.</source>
         <translation>Део колекције.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="164"/>
+        <location filename="../../Misc/Landmarks.cpp" line="199"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="164"/>
+        <location filename="../../Misc/Landmarks.cpp" line="199"/>
         <source>A warning or caution about specific material. Status: Deprecated - Replaced by &apos;notice&apos;.</source>
         <translation>Упозорење или опрез у вези специфичног материјала. Статус: Превазиђено - Заменити са ’објава’</translation>
     </message>
@@ -3944,7 +4532,7 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="160"/>
-        <source>Phillippines</source>
+        <source>Philippines</source>
         <translation>Филипини</translation>
     </message>
     <message>
@@ -6043,406 +6631,411 @@ Do you want to save your changes?</source>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="575"/>
+        <source>Paraguayan Guaraní</source>
+        <translation>парагвајски гуарани</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/Language.cpp" line="576"/>
         <source>Persian- Old (ca.600-400 B.C.)</source>
         <translation>Persian- Old (ca.600-400 B.C.)</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="576"/>
+        <location filename="../../Misc/Language.cpp" line="577"/>
         <source>Philippine languages</source>
         <translation>Филипински језици</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="577"/>
+        <location filename="../../Misc/Language.cpp" line="578"/>
         <source>Phoenician</source>
         <translation>Phoenician</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="578"/>
+        <location filename="../../Misc/Language.cpp" line="579"/>
         <source>Pohnpeian</source>
         <translation>Pohnpeian</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="579"/>
+        <location filename="../../Misc/Language.cpp" line="580"/>
         <source>Prakrit languages</source>
         <translation>Prakrit languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="580"/>
+        <location filename="../../Misc/Language.cpp" line="581"/>
         <source>Rajasthani</source>
         <translation>Rajasthani</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="581"/>
+        <location filename="../../Misc/Language.cpp" line="582"/>
         <source>Rapanui</source>
         <translation>Rapanui</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="582"/>
+        <location filename="../../Misc/Language.cpp" line="583"/>
         <source>Rarotongan, Cook Islands Maori</source>
         <translation>Rarotongan, Cook Islands Maori</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="583"/>
+        <location filename="../../Misc/Language.cpp" line="584"/>
         <source>Reserved for local use</source>
         <translation>Резервисано за локалну употребу</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="584"/>
+        <location filename="../../Misc/Language.cpp" line="585"/>
         <source>Romance languages</source>
         <translation>Романски језици</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="585"/>
+        <location filename="../../Misc/Language.cpp" line="586"/>
         <source>Romany</source>
         <translation>Румунски</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="586"/>
+        <location filename="../../Misc/Language.cpp" line="587"/>
         <source>Salishan languages</source>
         <translation>Salishan languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="587"/>
+        <location filename="../../Misc/Language.cpp" line="588"/>
         <source>Samaritan Aramaic</source>
         <translation>Samaritan Aramaic</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="588"/>
+        <location filename="../../Misc/Language.cpp" line="589"/>
         <source>Sami languages</source>
         <translation>Sami languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="589"/>
+        <location filename="../../Misc/Language.cpp" line="590"/>
         <source>Sandawe</source>
         <translation>Sandawe</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="590"/>
+        <location filename="../../Misc/Language.cpp" line="591"/>
         <source>Santali</source>
         <translation>Santali</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="591"/>
+        <location filename="../../Misc/Language.cpp" line="592"/>
         <source>Sasak</source>
         <translation>Sasak</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="592"/>
+        <location filename="../../Misc/Language.cpp" line="593"/>
         <source>Scots</source>
         <translation>Шкотски</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="593"/>
+        <location filename="../../Misc/Language.cpp" line="594"/>
         <source>Selkup</source>
         <translation>Selkup</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="594"/>
+        <location filename="../../Misc/Language.cpp" line="595"/>
         <source>Semitic languages</source>
         <translation>Semitic languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="595"/>
+        <location filename="../../Misc/Language.cpp" line="596"/>
         <source>Serer</source>
         <translation>Serer</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="596"/>
+        <location filename="../../Misc/Language.cpp" line="597"/>
         <source>Shan</source>
         <translation>Shan</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="597"/>
+        <location filename="../../Misc/Language.cpp" line="598"/>
         <source>Sicilian</source>
         <translation>Sicilian</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="598"/>
+        <location filename="../../Misc/Language.cpp" line="599"/>
         <source>Sidamo</source>
         <translation>Sidamo</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="599"/>
+        <location filename="../../Misc/Language.cpp" line="600"/>
         <source>Sign Languages</source>
         <translation>Sign Languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="600"/>
+        <location filename="../../Misc/Language.cpp" line="601"/>
         <source>Siksika</source>
         <translation>Siksika</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="601"/>
+        <location filename="../../Misc/Language.cpp" line="602"/>
         <source>Sino-Tibetan languages</source>
         <translation>Sino-Tibetan languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="602"/>
+        <location filename="../../Misc/Language.cpp" line="603"/>
         <source>Siouan languages</source>
         <translation>Siouan languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="603"/>
+        <location filename="../../Misc/Language.cpp" line="604"/>
         <source>Skolt Sami</source>
         <translation>Skolt Sami</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="604"/>
+        <location filename="../../Misc/Language.cpp" line="605"/>
         <source>Slave (Athapascan)</source>
         <translation>Slave (Athapascan)</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="605"/>
+        <location filename="../../Misc/Language.cpp" line="606"/>
         <source>Slavic languages</source>
         <translation>Словенски језици</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="606"/>
+        <location filename="../../Misc/Language.cpp" line="607"/>
         <source>Sogdian</source>
         <translation>Sogdian</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="607"/>
+        <location filename="../../Misc/Language.cpp" line="608"/>
         <source>Songhai languages</source>
         <translation>Songhai languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="608"/>
+        <location filename="../../Misc/Language.cpp" line="609"/>
         <source>Soninke</source>
         <translation>Soninke</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="609"/>
+        <location filename="../../Misc/Language.cpp" line="610"/>
         <source>Sorbian languages</source>
         <translation>Лужичко-српски</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="610"/>
+        <location filename="../../Misc/Language.cpp" line="611"/>
         <source>South American Indian languages</source>
         <translation>Јужно-амерички индијански језици</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="611"/>
+        <location filename="../../Misc/Language.cpp" line="612"/>
         <source>Southern Altai</source>
         <translation>Southern Altai</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="612"/>
+        <location filename="../../Misc/Language.cpp" line="613"/>
         <source>Southern Sami</source>
         <translation>Southern Sami</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="613"/>
+        <location filename="../../Misc/Language.cpp" line="614"/>
         <source>Sranan Tongo</source>
         <translation>Sranan Tongo</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="614"/>
+        <location filename="../../Misc/Language.cpp" line="615"/>
         <source>Sukuma</source>
         <translation>Sukuma</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="615"/>
+        <location filename="../../Misc/Language.cpp" line="616"/>
         <source>Sumerian</source>
         <translation>Sumerian</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="616"/>
+        <location filename="../../Misc/Language.cpp" line="617"/>
         <source>Susu</source>
         <translation>Susu</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="617"/>
+        <location filename="../../Misc/Language.cpp" line="618"/>
         <source>Alsatian, Swiss German, Alemannic</source>
         <translation>Alsatian, Swiss German, Alemannic</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="618"/>
+        <location filename="../../Misc/Language.cpp" line="619"/>
         <source>Syriac</source>
         <translation>Syriac</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="619"/>
+        <location filename="../../Misc/Language.cpp" line="620"/>
         <source>Tai languages</source>
         <translation>Tai languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="620"/>
+        <location filename="../../Misc/Language.cpp" line="621"/>
         <source>Tamashek</source>
         <translation>Tamashek</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="621"/>
+        <location filename="../../Misc/Language.cpp" line="622"/>
         <source>Tereno</source>
         <translation>Tereno</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="622"/>
+        <location filename="../../Misc/Language.cpp" line="623"/>
         <source>Tetum</source>
         <translation>Tetum</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="623"/>
+        <location filename="../../Misc/Language.cpp" line="624"/>
         <source>Tigre</source>
         <translation>Tigre</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="624"/>
+        <location filename="../../Misc/Language.cpp" line="625"/>
         <source>Timne</source>
         <translation>Timne</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="625"/>
+        <location filename="../../Misc/Language.cpp" line="626"/>
         <source>Tiv</source>
         <translation>Tiv</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="626"/>
+        <location filename="../../Misc/Language.cpp" line="627"/>
         <source>Tlingit</source>
         <translation>Tlingit</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="627"/>
+        <location filename="../../Misc/Language.cpp" line="628"/>
         <source>Tok Pisin</source>
         <translation>Tok Pisin</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="628"/>
+        <location filename="../../Misc/Language.cpp" line="629"/>
         <source>Tokelau</source>
         <translation>Tokelau</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="629"/>
+        <location filename="../../Misc/Language.cpp" line="630"/>
         <source>Tonga (Nyasa)</source>
         <translation>Tonga (Nyasa)</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="630"/>
+        <location filename="../../Misc/Language.cpp" line="631"/>
         <source>Tsimshian</source>
         <translation>Tsimshian</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="631"/>
+        <location filename="../../Misc/Language.cpp" line="632"/>
         <source>Tumbuka</source>
         <translation>Tumbuka</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="632"/>
+        <location filename="../../Misc/Language.cpp" line="633"/>
         <source>Tupi languages</source>
         <translation>Tupi languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="633"/>
+        <location filename="../../Misc/Language.cpp" line="634"/>
         <source>Turkish- Ottoman (1500-1928)</source>
         <translation>Турско- Отомански (1500-1928)</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="634"/>
+        <location filename="../../Misc/Language.cpp" line="635"/>
         <source>Tuvalu</source>
         <translation>Tuvalu</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="635"/>
+        <location filename="../../Misc/Language.cpp" line="636"/>
         <source>Tuvinian</source>
         <translation>Tuvinian</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="636"/>
+        <location filename="../../Misc/Language.cpp" line="637"/>
         <source>Udmurt</source>
         <translation>Udmurt</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="637"/>
+        <location filename="../../Misc/Language.cpp" line="638"/>
         <source>Ugaritic</source>
         <translation>Ugaritic</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="638"/>
+        <location filename="../../Misc/Language.cpp" line="639"/>
         <source>Umbundu</source>
         <translation>Umbundu</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="639"/>
+        <location filename="../../Misc/Language.cpp" line="640"/>
         <source>Uncoded languages</source>
         <translation>Некодирани језици</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="640"/>
+        <location filename="../../Misc/Language.cpp" line="641"/>
         <source>Undetermined</source>
         <translation>Неодређено</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="641"/>
+        <location filename="../../Misc/Language.cpp" line="642"/>
         <source>Upper Sorbian</source>
         <translation>Upper Sorbian</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="642"/>
+        <location filename="../../Misc/Language.cpp" line="643"/>
         <source>Vai</source>
         <translation>Vai</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="643"/>
+        <location filename="../../Misc/Language.cpp" line="644"/>
         <source>Votic</source>
         <translation>Votic</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="644"/>
+        <location filename="../../Misc/Language.cpp" line="645"/>
         <source>Wakashan languages</source>
         <translation>Wakashan languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="645"/>
+        <location filename="../../Misc/Language.cpp" line="646"/>
         <source>Waray</source>
         <translation>Waray</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="646"/>
+        <location filename="../../Misc/Language.cpp" line="647"/>
         <source>Washo</source>
         <translation>Washo</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="647"/>
+        <location filename="../../Misc/Language.cpp" line="648"/>
         <source>Wolaitta, Wolaytta</source>
         <translation>Wolaitta, Wolaytta</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="648"/>
+        <location filename="../../Misc/Language.cpp" line="649"/>
         <source>Yakut</source>
         <translation>Yakut</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="649"/>
+        <location filename="../../Misc/Language.cpp" line="650"/>
         <source>Yao</source>
         <translation>Yao</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="650"/>
+        <location filename="../../Misc/Language.cpp" line="651"/>
         <source>Yapese</source>
         <translation>Yapese</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="651"/>
+        <location filename="../../Misc/Language.cpp" line="652"/>
         <source>Yupik languages</source>
         <translation>Yupik languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="652"/>
+        <location filename="../../Misc/Language.cpp" line="653"/>
         <source>Zande languages</source>
         <translation>Zande languages</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="653"/>
+        <location filename="../../Misc/Language.cpp" line="654"/>
         <source>Zapotec</source>
         <translation>Zapotec</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="654"/>
+        <location filename="../../Misc/Language.cpp" line="655"/>
         <source>Zenaga</source>
         <translation>Zenaga</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="655"/>
+        <location filename="../../Misc/Language.cpp" line="656"/>
         <source>Zuni</source>
         <translation>Zuni</translation>
     </message>
@@ -6515,12 +7108,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
         <translation>Доле</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/LinkStylesheets.cpp" line="60"/>
+        <location filename="../../Dialogs/LinkStylesheets.cpp" line="61"/>
         <source>Include</source>
         <translation>Укључити</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/LinkStylesheets.cpp" line="61"/>
+        <location filename="../../Dialogs/LinkStylesheets.cpp" line="62"/>
         <source>Stylesheet</source>
         <translation>Стил</translation>
     </message>
@@ -6543,96 +7136,104 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
         <translation>Филтер:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="65"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="71"/>
         <source>File</source>
         <translation>Датотека</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="66"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="72"/>
         <source>Line</source>
         <translation>Линија</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="67"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="73"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="68"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="74"/>
         <source>Text</source>
         <translation>Текст</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="69"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="75"/>
         <source>Target File</source>
         <translation>Циљна датотека</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="70"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="76"/>
         <source>Target ID</source>
         <translation>Циљани ИД</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="71"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="77"/>
         <source>Target Exists?</source>
         <translation>Циљ постоји?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="72"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="78"/>
         <source>Target Text</source>
         <translation>Циљани текст</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="73"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="79"/>
         <source>Target&apos;s Target File</source>
         <translation>Циљна датотека циља</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="74"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="80"/>
         <source>Target&apos;s Target ID</source>
         <translation>Циљни ИД одредишта.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="75"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="81"/>
         <source>Match?</source>
         <translation>Подударање?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="81"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="87"/>
         <source>Report shows all source and target links using the anchor tag &quot;a&quot;.</source>
         <translation>Извештај приказује све изворне и одредишне везе које користе сидришну ознаку „a”</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="150"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="159"/>
         <source>n/a</source>
-        <translation type="unfinished"/>
+        <translation>недоступно</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="153"/>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="221"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="163"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="231"/>
         <source>no</source>
-        <translation type="unfinished"/>
+        <translation>не</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="160"/>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="223"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="173"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="233"/>
         <source>yes</source>
-        <translation type="unfinished"/>
+        <translation>да</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="337"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="352"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Сачувај извештај са одвојеним зарезима</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="350"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="366"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="350"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="366"/>
         <source>Cannot save report file.</source>
         <translation>Није могуће сачувати извештај.</translation>
+    </message>
+</context>
+<context>
+    <name>ListSelector</name>
+    <message>
+        <location filename="../../Dialogs/ListSelector.h" line="48"/>
+        <source>View selected</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -6653,203 +7254,267 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
         <translation>Д&amp;одај</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="88"/>
-        <source>&amp;Edit</source>
-        <translation>&amp;Уређивање</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="92"/>
-        <source>C&amp;hange Case</source>
-        <translation>И&amp;змени величину слова</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="117"/>
-        <source>&amp;Insert</source>
-        <translation>&amp;Уметање</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="121"/>
-        <source>Cli&amp;p</source>
-        <translation>Шабло&amp;н</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="158"/>
-        <source>&amp;Help</source>
-        <translation>&amp;Помоћ</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="168"/>
-        <source>For&amp;mat</source>
-        <translation>Фор&amp;мат</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="172"/>
-        <source>&amp;Heading</source>
-        <translation>&amp;Заглавље</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="213"/>
-        <source>&amp;View</source>
-        <translation>&amp;Приказ</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="217"/>
-        <source>&amp;Toolbars</source>
-        <translation>&amp;Траке алата</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="232"/>
-        <source>&amp;Search</source>
-        <translation>&amp;Претражи</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="236"/>
-        <source>Current Fil&amp;e</source>
-        <translation>Тренутни фа&amp;јл</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="268"/>
-        <source>&amp;Window</source>
-        <translation>&amp;Прозор</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="280"/>
-        <source>&amp;Tools</source>
-        <translation>&amp;Алати</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="284"/>
-        <source>&amp;Table Of Contents</source>
-        <translation>&amp;Садржај</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="292"/>
-        <source>Spe&amp;llcheck</source>
-        <translation>Провера пра&amp;вописа</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="306"/>
-        <source>&amp;Index</source>
-        <translation>&amp;Индекс</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="317"/>
-        <source>Re&amp;format HTML</source>
-        <translation>Пре&amp;обликуј HTML</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="324"/>
-        <source>Epub&amp;3 Tools</source>
-        <translation>Epub&amp;3 алати</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="349"/>
-        <source>Plugins</source>
-        <translation>Додаци</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="367"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="573"/>
-        <source>File</source>
-        <translation>Датотека</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="382"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="312"/>
-        <source>Edit</source>
-        <translation>Уреди</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="401"/>
-        <source>View</source>
-        <translation>Приказ</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="414"/>
-        <source>Insert</source>
-        <translation>Уметање</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="431"/>
-        <source>Back</source>
-        <translation>Назад</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="443"/>
-        <source>Donate</source>
-        <translation>Донирај</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="455"/>
-        <source>Tools</source>
-        <translation>Алати</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="477"/>
-        <source>Heading</source>
-        <translation>Заглавље</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="495"/>
-        <source>Format</source>
-        <translation>Формат</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="512"/>
-        <source>Align</source>
-        <translation>Положај</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="527"/>
-        <source>List</source>
-        <translation>Листа</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="540"/>
-        <source>Indent</source>
-        <translation>Увлачење</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="553"/>
-        <source>Change Case</source>
-        <translation>Измена величине слова</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="568"/>
-        <source>Text Direction</source>
-        <translation>Смер текста</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="582"/>
-        <source>Clip Bar</source>
-        <translation>Трака за шаблоне</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="617"/>
+        <location filename="../../Form_Files/main.ui" line="72"/>
         <source>&amp;New</source>
         <translation>&amp;Ново</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="620"/>
-        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new book.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Ново&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Креирај нову књигу.&lt;/p&gt;</translation>
+        <location filename="../../Form_Files/main.ui" line="96"/>
+        <source>&amp;Edit</source>
+        <translation>&amp;Уређивање</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="625"/>
+        <location filename="../../Form_Files/main.ui" line="100"/>
+        <source>C&amp;hange Case</source>
+        <translation>И&amp;змени величину слова</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="125"/>
+        <source>&amp;Insert</source>
+        <translation>&amp;Уметање</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="129"/>
+        <source>Cli&amp;p</source>
+        <translation>Шабло&amp;н</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="154"/>
+        <source>Cli&amp;p2</source>
+        <translation>Шабло&amp;н2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="192"/>
+        <source>&amp;Help</source>
+        <translation>&amp;Помоћ</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="202"/>
+        <source>For&amp;mat</source>
+        <translation>Фор&amp;мат</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="206"/>
+        <source>&amp;Heading</source>
+        <translation>&amp;Заглавље</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="246"/>
+        <source>&amp;View</source>
+        <translation>&amp;Приказ</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="250"/>
+        <source>&amp;Toolbars</source>
+        <translation>&amp;Траке алата</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="262"/>
+        <source>&amp;Search</source>
+        <translation>&amp;Претражи</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="266"/>
+        <source>Current Fil&amp;e</source>
+        <translation>Тренутни фа&amp;јл</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="298"/>
+        <source>&amp;Window</source>
+        <translation>&amp;Прозор</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="310"/>
+        <source>&amp;Tools</source>
+        <translation>&amp;Алати</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="314"/>
+        <source>&amp;Table Of Contents</source>
+        <translation>&amp;Садржај</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="322"/>
+        <source>Spe&amp;llcheck</source>
+        <translation>Провера пра&amp;вописа</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="336"/>
+        <source>&amp;Index</source>
+        <translation>&amp;Индекс</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="347"/>
+        <source>Re&amp;format HTML</source>
+        <translation>Пре&amp;обликуј HTML</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="354"/>
+        <source>Epub&amp;3 Tools</source>
+        <translation>Epub&amp;3 алати</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="382"/>
+        <source>Plugins</source>
+        <translation>Додаци</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="388"/>
+        <location filename="../../Form_Files/main.ui" line="427"/>
+        <source>Checkpoints</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="411"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1140"/>
+        <source>File</source>
+        <translation>Датотека</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="442"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="379"/>
+        <source>Edit</source>
+        <translation>Уреди</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="463"/>
+        <source>Insert</source>
+        <translation>Уметање</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="480"/>
+        <source>Back</source>
+        <translation>Назад</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="492"/>
+        <source>Donate</source>
+        <translation>Донирај</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="504"/>
+        <source>Tools</source>
+        <translation>Алати</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="518"/>
+        <source>Plugins Set 1</source>
+        <translation>Додаци скуп 1</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="534"/>
+        <source>Plugins Set 2</source>
+        <translation>Додаци скуп 2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="550"/>
+        <source>Heading</source>
+        <translation>Заглавље</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="564"/>
+        <source>set Heading Level of Selected Text</source>
+        <translation>поставља ниво наслова за изабрани текст</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="577"/>
+        <source>Format</source>
+        <translation>Формат</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="594"/>
+        <source>Align</source>
+        <translation>Поравнање</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="609"/>
+        <source>List</source>
+        <translation>Листа</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="622"/>
+        <source>Indent</source>
+        <translation>Увлачење</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="635"/>
+        <source>Change Case</source>
+        <translation>Измена величине слова</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="649"/>
+        <source>set Case of Selected Text</source>
+        <translation>поставља величину слова изабраном тексту</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="659"/>
+        <source>Text Direction</source>
+        <translation>Смер текста</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="673"/>
+        <source>Clip Bar</source>
+        <translation>Трака за шаблоне</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="704"/>
+        <source>Clip Bar2</source>
+        <translation>Трака за шаблоне2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="740"/>
+        <source>New Default</source>
+        <translation>Нова подразумевана</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="743"/>
+        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new default book.&lt;/p&gt;</source>
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Ново&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Креирај нову подразумевану књигу.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="748"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="634"/>
+        <location filename="../../Form_Files/main.ui" line="758"/>
+        <source>ePub&amp;2</source>
+        <translation>ePub&amp;2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="761"/>
+        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New ePub2&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new ePub2 book.&lt;/p&gt;</source>
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Нов ePub2&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Креирај нову ePub2 књигу.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="773"/>
+        <source>ePub&amp;3</source>
+        <translation>ePub&amp;3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="776"/>
+        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New ePub3&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new ePub3 book.&lt;/p&gt;</source>
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Нов ePub3&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Креирај нову ePub3 књигу.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="788"/>
         <source>&amp;Save</source>
         <translation>&amp;Сачувај</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="637"/>
+        <location filename="../../Form_Files/main.ui" line="791"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Save&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Save the current book.&lt;/p&gt;</source>
@@ -6858,17 +7523,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Сачувај тренутну књигу.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="642"/>
+        <location filename="../../Form_Files/main.ui" line="796"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="647"/>
+        <location filename="../../Form_Files/main.ui" line="801"/>
         <source>Save &amp;As...</source>
         <translation>Сачувај &amp;као...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="650"/>
+        <location filename="../../Form_Files/main.ui" line="804"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Save As&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Save the current book with a different filename.&lt;/p&gt;</source>
@@ -6877,27 +7542,27 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Сачувај тренутну књигу са различитим именом.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="655"/>
+        <location filename="../../Form_Files/main.ui" line="809"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="660"/>
+        <location filename="../../Form_Files/main.ui" line="814"/>
         <source>Save A &amp;Copy...</source>
         <translation>Сачувај &amp;копију...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="663"/>
+        <location filename="../../Form_Files/main.ui" line="817"/>
         <source>Save a copy of your book to another file name.</source>
         <translation>Сачувај копију књиге под другим именом.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="672"/>
+        <location filename="../../Form_Files/main.ui" line="826"/>
         <source>Cu&amp;t</source>
         <translation>Ис&amp;еци</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="675"/>
+        <location filename="../../Form_Files/main.ui" line="829"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Cut&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Cuts the selected text from the document and puts it on the clipboard.&lt;/p&gt;</source>
@@ -6906,12 +7571,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Исеци селектовани текст из документа и стави га у клипборд.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="686"/>
+        <location filename="../../Form_Files/main.ui" line="840"/>
         <source>&amp;Paste</source>
         <translation>&amp;Налепи</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="689"/>
+        <location filename="../../Form_Files/main.ui" line="843"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Paste&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Pastes the content from the clipboard into the book.&lt;/p&gt;</source>
@@ -6920,27 +7585,27 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Налепи садржај из клипборда у књигу.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="696"/>
+        <location filename="../../Form_Files/main.ui" line="850"/>
         <source>&amp;Closing Tag</source>
         <translation>&amp;Затварајућа ознака</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="699"/>
+        <location filename="../../Form_Files/main.ui" line="853"/>
         <source>Insert a closing tag in Code View.</source>
         <translation>Уметните затварајућу ознаку у Приказ кода</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="702"/>
+        <location filename="../../Form_Files/main.ui" line="856"/>
         <source>Ctrl+.</source>
         <translation>Ctrl+.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="711"/>
+        <location filename="../../Form_Files/main.ui" line="865"/>
         <source>&amp;Undo</source>
         <translation>&amp;Опозови</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="714"/>
+        <location filename="../../Form_Files/main.ui" line="868"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Undo&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Reverts the changes of the previous operation.&lt;/p&gt;</source>
@@ -6949,17 +7614,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Врати на стање пре претходне операције.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="719"/>
+        <location filename="../../Form_Files/main.ui" line="873"/>
         <source>Ctrl+Z</source>
         <translation>Ctrl+Z</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="728"/>
+        <location filename="../../Form_Files/main.ui" line="882"/>
         <source>&amp;Redo</source>
         <translation>&amp;Претходно</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="731"/>
+        <location filename="../../Form_Files/main.ui" line="885"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Redo&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Restores the changes reverted by the previous Undo action.&lt;/p&gt;</source>
@@ -6968,17 +7633,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Понавља измене које је опозвала претходна  акција Опозови.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="736"/>
+        <location filename="../../Form_Files/main.ui" line="890"/>
         <source>Ctrl+Y</source>
         <translation>Ctrl+Y</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="745"/>
+        <location filename="../../Form_Files/main.ui" line="899"/>
         <source>&amp;Copy</source>
         <translation>&amp;Копирај</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="748"/>
+        <location filename="../../Form_Files/main.ui" line="902"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Copy&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Copies the selected text and puts it on the clipboard.&lt;/p&gt;</source>
@@ -6987,78 +7652,78 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Копирај одабрани текст и стави га у клипборд.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="762"/>
+        <location filename="../../Form_Files/main.ui" line="916"/>
         <source>Align &amp;Left</source>
-        <translation>Положај &amp;лево</translation>
+        <translation>Поравнај &amp;лево</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="765"/>
+        <location filename="../../Form_Files/main.ui" line="919"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Align Left&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Align the paragraph to the left.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Положај лево&lt;/b&gt;&lt;/p&gt;
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Поравнај лево&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Подеси положај лево.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Поравнава пасус са левом маргином.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="779"/>
+        <location filename="../../Form_Files/main.ui" line="933"/>
         <source>Align &amp;Right</source>
-        <translation>Положај &amp;десно</translation>
+        <translation>Поравнај &amp;десно</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="782"/>
+        <location filename="../../Form_Files/main.ui" line="936"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Align Right&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Align the paragraph to the right.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Положај десно&lt;/b&gt;&lt;/p&gt;
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Поравнај десно&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Подеси положај десно.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Поравнва пасус са десном маргином.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="796"/>
+        <location filename="../../Form_Files/main.ui" line="950"/>
         <source>&amp;Center</source>
         <translation>&amp;Центрирај</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="799"/>
+        <location filename="../../Form_Files/main.ui" line="953"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Center&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Center the paragraph.&lt;/p&gt;</source>
         <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Центрирај&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Центрирај параграф.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Центрирај пасус.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="804"/>
+        <location filename="../../Form_Files/main.ui" line="958"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="816"/>
+        <location filename="../../Form_Files/main.ui" line="970"/>
         <source>&amp;Justify</source>
         <translation>&amp;Поравнај обострано</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="819"/>
+        <location filename="../../Form_Files/main.ui" line="973"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Justify&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Align the paragraph to both the left and right margins.&lt;/p&gt;</source>
         <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Поравнај обострано&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Подеси положај поравнат на обе стране.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Поравнава пасус са обе маргине.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="824"/>
+        <location filename="../../Form_Files/main.ui" line="978"/>
         <source>Ctrl+J</source>
         <translation>Ctrl+J</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="836"/>
+        <location filename="../../Form_Files/main.ui" line="990"/>
         <source>&amp;Bold</source>
         <translation>&amp;Подебљано</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="839"/>
+        <location filename="../../Form_Files/main.ui" line="993"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Bold&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Make the selected text bold.&lt;/p&gt;</source>
@@ -7067,17 +7732,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Подебљај селектовани текст.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="844"/>
+        <location filename="../../Form_Files/main.ui" line="998"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="856"/>
+        <location filename="../../Form_Files/main.ui" line="1010"/>
         <source>&amp;Italic</source>
         <translation>&amp;Искошено</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="859"/>
+        <location filename="../../Form_Files/main.ui" line="1013"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Italic&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Make the selected text italic.&lt;/p&gt;</source>
@@ -7086,17 +7751,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Искоси селектовани текст.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="864"/>
+        <location filename="../../Form_Files/main.ui" line="1018"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="873"/>
+        <location filename="../../Form_Files/main.ui" line="1027"/>
         <source>&amp;Open...</source>
         <translation>&amp;Отвори...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="876"/>
+        <location filename="../../Form_Files/main.ui" line="1030"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Open&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Open a book from disk.&lt;/p&gt;</source>
@@ -7105,17 +7770,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Отвори књигу са диска.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="881"/>
+        <location filename="../../Form_Files/main.ui" line="1035"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="893"/>
+        <location filename="../../Form_Files/main.ui" line="1047"/>
         <source>&amp;Underline</source>
         <translation>&amp;Подвучено</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="896"/>
+        <location filename="../../Form_Files/main.ui" line="1050"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Underline&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Underline the selected text.&lt;/p&gt;</source>
@@ -7124,42 +7789,42 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Подвуци означени текст.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="901"/>
+        <location filename="../../Form_Files/main.ui" line="1055"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="910"/>
+        <location filename="../../Form_Files/main.ui" line="1067"/>
         <source>&amp;Quit</source>
         <translation>&amp;Напусти</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="913"/>
+        <location filename="../../Form_Files/main.ui" line="1070"/>
         <source>Exit</source>
         <translation>Напусти</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="916"/>
+        <location filename="../../Form_Files/main.ui" line="1073"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="925"/>
+        <location filename="../../Form_Files/main.ui" line="1085"/>
         <source>&amp;About...</source>
         <translation>&amp;О...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="928"/>
+        <location filename="../../Form_Files/main.ui" line="1088"/>
         <source>Show information about Sigil.</source>
         <translation>Прикажи информације о Сигилу.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="933"/>
+        <location filename="../../Form_Files/main.ui" line="1093"/>
         <source>Add &amp;Cover...</source>
         <translation>Додај &amp;корице...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="936"/>
+        <location filename="../../Form_Files/main.ui" line="1096"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Add Cover&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Add a cover.&lt;/p&gt;</source>
@@ -7168,12 +7833,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Додај омот.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="947"/>
+        <location filename="../../Form_Files/main.ui" line="1107"/>
         <source>&amp;Metadata Editor...</source>
         <translation>&amp;Едитор метаподатака...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="950"/>
+        <location filename="../../Form_Files/main.ui" line="1110"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Metadata Editor&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edit and display information about your book including the author and title.&lt;/p&gt;</source>
@@ -7182,17 +7847,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Уреди и прикажи информације о књизи укључујући аутора и наслов.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="955"/>
+        <location filename="../../Form_Files/main.ui" line="1115"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="964"/>
+        <location filename="../../Form_Files/main.ui" line="1124"/>
         <source>&amp;Generate Table Of Contents...</source>
         <translation>&amp;Генериши садржај...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="967"/>
+        <location filename="../../Form_Files/main.ui" line="1127"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Generate Table of Contents&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Generate a new Table of Contents from headings in your book.&lt;/p&gt;</source>
@@ -7201,17 +7866,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Генериши нови садржај из наслова ваше књиге.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="972"/>
+        <location filename="../../Form_Files/main.ui" line="1132"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="977"/>
+        <location filename="../../Form_Files/main.ui" line="1137"/>
         <source>&amp;Edit Table Of Contents...</source>
         <translation>&amp;Уреди садржај...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="980"/>
+        <location filename="../../Form_Files/main.ui" line="1140"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Edit Table of Contents&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Directly edit the existing Table of Contents.&lt;/p&gt;</source>
@@ -7220,55 +7885,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Директно измени постојећи садржај.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="994"/>
-        <source>&amp;Book View</source>
-        <translation>&amp;Приказ књиге</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="997"/>
-        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Book View&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edit and display the files in your book as they will appear to readers.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Приказ књиге&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Уређивање и приказ датотека у вашој књизи у форми у којој ће их видети читаоци.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1011"/>
-        <source>&amp;Code View</source>
-        <translation>&amp;Приказ кода</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1014"/>
-        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Code View&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edit and display the actual contents of the files in your book, including the formatting codes that control how your book will appear to readers.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Приказ кода&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Уређивање и приказ стварног садржај датотека у вашој књизи, укључујући кодове обликовања који контролишу како ће уређаји за читање приказати вашу књигу.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1021"/>
-        <source>&amp;Toggle View State</source>
-        <translation>&amp;Пребаци приказ</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1024"/>
-        <source>Toggle Book View to Code View or Code View to Book View</source>
-        <translation>Пребаци Приказ књиге у Приказ кода или Приказ кода у Приказ књиге</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1027"/>
-        <source>F2</source>
-        <translation>F2</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1036"/>
+        <location filename="../../Form_Files/main.ui" line="1151"/>
         <source>&amp;Split At Cursor</source>
         <translation>&amp;Раздвој на позицији курсора</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1039"/>
+        <location filename="../../Form_Files/main.ui" line="1154"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Split At Cursor&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Split the current file into two files using your cursor location as the dividing point.&lt;/p&gt;</source>
@@ -7277,17 +7899,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Раздваја текућу датотеку на две користећи позицију вашег курсора као тачку раздвајања.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1044"/>
+        <location filename="../../Form_Files/main.ui" line="1159"/>
         <source>Ctrl+Return</source>
         <translation>Ctrl+Return</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1053"/>
+        <location filename="../../Form_Files/main.ui" line="1168"/>
         <source>&amp;File...</source>
         <translation>&amp;Датотека...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1056"/>
+        <location filename="../../Form_Files/main.ui" line="1171"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Insert File&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Select image, video or audio files from your book to insert into the text.&lt;/p&gt;
@@ -7300,17 +7922,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Можете додати датотеке у вашу књигу путањом мени Датотека - Додај - Постојеће датотеке.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1063"/>
+        <location filename="../../Form_Files/main.ui" line="1178"/>
         <source>Ctrl+Shift+I</source>
         <translation>Ctrl+Shift+I</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1072"/>
+        <location filename="../../Form_Files/main.ui" line="1187"/>
         <source>&amp;Special Character...</source>
         <translation>&amp;Посебни карактери...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1075"/>
+        <location filename="../../Form_Files/main.ui" line="1190"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Insert Special Character&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Select a character to insert into your text.&lt;/p&gt;</source>
@@ -7319,12 +7941,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Одаберите карактер који желите да уметнете  ваш текст.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1086"/>
+        <location filename="../../Form_Files/main.ui" line="1201"/>
         <source>I&amp;D...</source>
         <translation>И&amp;Д...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1089"/>
+        <location filename="../../Form_Files/main.ui" line="1204"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Insert ID&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Insert or edit an anchor with an ID name to use as a link target.&lt;/p&gt;</source>
@@ -7333,12 +7955,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Уметни или уреди са ИД именом које ће се користити као одредиште везе.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1100"/>
+        <location filename="../../Form_Files/main.ui" line="1215"/>
         <source>&amp;Link...</source>
         <translation>&amp;Веза...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1103"/>
+        <location filename="../../Form_Files/main.ui" line="1218"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Insert Link&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Insert or edit an anchor with a hyperlink to a target.&lt;/p&gt;</source>
@@ -7347,12 +7969,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Уметни или уреди сидро са хипервезом на одредиште.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1117"/>
+        <location filename="../../Form_Files/main.ui" line="1232"/>
         <source>&amp;Numbered List</source>
         <translation>&amp;Листа под бројем</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1120"/>
+        <location filename="../../Form_Files/main.ui" line="1235"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Numbering&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a numbered list.&lt;/p&gt;</source>
@@ -7361,12 +7983,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Креирајте нумерисану листу.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1134"/>
+        <location filename="../../Form_Files/main.ui" line="1249"/>
         <source>Bulle&amp;ted List</source>
         <translation>Лис&amp;та за набрајање</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1137"/>
+        <location filename="../../Form_Files/main.ui" line="1252"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Bullets&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a bulleted list.&lt;/p&gt;</source>
@@ -7375,17 +7997,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Креирај листу за набрајање.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1142"/>
+        <location filename="../../Form_Files/main.ui" line="1257"/>
         <source>Ctrl+Shift+L</source>
         <translation>Ctrl+Shift+L</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1154"/>
+        <location filename="../../Form_Files/main.ui" line="1269"/>
         <source>Stri&amp;kethrough</source>
         <translation>Пре&amp;цртано</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1157"/>
+        <location filename="../../Form_Files/main.ui" line="1272"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Strikethrough&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Draw a line through the selected text.&lt;/p&gt;</source>
@@ -7394,12 +8016,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Draw a line through the selected text.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1171"/>
+        <location filename="../../Form_Files/main.ui" line="1286"/>
         <source>&amp;Subscript</source>
         <translation>&amp;Смањи доле</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1174"/>
+        <location filename="../../Form_Files/main.ui" line="1289"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Subscript&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Set the selected text slightly smaller and below the normal line.&lt;/p&gt;</source>
@@ -7408,12 +8030,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Подеси означени текст смањено на доњу позицију.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1188"/>
+        <location filename="../../Form_Files/main.ui" line="1303"/>
         <source>Su&amp;perscript</source>
         <translation>Сма&amp;њи горе</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1191"/>
+        <location filename="../../Form_Files/main.ui" line="1306"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Superscript&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Set the selected text slightly smaller and above the normal line.&lt;/p&gt;</source>
@@ -7422,93 +8044,88 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Подеси означени текст мањим на горњу позицију.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1202"/>
+        <location filename="../../Form_Files/main.ui" line="1317"/>
         <source>&amp;Print...</source>
         <translation>&amp;Штампај...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1205"/>
+        <location filename="../../Form_Files/main.ui" line="1320"/>
         <source>Print</source>
         <translation>Штампај</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1208"/>
+        <location filename="../../Form_Files/main.ui" line="1323"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1217"/>
+        <location filename="../../Form_Files/main.ui" line="1332"/>
         <source>Print Pre&amp;view...</source>
         <translation>Штампај пре&amp;глед...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1220"/>
+        <location filename="../../Form_Files/main.ui" line="1335"/>
         <source>Print Preview</source>
         <translation>Приказ пре штампања</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1225"/>
-        <location filename="../../Form_Files/main.ui" line="1228"/>
+        <location filename="../../Form_Files/main.ui" line="1340"/>
+        <location filename="../../Form_Files/main.ui" line="1343"/>
         <source>Close</source>
         <translation>Затвори</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1231"/>
+        <location filename="../../Form_Files/main.ui" line="1346"/>
         <source>Ctrl+Shift+W</source>
         <translation>Ctrl+Shift+W</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1240"/>
+        <location filename="../../Form_Files/main.ui" line="1351"/>
+        <source>Restructure Epub to Sigil Norm</source>
+        <translation>Реструктурирај Epub у Сигил норму</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="1354"/>
+        <source>Restructure Epub to Sigil Standard Form</source>
+        <translation>Реструктурира Epub у Сигил Стандардну Форму</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="1363"/>
         <source>Zoom &amp;In</source>
         <translation>Уве&amp;ћај</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1243"/>
+        <location filename="../../Form_Files/main.ui" line="1366"/>
         <source>Zoom In</source>
         <translation>Увећај</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1246"/>
+        <location filename="../../Form_Files/main.ui" line="1369"/>
         <source>Ctrl+=</source>
         <translation>Ctrl+=</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1255"/>
+        <location filename="../../Form_Files/main.ui" line="1378"/>
         <source>Zoom &amp;Out</source>
         <translation>Сма&amp;њи</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1258"/>
+        <location filename="../../Form_Files/main.ui" line="1381"/>
         <source>Zoom Out</source>
         <translation>Смањи</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1261"/>
+        <location filename="../../Form_Files/main.ui" line="1384"/>
         <source>Ctrl+-</source>
         <translation>Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1266"/>
-        <source>Sho&amp;w Tag</source>
-        <translation>При&amp;кажи ознаку</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1269"/>
-        <source>Show the enclosing tag HTML for the cursor position in Book View.</source>
-        <translation>Покажи окружујућу HTML ознаку за позицију курсора у Погледу књиге. </translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1272"/>
-        <source>Ctrl+Alt+T</source>
-        <translation>Ctrl+Alt+T</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1281"/>
+        <location filename="../../Form_Files/main.ui" line="1393"/>
         <source>&amp;Find &amp;&amp; Replace...</source>
         <translation>&amp;Пронађи &amp;&amp; Замени...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1284"/>
+        <location filename="../../Form_Files/main.ui" line="1396"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Find &amp;amp; Replace&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Find and replace text in the document.&lt;/p&gt;</source>
@@ -7517,56 +8134,56 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Пронађи и замени текст у документу.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1289"/>
+        <location filename="../../Form_Files/main.ui" line="1401"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1298"/>
+        <location filename="../../Form_Files/main.ui" line="1410"/>
         <source>Incre&amp;ase Indent</source>
         <translation>Уву&amp;ци напред</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1301"/>
+        <location filename="../../Form_Files/main.ui" line="1413"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Increase Indent&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Increase the indent level of the paragraph.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Увуци напред&lt;/b&gt;&lt;/p&gt;
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Увећај увлачење&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Параграфе помери напред.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Увећава ниво увлачења пасуса.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1306"/>
+        <location filename="../../Form_Files/main.ui" line="1418"/>
         <source>Ctrl+Alt+M</source>
         <translation>Ctrl+Alt+M</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1315"/>
+        <location filename="../../Form_Files/main.ui" line="1427"/>
         <source>&amp;Decrease Indent</source>
         <translation>&amp;Увуци назад</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1318"/>
+        <location filename="../../Form_Files/main.ui" line="1430"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Decrease Indent&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Decrease the indent level of the paragraph.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Увуци назад&lt;/b&gt;&lt;/p&gt;
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Умањи увлачење&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Параграфе помери назад.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Умањује ниво увлачења пасуса.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1323"/>
-        <location filename="../../Form_Files/main.ui" line="1734"/>
+        <location filename="../../Form_Files/main.ui" line="1435"/>
+        <location filename="../../Form_Files/main.ui" line="1846"/>
         <source>Ctrl+Shift+M</source>
         <translation>Ctrl+Shift+M</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1332"/>
+        <location filename="../../Form_Files/main.ui" line="1444"/>
         <source>Te&amp;xt Direction LTR</source>
         <translation>Сме&amp;р текста ЛУД</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1335"/>
+        <location filename="../../Form_Files/main.ui" line="1447"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Left-to-Right&lt;/b&gt;&lt;/p&gt;
 
@@ -7579,12 +8196,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1348"/>
+        <location filename="../../Form_Files/main.ui" line="1460"/>
         <source>T&amp;ext Direction RTL</source>
         <translation>См&amp;ер текста ДУЛ</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1351"/>
+        <location filename="../../Form_Files/main.ui" line="1463"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Right-to-Left&lt;/b&gt;&lt;/p&gt;
 
@@ -7597,12 +8214,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1364"/>
+        <location filename="../../Form_Files/main.ui" line="1476"/>
         <source>Text Directi&amp;on Default</source>
         <translation>Подразуме&amp;вани смер текста</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1367"/>
+        <location filename="../../Form_Files/main.ui" line="1479"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Default&lt;/b&gt;&lt;/p&gt;
 
@@ -7611,26 +8228,26 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
         <translation>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Подразумевано&lt;/b&gt;&lt;/p&gt;
 
-     &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Подеси смер параграфа тако да наследи подразумевану вредност.&lt;/p&gt;
+     &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Подеси смер пасуса тако да наследи подразумевану вредност.&lt;/p&gt;
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1376"/>
+        <location filename="../../Form_Files/main.ui" line="1488"/>
         <source>Remove &amp;Formatting</source>
         <translation>Обриши &amp;форматирање</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1379"/>
+        <location filename="../../Form_Files/main.ui" line="1491"/>
         <source>Ctrl+Space</source>
         <translation>Ctrl+Space</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1388"/>
+        <location filename="../../Form_Files/main.ui" line="1500"/>
         <source>&amp;Lowercase</source>
         <translation>&amp;Мала слова</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1391"/>
+        <location filename="../../Form_Files/main.ui" line="1503"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Lowercase&lt;/b&gt;&lt;/p&gt;
 
@@ -7643,17 +8260,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1398"/>
+        <location filename="../../Form_Files/main.ui" line="1510"/>
         <source>Alt+L</source>
         <translation>Alt+L</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1407"/>
+        <location filename="../../Form_Files/main.ui" line="1519"/>
         <source>&amp;Uppercase</source>
         <translation>&amp;Велика слова</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1410"/>
+        <location filename="../../Form_Files/main.ui" line="1522"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Uppercase&lt;/b&gt;&lt;/p&gt;
 
@@ -7666,17 +8283,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1417"/>
+        <location filename="../../Form_Files/main.ui" line="1529"/>
         <source>Alt+U</source>
         <translation>Alt+U</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1426"/>
+        <location filename="../../Form_Files/main.ui" line="1538"/>
         <source>&amp;Titlecase</source>
         <translation>&amp;Почетна слова</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1429"/>
+        <location filename="../../Form_Files/main.ui" line="1541"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Titlecase&lt;/b&gt;&lt;/p&gt;
 
@@ -7689,145 +8306,145 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1442"/>
+        <location filename="../../Form_Files/main.ui" line="1554"/>
         <source>&amp;Capitalize</source>
-        <translation>&amp;Повећање</translation>
+        <translation>&amp;Као реченица</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1445"/>
+        <location filename="../../Form_Files/main.ui" line="1557"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Capitalize&lt;/b&gt;&lt;/p&gt;
 
      &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Capitalize only the first word of the selected text.&lt;/p&gt;
     </source>
         <translation>
-     &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Повећање&lt;/b&gt;&lt;/p&gt;
+     &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Као реченица&lt;/b&gt;&lt;/p&gt;
 
-     &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Повећај само прво слово одабране речи.&lt;/p&gt;
+     &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Поставља велико прво слово првој речи изабраног текста.&lt;/p&gt;
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1454"/>
+        <location filename="../../Form_Files/main.ui" line="1566"/>
         <source>Sigil Website...</source>
         <translation>Сигил вебсајт...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1459"/>
+        <location filename="../../Form_Files/main.ui" line="1571"/>
         <source>&amp;Next Tab</source>
         <translation>&amp;Следећа картица</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1462"/>
+        <location filename="../../Form_Files/main.ui" line="1574"/>
         <source>Ctrl+PgUp</source>
         <translation>Ctrl+PgUp</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1467"/>
+        <location filename="../../Form_Files/main.ui" line="1579"/>
         <source>&amp;Previous Tab</source>
         <translation>&amp;Претходна картица</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1470"/>
+        <location filename="../../Form_Files/main.ui" line="1582"/>
         <source>Ctrl+PgDown</source>
         <translation>Ctrl+PgDown</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1475"/>
+        <location filename="../../Form_Files/main.ui" line="1587"/>
         <source>&amp;Close Tab</source>
         <translation>&amp;Затвори картицу</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1478"/>
+        <location filename="../../Form_Files/main.ui" line="1590"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1483"/>
+        <location filename="../../Form_Files/main.ui" line="1595"/>
         <source>Split At &amp;Markers</source>
         <translation>Раздвоји на &amp;маркерима</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1486"/>
+        <location filename="../../Form_Files/main.ui" line="1598"/>
         <source>Split At Sigil split file markers</source>
         <translation>Раздвоји на Сигил маркерима за раздвајање датотеке</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1489"/>
+        <location filename="../../Form_Files/main.ui" line="1601"/>
         <source>F6</source>
         <translation>F6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1494"/>
+        <location filename="../../Form_Files/main.ui" line="1606"/>
         <source>Split &amp;Marker</source>
         <translation>&amp;Маркер за раздвајање датотеке</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1497"/>
+        <location filename="../../Form_Files/main.ui" line="1609"/>
         <source>Insert Sigil split file marker</source>
         <translation>Уметни Сигил маркер за раздвајање датотеке</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1500"/>
+        <location filename="../../Form_Files/main.ui" line="1612"/>
         <source>Ctrl+Shift+Return</source>
         <translation>Ctrl+Shift+Return</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1505"/>
+        <location filename="../../Form_Files/main.ui" line="1617"/>
         <source>User &amp;Guide...</source>
         <translation>Корисничко &amp;упутство...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1508"/>
+        <location filename="../../Form_Files/main.ui" line="1620"/>
         <source>User Guide</source>
         <translation>Корисничко упутство</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1511"/>
+        <location filename="../../Form_Files/main.ui" line="1623"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1516"/>
+        <location filename="../../Form_Files/main.ui" line="1628"/>
         <source>&amp;Frequently Asked Questions...</source>
         <translation>&amp;Често постављена питања...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1519"/>
+        <location filename="../../Form_Files/main.ui" line="1631"/>
         <source>Frequently Asked Questions</source>
         <translation>Често постављена питања</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1524"/>
+        <location filename="../../Form_Files/main.ui" line="1636"/>
         <source>&amp;Tutorials...</source>
         <translation>&amp;Упутства...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1527"/>
+        <location filename="../../Form_Files/main.ui" line="1639"/>
         <source>Tutorials</source>
         <translation>Упутства</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1532"/>
+        <location filename="../../Form_Files/main.ui" line="1644"/>
         <source>Well-Formed Check &amp;EPUB</source>
         <translation>Провера добре обликованости &amp;EPUB</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1535"/>
+        <location filename="../../Form_Files/main.ui" line="1647"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Well-Formed Check EPUB&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Verify your document complies with minimum needed to be successfully parsed. This does not indicate compliance with the relevant epub standards.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Провера добре обликованости EPUB&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Проверава да ли је ваш документ сагласан са минимумом који је потребан да би био успешно рашчлањен. Ово не показује сагласност са релевантним  epub стандардима.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1538"/>
+        <location filename="../../Form_Files/main.ui" line="1650"/>
         <source>F7</source>
         <translation>F7</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1543"/>
+        <location filename="../../Form_Files/main.ui" line="1655"/>
         <source>Validate Stylesheets With &amp;W3C</source>
         <translation>Потврди стилове са &amp;W3C</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1546"/>
+        <location filename="../../Form_Files/main.ui" line="1658"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Validate Stylesheets with W3C&lt;/b&gt;&lt;/p&gt;
 
@@ -7840,12 +8457,12 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1559"/>
+        <location filename="../../Form_Files/main.ui" line="1671"/>
         <source>&amp;Spellcheck...</source>
         <translation>&amp;Провера правописа...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1562"/>
+        <location filename="../../Form_Files/main.ui" line="1674"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Spellcheck&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Find all misspelled words and allow you to add them to a dictionary or ignore them.&lt;/p&gt;</source>
@@ -7854,102 +8471,102 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Пронађи све неисправне речи и омогући додавање у речник или њихово игнорисање.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1567"/>
+        <location filename="../../Form_Files/main.ui" line="1679"/>
         <source>Alt+Q</source>
         <translation>Alt+Q</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1575"/>
+        <location filename="../../Form_Files/main.ui" line="1687"/>
         <source>&amp;Highlight Misspelled Words</source>
         <translation>&amp;Истакнуте неисправне речи</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1578"/>
+        <location filename="../../Form_Files/main.ui" line="1690"/>
         <source>Enable or disable highlighting of misspelled words in Code View.</source>
         <translation>Омогући или онемогући истицање неисправних речи у Приказу кода.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1583"/>
+        <location filename="../../Form_Files/main.ui" line="1695"/>
         <source>&amp;Next Misspelled Word</source>
         <translation>&amp;Следећа неисправна реч</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1586"/>
+        <location filename="../../Form_Files/main.ui" line="1698"/>
         <source>Find the next misspelled word in the book.</source>
         <translation>Пронађи следећу неисправну реч у књизи.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1589"/>
+        <location filename="../../Form_Files/main.ui" line="1701"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1594"/>
+        <location filename="../../Form_Files/main.ui" line="1706"/>
         <source>&amp;Add Misspelled Word</source>
         <translation>&amp;Додај неисправну реч</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1597"/>
+        <location filename="../../Form_Files/main.ui" line="1709"/>
         <source>Add the current misspelled word under the caret to the default user dictionary.</source>
         <translation>Додајте тренутно погрешну реч под знак за уметање на подразумевани кориснички речник.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1602"/>
+        <location filename="../../Form_Files/main.ui" line="1714"/>
         <source>&amp;Ignore Misspelled Word</source>
         <translation>&amp;Игнориши неисправну реч</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1605"/>
+        <location filename="../../Form_Files/main.ui" line="1717"/>
         <source>Ignore the current misspelled word under the caret until Sigil is restarted.</source>
         <translation>Игнориши тренутну погрешно написану реч под знаком за уметање све док се Сигил поново не покрене.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1610"/>
+        <location filename="../../Form_Files/main.ui" line="1722"/>
         <source>&amp;Clear Ignored Words</source>
         <translation>&amp;Очисти неисправне речи</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1613"/>
+        <location filename="../../Form_Files/main.ui" line="1725"/>
         <source>Clear currently ignored words from Spellcheck without having to restart Sigil.</source>
         <translation>Очисти тренутно игорисане речи са провере правописа без поновног покретања програма.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1618"/>
+        <location filename="../../Form_Files/main.ui" line="1730"/>
         <source>&amp;Index Editor...</source>
         <translation>&amp;Едитор индекса...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1621"/>
+        <location filename="../../Form_Files/main.ui" line="1733"/>
         <source>Ctrl+Alt+I</source>
         <translation>Ctrl+Alt+I</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1626"/>
+        <location filename="../../Form_Files/main.ui" line="1738"/>
         <source>&amp;Delete Unused Media Files...</source>
         <translation>&amp;Обриши некоришћене медијске датотеке...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1631"/>
+        <location filename="../../Form_Files/main.ui" line="1743"/>
         <source>Delete &amp;Unused Stylesheet Classes...</source>
         <translation>Уклони &amp;некоришћене стилове...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1636"/>
+        <location filename="../../Form_Files/main.ui" line="1748"/>
         <source>&amp;Reports...</source>
         <translation>&amp;Извештај...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1639"/>
+        <location filename="../../Form_Files/main.ui" line="1751"/>
         <source>Ctrl+Shift+R</source>
         <translation>Ctrl+Shift+R</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1648"/>
+        <location filename="../../Form_Files/main.ui" line="1760"/>
         <source>&amp;Donate...</source>
         <translation>&amp;Донирајте...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1651"/>
+        <location filename="../../Form_Files/main.ui" line="1763"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Donate&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Donate to support Sigil.&lt;/p&gt;
@@ -7960,427 +8577,627 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1659"/>
+        <location filename="../../Form_Files/main.ui" line="1771"/>
         <source>Close &amp;Other Tabs</source>
         <translation>Затвори &amp;остале картице</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1662"/>
+        <location filename="../../Form_Files/main.ui" line="1774"/>
         <source>Ctrl+Alt+W</source>
         <translation>Ctrl+Alt+W</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1667"/>
+        <location filename="../../Form_Files/main.ui" line="1779"/>
         <source>Go To &amp;Line...</source>
         <translation>Иди на &amp;линију...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1670"/>
+        <location filename="../../Form_Files/main.ui" line="1782"/>
         <source>Ctrl+/</source>
         <translation>Ctrl+/</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1675"/>
+        <location filename="../../Form_Files/main.ui" line="1787"/>
         <source>Find &amp;Next</source>
         <translation>Пронађи &amp;следеће</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1678"/>
+        <location filename="../../Form_Files/main.ui" line="1790"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1683"/>
+        <location filename="../../Form_Files/main.ui" line="1795"/>
         <source>Find &amp;Previous</source>
         <translation>Пронађи &amp;претходно</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1686"/>
+        <location filename="../../Form_Files/main.ui" line="1798"/>
         <source>Ctrl+Shift+G</source>
         <translation>Ctrl+Shift+G</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1691"/>
+        <location filename="../../Form_Files/main.ui" line="1803"/>
         <source>Replace</source>
         <translation>Замени</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1694"/>
+        <location filename="../../Form_Files/main.ui" line="1806"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1699"/>
+        <location filename="../../Form_Files/main.ui" line="1811"/>
         <source>&amp;Replace/Find Next</source>
         <translation>&amp;Замени/пронађи следеће</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1702"/>
+        <location filename="../../Form_Files/main.ui" line="1814"/>
         <source>Ctrl+]</source>
         <translation>Ctrl+]</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1707"/>
+        <location filename="../../Form_Files/main.ui" line="1819"/>
         <source>R&amp;eplace/Find Previous</source>
         <translation>З&amp;амени/пронађи претходно</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1710"/>
+        <location filename="../../Form_Files/main.ui" line="1822"/>
         <source>Ctrl+[</source>
         <translation>Ctrl+[</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1715"/>
+        <location filename="../../Form_Files/main.ui" line="1827"/>
         <source>Replace &amp;All</source>
         <translation>Замени &amp;све</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1718"/>
+        <location filename="../../Form_Files/main.ui" line="1830"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1723"/>
+        <location filename="../../Form_Files/main.ui" line="1835"/>
         <source>&amp;Count All</source>
         <translation>П&amp;реброј све</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1726"/>
+        <location filename="../../Form_Files/main.ui" line="1838"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1731"/>
+        <location filename="../../Form_Files/main.ui" line="1843"/>
         <source>Mar&amp;k Selected Text</source>
         <translation>Озна&amp;чи селектован текст</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1739"/>
+        <location filename="../../Form_Files/main.ui" line="1851"/>
         <source>Find &amp;Next In File</source>
         <translation>&amp;Пронађи следеће у датотеци</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1744"/>
+        <location filename="../../Form_Files/main.ui" line="1856"/>
         <source>&amp;Replace Next In File</source>
         <translation>&amp;Замени следеће у датотеци</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1749"/>
+        <location filename="../../Form_Files/main.ui" line="1861"/>
         <source>Replace &amp;All In File</source>
         <translation>Замени &amp;све у датотеци</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1754"/>
+        <location filename="../../Form_Files/main.ui" line="1866"/>
         <source>&amp;Count All In File</source>
         <translation>&amp;Изброј све у датотеци</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1759"/>
+        <location filename="../../Form_Files/main.ui" line="1871"/>
         <source>&amp;Saved Searches...</source>
         <translation>&amp;Сачувана претрага...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1762"/>
+        <location filename="../../Form_Files/main.ui" line="1874"/>
         <source>Ctrl+Alt+F</source>
         <translation>Ctrl+Alt+F</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1767"/>
+        <location filename="../../Form_Files/main.ui" line="1879"/>
         <source>&amp;Clip Editor...</source>
         <translation>&amp;Едитор шаблона...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1770"/>
+        <location filename="../../Form_Files/main.ui" line="1882"/>
         <source>Open the Clip Editor.</source>
         <translation>Отвори едитор шаблона.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1773"/>
+        <location filename="../../Form_Files/main.ui" line="1885"/>
         <source>Ctrl+Alt+C</source>
         <translation>Ctrl+Alt+C</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1778"/>
+        <location filename="../../Form_Files/main.ui" line="1890"/>
         <source>Clip &amp;1</source>
         <translation>Шаблон &amp;1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1781"/>
+        <location filename="../../Form_Files/main.ui" line="1893"/>
         <source>Insert Clip 1</source>
         <translation>Уметни шаблон 1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1784"/>
+        <location filename="../../Form_Files/main.ui" line="1896"/>
         <source>Ctrl+Alt+1</source>
         <translation>Ctrl+Alt+1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1789"/>
+        <location filename="../../Form_Files/main.ui" line="1901"/>
         <source>Clip &amp;2</source>
         <translation>Шаблон 2&amp;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1792"/>
+        <location filename="../../Form_Files/main.ui" line="1904"/>
         <source>Insert Clip 2</source>
         <translation>Уметни шаблон 2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1795"/>
+        <location filename="../../Form_Files/main.ui" line="1907"/>
         <source>Ctrl+Alt+2</source>
         <translation>Ctrl+Alt+2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1800"/>
+        <location filename="../../Form_Files/main.ui" line="1912"/>
         <source>Clip &amp;3</source>
         <translation>Шаблон &amp;3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1803"/>
+        <location filename="../../Form_Files/main.ui" line="1915"/>
         <source>Insert Clip 3</source>
         <translation>Уметни шаблон 3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1806"/>
+        <location filename="../../Form_Files/main.ui" line="1918"/>
         <source>Ctrl+Alt+3</source>
         <translation>Ctrl+Alt+3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1811"/>
+        <location filename="../../Form_Files/main.ui" line="1923"/>
         <source>Clip &amp;4</source>
         <translation>Шаблон &amp;4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1814"/>
+        <location filename="../../Form_Files/main.ui" line="1926"/>
         <source>Insert Clip 4</source>
         <translation>Уметни шаблон 4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1817"/>
+        <location filename="../../Form_Files/main.ui" line="1929"/>
         <source>Ctrl+Alt+4</source>
         <translation>Ctrl+Alt+4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1822"/>
+        <location filename="../../Form_Files/main.ui" line="1934"/>
         <source>Clip &amp;5</source>
         <translation>Шаблон &amp;5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1825"/>
+        <location filename="../../Form_Files/main.ui" line="1937"/>
         <source>Insert Clip 5</source>
         <translation>Уметни шаблон 5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1828"/>
+        <location filename="../../Form_Files/main.ui" line="1940"/>
         <source>Ctrl+Alt+5</source>
         <translation>Ctrl+Alt+5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1833"/>
+        <location filename="../../Form_Files/main.ui" line="1945"/>
         <source>Clip &amp;6</source>
         <translation>Шаблон &amp;6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1836"/>
+        <location filename="../../Form_Files/main.ui" line="1948"/>
         <source>Insert Clip 6</source>
         <translation>Уметни шаблон 6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1839"/>
+        <location filename="../../Form_Files/main.ui" line="1951"/>
         <source>Ctrl+Alt+6</source>
         <translation>Ctrl+Alt+6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1844"/>
+        <location filename="../../Form_Files/main.ui" line="1956"/>
         <source>Clip &amp;7</source>
         <translation>Шаблон &amp;7</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1847"/>
+        <location filename="../../Form_Files/main.ui" line="1959"/>
         <source>Insert Clip 7</source>
         <translation>Уметни шаблон 7</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1850"/>
+        <location filename="../../Form_Files/main.ui" line="1962"/>
         <source>Ctrl+Alt+7</source>
         <translation>Ctrl+Alt+7</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1855"/>
+        <location filename="../../Form_Files/main.ui" line="1967"/>
         <source>Clip &amp;8</source>
         <translation>Шаблон &amp;8</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1858"/>
+        <location filename="../../Form_Files/main.ui" line="1970"/>
         <source>Insert Clip 8</source>
         <translation>Уметни шаблон 8</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1861"/>
+        <location filename="../../Form_Files/main.ui" line="1973"/>
         <source>Ctrl+Alt+8</source>
         <translation>Ctrl+Alt+8</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1866"/>
+        <location filename="../../Form_Files/main.ui" line="1978"/>
         <source>Clip &amp;9</source>
         <translation>Шаблон &amp;9</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1869"/>
+        <location filename="../../Form_Files/main.ui" line="1981"/>
         <source>Insert Clip 9</source>
         <translation>Уметни шаблон 9</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1872"/>
+        <location filename="../../Form_Files/main.ui" line="1984"/>
         <source>Ctrl+Alt+9</source>
         <translation>Ctrl+Alt+9</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1877"/>
+        <location filename="../../Form_Files/main.ui" line="1989"/>
         <source>Clip 1&amp;0</source>
         <translation>Шаблон 1&amp;0</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1880"/>
+        <location filename="../../Form_Files/main.ui" line="1992"/>
         <source>Insert Clip 10</source>
         <translation>Уметни шаблон 10</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1883"/>
+        <location filename="../../Form_Files/main.ui" line="1995"/>
         <source>Ctrl+Alt+0</source>
         <translation>Ctrl+Alt+0</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1888"/>
+        <location filename="../../Form_Files/main.ui" line="2000"/>
         <source>Clip 11</source>
         <translation>Шаблон 11</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1891"/>
+        <location filename="../../Form_Files/main.ui" line="2003"/>
         <source>Insert Clip 11</source>
         <translation>Уметни шаблон 11</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1896"/>
+        <location filename="../../Form_Files/main.ui" line="2008"/>
         <source>Clip 12</source>
         <translation>Шаблон 12</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1899"/>
+        <location filename="../../Form_Files/main.ui" line="2011"/>
         <source>Insert Clip 12</source>
         <translation>Уметни шаблон 12</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1904"/>
+        <location filename="../../Form_Files/main.ui" line="2016"/>
         <source>Clip 13</source>
         <translation>Шаблон 13</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1907"/>
+        <location filename="../../Form_Files/main.ui" line="2019"/>
         <source>Insert Clip 13</source>
         <translation>Уметни шаблон 13</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1912"/>
+        <location filename="../../Form_Files/main.ui" line="2024"/>
         <source>Clip 14</source>
         <translation>Шаблон 14</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1915"/>
+        <location filename="../../Form_Files/main.ui" line="2027"/>
         <source>Insert Clip 14</source>
         <translation>Уметни шаблон 14</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1920"/>
+        <location filename="../../Form_Files/main.ui" line="2032"/>
         <source>Clip 15</source>
         <translation>Шаблон 15</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1923"/>
+        <location filename="../../Form_Files/main.ui" line="2035"/>
         <source>Insert Clip 15</source>
         <translation>Уметни шаблон 15</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1928"/>
+        <location filename="../../Form_Files/main.ui" line="2040"/>
         <source>Clip 16</source>
         <translation>Шаблон 16</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1931"/>
+        <location filename="../../Form_Files/main.ui" line="2043"/>
         <source>Insert Clip 16</source>
         <translation>Уметни шаблон 16</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1936"/>
+        <location filename="../../Form_Files/main.ui" line="2048"/>
         <source>Clip 17</source>
         <translation>Шаблон 17</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1939"/>
+        <location filename="../../Form_Files/main.ui" line="2051"/>
         <source>Insert Clip 17</source>
         <translation>Уметни шаблон 17</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1944"/>
+        <location filename="../../Form_Files/main.ui" line="2056"/>
         <source>Clip 18</source>
         <translation> Шаблон 18</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1947"/>
+        <location filename="../../Form_Files/main.ui" line="2059"/>
         <source>Insert Clip 18</source>
         <translation>Уметни шаблон 18</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1952"/>
+        <location filename="../../Form_Files/main.ui" line="2064"/>
         <source>Clip 19</source>
         <translation> Шаблон 19</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1955"/>
+        <location filename="../../Form_Files/main.ui" line="2067"/>
         <source>Insert Clip 19</source>
         <translation>Уметни шаблон 19</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1960"/>
+        <location filename="../../Form_Files/main.ui" line="2072"/>
         <source>Clip 20</source>
         <translation>Шаблон 20</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1963"/>
+        <location filename="../../Form_Files/main.ui" line="2075"/>
         <source>Insert Clip 20</source>
         <translation>Уметни шаблон 20</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1968"/>
+        <location filename="../../Form_Files/main.ui" line="2081"/>
+        <source>Clip 21</source>
+        <translation>Шаблон 21</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2084"/>
+        <source>Insert Clip 21</source>
+        <translation>Уметни шаблон 21</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2089"/>
+        <source>Clip 22</source>
+        <translation>Шаблон 22</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2092"/>
+        <source>Insert Clip 22</source>
+        <translation>Уметни шаблон 22</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2097"/>
+        <source>Clip 23</source>
+        <translation>Шаблон 23</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2100"/>
+        <source>Insert Clip 23</source>
+        <translation>Уметни шаблон 23</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2105"/>
+        <source>Clip 24</source>
+        <translation>Шаблон 24</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2108"/>
+        <source>Insert Clip 24</source>
+        <translation>Уметни шаблон 24</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2113"/>
+        <source>Clip 25</source>
+        <translation>Шаблон 25</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2116"/>
+        <source>Insert Clip 25</source>
+        <translation>Уметни шаблон 25</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2121"/>
+        <source>Clip 26</source>
+        <translation>Шаблон 26</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2124"/>
+        <source>Insert Clip 26</source>
+        <translation>Уметни шаблон 26</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2129"/>
+        <source>Clip 27</source>
+        <translation>Шаблон 27</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2132"/>
+        <source>Insert Clip 27</source>
+        <translation>Уметни шаблон 27</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2137"/>
+        <source>Clip 28</source>
+        <translation>Шаблон 28</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2140"/>
+        <source>Insert Clip 28</source>
+        <translation>Уметни шаблон 28</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2145"/>
+        <source>Clip 29</source>
+        <translation>Шаблон 29</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2148"/>
+        <source>Insert Clip 29</source>
+        <translation>Уметни шаблон 29</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2153"/>
+        <source>Clip 30</source>
+        <translation>Шаблон 30</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2156"/>
+        <source>Insert Clip 30</source>
+        <translation>Уметни шаблон 30</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2161"/>
+        <source>Clip 31</source>
+        <translation>Шаблон 31</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2164"/>
+        <source>Insert Clip 31</source>
+        <translation>Уметни шаблон 31</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2169"/>
+        <source>Clip 32</source>
+        <translation>Шаблон 32</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2172"/>
+        <source>Insert Clip 32</source>
+        <translation>Уметни шаблон 32</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2177"/>
+        <source>Clip 33</source>
+        <translation>Шаблон 33</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2180"/>
+        <source>Insert Clip 33</source>
+        <translation>Уметни шаблон 33</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2185"/>
+        <source>Clip 34</source>
+        <translation>Шаблон 34</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2188"/>
+        <source>Insert Clip 34</source>
+        <translation>Уметни шаблон 34</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2193"/>
+        <source>Clip 35</source>
+        <translation>Шаблон 35</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2196"/>
+        <source>Insert Clip 35</source>
+        <translation>Уметни шаблон 35</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2201"/>
+        <source>Clip 36</source>
+        <translation>Шаблон 36</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2204"/>
+        <source>Insert Clip 36</source>
+        <translation>Уметни шаблон 36</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2209"/>
+        <source>Clip 37</source>
+        <translation>Шаблон 37</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2212"/>
+        <source>Insert Clip 37</source>
+        <translation>Уметни шаблон 37</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2217"/>
+        <source>Clip 38</source>
+        <translation>Шаблон 38</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2220"/>
+        <source>Insert Clip 38</source>
+        <translation>Уметни шаблон 38</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2225"/>
+        <source>Clip 39</source>
+        <translation>Шаблон 39</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2228"/>
+        <source>Insert Clip 39</source>
+        <translation>Уметни шаблон 39</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2233"/>
+        <source>Clip 40</source>
+        <translation>Шаблон 40</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2236"/>
+        <source>Insert Clip 40</source>
+        <translation>Уметни шаблон 40</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2245"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Подешавања...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1971"/>
+        <location filename="../../Form_Files/main.ui" line="2248"/>
         <source>F5</source>
         <translation>F5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1976"/>
+        <location filename="../../Form_Files/main.ui" line="2253"/>
         <source>&amp;Zoom Reset</source>
         <translation>&amp;Поврати увећање</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1979"/>
+        <location filename="../../Form_Files/main.ui" line="2256"/>
         <source>Zoom Reset</source>
         <translation>Поврати увећање</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1982"/>
+        <location filename="../../Form_Files/main.ui" line="2259"/>
         <source>Ctrl+0</source>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1994"/>
+        <location filename="../../Form_Files/main.ui" line="2271"/>
         <source>Heading &amp;1</source>
         <translation>Наслов &amp;1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1997"/>
+        <location filename="../../Form_Files/main.ui" line="2274"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 1&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 1 heading.&lt;/p&gt;</source>
@@ -8389,17 +9206,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Форматирај текст као наслов нивоа 1.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2002"/>
+        <location filename="../../Form_Files/main.ui" line="2279"/>
         <source>Ctrl+1</source>
         <translation>Ctrl+1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2014"/>
+        <location filename="../../Form_Files/main.ui" line="2291"/>
         <source>Heading &amp;2</source>
         <translation>Наслов &amp;2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2017"/>
+        <location filename="../../Form_Files/main.ui" line="2294"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 2&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 2 heading.&lt;/p&gt;</source>
@@ -8408,17 +9225,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Форматирај текст као наслов нивоа 2.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2022"/>
+        <location filename="../../Form_Files/main.ui" line="2299"/>
         <source>Ctrl+2</source>
         <translation>Ctrl+2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2034"/>
+        <location filename="../../Form_Files/main.ui" line="2311"/>
         <source>Heading &amp;3</source>
         <translation>Наслов &amp;3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2037"/>
+        <location filename="../../Form_Files/main.ui" line="2314"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 3&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 3 heading.&lt;/p&gt;</source>
@@ -8427,17 +9244,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Форматирај текст као наслов нивоа 3.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2042"/>
+        <location filename="../../Form_Files/main.ui" line="2319"/>
         <source>Ctrl+3</source>
         <translation>Ctrl+3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2054"/>
+        <location filename="../../Form_Files/main.ui" line="2331"/>
         <source>Heading &amp;4</source>
         <translation>Наслов &amp;4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2057"/>
+        <location filename="../../Form_Files/main.ui" line="2334"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 4&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 4 heading.&lt;/p&gt;</source>
@@ -8446,17 +9263,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Форматирај текст као наслов нивоа 4.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2062"/>
+        <location filename="../../Form_Files/main.ui" line="2339"/>
         <source>Ctrl+4</source>
         <translation>Ctrl+4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2074"/>
+        <location filename="../../Form_Files/main.ui" line="2351"/>
         <source>Heading &amp;5</source>
         <translation>Наслов &amp;5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2077"/>
+        <location filename="../../Form_Files/main.ui" line="2354"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 5&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 5 heading.&lt;/p&gt;</source>
@@ -8465,17 +9282,17 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Форматирај текст као наслов нивоа 5.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2082"/>
+        <location filename="../../Form_Files/main.ui" line="2359"/>
         <source>Ctrl+5</source>
         <translation>Ctrl+5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2094"/>
+        <location filename="../../Form_Files/main.ui" line="2371"/>
         <source>Heading &amp;6</source>
         <translation>Наслов &amp;6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2097"/>
+        <location filename="../../Form_Files/main.ui" line="2374"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 6&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 6 heading.&lt;/p&gt;</source>
@@ -8484,56 +9301,56 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Форматирај текст као наслов нивоа 6.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2102"/>
+        <location filename="../../Form_Files/main.ui" line="2379"/>
         <source>Ctrl+6</source>
         <translation>Ctrl+6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2114"/>
+        <location filename="../../Form_Files/main.ui" line="2391"/>
         <source>&amp;Normal</source>
         <translation>&amp;Нормално</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2117"/>
+        <location filename="../../Form_Files/main.ui" line="2394"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Paragraph&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a normal paragraph.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Параграф&lt;/b&gt;&lt;/p&gt;
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Пасус&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Форматирај параграф као нормалан параграф.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Форматирај пасус као обичан пасус.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2122"/>
+        <location filename="../../Form_Files/main.ui" line="2399"/>
         <source>Ctrl+7</source>
         <translation>Ctrl+7</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2130"/>
+        <location filename="../../Form_Files/main.ui" line="2407"/>
         <source>&amp;Preserve Existing Attributes</source>
         <translation>&amp;Сачувај постојеће атрибуте</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2133"/>
+        <location filename="../../Form_Files/main.ui" line="2410"/>
         <source>When applying this style, preserve any existing attributes on the tag</source>
         <translation>Када се примењује овај стил, задржи све постојеће атрибуте ознаке</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2138"/>
+        <location filename="../../Form_Files/main.ui" line="2415"/>
         <source>Blank HTML File</source>
         <translation>Празна HTML датотека</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2141"/>
+        <location filename="../../Form_Files/main.ui" line="2418"/>
         <source>Add a new blank HTML file to the book.</source>
-        <translation>Додаје нову празану HTML датотеку у књигу.</translation>
+        <translation>Додаје нову празну HTML датотеку у књигу.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2150"/>
+        <location filename="../../Form_Files/main.ui" line="2427"/>
         <source>Existing Files...</source>
         <translation>Постојеће датотеке...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2153"/>
+        <location filename="../../Form_Files/main.ui" line="2430"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Add Existing Files&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Add files from your computer to the book.&lt;/p&gt;</source>
@@ -8542,127 +9359,127 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Додаје датотеке са компјутера у књигу.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2160"/>
+        <location filename="../../Form_Files/main.ui" line="2437"/>
         <source>Blank Stylesheet</source>
         <translation>Празан стил</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2163"/>
+        <location filename="../../Form_Files/main.ui" line="2440"/>
         <source>Add a new blank stylesheet to the book.</source>
         <translation>Додај нов празан стил у књигу.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2168"/>
+        <location filename="../../Form_Files/main.ui" line="2445"/>
         <source>Blank SVG Image</source>
         <translation>Празна SVG слика</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2171"/>
+        <location filename="../../Form_Files/main.ui" line="2448"/>
         <source>Add a new blank svg image file to the book.</source>
-        <translation>Додаје нову празану векторску слику у књигу.</translation>
+        <translation>Додаје нову празну векторску слику у књигу.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2176"/>
+        <location filename="../../Form_Files/main.ui" line="2453"/>
         <source>Pre&amp;vious File</source>
         <translation>Пре&amp;тходна датотека</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2179"/>
+        <location filename="../../Form_Files/main.ui" line="2456"/>
         <source>Open previous file of the same type.</source>
         <translation>Отвори претходну датотеку истог типа.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2182"/>
+        <location filename="../../Form_Files/main.ui" line="2459"/>
         <source>Alt+PgUp</source>
         <translation>Alt+PgUp</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2187"/>
+        <location filename="../../Form_Files/main.ui" line="2464"/>
         <source>Next &amp;File</source>
         <translation>Следећа &amp;датотека</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2190"/>
+        <location filename="../../Form_Files/main.ui" line="2467"/>
         <source>Open next file of the same type.</source>
         <translation>Отвори следећу датотеку истог типа.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2193"/>
+        <location filename="../../Form_Files/main.ui" line="2470"/>
         <source>Alt+PgDown</source>
         <translation>Alt+PgDown</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2198"/>
+        <location filename="../../Form_Files/main.ui" line="2475"/>
         <source>&amp;Add To Index Editor</source>
         <translation>&amp;Додај у едитор индекса</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2201"/>
+        <location filename="../../Form_Files/main.ui" line="2478"/>
         <source>Add the selected text to the Index Editor.</source>
         <translation>Додај селектовани текст у едитор индекса.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2206"/>
+        <location filename="../../Form_Files/main.ui" line="2483"/>
         <source>&amp;Mark For Index</source>
         <translation>&amp;Означи за индекс</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2209"/>
+        <location filename="../../Form_Files/main.ui" line="2486"/>
         <source>Mark the selected text for inclusion in the Index.</source>
         <translation>Означи селектован текст за укључење у индекс.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2212"/>
+        <location filename="../../Form_Files/main.ui" line="2489"/>
         <source>Ctrl+Shift+X</source>
         <translation>Ctrl+Shift+X</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2217"/>
+        <location filename="../../Form_Files/main.ui" line="2494"/>
         <source>&amp;Create Index</source>
         <translation>&amp;Креирај индекс</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2220"/>
+        <location filename="../../Form_Files/main.ui" line="2497"/>
         <source>Generate a new Index HTML file.</source>
         <translation>Генериши нову HTML датотеку индекса.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2225"/>
+        <location filename="../../Form_Files/main.ui" line="2502"/>
         <source>&amp;Create HTML Table Of Contents</source>
         <translation>&amp;Креирај HTML садржаја</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2228"/>
+        <location filename="../../Form_Files/main.ui" line="2505"/>
         <source>Create a new HTML file using the current TOC.</source>
         <translation>Креирај нову HTML датотеку користећи тренутни TOC.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2233"/>
+        <location filename="../../Form_Files/main.ui" line="2510"/>
         <source>Book&amp;mark Location</source>
         <translation>Локац&amp;ија забелешки</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2236"/>
+        <location filename="../../Form_Files/main.ui" line="2513"/>
         <source>Ctrl+Alt+B</source>
         <translation>Ctrl+Alt+B</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2241"/>
+        <location filename="../../Form_Files/main.ui" line="2518"/>
         <source>&amp;Go To Link Or Style</source>
         <translation>&amp;Иди на линк или стил</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2244"/>
+        <location filename="../../Form_Files/main.ui" line="2521"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2253"/>
+        <location filename="../../Form_Files/main.ui" line="2530"/>
         <source>&amp;Back</source>
         <translation>&amp;Врати</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2256"/>
+        <location filename="../../Form_Files/main.ui" line="2533"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Back&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Go back to where you last went to a link or style, or bookmarked your location.&lt;/p&gt;
@@ -8673,147 +9490,320 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2262"/>
+        <location filename="../../Form_Files/main.ui" line="2539"/>
         <source>Ctrl+\</source>
         <translation>Ctrl+\</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2267"/>
+        <location filename="../../Form_Files/main.ui" line="2544"/>
         <source>Edit/Paste From Clipboard &amp;History...</source>
         <translation>Уреди/Налепи из &amp;Историје клипборда...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2270"/>
+        <location filename="../../Form_Files/main.ui" line="2547"/>
         <source>Ctrl+Alt+V</source>
         <translation>Ctrl+Alt+V</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2275"/>
+        <location filename="../../Form_Files/main.ui" line="2552"/>
         <source>&amp;Delete Line</source>
         <translation>&amp;Обриши линију</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2278"/>
+        <location filename="../../Form_Files/main.ui" line="2555"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2283"/>
+        <location filename="../../Form_Files/main.ui" line="2560"/>
         <source>Manage Plugins</source>
         <translation>Управљај додацима</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2292"/>
+        <location filename="../../Form_Files/main.ui" line="2569"/>
         <source>Run Plugin 1</source>
         <translation>Покрени Додатак 1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2301"/>
+        <location filename="../../Form_Files/main.ui" line="2578"/>
         <source>Run Plugin 2</source>
         <translation>Покрени Додатак 2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2310"/>
+        <location filename="../../Form_Files/main.ui" line="2587"/>
         <source>Run Plugin 3</source>
         <translation>Покрени Додатак 3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2319"/>
+        <location filename="../../Form_Files/main.ui" line="2596"/>
         <source>Run Plugin 4</source>
         <translation>Покрени Додатак 4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2328"/>
+        <location filename="../../Form_Files/main.ui" line="2605"/>
         <source>Run Plugin 5</source>
         <translation>Покрени Додатак 5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2333"/>
+        <location filename="../../Form_Files/main.ui" line="2614"/>
+        <source>Run Plugin 6</source>
+        <translation>Покрени Додатак 6</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2623"/>
+        <source>Run Plugin 7</source>
+        <translation>Покрени Додатак 7</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2632"/>
+        <source>Run Plugin 8</source>
+        <translation>Покрени Додатак 8</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2641"/>
+        <source>Run Plugin 9</source>
+        <translation>Покрени Додатак 9</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2650"/>
+        <source>Run Plugin 10</source>
+        <translation>Покрени Додатак 10</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2659"/>
+        <source>Launch External Xhtml Editor</source>
+        <translation>Покрени екстерни xhtml едитор</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2662"/>
+        <source>F2</source>
+        <translation>F2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2667"/>
         <source>Mend and &amp;Prettify All HTML Files</source>
         <translation>Поправи и &amp;улепшај све HTML датотеке</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2338"/>
+        <location filename="../../Form_Files/main.ui" line="2672"/>
         <source>&amp;Mend All HTML Files</source>
         <translation>&amp;Поправи све HTML датотеке</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2343"/>
+        <location filename="../../Form_Files/main.ui" line="2677"/>
         <source>&amp;Update Manifest Properties</source>
         <translation>&amp;Ажурирај својства манифеста</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2348"/>
-        <source>Generate NC&amp;X from Nav</source>
-        <translation>Генериши NC&amp;X од Nav</translation>
+        <location filename="../../Form_Files/main.ui" line="2682"/>
+        <source>Generate &amp;NCX/Guide for epub2 e-readers</source>
+        <translation>Генериши &amp;NCX/Водич за epub2 е-читаче</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="300"/>
+        <location filename="../../Form_Files/main.ui" line="2687"/>
+        <source>Create a Custom Empty Epub</source>
+        <translation>Креирај Прилагођени празан Epub</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2692"/>
+        <source>Remove the NCX and Guide</source>
+        <translation>Уклони NCX и Водич</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2701"/>
+        <source>Create Checkpoint for Epub</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2710"/>
+        <source>Create Epub from previous Checkpoint</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2719"/>
+        <source>Compare Epub against Checkpoint</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2728"/>
+        <source>Manage Checkpoint Repositories</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="367"/>
         <source>Input</source>
         <translation>Улаз</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="306"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="373"/>
         <source>Output</source>
         <translation>Излаз</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="318"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="385"/>
         <source>Validation</source>
         <translation>Потврђивање</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="464"/>
-        <source>Navigation cancelled as location no longer exists.</source>
-        <translation>Навигација је отказана јер локација више не постоји.</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="480"/>
-        <source>Location bookmarked.</source>
-        <translation>Локација је забележена.</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="527"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="759"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="967"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1113"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1495"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1582"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1637"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1645"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1662"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1674"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1777"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1785"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1799"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1804"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1817"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1825"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1836"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1841"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1853"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1863"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1868"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2087"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2094"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2108"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2113"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2137"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2169"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3454"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3460"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3466"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3508"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3514"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3520"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3677"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3884"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="4084"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="434"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="447"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="455"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="462"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1104"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1437"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1672"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1814"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2295"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2390"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2458"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2466"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2483"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2495"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2600"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2616"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2621"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2634"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2647"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2652"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2664"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2674"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2679"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2838"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2845"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2859"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2864"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2888"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2920"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4087"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4093"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4099"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4134"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4140"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4146"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4400"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4420"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4718"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4928"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="527"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="435"/>
+        <source>Are you sure you want to restructure this epub?
+This action cannot be reversed.</source>
+        <translation>Да ли сте сигурни да желите да реструктуирате овај epub?
+Након ове акције, нема повратка на старо.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="448"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="456"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="463"/>
+        <source>Restructure cancelled: %1, XML not well formed.</source>
+        <translation>Реструктурирање отказано: %1, XML није добро формиран.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="532"/>
+        <source>Restructure completed.</source>
+        <translation>Реструктурирање завршено.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="634"/>
+        <source>Checkpoint generation failed.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="640"/>
+        <source>Checkpoint saved.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="676"/>
+        <source>Checkout Failed. No checkpoints found</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="693"/>
+        <source>Checkout Failed. No checkpoint selected</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="718"/>
+        <source>Epub Generate from Tag Failed.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="723"/>
+        <source>Epub Generation succeeded</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="737"/>
+        <source>Repository Checkout</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="738"/>
+        <source>Your current book will be replaced losing any unsaved changes ... Are you sure you want to proceed?</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="762"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="786"/>
+        <source>Diff Failed. No checkpoints found</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="802"/>
+        <source>Diff Failed. No checkpoint selected for comparison</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="833"/>
+        <source>Results of Comparison</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="833"/>
+        <source>No differences were found.</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="864"/>
+        <source>External XHtml Editor works only on Html Resources or OPF Resources!</source>
+        <translation>Екстерни XHtml едитор функционише само за Html ресурсе или за OPF ресурсе!</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="871"/>
+        <source>No External Xhtml Editor has been specified:  See Preferences</source>
+        <translation>Није наведен екстерни xhtml едитор: погледајте Подешавања</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="878"/>
+        <source>Specified External Xhtml Editor path does not exist</source>
+        <translation>Наведена путања екстерног xhtml едитора не постоји</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="922"/>
+        <source>Executing External Xhtml Editor</source>
+        <translation>Извршавање екстерног xhtml едитора</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="925"/>
+        <source>Failed to Launch External Xhtml Editor</source>
+        <translation>Екстерни xhtml едитор није успео да се покрене</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1022"/>
+        <source>Navigation cancelled as location no longer exists.</source>
+        <translation>Навигација је отказана јер локација више не постоји.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1039"/>
+        <source>Location bookmarked.</source>
+        <translation>Локација је забележена.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1104"/>
         <source>Are you sure you want to open this external link?
 
 %1</source>
@@ -8822,420 +9812,441 @@ Stylesheets that are listed first take precedence over later stylesheets.</sourc
 %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="573"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1140"/>
         <source>was updated</source>
         <translation>је ажурирано</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="580"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1147"/>
         <source>Warning</source>
         <translation>Упозорење</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="580"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1147"/>
         <source>The file was NOT well formed and may be corrupted.</source>
         <translation>Датотека НИЈЕ добро формирана и можда је оштећена.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="608"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1175"/>
         <source>Opening this EPUB generated warnings.</source>
         <translation>Отварање овог EPUBа је генерисало упозорења.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="610"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1177"/>
         <source>Select Show Details for more information.</source>
         <translation>Одабери Прикажи детаље за више информација.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="650"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1305"/>
         <source>Sigil is closing...</source>
         <translation>Сигил се затвара...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="700"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1371"/>
         <source>New file created.</source>
         <translation>Креирана је нова датотека.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="721"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1396"/>
         <source>Open File</source>
         <translation>Отвори датотеку</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="758"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1436"/>
         <source>This file no longer exists. Click OK to remove it from the menu.
 %1</source>
         <translation>Овај датотека више не постоји. Кликните на ОК да бисте је уклонили из менија.
 %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="828"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1514"/>
         <source>Save File</source>
         <translation>Сачувај датотеку</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="882"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1568"/>
         <source>Save a Copy</source>
         <translation>Сачувај копију</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="944"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1607"/>
+        <source>Epub layout discarded.</source>
+        <translation>Epub распоред је одбачен.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1614"/>
+        <source>New epub created.</source>
+        <translation>Креиран је нови epub.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1649"/>
         <source>Go To Line</source>
         <translation>Иди на ред</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="944"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1649"/>
         <source>Line #</source>
         <translation>Ред #</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="967"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1672"/>
         <source>Image does not exist: </source>
         <translation>Слика не постоји:</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1037"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1725"/>
+        <source>or</source>
+        <translation>или</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1733"/>
         <source>No CSS styles named</source>
         <translation>Није именован ни један CSS стил</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1109"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1733"/>
+        <source>found, or stylesheet not linked.</source>
+        <translation>пронађено, или опис стилова није повезан</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1810"/>
         <source>&lt;html&gt;&lt;p&gt;The href &lt;b&gt;%1&lt;/b&gt; found in &lt;b&gt;%2&lt;/b&gt; does not exist (and there may be more). Splitting or merging under these conditions can result in broken links.&lt;/p&gt;&lt;p&gt;Do you still wish to continue?&lt;/p&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;p&gt;href &lt;b&gt;%1&lt;/b&gt; пронађен на &lt;b&gt;%2&lt;/b&gt; не постоји (а можда и више њих). Раздвајање или спајање под овим условима може да доведе до неисправних веза.&lt;/p&gt;&lt;p&gt;Да ли и даље желите да наставите?&lt;/p&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1131"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1834"/>
         <source>Add Cover</source>
         <translation>Додај корице...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1223"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1883"/>
+        <source>An existing Cover file has been found.</source>
+        <translation>Пронађена је постојећа слика омота.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1939"/>
         <source>Unexpected error. Only image files can be used for the cover.</source>
         <translation>Неочекивана грешка. За корице могу да се користе само датотеке слика.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1240"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1956"/>
         <source>Cover added.</source>
         <translation>Корица је додата.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1249"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1266"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1965"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1982"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2014"/>
         <source>Not Available for epub2.</source>
         <translation>Није доступно за epub2.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1257"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1973"/>
         <source>OPF Manifest Properties Updated.</source>
         <translation>Својства OPF манифеста су ажурирана.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1283"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1337"/>
-        <source>NCX generation failed.</source>
-        <translation>Генерисање NCX није успело.</translation>
+        <location filename="../../MainUI/MainWindow.cpp" line="2004"/>
+        <source>NCX and Guide removed.</source>
+        <translation>NCX и Водич успешно уклоњени.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1332"/>
-        <source>NCX generated.</source>
-        <translation>NCX је генерисан.</translation>
+        <location filename="../../MainUI/MainWindow.cpp" line="2031"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2063"/>
+        <source>NCX and Guide generation failed.</source>
+        <translation>Генерисање NCX и Водича није успело.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1485"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2101"/>
+        <source>NCX and Guide generated.</source>
+        <translation>NCX и Водич су успешно је генерисани.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="2185"/>
+        <source>An existing Index file has been found.</source>
+        <translation>Пронађена је постојећа датотека индекса.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="2276"/>
         <source>Styles deleted.</source>
         <translation>Стилови обрисани.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1495"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2284"/>
+        <source>Reports Being Generated.</source>
+        <translation>Извештаји се генеришу.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="2295"/>
         <source>Reports cancelled due to XML not well formed.</source>
         <translation>Извештаји су отказани јер XML није добро обликован.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1582"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2390"/>
         <source>Delete Unused Media Files cancelled due to XML not well formed.</source>
         <translation>Брисање некоришћених медијских датотека је отказано јер XML није добро обликован.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1635"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2456"/>
         <source>Unused media files deleted.</source>
         <translation>Некоришћене медијске датотеке су избрисане.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1637"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2458"/>
         <source>There are no unused image, video or audio files to delete.</source>
         <translation>Нема некоришћених датотека слика, видеа или звука за брисање.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1645"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2466"/>
         <source>Delete Unused Styles cancelled due to XML not well formed.</source>
         <translation>Брисање некоришћених стилова је отказано јер XML није добро обликован.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1662"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2483"/>
         <source>There are no unused stylesheet classes to delete.</source>
         <translation>Нема некоришћених класа описа стилова за брисање.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1674"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2495"/>
         <source>You cannot insert a file at this position.</source>
         <translation>На ову позицију не можете да уметнете датотеку.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1681"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2502"/>
         <source>Insert File</source>
         <translation>Уметни датотеку</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1726"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2554"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Датотека &quot;%1&quot; не постоји.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1777"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1804"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2600"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2621"/>
         <source>You cannot insert an id at this position.</source>
         <translation>Не можете да уметнете ид на ову позицију.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1785"/>
-        <source>You must select text before inserting a new id.</source>
-        <translation>Морате селектовати текст пре уметања новог ид.</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1799"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2616"/>
         <source>ID is invalid - must start with a letter, followed by letter number _ : - or .</source>
         <translation>ИД није исправан - мора да почне словом које прати број _ : - или .</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1817"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1841"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2634"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2652"/>
         <source>You cannot insert a link at this position.</source>
         <translation>Не можете да уметнете линк на ову позицију.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1825"/>
-        <source>You must select text before inserting a new link.</source>
-        <translation>Морате селектовати текст пре уметања новог линка.</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1836"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2647"/>
         <source>Link is invalid - cannot contain &apos;&lt;&apos; or &apos;&gt;&apos;</source>
         <translation>Линк је неисправан - не може садржати &apos;&lt;&apos; or &apos;&gt;&apos;</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1853"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2664"/>
         <source>You cannot mark an index at this position or without selecting text.</source>
         <translation>Не можете да маркирате индекс на овој позицији без обележавања текста. </translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1863"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2674"/>
         <source>Entry is invalid - cannot contain &apos;&lt;&apos; or &apos;&gt;&apos;</source>
         <translation>Ставка је неисправна - не може садржати &apos;&lt;&apos; or &apos;&gt;&apos;</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1868"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2679"/>
         <source>You cannot mark an index at this position.</source>
         <translation>Не можете да маркирате индекс на овој позицији.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1922"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1933"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2048"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2746"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2768"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2787"/>
         <source>Select the destination to paste into first.</source>
         <translation>Одаберите прво дестинацију за налепи.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1941"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2776"/>
         <source>Pasted clip entry %1.</source>
         <translation>Налепљена ставка шаблона %1.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2087"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2838"/>
         <source>One resource selected and there is no previous resource to merge into.</source>
         <translation>Изабран је један ресурс а нема претходних ресура са којим би требало да се споји.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2094"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2845"/>
         <source>Are you sure you want to merge the selected files?
 This action cannot be reversed.</source>
         <translation>Да ли сте сигурни да желите да спојите одабране датотеке?
 Резултат ове радња не може да се поништи.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2108"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2859"/>
         <source>Merge cancelled: %1, XML not well formed.</source>
         <translation>Спајање отказано: %1, XML није добро обликован.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2113"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2864"/>
         <source>Merge cancelled due to XML not well formed.</source>
         <translation>Спајање датотека није успело јер XML није добро формиран.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2137"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2888"/>
         <source>Cannot merge file %1</source>
         <translation>Датотека %1 не може да се споји</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2151"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2902"/>
         <source>Merge completed. You may need to regenerate or edit your Table Of Contents.</source>
         <translation>Спајање завршено. Можда ћете морати да регенеришете или уредите садржај.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2169"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2920"/>
         <source>Link Stylesheets cancelled: %1, XML not well formed.</source>
         <translation>Линк стила је оштећен: %1, XML није добро формиран.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2300"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3045"/>
         <source>Word updated.</source>
         <translation>Реч је ажурирана.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2382"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3117"/>
         <source>File(s) deleted.</source>
         <translation>Датотека/е обрисана/е.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2393"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3128"/>
         <source>Edit Table of Contents cancelled.</source>
         <translation>Измена садржаја је отказана.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2398"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3133"/>
         <source>Table Of Contents edited.</source>
         <translation>Садржај је измењен.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2416"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3151"/>
         <source>Generate TOC cancelled.</source>
         <translation>Генерисање садржаја отказано.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2440"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3176"/>
         <source>Table Of Contents generated.</source>
         <translation>Садржај је генерисан.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2442"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3178"/>
         <source>No Table Of Contents changes were necessary.</source>
         <translation>Није било неопходно да се промени садржај.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2578"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3251"/>
+        <source>An existing HTML Table of Contents file has been found.</source>
+        <translation>Пронађен је постојећи HTML садржај.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="3329"/>
         <source>Text selection marked.</source>
         <translation>Избор текста је означен.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2580"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2598"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3331"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3349"/>
         <source>Text selection unmarked.</source>
         <translation>Избор текста је одзначен.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2686"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3398"/>
         <source>Metadata Editor cancelled.</source>
         <translation>Едитор метаподатака је отказан.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2689"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3401"/>
         <source>Metadata edited.</source>
         <translation>Метаподаци су измењени.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2777"/>
-        <source>RunPlugin1</source>
-        <translation>ПокрениДодатак1</translation>
+        <location filename="../../MainUI/MainWindow.cpp" line="3509"/>
+        <source>RunPlugin</source>
+        <translation>Покрени Додатaк</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2778"/>
-        <source>RunPlugin2</source>
-        <translation>ПокрениДодатак2</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2779"/>
-        <source>RunPlugin3</source>
-        <translation>ПокрениДодатак3</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2780"/>
-        <source>RunPlugin4</source>
-        <translation>ПокрениДодатак4</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2781"/>
-        <source>RunPlugin5</source>
-        <translation>ПокрениДодатак5</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2812"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3534"/>
         <source>This EPUB does not contain any CSS stylesheets to validate.</source>
         <translation>Овај EPUB не садржи било какав CSS стил за потврђивање.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3355"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4001"/>
         <source>Line: %1, Col: %2</source>
         <translation>Лин: %1, Кол: %2</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3454"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4087"/>
         <source>File cannot be split at this position.</source>
         <translation>Датотека не може да се раздвоји на овој позицији.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3460"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4093"/>
         <source>Cannot split since it may not be an HTML file.</source>
         <translation>Раздвајање је немогуће јер можда није HTML датотека.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3466"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4099"/>
         <source>The Nav file cannot be split.</source>
         <translation>Nav датотека не може да се раздвоји.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3483"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4116"/>
         <source>Split completed.</source>
         <translation>Раздвајање је завршено.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3508"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4134"/>
         <source>Cannot split since at least one file is not an HTML file.</source>
         <translation>Раздвајање је немогуће јер најмање једна датотека није HTML датотека.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3514"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4140"/>
         <source>Cannot split: %1 XML is not well formed</source>
         <translation>Раздвајање је немогуће: %1 XML није добро обликован</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3520"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4146"/>
         <source>Cannot split since at least one file may not be an HTML file.</source>
         <translation>Раздвајање је немогуће јер најмање једна датотека можда није HTML датотека.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3553"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4179"/>
         <source>Split completed. You may need to update the Table of Contents.</source>
         <translation>Дељење је завршено. Можда ћете морати да ажурирате садржај.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3562"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4181"/>
         <source>No split file markers found. Use Insert-&gt;Split Marker.</source>
         <translation>Није пронађен ниједан маркер за раздвајање датотеке. Користите Уметање-&gt;Маркер за раздвајање.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3678"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4401"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Документ је измењен.
 Да ли желите да сачувате промене?</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3758"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4422"/>
+        <source>Should Sigil overwrite this file?</source>
+        <translation>Да ли да Сигил препише ову датотеку?</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="4593"/>
         <source>No importer for file type: %1</source>
         <translation>Нема увозника за тип датотеке: %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3765"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4600"/>
         <source>The following file was not loaded due to invalid content or not well formed XML:
 
 %1 (line %2: %3)
@@ -9248,117 +10259,191 @@ Try setting the Clean Source preference to Mend XHTML Source Code on Open and re
 Покушајте да поставите подешавање параметра Пречисти изворни код на Поправи XHTML изворни код приликом отварања и поновног учитавања.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3770"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4605"/>
         <source>Loading file...</source>
         <translation>Учитавање датотеке...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3784"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4619"/>
         <source>File loaded.</source>
         <translation>Датотека је учитана.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3811"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4646"/>
         <source>The creator of this file has encrypted it with DRM. Sigil cannot open such files.</source>
         <translation>Творац је шифровао ову датотеку користећи DRM. Сигил не може да отвори такве датотеке.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3818"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4653"/>
         <source>Cannot load EPUB: %1</source>
         <translation>Не могу учитати EPUB: %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3822"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4657"/>
         <source>Cannot load file %1: %2</source>
         <translation>Не могу учитати датотеку %1: %2</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3851"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4685"/>
         <source>Saving EPUB...</source>
         <translation>Чување EPUB...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3860"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4694"/>
         <source>Sigil cannot save files of type &quot;%1&quot;.
 Please choose a different format.</source>
         <translation>Сигил не може да сачува датотеке типа &quot;%1&quot;.
 Молимо одаберите другачији формат.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3885"/>
-        <source>This EPUB has HTML files that are not well formed and your current Clean Source preferences are set to automatically mend on Save. Saving a file that is not well formed will cause it to be automatically fixed, which very rarely may result in data loss.
+        <location filename="../../MainUI/MainWindow.cpp" line="4719"/>
+        <source>This EPUB has HTML files that are not well formed and your current Clean Source preferences are set to automatically mend on Save. Saving a file that is not well formed will cause it to be automatically fixed, which very rarely may result in some data loss.
 
 Do you want to automatically mend the files before saving?</source>
-        <translation>Овај EPUB садржи HTML датотеке које нису добро обликоване и ваша тренутна подешавања параметара Пречисти изворни код су постављена на аутоматско поправљање приликом чувања. Чување датотеке које нису добро обликоване ће покренути аутоматску поправку, која изузетно ретко може да доведе до губитка података.
+        <translation>Овај EPUB садржи HTML датотеке које нису добро обликоване и ваша тренутна подешавања параметара Пречисти изворни код су постављена на аутоматско поправљање приликом чувања. Чување датотеке која није добро обликована ће покренути аутоматску поправку, што изузетно ретко може да доведе до губитка мало података.
 
 Да ли желите да аутоматски поправите датотеке пре чувања?</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3916"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4757"/>
         <source>EPUB saved, but not all HTML files are well formed.</source>
         <translation>EPUB сачуван, али нису све HTML датотеке добро формиране.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3918"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4759"/>
         <source>EPUB saved.</source>
         <translation>EPUB сачуван.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3924"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4765"/>
         <source>Cannot save file %1: %2</source>
         <translation>Не могу сачувати датотеку %1: %2</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4059"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4898"/>
         <source>EPUB files (*.epub)</source>
         <translation>EPUB датотеке (*.epub)</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4060"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="4061"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="4062"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4899"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4900"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4901"/>
         <source>HTML files (*.htm *.html *.xhtml)</source>
         <translation>HTML датотеке (*.htm *.html *.xhtml)</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4063"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4902"/>
         <source>Text files (*.txt)</source>
         <translation>Текстуални датотеке (*.txt)</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4064"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4903"/>
         <source>All files (*.*)</source>
         <translation>Сви датотеке (*.*)</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4072"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4911"/>
         <source>EPUB file (*.epub)</source>
         <translation>EPUB датотека (*.epub)</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4084"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4928"/>
         <source>%1[*] - epub%2 - %3</source>
         <translation>%1[*] - epub%2 - %3</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4155"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="5006"/>
         <source>Preserve existing heading attributes is now:</source>
         <translation>Задржи постојеће атрибуте је тренутно:</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4156"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="5007"/>
         <source>ON</source>
         <translation>УКЉУЧЕНО</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4156"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="5007"/>
         <source>OFF</source>
         <translation>ИСКЉУЧЕНО</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4181"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="5032"/>
         <source>&amp;%1 %2</source>
         <translation>&amp;%1 %2</translation>
+    </message>
+</context>
+<context>
+    <name>ManageRepos</name>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="14"/>
+        <source>Manage Checkpoint Repositories</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="22"/>
+        <source>Checkpoint Repositories</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="69"/>
+        <source>ePub FileName</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="74"/>
+        <source>Title</source>
+        <translation>Наслов</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="79"/>
+        <source>Modified</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="84"/>
+        <source>Version</source>
+        <translation>Верзија</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="89"/>
+        <source>ePub:UUID</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="112"/>
+        <source>Show Log</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="120"/>
+        <source>Remove</source>
+        <translation>Уклони</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="128"/>
+        <source>Remove All</source>
+        <translation>Обриши све</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ManageRepos.cpp" line="140"/>
+        <location filename="../../Dialogs/ManageRepos.cpp" line="171"/>
+        <source>Nothing is Selected.</source>
+        <translation>Ништа није изабрано.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ManageRepos.cpp" line="161"/>
+        <source>Repository Log</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ManageRepos.cpp" line="196"/>
+        <source>Remove All Repositories</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ManageRepos.cpp" line="197"/>
+        <source>Are you sure sure you want to remove all checkpoint repositories?</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -12095,710 +13180,721 @@ Do you want to automatically mend the files before saving?</source>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="171"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="234"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="239"/>
         <source>[ISBN here]</source>
         <translation>[Овде иде ISBN]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="175"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="239"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="244"/>
         <source>[ISSN here]</source>
         <translation>[Овде иде ISSN]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="179"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="244"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="249"/>
         <source>[DOI here]</source>
         <translation>[Овде иде DOI]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="183"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="249"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="254"/>
         <source>[UUID here]</source>
         <translation>[Овде иде UUID]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="194"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="267"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="272"/>
         <source>[Author name here]</source>
         <translation>[Овде иде име аутора]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="200"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="272"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="277"/>
         <source>[Creator name here]</source>
         <translation>[Овде иде име творца]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="204"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="276"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="281"/>
         <source>[Contributor name here]</source>
         <translation>[Овде иде име сарадника]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="254"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="208"/>
+        <source>[meta value here]</source>
+        <translation>[Овде иде мета вредност]</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="259"/>
         <source>[Custom identifier here]</source>
         <translation>[Овде иде кориснички дефинисан идентификатор]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="443"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="448"/>
         <source>[Place value here]</source>
         <translation>[Овде ставите вредност]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="478"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="483"/>
         <source>[Your value here]</source>
         <translation>[Овде иде ваша вредност]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="542"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="644"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="547"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="649"/>
         <source>Author</source>
         <translation>Аутор</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="542"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="644"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="547"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="649"/>
         <source>Represents a primary author of the book or publication</source>
         <translation>Представља примарног аутора књиге или публикације.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="543"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="648"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="548"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="653"/>
         <source>Subject</source>
         <translation>Предмет</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="543"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="648"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="548"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="653"/>
         <source>An arbitrary phrase or keyword describing the subject in question. Use multiple &apos;subject&apos; elements if needed.</source>
         <translation>Произвољна фраза или кључна реч која описује предмет у питању. Користите више &apos;Предмет&apos; елемената ако је потребно.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="544"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="649"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="549"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="654"/>
         <source>Description</source>
         <translation>Опис</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="544"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="649"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="549"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="654"/>
         <source>Description of the publication&apos;s content.</source>
         <translation>Опис садржаја публикације.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="545"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="650"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="550"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="655"/>
         <source>Publisher</source>
         <translation>Издавач</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="545"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="650"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="550"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="655"/>
         <source>An entity responsible for making the publication available.</source>
         <translation>Ентитет који је учинио да публикација буде доступна.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="546"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="651"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="551"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="656"/>
         <source>Date: Publication</source>
         <translation>Датум: Објављивање</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="546"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="651"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="551"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="656"/>
         <source>The date of publication.</source>
         <translation>Датум објављивања.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="547"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="652"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="552"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="657"/>
         <source>Date: Creation</source>
         <translation>Датум: Стварање</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="547"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="652"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="552"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="657"/>
         <source>The date of creation.</source>
         <translation>Датум стварања.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="548"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="553"/>
         <source>Date: Issued</source>
         <translation>Датум: Издато</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="548"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="549"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="653"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="553"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="554"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="658"/>
         <source>The date of modification.</source>
         <translation>Датум измене.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="549"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="653"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="554"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="658"/>
         <source>Date: Modification</source>
         <translation>Датум: Измене</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="550"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="654"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="555"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="659"/>
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="550"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="555"/>
         <source>Used to indicate that the given EPUB Publication is of a specialized type..</source>
         <translation>Користи се да означи да је дата EPUB публикација специјализованог типа.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="551"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="655"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="556"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="660"/>
         <source>Format</source>
         <translation>Формат</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="551"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="655"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="556"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="660"/>
         <source>The media type or dimensions of the publication. Best practice is to use a value from a controlled vocabulary (e.g. MIME media types).</source>
         <translation>Врста или димензије медијума публикације. Најбоља пракса је да се користи вредност из контролисаног речника (нпр. MIME медијски типови)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="552"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="656"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="557"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="661"/>
         <source>Source</source>
         <translation>Извор</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="552"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="557"/>
         <source>Identifies the related resource(s) from which this EPUB Publication is derived.</source>
         <translation>Идентификује повезан(е) извор(е) из којих је ова EPUB публикација изведена.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="553"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="657"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="558"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="662"/>
         <source>Language</source>
         <translation>Језик</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="553"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="558"/>
         <source>Specifies the language of the publication. Select from the dropdown menu</source>
         <translation>Наводи језик публикације. Изаберите из падајуће листе.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="554"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="658"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="559"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="663"/>
         <source>Relation</source>
         <translation>Однос</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="554"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="658"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="559"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="663"/>
         <source>A reference to a related resource. The recommended best practice is to identify the referenced resource by means of a string or number conforming to a formal identification system.</source>
         <translation>Показатељ на повезани ресурс. Препоручена најбоља пракса је да се указани ресурс идентификује стрингом или бројем који је у складу са формалним идентификационим системом.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="555"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="659"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="560"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="664"/>
         <source>Coverage</source>
         <translation>Покривеност</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="555"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="659"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="560"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="664"/>
         <source>The extent or scope of the content of the publication&apos;s content.</source>
         <translation>Обим или опсег садржаја материјала у публикацији.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="556"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="660"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="561"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="665"/>
         <source>Rights</source>
         <translation>Права</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="556"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="660"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="561"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="665"/>
         <source>Information about rights held in and over the publication. Rights information often encompasses Intellectual Property Rights (IPR), Copyright, and various Property Rights. If the Rights element is absent, no assumptions may be made about any rights held in or over the publication.</source>
         <translation>Информација о придржаним правима у и на публикацију. Информација о правима обично садржи и Права на интелектуалну својину, Права умножавања и разна Права својине. Ако елемент Права не постоји, не треба да се праве претпоставке о било којим придржаним правима у и на публикацију.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="557"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="646"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="562"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="651"/>
         <source>Creator</source>
         <translation>Творац</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="557"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="562"/>
         <source>Represents the name of a person, organization, etc. responsible for the creation of the content of an EPUB Publication. The role property can be attached to the element to indicate the function the creator played in the creation of the content.</source>
         <translation>Представља име особе, организације, итд. која је одговорна за стварање садржаја EPUB публикације. Елементу може да се дода својство улога да би се означила функција коју је творац имао у стварању садржаја.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="558"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="647"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="563"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="652"/>
         <source>Contributor</source>
         <translation>Сарадник</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="558"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="563"/>
         <source>Represents the name of a person, organization, etc. that played a secondary role in the creation of the content of an EPUB Publication. The role property can be attached to the element to indicate the function the creator played in the creation of the content.</source>
         <translation>Представља име особе, организације, итд. која је имала секундарну улогу у стварању садржаја EPUB публикације. Елементу може да се дода својство улога да би се означила функција коју је творац имао у стварању садржаја.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="559"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="564"/>
         <source>Belongs to Collection</source>
         <translation>Припада колекцији</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="559"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="564"/>
         <source>Identifies the name of a collection to which the EPUB Publication belongs. An EPUB Publication may belong to one or more collections.</source>
         <translation>Означава име колекције којој припада EPUB публикација. EPUB публикација може да буде део једне или више колекција.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="560"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="645"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="565"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="650"/>
         <source>Title</source>
         <translation>Наслов</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="560"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="565"/>
         <source>A title of the publication.  A publication may have only one main title but may have numerous other title types.  These include main, subtitle, short, collection, edition, and expanded title types.</source>
         <translation>Наслов публикације. Публикација може да има само један главни наслов, али може да има бројне наслове другог типа. Ту спадају типови главни, поднаслов, кратки наслов, колекција, едиција, проширени наслов.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="561"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="566"/>
         <source>Identifier: DOI</source>
         <translation>Идентификатор: DOI</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="561"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="566"/>
         <source>Digital Object Identifier associated with the given EPUB publication.</source>
         <translation>Идентификатор дигиталног објекта придружен EPUB публикацији.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="562"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="567"/>
         <source>Identifier: ISBN</source>
         <translation>Идентификатор: ISBN</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="562"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="567"/>
         <source>International Standard Book Number associated with the given EPUB publication.</source>
         <translation>Међународни стандардни број књиге придружен датој EPUB публикацији.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="563"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="568"/>
         <source>Identifier: ISSN</source>
         <translation>Идентификатор: ISSN</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="563"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="568"/>
         <source>International Standard Serial Number associated with the given EPUB publication.</source>
         <translation>Међународни стандардни серијски број придружен датој EPUB публикацији.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="564"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="569"/>
         <source>Identifier: UUID</source>
         <translation>Идентификатор: UUID</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="564"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="569"/>
         <source>A Universally Unique Idenitifier generated for this EPUB publication.</source>
         <translation>Универзално јединствен идентификатор генерисан за ову EPUB публикацију.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="566"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="669"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="571"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="674"/>
         <source>Custom Element</source>
         <translation>Прилагођени елемент</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="566"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="669"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="571"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="674"/>
         <source>[Custom element]</source>
         <translation>[Прилагођени елемент]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="566"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="571"/>
         <source>An empty metadata element you can modify.</source>
         <translation>Празан елемент метаподатака који можете да измените.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="593"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="696"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="572"/>
+        <source>Meta Element (primary)</source>
+        <translation>Мета Елемент (примарни)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="572"/>
+        <source>An empty primary meta element you can modify.</source>
+        <translation>Празан примарни елемент метаподатака који можете да измените.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="598"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="701"/>
         <source>Id Attribute</source>
         <translation>Id атрибут</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="593"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="696"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="598"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="701"/>
         <source>Optional, typically short, unique identifier string used as an attribute in the Package (opf) document.</source>
         <translation>Необавезни, обично кратак стринг за јединствену идентификацију који се користи као атрибут у документу Пакета (opf) </translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="594"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="697"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="599"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="702"/>
         <source>XML Language</source>
         <translation>XML Језик</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="594"/>
-        <source>Optional, language specifying attribute.  Uses same codes as dc:language. Not for use with dc:langauge, dc:date, or dc:identifier metadata elements.</source>
-        <translation>Необавезан, атрибут који наводи језик. Користи исте кодове као dc:language. Није за коришћење са dc:langauge, dc:date, или dc:identifier елементима метаподатака.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="595"/>
-        <source>Text Direction: rtl</source>
-        <translation>Смер текста: дул</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="595"/>
-        <source>Optional text direction attribute for this metadata item. right-to-left (rtl). Not for use with dc:language, dc:date, or dc:identifier metadata elements.</source>
-        <translation>Необавезни атрибут смера текста за ову ставку метаподатака. десно-у-лево (дул). Није за коришћење са dc:langauge, dc:date, или dc:identifier елементима метаподатака. </translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="596"/>
-        <source>Text Direction: ltr</source>
-        <translation>Смер текста: луд</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="596"/>
-        <source>Optional text direction attribute for this metadata item. left-to-right (ltr). Not for use with dc:language, dc:date, or dc:identifier metadata elements.</source>
-        <translation>Необавезни атрибут смера текста за ову ставку метаподатака. лево-у-десно (луд). Није за коришћење са dc:langauge, dc:date, или dc:identifier елементима метаподатака. </translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="597"/>
-        <source>Title Type: main</source>
-        <translation>Тип наслова: главни</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="597"/>
-        <source>Indicates the associated title is the main title of the publication.  Only one main title should exist.</source>
-        <translation>Указује да је придружени наслов главни наслов публикације. Требало би да постоји само један главни наслов.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="598"/>
-        <source>Title Type: subtitle</source>
-        <translation>Тип наслова: подаслов</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="598"/>
-        <source>Indicates that the associated title is a subtitle of the publication if one exists..</source>
-        <translation>Указује да је придружени наслов поднаслов публикације ако он уопште и постоји.</translation>
-    </message>
-    <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="599"/>
-        <source>Title Type: short</source>
-        <translation>Тип наслова: кратки</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="599"/>
-        <source>Indicates that the associated title is a shortened title of the publication if one exists.</source>
-        <translation>Указује да је придружени наслов скраћени наслов публикације ако он уопште и постоји.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="600"/>
-        <source>Title Type: collection</source>
-        <translation>Тип наслова: колекција</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="600"/>
-        <source>Indicates that the associated title is the title of a collection that includes this publication belongs to, if one exists.</source>
-        <translation>Указује да је придружени наслов наслов колекције којој публикација припада ако она уопште и постоји.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="601"/>
-        <source>Title Type: edition</source>
-        <translation>Тип наслова: едиција</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="601"/>
-        <source>Indicates that the associated title is an edition title for this publications if one exists.</source>
-        <translation>Указује да је придружени наслов наслов едиције за ову публикације ако он уопште и постоји.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="602"/>
-        <source>Title Type: expanded</source>
-        <translation>Тип наслова: проширени</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="602"/>
-        <source>Indicates that the associated title is an expanded title for this publication if one exists.</source>
-        <translation>Указује да је придружени наслов проширени наслов за ову публикацију ако он уопште и постоји.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="603"/>
-        <source>Alternate Script</source>
-        <translation>Алтернативно писмо</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="603"/>
-        <source>Provides an alternate expression of the associated property value in a language and script identified by an alternate-language attribute.</source>
-        <translation>Обезбеђује алтернативни израз вредности придруженог својства на језику и писму који идентификује атрибут Алтернативни језик. </translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="604"/>
-        <source>Alternate Language</source>
-        <translation>Алтернативни језик</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="604"/>
-        <source>Language code for the language used in the associated alternate-script property value.</source>
-        <translation>Код језика за језик који се користи у вредности придруженог својства Алтернативно писмо.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="605"/>
-        <source>Collection Type: set</source>
-        <translation>Тип колекције: скуп</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="605"/>
-        <source>Property used with belongs-to-collection. Indicates the form or nature of a collection. The value &apos;set&apos; should be used for a finite collection of works that together constitute a single intellectual unit; typically issued together and able to be sold as a unit..</source>
-        <translation>Својство које се користи са део-колекције. Указује на форму или природу колекције. Вредност &apos;скуп&apos; би требало да се користи за коначне колекције дела која заједно чине једну интелектуалну целину; обично издате заједно и могу да се продају као целина. </translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="606"/>
-        <source>Collection Type: series</source>
-        <translation>Тип колекције: серија</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="606"/>
-        <source>Property used with belongs-to-collection. Indicates the form or nature of a collection. The value &apos;series&apos;&apos; should be used for a sequence of related works that are formally identified as a group; typically open-ended with works issued individually over time.</source>
-        <translation>Својство које се користи са део-колекције. Указује на форму или природу колекције. Вредност &apos;серија&apos; би требало да се користи за секвенцу повезаних дела која се формално идентификују као група; обично су са отвореним крајем, чине их дела која се појединачно издају током времена. </translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="607"/>
-        <source>Display Sequence</source>
-        <translation>Секвенца приказа</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="607"/>
-        <source>Indicates the numeric position in which to display the current property relative to identical metadata properties (e.g., to indicate the order in which to render multiple titles or multiple authors).</source>
-        <translation>Показује на бројчано место у коме треба приказати тренутно својство у односу на иста својства метаподатака (нпр. да се назначи ред у коме се приказују вишеструки наслови или вишеструки аутори).</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="608"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="698"/>
-        <source>File as</source>
-        <translation>Заведи као</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="608"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="698"/>
-        <source>Provides the normalized form of the associated property for sorting. Typically used with author, creator, and contributor names.</source>
-        <translation>Обезбеђује нормализовану форму придруженог својства за сортирање. Обично се користи за имена аутора, творца, и сарадника.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="609"/>
-        <source>Group Position</source>
-        <translation>Место у групи</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="609"/>
-        <source>Indicates the numeric position in which the EPUB Publication is ordered relative to other works belonging to the same group (whether all EPUB Publications or not).</source>
-        <translation>Означава бројчано место редоследа EPUB публикације у односу на остала дела која припадају истој групи (било да су EPUB или не).</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="610"/>
-        <source>Identifier Type</source>
-        <translation>Тип идентификатора</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="610"/>
-        <source>Indicates the form or nature of an identifier. When the identifier-type value is drawn from a code list or other formal enumeration, the scheme attribute should be used to identify its source.</source>
-        <translation>Означава форму или природу идентификатора. Када се вредност за тип идентификатора узима из листе кодова или неког другог формалног набрајања, атрибут шеме би такође требало да се корити како би се идентификовао њен извор.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="611"/>
-        <source>Meta Authority</source>
-        <translation>Мета Управа</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="611"/>
-        <source>Identifies the party or authority responsible for an instance of package metadata.</source>
-        <translation>Идентификује странку или управу која је одговорна за инстанцу метаподатака пакета.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="612"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="699"/>
-        <source>Role</source>
-        <translation>Улога</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="612"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="699"/>
-        <source>Describes the nature of work performed by a creator or contributor (e.g., that the person is the author or editor of a work).  Typically used with the marc:relators scheme for a controlled vocabulary.</source>
-        <translation>Описује природу дела које изводи творац или сарадник (нпр. да је особа аутор или уредник дела). Обично се користи са marc:relators шемом за контролисан речник.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="613"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="700"/>
-        <source>Scheme</source>
-        <translation>Шема</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="613"/>
-        <source>This attribute is typically added to dc:identifier, dc:source: dc:creator, or dc:contributor to indicate the controlled vocabulary system employed. (e.g. marc:relators to specify valid values for the role property.</source>
-        <translation>Овај атрибут се обично додаје dc:identifier, dc:source: dc:creator, или dc:contributor да укаже на контролисани речник који се користи (нпр. marc:relators за навођење исправних вредности које се корите за својство улога).</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="614"/>
-        <source>Source of Pagination</source>
-        <translation>Извор нумерације страна</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="614"/>
-        <source>Indicates a unique aspect of an adapted source resource that has been retained in the given Rendition of the EPUB Publication. This specification defines the pagination value to indicate that the referenced source element is the source of the pagebreak properties defined in the content. This value should be set whenever pagination is included and the print source is known. Valid values: pagination.</source>
-        <translation>Указује на јединствени аспект адаптираног изворног ресурса који је задржан у датом излагању EPUB публикације. Ова спецификација дефинише вредност нумерације како би се означило да је указани изворни елемент извор својства прелома стране дефинисан у садржају. Ова вредност би требало да се постави кадгод је нумерација страна укључена и када је штампани извор познат. Исправне вредности: pagination.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="615"/>
-        <source>Custom Property</source>
-        <translation>Прилагођено својство</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="615"/>
-        <source>[Custom property/attribute]</source>
-        <translation>[Прилагођено својство/атрибут]</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="615"/>
-        <source>An empty metadata property or attribute you can modify.</source>
-        <translation>Празно својство или атрибут метаподатака који можете да измените.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="645"/>
-        <source>The main title of the epub publication.  Only one title may exist.</source>
-        <translation>Главни наслов EPUB публикације. Може да постоји само један наслов.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="646"/>
-        <source>Represents the name of a person, organization, etc. responsible for the creation of the content of an EPUB Publication. The attributes opf:role, opf:scheme and opf:file-as can be attached to the element to indicate the function the creator played in the creation of the content.</source>
-        <translation>Представља име особе, организације, итд. која је одговорна за стварање садржаја EPUB публикације. Могу да се прикључе атрибути opf:role, opf:scheme и opf:file-as како би се означила функција коју је творац имао у стварању садржаја.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="647"/>
-        <source>Represents the name of a person, organization, etc. that played a secondary role in the creation of the content of an EPUB Publication&apos;</source>
-        <translation>Представља име особе, организације, итд. која је имала секундарну улогу у стварању садржаја EPUB публикације&apos;</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="654"/>
-        <source>The nature or genre of the content of the resource.</source>
-        <translation>Природа или жанр садржаја ресурса.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="656"/>
-        <source>A reference to a resource from which the present publication is derived.</source>
-        <translation>Референца на ресурс из ког је садашња публикација изведена.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="657"/>
-        <source>A language used in the publication. Choose a RFC5646 value.</source>
-        <translation>Језик који се користи у публикацији. Изаберите RFC5646 вредност.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="661"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="662"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="663"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="664"/>
-        <source>Identifier</source>
-        <translation>Идентификатор</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="661"/>
-        <source>Digital Object Identifier</source>
-        <translation>Идентификатор дигиталног објекта</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="662"/>
-        <source>International Standard Book Number</source>
-        <translation>Међународни стандардни број књиге</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="663"/>
-        <source>International Standard Serial Number</source>
-        <translation>Међународни стандардни серијски број</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="664"/>
-        <source>Universally Unique Identifier</source>
-        <translation>Универзално јединствен идентификатор</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="665"/>
-        <source>Identifier: Custom</source>
-        <translation>Идентификатор: Прилагођен</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="665"/>
-        <source>A custom identifier based on a specified scheme</source>
-        <translation>Прилагођени идентификатор заснован на наведеној шеми</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="666"/>
-        <source>Series</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="666"/>
-        <source>Series title or name (from calibre)</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="667"/>
-        <source>Series Index</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="667"/>
-        <source>Index of this book in the series (from calibre)</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="668"/>
-        <source>Title for Sorting</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="668"/>
-        <source>Version of ebook title to use for sorting(from calibre)</source>
-        <translation type="unfinished"/>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="669"/>
-        <source>An empty metadata element for you to modify</source>
-        <translation>Празан елемент метаподатака који можете да измените</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="697"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="702"/>
         <source>Optional, language specifying attribute.  Uses same codes as dc:language. Not for use with dc:language, dc:date, or dc:identifier metadata elements.</source>
         <translation>Необавезан, атрибут који наводи језик. Користи исте кодове као dc:language. Није за коришћење са dc:langauge, dc:date, или dc:identifier елементима метаподатака.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="700"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="600"/>
+        <source>Text Direction: rtl</source>
+        <translation>Смер текста: дул</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="600"/>
+        <source>Optional text direction attribute for this metadata item. right-to-left (rtl). Not for use with dc:language, dc:date, or dc:identifier metadata elements.</source>
+        <translation>Необавезни атрибут смера текста за ову ставку метаподатака. десно-у-лево (дул). Није за коришћење са dc:langauge, dc:date, или dc:identifier елементима метаподатака. </translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="601"/>
+        <source>Text Direction: ltr</source>
+        <translation>Смер текста: луд</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="601"/>
+        <source>Optional text direction attribute for this metadata item. left-to-right (ltr). Not for use with dc:language, dc:date, or dc:identifier metadata elements.</source>
+        <translation>Необавезни атрибут смера текста за ову ставку метаподатака. лево-у-десно (луд). Није за коришћење са dc:langauge, dc:date, или dc:identifier елементима метаподатака. </translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="602"/>
+        <source>Title Type: main</source>
+        <translation>Тип наслова: главни</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="602"/>
+        <source>Indicates the associated title is the main title of the publication.  Only one main title should exist.</source>
+        <translation>Указује да је придружени наслов главни наслов публикације. Требало би да постоји само један главни наслов.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="603"/>
+        <source>Title Type: subtitle</source>
+        <translation>Тип наслова: подаслов</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="603"/>
+        <source>Indicates that the associated title is a subtitle of the publication if one exists..</source>
+        <translation>Указује да је придружени наслов поднаслов публикације ако он уопште и постоји.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="604"/>
+        <source>Title Type: short</source>
+        <translation>Тип наслова: кратки</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="604"/>
+        <source>Indicates that the associated title is a shortened title of the publication if one exists.</source>
+        <translation>Указује да је придружени наслов скраћени наслов публикације ако он уопште и постоји.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="605"/>
+        <source>Title Type: collection</source>
+        <translation>Тип наслова: колекција</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="605"/>
+        <source>Indicates that the associated title is the title of a collection that includes this publication belongs to, if one exists.</source>
+        <translation>Указује да је придружени наслов наслов колекције којој публикација припада ако она уопште и постоји.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="606"/>
+        <source>Title Type: edition</source>
+        <translation>Тип наслова: едиција</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="606"/>
+        <source>Indicates that the associated title is an edition title for this publications if one exists.</source>
+        <translation>Указује да је придружени наслов наслов едиције за ову публикације ако он уопште и постоји.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="607"/>
+        <source>Title Type: expanded</source>
+        <translation>Тип наслова: проширени</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="607"/>
+        <source>Indicates that the associated title is an expanded title for this publication if one exists.</source>
+        <translation>Указује да је придружени наслов проширени наслов за ову публикацију ако он уопште и постоји.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="608"/>
+        <source>Alternate Script</source>
+        <translation>Алтернативно писмо</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="608"/>
+        <source>Provides an alternate expression of the associated property value in a language and script identified by an alternate-language attribute.</source>
+        <translation>Обезбеђује алтернативни израз вредности придруженог својства на језику и писму који идентификује атрибут Алтернативни језик. </translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="609"/>
+        <source>Alternate Language</source>
+        <translation>Алтернативни језик</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="609"/>
+        <source>Language code for the language used in the associated alternate-script property value.</source>
+        <translation>Код језика за језик који се користи у вредности придруженог својства Алтернативно писмо.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="610"/>
+        <source>Collection Type: set</source>
+        <translation>Тип колекције: скуп</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="610"/>
+        <source>Property used with belongs-to-collection. Indicates the form or nature of a collection. The value &apos;set&apos; should be used for a finite collection of works that together constitute a single intellectual unit; typically issued together and able to be sold as a unit..</source>
+        <translation>Својство које се користи са део-колекције. Указује на форму или природу колекције. Вредност &apos;скуп&apos; би требало да се користи за коначне колекције дела која заједно чине једну интелектуалну целину; обично издате заједно и могу да се продају као целина. </translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="611"/>
+        <source>Collection Type: series</source>
+        <translation>Тип колекције: серија</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="611"/>
+        <source>Property used with belongs-to-collection. Indicates the form or nature of a collection. The value &apos;series&apos;&apos; should be used for a sequence of related works that are formally identified as a group; typically open-ended with works issued individually over time.</source>
+        <translation>Својство које се користи са део-колекције. Указује на форму или природу колекције. Вредност &apos;серија&apos; би требало да се користи за секвенцу повезаних дела која се формално идентификују као група; обично су са отвореним крајем, чине их дела која се појединачно издају током времена. </translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="612"/>
+        <source>Display Sequence</source>
+        <translation>Секвенца приказа</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="612"/>
+        <source>Indicates the numeric position in which to display the current property relative to identical metadata properties (e.g., to indicate the order in which to render multiple titles or multiple authors).</source>
+        <translation>Показује на бројчано место у коме треба приказати тренутно својство у односу на иста својства метаподатака (нпр. да се назначи ред у коме се приказују вишеструки наслови или вишеструки аутори).</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="613"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="703"/>
+        <source>File as</source>
+        <translation>Заведи као</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="613"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="703"/>
+        <source>Provides the normalized form of the associated property for sorting. Typically used with author, creator, and contributor names.</source>
+        <translation>Обезбеђује нормализовану форму придруженог својства за сортирање. Обично се користи за имена аутора, творца, и сарадника.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="614"/>
+        <source>Group Position</source>
+        <translation>Место у групи</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="614"/>
+        <source>Indicates the numeric position in which the EPUB Publication is ordered relative to other works belonging to the same group (whether all EPUB Publications or not).</source>
+        <translation>Означава бројчано место редоследа EPUB публикације у односу на остала дела која припадају истој групи (било да су EPUB или не).</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="615"/>
+        <source>Identifier Type</source>
+        <translation>Тип идентификатора</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="615"/>
+        <source>Indicates the form or nature of an identifier. When the identifier-type value is drawn from a code list or other formal enumeration, the scheme attribute should be used to identify its source.</source>
+        <translation>Означава форму или природу идентификатора. Када се вредност за тип идентификатора узима из листе кодова или неког другог формалног набрајања, атрибут шеме би такође требало да се корити како би се идентификовао њен извор.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="616"/>
+        <source>Meta Authority</source>
+        <translation>Мета Управа</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="616"/>
+        <source>Identifies the party or authority responsible for an instance of package metadata.</source>
+        <translation>Идентификује странку или управу која је одговорна за инстанцу метаподатака пакета.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="617"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="704"/>
+        <source>Role</source>
+        <translation>Улога</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="617"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="704"/>
+        <source>Describes the nature of work performed by a creator or contributor (e.g., that the person is the author or editor of a work).  Typically used with the marc:relators scheme for a controlled vocabulary.</source>
+        <translation>Описује природу дела које изводи творац или сарадник (нпр. да је особа аутор или уредник дела). Обично се користи са marc:relators шемом за контролисан речник.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="618"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="705"/>
+        <source>Scheme</source>
+        <translation>Шема</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="618"/>
+        <source>This attribute is typically added to dc:identifier, dc:source: dc:creator, or dc:contributor to indicate the controlled vocabulary system employed. (e.g. marc:relators to specify valid values for the role property.</source>
+        <translation>Овај атрибут се обично додаје dc:identifier, dc:source: dc:creator, или dc:contributor да укаже на контролисани речник који се користи (нпр. marc:relators за навођење исправних вредности које се корите за својство улога).</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="619"/>
+        <source>Source of Pagination</source>
+        <translation>Извор нумерације страна</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="619"/>
+        <source>Indicates a unique aspect of an adapted source resource that has been retained in the given Rendition of the EPUB Publication. This specification defines the pagination value to indicate that the referenced source element is the source of the pagebreak properties defined in the content. This value should be set whenever pagination is included and the print source is known. Valid values: pagination.</source>
+        <translation>Указује на јединствени аспект адаптираног изворног ресурса који је задржан у датом излагању EPUB публикације. Ова спецификација дефинише вредност нумерације како би се означило да је указани изворни елемент извор својства прелома стране дефинисан у садржају. Ова вредност би требало да се постави кадгод је нумерација страна укључена и када је штампани извор познат. Исправне вредности: pagination.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="620"/>
+        <source>Custom Property</source>
+        <translation>Прилагођено својство</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="620"/>
+        <source>[Custom property/attribute]</source>
+        <translation>[Прилагођено својство/атрибут]</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="620"/>
+        <source>An empty metadata property or attribute you can modify.</source>
+        <translation>Празно својство или атрибут метаподатака који можете да измените.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="650"/>
+        <source>The main title of the epub publication.  Only one title may exist.</source>
+        <translation>Главни наслов EPUB публикације. Може да постоји само један наслов.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="651"/>
+        <source>Represents the name of a person, organization, etc. responsible for the creation of the content of an EPUB Publication. The attributes opf:role, opf:scheme and opf:file-as can be attached to the element to indicate the function the creator played in the creation of the content.</source>
+        <translation>Представља име особе, организације, итд. која је одговорна за стварање садржаја EPUB публикације. Могу да се прикључе атрибути opf:role, opf:scheme и opf:file-as како би се означила функција коју је творац имао у стварању садржаја.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="652"/>
+        <source>Represents the name of a person, organization, etc. that played a secondary role in the creation of the content of an EPUB Publication&apos;</source>
+        <translation>Представља име особе, организације, итд. која је имала секундарну улогу у стварању садржаја EPUB публикације&apos;</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="659"/>
+        <source>The nature or genre of the content of the resource.</source>
+        <translation>Природа или жанр садржаја ресурса.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="661"/>
+        <source>A reference to a resource from which the present publication is derived.</source>
+        <translation>Референца на ресурс из ког је садашња публикација изведена.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="662"/>
+        <source>A language used in the publication. Choose a RFC5646 value.</source>
+        <translation>Језик који се користи у публикацији. Изаберите RFC5646 вредност.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="666"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="667"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="668"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="669"/>
+        <source>Identifier</source>
+        <translation>Идентификатор</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="666"/>
+        <source>Digital Object Identifier</source>
+        <translation>Идентификатор дигиталног објекта</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="667"/>
+        <source>International Standard Book Number</source>
+        <translation>Међународни стандардни број књиге</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="668"/>
+        <source>International Standard Serial Number</source>
+        <translation>Међународни стандардни серијски број</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="669"/>
+        <source>Universally Unique Identifier</source>
+        <translation>Универзално јединствен идентификатор</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="670"/>
+        <source>Identifier: Custom</source>
+        <translation>Идентификатор: Прилагођен</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="670"/>
+        <source>A custom identifier based on a specified scheme</source>
+        <translation>Прилагођени идентификатор заснован на наведеној шеми</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="671"/>
+        <source>Series</source>
+        <translation>Серија</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="671"/>
+        <source>Series title or name (from calibre)</source>
+        <translation>Наслов или име серије (из програма Calibre)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="672"/>
+        <source>Series Index</source>
+        <translation>Индекс серије</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="672"/>
+        <source>Index of this book in the series (from calibre)</source>
+        <translation>Редослед ове књиге у серији (из програма Calibre)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="673"/>
+        <source>Title for Sorting</source>
+        <translation>Наслов за сортирање</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="673"/>
+        <source>Version of ebook title to use for sorting (from calibre)</source>
+        <translation>Верзија наслова екњиге који се користи за сортирање (из програма Calibre)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="674"/>
+        <source>An empty element for you to modify</source>
+        <translation>Празан елемент који можете да измените</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="705"/>
         <source>This attribute is typically added to dc:identifier to indicate the type of identifier being used: DOI, ISBN, ISSN, or UUID.</source>
         <translation>Овај атрибут се обично додаје елементу dc:identifier како би се назначио тип идентификатора који се користи: DOI, ISBN, ISSN, or UUID.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="701"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="706"/>
         <source>Event</source>
         <translation>Догађај</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="701"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="706"/>
         <source>This attribute is typically added to dc:date elements to specify the date type: publication, creation, or modification.</source>
         <translation>Овај атрибут се обично додаје dc:date елементима како би се навео тип датума: објављивање, стварање или измене.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="702"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="707"/>
         <source>Custom Attribute</source>
         <translation>Прилагођени атрибут</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="702"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="707"/>
         <source>[Custom metadata property/attribute]</source>
         <translation>[Прилагођено својство/атрибут метаподатака]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="702"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="707"/>
         <source>An empty metadata attribute you can modify.</source>
         <translation>Празан атрибут метаподатака који можете да измените.</translation>
     </message>
@@ -12806,41 +13902,149 @@ Do you want to automatically mend the files before saving?</source>
 <context>
     <name>NCXResource</name>
     <message>
-        <location filename="../../ResourceObjects/NCXResource.cpp" line="159"/>
-        <location filename="../../ResourceObjects/NCXResource.cpp" line="161"/>
+        <location filename="../../ResourceObjects/NCXResource.cpp" line="183"/>
+        <location filename="../../ResourceObjects/NCXResource.cpp" line="185"/>
         <source>Start</source>
         <translation>Почетак</translation>
     </message>
 </context>
 <context>
+    <name>Navigator</name>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="48"/>
+        <source>Left</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="49"/>
+        <source>Right</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="55"/>
+        <source>Go to previous change - [p]</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="61"/>
+        <source>Go to next change - [n]</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="67"/>
+        <source>Search ...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="71"/>
+        <source>Find Next</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="77"/>
+        <source>Find Previous</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="82"/>
+        <source>Use Left Panel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="85"/>
+        <source>Use Right Panel</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="90"/>
+        <source>Close this window</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="91"/>
+        <source>Done</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>Navigator2</name>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="53"/>
+        <source>Go to previous page - [p]</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="60"/>
+        <source>Go to next page - [n]</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="67"/>
+        <source>Search ...</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="72"/>
+        <source>Find Next</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="79"/>
+        <source>Find Previous</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="85"/>
+        <source>Close this window</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="86"/>
+        <source>Done</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
     <name>OPFModel</name>
     <message>
-        <location filename="../../MainUI/OPFModel.cpp" line="596"/>
+        <location filename="../../MainUI/OPFModel.cpp" line="713"/>
         <source>A filename cannot contains the character &quot;%1&quot;.</source>
         <translation>Име датотеке не може да садржи карактер &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/OPFModel.cpp" line="607"/>
+        <location filename="../../MainUI/OPFModel.cpp" line="724"/>
         <source>The filename cannot be empty.</source>
         <translation>Име датотеке не може бити празно.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/OPFModel.cpp" line="614"/>
+        <location filename="../../MainUI/OPFModel.cpp" line="736"/>
         <source>The filename &quot;%1&quot; is already in use.
 </source>
         <translation>Име датотеке &quot;%1&quot; је већ у употреби.
+</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/OPFModel.cpp" line="748"/>
+        <source>The book path cannot be empty.</source>
+        <translation>Путања књиге не може да буде празна.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/OPFModel.cpp" line="755"/>
+        <source>That book path &quot;%1&quot; is already in use.
+</source>
+        <translation>Та путања књиге &quot;%1&quot; је већ у употреби.
 </translation>
     </message>
 </context>
 <context>
     <name>OPFResource</name>
     <message>
-        <location filename="../../ResourceObjects/OPFResource.cpp" line="1120"/>
+        <location filename="../../ResourceObjects/OPFResource.cpp" line="1241"/>
         <source>[Title here]</source>
         <translation>[Овде иде наслов]</translation>
     </message>
     <message>
-        <location filename="../../ResourceObjects/OPFResource.cpp" line="1122"/>
+        <location filename="../../ResourceObjects/OPFResource.cpp" line="1247"/>
         <source>[Main title here]</source>
         <translation>[Овде иде главни наслов]</translation>
     </message>
@@ -12916,336 +14120,377 @@ Do you want to automatically mend the files before saving?</source>
         <translation>Статус:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="104"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="125"/>
         <source>Error: A plugin by that name does not exist</source>
         <translation>Грешка: Прикључак са тим именом не постоји</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="135"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="156"/>
         <source>Error: Interpreter</source>
-        <translation type="unfinished"/>
+        <translation>Грешка: Интерпретер</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="135"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="156"/>
         <source>has no path set</source>
-        <translation type="unfinished"/>
+        <translation>нема постављену путању</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="148"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="169"/>
         <source>Installation Error: plugin launcher</source>
-        <translation type="unfinished"/>
+        <translation>Грешка при инсталацији: покретач додатака</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="149"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="170"/>
         <source>does not exist</source>
-        <translation type="unfinished"/>
+        <translation>не постоји</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="154"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="175"/>
         <source>Error: plugin engine</source>
-        <translation type="unfinished"/>
+        <translation>Грешка: погон додатака</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="155"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="176"/>
         <source>is not supported (yet!)</source>
-        <translation type="unfinished"/>
+        <translation>(још!) није подржано</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="161"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="182"/>
         <source>Status: ready</source>
         <translation>Статус: спреман</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="223"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="272"/>
         <source>Error: plugin can not start</source>
         <translation>Грешка: додатак се не може покренути</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="371"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="424"/>
         <source>Status: running</source>
-        <translation type="unfinished"/>
+        <translation>Статус: извршавање</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="388"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="441"/>
         <source>Launcher process crashed</source>
         <translation>Процес покретања је срушен</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="399"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="452"/>
         <source>Status: finished</source>
         <translation>Статус: завршено</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="406"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="459"/>
         <source>Status: failed</source>
         <translation>Статус: неуспешно</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="412"/>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="421"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="465"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="474"/>
         <source>Status: No Changes Made</source>
         <translation>Статус: Нису извршене промене</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="420"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="473"/>
         <source>Error: Plugin Tried to Remove the Last XHTML file .. aborting changes</source>
         <translation>Грешка: Додатак је покушао да уклони последњу XHTML датотеку .. измене прекидају.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="484"/>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="555"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="537"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="623"/>
         <source>Status:</source>
-        <translation type="unfinished"/>
+        <translation>Статус:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="511"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="564"/>
         <source>Plugin failed to start</source>
         <translation>Неуспео старт додатка</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="519"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="572"/>
         <source>Status: error</source>
         <translation>Статус: грешка</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="533"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="601"/>
         <source>Plugin cancelled</source>
         <translation>Додатак је отказан</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="534"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="602"/>
         <source>Status: cancelled</source>
         <translation>Статус: отказано</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="627"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="695"/>
         <source>Error Parsing Result XML:  </source>
         <translation>Грешка код парсирања резултујућег XML: </translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="684"/>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="699"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="752"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="767"/>
         <source>Status: checking</source>
-        <translation type="unfinished"/>
+        <translation>Статус: проверавање</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="688"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="756"/>
         <source>Incorrect XHTML:</source>
-        <translation type="unfinished"/>
+        <translation>Неисправан XHTML:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="688"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="756"/>
         <source>Line/Col</source>
-        <translation type="unfinished"/>
+        <translation>Лин/Кол</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="715"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="783"/>
         <source>Check Report</source>
         <translation>Провера извештаја</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="716"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="784"/>
         <source>Incorrect XHTML/XML Detected
 Are you Sure You Want to Continue?</source>
         <translation>Детектован је неисправан XHTML/XML
 Да ли сте сигурни да желите да наставите?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="734"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="802"/>
         <source>Status: cleaning up - deleting files</source>
         <translation>Статус: чишћење - брисање датотека</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="759"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="835"/>
         <source>Status: deleting</source>
-        <translation type="unfinished"/>
+        <translation>Статус: брисање</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="798"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="874"/>
         <source>Status: Loading</source>
-        <translation type="unfinished"/>
+        <translation>Статус: Учитавање</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="809"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="893"/>
         <source>Input Plugin</source>
         <translation>Улазни додатак</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="810"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="894"/>
         <source>Your current book will be completely replaced losing any unsaved changes ...  Are you sure you want to proceed</source>
         <translation>Ваша текућа књига ће бити потпуно замењена и све несачуване промене изгубљене  ...  Да ли сте сигурни да желите да наставите</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="836"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="920"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="934"/>
         <source>Status: adding</source>
-        <translation type="unfinished"/>
+        <translation>Статус: додавање</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="877"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="972"/>
         <source>Status: cleaning up - modifying files</source>
         <translation>Статус: чишћење - измена датотека</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="906"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="1009"/>
         <source>Status: modifying</source>
-        <translation type="unfinished"/>
+        <translation>Статус: измена</translation>
     </message>
 </context>
 <context>
     <name>PluginWidget</name>
     <message>
         <location filename="../../Form_Files/PPluginWidget.ui" line="14"/>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="167"/>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="116"/>
         <source>Plugins</source>
         <translation>Додаци</translation>
     </message>
     <message>
         <location filename="../../Form_Files/PPluginWidget.ui" line="28"/>
-        <source>Assign as Plugin 1</source>
-        <translation>Додели као Додатак 1</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="75"/>
-        <source>Name</source>
-        <translation>Име</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="80"/>
-        <source>Version</source>
-        <translation>Верзија</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="85"/>
-        <source>Author</source>
-        <translation>Аутор</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="90"/>
-        <source>Type</source>
-        <translation>Тип</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="95"/>
-        <source>Interpreter</source>
-        <translation>Интерпретатор</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="109"/>
-        <source>≥Python3.4:</source>
-        <translation>≥Python3.4:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="128"/>
-        <source>Auto</source>
-        <translation>Ауто</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="135"/>
-        <source>Set</source>
-        <translation>Подеси</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="174"/>
-        <source>Add Plugin</source>
-        <translation>Додај додатак</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="181"/>
-        <source>Remove All</source>
-        <translation>Обриши све</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="188"/>
-        <source>Remove Plugin</source>
-        <translation>Обриши додатак</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="214"/>
         <source>Path to Interpreter Executable</source>
         <translation>Путања до интерпретатора</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="224"/>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="38"/>
         <source>Should the bundled Python interpreter be used if present?</source>
         <translation>Да ли да се користи испоручени Python интерпретер ако је доступан?</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="227"/>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="41"/>
         <source>Use Bundled Python</source>
         <translation>Користи испоручени Python</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="234"/>
-        <source>Assign as Plugin 2</source>
-        <translation>Додели као Додатак 2</translation>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="54"/>
+        <source>≥Python3.4:</source>
+        <translation>≥Python3.4:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="73"/>
+        <source>Auto</source>
+        <translation>Ауто</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="80"/>
+        <source>Set</source>
+        <translation>Подеси</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="108"/>
+        <source>Add/Remove</source>
+        <translation>Додај/Уклони</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="163"/>
+        <source>Name</source>
+        <translation>Име</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="168"/>
+        <source>Version</source>
+        <translation>Верзија</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="173"/>
+        <source>Author</source>
+        <translation>Аутор</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="178"/>
+        <source>Type</source>
+        <translation>Тип</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="183"/>
+        <source>Interpreter</source>
+        <translation>Интерпретатор</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="204"/>
+        <source>Add Plugin</source>
+        <translation>Додај додатак</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="211"/>
+        <source>Remove Plugin</source>
+        <translation>Обриши додатак</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="218"/>
+        <source>Remove All</source>
+        <translation>Обриши све</translation>
     </message>
     <message>
         <location filename="../../Form_Files/PPluginWidget.ui" line="241"/>
-        <source>Assign as Plugin 3</source>
-        <translation>Додели као Додатак 3</translation>
+        <source>Shortcuts</source>
+        <translation>Пречице</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="248"/>
-        <source>Assign as Plugin 4</source>
-        <translation>Додели као Додатак 4</translation>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="249"/>
+        <source>Quick Launch Plugin Assignments</source>
+        <translation>Додела Додатака Брзом Покретању</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="255"/>
-        <source>Assign as Plugin 5</source>
-        <translation>Додели као Додатак 5</translation>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="259"/>
+        <source>Plugin 1:</source>
+        <translation>Додатак 1:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="184"/>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="272"/>
+        <source>Plugin 6:</source>
+        <translation>Додатак 6:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="285"/>
+        <source>Plugin 2:</source>
+        <translation>Додатак 2:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="298"/>
+        <source>Plugin 7:</source>
+        <translation>Додатак 7:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="311"/>
+        <source>Plugin 3:</source>
+        <translation>Додатак 3:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="324"/>
+        <source>Plugin 8:</source>
+        <translation>Додатак 8:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="337"/>
+        <source>Plugin 4:</source>
+        <translation>Додатак 4:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="350"/>
+        <source>Plugin 9:</source>
+        <translation>Додатак 9:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="363"/>
+        <source>Plugin 5:</source>
+        <translation>Додатак 5:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="376"/>
+        <source>Plugin 10:</source>
+        <translation>Додатак 10:</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="209"/>
         <source>Select Plugin Zip Archive</source>
         <translation>Одабери зип архиву додатка</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="184"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="211"/>
         <source>Plugin Files (*.zip)</source>
         <translation>Датотеке додатака (*.zip)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="200"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="229"/>
         <source>Error: Plugin plugin.xml is invalid or not supported on your operating system.</source>
         <translation>Грешка: Додатак plugin.xml је неисправан или није подржан на вашем оперативном систему.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="203"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="232"/>
         <source>Warning: A plugin by that name already exists</source>
         <translation>Упозорење: Додатак са тим именом већ постоји</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="206"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="235"/>
         <source>Error: Plugin Could Not be Unzipped.</source>
         <translation>Грешка: Додатак не може бити отпакован</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="209"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="238"/>
         <source>Error: Plugin not a valid Sigil plugin.</source>
         <translation>Грешка: Додатак није исправан Сигил додатак.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="249"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="276"/>
         <source>Nothing is Selected.</source>
         <translation>Ништа није изабрано.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="307"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="324"/>
         <source>Remove All Plugins</source>
         <translation>Обриши све додатке</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="308"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="325"/>
         <source>Are you sure sure you want to remove all of your plugins?</source>
         <translation>Да ли сте сигурни да желите да обришете све ваше додатке?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="366"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="382"/>
         <source>Select Interpreter</source>
         <translation>Одабери интерпретатор</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="391"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="411"/>
         <source>Incorrect Interpreter Path selected</source>
         <translation>Одабрана путања до интерпретатора није исправна</translation>
     </message>
@@ -13258,17 +14503,17 @@ Are you Sure You Want to Continue?</source>
         <translation>Подешавања</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/Preferences.cpp" line="102"/>
+        <location filename="../../Dialogs/Preferences.cpp" line="116"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/Preferences.cpp" line="102"/>
+        <location filename="../../Dialogs/Preferences.cpp" line="116"/>
         <source>Changes will take effect when you restart Sigil.</source>
         <translation>Промене ће имати дејство када поново покренете Сигил.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/Preferences.cpp" line="174"/>
+        <location filename="../../Dialogs/Preferences.cpp" line="198"/>
         <source>Open Preferences Location</source>
         <translation>Отвори локацију подешавања</translation>
     </message>
@@ -13308,12 +14553,12 @@ Entities can be separated by lines, commas, or spaces.</source>
         <translation>Обриши све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PreserveEntitiesWidget.cpp" line="63"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PreserveEntitiesWidget.cpp" line="67"/>
         <source>Add Entities</source>
         <translation>Додај ентитете</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PreserveEntitiesWidget.cpp" line="63"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PreserveEntitiesWidget.cpp" line="67"/>
         <source>Entities:</source>
         <translation>Ентитети:</translation>
     </message>
@@ -13321,42 +14566,75 @@ Entities can be separated by lines, commas, or spaces.</source>
 <context>
     <name>PreviewWindow</name>
     <message>
-        <location filename="../../MainUI/PreviewWindow.cpp" line="42"/>
-        <location filename="../../MainUI/PreviewWindow.cpp" line="252"/>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="57"/>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="67"/>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="344"/>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="352"/>
         <source>Preview</source>
         <translation>Преглед</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="183"/>
+        <source>Inspect Page</source>
+        <translation>Прегледај Страницу</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="186"/>
+        <source>Select-All</source>
+        <translation>Изабери-Све</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="189"/>
+        <source>Copy Selection To ClipBoard</source>
+        <translation>Копирај избор у Клипборд</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="192"/>
+        <source>Update Preview Window</source>
+        <translation>Освежи Прозор за Преглед</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../BookManipulation/Book.cpp" line="1051"/>
+        <location filename="../../BookManipulation/Book.cpp" line="1149"/>
         <source>Merging Files..</source>
         <translation>Спајање датотека...</translation>
     </message>
     <message>
-        <location filename="../../BookManipulation/BookReports.cpp" line="53"/>
-        <location filename="../../BookManipulation/BookReports.cpp" line="124"/>
-        <source>Collecting classes...</source>
-        <translation>Прикупљају се класе...</translation>
-    </message>
-    <message>
-        <location filename="../../BookManipulation/CleanSource.cpp" line="292"/>
+        <location filename="../../BookManipulation/CleanSource.cpp" line="312"/>
         <source>Cleaning...</source>
         <translation>Чишћење...</translation>
     </message>
     <message>
-        <location filename="../../BookManipulation/Index.cpp" line="47"/>
+        <location filename="../../BookManipulation/Index.cpp" line="48"/>
         <source>Creating Index...</source>
         <translation>Креирање индекса...</translation>
     </message>
     <message>
-        <location filename="../../BookManipulation/Index.cpp" line="47"/>
+        <location filename="../../BookManipulation/Index.cpp" line="48"/>
         <source>Cancel</source>
         <translation>Откажи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/Reports.cpp" line="114"/>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="89"/>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="289"/>
+        <source>Custom Epub Layout Designer</source>
+        <translation>Дизајнер Прилагођеног Epub распореда </translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="163"/>
+        <location filename="../../Misc/OpenExternally.cpp" line="244"/>
+        <source>Applications</source>
+        <translation>Апликације</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="181"/>
+        <source>Select External Xhtml Editor</source>
+        <translation>Изаберите екстерни xhtml едитор</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/Reports.cpp" line="124"/>
         <source>Creating reports...</source>
         <translation>Креирање извештаја...</translation>
     </message>
@@ -13366,113 +14644,107 @@ Entities can be separated by lines, commas, or spaces.</source>
         <translation>Није могуће читати EPUB: %1</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="221"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="245"/>
         <source>The OPF file does not contain a valid spine.</source>
         <translation>OPF датотека не садржи исправан хрбат.</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="222"/>
-        <location filename="../../Importers/ImportEPUB.cpp" line="710"/>
-        <location filename="../../Importers/ImportEPUB.cpp" line="713"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="246"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="860"/>
         <source>Sigil has created a new one for you.</source>
         <translation>Сигил је направио нов уместо вас.</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="259"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="290"/>
         <source>Error parsing encryption xml.
 Line: %1 Column %2 - %3</source>
         <translation>Грешка код парсирања xml-а шифровања.
 Линија: %1 Колона %2 - %3</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="391"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="406"/>
         <source>Cannot unzip EPUB: %1</source>
         <translation>Није могуће распаковати EPUB датотеку: %1</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="431"/>
-        <location filename="../../Importers/ImportEPUB.cpp" line="440"/>
-        <location filename="../../Importers/ImportEPUB.cpp" line="457"/>
-        <location filename="../../Importers/ImportEPUB.cpp" line="465"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="462"/>
+        <source>Possible evil or corrupt epub file name: %1</source>
+        <translation>Могуће злонамерно или искварено име epub датотеке: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Importers/ImportEPUB.cpp" line="489"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="498"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="515"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="523"/>
         <source>Cannot extract file: %1</source>
         <translation>Није могуће распаковати датотеку: %1</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="478"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="535"/>
         <source>Cannot open EPUB: %1</source>
         <translation>Није могуће отворити EPUB: %1</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="530"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="589"/>
         <source>Unable to parse container.xml file.
 Line: %1 Column %2 - %3</source>
         <translation>Датотека container.xml не може да се парсира.
 Линија: %1 Колона %2 - %3</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="538"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="601"/>
         <source>No appropriate OPF file found</source>
         <translation>Није пронађена одговарајућа OPF датотека</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="577"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="652"/>
         <source>Unable to read OPF file.
 Line: %1 Column %2 - %3</source>
         <translation>Није могуће читање OPF датотеке.
 Линија: %1 Колона %2 - %3</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="631"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="739"/>
+        <source>The OPF uses an unrecognized media type &quot;%1&quot; for file &quot;%2&quot;</source>
+        <translation>OPF користи непрепознати тип медија &quot;%1&quot; за датотеку &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <location filename="../../Importers/ImportEPUB.cpp" line="740"/>
+        <source>A temporary media type of &quot;%1&quot; has been assigned. You should edit your OPF file to fix this problem.</source>
+        <translation>Додељен је привремени тип медија &quot;%1&quot;. Требало би да уредите своју OPF датотеку како бисте поправили овај проблем.</translation>
+    </message>
+    <message>
+        <location filename="../../Importers/ImportEPUB.cpp" line="763"/>
         <source>The OPF manifest contains duplicate ids for: %1</source>
         <translation>OPF манифест садржи дупликат id-је за: %1</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="632"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="764"/>
         <source>A temporary id has been assigned to load this EPUB. You should edit your OPF file to remove the duplication.</source>
         <translation>Додељен је привремен id како би се учитао овај EPUB. Требало би да уредите вашу OPF датотеку да бисте уклонили дупликат.</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="676"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="835"/>
         <source>The OPF file did not identify the NCX file correctly.</source>
         <translation>OPF датотека није исправно идентификовала NCX датотеку.</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="677"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="836"/>
         <source>Sigil has used the following file as the NCX:</source>
         <translation>Сигил је користио следећу датотеку као NCX:</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="705"/>
-        <source>Sigil has created a template NCX</source>
-        <translation>Сигил је направио шаблонски NCX</translation>
-    </message>
-    <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="706"/>
-        <source>to support epub2 backwards compatibility.</source>
-        <translation>да би била подржана epub2 компатибилност.</translation>
-    </message>
-    <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="709"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="859"/>
         <source>The OPF file does not contain an NCX file.</source>
         <translation>OPF датотека не садржи NCX датотеку.</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="712"/>
-        <source>The NCX file is not present in this EPUB.</source>
-        <translation>EPUB не садржи NCX датотеку.</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="576"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="641"/>
         <source>Adding Existing Files..</source>
         <translation>Додавање постојећих датотека...</translation>
     </message>
     <message>
-        <location filename="../../Misc/OpenExternally.cpp" line="183"/>
-        <source>Applications</source>
-        <translation>Апликације</translation>
-    </message>
-    <message>
-        <location filename="../../Misc/OpenExternally.cpp" line="193"/>
+        <location filename="../../Misc/OpenExternally.cpp" line="262"/>
         <source>Open With</source>
         <translation>Отвори са</translation>
     </message>
@@ -13487,57 +14759,129 @@ Line: %1 Column %2 - %3</source>
         <translation>Замена термина претраге...</translation>
     </message>
     <message>
-        <location filename="../../Misc/TOCHTMLWriter.cpp" line="105"/>
+        <location filename="../../Misc/TOCHTMLWriter.cpp" line="111"/>
         <source>Table of Contents</source>
         <translation>Преглед садржаја</translation>
     </message>
     <message>
-        <location filename="../../Misc/UpdateChecker.cpp" line="97"/>
+        <location filename="../../Misc/UpdateChecker.cpp" line="98"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Misc/UpdateChecker.cpp" line="98"/>
+        <location filename="../../Misc/UpdateChecker.cpp" line="99"/>
         <source>&lt;p&gt;A newer version of Sigil is available, version &lt;b&gt;%1&lt;/b&gt;.&lt;br/&gt;&lt;p&gt;Would you like to go to the download page?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Доступна је новија верзија програма Сигил, верзија &lt;b&gt;%1&lt;/b&gt;.&lt;br/&gt;&lt;p&gt;Да ли желите да идете на страну за преузимање?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Misc/Utility.cpp" line="420"/>
+        <location filename="../../Misc/Utility.cpp" line="505"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation>Није могуће читање датотеке %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Utility.cpp" line="535"/>
+        <location filename="../../Misc/Utility.cpp" line="632"/>
         <source>Sigil has encountered a problem.</source>
         <translation>Сигил је наишао на проблем.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Utility.cpp" line="536"/>
+        <location filename="../../Misc/Utility.cpp" line="633"/>
         <source>Sigil may need to close.</source>
         <translation>Сигил можда мора да се затвори.</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/IndexHTMLWriter.cpp" line="70"/>
+        <location filename="../../MiscEditors/IndexHTMLWriter.cpp" line="75"/>
         <source>Index</source>
         <translation>Индекс</translation>
     </message>
     <message>
-        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="207"/>
-        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="273"/>
+        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="211"/>
+        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="279"/>
         <source>Invalid HTML file: %1</source>
         <translation>Неважећа HTML датотека: %1</translation>
     </message>
     <message>
-        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="316"/>
+        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="324"/>
         <source>Invalid OPF file: %1</source>
         <translation>Неважећа OPF датотека: %1</translation>
     </message>
     <message>
-        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="341"/>
+        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="350"/>
         <source>Invalid NCX file: %1</source>
         <translation>Неважећа NCX датотека: %1</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="587"/>
+        <location filename="../../main.cpp" line="643"/>
+        <source>Quit</source>
+        <translation>Напуштање</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="599"/>
+        <source>About</source>
+        <translation>О програму</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="610"/>
+        <source>Preferences</source>
+        <translation>Подешавања</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="621"/>
+        <source>New</source>
+        <translation>Ново</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="632"/>
+        <source>Open</source>
+        <translation>Отварања</translation>
+    </message>
+</context>
+<context>
+    <name>RERenamer</name>
+    <message>
+        <location filename="../../Form_Files/RERenamer.ui" line="14"/>
+        <source>RE File Renamer</source>
+        <translation>РИ Измена имена датотеке</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RERenamer.ui" line="42"/>
+        <source>Enter Regular Expression to be Replaced</source>
+        <translation>Унесите регуларни израз који треба да се замени</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RERenamer.ui" line="55"/>
+        <source>Regular Expression:</source>
+        <translation>Регуларни израз:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RERenamer.ui" line="68"/>
+        <source>Replacement:</source>
+        <translation>Замена:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RERenamer.ui" line="81"/>
+        <source>Enter Replacement text (can use subgroups replacements)</source>
+        <translation>Унесите текст замене (могу да се користе замене подгрупа)</translation>
+    </message>
+</context>
+<context>
+    <name>RETable</name>
+    <message>
+        <location filename="../../Form_Files/RETable.ui" line="14"/>
+        <source>Rename Table</source>
+        <translation>Табела промене имена</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RETable.ui" line="39"/>
+        <source>Prior Filename</source>
+        <translation>Претходно име датотеке</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RETable.ui" line="44"/>
+        <source>Revised Filename</source>
+        <translation>Измењено име датотеке</translation>
     </message>
 </context>
 <context>
@@ -13647,7 +14991,7 @@ then if not found look for the second entry in the list, etc.</source>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="96"/>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="67"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="68"/>
         <source>Find</source>
         <translation>Пронађи</translation>
     </message>
@@ -13662,7 +15006,7 @@ and stop at the first successful replace.</source>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="108"/>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="68"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="69"/>
         <source>Replace</source>
         <translation>Замени</translation>
     </message>
@@ -13738,187 +15082,187 @@ including entries in selected groups.</source>
         <translation>Кликните Примени како бисте учитали Пронађи &amp; Замени са изабраном претрагом. Кликните ОК да учитате вашу претрагу, сачувате ваше податке, и затворите.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="61"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="62"/>
         <source>All searches default to Regex, All HTML Files, Down.</source>
         <translation>Све претраге подразумевају Рег.Изр, Све HTML датотеке, Наниже.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="62"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="63"/>
         <source>Hold Ctrl down while clicking Find, Replace, etc. to temporarily search only the Current File.</source>
         <translation>Држите притиснут Ctrl док кликћете на Претражи, Замени, итд. како бисте привремено ограничили претрагу само на Текућу датотеку.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="63"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="64"/>
         <source>Right click on an entry to see a context menu of actions.</source>
         <translation>Десни клик на ставку за преглед контекстног менија.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="64"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="65"/>
         <source>You can also right click on the Find text box in the Find &amp; Replace window to select an entry.</source>
         <translation>Такође можете и да урадите десни клик на Пронађи текст поље у прозору Пронађи &amp; Замени како бисте изабрали ставку.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="66"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="67"/>
         <source>Name</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="66"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="67"/>
         <source>Name of your entry or group.</source>
         <translation>Име ставке или групе.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="67"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="68"/>
         <source>The text to put into the Find box.</source>
         <translation>Текст који се поставља у поље Пронађи.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="68"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="69"/>
         <source>The text to put into the Replace box.</source>
         <translation>Текст који се поставља у поље Замени.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="72"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="73"/>
         <source>Save</source>
         <translation>Сачувај</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="72"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="73"/>
         <source>Save your changes.</source>
         <translation>Сачувај промене.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="72"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="73"/>
         <source>If any other instances of Sigil are running they will be automatically updated with your changes.</source>
         <translation>Ако је покренута још нека инстанца Сигила, ваше промене ће аутоматски бити примењене и у њима. </translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="89"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="90"/>
         <source>Cannot save entries.</source>
         <translation>Није могуће сачувати ставке.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="163"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="170"/>
         <source>Saved Searches loaded from file.</source>
         <translation>Сачуване претраге су учитане из датотеке.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="195"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="206"/>
         <source>You cannot select more than one entry when using this action.</source>
         <translation>Не можете одабрати више од једне ставке када користите ову акцију.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="203"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="214"/>
         <source>You cannot select a group for this action.</source>
         <translation>Не можете одабрати групу за ову акцију.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="245"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="260"/>
         <source>You cannot select an entry and a group containing the entry.</source>
         <translation>Не можете да изаберете ставку и групи која садржи ту ставку.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="328"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="343"/>
         <source>You cannot Copy or Cut groups - use drag-and-drop.</source>
         <translation>Није могуће копирати или исећи групе - користи превуци и спусти.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="395"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="410"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="395"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="410"/>
         <source>Are you sure you want to reload all entries?  This will overwrite any unsaved changes.</source>
         <translation>Да ли сте сигурни да желите поновно учитати све ставке? Ово ће пребрисати све несачуване промене.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="411"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="430"/>
         <source>Import Search Entries</source>
         <translation>Увези ставке претраге</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="484"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="510"/>
         <source>Export Selected Searches</source>
         <translation>Извези одабрану претрагу</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="649"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="676"/>
         <source>Add Entry</source>
         <translation>Додај ставку</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="650"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="677"/>
         <source>Add Group</source>
         <translation>Додај групу</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="651"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="678"/>
         <source>Edit</source>
         <translation>Уреди</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="652"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="679"/>
         <source>Cut</source>
         <translation>Исеци</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="653"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="680"/>
         <source>Copy</source>
         <translation>Копирај</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="654"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="681"/>
         <source>Paste</source>
         <translation>Налепи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="655"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="682"/>
         <source>Delete</source>
         <translation>Уклони</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="656"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="683"/>
         <source>Import</source>
         <translation>Увези</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="657"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="684"/>
         <source>Reload</source>
         <translation>Поново учитај</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="658"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="685"/>
         <source>Export</source>
         <translation>Извези</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="659"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="686"/>
         <source>Export All</source>
         <translation>Извези све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="660"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="687"/>
         <source>Collapse All</source>
         <translation>Скупи све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="661"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="688"/>
         <source>Expand All</source>
         <translation>Прошири све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="738"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="765"/>
         <source>Search entries saved.</source>
         <translation>Претрага сачуваних ставки.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="767"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="794"/>
         <source>Sigil: Saved Searches</source>
         <translation>Сигил: Сачуване претраге</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="768"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="795"/>
         <source>The Search entries may have been modified.
 Do you want to save your changes?</source>
         <translation>Могуће је да су ставке Претраге промењене.
@@ -13928,17 +15272,17 @@ Do you want to save your changes?</source>
 <context>
     <name>SearchEditorModel</name>
     <message>
-        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="65"/>
+        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="66"/>
         <source>Name</source>
         <translation>Име</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="66"/>
+        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="67"/>
         <source>Find</source>
         <translation>Пронађи</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="67"/>
+        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="68"/>
         <source>Replace</source>
         <translation>Замени</translation>
     </message>
@@ -13954,6 +15298,19 @@ Do you want to save your changes?</source>
         <location filename="../../Form_Files/SelectCharacter.ui" line="14"/>
         <source>Insert Special Character</source>
         <translation>Уметни специјални карактер</translation>
+    </message>
+</context>
+<context>
+    <name>SelectCheckpoint</name>
+    <message>
+        <location filename="../../Form_Files/SelectCheckpoint.ui" line="14"/>
+        <source>Select Checkpoint Version</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Form_Files/SelectCheckpoint.ui" line="56"/>
+        <source>Description of Checkpoint</source>
+        <translation type="unfinished"/>
     </message>
 </context>
 <context>
@@ -13991,54 +15348,76 @@ your book and automatically insert into your document.</source>
         <translation>Величина сличица:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="80"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="85"/>
         <source>All</source>
         <translation>Све</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="81"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="86"/>
         <source>Images</source>
         <translation>Слике</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="82"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="87"/>
         <source>Video</source>
         <translation>Видео</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="83"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="88"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="127"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="136"/>
         <source>Files In the Book</source>
         <translation>Датотеке у књизи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="130"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="139"/>
         <source>Thumbnails</source>
         <translation>Сличице</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="286"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="299"/>
         <source>shades</source>
         <translation>сенке</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="286"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="299"/>
         <source>colors</source>
         <translation>боје</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="287"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="300"/>
         <source>Grayscale</source>
         <translation>Црно-бело</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="287"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="300"/>
         <source>Color</source>
         <translation>Боја</translation>
+    </message>
+</context>
+<context>
+    <name>SelectFolder</name>
+    <message>
+        <location filename="../../Form_Files/SelectFolder.ui" line="14"/>
+        <source>Select Destination Folder </source>
+        <translation>Избор Циљног фолдера</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/SelectFolder.ui" line="22"/>
+        <source>Enter or select an ebook path to the desired destination folder.
+
+The dropdown box shows existing Folder paths for this file type.</source>
+        <translation>Унесите или изаберите путању у екњизи до жељеног циљног фолдера.
+
+Падајућа листа приказује путање постојећих фолдера за овај тип датотеке.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/SelectFolder.ui" line="27"/>
+        <source>Folders:</source>
+        <translation>Фолдери:</translation>
     </message>
 </context>
 <context>
@@ -14071,7 +15450,7 @@ double click on existing destinations in your book from the list above.</source>
         <translation>Циљ:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectHyperlink.cpp" line="61"/>
+        <location filename="../../Dialogs/SelectHyperlink.cpp" line="69"/>
         <source>Targets in the Book</source>
         <translation>Циљеви у књизи</translation>
     </message>
@@ -14128,60 +15507,54 @@ ID имена морају бити јединствена и морају да 
         <translation>Речник провере правописа</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="34"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="22"/>
         <source>Dictionary:</source>
         <translation>Речник:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="64"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="52"/>
         <source>Highlight misspelled words in Code View.</source>
         <translation>Истакнуте неисправне речи у Приказу кода</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="67"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="55"/>
         <source>Highlight Misspelled Words</source>
         <translation>Истакнуте неисправне речи</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="74"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="75"/>
         <source>Check words with numbers in them.</source>
         <translation>Провери речи које садрже бројеве у себи.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="77"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="78"/>
         <source>Check Numbers</source>
         <translation>Провери Бројеве</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="130"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="149"/>
         <source>User Dictionaries</source>
         <translation>Кориснички речник</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="138"/>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="222"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="159"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="264"/>
         <source>Add</source>
         <translation>Додај</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="145"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="212"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="166"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="217"/>
         <source>Rename</source>
         <translation>Преименуј</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="152"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="173"/>
         <source>Copy</source>
         <translation>Копирај</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="159"/>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="236"/>
-        <source>Remove</source>
-        <translation>Обриши</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="162"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="180"/>
         <source>Remove the selected dictionary.
 
 You cannot remove the last dictionary.</source>
@@ -14190,7 +15563,13 @@ You cannot remove the last dictionary.</source>
 Последњи речник не може да се уклони.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="189"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="185"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="278"/>
+        <source>Remove</source>
+        <translation>Обриши</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="223"/>
         <source>Mark which dictionaries are enabled for
 spell checking.
 
@@ -14203,102 +15582,102 @@ and to make it the default dictionary.</source>
 и како би сте га означили као подразумеваног.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="203"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="250"/>
         <source>User Dictionary Word List</source>
         <translation>Листа корисничких речника</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="218"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="260"/>
         <source>Enter or paste words to add to the dictionary.
 Words can be separated by lines, commas, or spaces.</source>
         <translation>Унесите или налепите речи које желите да додате у речник.
 Речи могу бити раздвојене линијама, зарезима или размацима.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="229"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="271"/>
         <source>Edit</source>
         <translation>Уреди</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="243"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="285"/>
         <source>Remove All</source>
         <translation>Обриши све</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="272"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="348"/>
         <source>The default dictionary is used when you add words to the
 default dictionary or use the shortcuts for Add Misspelled Words.</source>
         <translation>Подразумевани речник се користи када додајете речи у
 подразумевани речник или користите пречицу за Додај погрешне речи.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="276"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="352"/>
         <source>Default Dictionary:</source>
         <translation>Подразумевани речник:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="283"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="359"/>
         <source>none</source>
         <translation>ниједна</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="52"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="53"/>
         <source>Enable</source>
         <translation>Омогући</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="53"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="54"/>
         <source>Dictionary</source>
         <translation>Речник</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="109"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="114"/>
         <source>Add Dictionary</source>
         <translation>Додај речник</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="109"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="212"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="114"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="217"/>
         <source>Name:</source>
         <translation>Име:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="123"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="163"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="225"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="233"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="252"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="128"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="168"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="230"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="238"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="257"/>
         <source>Error</source>
         <translation>Грешка</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="123"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="225"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="128"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="230"/>
         <source>A user dictionary already exists with this name!</source>
         <translation>Кориснички речник са овим именом већ постоји!</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="132"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="137"/>
         <source>Add Words</source>
         <translation>Додај речи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="132"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="137"/>
         <source>Words:</source>
         <translation>Речи:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="163"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="168"/>
         <source>Could not create file!</source>
         <translation>Датотека не може да се креира!</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="233"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="238"/>
         <source>Could not rename file!</source>
         <translation>Датотека не може да се преименује!</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="252"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="257"/>
         <source>You cannot delete the last dictionary.</source>
         <translation>Не можете обрисати последњи речник.</translation>
     </message>
@@ -14329,7 +15708,7 @@ is restarted or a new book is opened.</source>
     </message>
     <message>
         <location filename="../../Form_Files/SpellcheckEditor.ui" line="62"/>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="532"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="541"/>
         <source>Ignore</source>
         <translation>Игнориши</translation>
     </message>
@@ -14390,104 +15769,104 @@ Use if you edit any HTML files while Spellcheck is open.</source>
         <translation>Освежи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="53"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="54"/>
         <source>f</source>
         <comment>Filter</comment>
         <translation>ф</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="54"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="55"/>
         <source>s</source>
         <comment>ShowAllWords</comment>
         <translation>с</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="55"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="56"/>
         <source>c</source>
         <comment>Case-InsensitiveSort</comment>
         <translation>н</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="56"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="57"/>
         <source>r</source>
         <comment>Refresh</comment>
         <translation>о</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="154"/>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="177"/>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="216"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="155"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="178"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="217"/>
         <source>No words selected.</source>
         <translation>Нису одабране речи.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="170"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="171"/>
         <source>Ignored word(s).</source>
         <translation>Игнорисана реч(и).</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="205"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="206"/>
         <source>Added word(s) to dictionary.</source>
         <translation>Додата реч(и) у речник.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="207"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="208"/>
         <source>Added word(s) to dictionary. The dictionary is not enabled in Preferences.</source>
         <translation>Додај реч(и) у речник. Речник није омогућен у Подешавањима.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="222"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="223"/>
         <source>The new word cannot contain &quot;&lt;&quot;, &quot;&gt;&quot;, or &quot;&amp;&quot;.</source>
         <translation>Нова реч не може да садржи  &quot;&lt;&quot;, &quot;&gt;&quot;, или &quot;&amp;&quot;.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="233"/>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="301"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="234"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="302"/>
         <source>No</source>
         <translation>Не</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="252"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="253"/>
         <source>Word</source>
         <translation>Реч</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="253"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="254"/>
         <source>Count</source>
         <translation>Број</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="254"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="255"/>
         <source>Misspelled?</source>
         <translation>Неисправно?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="299"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="300"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="314"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="318"/>
         <source>Misspelled Words</source>
         <translation>Погрешно написане речи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="314"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="318"/>
         <source>Total Unique Words</source>
         <translation>Тотално јединствене речи</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="533"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="542"/>
         <source>Add to Dictionary</source>
         <translation>Додај у речник</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="534"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="543"/>
         <source>Find in Text</source>
         <translation>Пронађи у тексту</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="535"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="544"/>
         <source>Select All</source>
         <translation>Одабери све</translation>
     </message>
@@ -14496,8 +15875,8 @@ Use if you edit any HTML files while Spellcheck is open.</source>
     <name>StylesInCSSFilesWidget</name>
     <message>
         <location filename="../../Form_Files/ReportsStylesInCSSFilesWidget.ui" line="14"/>
-        <source>Style Classes in CSS Files</source>
-        <translation>Стилске класе у CSS датотекама</translation>
+        <source>CSS Classes</source>
+        <translation>CSS класе</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ReportsStylesInCSSFilesWidget.ui" line="34"/>
@@ -14510,52 +15889,52 @@ Use if you edit any HTML files while Spellcheck is open.</source>
         <translation>Филтер</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="80"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="86"/>
         <source>CSS File</source>
         <translation>CSS датотека</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="81"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="87"/>
         <source>Class Selector</source>
         <translation>Селектор класе</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="82"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="88"/>
         <source>Used In HTML File</source>
         <translation>Користи се у HTML датотеци</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="88"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="94"/>
         <source>&lt;p&gt;This is a list of the class based selectors in all CSS files and whether or not the selector was matched from a style in an HTML file.&lt;p&gt;</source>
         <translation>&lt;p&gt;Ово је листа селектора заснованих на класама који су коришћени у свим CSS датотекама и да ли је селектор упарен са стилом у HTML датотеци или не.&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="89"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="95"/>
         <source>&lt;p&gt;NOTE:&lt;/p&gt;</source>
         <translation>&lt;p&gt;НАПОМЕНА:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="90"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="96"/>
         <source>&lt;p&gt;Due to the complexities of CSS you must check your code manually to be certain if a style is used or not.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Због сложености CSS-а морате ручно да проверите ваш код како би били сигурни да ли је стил коришћен или не.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="246"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="258"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Сачувај извештај са одвојеним зарезима</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="259"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="272"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="259"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="272"/>
         <source>Cannot save report file.</source>
         <translation>Није могуће сачувати извештај.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="270"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="283"/>
         <source>Delete From Stylesheet</source>
         <translation>Обриши из стила</translation>
     </message>
@@ -14563,7 +15942,7 @@ Use if you edit any HTML files while Spellcheck is open.</source>
 <context>
     <name>TabBar</name>
     <message>
-        <location filename="../../Tabs/TabBar.cpp" line="67"/>
+        <location filename="../../Tabs/TabBar.cpp" line="83"/>
         <source>Close Other Tabs</source>
         <translation>Затвори остале картице</translation>
     </message>
@@ -14571,7 +15950,7 @@ Use if you edit any HTML files while Spellcheck is open.</source>
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="../../Tabs/TabManager.cpp" line="217"/>
+        <location filename="../../Tabs/TabManager.cpp" line="264"/>
         <source>Cannot edit file</source>
         <translation>Датотека не може да се уређује</translation>
     </message>
@@ -14584,17 +15963,17 @@ Use if you edit any HTML files while Spellcheck is open.</source>
         <translation>Садржај</translation>
     </message>
     <message>
-        <location filename="../../MainUI/TableOfContents.cpp" line="123"/>
+        <location filename="../../MainUI/TableOfContents.cpp" line="127"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Датотека &quot;%1&quot; не постоји.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/TableOfContents.cpp" line="154"/>
+        <location filename="../../MainUI/TableOfContents.cpp" line="158"/>
         <source>Collapse All</source>
         <translation>Скупи све</translation>
     </message>
     <message>
-        <location filename="../../MainUI/TableOfContents.cpp" line="155"/>
+        <location filename="../../MainUI/TableOfContents.cpp" line="159"/>
         <source>Expand All</source>
         <translation>Прошири све</translation>
     </message>
@@ -14602,20 +15981,48 @@ Use if you edit any HTML files while Spellcheck is open.</source>
 <context>
     <name>TextTab</name>
     <message>
-        <location filename="../../Tabs/TextTab.cpp" line="309"/>
+        <location filename="../../Tabs/TextTab.cpp" line="314"/>
         <source>Print %1</source>
         <translation>Штампај %1</translation>
     </message>
 </context>
 <context>
+    <name>TextView</name>
+    <message>
+        <location filename="../../ViewEditors/TextView.cpp" line="436"/>
+        <source>Reformat HTML</source>
+        <translation>Поновно форматирај HTML</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/TextView.cpp" line="438"/>
+        <source>Mend and Prettify Code</source>
+        <translation>Поправи и улепшај код</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/TextView.cpp" line="439"/>
+        <source>Mend and Prettify Code - All HTML Files</source>
+        <translation>Поправи и улепшај код - све HTML датотеке</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/TextView.cpp" line="440"/>
+        <source>Mend Code</source>
+        <translation>Поправи код</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/TextView.cpp" line="441"/>
+        <source>Mend Code - All HTML Files</source>
+        <translation>Поправи код - све HTML датотеке</translation>
+    </message>
+</context>
+<context>
     <name>Utility</name>
     <message>
-        <location filename="../../Misc/Utility.cpp" line="648"/>
+        <location filename="../../Misc/Utility.cpp" line="740"/>
         <source>Sigil</source>
         <translation>Сигил</translation>
     </message>
     <message>
-        <location filename="../../Misc/Utility.cpp" line="649"/>
+        <location filename="../../Misc/Utility.cpp" line="741"/>
         <source>The requested file name contains non-ASCII characters. You should only use ASCII characters in filenames. Using non-ASCII characters can prevent the EPUB from working with some readers.
 
 Continue using the requested filename?</source>
@@ -14627,75 +16034,141 @@ Continue using the requested filename?</source>
 <context>
     <name>ValidationResultsView</name>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="44"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="48"/>
         <source>Validation Results</source>
         <translation>Резултати потврђивања</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="227"/>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="231"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="246"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="250"/>
         <source>N/A</source>
         <translation>N/A</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="254"/>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="270"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="273"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="289"/>
         <source>Message</source>
         <translation>Порука</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="255"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="274"/>
         <source>No problems found!</source>
         <translation>Нису пронађени проблеми!</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="270"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="289"/>
         <source>File</source>
         <translation>Датотека</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="270"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="289"/>
         <source>Line</source>
         <translation>Линија</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="270"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="289"/>
         <source>Offset</source>
         <translation>Офсет</translation>
     </message>
 </context>
 <context>
-    <name>ViewImage</name>
+    <name>ViewAV</name>
     <message>
-        <location filename="../../Form_Files/ViewImage.ui" line="20"/>
-        <source>View Image</source>
-        <translation>Прикажи слику</translation>
+        <location filename="../../Dialogs/ViewAV.cpp" line="86"/>
+        <source>Close this window</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../../Form_Files/ViewImage.ui" line="33"/>
-        <source>about:blank</source>
-        <translation>о:празно</translation>
+        <location filename="../../Dialogs/ViewAV.cpp" line="87"/>
+        <source>Done</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>ViewFont</name>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="88"/>
+        <source>Close this window</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="89"/>
+        <source>Done</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="147"/>
+        <source>abcdefghijklmnopqrstuvwxyz</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="148"/>
+        <source>ABCDEFGHIJKLMNOPQRSTUVWXYZ</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="149"/>
+        <source>0123456789.:,;(*!?&apos;\/&quot;)$%^&amp;-+@=_-~&gt;&lt;</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="150"/>
+        <source>The quick brown fox jumps over the lazy dog</source>
+        <translation type="unfinished"/>
+    </message>
+</context>
+<context>
+    <name>ViewImage</name>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="76"/>
+        <source>Close this window</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="77"/>
+        <source>Done</source>
+        <translation type="unfinished"/>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="106"/>
+        <source>shades</source>
+        <translation>нијансе</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="106"/>
+        <source>colors</source>
+        <translation>боје</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="107"/>
+        <source>Grayscale</source>
+        <translation>Сиви тонови</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="107"/>
+        <source>Color</source>
+        <translation>Боја</translation>
     </message>
 </context>
 <context>
     <name>WellFormedCheckComponent</name>
     <message>
-        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="42"/>
+        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="43"/>
         <source>&lt;p&gt;The operation you requested cannot be performed because &lt;b&gt;%1&lt;/b&gt; is not a well-formed XML document.&lt;/p&gt;&lt;p&gt;An error was found &lt;b&gt;at or above line %2: %3.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The &lt;i&gt;Fix Manually&lt;/i&gt; option will let you fix the problem by hand.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Операција коју сте захтевали не може да се изврши зато што &lt;b&gt;%1&lt;/b&gt; није добро формирани XML документ.&lt;/p&gt;&lt;p&gt;Грешка је пронађена &lt;b&gt;у или изнад линије %2: %3.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Опција &lt;i&gt;Исправи ручно&lt;/i&gt; вам омогућава да ручно исправите проблем.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="47"/>
+        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="48"/>
         <source>&lt;p&gt;The &lt;i&gt;Fix Automatically&lt;/i&gt; option will instruct Sigil to try to repair the document. &lt;b&gt;This option may lead to loss of data!&lt;/b&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;Опција &lt;i&gt;Аутоматски исправи&lt;/i&gt; ће наложити Сигилу да покуша да поправи документ. &lt;b&gt;Ова опција може да доведе до губитка података!&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="54"/>
+        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="55"/>
         <source>Fix &amp;Automatically</source>
         <translation>Исправи &amp;аутоматски</translation>
     </message>
     <message>
-        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="56"/>
+        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="57"/>
         <source>Fix &amp;Manually</source>
         <translation>Исправи &amp;ручно</translation>
     </message>
@@ -14840,7 +16313,7 @@ Continue using the requested filename?</source>
     <message>
         <location filename="../../Misc/XMLEntities.cpp" line="124"/>
         <source>pilcrow sign</source>
-        <translation>знак за параграф</translation>
+        <translation>знак за пасус</translation>
     </message>
     <message>
         <location filename="../../Misc/XMLEntities.cpp" line="125"/>

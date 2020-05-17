@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-**  Copyright (C) 2016 Kevin B. Hendricks, Stratford, ON Canada
+**  Copyright (C) 2016-2019 Kevin B. Hendricks, Stratford, ON Canada
 **
 **  This file is part of Sigil.
 **
@@ -203,6 +203,11 @@ void MetaEditor::selectElement()
             code = "dc:contributor";
             QString content = tr("[Contributor name here]");
             insertRow(code, content);
+        } else if (code == "meta") {
+            code = "meta";
+            QString content = tr("[meta value here]");
+            insertRow(code, content);
+            insertChild(QString("property"),QString("[property_name]"));
         } else {
             insertRow(code);
         }
@@ -546,7 +551,7 @@ void MetaEditor::loadMetadataElements()
          tr("Date: Publication") << "dc:date" << tr("The date of publication.") <<
          tr("Date: Creation") << "dcterms:created" << tr("The date of creation.") <<
          tr("Date: Issued") << "dcterms:issued" << tr("The date of modification.") <<
-         tr("Date: Modification") << "dcterms:modfied" << tr("The date of modification.") <<
+         tr("Date: Modification") << "dcterms:modified" << tr("The date of modification.") <<
          tr("Type") << "dc:type" << tr("Used to indicate that the given EPUB Publication is of a specialized type..") <<
          tr("Format") << "dc:format" << tr("The media type or dimensions of the publication. Best practice is to use a value from a controlled vocabulary (e.g. MIME media types).") <<
          tr("Source") << "dc:source" << tr("Identifies the related resource(s) from which this EPUB Publication is derived.") <<
@@ -563,8 +568,8 @@ void MetaEditor::loadMetadataElements()
          tr("Identifier: ISSN") << "dc:identifier-issn" << tr("International Standard Serial Number associated with the given EPUB publication.") <<
          tr("Identifier: UUID") << "dc:identifier-uuid" << tr("A Universally Unique Idenitifier generated for this EPUB publication.") <<
          // tr("Identifier: Custom") << "dc:identifier-custom" << tr("A custom identifier based on a specified scheme") <<
-         tr("Custom Element") << tr("[Custom element]") << tr("An empty metadata element you can modify.");
-
+         tr("Custom Element") << tr("[Custom element]") << tr("An empty metadata element you can modify.")  << 
+         tr("Meta Element (primary)") << "meta" << tr("An empty primary meta element you can modify.");
     for (int i = 0; i < data.count(); i++) {
         QString name = data.at(i++);
         QString code = data.at(i++);
@@ -591,7 +596,7 @@ void MetaEditor::loadMetadataProperties()
     QStringList data;
     data <<
          tr("Id Attribute") << "id" << tr("Optional, typically short, unique identifier string used as an attribute in the Package (opf) document.") <<
-         tr("XML Language") << "xml:lang" << tr("Optional, language specifying attribute.  Uses same codes as dc:language. Not for use with dc:langauge, dc:date, or dc:identifier metadata elements.") <<
+         tr("XML Language") << "xml:lang" << tr("Optional, language specifying attribute.  Uses same codes as dc:language. Not for use with dc:language, dc:date, or dc:identifier metadata elements.") <<
          tr("Text Direction: rtl") << "dir:rtl" << tr("Optional text direction attribute for this metadata item. right-to-left (rtl). Not for use with dc:language, dc:date, or dc:identifier metadata elements.") <<
          tr("Text Direction: ltr") << "dir:ltr" << tr("Optional text direction attribute for this metadata item. left-to-right (ltr). Not for use with dc:language, dc:date, or dc:identifier metadata elements.") <<
          tr("Title Type: main") << "title-type:main" << tr("Indicates the associated title is the main title of the publication.  Only one main title should exist.") <<
@@ -665,8 +670,8 @@ void MetaEditor::loadE2MetadataElements()
          tr("Identifier: Custom") << "dc:identifier-custom" << tr("A custom identifier based on a specified scheme") <<
          tr("Series") << "calibre:series" << tr("Series title or name (from calibre)") <<
          tr("Series Index") << "calibre:series_index" << tr("Index of this book in the series (from calibre)") <<
-         tr("Title for Sorting") << "calibre:title_sort" << tr("Version of ebook title to use for sorting(from calibre)") <<
-         tr("Custom Element") << tr("[Custom element]") << tr("An empty metadata element for you to modify");
+         tr("Title for Sorting") << "calibre:title_sort" << tr("Version of ebook title to use for sorting (from calibre)") <<
+         tr("Custom Element") << tr("[Custom element]") << tr("An empty element for you to modify");
 
     for (int i = 0; i < data.count(); i++) {
         QString name = data.at(i++);

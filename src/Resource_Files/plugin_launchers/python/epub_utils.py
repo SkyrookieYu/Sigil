@@ -79,8 +79,8 @@ def epub_zip_up_book_contents(ebook_path, epub_filepath):
     outzip.close()
 
 
-def build_container_xml(relative_path_to_opf):
-    opf_path = unicode_str(relative_path_to_opf)
+def build_container_xml(bookpath_to_opf):
+    opf_path = unicode_str(bookpath_to_opf)
     container = '<?xml version="1.0" encoding="UTF-8"?>\n'
     container += '<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">\n'
     container += '    <rootfiles>\n'
@@ -89,40 +89,40 @@ def build_container_xml(relative_path_to_opf):
     return container
 
 
+# mangled_fonts is a list of the book paths to the font files to be (de)mangled
 def build_adobe_encryption_xml(mangled_fonts):
     encryption = ''
     if mangled_fonts is not None and len(mangled_fonts) > 0:
         encryption = '<encryption xmlns="urn:oasis:names:tc:opendocument:xmlns:container" \
             xmlns:enc="http://www.w3.org/2001/04/xmlenc#" xmlns:deenc="http://ns.adobe.com/digitaleditions/enc">\n'
-        for fontfile in mangled_fonts:
+        for fontbkpath in mangled_fonts:
             encryption += '  <enc:EncryptedData>\n'
             encryption += '    <enc:EncryptionMethod Algorithm="http://ns.adobe.com/pdf/enc#RC"/>\n'
             encryption += '    <enc:CipherData>\n'
-            encryption += '      <enc:CipherReference URI="OEBPS/Fonts/' + fontfile + '"/>\n'
+            encryption += '      <enc:CipherReference URI="' + fontbkpath + '"/>\n'
             encryption += '    </enc:CipherData>\n'
             encryption += '  </enc:EncryptedData>\n'
         encryption += '</encryption>\n'
     return encryption
 
 
-# mangeled_fonts is a simple list of Font file names (no href or path needed)
+# mangled_fonts is a list of book paths to the font files to be (de)mangled
 def build_idpf_encryption_xml(mangled_fonts):
     encryption = ''
     if mangled_fonts is not None and len(mangled_fonts) > 0:
         encryption = '<encryption xmlns="urn:oasis:names:tc:opendocument:xmlns:container" \
             xmlns:enc="http://www.w3.org/2001/04/xmlenc#">\n'
-        for fontfile in mangled_fonts:
+        for fontbkpath in mangled_fonts:
             encryption += '  <enc:EncryptedData>\n'
             encryption += '    <enc:EncryptionMethod Algorithm="http://www.idpf.org/2008/embedding"/>\n'
             encryption += '    <enc:CipherData>\n'
-            encryption += '      <enc:CipherReference URI="OEBPS/Fonts/' + fontfile + '"/>\n'
+            encryption += '      <enc:CipherReference URI="' + fontbkpath + '"/>\n'
             encryption += '    </enc:CipherData>\n'
             encryption += '  </enc:EncryptedData>\n'
         encryption += '</encryption>\n'
     return encryption
 
 
-# mangeled_fonts is a simple list of Font file names (no href or path needed)
 def Adobe_encryption_key(uid):
     # strip it down to simple valid hex characters
     # being careful to generate a string of 16 bytes in length

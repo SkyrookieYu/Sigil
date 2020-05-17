@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -61,43 +62,67 @@ QString Resource::GetIdentifier() const
 
 QString Resource::Filename() const
 {
+#if 0  
+    // accessing the file system just to extract a file name is very slow
+    // especially when we know this resource path ends with a filename
     return QFileInfo(m_FullFilePath).fileName();
+#else
+    return GetRelativePath().split('/').last();
+#endif
 }
 
 
+
+// relative path of the resource's directory within the EPUB (a book path to the folder)
 QString Resource::GetFolder() const
 {
-    // Pathname of the directory within the EPUB.
-    return QFileInfo(GetRelativePath()).absolutePath().remove(0, 1);
+    return QFileInfo(GetRelativePath()).path();
 }
 
 
+// Pathname of the file within the EPUB.  Sometimes called the book path
 QString Resource::GetRelativePath() const
 {
-    // Pathname of the file within the EPUB.
-    return m_FullFilePath.right(m_FullFilePath.length() - m_MainFolder.length());
+    // Note m_MainFolder *never* ends with a path separator - see Misc/TempFolder.cpp
+    return m_FullFilePath.right(m_FullFilePath.length() - m_MainFolder.length() - 1);
 }
 
-QString Resource::GetRelativePathToOEBPS() const
+
+// Generate a unique path segment ending in file name for this resource
+QString Resource::ShortPathName() const
 {
-    return QFileInfo(m_FullFilePath).dir().dirName() + "/" + Filename();
+    return m_ShortName;
 }
 
 
-QString Resource::GetRelativePathToRoot() const
+// Use to generate relative path **from** some **other** start_resource 
+// (OPFResource, NCXResource, NavResource, etc) "to" **this** resource
+QString Resource::GetRelativePathFromResource(const Resource* start_resource) const
 {
-    QFileInfo info(m_FullFilePath);
-    QDir parent_dir = info.dir();
-    QString parent_name = parent_dir.dirName();
-    parent_dir.cdUp();
-    QString grandparent_name = parent_dir.dirName();
-    return grandparent_name + "/" + parent_name + "/" + Filename();
-}
+    if (GetRelativePath() == start_resource->GetRelativePath()) return "";
+    // return Utility::relativePath(GetRelativePath(), start_resource->GetFolder());
+    return Utility::relativePath(m_FullFilePath, start_resource->GetFullFolderPath());
+} 
+
+
+// Use to generate relative path from **this** resource to  some **other** dest_resource
+QString Resource::GetRelativePathToResource(const Resource* dest_resource) const
+{
+    if (GetRelativePath() == dest_resource->GetRelativePath()) return "";
+    // return Utility::relativePath(dest_resource->GetRelativePath(), dest_resource->GetFolder());
+    return Utility::relativePath(dest_resource->GetFullPath(), GetFullFolderPath());
+} 
 
 
 QString Resource::GetFullPath() const
 {
     return m_FullFilePath;
+}
+
+
+QString Resource::GetFullFolderPath() const
+{
+    return QFileInfo(m_FullFilePath).absolutePath();
 }
 
 
@@ -116,7 +141,7 @@ void Resource::SetCurrentBookRelPath(const QString& current_path)
 QString Resource::GetCurrentBookRelPath()
 {
   if (m_CurrentBookRelPath.isEmpty()) {
-      return GetRelativePathToRoot();
+      return GetRelativePath();
   }
   return m_CurrentBookRelPath;
 }
@@ -145,6 +170,18 @@ QString Resource::GetMediaType() const
 }
 
 
+void Resource::SetShortPathName(const QString& shortname)
+{
+    m_ShortName = shortname;
+}
+
+
+QString Resource::GetFullPathToBookFolder() const
+{
+   return m_MainFolder;
+}
+
+
 QReadWriteLock &Resource::GetLock() const
 {
     return m_ReadWriteLock;
@@ -170,7 +207,27 @@ bool Resource::RenameTo(const QString &new_filename)
     if (successful) {
         QString old_path = m_FullFilePath;
         m_FullFilePath = new_path;
+	SetShortPathName(new_filename);
         emit Renamed(this, old_path);
+    }
+
+    return successful;
+}
+
+bool Resource::MoveTo(const QString &new_bookpath)
+{
+    QString new_path;
+    bool successful = false;
+    {
+        QWriteLocker locker(&m_ReadWriteLock);
+	new_path = GetFullPathToBookFolder() + "/" + new_bookpath;
+        successful = Utility::SMoveFile(m_FullFilePath, new_path);
+    }
+
+    if (successful) {
+        QString old_path = m_FullFilePath;
+        m_FullFilePath = new_path;
+        emit Moved(this, old_path);
     }
 
     return successful;
@@ -186,6 +243,9 @@ bool Resource::Delete()
 
     if (successful) {
         emit Deleted(this);
+        // try to prevent any resource modified signals from going out
+	// while we wait for delete to actually happen
+	disconnect(this, 0, 0, 0);
         deleteLater();
     }
 

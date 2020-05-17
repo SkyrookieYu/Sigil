@@ -1,5 +1,6 @@
 /************************************************************************
 **
+**  Copyright (C) 2019 Kevin B. Hendricks, Stratford, Ontario Canada
 **  Copyright (C) 2012 John Schember <john@nachtimwald.com>
 **
 **  This file is part of Sigil.
@@ -26,7 +27,7 @@
 #include "Tabs/ContentTab.h"
 #include "ResourceObjects/Resource.h"
 
-class QWebView;
+class AVView;
 
 class AVTab : public ContentTab
 {
@@ -36,12 +37,13 @@ public:
     AVTab(Resource *resource, QWidget *parent=0);
 
 public slots:
+    void ShowAV();
     void RefreshContent();
 
 private:
     void ConnectSignalsToSlots();
 
-    QWebView *m_WebView;
+    AVView *m_av;
 };
 
-#endif // IMAGETAB_H
+#endif // AVTAB_H

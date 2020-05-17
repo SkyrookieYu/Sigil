@@ -33,7 +33,7 @@ fwk_struct = ['Python.framework/Versions/' + pversion + '/lib/' + stdlib_name + 
 ]
 
 # minimal set of PyQt modules to support the plugin gui
-PYQT_MODULES = ['%s.so' % x for x in ('Qt', 'QtCore', 'QtGui', 'QtNetwork', 'QtPrintSupport', 'QtSvg', 'QtWidgets', 'sip')]
+PYQT_MODULES = ['%s.so' % x for x in ('Qt', 'QtCore', 'QtDBus', 'QtGui', 'QtNetwork', 'QtPrintSupport', 'QtSvg', 'QtWidgets', 'sip')]
 
 EXCLUDED_UIC_WIDGET_PLUGINS = ['%s.py' % x for x in ('qaxcontainer', 
                                                      'qscintilla', 'qtcharts', 'qtquickwidgets', 
@@ -44,27 +44,33 @@ EXCLUDED_UIC_WIDGET_PLUGINS = ['%s.py' % x for x in ('qaxcontainer',
 site_packages = [ ('lxml', 'd'), 
                   ('six.py', 'f'), 
                   ('html5lib','d'), 
-                  ('PIL', 'd'), 
-                  ('regex.py','f'),
-                  ('_regex.so','f'),
-                  ('_regex.cpython-37m-darwin.so','f'),
-                  ('_regex_core.py','f'),
-                  ('test_regex.py', 'f'),
+                  ('PIL', 'd'),
+                  ('regex', 'd'),
+                  ('certifi', 'd'),
                   ('cssselect', 'd'),
+                  ('urllib3', 'd'),
+                  ('dulwich', 'd'),
                   ('encutils', 'd'),
-                  ('cssutils', 'd'),
+                  ('css_parser', 'd'),
                   ('webencodings', 'd'), # needed by html5lib
                   ('chardet', 'd'),
                   ('sip.so', 'f'),
                   ('PyQt5', 'd')]
+
+# The latest regex is installed inside its own directory in site packages
+#  ('regex.py','f'),
+#  ('_regex.so','f'),
+#  ('_regex.cpython-37m-darwin.so','f'),
+#  ('_regex_core.py','f'),
+#  ('test_regex.py', 'f'),
 
 
 def copy_python_stdlibrary(src_dir, dest_dir):
     for x in os.listdir(src_dir):
         y = os.path.join(src_dir, x)
         ext = os.path.splitext(x)[1]
-        if os.path.isdir(y) and x not in ('test', 'hotshot', 'distutils',
-                'site-packages', 'idlelib', 'lib2to3', 'dist-packages', '__pycache__'):
+        if os.path.isdir(y) and x not in ('test', 'hotshot', 'site-packages', 
+                                          'idlelib', 'lib2to3', 'dist-packages', '__pycache__'):
             shutil.copytree(y, os.path.join(dest_dir, x),
                     ignore=ignore_in_dirs)
         if os.path.isfile(y) and ext in ('.py', '.so'):

@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2018, Kevin B. Hendricks, Stratford, ON Canada
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2009-2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -20,6 +20,7 @@
 **
 *************************************************************************/
 
+#include <QDebug>
 #include "BookManipulation/CleanSource.h"
 #include "ResourceObjects/Resource.h"
 #include "ResourceObjects/CSSResource.h"
@@ -30,6 +31,7 @@
 #include "ResourceObjects/MiscTextResource.h"
 #include "ResourceObjects/SVGResource.h"
 #include "Tabs/AVTab.h"
+#include "Tabs/FontTab.h"
 #include "Tabs/CSSTab.h"
 #include "Tabs/FlowTab.h"
 #include "Tabs/ImageTab.h"
@@ -43,18 +45,37 @@
 
 TabManager::TabManager(QWidget *parent)
     :
-    QTabWidget(parent)
+    QTabWidget(parent),
+    m_LastContentTab(NULL),
+    m_TabsToDelete(QList<ContentTab*>()),
+    m_tabs_deletion_in_use(false)
 {
     QTabBar *tab_bar = new TabBar(this);
     setTabBar(tab_bar);
-    connect(tab_bar, SIGNAL(TabBarDoubleClicked()),      this, SIGNAL(ToggleViewStateRequest()));
     connect(tab_bar, SIGNAL(TabBarClicked()),            this, SLOT(SetFocusInTab()));
     connect(tab_bar, SIGNAL(CloseOtherTabsRequest(int)), this, SLOT(CloseOtherTabs(int)));
-    connect(this, SIGNAL(currentChanged(int)),         this, SLOT(EmitTabChanged()));
+    connect(this, SIGNAL(currentChanged(int)),         this, SLOT(EmitTabChanged(int)));
     connect(this, SIGNAL(tabCloseRequested(int)),      this, SLOT(CloseTab(int)));
     setDocumentMode(true);
+
+    // re-enable tab drag and drop as a test to see if last commit helped
+#if 0    
+    // QTabBar has a bug when a user "presses and flicks" on a non current tab it will cause it 
+    // to setCurrentIndex() but during EmitTabChanged(int) it then may allows the resulting mouseMoveEvent
+    // be processed on the same index that is being set in setCurrentIndex which causes a crash.
+    // This bug makes it dangerous to enable dragging and dropping to move tabs in the QTabBar
+    // So default to non-movable but let a environment variable override this decision
+    if (qEnvironmentVariableIsSet("SIGIL_ALLOW_TAB_MOVEMENT")) {
+        setMovable(true);
+    } else {
+        setMovable(false);
+    }
+#else
     setMovable(true);
+#endif
+
     setTabsClosable(true);
+    // setElideMode(Qt::ElideRight); this is the default after qt-5.6
     setUsesScrollButtons(true);
 }
 
@@ -107,12 +128,12 @@ void TabManager::CloseAllTabs(bool all)
     }
 }
 
-void TabManager::CloseTabForResource(const Resource *resource)
+void TabManager::CloseTabForResource(const Resource *resource, bool force)
 {
     int index = ResourceTabIndex(resource);
 
     if (index != -1) {
-        CloseTab(index);
+        CloseTab(index, force);
     }
 }
 
@@ -148,17 +169,20 @@ void TabManager::ReloadTabDataForResources(const QList<Resource *> &resources)
     }
 }
 
-void TabManager::ReopenTabs(MainWindow::ViewState view_state)
+void TabManager::ReopenTabs()
 {
     ContentTab *currentTab = GetCurrentContentTab();
     QList<Resource *> resources = GetTabResources();
     foreach(Resource *resource, resources) {
-        CloseTabForResource(resource);
+        CloseTabForResource(resource, true);
+        OpenResource(resource, -1, -1, QString());
     }
+#if 0
     foreach(Resource *resource, resources) {
-        OpenResource(resource, -1, -1, QString(), view_state);
+        OpenResource(resource, -1, -1, QString());
     }
-    OpenResource(currentTab->GetLoadedResource(), -1, -1, QString(), view_state);
+#endif
+    OpenResource(currentTab->GetLoadedResource(), -1, -1, QString());
 }
 
 
@@ -175,20 +199,45 @@ void TabManager::SaveTabData()
 
 void TabManager::LinkClicked(const QUrl &url)
 {
-    if (url.toString().isEmpty()) {
-        return;
-    }
-
-    ContentTab *tab = GetCurrentContentTab();
     QString url_string = url.toString();
 
-    // Convert fragments to full filename/fragments
-    if (url_string.startsWith("#")) {
-        url_string.prepend(tab->GetFilename());
-    } else if (url.scheme() == "file") {
-        if (url_string.contains("/#")) {
-            url_string.insert(url_string.indexOf("/#") + 1, tab->GetFilename());
-        }
+    if (url_string.isEmpty()) {
+        return;
+    }
+    
+    ContentTab *tab = GetCurrentContentTab();
+
+    if (url_string.indexOf(':') == -1) {
+
+        // we have a relative url, so build an internal
+        // book: scheme url book:///bookpath#fragment
+        QString attpath = Utility::URLDecodePath(url_string);
+	QString dest_bookpath;
+	int fragpos = attpath.lastIndexOf('#');
+	bool has_fragment = fragpos != -1;
+	QString fragment = "";
+	if (has_fragment) {
+	    fragment = url_string.mid(fragpos+1, -1);
+	    attpath = attpath.mid(0, fragpos);
+	}
+	if (attpath.isEmpty()) {
+	    dest_bookpath = tab->GetLoadedResource()->GetRelativePath();
+	} else {
+	    QString startdir = tab->GetLoadedResource()->GetFolder();
+	    dest_bookpath = Utility::buildBookPath(attpath, startdir);
+	}
+	if (!fragment.isEmpty()) {
+	    dest_bookpath = dest_bookpath + "#" + fragment;
+	}
+	url_string = "book:///" + dest_bookpath;
+	// QUrl will take care of encoding the url path
+    } else {
+        // we have a scheme and are absolute
+        if (url.scheme() == "file") {
+            if (url_string.contains("/#")) {
+                url_string.insert(url_string.indexOf("/#") + 1, tab->GetFilename());
+            }
+	}
     }
 
     emit OpenUrlRequest(QUrl(url_string));
@@ -198,7 +247,6 @@ void TabManager::OpenResource(Resource *resource,
                               int line_to_scroll_to,
                               int position_to_scroll_to,
                               const QString &caret_location_to_scroll_to,
-                              MainWindow::ViewState view_state,
                               const QUrl &fragment,
                               bool precede_current_tab)
 {
@@ -208,15 +256,18 @@ void TabManager::OpenResource(Resource *resource,
 
     bool grab_focus = !precede_current_tab;
     ContentTab *new_tab = CreateTabForResource(resource, line_to_scroll_to, position_to_scroll_to,
-                          caret_location_to_scroll_to, view_state, fragment, grab_focus);
+                          caret_location_to_scroll_to, fragment, grab_focus);
 
     if (new_tab) {
         AddNewContentTab(new_tab, precede_current_tab);
         emit ShowStatusMessageRequest("");
     } else {
-        QString message = tr("Cannot edit file") + ": " + resource->Filename();
+        QString message = tr("Cannot edit file") + ": " + resource->ShortPathName();
         emit ShowStatusMessageRequest(message);
     }
+
+    // do not Scroll the Preview in response as new Flow Tabs have
+    // delayed initialization.  Instead FlowTab itself will handle this
 }
 
 
@@ -301,22 +352,123 @@ void TabManager::MakeCentralTab(ContentTab *tab)
     setCurrentIndex(indexOf(tab));
 }
 
-void TabManager::EmitTabChanged()
+// Note: m_LastContentTab was previously declared as follows:
+//
+//     QPointer<ContentTab> m_LastContentTab;
+//
+// instead of just a simple:
+//
+//     ContentTab * m_LastContentTab;
+//
+// but this caused many issues with fast deleting and updating of 
+// this special pointer.
+//
+// This pointer only ever records the last curent ContentTab and it is 
+// never shared outside the TabManager
+
+void TabManager::EmitTabChanged(int new_index)
 {
     ContentTab *current_tab = qobject_cast<ContentTab *>(currentWidget());
-
-    if (m_LastContentTab.data() != current_tab) {
-        emit TabChanged(m_LastContentTab.data(), current_tab);
-        m_LastContentTab = QPointer<ContentTab>(current_tab);
+    // the result of the qobject_cast can be NULL and that is okay
+    if (m_LastContentTab != current_tab) {
+        ContentTab * prev_tab = m_LastContentTab;
+        m_LastContentTab = current_tab;
+        emit TabChanged(prev_tab, current_tab);
     }
 }
 
 
 void TabManager::DeleteTab(ContentTab *tab_to_delete)
 {
-    Q_ASSERT(tab_to_delete);
-    removeTab(indexOf(tab_to_delete));
-    tab_to_delete->deleteLater();
+
+    if (!m_TabsToDelete.contains(tab_to_delete)) {
+        m_TabsToDelete.prepend(tab_to_delete);
+    }
+    if (m_tabs_deletion_in_use) return;
+    m_tabs_deletion_in_use = true;
+
+    // qDebug() << "entering DeleteTab";
+
+    // Important: This routine appears to be re-entered somehow
+    // due to processEvents causing control to leave and return
+    // *before* this routine can itself return so multiple
+    // delete tab requests are being processed at the same time!
+
+    // here is an actual sample debug output form deleting
+    // tabs as fast as possible using Ctrl-W
+
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x128c78b30) FlowTab(0x13034af30)
+      // Debug: exiting  DeleteTab
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x13034af30) FlowTab(0x119595e60)
+      // Debug: exiting  DeleteTab
+
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x119595e60) FlowTab(0x115207f60)
+      // Debug: entering DeleteTab
+
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x115207f60) FlowTab(0x11958a620)
+      // Debug: exiting  DeleteTab
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x11958a620) FlowTab(0x126c86e80)
+      // Debug: exiting  DeleteTab
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x126c86e80) FlowTab(0x1195daaf0)
+      // Debug: exiting  DeleteTab
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x1195daaf0) FlowTab(0x128c717d0)
+      // Debug: exiting  DeleteTab
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x128c717d0) FlowTab(0x1291c9150)
+      // Debug: exiting  DeleteTab
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x1291c9150) FlowTab(0x11955d210)
+      // Debug: exiting  DeleteTab
+      // Debug: exiting  DeleteTab
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x11955d210) FlowTab(0x128d01540)
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x128d01540) FlowTab(0x1094240b0)
+      // Debug: exiting  DeleteTab
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x1094240b0) FlowTab(0x109763800)
+      // Debug: exiting  DeleteTab
+      // Debug: entering DeleteTab
+      // Debug: in ChangesSignalWhenTabChanges  FlowTab(0x109763800) FlowTab(0x119ef3a50)
+      // Debug: exiting  DeleteTab
+      // Debug: exiting  DeleteTab
+
+
+    while(!m_TabsToDelete.isEmpty()) {
+	ContentTab *tab = m_TabsToDelete.takeLast();
+
+        Q_ASSERT(tab);
+
+        // to prevent segfaults, disconnect and reconnect the currentChanged()
+        // signal and invoke EmitTabChanged() manually after QTabBar::removeTab(int) 
+        // completes because QTabBar::setCurrentIndex(int) **somehow** invokes processEvents()
+        // ***BEFORE*** properly setting the current index
+        // this helps to prevent reentrancy.
+        disconnect(this, SIGNAL(currentChanged(int)), this, SLOT(EmitTabChanged(int)));
+        removeTab(indexOf(tab));
+        connect(this, SIGNAL(currentChanged(int)), this, SLOT(EmitTabChanged(int)));
+
+        // Only the current tab is ever connected to the main ui
+        // so do our own version of EmitTabChanged() only if needed
+        // to disconnect and reconnect ui signals
+        ContentTab *new_tab = qobject_cast<ContentTab *>(currentWidget());
+        if (m_LastContentTab != new_tab) {
+            // move updating of m_LastContentTab to be upfront *before* emitting the signal
+            ContentTab* prevtab = m_LastContentTab;
+            m_LastContentTab = new_tab;
+            // flow control is lost in following line
+            emit TabChanged(prevtab,  new_tab);
+        }
+        tab->deleteLater();
+        m_tabs_deletion_in_use = !m_TabsToDelete.isEmpty();
+    }
+    // qDebug() << "exiting  DeleteTab";
 }
 
 
@@ -330,7 +482,7 @@ void TabManager::CloseTab(int tab_index, bool force)
     }
 
     ContentTab *tab = qobject_cast<ContentTab *>(widget(tab_index));
-    tab->Close();
+    if (tab) tab->Close();
     emit TabCountChanged();
 }
 
@@ -338,7 +490,7 @@ void TabManager::CloseTab(int tab_index, bool force)
 void TabManager::UpdateTabName(ContentTab *renamed_tab)
 {
     Q_ASSERT(renamed_tab);
-    setTabText(indexOf(renamed_tab), renamed_tab->GetFilename());
+    setTabText(indexOf(renamed_tab), renamed_tab->GetShortPathName());
 }
 
 void TabManager::SetFocusInTab()
@@ -388,10 +540,13 @@ bool TabManager::SwitchedToExistingTab(const Resource *resource,
     // If the resource is already opened in
     // some tab, then we just switch to it
     if (resource_index != -1) {
+        // the next line will cause TabChanged to be emitted which will update Preview
+        // but to whatever location this tab has now now after scrolling
         setCurrentIndex(resource_index);
         QWidget *tab = widget(resource_index);
         Q_ASSERT(tab);
         tab->setFocus();
+
         FlowTab *flow_tab = qobject_cast<FlowTab *>(tab);
 
         if (flow_tab != NULL) {
@@ -404,6 +559,10 @@ bool TabManager::SwitchedToExistingTab(const Resource *resource,
             } else if (line_to_scroll_to > 0) {
                 flow_tab->ScrollToLine(line_to_scroll_to);
             }
+
+
+            // manually update the Preview Location
+	    // flow_tab->EmitScrollPreviewImmediately();
 
             return true;
         }
@@ -431,6 +590,13 @@ bool TabManager::SwitchedToExistingTab(const Resource *resource,
             return true;
         }
 
+        FontTab *font_tab = qobject_cast<FontTab *>(tab);
+
+        if (font_tab != NULL) {
+            return true;
+        }
+
+
     }
 
     return false;
@@ -441,7 +607,6 @@ ContentTab *TabManager::CreateTabForResource(Resource *resource,
         int line_to_scroll_to,
         int position_to_scroll_to,
         const QString &caret_location_to_scroll_to,
-        MainWindow::ViewState view_state,
         const QUrl &fragment,
         bool grab_focus)
 {
@@ -455,7 +620,6 @@ ContentTab *TabManager::CreateTabForResource(Resource *resource,
             }
             tab = new FlowTab(html_resource,
                               fragment,
-                              view_state,
                               line_to_scroll_to,
                               position_to_scroll_to,
                               caret_location_to_scroll_to,
@@ -514,6 +678,11 @@ ContentTab *TabManager::CreateTabForResource(Resource *resource,
             break;
         }
 
+        case Resource::FontResourceType: {
+            tab = new FontTab(qobject_cast<Resource *>(resource), this);
+            break;
+        }
+
         default:
             break;
     }
@@ -537,13 +706,42 @@ bool TabManager::AddNewContentTab(ContentTab *new_tab, bool precede_current_tab)
         return false;
     }
 
+    // before adding a tab make sure m_LastContentTab has been
+    // properly updated to reflect the current tab
+    ContentTab *old_tab = qobject_cast<ContentTab *>(currentWidget());
+    m_LastContentTab = old_tab;
+
+    int idx = -1;
     if (!precede_current_tab) {
-        addTab(new_tab, new_tab->GetIcon(), new_tab->GetFilename());
+
+#if defined(Q_OS_MAC)
+        // drop use of icons to workaround Qt Bugs: QTBUG-61235, QTBUG-61742, QTBUG-63445, QTBUG-64630
+        // This is still broken in Qt 5.12.2 
+        // elided text is wrong when icon image present (hides most of elided text)
+        // icon image still overlaps with name of tab if ElideNone is used
+        idx = addTab(new_tab, new_tab->GetShortPathName());
+#else
+        idx = addTab(new_tab, new_tab->GetIcon(), new_tab->GetShortPathName());
+#endif
+
         setCurrentWidget(new_tab);
+
         new_tab->setFocus();
+
     } else {
-        insertTab(currentIndex(), new_tab, new_tab->GetIcon(), new_tab->GetFilename());
+
+#if defined(Q_OS_MAC)
+        // drop use of icons to workaround Qt Bugs: QTBUG-61235, QTBUG-61742, QTBUG-63445, QTBUG-64630
+        // This is still broken in Qt 5.12.2
+        // elided text is wrong when icon image present image (hides most of elided text)
+        // icon image still overlaps with name of tab if ElideNone is used
+        idx = insertTab(currentIndex(), new_tab, new_tab->GetShortPathName());
+#else
+        idx = insertTab(currentIndex(), new_tab, new_tab->GetIcon(), new_tab->GetShortPathName());
+#endif
+
     }
+    setTabToolTip(idx, new_tab->GetShortPathName());
 
     connect(new_tab, SIGNAL(DeleteMe(ContentTab *)), this, SLOT(DeleteTab(ContentTab *)));
     connect(new_tab, SIGNAL(TabRenamed(ContentTab *)), this, SLOT(UpdateTabName(ContentTab *)));
@@ -553,7 +751,7 @@ bool TabManager::AddNewContentTab(ContentTab *new_tab, bool precede_current_tab)
 void TabManager::UpdateTabDisplay()
 {
     for (int i = 0; i < count(); ++i) {
-        ContentTab *tab = dynamic_cast<ContentTab *>(widget(i));
+        ContentTab *tab = qobject_cast<ContentTab *>(widget(i));
 
         if (tab) {
             tab->UpdateDisplay();

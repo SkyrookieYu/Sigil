@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -31,11 +32,15 @@
 
 static const QChar FORWARD_SLASH = QChar::fromLatin1('/');
 
-PerformCSSUpdates::PerformCSSUpdates(const QString &source, const QHash<QString, QString> &css_updates, const QString &currentpath)
+PerformCSSUpdates::PerformCSSUpdates(const QString &source, 
+				     const QString& newbookpath, 
+				     const QHash<QString, QString> &css_updates, 
+				     const QString &currentpath)
     :
     m_Source(source),
     m_CSSUpdates(css_updates),
-    m_CurrentPath(currentpath)
+    m_CurrentPath(currentpath),
+    m_newbookpath(newbookpath)
 {
 }
 
@@ -44,13 +49,14 @@ QString PerformCSSUpdates::operator()()
 {
     QString result(m_Source);
     QString origDir = QFileInfo(m_CurrentPath).dir().path();
+    QString destfile = QFileInfo(m_newbookpath).fileName();
     const QList<QString> &keys = m_CSSUpdates.keys();
     int num_keys = keys.count();
     if (num_keys == 0) return result;
 
     // Now parse the text once looking for keys and replacing them where needed
     QRegularExpression reference(
-        "(?:(?:src|background|background-image|list-style|list-style-image|border-image|border-image-source|content)\\s*:|@import)\\s*"
+        "(?:(?:src|background|background-image|list-style|list-style-image|border-image|border-image-source|content|(?:-webkit-)?shape-outside)\\s*:|@import)\\s*"
         "("
         "[^;\\}]*"
         ")"
@@ -65,6 +71,8 @@ QString PerformCSSUpdates::operator()()
 
     int start_index = 0;
     QRegularExpressionMatch mo = reference.match(result, start_index);
+    // handle case if no initial match at all
+    if (!mo.hasMatch()) return result;
     do {
         bool changes_made = false;
         for (int i = 1; i <= reference.captureCount(); ++i) {
@@ -75,35 +83,37 @@ QString PerformCSSUpdates::operator()()
             int frag_start_index = 0;
             QString fragment = mo.captured(i);
             QRegularExpressionMatch frag_mo = urls.match(fragment, frag_start_index);
-            do {
-                for (int j = 1; j <= urls.captureCount(); ++j) {
-                    if (frag_mo.captured(j).trimmed().isEmpty()) {
-                        continue;
+	    // only loop if at least one match was found
+	    if (frag_mo.hasMatch()) {
+                do {
+                    for (int j = 1; j <= urls.captureCount(); ++j) {
+                        if (frag_mo.captured(j).trimmed().isEmpty()) {
+                            continue;
+                        }
+                        QString apath = Utility::URLDecodePath(frag_mo.captured(j));
+                        QString dest_oldbkpath = Utility::buildBookPath(apath, origDir);
+			// targets may not have moved but we may have
+                        QString dest_newbkpath = m_CSSUpdates.value(dest_oldbkpath,dest_oldbkpath);
+			if (!dest_newbkpath.isEmpty() && !m_newbookpath.isEmpty()) {
+			    QString new_href = Utility::buildRelativePath(m_newbookpath, dest_newbkpath);
+			    if (new_href.isEmpty()) new_href = destfile;
+			    new_href = Utility::URLEncodePath(new_href);
+                            // Replace the old url with the new one
+                            fragment.replace(frag_mo.capturedStart(j), frag_mo.capturedLength(j), new_href);
+                            changes_made = true;
+                        }
                     }
-                    QString apath = Utility::URLDecodePath(frag_mo.captured(j));
-                    QString search_key = QDir::cleanPath(origDir + FORWARD_SLASH + apath);
-                    QString new_href;
-                    if (m_CSSUpdates.contains(search_key)) {
-                        new_href = m_CSSUpdates.value(search_key);
-                    }
-                    if (!new_href.isEmpty()) {
-                        new_href = Utility::URLEncodePath(new_href);
-                        // Replace the old url with the new one
-                        fragment.replace(frag_mo.capturedStart(j), frag_mo.capturedLength(j), new_href);
-                        changes_made = true;
-                    }
-    
-                }
-                frag_start_index += frag_mo.capturedLength();
-                frag_mo = urls.match(fragment, frag_start_index);
-            } while (frag_mo.hasMatch());
+                    frag_start_index += frag_mo.capturedLength();
+                    frag_mo = urls.match(fragment, frag_start_index);
+                } while (frag_mo.hasMatch());
+	    }
             // Replace the original attribute string fragment with the new one
             if (changes_made) {
                 result.replace(mo.capturedStart(i), mo.capturedLength(i), fragment);
             }
 
         }
-        start_index += mo.capturedLength();
+        start_index = mo.capturedEnd();
         mo = reference.match(result, start_index);
     } while (mo.hasMatch());
 

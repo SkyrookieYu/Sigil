@@ -1,8 +1,9 @@
 /************************************************************************
 **
 **
-**  Copyright (C) 2012,2013 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012,2013 Dave Heiland
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2012-2013 John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012-2013 Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -34,7 +35,7 @@
 
 class QString;
 class QStringList;
-class QWebView;
+class QWebEngineView;
 
 class SelectFiles : public QDialog
 {
@@ -114,7 +115,7 @@ private:
     QListWidgetItem *m_VideoItem;
     QListWidgetItem *m_AudioItem;
 
-    QWebView *m_WebView;
+    QWebEngineView *m_WebView;
 
     Ui::SelectFiles ui;
 };

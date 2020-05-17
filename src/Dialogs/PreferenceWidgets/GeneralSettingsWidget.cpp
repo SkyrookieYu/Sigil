@@ -1,7 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2011  John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012  Dave Heiland
+**  Copyright (C) 2019-2020 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2011      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012      Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -27,8 +28,9 @@
 #include <QDir>
 #include <QFileDialog>
 #include <QFileInfo>
-#include "Misc/Utility.h"
+#include <QStandardPaths>
 
+#include "Misc/Utility.h"
 #include "sigil_constants.h"
 
 GeneralSettingsWidget::GeneralSettingsWidget()
@@ -41,8 +43,9 @@ GeneralSettingsWidget::GeneralSettingsWidget()
     connectSignalsToSlots();
 }
 
-PreferencesWidget::ResultAction GeneralSettingsWidget::saveSettings()
+PreferencesWidget::ResultActions GeneralSettingsWidget::saveSettings()
 {
+    PreferencesWidget::ResultActions results = PreferencesWidget::ResultAction_None;
 
     int new_clean_on_level = 0;
     QString new_epub_version = "2.0";
@@ -79,23 +82,41 @@ PreferencesWidget::ResultAction GeneralSettingsWidget::saveSettings()
         new_remote_on_level = 1;
     }
 
+    int new_javascript_on_level = 0;
+
+    if (ui.AllowJavascript->isChecked()) {
+        new_javascript_on_level = 1;
+    }
+
     QString new_temp_folder_home = "<SIGIL_DEFAULT_TEMP_HOME>";
     if (!ui.lineEdit->text().isEmpty()) {
          new_temp_folder_home = ui.lineEdit->text();
     }
+
+    QString new_xeditor_path = "";
+    if (!ui.lineEdit7->text().isEmpty()) {
+         QString xeditorpath = ui.lineEdit7->text();
+	 if (QFileInfo(xeditorpath).exists()) {
+	     new_xeditor_path = xeditorpath;
+	 }
+    }
+
     SettingsStore settings;
     settings.setCleanOn(new_clean_on_level);
     settings.setDefaultVersion(new_epub_version);
     settings.setCssEpub2ValidationSpec(css_epub2_spec);
     settings.setCssEpub3ValidationSpec(css_epub3_spec);
     settings.setRemoteOn(new_remote_on_level);
+    settings.setJavascriptOn(new_javascript_on_level);
     settings.setClipboardHistoryLimit(int(ui.clipLimitSpin->value()));
     settings.setTempFolderHome(new_temp_folder_home);
+    settings.setExternalXEditorPath(new_xeditor_path);
 
-    if (!m_refreshClipboardHistoryLimit) {
-        return PreferencesWidget::ResultAction_None;
+    if (m_refreshClipboardHistoryLimit) {
+        results = results | PreferencesWidget::ResultAction_RefreshClipHistoryLimit;
     }
-    return PreferencesWidget::ResultAction_RefreshClipHistoryLimit;
+    results = results & PreferencesWidget::ResultAction_Mask;
+    return results;
 }
 
 void GeneralSettingsWidget::readSettings()
@@ -117,9 +138,67 @@ void GeneralSettingsWidget::readSettings()
     ui.MendOnSave->setChecked(cleanOn & CLEANON_SAVE);
     int remoteOn = settings.remoteOn();
     ui.AllowRemote->setChecked(remoteOn);
+    int javascriptOn = settings.javascriptOn();
+    ui.AllowJavascript->setChecked(javascriptOn);
     ui.clipLimitSpin->setValue(int(settings.clipboardHistoryLimit()));
     QString temp_folder_home = settings.tempFolderHome();
     ui.lineEdit->setText(temp_folder_home);
+    QString xeditor_path = settings.externalXEditorPath();
+    ui.lineEdit7->setText(xeditor_path);
+}
+
+void GeneralSettingsWidget::clearXEditorPath()
+{
+    ui.lineEdit7->setText("");
+}
+
+void GeneralSettingsWidget::setXEditorPath()
+{
+#if defined(Q_OS_WIN32)
+    static QString LAST_LOCATION = Utility::GetEnvironmentVar("PROGRAMFILES");
+#else
+    static QString LAST_LOCATION = QStandardPaths::writableLocation(QStandardPaths::ApplicationsLocation);
+#endif
+
+    static const QString NAME_FILTER = QObject::tr("Applications")
+#if defined(Q_OS_WIN32)
+                                       + " (*.exe *.com *.bat *.cmd)"
+#elif defined(Q_OS_MAC)
+                                       + " (*.app)"
+#else
+                                       + " (*)"
+#endif
+      ;
+
+#ifdef Q_OS_MAC
+    QFileDialog::Options options = QFileDialog::Options() | QFileDialog::ReadOnly;
+#else
+    QFileDialog::Options options = QFileDialog::Options() | QFileDialog::ReadOnly | QFileDialog::HideNameFilterDetails;
+#endif
+
+    // Qt Bug - you must use a native FileDialog on macOS otherwise it treats .app as a normal directory
+    QString xeditorPath = QFileDialog::getOpenFileName(this,
+						       QObject::tr("Select External Xhtml Editor"),
+						       LAST_LOCATION,
+						       NAME_FILTER,
+						       0,
+                                                       options);
+    ui.lineEdit7->setText(xeditorPath);
+}
+
+void GeneralSettingsWidget::XEditorPathChanged()
+{
+    // make sure typed in path actually exists
+    QString xeditorpath = ui.lineEdit7->text();
+    if (!xeditorpath.isEmpty()) {
+        QFileInfo xeditinfo(xeditorpath);
+        if (!xeditinfo.exists() || !xeditinfo.isReadable()) {
+            disconnect(ui.lineEdit7, SIGNAL(editingFinished()), this, SLOT(XEditorPathChanged()));
+            Utility::DisplayStdWarningDialog(tr("Incorrect Path for External Xhtml Editor selected"));
+            ui.lineEdit7->setText("");
+            connect(ui.lineEdit7, SIGNAL(editingFinished()), this, SLOT(XEditorPathChanged()));
+        }
+    }
 }
 
 void GeneralSettingsWidget::autoTempFolder()
@@ -129,7 +208,15 @@ void GeneralSettingsWidget::autoTempFolder()
 
 void GeneralSettingsWidget::setTempFolder()
 {
-    QString name = QFileDialog::getExistingDirectory(this, tr("Select Folder for Temporary Files"));
+    QFileDialog::Options options = QFileDialog::Options() | QFileDialog::ShowDirsOnly;
+#ifdef Q_OS_MAC
+    options = options | QFileDialog::DontUseNativeDialog;
+#endif
+
+    QString name = QFileDialog::getExistingDirectory(this, 
+						     tr("Select Folder for Temporary Files"),
+						     QString(),
+						     options);
     if (name.isEmpty()) {
         return;
     }
@@ -167,4 +254,7 @@ void GeneralSettingsWidget::connectSignalsToSlots()
     connect(ui.browseButton, SIGNAL(clicked()), this, SLOT(setTempFolder()));
     connect(ui.lineEdit, SIGNAL(editingFinished()), this, SLOT(tempFolderPathChanged()));
     connect(ui.clipLimitSpin, SIGNAL(valueChanged(int)), this, SLOT(clipLimitValueChanged()));
+    connect(ui.clearButton7, SIGNAL(clicked()), this, SLOT(clearXEditorPath()));
+    connect(ui.browseButton7, SIGNAL(clicked()), this, SLOT(setXEditorPath()));
+    connect(ui.lineEdit7, SIGNAL(editingFinished()), this, SLOT(XEditorPathChanged()));
 }

@@ -1,6 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2011  John Schember <john@nachtimwald.com>
+**  Copyright (C) 2015-2019  Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2016-2019  Doug Massay
+**  Copyright (C) 2011-2013  John Schember <john@nachtimwald.com>
 **
 **  This file is part of Sigil.
 **
@@ -43,7 +45,9 @@ Preferences::Preferences(QWidget *parent) :
     m_refreshSpellingHighlighting(false),
     m_reloadTabs(false),
     m_restartSigil(false),
-    m_refreshClipHistoryLimit(false)
+    m_refreshClipHistoryLimit(false),
+    m_refreshBookBrowser(false),
+    m_reloadPreview(false)
 {
     ui.setupUi(this);
     extendUI();
@@ -70,7 +74,7 @@ void Preferences::selectPWidget(QListWidgetItem *current, QListWidgetItem *previ
 
 void Preferences::saveSettings()
 {
-    PreferencesWidget::ResultAction widgetResult;
+    PreferencesWidget::ResultActions widgetResult;
     SettingsStore settings;
     settings.beginGroup(SETTINGS_GROUP);
     QApplication::setOverrideCursor(Qt::WaitCursor);
@@ -81,17 +85,27 @@ void Preferences::saveSettings()
         PreferencesWidget *pw = qobject_cast<PreferencesWidget *>(ui.pWidget->widget(i));
 
         if (pw != 0) {
-            widgetResult = pw->saveSettings();
 
-            if (widgetResult == PreferencesWidget::ResultAction_RefreshSpelling) {
+            widgetResult = pw->saveSettings();
+            widgetResult = widgetResult & PreferencesWidget::ResultAction_Mask;
+
+            if (widgetResult & PreferencesWidget::ResultAction_RefreshSpelling)
                 m_refreshSpellingHighlighting = true;
-            } else if (widgetResult == PreferencesWidget::ResultAction_ReloadTabs) {
+
+            if (widgetResult & PreferencesWidget::ResultAction_ReloadTabs)
                 m_reloadTabs = true;
-            } else if (widgetResult == PreferencesWidget::ResultAction_RestartSigil) {
+
+            if (widgetResult & PreferencesWidget::ResultAction_RestartSigil)
                 m_restartSigil = true;
-            } else if (widgetResult == PreferencesWidget::ResultAction_RefreshClipHistoryLimit) {
+
+            if (widgetResult & PreferencesWidget::ResultAction_RefreshClipHistoryLimit)
                 m_refreshClipHistoryLimit = true;
-            }
+
+            if (widgetResult & PreferencesWidget::ResultAction_RefreshBookBrowser)
+                m_refreshBookBrowser = true;
+
+            if (widgetResult & PreferencesWidget::ResultAction_ReloadPreview)
+                m_reloadPreview = true;
         }
     }
 
@@ -160,6 +174,16 @@ bool Preferences::isRestartRequired()
 bool Preferences::isRefreshClipHistoryLimitRequired()
 {
     return m_refreshClipHistoryLimit;
+}
+
+bool Preferences::isRefreshBookBrowserRequired()
+{
+    return m_refreshBookBrowser;
+}
+
+bool Preferences::isReloadPreviewRequired()
+{
+    return m_reloadPreview;
 }
 
 void Preferences::openPreferencesLocation()

@@ -131,77 +131,77 @@
         <translation>Filtr:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="68"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="73"/>
         <source>Directory</source>
         <translation>Folder</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="69"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="74"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="70"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="75"/>
         <source>File Size (KB)</source>
         <translation>Wielkość pliku (KB)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="71"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="76"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="72"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="77"/>
         <source>Semantics</source>
         <translation>Semantyka</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="74"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="79"/>
         <source>Properties</source>
         <translation>Właściwości</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="143"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="149"/>
         <source>%n file(s)</source>
         <translation><numerusform>%n plik</numerusform><numerusform>%n pliki</numerusform><numerusform>%n plików</numerusform><numerusform>%n plików</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="256"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="267"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Zapisz raport jako plik CSV (wartości rozdzielone przecinkiem)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="269"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="281"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="269"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="281"/>
         <source>Cannot save report file.</source>
         <translation>Nie można zapisać pliku raportu.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="294"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="306"/>
         <source>Image</source>
         <translation>Obraz</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="299"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="311"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="304"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="316"/>
         <source>Video</source>
         <translation>Wideo</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="309"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="321"/>
         <source>Font</source>
         <translation>Czcionka</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="336"/>
+        <location filename="../../Dialogs/ReportsWidgets/AllFilesWidget.cpp" line="348"/>
         <source>Unknown</source>
         <translation>Nieznany</translation>
     </message>
@@ -214,244 +214,347 @@
         <translation>Wygląd</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="24"/>
-        <source>Fonts / Colors</source>
-        <translation>Czcionki / Kolor</translation>
-    </message>
-    <message>
         <location filename="../../Form_Files/PAppearanceWidget.ui" line="30"/>
-        <source>Book View / Preview:</source>
-        <translation>Widok Książki / Podgląd:</translation>
+        <source>Code View</source>
+        <translation>Widok kodu</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="39"/>
-        <source>If no font is specified in the CSS for your page, the following font will be used to display within Sigil. These fonts will not be used in your actual ebook.</source>
-        <translation>Jeśli nie określono czcionki w CSS na twojej stronie, następujące czcionki będą wykorzystywane do wyświetlania w obrębie Sigila. Czcionki te nie będą wykorzystywane w rzeczywistej książce.</translation>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="36"/>
+        <source>Monospaced Code Font:</source>
+        <translation>Czcionka o stałej szerokości do edycji kodu:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="59"/>
-        <source>Default font size to be used for Book View and Preview
-if no font-size specified in your CSS</source>
-        <translation>Domyślny rozmiar czcionki użytej w Widoku Książki i Widoku Podglądu
-jeżeli nie ma wielkości określonej w pliku CSS</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="63"/>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="197"/>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="313"/>
-        <source>Font Size:</source>
-        <translation>Wielkość czcionki:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="93"/>
-        <source>Default font family to be used for Book View and Preview
-if no font-family specified in your CSS</source>
-        <translation>Domyślna rodzina czcionek użytych w Widoku Książki i Podglądu
-jeżeli nie ma rodziny czcionek wyznaczonej w CSS</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="97"/>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="227"/>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="346"/>
-        <source>Standard Font:</source>
-        <translation>Czcionka standardowa:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="107"/>
-        <source>Default font family to be used for Book View and Preview
-if a serif font-family specified in your CSS</source>
-        <translation>Domyślna rodzina czcionek użytych w Widoku Książki i Podglądu
-jeżeli rodzina czcionki szeryfowej jest określona w pliku CSS</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="111"/>
-        <source>Serif Font:</source>
-        <translation>Czcionka szeryfowa:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="121"/>
-        <source>Default font family to be used for Book View and Preview
-if a sans-serif font-family specified in your CSS</source>
-        <translation>Domyślna rodzina czcionek użytych w Widoku Książki i Podglądu
-jeżeli rodzina czcionki bezszeryfowej jest określona w pliku CSS</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="125"/>
-        <source>Sans-Serif Font:</source>
-        <translation>Czcionka bezszeryfowa:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="171"/>
-        <source>CSS / Code View:</source>
-        <translation>CSS / Widok Kodu:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="181"/>
-        <source>Item Colors:</source>
-        <translation>Kolor elementu:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="194"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="50"/>
         <source>Font size to be used for text in Code View.</source>
         <translation>Wielkość czcionki użyta dla tekstu w Widoku Kodu.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="224"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="53"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="119"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="309"/>
+        <source>Font Size:</source>
+        <translation>Wielkość czcionki:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="67"/>
         <source>Font family to be used for text in Code View.</source>
         <translation>Rodzina czcionek użyta w Widoku Kodu.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="263"/>
-        <source>Select an alternative color for this display item</source>
-        <translation>Wybór alternatywnego koloru dla pokazanego elementu</translation>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="70"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="136"/>
+        <source>Font:</source>
+        <translation>Czcionka:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="266"/>
-        <source>Custom Color...</source>
-        <translation>Kolor niestandardowy...</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="296"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="102"/>
         <source>Insert Special Characters:</source>
         <translation>Wstaw znaki specjalne:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="310"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="116"/>
         <source>Font size to be used for Insert Special Characters window</source>
         <translation>Rozmiar czcionki do wykorzystania w oknie Wstaw znak specjalny</translation>
     </message>
     <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="164"/>
+        <source>Colors:</source>
+        <translation>Kolory:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="172"/>
+        <source>Item Colors:</source>
+        <translation>Kolor elementu:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="191"/>
+        <source>Select an alternative color for this display item</source>
+        <translation>Wybór alternatywnego koloru dla pokazanego elementu</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="194"/>
+        <source>Custom Color...</source>
+        <translation>Kolor niestandardowy...</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="260"/>
+        <source>Preview</source>
+        <translation>Podgląd</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="266"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="497"/>
+        <source>Fonts:</source>
+        <translation>Czcionki:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="275"/>
+        <source>If no font is specified in the CSS for your page, the following font will be used to display within Sigil. These fonts will not be used in your actual ebook.</source>
+        <translation>Jeśli nie określono czcionki w CSS na twojej stronie, następujące czcionki będą wykorzystywane do wyświetlania w obrębie Sigila. Czcionki te nie będą wykorzystywane w rzeczywistej książce.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="305"/>
+        <source>Default font size to be used for Preview
+if no font-size specified in your CSS</source>
+        <translation>Domyślny rozmiar czcionki użytej w Podglądzie
+jeżeli nie określono tej wielkości w pliku CSS</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="316"/>
+        <source>Default font family to be used for Preview
+if no font-family specified in your CSS</source>
+        <translation>Domyślna rodzina czcionek użytych w Podglądzie
+jeżeli nie określono rodziny czcionek w pliku CSS</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="320"/>
+        <source>Standard:</source>
+        <translation>Standardowa:</translation>
+    </message>
+    <message>
         <location filename="../../Form_Files/PAppearanceWidget.ui" line="343"/>
-        <source>Font family to be used for Insert Special Characters window</source>
-        <translation>Nazwa czcionki do wykorzystania w oknie Wstaw znak specjalny</translation>
+        <source>Default font family to be used for Preview
+if a serif font-family specified in your CSS</source>
+        <translation>Domyślna rodzina czcionek użytych w Podglądzie
+jeżeli rodzina czcionki szeryfowej jest określona w pliku CSS</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="388"/>
-        <source>Menus</source>
-        <translation>Menu</translation>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="347"/>
+        <source>Serif:</source>
+        <translation>Szeryfowa:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="394"/>
-        <source>Main Menu Icon Size</source>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="360"/>
+        <source>Default font family to be used for Preview
+if a sans-serif font-family specified in your CSS</source>
+        <translation>Domyślna rodzina czcionek użytych w Podglądzie
+jeżeli rodzina czcionki bezszeryfowej jest określona w pliku CSS</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="364"/>
+        <source>Sans-Serif:</source>
+        <translation>Bezszeryfowa:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="391"/>
+        <source>Make Preview simulate a dark appearance in dark mode</source>
+        <translation>Podgląd powinien symulować ciemny wygląd w trybie ciemnym</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="415"/>
+        <source>Main UI</source>
+        <translation>Główny interfejs</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="421"/>
+        <source>Main Menu Icon Size:</source>
         <translation>Rozmiar ikon na paskach narzędzi</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="400"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="427"/>
         <source>Adjust the size of the icons in the main menu.</source>
         <translation>Dostosuj rozmiar ikon na paskach narzędzi.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="476"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="465"/>
+        <source>High DPI Setting:</source>
+        <translation>Ustawienia wysokiej rozdzielczości DPI:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="474"/>
+        <source>(Needs Sigil Restart)</source>
+        <translation>(Wymaga restartu Sigila)</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="503"/>
+        <source>UI Font:</source>
+        <translation>Czcionka interfejsu:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="513"/>
+        <source>Change the font used by Sigil&apos;s menus, buttons, etc...</source>
+        <translation>Zmień czcionkę używaną przez Sigila w menu, przyciskach itd.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="516"/>
+        <source>Change Font (Needs Sigil Restart)</source>
+        <translation>Zmień czcionkę (wymaga restartu Sigila)</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="539"/>
+        <source>Determine if the BookBrowser should show full paths</source>
+        <translation>Ustal, czy w panelu Zawartość książki powinny być wyświetlane pełne ścieżki</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="542"/>
+        <source>Control Book Browser Appearance:</source>
+        <translation>Kontrola wyglądu Zawartości książki:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="551"/>
+        <source>Check to make BookBrowser show full paths.</source>
+        <translation>Zaznacz, by w panelu Zawartość książki wyświetlane były pełne ścieżki.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="554"/>
+        <source>BookBrowser should show full paths.</source>
+        <translation>Wyświetlaj pełne ścieżki w panelu Zawartość książki.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="567"/>
+        <source>Tweak Drag Distance (Needs Sigil Restart):</source>
+        <translation>Dostosuj odległość przeciągania (wymaga restartu Sigila)</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="600"/>
         <source>Reset all fonts and colors to the default values</source>
         <translation>Resetuje wszystkie czcionki i kolory do wartości domyślnych</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PAppearanceWidget.ui" line="479"/>
+        <location filename="../../Form_Files/PAppearanceWidget.ui" line="603"/>
         <source>Reset All</source>
         <translation>Zresetuj wszystko</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="204"/>
-        <source>Background</source>
-        <translation>Tło</translation>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="92"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="93"/>
+        <source>Detect</source>
+        <translation>Wykryj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="205"/>
-        <source>Foreground</source>
-        <translation>Pierwszy plan</translation>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="92"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="95"/>
+        <source>On</source>
+        <translation>Włącz</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="206"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="92"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="97"/>
+        <source>Off</source>
+        <translation>Wyłącz</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="93"/>
+        <source>Detect whether any high dpi scaling should take place.</source>
+        <translation>Wykryj, czy powinno nastąpić skalowanie wysokiej rozdzielczości DPI.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="94"/>
+        <source>Defers to any Qt environment variables that are set to control high dpi behavior.</source>
+        <translation>Działa zgodnie ze zmiennymi środowiskowymi Qt, które są ustawione do kontrolowania zachowania w wysokiej rozdzielczości DPI.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="95"/>
+        <source>Turns on high dpi scaling and ignores any Qt environment variables</source>
+        <translation>Włącza skalowanie w wysokiej rozdzielczości DPI oraz ignoruje wszelkie zmienne środowiskowe Qt.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="96"/>
+        <source>that are set controlling high dpi behavior.</source>
+        <translation>które kontrolują zachowanie w wysokiej rozdzielczości DPI.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="97"/>
+        <source>Turns off high dpi scaling regardless if any Qt environment</source>
+        <translation>Wyłącza skalowanie w wysokiej rozdzielczości DPI niezależnie od tego, czy jakiekolwiek zmienne środowiskowe Qt</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="98"/>
+        <source>variables controlling high dpi behavior are set.</source>
+        <translation>zachowanie w wysokiej rozdzielczości DPI są ustawione.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="102"/>
+        <source>Adjust the distance necessary to drag an item before a move event is triggered.</source>
+        <translation>Dostosuj odległość potrzebną do przeciągnięcia elementu przed uruchomieniem zdarzenia przenoszenia.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="103"/>
+        <source>-20 to +20 pixel range</source>
+        <translation>Zakres od -20 do +20 pikseli</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="287"/>
         <source>CSS Comment</source>
         <translation>Komentarz CSS</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="207"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="288"/>
         <source>CSS Property</source>
         <translation>Właściwości CSS</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="208"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="289"/>
         <source>CSS Quote</source>
         <translation>Cytat CSS</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="209"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="290"/>
         <source>CSS Selector</source>
         <translation>Selektor CSS</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="210"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="291"/>
         <source>CSS Value</source>
         <translation>Wartość CSS</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="211"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="292"/>
         <source>Line Highlight</source>
-        <translation>Wyróżnienie linii</translation>
+        <translation>Wyróżnienie bieżącej linii</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="212"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="293"/>
         <source>Line# Background</source>
-        <translation>Tło numeru linii</translation>
+        <translation>Tło numerów linii</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="213"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="294"/>
         <source>Line# Foreground</source>
-        <translation>Pierwszy plan numeru linii</translation>
+        <translation>Tekst numerów linii</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="214"/>
-        <source>Selection Background</source>
-        <translation>Wybór tła</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="215"/>
-        <source>Selection Foreground</source>
-        <translation>Wybór pierwszego planu</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="216"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="295"/>
         <source>Spelling Underline</source>
         <translation>Podkreślanie błędnych słów</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="217"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="296"/>
         <source>XHTML Attribute Name</source>
         <translation>Nazwa atrybutu XHTML</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="218"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="297"/>
         <source>XHTML Attribute Value</source>
         <translation>Wartość atrybutu XHTML</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="219"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="298"/>
         <source>XHTML CSS</source>
         <translation>CSS XHTML</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="220"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="299"/>
         <source>XHTML CSS Comment</source>
         <translation>Komentarz CSS XHTML</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="221"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="300"/>
         <source>XHTML DocType</source>
-        <translation>Typ dok. XHTML</translation>
+        <translation>Deklaracja typu dok. XHTML</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="222"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="301"/>
         <source>XHTML Entity</source>
-        <translation>Encje XHTML</translation>
+        <translation>Encja XHTML</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="223"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="302"/>
         <source>XHTML HTML Tag</source>
         <translation>Tag XHTML HTML</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="224"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="303"/>
         <source>XHTML HTML Comment</source>
         <translation>Komentarz XHTML HTML</translation>
     </message>
@@ -459,67 +562,68 @@ jeżeli rodzina czcionki bezszeryfowej jest określona w pliku CSS</translation>
 <context>
     <name>Book</name>
     <message>
-        <location filename="../../BookManipulation/Book.cpp" line="399"/>
+        <location filename="../../BookManipulation/Book.cpp" line="415"/>
         <source>Start</source>
-        <translation>Start</translation>
+        <translation>Początek czytania</translation>
     </message>
 </context>
 <context>
     <name>BookBrowser</name>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="60"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="69"/>
         <source>Book Browser</source>
         <translation>Zawartość książki</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="70"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="81"/>
         <source>Font Obfuscation</source>
         <translation>Zamaskowanie czcionki</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="71"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1405"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1505"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="82"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1714"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1836"/>
         <source>Open With</source>
         <translation>Otwórz za pomocą</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../MainUI/BookBrowser.cpp" line="121"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="141"/>
         <source>%n file(s)</source>
         <translation><numerusform>%n plik</numerusform><numerusform>%n pliki</numerusform><numerusform>%n plików</numerusform><numerusform>%n plików</numerusform></translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="211"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="618"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="634"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="683"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="783"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="983"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="244"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="691"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="722"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="780"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="894"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1178"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1283"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="211"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="244"/>
         <source>Are you sure you want to sort the selected files alphanumerically?</source>
         <translation>Czy na pewno uporządkować alfabetycznie zaznaczone pliki?</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="211"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="244"/>
         <source>This action cannot be reversed.</source>
         <translation>Tej akcji nie można cofnąć.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="237"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="279"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Plik &quot;%1&quot; nie istnieje.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="561"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="622"/>
         <source>Add Existing Files</source>
         <translation>Dodaj istniejące pliki</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="594"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="661"/>
         <source>File is not an image and cannot be used:
 
 &quot;%1&quot;.</source>
@@ -528,7 +632,7 @@ jeżeli rodzina czcionki bezszeryfowej jest określona w pliku CSS</translation>
 &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="603"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="670"/>
         <source>File is not multimedia (image, video, audio) and cannot be inserted:
 
 &quot;%1&quot;.</source>
@@ -537,7 +641,7 @@ jeżeli rodzina czcionki bezszeryfowej jest określona w pliku CSS</translation>
 &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="618"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="692"/>
         <source>The multimedia file &quot;%1&quot; already exists in the book.
 
 OK to replace?</source>
@@ -546,12 +650,12 @@ OK to replace?</source>
 OK aby zastąpić?</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="629"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="717"/>
         <source>Unable to delete or replace file &quot;%1&quot;.</source>
         <translation>Nie można usunąć lub nadpisać pliku &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="634"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="722"/>
         <source>Unable to load &quot;%1&quot;
 
 A file with this name already exists in the book.</source>
@@ -560,321 +664,288 @@ A file with this name already exists in the book.</source>
 Plik o tej samej nazwie już jest w książce.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="684"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="781"/>
         <source>The following file(s) were not loaded due to invalid content or not well formed XML:
 
 %1</source>
-        <translation>Następujące plik(i) nie został(y) załadowane z powodu nieprawidłowej treści lub błędnego formatowania XML:
+        <translation>Następujące plik(i) nie został(y) załadowane z powodu nieprawidłowej treści lub błędów składniowych XML:
 
 %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="698"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="795"/>
         <source>File(s) added.</source>
         <translation>Plik(i) dodano.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="733"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="835"/>
         <source>Save As File</source>
         <translation>Zapisz jako plik</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="755"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="858"/>
         <source>Unable to save the file.</source>
         <translation>Nie można zapisać do pliku.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="763"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="872"/>
         <source>Choose the directory to save the files to</source>
         <translation>Wybierz folder by zapisać plik do</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="783"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="894"/>
         <source>One or more files already exists.  OK to overwrite?</source>
         <translation>Jeden lub więcej plików już istnieje. Nadpisać?</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="800"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="911"/>
         <source>Unable to save files.  Destination may be a directory.</source>
         <translation>Nie można zapisać pliku. Obiekt docelowy może być folderem.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="808"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="919"/>
         <source>Unable to save files.</source>
         <translation>Nie można zapisać plików.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="983"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1178"/>
         <source>Cannot rename files since this would result in duplicate filenames.</source>
         <translation>Nie można zmienić nazwy pliku ponieważ podobna nazwa już istnieje.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1046"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1249"/>
+        <source>Destination Folder has invalid path &quot;%1&quot;</source>
+        <translation>Folder docelowy ma błędną ścieżkę &quot;%1&quot;</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1283"/>
+        <source>Cannot move files since this would result in duplicate filenames.</source>
+        <translation>Nie można przenieść plików, ponieważ spowodowałoby to zduplikowanie nazw plików.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1330"/>
         <source>The Nav document can not be removed.</source>
         <translation>Dokumentu Nav nie można usunąć.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1054"/>
-        <source>Neither the NCX nor the OPF can be removed.</source>
-        <translation>Pliki NCX i OPF nie mogą być usunięte.</translation>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1338"/>
+        <source>The NCX can not be removed.</source>
+        <translation>Nie można usunąć pliku NCX.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1061"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1345"/>
+        <source>The OPF is required for epub and can not be removed.</source>
+        <translation>OPF musi istnieć w pliku EPUB i nie można go usunąć.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1354"/>
         <source>You cannot remove all html files.
 There always has to be at least one.</source>
         <translation>Nie możesz usunąć wszystkich plików html.
 Zawsze musi być przynajmniej jeden.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1201"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1495"/>
         <source>Unable to set file as cover image.</source>
         <translation>Nie można ustawić pliku jako obraz okładki.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1386"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1693"/>
         <source>Select All</source>
         <translation>Zaznacz wszystko</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1387"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1694"/>
         <source>Add Blank HTML File</source>
         <translation>Dodaj pusty plik HTML</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1388"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1695"/>
         <source>Add Blank Stylesheet</source>
         <translation>Dodaj pusty arkusz stylów</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1389"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1696"/>
         <source>Add Blank SVG Image</source>
         <translation>Dodaj pusty obraz SVG</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1390"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1697"/>
         <source>Add Existing Files...</source>
         <translation>Dodaj istniejące pliki...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1391"/>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1392"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1698"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1699"/>
         <source>Add Copy</source>
         <translation>Dodaj kopię</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1393"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1700"/>
         <source>Rename</source>
         <translation>Zmień nazwę</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1394"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1701"/>
+        <source>RegEx Rename</source>
+        <translation>Zmień nazwę (RegEx)</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1702"/>
+        <source>Move</source>
+        <translation>Przenieś</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1703"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1395"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1704"/>
         <source>Cover Image</source>
         <translation>Obraz okładki</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1396"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1705"/>
         <source>Merge</source>
         <translation>Scal</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1397"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1706"/>
         <source>None</source>
         <translation>Brak</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1398"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1707"/>
         <source>Use Adobe&apos;s Method</source>
         <translation>Użyj metody Adobe</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1399"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1708"/>
         <source>Use IDPF&apos;s Method</source>
         <translation>Użyj metody IDPF</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1400"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1709"/>
         <source>Sort</source>
         <translation>Porządkuj</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1401"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1710"/>
         <source>Renumber TOC Entries</source>
-        <translation>Przenumeruj wpisy Spisu treści</translation>
+        <translation>Przenumeruj wpisy spisu treści</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1402"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1711"/>
         <source>Link Stylesheets...</source>
         <translation>Łącza do arkuszy stylów...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1403"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1712"/>
         <source>Add Semantics...</source>
         <translation>Dodaj semantykę...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1404"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1713"/>
         <source>Validate with W3C</source>
         <translation>Sprawdzenie przy pomocy W3C</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1406"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1715"/>
         <source>Save As</source>
         <translation>Zapisz jako</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1416"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1729"/>
         <source>Merge with previous file, or merge multiple files into one.</source>
         <translation>Scal z poprzednim plikiem lub scal wiele plików w jeden.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1419"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1732"/>
         <source>Rename selected file(s)</source>
         <translation>Zmień nazwy zaznaczonych plików</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1421"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1734"/>
+        <source>Use Regular Expressions to Rename selected file(s)</source>
+        <translation>Zmień nazwy zaznaczonych plików z wykorzystaniem wyrażeń regularnych</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1737"/>
+        <source>Move selected file(s) to a new folder</source>
+        <translation>Przenieś zaznaczony(e) plik(i) do nowego folderu</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1739"/>
         <source>Link Stylesheets to selected file(s).</source>
         <translation>Dodaj lub usuń łącza do arkuszy stylów w zaznaczonych plikach.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1423"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1741"/>
         <source>Add Semantics to selected file(s).</source>
         <translation>Dodaj semantykę w zaznaczonych plikach.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="1511"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="1871"/>
         <source>Other Application</source>
         <translation>Inna aplikacja</translation>
     </message>
 </context>
 <context>
-    <name>BookViewEditor</name>
+    <name>CPCompare</name>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="700"/>
-        <source>Clipboard contains HTML formatting</source>
-        <translation>Schowek zawiera formatowany HTML</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="81"/>
+        <source>Files Only in Checkpoint</source>
+        <translation>Pliki tylko w punkcie kontrolnym</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="701"/>
-        <source>Do you want to paste clipboard data as plain text?</source>
-        <translation>Czy chcesz wkleić dane ze schowka jako zwykły tekst?</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="81"/>
+        <location filename="../../Dialogs/CPCompare.cpp" line="82"/>
+        <location filename="../../Dialogs/CPCompare.cpp" line="83"/>
+        <source>View</source>
+        <translation>Podgląd</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="897"/>
-        <source>Open Tab For</source>
-        <translation>Otwórz zakładkę</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="82"/>
+        <source>Files Only in Current ePub</source>
+        <translation>Pliki tylko w bieżącym EPUB</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="911"/>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1084"/>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1086"/>
-        <source>Open With</source>
-        <translation>Otwórz za pomocą</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="83"/>
+        <source>Modified since Checkpoint</source>
+        <translation>Zmodyfikowane od punktu kontrolnego</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="918"/>
-        <source>Other Application</source>
-        <translation>Inna aplikacja</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="84"/>
+        <location filename="../../Dialogs/CPCompare.cpp" line="191"/>
+        <source>Results of Comparison</source>
+        <translation>Wyniki porównania</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="966"/>
-        <source>Clips</source>
-        <translation>Wycinki</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="85"/>
+        <source>Done</source>
+        <translation>Gotowe</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="976"/>
-        <source>Add To Clips</source>
-        <translation>Dodaj do Wycinków</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="193"/>
+        <source>These binary files differ in content:</source>
+        <translation>Te pliki binarne różnią się zawartością:</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1074"/>
-        <source>Insert File</source>
-        <translation>Wstaw plik</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="194"/>
+        <source>Checkpoint:</source>
+        <translation>Punkt kontrolny:</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1075"/>
-        <source>Undo</source>
-        <translation>Cofnij</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="194"/>
+        <location filename="../../Dialogs/CPCompare.cpp" line="195"/>
+        <source>bytes</source>
+        <translation>bajty(ów)</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1076"/>
-        <source>Redo</source>
-        <translation>Ponów</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1077"/>
-        <source>Cut</source>
-        <translation>Wytnij</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1078"/>
-        <source>Copy</source>
-        <translation>Kopiuj</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1079"/>
-        <source>Copy Image</source>
-        <translation>Kopiuj obraz</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1080"/>
-        <source>Paste</source>
-        <translation>Wklej</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1081"/>
-        <source>Select All</source>
-        <translation>Zaznacz wszystko</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1082"/>
-        <source>Open</source>
-        <translation>Otwórz</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1085"/>
-        <source>Save As</source>
-        <translation>Zapisz jako</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewEditor.cpp" line="1089"/>
-        <source>Inspect Element</source>
-        <translation>Inspekcja elementu</translation>
-    </message>
-</context>
-<context>
-    <name>BookViewPreview</name>
-    <message>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="259"/>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="324"/>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="330"/>
-        <source>Unsupported</source>
-        <translation>Funkcja niewspierana</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="259"/>
-        <source>Spellcheck mode is not supported in Book View at this time.  Switch to Code View.</source>
-        <translation>Sprawdzanie pisowni nie jest wspierane w Widoku Książki. Przełącz się do Widoku Kodu.</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="324"/>
-        <source>Replace is not supported in this view. Switch to Code View.</source>
-        <translation>Funkcja Zastąp niedostępna w tym trybie. Przełącz się do Widoku Kodu.</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="330"/>
-        <source>Replace All for the current file is not supported in this view. Switch to Code View.</source>
-        <translation>Funkcja Zastąp wszystko niedostępna w tym trybie. Przełącz się do Widoku Kodu.</translation>
-    </message>
-    <message>
-        <location filename="../../ViewEditors/BookViewPreview.cpp" line="750"/>
-        <source>Inspect Element</source>
-        <translation>Zbadaj element</translation>
+        <location filename="../../Dialogs/CPCompare.cpp" line="195"/>
+        <source>Current:</source>
+        <translation>Bieżący:</translation>
     </message>
 </context>
 <context>
@@ -895,47 +966,47 @@ Zawsze musi być przynajmniej jeden.</translation>
         <translation>Filtr:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="70"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="75"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="71"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="76"/>
         <source>Size (KB)</source>
         <translation>Wielkość (KB)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="72"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="77"/>
         <source>Times Used</source>
         <translation>Ile razy użyty</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="137"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="143"/>
         <source>%n file(s)</source>
         <translation><numerusform>%n plik</numerusform><numerusform>%n pliki</numerusform><numerusform>%n plików</numerusform><numerusform>%n plików</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="141"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="147"/>
         <source>KB</source>
         <translation>KB</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="268"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="280"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Zapisz raport jako plik CSV (wartości rozdzielone przecinkiem)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="281"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="294"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="281"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="294"/>
         <source>Cannot save report file.</source>
         <translation>Nie można zapisać pliku raportu.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="292"/>
+        <location filename="../../Dialogs/ReportsWidgets/CSSFilesWidget.cpp" line="305"/>
         <source>Delete From Book</source>
         <translation>Usuń z książki</translation>
     </message>
@@ -962,8 +1033,8 @@ Zawsze musi być przynajmniej jeden.</translation>
     <name>CharactersInHTMLFilesWidget</name>
     <message>
         <location filename="../../Form_Files/ReportsCharactersInHTMLFilesWidget.ui" line="14"/>
-        <source>Characters in HTML Files</source>
-        <translation>Znaki w plikach HTML</translation>
+        <source>Characters Used</source>
+        <translation>Użyte znaki</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ReportsCharactersInHTMLFilesWidget.ui" line="34"/>
@@ -981,47 +1052,47 @@ Zawsze musi być przynajmniej jeden.</translation>
         <translation>Znaki:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="74"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="78"/>
         <source>Character</source>
         <translation>Znak</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="75"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="79"/>
         <source>Decimal</source>
         <translation>Dziesiętny</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="76"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="80"/>
         <source>Hexadecimal</source>
         <translation>Szesnastkowy</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="77"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="81"/>
         <source>Entity Name</source>
         <translation>Nazwa encji</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="78"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="82"/>
         <source>Entity Description</source>
         <translation>Opis encji</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="84"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="88"/>
         <source>&lt;p&gt;This is a list of the characters used in all HTML files.&lt;p&gt;</source>
         <translation>&lt;p&gt;Lista znaków użytych we wszystkich plikach HTML.&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="265"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="254"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Zapisz raport jako plik CSV (wartości rozdzielone przecinkiem)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="278"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="268"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="278"/>
+        <location filename="../../Dialogs/ReportsWidgets/CharactersInHTMLFilesWidget.cpp" line="268"/>
         <source>Cannot save report file.</source>
         <translation>Nie można zapisać pliku raportu.</translation>
     </message>
@@ -1030,8 +1101,8 @@ Zawsze musi być przynajmniej jeden.</translation>
     <name>ClassesInHTMLFilesWidget</name>
     <message>
         <location filename="../../Form_Files/ReportsClassesInHTMLFilesWidget.ui" line="14"/>
-        <source>Style Classes in HTML Files</source>
-        <translation>Klasy stylów w plikach HTML</translation>
+        <source>Classes Used</source>
+        <translation>Użyte klasy</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ReportsClassesInHTMLFilesWidget.ui" line="34"/>
@@ -1044,57 +1115,57 @@ Zawsze musi być przynajmniej jeden.</translation>
         <translation>Filtr:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="77"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="83"/>
         <source>HTML File</source>
         <translation>Plik HTML</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="78"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="84"/>
         <source>Element</source>
         <translation>Element</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="79"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="85"/>
         <source>Class</source>
         <translation>Klasa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="80"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="86"/>
         <source>Matched Selector</source>
-        <translation>Wybór pasujących</translation>
+        <translation>Dopasowany selektor</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="81"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="87"/>
         <source>Found In</source>
         <translation>Znaleziono w</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="87"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="93"/>
         <source>&lt;p&gt;This is a list of the style classes used in all HTML files and whether or not the style matched a selector in a linked stylesheet.&lt;p&gt;</source>
         <translation>&lt;p&gt;To jest lista klas stylów używanych we wszystkich plikach HTML oraz czy styl pasuje do selektora w połączonym arkuszu stylów.&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="88"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="94"/>
         <source>&lt;p&gt;NOTE:&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Notatka:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;UWAGA:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="89"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="95"/>
         <source>&lt;p&gt;Due to the complexities of CSS you must check your code manually to be certain if a style is used or not.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Ze względu na złożoność CSS należy sprawdzić swój kod ręcznie, aby mieć pewność, czy styl jest używany, czy nie.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="223"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="242"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Zapisz raport jako plik CSV (wartości rozdzielone przecinkiem)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="236"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="256"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="236"/>
+        <location filename="../../Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.cpp" line="256"/>
         <source>Cannot save report file.</source>
         <translation>Nie można zapisać pliku raportu.</translation>
     </message>
@@ -1103,9 +1174,9 @@ Zawsze musi być przynajmniej jeden.</translation>
     <name>ClipEditor</name>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="14"/>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="503"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="538"/>
         <source>Clip Editor</source>
-        <translation>Edytor Wycinków</translation>
+        <translation>Edytor wycinków</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="23"/>
@@ -1125,29 +1196,29 @@ Zawsze musi być przynajmniej jeden.</translation>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="65"/>
         <source>Paste the selected entry into the active window.</source>
-        <translation>Wklej wybrany Wpis do aktywnego okna.</translation>
+        <translation>Wklej wybrany wpis do aktywnego okna.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="68"/>
         <source>Paste Clip</source>
-        <translation>Wklej Wycinek</translation>
+        <translation>Wklej wycinek</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="91"/>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="614"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="649"/>
         <source>Add Entry</source>
-        <translation>Dodaj Wpis</translation>
+        <translation>Dodaj wpis</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="98"/>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="615"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="650"/>
         <source>Add Group</source>
-        <translation>Dodaj Grupę</translation>
+        <translation>Dodaj grupę</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="123"/>
         <source>Move an entry up one entry in the same group.</source>
-        <translation>Przesuń Wpis w górę o jeden Wpis w tej samej Grupie.</translation>
+        <translation>Przesuń wpis w górę o jeden wpis w tej samej grupie.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="126"/>
@@ -1160,7 +1231,7 @@ Zawsze musi być przynajmniej jeden.</translation>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="153"/>
         <source>Move an entry to the level of its parent.</source>
-        <translation>Przesuń Wpis do poziomu nadrzędnego.</translation>
+        <translation>Przesuń wpis do poziomu nadrzędnego.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="182"/>
@@ -1170,191 +1241,191 @@ Zawsze musi być przynajmniej jeden.</translation>
     <message>
         <location filename="../../Form_Files/ClipEditor.ui" line="212"/>
         <source>Move an entry down one in the group.</source>
-        <translation>Przesuń Wpis w dół o jeden Wpis w tej Grupie.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="72"/>
-        <source>Right click on an entry to see a context menu of actions.</source>
-        <translation>Kliknij prawym przyciskiem myszy na Wpis, aby zobaczyć menu kontekstowe działań.</translation>
+        <translation>Przesuń wpis w dół o jeden wpis w tej grupie.</translation>
     </message>
     <message>
         <location filename="../../Dialogs/ClipEditor.cpp" line="73"/>
+        <source>Right click on an entry to see a context menu of actions.</source>
+        <translation>Kliknij prawym przyciskiem myszy na wpis, aby zobaczyć menu kontekstowe działań.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="74"/>
         <source>You can also right click in your document to select an entry.</source>
         <translation>Można również kliknąć prawym przyciskiem myszy w dokumencie, aby wybrać pozycję.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="75"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="76"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="75"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="76"/>
         <source>Name of your entry or group.</source>
-        <translation>Nazwa Wpisu lub Grupy.</translation>
+        <translation>Nazwa wpisu lub grupy.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="76"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="77"/>
         <source>Text</source>
         <translation>Tekst</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="76"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="77"/>
         <source>The text to insert. The text is treated like a Regex replacement expression so \1 can be used to insert the text selected in Code View when you paste the clip.</source>
-        <translation>Tekst do wstawienia. Tekst jest traktowany jako zamiana wyrażenia regularnego, więc \1 może być wykorzystane do wstawienia zaznaczonego tekstu w Widoku Kodu gdy wklejasz Wycinek.</translation>
+        <translation>Tekst do wstawienia. Tekst jest traktowany jako zamiana wyrażenia regularnego, więc \1 może być wykorzystane do wstawienia zaznaczonego tekstu w Widoku Kodu gdy wklejasz wycinek.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="80"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="81"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="80"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="81"/>
         <source>Save your changes.</source>
         <translation>Zapisz wprowadzone zmiany.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="80"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="81"/>
         <source>If any other instances of Sigil are running they will be automatically updated with your changes.</source>
         <translation>Jeżeli są uruchomione jakiekolwiek inne instancje Sigila, wszelkie wprowadzone zmiany będą wyświetlane automatycznie.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="90"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="91"/>
         <source>Cannot save entries.</source>
-        <translation>Brak możliwości zapisania Wpisu.</translation>
+        <translation>Brak możliwości zapisania wpisu.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="132"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="135"/>
         <source>Clip entries loaded from file.</source>
-        <translation>Zapisane Wycinki wczytano z pliku.</translation>
+        <translation>Zapisane wycinki wczytano z pliku.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="188"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="195"/>
         <source>You cannot select an entry and a group containing the entry.</source>
-        <translation>Nie można wybrać Wpisu i Grupy zawierającej wpis.</translation>
+        <translation>Nie można wybrać wpisu i grupy zawierającej wpis.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="270"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="282"/>
         <source>You cannot Copy or Cut groups - use drag-and-drop.</source>
-        <translation>Nie możesz użyć Kopiuj lub Wytnij dla grup - użyj przeciągnij-i-upuść.</translation>
+        <translation>Nie możesz kopiować lub wycinać grup - użyj przeciągnij-i-upuść.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="336"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="354"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="336"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="354"/>
         <source>Are you sure you want to reload all entries?  This will overwrite any unsaved changes.</source>
-        <translation>Czy jesteś pewien, że chcesz, aby ponownie załadować wszystkie Wpisy?
+        <translation>Czy jesteś pewien, że chcesz, aby ponownie załadować wszystkie wpisy?
 Spowoduje to nadpisanie wszystkich niezapisanych zmian.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="352"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="375"/>
         <source>Import Entries</source>
-        <translation>Importuj Wpisy</translation>
+        <translation>Importuj wpisy</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="425"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="456"/>
         <source>Export Selected Entries</source>
-        <translation>Eksport wybranych Wpisów</translation>
+        <translation>Eksport wybranych wpisów</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/ClipEditor.cpp" line="503"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="538"/>
         <source>CSS entries added: %n</source>
         <translation><numerusform>Dodano wpis CSS: %n</numerusform><numerusform>Dodano wpisy CSS: %n</numerusform><numerusform>Dodano wpisów CSS: %n</numerusform><numerusform>Dodano wpisów CSS: %n</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="616"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="651"/>
         <source>Edit</source>
         <translation>Edytuj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="617"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="652"/>
         <source>Cut</source>
         <translation>Wytnij</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="618"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="653"/>
         <source>Copy</source>
         <translation>Kopiuj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="619"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="654"/>
         <source>Paste</source>
         <translation>Wklej</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="620"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="655"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="621"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="656"/>
         <source>Import</source>
         <translation>Importuj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="622"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="657"/>
         <source>Reload</source>
         <translation>Wczytaj ponownie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="623"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="658"/>
         <source>Export</source>
         <translation>Eksportuj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="624"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="659"/>
         <source>Export All</source>
         <translation>Eksportuj wszystko</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="625"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="660"/>
         <source>Collapse All</source>
         <translation>Zwiń wszystko</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="626"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="661"/>
         <source>Expand All</source>
         <translation>Rozwiń wszystko</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="627"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="662"/>
         <source>Autofill</source>
         <translation>Autowypełnienie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="707"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="742"/>
         <source>Clip entries saved.</source>
-        <translation>Wprowadzone Wycinki zostały zapisane.</translation>
+        <translation>Wprowadzone wycinki zostały zapisane.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="736"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="771"/>
         <source>Sigil: Clip Editor</source>
-        <translation>Sigil: Edytor Wycinków</translation>
+        <translation>Sigil: Edytor wycinków</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipEditor.cpp" line="737"/>
+        <location filename="../../Dialogs/ClipEditor.cpp" line="772"/>
         <source>The Clip entries may have been modified.
 Do you want to save your changes?</source>
-        <translation>Wprowadzone Wycinki zostały zmienione.
+        <translation>Wprowadzone wycinki zostały zmienione.
 Czy chcesz zapisać zmiany?</translation>
     </message>
 </context>
 <context>
     <name>ClipEditorModel</name>
     <message>
-        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="64"/>
+        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="65"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="65"/>
+        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="66"/>
         <source>Text</source>
         <translation>Tekst</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="681"/>
+        <location filename="../../MiscEditors/ClipEditorModel.cpp" line="680"/>
         <source>Unable to create file %1</source>
         <translation>Nie można utworzyć pliku %1</translation>
     </message>
@@ -1372,12 +1443,12 @@ Czy chcesz zapisać zmiany?</translation>
         <translation>Poprzednie schowki:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipboardHistorySelector.cpp" line="338"/>
+        <location filename="../../Dialogs/ClipboardHistorySelector.cpp" line="340"/>
         <source>Paste</source>
         <translation>Wklej</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ClipboardHistorySelector.cpp" line="340"/>
+        <location filename="../../Dialogs/ClipboardHistorySelector.cpp" line="342"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
@@ -1385,17 +1456,17 @@ Czy chcesz zapisać zmiany?</translation>
 <context>
     <name>ClipsWindow</name>
     <message>
-        <location filename="../../MainUI/ClipsWindow.cpp" line="34"/>
+        <location filename="../../MainUI/ClipsWindow.cpp" line="36"/>
         <source>Clips</source>
         <translation>Wycinki</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ClipsWindow.cpp" line="99"/>
+        <location filename="../../MainUI/ClipsWindow.cpp" line="101"/>
         <source>Collapse All</source>
         <translation>Zwiń wszystkie</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ClipsWindow.cpp" line="100"/>
+        <location filename="../../MainUI/ClipsWindow.cpp" line="102"/>
         <source>Expand All</source>
         <translation>Rozwiń wszystkie</translation>
     </message>
@@ -1403,137 +1474,137 @@ Czy chcesz zapisać zmiany?</translation>
 <context>
     <name>CodeViewEditor</name>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="418"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="441"/>
         <source>Cannot insert closing tag at this position.</source>
         <translation>Nie można wstawić zamykającego tagu w tym miejscu.</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="427"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="450"/>
         <source>No open tags found at this position.</source>
         <translation>Brak otwartych tagów w tym miejscu.</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1175"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1233"/>
         <source>Add To Default Dictionary</source>
         <translation>Dodaj do domyślnego słownika</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1188"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1246"/>
         <source>Add To Dictionary</source>
         <translation>Dodaj do słownika</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1205"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1263"/>
         <source>Ignore</source>
         <translation>Ignoruj</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1267"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1325"/>
         <source>Reformat CSS</source>
         <translation>Przeformatuj CSS</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1268"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1327"/>
         <source>Multiple Lines Per Style</source>
         <translation>Wiele linii na styl</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1269"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1328"/>
         <source>Single Line Per Style</source>
         <translation>Jedna linia na styl</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1294"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1353"/>
         <source>Reformat HTML</source>
         <translation>Ponownie formatuj HTML</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1295"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1355"/>
         <source>Mend and Prettify Code</source>
-        <translation>Napraw i popraw kod</translation>
+        <translation>Popraw i upiększ kod</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1296"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1356"/>
         <source>Mend and Prettify Code - All HTML Files</source>
-        <translation>Napraw i popraw kod we wszystkich plikach HTML</translation>
+        <translation>Popraw i upiększ kod - wszystkie pliki HTML</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1297"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1357"/>
         <source>Mend Code</source>
-        <translation>Napraw kod</translation>
+        <translation>Popraw kod</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1298"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1358"/>
         <source>Mend Code - All HTML Files</source>
-        <translation>Napraw kod we wszystkich plikach HTML</translation>
+        <translation>Popraw kod - wszystkie pliki HTML</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1328"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1388"/>
         <source>Go To Link Or Style</source>
         <translation>Idź do łącza lub stylu</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1351"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1410"/>
         <source>View Image</source>
-        <translation>Podgląd Obrazu</translation>
+        <translation>Podgląd obrazu</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1352"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1411"/>
         <source>Open Tab For Image</source>
         <translation>Otwórz obraz w nowej zakładce</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1378"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1437"/>
         <source>Mark Selected Text</source>
         <translation>Zaznacz wybrany tekst</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1380"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1439"/>
         <source>Unmark Marked Text</source>
         <translation>Odznacz wybrany tekst</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1406"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1465"/>
         <source>Clips</source>
         <translation>Wycinki</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1416"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1475"/>
         <source>Add To Clips</source>
-        <translation>Dodaj do Wycinków</translation>
+        <translation>Dodaj do wycinków</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1542"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1601"/>
         <source>You must be in an opening HTML tag to use this feature.</source>
-        <translation>Musisz otworzyć tag HTML by korzystać z tej funkcji.</translation>
+        <translation>Musisz być w otwierającym tagu HTML by korzystać z tej funkcji.</translation>
     </message>
     <message>
-        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1552"/>
+        <location filename="../../ViewEditors/CodeViewEditor.cpp" line="1611"/>
         <source>You must be inside an opening HTML tag to use this feature.</source>
-        <translation>Musisz być w otwartym tagu HTML by korzystać z tej funkcji.</translation>
+        <translation>Musisz być w otwierającym tagu HTML by korzystać z tej funkcji.</translation>
     </message>
 </context>
 <context>
     <name>ColorSwatchDelegate</name>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="56"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="59"/>
         <source>Background</source>
         <translation>Tło</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="58"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="61"/>
         <source>Foreground</source>
-        <translation>Pierwszy plan</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="60"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="63"/>
         <source>Selection Background</source>
-        <translation>Wybierz tło</translation>
+        <translation>Tło zaznaczonego tekstu</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="62"/>
+        <location filename="../../Dialogs/PreferenceWidgets/AppearanceWidget.cpp" line="65"/>
         <source>Selection Foreground</source>
-        <translation>Wybierz pierwszy plan</translation>
+        <translation>Zaznaczony tekst</translation>
     </message>
 </context>
 <context>
@@ -1544,17 +1615,17 @@ Czy chcesz zapisać zmiany?</translation>
         <translation>Usuwanie plików</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteFiles.cpp" line="66"/>
+        <location filename="../../Dialogs/DeleteFiles.cpp" line="68"/>
         <source>Delete Marked Files</source>
         <translation>Usuń zaznaczone pliki</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteFiles.cpp" line="67"/>
+        <location filename="../../Dialogs/DeleteFiles.cpp" line="69"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteFiles.cpp" line="68"/>
+        <location filename="../../Dialogs/DeleteFiles.cpp" line="70"/>
         <source>File</source>
         <translation>Plik</translation>
     </message>
@@ -1567,22 +1638,22 @@ Czy chcesz zapisać zmiany?</translation>
         <translation>Usuwanie Stylów</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteStyles.cpp" line="79"/>
+        <location filename="../../Dialogs/DeleteStyles.cpp" line="80"/>
         <source>Delete Marked Styles</source>
-        <translation>Usuń zaznaczone Style</translation>
+        <translation>Usuń zaznaczone style</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteStyles.cpp" line="80"/>
+        <location filename="../../Dialogs/DeleteStyles.cpp" line="81"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteStyles.cpp" line="81"/>
+        <location filename="../../Dialogs/DeleteStyles.cpp" line="82"/>
         <source>File</source>
         <translation>Plik</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/DeleteStyles.cpp" line="82"/>
+        <location filename="../../Dialogs/DeleteStyles.cpp" line="83"/>
         <source>Style</source>
         <translation>Styl</translation>
     </message>
@@ -1592,7 +1663,7 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Form_Files/EditTOC.ui" line="14"/>
         <source>Edit Table Of Contents</source>
-        <translation>Edycja Spisu treści</translation>
+        <translation>Edycja spisu treści</translation>
     </message>
     <message>
         <location filename="../../Form_Files/EditTOC.ui" line="52"/>
@@ -1621,14 +1692,14 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <location filename="../../Form_Files/EditTOC.ui" line="75"/>
-        <location filename="../../Dialogs/EditTOC.cpp" line="443"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="465"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
         <location filename="../../Form_Files/EditTOC.ui" line="82"/>
         <source>Set the destination of the TOC entry from a list of valid targets in the book.</source>
-        <translation>Ustaw miejsce docelowe Wpisu TOC z listy ważnych celów w książce.</translation>
+        <translation>Ustaw miejsce docelowe wpisu TOC z listy ważnych celów w książce.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/EditTOC.ui" line="85"/>
@@ -1639,7 +1710,7 @@ Czy chcesz zapisać zmiany?</translation>
         <location filename="../../Form_Files/EditTOC.ui" line="110"/>
         <source>Decrease the heading level of the selected entry.
 You can also use the left arrow key.</source>
-        <translation>Zmniejsza poziom pozycji wybranego Wpisu.
+        <translation>Zmniejsza poziom pozycji wybranego wpisu.
 Możesz również użyć klawisza strzałki w lewo.</translation>
     </message>
     <message>
@@ -1652,41 +1723,41 @@ Możesz również użyć klawisza strzałki w lewo.</translation>
         <location filename="../../Form_Files/EditTOC.ui" line="148"/>
         <source>Increase the heading level of the selected entry.
 You can also use the right arrow key.</source>
-        <translation>Zwiększa poziom pozycji wybranego Wpisu.
+        <translation>Zwiększa poziom pozycji wybranego wpisu.
 Możesz również użyć klawisza strzałki w prawo.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="85"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="97"/>
         <source>TOC Entry</source>
         <translation>Wpisy TOC</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="86"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="98"/>
         <source>Target</source>
         <translation>Cel</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="442"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="464"/>
         <source>Rename</source>
         <translation>Zmiana nazwy</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="450"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="472"/>
         <source>Move Up</source>
-        <translation>Przenieś Wyżej</translation>
+        <translation>Przenieś wyżej</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="451"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="473"/>
         <source>Move Down</source>
         <translation>Przenieś Niżej</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="457"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="479"/>
         <source>Expand All</source>
         <translation>Rozwiń wszystkie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/EditTOC.cpp" line="458"/>
+        <location filename="../../Dialogs/EditTOC.cpp" line="480"/>
         <source>Collapse All</source>
         <translation>Zwiń wszystkie</translation>
     </message>
@@ -1694,10 +1765,248 @@ Możesz również użyć klawisza strzałki w prawo.</translation>
 <context>
     <name>EmbeddedPython</name>
     <message>
-        <location filename="../../Misc/EmbeddedPython.cpp" line="614"/>
-        <location filename="../../Misc/EmbeddedPythonPkg.cpp" line="613"/>
+        <location filename="../../Misc/EmbeddedPython.cpp" line="617"/>
         <source>Embedded Python Error</source>
         <translation>Obsługa błędów Pythona</translation>
+    </message>
+</context>
+<context>
+    <name>EmptyLayout</name>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="22"/>
+        <source>Design Custom Epub Layout</source>
+        <translation>Projekt własnego układu pliku EPUB</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="62"/>
+        <source>Load a previously saved design from an ini file.</source>
+        <translation>Załaduj poprzednio zapisany układ z pliku ini.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="65"/>
+        <source>Load</source>
+        <translation>Załaduj</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="73"/>
+        <source>Save the current design to an ini file.</source>
+        <translation>Zapisz aktualny układ do pliku ini.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="76"/>
+        <source>Save</source>
+        <translation>Zapisz</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="98"/>
+        <source>Add a new folder to parent.</source>
+        <translation>Dodaj nowy folder nadrzędny.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="101"/>
+        <source>Add Folder</source>
+        <translation>Dodaj folder</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="109"/>
+        <source>Add an allowed file type marker to an existing folder.</source>
+        <translation>Dodaj znacznik dozwolonego typu plików do istniejącego folderu.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="112"/>
+        <source>Add Marker</source>
+        <translation>Dodaj znacznik</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="120"/>
+        <source>Remove an existing file type marker or folder.</source>
+        <translation>Usuń istniejący znacznik typu pliku lub folder.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="123"/>
+        <source>Remove</source>
+        <translation>Usuń</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="131"/>
+        <source>Rename a folder or OPF, NCX or Nav marker.</source>
+        <translation>Zmień nazwę folderu lub znacznik dla OPF, NCX lub Nav.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="134"/>
+        <source>Rename</source>
+        <translation>Zmień nazwę</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="167"/>
+        <source>Add folders/subfolders and file markers that determine 
+the types of files that can be stored in each folder.  
+The file type markers can also be used to specify 
+locations and names for the OPF, NCX and/or Nav.</source>
+        <translation>Dodaj foldery/podfoldery i znaczniki plików, które określą
+typy plików, które mogą być przechowywane w każdym z folderów.
+Znaczniki typów plików mogą być również używane do określenia
+położenia i nazw dla plików OPF, NCV i/lub Nav.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/EmptyLayout.ui" line="179"/>
+        <source>Use OK to commit your custom epub design, otherwise use Cancel.</source>
+        <translation>Użyj OK, aby zatwierdzić własny układ pliku EPUB, w przeciwnym razie użyj Anuluj.
+</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="144"/>
+        <source>Xhtml files</source>
+        <translation>Pliki XHTML</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="144"/>
+        <source>Style files</source>
+        <translation>Pliki CSS</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="145"/>
+        <source>Image files</source>
+        <translation>Pliki obrazów</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="145"/>
+        <source>Font files</source>
+        <translation>Pliki czcionek</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="146"/>
+        <source>Audio files</source>
+        <translation>Pliki audio</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="146"/>
+        <source>Video files</source>
+        <translation>Pliki wideo</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="147"/>
+        <source>Javascript files</source>
+        <translation>Pliki javascript</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="147"/>
+        <source>Misc files</source>
+        <translation>Pliki różne</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="148"/>
+        <source>OPF file</source>
+        <translation>Plik OPF</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="148"/>
+        <source>NCX file</source>
+        <translation>Plik NCX</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="149"/>
+        <source>Nav file</source>
+        <translation>Plik Nav</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="224"/>
+        <source>Select previously saved layout design ini File</source>
+        <translation>Wybierz plik ini z poprzednio zapisanym układem</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="226"/>
+        <source>Settings Files (*.ini)</source>
+        <translation>Pliki z ustawieniami (*.ini)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="326"/>
+        <source>Save current design to an ini File</source>
+        <translation>Zapisz aktualny układ do pliku ini</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="358"/>
+        <source>Add a Folder</source>
+        <translation>Dodaj folder</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="358"/>
+        <source>New Folder Name?</source>
+        <translation>Nazwa nowego folderu?</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="358"/>
+        <source>untitled_folder</source>
+        <translation>nienazwany_folder</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="395"/>
+        <source>Rename a Folder</source>
+        <translation>Zmień nazwę folderu</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="395"/>
+        <source>New Name for Folder?</source>
+        <translation>Nowa nazwa dla folderu?</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="406"/>
+        <source>Rename a File</source>
+        <translation>Zmień nazwę pliku</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="406"/>
+        <source>New Name for File?</source>
+        <translation>Nowa nazwa dla pliku?</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="464"/>
+        <source>A single OPF file is required.</source>
+        <translation>Wymagany jest pojedynczy plik OPF.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="465"/>
+        <source>At least one xhtml marker must exist.</source>
+        <translation>Musi istnieć przynajmniej jeden znacznik XHTML.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="466"/>
+        <source>At least one image marker must exist.</source>
+        <translation>Musi istnieć przynajmniej jeden znacznik obrazu.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="467"/>
+        <source>At least one css marker must exist.</source>
+        <translation>Musi istnieć przynajmniej jeden znacznik CSS.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="469"/>
+        <source>A single NCX file is required.</source>
+        <translation>Wymagany jest pojedynczy plik NCX.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="471"/>
+        <source>A single NAV file is required.</source>
+        <translation>Wymagany jest pojedynczy plik NAV.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="475"/>
+        <source>Errors Detected</source>
+        <translation>Wykryte błędy</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="481"/>
+        <source>Sigil</source>
+        <translation>Sigil</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="482"/>
+        <source>Do you want to set this layout as the default empty Epub layout for Sigil?
+
+</source>
+        <translation>Czy chcesz, aby ten układ stał się domyślnym układem dla EPUB w Sigilu?
+
+</translation>
     </message>
 </context>
 <context>
@@ -1840,170 +2149,170 @@ początku, kontynuuje wyszukiwanie.</translation>
         <translation>Tryb:</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="178"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1430"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="179"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1431"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1432"/>
         <source>Current File</source>
         <translation>Bieżący plik</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../MainUI/FindReplace.cpp" line="333"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1253"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="334"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1254"/>
         <source>Matches found: %n</source>
         <translation><numerusform>Znaleziono pasujący: %n</numerusform><numerusform>Znaleziono pasujące: %n</numerusform><numerusform>Znaleziono pasujących: %n</numerusform><numerusform>Znaleziono pasujące: %n</numerusform></translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="417"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1277"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="418"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1278"/>
         <source>No replacements made</source>
         <translation>Nie znaleziono do zastąpienia</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../MainUI/FindReplace.cpp" line="419"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1279"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="420"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1280"/>
         <source>Replacements made: %n</source>
         <translation><numerusform>Dokonano zmiany: %n</numerusform><numerusform>Dokonano zmian: %n</numerusform><numerusform>Dokonano zmian: %n</numerusform><numerusform>Dokonano zmian: %n</numerusform></translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="620"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="617"/>
         <source>No matches found</source>
         <translation>Nie znaleziono pasującego</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1135"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1132"/>
         <source>This tab cannot be searched</source>
         <translation>Ta zakładka nie może być przeszukiwana</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1167"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1164"/>
         <source>Unnamed search loaded</source>
         <translation>Załadowano wyszukiwania bez nazwy</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1170"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1167"/>
         <source>Loaded</source>
         <translation>Wczytano</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1179"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1199"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1217"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1237"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1263"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1180"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1200"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1218"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1238"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1264"/>
         <source>No searches selected</source>
-        <translation>Nie wybrano szukanych</translation>
+        <translation>Nie wybrano wyszukiwań</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1420"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1421"/>
         <source>What to search for</source>
         <translation>Czego szukać</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1421"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1422"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1423"/>
         <source>Normal</source>
         <translation>Normalny</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1422"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1423"/>
         <source>Case in-sensitive search of exactly what you type.</source>
         <translation>Wielkość liter napisanych w szukaniu nie ma znaczenia.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1423"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1424"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1425"/>
         <source>Case Sensitive</source>
         <translation>Z rozróżnieniem wielkości liter</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1424"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1425"/>
         <source>Case sensitive search of exactly what you type.</source>
         <translation>Wielkość liter w szukaniu dokładnie taka jak napisane.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1425"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1426"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1427"/>
         <source>Regex</source>
         <translation>Wyrażenie regularne</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1426"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1427"/>
         <source>Search for a pattern using Regular Expression syntax.</source>
         <translation>Wyszukiwanie wzorca przy użyciu składni wyrażeń regularnych.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1429"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1441"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1430"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1442"/>
         <source>Where to search</source>
         <translation>Gdzie szukać</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1431"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1432"/>
         <source>Restrict the find or replace to the opened file.  Hold the Ctrl key down while clicking any search buttons to temporarily restrict the search to the Current File.</source>
         <translation>Ogranicza szukanie lub zamianę do otwartych plików. Przytrzymaj klawisz Ctrl przy klikaniu na przycisk szukania, by tymczasowo ograniczyć szukanie do bieżącego pliku.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1432"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1433"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1434"/>
         <source>All HTML Files</source>
         <translation>Wszystkie pliki HTML</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1433"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1434"/>
         <source>Find or replace in all HTML files in Code View.</source>
         <translation>Znajdź lub zastąp we wszystkich plikach HTML w Widoku Kodu.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1434"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1435"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1436"/>
         <source>Selected HTML Files</source>
         <translation>Wybrane pliki HTML</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1435"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1436"/>
         <source>Restrict the find or replace to the HTML files selected in the Book Browser in Code View.</source>
         <translation>Ogranicza szukanie lub zastępowanie do plików HTML wybranych w Zawartości książki w Widoku Kodu.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1437"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1438"/>
         <source>To restrict search to selected text, use Search&amp;rarr;Mark Selected Text.</source>
-        <translation>Aby ograniczyć wyszukiwanie do wybranego tekstu użyj Znajdź&amp;amp;rarr;Zaznaczony tekst.</translation>
+        <translation>Aby ograniczyć wyszukiwanie do wybranego tekstu użyj Szukaj &amp;rarr; Zaznacz wybrany tekst.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1442"/>
         <location filename="../../MainUI/FindReplace.cpp" line="1443"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1444"/>
         <source>Marked Text</source>
         <translation>Zaznaczony tekst</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1443"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1444"/>
         <source>Restrict the find or replace to the text marked by Search&amp;rarr;Mark Selected Text.  Cleared if you use Undo, enter text, or change views or tabs.</source>
         <translation>Ogranicz szukanie lub zastępowanie tylko do zaznaczonego tekstu przez Szukaj &amp;rarr; Zaznacz wybrany tekst. Przywrócenie poprzedniego zakresu wyszukiwania nastąpi po użyciu Cofnij, wprowadzeniu tekstu, zmianie widoku lub zakładki.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1447"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1451"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1448"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1452"/>
         <source>Up</source>
         <translation>W górę</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1448"/>
-        <location filename="../../MainUI/FindReplace.cpp" line="1452"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1449"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1453"/>
         <source>Down</source>
         <translation>W dół</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1449"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1450"/>
         <source>Direction to search</source>
         <translation>Kierunek przeszukiwania</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1451"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1452"/>
         <source>Search for the previous match from your current position.</source>
         <translation>Znajdź poprzednie pasujące od obecnej pozycji.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/FindReplace.cpp" line="1452"/>
+        <location filename="../../MainUI/FindReplace.cpp" line="1453"/>
         <source>Search for the next match from your current position.</source>
         <translation>Znajdź następne pasujące od obecnej pozycji.</translation>
     </message>
@@ -2011,22 +2320,30 @@ początku, kontynuuje wyszukiwanie.</translation>
 <context>
     <name>FindReplaceQLineEdit</name>
     <message>
-        <location filename="../../Misc/FindReplaceQLineEdit.cpp" line="58"/>
+        <location filename="../../Misc/FindReplaceQLineEdit.cpp" line="60"/>
         <source>Tokenise Selection</source>
         <translation>Tokenizuj zaznaczenie</translation>
     </message>
     <message>
-        <location filename="../../Misc/FindReplaceQLineEdit.cpp" line="71"/>
+        <location filename="../../Misc/FindReplaceQLineEdit.cpp" line="73"/>
         <source>Save Search</source>
-        <translation>Zapisz Wyszukiwanie</translation>
+        <translation>Zapisz wyszukiwanie</translation>
     </message>
 </context>
 <context>
     <name>FlowTab</name>
     <message>
-        <location filename="../../Tabs/FlowTab.cpp" line="1161"/>
+        <location filename="../../Tabs/FlowTab.cpp" line="853"/>
         <source>Print %1</source>
         <translation>Drukowanie %1</translation>
+    </message>
+</context>
+<context>
+    <name>FontResource</name>
+    <message>
+        <location filename="../../ResourceObjects/FontResource.cpp" line="74"/>
+        <source>No reliable font data</source>
+        <translation>Brak wiarygodnych danych czcionek</translation>
     </message>
 </context>
 <context>
@@ -2037,191 +2354,250 @@ początku, kontynuuje wyszukiwanie.</translation>
         <translation>Ustawienia ogólne</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="20"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="30"/>
+        <source>Basics</source>
+        <translation>Podstawowe</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="42"/>
         <source>Choose which version of Epub to use
 when creating new or empty Epubs in Sigil.</source>
-        <translation>Wybierz której wersji EPUB chcesz używać w Sigilu
+        <translation>Wybierz wersję EPUB, którą chcesz używać w Sigilu
 przy tworzeniu nowych lub pustych plików EPUB.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="24"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="46"/>
         <source>Create New or Empty Epubs as:</source>
         <translation>Twórz nowe lub puste pliki EPUB jako:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="30"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="55"/>
         <source>Epub Version 2.</source>
         <translation>EPUB w wersji 2.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="33"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="58"/>
         <source>Version 2</source>
         <translation>Wersję 2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="43"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="68"/>
         <source>Epub Version 3.</source>
         <translation>EPUB w wersji 3.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="46"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="71"/>
         <source>Version 3</source>
         <translation>Wersję 3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="59"/>
-        <source>Choose when your HTML code is automatically 
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="103"/>
+        <source>Choose when your not well formed HTML code is automatically 
 mended.</source>
-        <translation>Wybierz, kiedy twój kod HTML ma być automatycznie 
-naprawiany.</translation>
+        <translation>Wybierz kiedy twój błędny składniowo kod HTML ma być
+automatycznie poprawiany.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="63"/>
-        <source>Mend XHTML Source Code On:</source>
-        <translation>Naprawiaj kod źródłowy XHTML podczas:</translation>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="107"/>
+        <source>Mend Not Well Formed HTML Source Code On:</source>
+        <translation>Poprawiaj błędy składniowe w kodzie źródłowym HTML podczas:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="69"/>
-        <source>Mend when opening an Epub or HTML file, 
-and when switching from Book View to Code View.</source>
-        <translation>Naprawiaj podczas otwierania pliku EPUB lub HTML oraz 
-podczas przełączania z Widoku Książki do Widoku Kodu.</translation>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="116"/>
+        <source>Mend Not Well Formed HTML when opening an Epub or HTML file.</source>
+        <translation>Poprawiaj błędy składniowe podczas otwierania pliku EPUB lub HTML.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="73"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="119"/>
         <source>Open</source>
         <translation>Otwierania</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="80"/>
-        <source>Mend when saving an Epub.</source>
-        <translation>Naprawiaj podczas zapisu pliku EPUB.</translation>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="126"/>
+        <source>Mend Not Well Formed HTML when saving an Epub.</source>
+        <translation>Poprawiaj błędy składniowe podczas zapisu pliku EPUB.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="83"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="129"/>
         <source>Save</source>
         <translation>Zapisywania</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="93"/>
-        <source>Determine if Epubs are allowed to access non-multimedia remote resources.</source>
-        <translation>Ustal, czy pliki EPUB mają mieć dostęp do zdalnych zasobów, innych niż multimedialne.</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="96"/>
-        <source> Control Access by Epubs to non-multimedia remote resources.</source>
-        <translation>Kontrola dostępu plików EPUB do zdalnych zasobów innych niż multimedialne.</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="105"/>
-        <source>Check to allow Epubs to access non-multimedia remote resources.</source>
-        <translation>Zaznacz, by zezwolić plikom EPUB na dostęp do zasobów zdalnych innych niż multimedialne.</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="108"/>
-        <source>Epubs may access all remote resources types.</source>
-        <translation>Pliki EPUB mogą uzyskać dostęp do wszystkich typów zdalnych zasobów.</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="127"/>
-        <source>What CSS level to specify for W3C stylesheet validation tool (EPUB2)</source>
-        <translation>Jaki poziom CSS użyje narzędzie do walidacji arkuszy stylów W3C (dla plików EPUB2)</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="130"/>
-        <source>EPUB2 W3C Stylesheet Validation Level:</source>
-        <translation>Poziom walidacji arkuszy stylów wg W3C dla plików EPUB2:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="139"/>
-        <source>W3C stylesheet validator will use CSS level 2 for EPUB2</source>
-        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 2 dla EPUB2</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="142"/>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="199"/>
-        <source>CSS Level 2</source>
-        <translation>CSS Poziomu 2</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="149"/>
-        <source>W3C stylesheet validator will use CSS level 2.1 for EPUB2</source>
-        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 2.1 dla EPUB2</translation>
-    </message>
-    <message>
         <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="152"/>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="209"/>
-        <source>CSS Level 2.1</source>
-        <translation>CSS Poziomu 2.1</translation>
+        <source>Number of clipboard history items to save (0 disables):</source>
+        <translation>Liczba elementów historii schowka do zapisania (0 wyłącza):</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="162"/>
-        <source>W3C stylesheet validator will use CSS level 3 for EPUB2</source>
-        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 3 dla EPUB2</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="165"/>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="222"/>
-        <source>CSS Level 3</source>
-        <translation>CSS Poziomu 3</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="184"/>
-        <source>What CSS Level to specify for W3C stylesheet validation tool (EPUB3)</source>
-        <translation>Jaki poziom CSS użyje narzędzie do walidacji arkuszy stylów W3C (dla plików EPUB3)</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="187"/>
-        <source>EPUB3 W3C Stylesheet Validation Level:</source>
-        <translation>Poziom walidacji arkuszy stylów wg W3C dla plików EPUB3:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="196"/>
-        <source>W3C stylesheet validator will use CSS level 2 for EPUB3</source>
-        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 2 dla EPUB3</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="206"/>
-        <source>W3C stylesheet validator will use CSS level 2.1 for EPUB3</source>
-        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 2.1 dla EPUB3</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="219"/>
-        <source>W3C stylesheet validator will use CSS level 3 for EPUB3</source>
-        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 3 dla EPUB3</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="235"/>
-        <source>Number of clipboard history items to save between sessions (0 disables):</source>
-        <translation>Liczba elementów historii schowka do zapisania między sesjami (0 wyłącza):</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="247"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="167"/>
         <source>Use to limit (or disable) clipboard history saving between sessions</source>
         <translation>Służy do ograniczania (lub wyłączania) ilości elementów historii schowka zapisywanych między sesjami</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="279"/>
-        <source>Set Folder where temporary files should be created</source>
-        <translation>Określ folder, w którym mają być tworzone pliki tymczasowe.</translation>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="186"/>
+        <source>Set your preferred external xhtml editor:</source>
+        <translation>Ustaw preferowany zewnętrzny edytor XHTML:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="290"/>
-        <source>Auto</source>
-        <translation>Auto</translation>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="203"/>
+        <source>Clear</source>
+        <translation>Wyczyść</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="297"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="210"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="524"/>
         <source>Browse</source>
         <translation>Przeglądaj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="132"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="236"/>
+        <source>Security</source>
+        <translation>Bezpieczeństwo</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="242"/>
+        <source>Determine if Epubs are allowed to access non-multimedia remote resources.</source>
+        <translation>Ustal, czy pliki EPUB mają mieć dostęp do zdalnych zasobów, innych niż multimedialne.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="245"/>
+        <source> Control Access by Epubs to non-multimedia remote resources:</source>
+        <translation>Kontrola dostępu plików EPUB do zdalnych zasobów innych niż multimedialne:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="260"/>
+        <source>Check to allow Epubs to access non-multimedia remote resources.</source>
+        <translation>Zaznacz, by zezwolić plikom EPUB na dostęp do zasobów zdalnych innych niż multimedialne.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="263"/>
+        <source>Epubs may access all remote resources types.</source>
+        <translation>Pliki EPUB mogą uzyskać dostęp do wszystkich typów zdalnych zasobów.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="276"/>
+        <source>Determine if javascript is allowed to be used by Epubs</source>
+        <translation>Ustal, czy javascript może być używany w plikach EPUB</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="279"/>
+        <source> Control Use of Javascript by Epubs.</source>
+        <translation>Kontrola używania javascriptu w plikach EPUB.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="294"/>
+        <source>Check to allow Epubs to use javascript.</source>
+        <translation>Zaznacz, by zezwolić plikom EPUB na korzystanie z javascriptu.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="297"/>
+        <source>Epubs may use javascript.</source>
+        <translation>Pliki EPUB mogą używać javascriptu.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="324"/>
+        <source>Validation</source>
+        <translation>Walidacja</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="336"/>
+        <source>What CSS level to specify for W3C stylesheet validation tool (EPUB2)</source>
+        <translation>Jaki poziom CSS użyje narzędzie do walidacji arkuszy stylów W3C (dla plików EPUB2)</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="339"/>
+        <source>EPUB2 W3C Stylesheet Validation Level:</source>
+        <translation>Poziom walidacji arkuszy stylów wg W3C dla plików EPUB2:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="348"/>
+        <source>W3C stylesheet validator will use CSS level 2 for EPUB2</source>
+        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 2 dla EPUB2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="351"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="421"/>
+        <source>CSS Level 2</source>
+        <translation>CSS Poziomu 2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="358"/>
+        <source>W3C stylesheet validator will use CSS level 2.1 for EPUB2</source>
+        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 2.1 dla EPUB2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="361"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="431"/>
+        <source>CSS Level 2.1</source>
+        <translation>CSS Poziomu 2.1</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="371"/>
+        <source>W3C stylesheet validator will use CSS level 3 for EPUB2</source>
+        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 3 dla EPUB2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="374"/>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="444"/>
+        <source>CSS Level 3</source>
+        <translation>CSS Poziomu 3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="406"/>
+        <source>What CSS Level to specify for W3C stylesheet validation tool (EPUB3)</source>
+        <translation>Jaki poziom CSS użyje narzędzie do walidacji arkuszy stylów W3C (dla plików EPUB3)</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="409"/>
+        <source>EPUB3 W3C Stylesheet Validation Level:</source>
+        <translation>Poziom walidacji arkuszy stylów wg W3C dla plików EPUB3:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="418"/>
+        <source>W3C stylesheet validator will use CSS level 2 for EPUB3</source>
+        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 2 dla EPUB3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="428"/>
+        <source>W3C stylesheet validator will use CSS level 2.1 for EPUB3</source>
+        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 2.1 dla EPUB3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="441"/>
+        <source>W3C stylesheet validator will use CSS level 3 for EPUB3</source>
+        <translation>Walidator arkuszy stylów W3C użyje CSS poziomu 3 dla EPUB3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="484"/>
+        <source>Advanced</source>
+        <translation>Zaawansowane</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="490"/>
+        <source>Unless you know exactly what you&apos;re doing, there&apos;s very little reason to ever change this setting. Use extreme caution!</source>
+        <translation>Jeśli nie wiesz dokładnie, co robisz, nie ma powodu, by zmieniać to ustawienie. Zachowaj szczególną ostrożność!</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="500"/>
+        <source>Set folder where temporary files should be created:</source>
+        <translation>Określ folder, w którym mają być tworzone pliki tymczasowe:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PGeneralSettingsWidget.ui" line="517"/>
+        <source>Auto</source>
+        <translation>Auto</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="197"/>
+        <source>Incorrect Path for External Xhtml Editor selected</source>
+        <translation>Wybrano niewłaściwą ścieżkę do zewnętrznego edytora Xhtml</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="217"/>
         <source>Select Folder for Temporary Files</source>
         <translation>Wybierz folder dla plików tymczasowych</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="147"/>
+        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="234"/>
         <source>Incorrect Folder for Temporary Files selected</source>
         <translation>Wybrano nieprawidłowy folder dla plików tymczasowych</translation>
     </message>
@@ -2229,172 +2605,362 @@ podczas przełączania z Widoku Książki do Widoku Kodu.</translation>
 <context>
     <name>GuideItems</name>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="110"/>
+        <location filename="../../Misc/GuideItems.cpp" line="154"/>
         <source>Acknowledgements</source>
         <translation>Podziękowania</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="110"/>
+        <location filename="../../Misc/GuideItems.cpp" line="154"/>
         <source>A passage containing acknowledgments to entities involved in the realization of the work.</source>
         <translation>Fragment zawierający podziękowania dla podmiotów uczestniczących w realizacji prac.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="111"/>
+        <location filename="../../Misc/GuideItems.cpp" line="155"/>
+        <source>Afterword [other.]</source>
+        <translation>Posłowie [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="155"/>
+        <source>A closing statement from the author or a person of importance to the story, typically providing insight into how the story came to be written, its significance or related events that have transpired since its timeline.</source>
+        <translation>Zamykające oświadczenie autora lub osoby znaczącej dla fabuły, zapewniające wgląd w jaki sposób historia została napisana, jej znaczenie lub podobne zdarzenia, które zaszły od momentu napisania publikacji.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="156"/>
+        <source>Appendix [other.]</source>
+        <translation>Dodatek [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="156"/>
+        <source>Supplemental information.</source>
+        <translation>Informacje uzupełniające.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="157"/>
+        <source>Back Matter [other.]</source>
+        <translation>Reszta publikacji [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="157"/>
+        <source>Ancillary material occurring after the main content of a publication, such as indices, appendices, etc.</source>
+        <translation>Materiał pomocniczy do występujących po głównej treści publikacji, takich jak indeksy, załączniki itp.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="158"/>
         <source>Bibliography</source>
         <translation>Bibliografia</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="111"/>
+        <location filename="../../Misc/GuideItems.cpp" line="158"/>
         <source>A list of works cited.</source>
         <translation>Lista cytowanych prac.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="112"/>
+        <location filename="../../Misc/GuideItems.cpp" line="159"/>
         <source>Text</source>
         <translation>Tekst</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="112"/>
+        <location filename="../../Misc/GuideItems.cpp" line="159"/>
         <source>The start of the main text content of a publication.</source>
         <translation>Początek publikacji treści tekstu głównego.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="113"/>
+        <location filename="../../Misc/GuideItems.cpp" line="160"/>
         <source>Colophon</source>
         <translation>Kolofon</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="113"/>
+        <location filename="../../Misc/GuideItems.cpp" line="160"/>
         <source>A brief description usually located at the end of a publication, describing production notes relevant to the edition.</source>
-        <translation>Krótki opis zazwyczaj znajdujący się na końcu publikacji, opisujący notatki o publikacji, odpowiednie do edycji.</translation>
+        <translation>Krótki opis zazwyczaj znajdujący się na końcu publikacji, opisujący uwagi dotyczące produkcji istotne dla wydania.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="114"/>
+        <location filename="../../Misc/GuideItems.cpp" line="161"/>
+        <source>Conclusion [other.]</source>
+        <translation>Wniosek [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="161"/>
+        <source>An ending section that typically wraps up the work.</source>
+        <translation>Końcowa sekcja, która zazwyczaj podsumowuje pracę.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="162"/>
+        <source>Contributors [other.]</source>
+        <translation>Współautorzy [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="162"/>
+        <source>A list of contributors to the work.</source>
+        <translation>Lista współautorów pracy.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="163"/>
         <source>Copyright Page</source>
         <translation>Prawa autorskie</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="114"/>
+        <location filename="../../Misc/GuideItems.cpp" line="163"/>
         <source>The copyright page of the work.</source>
         <translation>Strona praw autorskich do dzieła.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="115"/>
+        <location filename="../../Misc/GuideItems.cpp" line="164"/>
         <source>Cover</source>
         <translation>Okładka</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="115"/>
+        <location filename="../../Misc/GuideItems.cpp" line="164"/>
         <source>The publications cover(s), jacket information, etc.</source>
         <translation>Okładka(i) publikacji, informacje obwoluty itp.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="116"/>
+        <location filename="../../Misc/GuideItems.cpp" line="165"/>
         <source>Dedication</source>
         <translation>Dedykacja</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="116"/>
+        <location filename="../../Misc/GuideItems.cpp" line="165"/>
         <source>An inscription addressed to one or several particular person(s).</source>
         <translation>Napis skierowany do jednej lub kilku szczególnych osób.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="117"/>
+        <location filename="../../Misc/GuideItems.cpp" line="166"/>
+        <source>Epilogue [other.]</source>
+        <translation>Epilog [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="166"/>
+        <source>A concluding section that is typically written from a later point in time than the main story, although still part of the narrative.</source>
+        <translation>Zawiera sekcję która jest zwykle napisana w późniejszym czasie niż główny wątek, chociaż nadal jest częścią narracji.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="167"/>
         <source>Epigraph</source>
         <translation>Epigraf</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="117"/>
+        <location filename="../../Misc/GuideItems.cpp" line="167"/>
         <source>A quotation that is pertinent but not integral to the text.</source>
         <translation>Cytat, który jest istotny, ale nie jest integralną częścią tekstu.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="118"/>
+        <location filename="../../Misc/GuideItems.cpp" line="168"/>
+        <source>Errata [other.]</source>
+        <translation>Errata [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="168"/>
+        <source>Publication errata, in printed works typically a loose sheet inserted by hand; sometimes a bound page that contains corrections for mistakes in the work.</source>
+        <translation>Errata publikacji, w dziełach drukowanych zwykle na luźnej kartce włożonej między strony; czasami dołączona strona, która zawiera poprawki błędów w pracy.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="169"/>
+        <source>Footnotes [other.]</source>
+        <translation>Przypisy [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="169"/>
+        <source>A collection of notes appearing at the bottom of a page.</source>
+        <translation>Zbiór informacji dodatkowych umieszczonych na spodzie strony.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="170"/>
         <source>Foreword</source>
         <translation>Przedmowa</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="118"/>
+        <location filename="../../Misc/GuideItems.cpp" line="170"/>
         <source>An introductory section that precedes the work, typically not written by the work&apos;s author.</source>
         <translation>Sekcja wprowadzająca, która poprzedza pracę, zazwyczaj nie napisana przez autora utworu.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="119"/>
+        <location filename="../../Misc/GuideItems.cpp" line="171"/>
+        <source>Front Matter [other.]</source>
+        <translation>Początek publikacji [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="171"/>
+        <source>Preliminary material to the main content of a publication, such as tables of contents, dedications, etc.</source>
+        <translation>Wstępny materiał do głównej treści meritum publikacji, taki jak tabele zawartości, dedykacje itp.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="172"/>
         <source>Glossary</source>
         <translation>Glosariusz</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="119"/>
+        <location filename="../../Misc/GuideItems.cpp" line="172"/>
         <source>An alphabetical list of terms in a particular domain of knowledge, with the definitions for those terms.</source>
         <translation>Alfabetyczna lista warunków w określonej domenie wiedzy, z definicji tych terminów.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="120"/>
+        <location filename="../../Misc/GuideItems.cpp" line="173"/>
+        <source>Half Title Page [other.]</source>
+        <translation>Strona przedtytułowa [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="173"/>
+        <source>The half title page of the work which carries just the title itself.</source>
+        <translation>Strona przedtytułowa dzieła, zawiera jedynie tytuł.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="174"/>
+        <source>Imprimatur [other.]</source>
+        <translation>Imprimatur [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="174"/>
+        <source>A formal statement authorizing the publication of the work.</source>
+        <translation>Oficjalne oświadczenie upoważniające do publikacji pracy.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="175"/>
+        <source>Imprint [other.]</source>
+        <translation>Imprint [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="175"/>
+        <source>Information relating to the publication or distribution of the work.</source>
+        <translation>Informacje odnoszące się do publikacji lub rozpowszechniania utworu.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="176"/>
         <source>Index</source>
         <translation>Indeks</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="120"/>
+        <location filename="../../Misc/GuideItems.cpp" line="176"/>
         <source>A detailed list, usually arranged alphabetically, of the specific information in a publication.</source>
         <translation>Szczegółowa lista, zwykle ułożone alfabetycznie, konkretnych informacji w publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="121"/>
+        <location filename="../../Misc/GuideItems.cpp" line="177"/>
+        <source>Introduction [other.]</source>
+        <translation>Wprowadzenie [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="177"/>
+        <source>A section in the beginning of the work, typically introducing the reader to the scope or nature of the work&apos;s content.</source>
+        <translation>Sekcja na początku pracy, zazwyczaj wprowadza czytelnika w zakres lub treść rodzaju pracy.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="178"/>
         <source>List of Illustrations</source>
         <translation>Spis ilustracji</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="121"/>
+        <location filename="../../Misc/GuideItems.cpp" line="178"/>
         <source>A listing of illustrations included in the work.</source>
         <translation>Spis ilustracji zawartych w pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="122"/>
+        <location filename="../../Misc/GuideItems.cpp" line="179"/>
+        <source>List of Audio Clips [other.]</source>
+        <translation>Spis klipów audio [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="179"/>
+        <source>A listing of audio clips included in the work.</source>
+        <translation>Spis klipów audio zawartych w pracy.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="180"/>
         <source>List of Tables</source>
         <translation>Spis tabel</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="122"/>
+        <location filename="../../Misc/GuideItems.cpp" line="180"/>
         <source>A listing of tables included in the work.</source>
         <translation>Spis tabel zawartych w pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="123"/>
+        <location filename="../../Misc/GuideItems.cpp" line="181"/>
+        <source>List of Video Clips [other.]</source>
+        <translation>Spis klipów wideo [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="181"/>
+        <source>A listing of video clips included in the work.</source>
+        <translation>Spis klipów wideo zawartych w pracy.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="182"/>
         <source>Notes</source>
         <translation>Notatki</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="123"/>
+        <location filename="../../Misc/GuideItems.cpp" line="182"/>
         <source>A collection of notes. It can be used to identify footnotes, rear notes, marginal notes, inline notes, and similar when legacy naming conventions are not desired. Status: Deprecated - Replaced by: &apos;footnotes&apos;, &apos;rearnotes&apos;</source>
         <translation>Zbiór notatek. Może służyć do identyfikowania przypisów, notatek końcowych, notatek na marginesie, notatek w tekście, i podobnych, gdy starsze konwencje nazewnictwa nie są pożądane. Stan: Przestarzałe - Zastępuje się: „przypisy dolne”, „notatki końcowe”</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="124"/>
+        <location filename="../../Misc/GuideItems.cpp" line="183"/>
+        <source>Other Credits [other.]</source>
+        <translation>Inne podziękowania [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="183"/>
+        <source>Acknowledgments of previously published parts of the work, illustration credits, and permission to quote from copyrighted material.</source>
+        <translation>Podziękowania do wcześniej publikowanych części pracy, ilustracji wyróżnień, oraz zgoda na cytat z materiałów chronionych prawem autorskim.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="184"/>
+        <source>Preamble [other.]</source>
+        <translation>Preambuła [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="184"/>
+        <source>A section in the beginning of the work, typically containing introductory and/or explanatory prose regarding the scope or nature of the work&apos;s content</source>
+        <translation>Sekcja na początku pracy, zwykle zawierająca wstęp i/lub wyjaśnienia dotyczące zakresu i charakteru treści dzieła</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="185"/>
         <source>Preface</source>
         <translation>Wstęp</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="124"/>
+        <location filename="../../Misc/GuideItems.cpp" line="185"/>
         <source>An introductory section that precedes the work, typically written by the work&apos;s author.</source>
         <translation>Sekcja wprowadzająca, która poprzedza pracę, zazwyczaj pisana przez autora utworu.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="125"/>
+        <location filename="../../Misc/GuideItems.cpp" line="186"/>
+        <source>Prologue [other.]</source>
+        <translation>Prolog [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="186"/>
+        <source>An introductory section that sets the background to a story, typically part of the narrative.</source>
+        <translation>Sekcja wprowadzająca która opisuje kontekst historii, zwykle część narracji.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="187"/>
+        <source>Rear Notes [other.]</source>
+        <translation>Końcowe uwagi [other.]</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="187"/>
+        <source>A collection of notes appearing at the rear (backmatter) of the work, or at the end of a section.</source>
+        <translation>Zbiór informacji dodatkowej umieszczonych z tyłu pracy (reszcie publikacji) albo na końcu sekcji.</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/GuideItems.cpp" line="188"/>
         <source>Title Page</source>
         <translation>Strona tytułowa</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="125"/>
+        <location filename="../../Misc/GuideItems.cpp" line="188"/>
         <source>A page at the beginning of a book giving its title, authors, publisher and other publication information.</source>
         <translation>Strona na początku książki, podająca jej tytuł, autora, wydawcę i inne podstawowe informacje o publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="126"/>
+        <location filename="../../Misc/GuideItems.cpp" line="189"/>
         <source>Table of Contents</source>
         <translation>Spis treści</translation>
     </message>
     <message>
-        <location filename="../../Misc/GuideItems.cpp" line="126"/>
+        <location filename="../../Misc/GuideItems.cpp" line="189"/>
         <source>A table of contents which is a list of the headings or parts of the book or document, organized in the order in which they appear. Typically appearing in the work&apos;s frontmatter, or at the beginning of a section.</source>
         <translation>Spis treści, którym jest lista nagłówków czy też części książki lub dokumentu, zorganizowany w kolejności w jakiej występują. Zazwyczaj pojawia się na początku publikacji lub na początku sekcji.</translation>
     </message>
@@ -2409,7 +2975,7 @@ podczas przełączania z Widoku Książki do Widoku Kodu.</translation>
     <message>
         <location filename="../../Form_Files/ReportsHTMLFilesWidget.ui" line="34"/>
         <source>List only the file names which contain the text you enter.</source>
-        <translation>Lista tylko z nazwami plików zawierającymi tekst wprowadzany.</translation>
+        <translation>Lista tylko z nazwami plików zawierającymi wprowadzany tekst.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ReportsHTMLFilesWidget.ui" line="37"/>
@@ -2417,82 +2983,82 @@ podczas przełączania z Widoku Książki do Widoku Kodu.</translation>
         <translation>Filtr:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="69"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="75"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="70"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="76"/>
         <source>File Size (KB)</source>
         <translation>Wielkość pliku (KB)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="71"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="77"/>
         <source>All Words</source>
         <translation>Wszystkie słowa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="72"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="78"/>
         <source>Misspelled Words</source>
         <translation>Błędne słowa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="73"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="79"/>
         <source>Images</source>
         <translation>Obrazy</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="74"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="80"/>
         <source>Video</source>
         <translation>Wideo</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="75"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="81"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="76"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="82"/>
         <source>Stylesheets</source>
         <translation>Arkusze stylów</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="77"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="83"/>
         <source>Well Formed</source>
-        <translation>Prawidłowy format</translation>
+        <translation>Poprawna składnia</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="166"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="173"/>
         <source>Yes</source>
         <translation>Tak</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="166"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="173"/>
         <source>No</source>
         <translation>Nie</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="185"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="192"/>
         <source>%n file(s)</source>
         <translation><numerusform>%n plik</numerusform><numerusform>%n pliki</numerusform><numerusform>%n plików</numerusform><numerusform>%n plików</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="326"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="338"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Zapisz raport jako plik CSV (wartości rozdzielone przecinkiem)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="339"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="352"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="339"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="352"/>
         <source>Cannot save report file.</source>
         <translation>Nie można zapisać pliku raportu.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="363"/>
+        <location filename="../../Dialogs/ReportsWidgets/HTMLFilesWidget.cpp" line="377"/>
         <source>Delete From Book</source>
         <translation>Usuń z książki</translation>
     </message>
@@ -2502,13 +3068,13 @@ podczas przełączania z Widoku Książki do Widoku Kodu.</translation>
     <message>
         <location filename="../../Form_Files/HeadingSelector.ui" line="14"/>
         <source>Generate Table Of Contents</source>
-        <translation>Wygeneruj Spis treści</translation>
+        <translation>Wygeneruj spis treści</translation>
     </message>
     <message>
         <location filename="../../Form_Files/HeadingSelector.ui" line="52"/>
         <source>Change the name of the entry in the TOC.
 The heading&apos;s title attribute will be updated in the document.</source>
-        <translation>Zmień nazwę wpisu w Spisie treści.
+        <translation>Zmień nazwę wpisu w spisie treści.
 Atrybut tytułu pozycji nagłówka zostanie zaktualizowany w dokumencie.</translation>
     </message>
     <message>
@@ -2522,7 +3088,7 @@ Atrybut tytułu pozycji nagłówka zostanie zaktualizowany w dokumencie.</transl
         <source>Decrease the heading level of the selected entry by 1.
 The heading's tag will be updated in the document.
 You can also use the left arrow key.</source>
-        <translation>Spadek poziomu pozycji wybranego Wpisu o 1.
+        <translation>Spadek poziomu pozycji wybranego wpisu o 1.
 Znaczniki nagłówka zostaną zaktualizowane w dokumencie.
 Można również użyć klawisza strzałki w lewo.</translation>
     </message>
@@ -2531,7 +3097,7 @@ Można również użyć klawisza strzałki w lewo.</translation>
         <source>Increase the heading level of the selected entry by 1.
 The heading's tag will be updated in the document.
 You can also use the right arrow key.</source>
-        <translation>Wzrost poziomu pozycji wybranego Wpisu o 1.
+        <translation>Wzrost poziomu pozycji wybranego wpisu o 1.
 Znaczniki nagłówka zostaną zaktualizowane w dokumencie.
 Można również użyć klawisza strzałki w prawo.</translation>
     </message>
@@ -2539,19 +3105,19 @@ Można również użyć klawisza strzałki w prawo.</translation>
         <location filename="../../Form_Files/HeadingSelector.ui" line="130"/>
         <source>Only display the items that will be added to the Table Of Contents.
 Check or uncheck an entry to determine if it will be added to the TOC.</source>
-        <translation>Wyświetlaj tylko elementy, które zostaną dodane do Spisu Treści.
-Zaznacz lub usuń zaznaczenie we wpisie dla ustalenia, czy chcesz by zostały te wpisy dodane do Spisu Treści.</translation>
+        <translation>Wyświetlaj tylko elementy, które zostaną dodane do spisu treści.
+Zaznacz lub usuń zaznaczenie we wpisie dla ustalenia, czy chcesz by zostały te wpisy dodane do spisu treści.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/HeadingSelector.ui" line="134"/>
         <source>Show TOC items only</source>
-        <translation>Pokaż tylko dane TOC</translation>
+        <translation>Pokaż tylko elementy spisu treści</translation>
     </message>
     <message>
         <location filename="../../Form_Files/HeadingSelector.ui" line="153"/>
         <source>Quickly mark which headings are included in the TOC.
 You can then check or uncheck individual headings in the list above.</source>
-        <translation>Szybko zaznacz, które nagłówki są uwzględniane w Spisie Treści.
+        <translation>Szybko zaznacz, które nagłówki są uwzględniane w spisie treści.
 Możesz następnie zaznaczyć lub odznaczyć pojedyncze pozycje na liście powyżej.</translation>
     </message>
     <message>
@@ -2563,17 +3129,17 @@ Możesz następnie zaznaczyć lub odznaczyć pojedyncze pozycje na liście powy�
     <message>
         <location filename="../../Dialogs/HeadingSelector.cpp" line="602"/>
         <source>Included</source>
-        <translation>Włączony</translation>
+        <translation>Włączone</translation>
     </message>
     <message>
         <location filename="../../Dialogs/HeadingSelector.cpp" line="602"/>
         <source>Hidden</source>
-        <translation>Ukryty</translation>
+        <translation>Ukryte</translation>
     </message>
     <message>
         <location filename="../../Dialogs/HeadingSelector.cpp" line="617"/>
         <source>TOC Entry / Heading Title</source>
-        <translation>Wprowadź wpisy Spisu treści / Nagłówki tytułów</translation>
+        <translation>Wprowadź wpisy spisu treści / Nagłówki tytułów</translation>
     </message>
     <message>
         <location filename="../../Dialogs/HeadingSelector.cpp" line="619"/>
@@ -2588,7 +3154,7 @@ Możesz następnie zaznaczyć lub odznaczyć pojedyncze pozycje na liście powy�
     <message>
         <location filename="../../Dialogs/HeadingSelector.cpp" line="840"/>
         <source>&lt;Select headings to include in TOC&gt;</source>
-        <translation>&lt;Select headings to include in TOC&gt;</translation>
+        <translation>&lt;Wybierz nagłówki, które chcesz dołączyć do spisu treści&gt;</translation>
     </message>
     <message>
         <location filename="../../Dialogs/HeadingSelector.cpp" line="843"/>
@@ -2613,7 +3179,7 @@ Możesz następnie zaznaczyć lub odznaczyć pojedyncze pozycje na liście powy�
     <message>
         <location filename="../../Form_Files/ReportsImageFilesWidget.ui" line="34"/>
         <source>List only the file names which contain the text you enter.</source>
-        <translation>Lista tylko z nazwami plików zawierającymi tekst wprowadzany.</translation>
+        <translation>Lista tylko z nazwami plików zawierającymi wprowadzany tekst.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ReportsImageFilesWidget.ui" line="37"/>
@@ -2626,72 +3192,72 @@ Możesz następnie zaznaczyć lub odznaczyć pojedyncze pozycje na liście powy�
         <translation>Wielkość miniaturki:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="83"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="88"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="84"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="89"/>
         <source>File Size (KB)</source>
         <translation>Wielkość pliku (KB)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="85"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="90"/>
         <source>Times Used</source>
         <translation>Ile razy użyty</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="86"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="91"/>
         <source>Width</source>
         <translation>Szerokość</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="87"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="92"/>
         <source>Height</source>
         <translation>Wysokość</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="88"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="93"/>
         <source>Pixels</source>
         <translation>Pikseli</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="89"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="94"/>
         <source>Color</source>
         <translation>Kolor</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="92"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="97"/>
         <source>Image</source>
         <translation>Obraz</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="179"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="184"/>
         <source>%n file(s)</source>
         <translation><numerusform>%n plik</numerusform><numerusform>%n pliki</numerusform><numerusform>%n plików</numerusform><numerusform>%n plików</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="183"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="188"/>
         <source>KB</source>
         <translation>KB</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="327"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="336"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Zapisz raport jako plik CSV (wartości rozdzielone przecinkiem)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="340"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="350"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="340"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="350"/>
         <source>Cannot save report file.</source>
         <translation>Nie można zapisać pliku raportu.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="412"/>
+        <location filename="../../Dialogs/ReportsWidgets/ImageFilesWidget.cpp" line="425"/>
         <source>Delete From Book</source>
         <translation>Usuń z książki</translation>
     </message>
@@ -2699,49 +3265,49 @@ Możesz następnie zaznaczyć lub odznaczyć pojedyncze pozycje na liście powy�
 <context>
     <name>ImageTab</name>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="155"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="186"/>
         <source>shades</source>
         <translation>odcienie</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="155"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="186"/>
         <source>colors</source>
         <translation>kolory</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="156"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="187"/>
         <source>Grayscale</source>
         <translation>Skala szarości</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="156"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="187"/>
         <source>Color</source>
         <translation>Kolor</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="246"/>
-        <location filename="../../Tabs/ImageTab.cpp" line="271"/>
-        <location filename="../../Tabs/ImageTab.cpp" line="274"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="307"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="365"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="368"/>
         <source>Open With</source>
         <translation>Otwórz za pomocą</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="253"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="343"/>
         <source>Other Application</source>
         <translation>Inna aplikacja</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="272"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="366"/>
         <source>Save As</source>
         <translation>Zapisz jako</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="273"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="367"/>
         <source>Copy Image</source>
         <translation>Kopiuj obraz</translation>
     </message>
     <message>
-        <location filename="../../Tabs/ImageTab.cpp" line="307"/>
+        <location filename="../../Tabs/ImageTab.cpp" line="415"/>
         <source>Print %1</source>
         <translation>Drukowanie %1</translation>
     </message>
@@ -2749,30 +3315,40 @@ Możesz następnie zaznaczyć lub odznaczyć pojedyncze pozycje na liście powy�
 <context>
     <name>ImportEPUB</name>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="165"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="148"/>
+        <source>Files exist in epub that are not listed in the manifest, they will be ignored</source>
+        <translation>Pliki istniejące w pliku EPUB, które nie są wymienione w manifeście, zostaną zignorowane.</translation>
+    </message>
+    <message>
+        <location filename="../../Importers/ImportEPUB.cpp" line="186"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="166"/>
-        <source>This EPUB has HTML files that are not well formed. Sigil can attempt to automatically fix these files, although this can result in data loss.
+        <location filename="../../Importers/ImportEPUB.cpp" line="187"/>
+        <source>This EPUB has HTML files that are not well formed. Sigil can attempt to automatically fix these files, although this can result in minor data loss.
 
 Do you want to automatically fix the files?</source>
-        <translation>Ten EPUB zawiera niepoprawnie sformatowane pliki HTML.  Sigil może automatycznie naprawić te pliki, ale może to spowodować utratę danych.
+        <translation>Ten EPUB zawiera pliki HTML z błędami składniowymi. Sigil może spróbować automatycznie naprawić te pliki, ale może to spowodować utratę danych.
 
 Czy chcesz automatycznie naprawić te pliki?</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="500"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="557"/>
         <source>Epub has missing or improperly specified OPF.</source>
-        <translation>W pliku ePub brakuje, lub jest niewłaściwie określona zawartość pliku OPF.</translation>
+        <translation>W pliku EPUB brakuje OPF lub jest on nieprawidłowo określony.</translation>
+    </message>
+    <message>
+        <location filename="../../Importers/ImportEPUB.cpp" line="597"/>
+        <source>This epub has multiple renditions (multiple OPF files). Editing this epub in Sigil will produce a normal single rendition epub using only the main (first) OPF file found.</source>
+        <translation>Ten plik EPUB ma wiele wersji (wiele plików OPF). Edycja tego pliku w Sigilu spowoduje utworzenie jednorodnego pliku EPUB, przy użyciu tylko znalezionego głównego (pierwszego) pliku OPF.</translation>
     </message>
 </context>
 <context>
     <name>IndexEditor</name>
     <message>
         <location filename="../../Form_Files/IndexEditor.ui" line="14"/>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="287"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="288"/>
         <source>Index Editor</source>
         <translation>Edytor indeksu</translation>
     </message>
@@ -2788,158 +3364,158 @@ Czy chcesz automatycznie naprawić te pliki?</translation>
     </message>
     <message>
         <location filename="../../Form_Files/IndexEditor.ui" line="55"/>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="421"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="435"/>
         <source>Add Entry</source>
-        <translation>Dodaj Wpis</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="66"/>
-        <source>Right click on an entry to see a context menu of actions.</source>
-        <translation>Kliknij prawym przyciskiem myszy na Wpis, aby zobaczyć menu kontekstowe działań.</translation>
+        <translation>Dodaj wpis</translation>
     </message>
     <message>
         <location filename="../../Dialogs/IndexEditor.cpp" line="67"/>
+        <source>Right click on an entry to see a context menu of actions.</source>
+        <translation>Kliknij prawym przyciskiem myszy na wpis, aby zobaczyć menu kontekstowe działań.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="68"/>
         <source>You can also right click in your document to add selected text to the Index.</source>
         <translation>Można również kliknąć prawym przyciskiem myszy w dokumencie, aby dodać zaznaczony tekst do indeksu.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="69"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="70"/>
         <source>Text to Include</source>
-        <translation>Zawartość tekstu</translation>
+        <translation>Uwzględnij tekst</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="69"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="70"/>
         <source>The pattern to match in your document, e.g. &quot;Gutenberg&quot;. This is a regex pattern so &quot;(?i)Gutenberg&quot; ignores case when matching.</source>
         <translation>Maska do dopasowania w dokumencie, np. &quot;Gutenberg&quot;. Jednak maska wyrażenia regularnego jak &quot;(?i)Gutenberg&quot; ignoruje wielkość liter przy dopasowaniu.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="70"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="71"/>
         <source>Index Entries</source>
         <translation>Wpisy indeksu</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="70"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="71"/>
         <source>The entry to create in the Index. Leave blank to use text as is, or enter text to display.  Create multi-level entries by using &apos;/&apos; after a level name, e.g. &quot;Books/Fantasy/Alice in Wonderland&quot; or &quot;Books/Fantasy/&quot;.</source>
         <translation>Wpis w tworzonym indeksie. Pozostaw pusty, aby użyć tekstu jak jest, lub wprowadź tekst do wyświetlenia. Tworzenie wielopoziomowych wpisów za pomocą &apos;/&apos; po nazwie poziomu, np. &quot;Książki/Fantasy/Alicja w Krainie Czarów&quot; lub &quot;Książki/Fantasy/&quot;.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="74"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="75"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="74"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="75"/>
         <source>Save your changes.</source>
         <translation>Zapisz wprowadzone zmiany.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="74"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="75"/>
         <source>If any other instances of Sigil are running they will be automatically updated with your changes.</source>
         <translation>Jeżeli są uruchomione jakiekolwiek inne instancje Sigila, wszelkie wprowadzone zmiany będą wyświetlane automatycznie.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="84"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="85"/>
         <source>Cannot save entries.</source>
-        <translation>Nie można zapisać Wpisów.</translation>
+        <translation>Nie można zapisać wpisów.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="126"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="127"/>
         <source>Index entries loaded from file.</source>
         <translation>Wpisy indeksu wczytano z pliku.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../../Dialogs/IndexEditor.cpp" line="287"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="288"/>
         <source>Entries added: %n</source>
         <translation><numerusform>Dodano wpis: %n</numerusform><numerusform>Dodano wpisy: %n</numerusform><numerusform>Dodano wpisów: %n</numerusform><numerusform>Dodano wpisy: %n</numerusform></translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="293"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="294"/>
         <source>Index files: *.ini *.txt (*.ini *.txt)</source>
         <translation>Pliki indeksu: *.ini *.txt (*.ini *.txt)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="295"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="301"/>
         <source>Load Entries From File</source>
-        <translation>Wczytaj Wpis z pliku</translation>
+        <translation>Wczytaj wpis z pliku</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="311"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="319"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="311"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="319"/>
         <source>Are you sure you want to reload all entries?  This will overwrite any unsaved changes.</source>
-        <translation>Czy jesteś pewien, że chcesz ponownie załadować wszystkie Wpisy?
+        <translation>Czy jesteś pewien, że chcesz, aby ponownie załadować wszystkie wpisy?
 Spowoduje to nadpisanie wszystkich niezapisanych zmian.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="329"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="342"/>
         <source>Save Entries to File</source>
-        <translation>Zapisz Wpis do pliku</translation>
+        <translation>Zapisz wpis do pliku</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="422"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="436"/>
         <source>Edit</source>
         <translation>Edytuj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="423"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="437"/>
         <source>Cut</source>
         <translation>Wytnij</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="424"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="438"/>
         <source>Copy</source>
         <translation>Kopiuj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="425"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="439"/>
         <source>Paste</source>
         <translation>Wklej</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="426"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="440"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="427"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="441"/>
         <source>Autofill</source>
         <translation>Autowypełnienie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="428"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="442"/>
         <source>Open</source>
         <translation>Otwórz</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="429"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="443"/>
         <source>Reload</source>
         <translation>Wczytaj ponownie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="430"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="444"/>
         <source>Save As</source>
         <translation>Zapisz jako</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="431"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="445"/>
         <source>Select All</source>
         <translation>Zaznacz wszystko</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="506"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="520"/>
         <source>Index entries saved.</source>
         <translation>Wprowadzone indeksy zapisano.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="535"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="549"/>
         <source>Sigil: Index Editor</source>
         <translation>Sigil: Edytor indeksu</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/IndexEditor.cpp" line="536"/>
+        <location filename="../../Dialogs/IndexEditor.cpp" line="550"/>
         <source>The Index entries may have been modified.
 Do you want to save your changes?</source>
         <translation>Wprowadzony indeks został zmieniony.
@@ -2949,19 +3525,32 @@ Czy chcesz zapisać zmiany?</translation>
 <context>
     <name>IndexEditorModel</name>
     <message>
-        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="60"/>
+        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="61"/>
         <source>Text to Include</source>
-        <translation>Zawartość tekstu</translation>
+        <translation>Uwzględnij tekst</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="61"/>
+        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="62"/>
         <source>Index Entries</source>
         <translation>Wpisy indeksu</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="342"/>
+        <location filename="../../MiscEditors/IndexEditorModel.cpp" line="347"/>
         <source>Unable to create file %1</source>
         <translation>Nie można utworzyć pliku %1</translation>
+    </message>
+</context>
+<context>
+    <name>Inspector</name>
+    <message>
+        <location filename="../../Dialogs/Inspector.cpp" line="54"/>
+        <source>Inspect Page or Element</source>
+        <translation>Sprawdzanie strony lub elementu</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/Inspector.cpp" line="153"/>
+        <source>The Inspector functionality is not supported before Qt 5.11</source>
+        <translation>Funkcja sprawdzania nie jest obsługiwana przed Qt 5.11</translation>
     </message>
 </context>
 <context>
@@ -3025,7 +3614,7 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Form_Files/PKeyboardShortcutsWidget.ui" line="144"/>
         <source>Assign</source>
-        <translation>Skojarz</translation>
+        <translation>Przypisz</translation>
     </message>
     <message>
         <location filename="../../Form_Files/PKeyboardShortcutsWidget.ui" line="160"/>
@@ -3038,7 +3627,7 @@ Czy chcesz zapisać zmiany?</translation>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/KeyboardShortcutsWidget.cpp" line="343"/>
+        <location filename="../../Dialogs/PreferenceWidgets/KeyboardShortcutsWidget.cpp" line="365"/>
         <source>Conflicts with: &lt;b&gt;</source>
         <translation>Konflikt z: &lt;b&gt;</translation>
     </message>
@@ -3046,482 +3635,482 @@ Czy chcesz zapisać zmiany?</translation>
 <context>
     <name>Landmarks</name>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="117"/>
+        <location filename="../../Misc/Landmarks.cpp" line="152"/>
         <source>Acknowledgments</source>
         <translation>Podziękowania</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="117"/>
+        <location filename="../../Misc/Landmarks.cpp" line="152"/>
         <source>A passage containing acknowledgments to entities involved in the realization of the work.</source>
         <translation>Fragment zawierający podziękowania dla podmiotów uczestniczących w realizacji prac.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="118"/>
+        <location filename="../../Misc/Landmarks.cpp" line="153"/>
         <source>Afterword</source>
         <translation>Posłowie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="118"/>
+        <location filename="../../Misc/Landmarks.cpp" line="153"/>
         <source>A closing statement from the author or a person of importance to the story, typically providing insight into how the story came to be written, its significance or related events that have transpired since its timeline.</source>
         <translation>Zamykające oświadczenie autora lub osoby znaczącej dla fabuły, zapewniające wgląd w jaki sposób historia została napisana, jej znaczenie lub podobne zdarzenia, które zaszły od momentu napisania publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="119"/>
+        <location filename="../../Misc/Landmarks.cpp" line="154"/>
         <source>Annotation</source>
         <translation>Adnotacja</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="119"/>
+        <location filename="../../Misc/Landmarks.cpp" line="154"/>
         <source>Explanatory information about passages in the work. Status: Deprecated</source>
         <translation>Informacje wyjaśniające na temat fragmentów pracy. Status: Przestarzałe</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="120"/>
+        <location filename="../../Misc/Landmarks.cpp" line="155"/>
         <source>Appendix</source>
         <translation>Dodatek</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="120"/>
+        <location filename="../../Misc/Landmarks.cpp" line="155"/>
         <source>Supplemental information.</source>
         <translation>Informacje uzupełniające.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="121"/>
+        <location filename="../../Misc/Landmarks.cpp" line="156"/>
         <source>Assessment</source>
         <translation>Ocena</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="121"/>
+        <location filename="../../Misc/Landmarks.cpp" line="156"/>
         <source>A test, quiz, or other activity that helps measure a student&apos;s understanding of what is being taught.</source>
         <translation>Test, quiz, lub inne czynności, która pomagają ocenić ucznia, zrozumienie materiału z nauczanego zakresu.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="122"/>
+        <location filename="../../Misc/Landmarks.cpp" line="157"/>
         <source>Back Matter</source>
         <translation>Reszta publikacji</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="122"/>
+        <location filename="../../Misc/Landmarks.cpp" line="157"/>
         <source>Ancillary material occurring after the main content of a publication, such as indices, appendices, etc.</source>
         <translation>Materiał pomocniczy do występujących po głównej treści publikacji, takich jak indeksy, załączniki itp.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="123"/>
+        <location filename="../../Misc/Landmarks.cpp" line="158"/>
         <source>Bibliography</source>
         <translation>Bibliografia</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="123"/>
+        <location filename="../../Misc/Landmarks.cpp" line="158"/>
         <source>A list of works cited.</source>
         <translation>Lista cytowanych prac.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="124"/>
+        <location filename="../../Misc/Landmarks.cpp" line="159"/>
         <source>Body Matter</source>
         <translation>Meritum publikacji</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="124"/>
+        <location filename="../../Misc/Landmarks.cpp" line="159"/>
         <source>The main content of a publication.</source>
         <translation>Główna treść publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="125"/>
+        <location filename="../../Misc/Landmarks.cpp" line="160"/>
         <source>Chapter</source>
         <translation>Rozdział</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="125"/>
+        <location filename="../../Misc/Landmarks.cpp" line="160"/>
         <source>A major structural division of a piece of writing.</source>
         <translation>Główny podział strukturalny, fragment pisma.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="126"/>
+        <location filename="../../Misc/Landmarks.cpp" line="161"/>
         <source>Colophon</source>
         <translation>Kolofon</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="126"/>
+        <location filename="../../Misc/Landmarks.cpp" line="161"/>
         <source>A brief description usually located at the end of a publication, describing production notes relevant to the edition.</source>
-        <translation>Krótki opis zazwyczaj znajdujący się na końcu publikacji, opisujący notatki o publikacji, odpowiednie do edycji.</translation>
+        <translation>Krótki opis zazwyczaj znajdujący się na końcu publikacji, opisujący uwagi dotyczące produkcji istotne dla wydania.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="127"/>
+        <location filename="../../Misc/Landmarks.cpp" line="162"/>
         <source>Conclusion</source>
         <translation>Wniosek</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="127"/>
+        <location filename="../../Misc/Landmarks.cpp" line="162"/>
         <source>An ending section that typically wraps up the work.</source>
         <translation>Końcowa sekcja, która zazwyczaj podsumowuje pracę.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="128"/>
+        <location filename="../../Misc/Landmarks.cpp" line="163"/>
         <source>Contributors</source>
         <translation>Współautorzy</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="128"/>
+        <location filename="../../Misc/Landmarks.cpp" line="163"/>
         <source>A list of contributors to the work.</source>
         <translation>Lista współautorów pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="129"/>
+        <location filename="../../Misc/Landmarks.cpp" line="164"/>
         <source>Copyright Page</source>
         <translation>Prawa autorskie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="129"/>
+        <location filename="../../Misc/Landmarks.cpp" line="164"/>
         <source>The copyright page of the work.</source>
         <translation>Strona praw autorskich do publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="130"/>
+        <location filename="../../Misc/Landmarks.cpp" line="165"/>
         <source>Cover</source>
         <translation>Okładka</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="130"/>
+        <location filename="../../Misc/Landmarks.cpp" line="165"/>
         <source>The publications cover(s), jacket information, etc.</source>
         <translation>Okładka(i) publikacji, informacje obwoluty itp.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="131"/>
+        <location filename="../../Misc/Landmarks.cpp" line="166"/>
         <source>Dedication</source>
         <translation>Dedykacja</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="131"/>
+        <location filename="../../Misc/Landmarks.cpp" line="166"/>
         <source>An inscription addressed to one or several particular person(s).</source>
         <translation>Napis skierowany do jednej lub kilku szczególnych osób.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="132"/>
+        <location filename="../../Misc/Landmarks.cpp" line="167"/>
         <source>Division</source>
         <translation>Podział</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="132"/>
+        <location filename="../../Misc/Landmarks.cpp" line="167"/>
         <source>A major structural division that may also appear as a substructure of a part (esp. in legislation).</source>
         <translation>Główny podział strukturalny, który może również pojawić się jako fundament części (zwł. w legislacji).</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="133"/>
+        <location filename="../../Misc/Landmarks.cpp" line="168"/>
         <source>Epigraph</source>
         <translation>Epigraf</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="133"/>
+        <location filename="../../Misc/Landmarks.cpp" line="168"/>
         <source>A quotation that is pertinent but not integral to the text.</source>
         <translation>Cytat, który jest istotny, ale nie jest integralną częścią tekstu.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="134"/>
+        <location filename="../../Misc/Landmarks.cpp" line="169"/>
         <source>Epilogue</source>
         <translation>Epilog</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="134"/>
+        <location filename="../../Misc/Landmarks.cpp" line="169"/>
         <source>A concluding section that is typically written from a later point in time than the main story, although still part of the narrative.</source>
         <translation>Zawiera sekcję która jest zwykle napisana w późniejszym czasie niż główny wątek, chociaż nadal jest częścią narracji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="135"/>
+        <location filename="../../Misc/Landmarks.cpp" line="170"/>
         <source>Errata</source>
         <translation>Errata</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="135"/>
+        <location filename="../../Misc/Landmarks.cpp" line="170"/>
         <source>Publication errata, in printed works typically a loose sheet inserted by hand; sometimes a bound page that contains corrections for mistakes in the work.</source>
         <translation>Errata publikacji, w dziełach drukowanych zwykle na luźnej kartce włożonej między strony; czasami dołączona strona, która zawiera poprawki błędów w pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="136"/>
+        <location filename="../../Misc/Landmarks.cpp" line="171"/>
         <source>Footnotes</source>
         <translation>Przypisy</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="136"/>
+        <location filename="../../Misc/Landmarks.cpp" line="171"/>
         <source>A collection of notes appearing at the bottom of a page.</source>
         <translation>Zbiór informacji dodatkowych umieszczonych na spodzie strony.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="137"/>
+        <location filename="../../Misc/Landmarks.cpp" line="172"/>
         <source>Foreword</source>
         <translation>Przedmowa</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="137"/>
+        <location filename="../../Misc/Landmarks.cpp" line="172"/>
         <source>An introductory section that precedes the work, typically not written by the work&apos;s author.</source>
         <translation>Sekcja wprowadzająca, która poprzedza pracę, zazwyczaj nie napisana przez autora utworu.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="138"/>
+        <location filename="../../Misc/Landmarks.cpp" line="173"/>
         <source>Front Matter</source>
         <translation>Początek publikacji</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="138"/>
+        <location filename="../../Misc/Landmarks.cpp" line="173"/>
         <source>Preliminary material to the main content of a publication, such as tables of contents, dedications, etc.</source>
         <translation>Wstępny materiał do głównej treści meritum publikacji, taki jak tabele zawartości, dedykacje itp.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="139"/>
+        <location filename="../../Misc/Landmarks.cpp" line="174"/>
         <source>Glossary</source>
         <translation>Glosariusz</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="139"/>
+        <location filename="../../Misc/Landmarks.cpp" line="174"/>
         <source>An alphabetical list of terms in a particular domain of knowledge, with the definitions for those terms.</source>
         <translation>Alfabetyczna lista warunków w określonej domenie wiedzy, z definicji tych terminów.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="140"/>
+        <location filename="../../Misc/Landmarks.cpp" line="175"/>
         <source>Half Title Page</source>
         <translation>Strona przedtytułowa</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="140"/>
+        <location filename="../../Misc/Landmarks.cpp" line="175"/>
         <source>The half title page of the work which carries just the title itself.</source>
-        <translation>Strona z przed-tytułem dzieła, za którą jest tylko tytuł.</translation>
+        <translation>Strona przedtytułowa dzieła, zawiera jedynie tytuł.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="141"/>
+        <location filename="../../Misc/Landmarks.cpp" line="176"/>
         <source>Imprimatur</source>
         <translation>Imprimatur</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="141"/>
+        <location filename="../../Misc/Landmarks.cpp" line="176"/>
         <source>A formal statement authorizing the publication of the work.</source>
         <translation>Oficjalne oświadczenie upoważniające do publikacji pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="142"/>
+        <location filename="../../Misc/Landmarks.cpp" line="177"/>
         <source>Imprint</source>
         <translation>Imprint</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="142"/>
+        <location filename="../../Misc/Landmarks.cpp" line="177"/>
         <source>Information relating to the publication or distribution of the work.</source>
         <translation>Informacje odnoszące się do publikacji lub rozpowszechniania utworu.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="143"/>
+        <location filename="../../Misc/Landmarks.cpp" line="178"/>
         <source>Index</source>
         <translation>Indeks</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="143"/>
+        <location filename="../../Misc/Landmarks.cpp" line="178"/>
         <source>A detailed list, usually arranged alphabetically, of the specific information in a publication.</source>
         <translation>Szczegółowa lista, zwykle ułożone alfabetycznie, konkretnych informacji w publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="144"/>
+        <location filename="../../Misc/Landmarks.cpp" line="179"/>
         <source>Introduction</source>
         <translation>Wprowadzenie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="144"/>
+        <location filename="../../Misc/Landmarks.cpp" line="179"/>
         <source>A section in the beginning of the work, typically introducing the reader to the scope or nature of the work&apos;s content.</source>
         <translation>Sekcja na początku pracy, zazwyczaj wprowadza czytelnika w zakres lub treść rodzaju pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="145"/>
+        <location filename="../../Misc/Landmarks.cpp" line="180"/>
         <source>Landmarks</source>
         <translation>Punkty orientacyjne</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="145"/>
+        <location filename="../../Misc/Landmarks.cpp" line="180"/>
         <source>A collection of references to well-known/recurring components within the publication</source>
         <translation>Zbiór punktów odniesienia dobrze znanych / powtarzających się elementów w publikacji</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="146"/>
+        <location filename="../../Misc/Landmarks.cpp" line="181"/>
         <source>List of Audio Clips</source>
         <translation>Spis klipów audio</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="146"/>
+        <location filename="../../Misc/Landmarks.cpp" line="181"/>
         <source>A listing of audio clips included in the work.</source>
         <translation>Spis klipów audio zawartych w pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="147"/>
+        <location filename="../../Misc/Landmarks.cpp" line="182"/>
         <source>List of Illustrations</source>
         <translation>Spis ilustracji</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="147"/>
+        <location filename="../../Misc/Landmarks.cpp" line="182"/>
         <source>A listing of illustrations included in the work.</source>
         <translation>Spis ilustracji zawartych w pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="148"/>
+        <location filename="../../Misc/Landmarks.cpp" line="183"/>
         <source>List of Tables</source>
         <translation>Spis tabel</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="148"/>
+        <location filename="../../Misc/Landmarks.cpp" line="183"/>
         <source>A listing of tables included in the work.</source>
         <translation>Spis tabel zawartych w pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="149"/>
+        <location filename="../../Misc/Landmarks.cpp" line="184"/>
         <source>List of Video Clips</source>
         <translation>Spis klipów wideo</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="149"/>
+        <location filename="../../Misc/Landmarks.cpp" line="184"/>
         <source>A listing of video clips included in the work.</source>
         <translation>Spis klipów wideo zawartych w pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="150"/>
+        <location filename="../../Misc/Landmarks.cpp" line="185"/>
         <source>Notice</source>
         <translation>Wzmianka</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="150"/>
+        <location filename="../../Misc/Landmarks.cpp" line="185"/>
         <source>Information that requires special attention, and that must not be skipped or suppressed. Examples include: alert, warning, caution, danger, important.</source>
         <translation>Informacja, która wymaga szczególnej uwagi, i że nie może być pomijana lub tłumiona. Przykłady obejmują: alarm, ostrzeżenie, ostrożnie, niebezpieczeństwo, ważne.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="151"/>
+        <location filename="../../Misc/Landmarks.cpp" line="186"/>
         <source>Other Credits</source>
         <translation>Inne podziękowania</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="151"/>
+        <location filename="../../Misc/Landmarks.cpp" line="186"/>
         <source>Acknowledgments of previously published parts of the work, illustration credits, and permission to quote from copyrighted material.</source>
         <translation>Podziękowania do wcześniej publikowanych części pracy, ilustracji wyróżnień, oraz zgoda na cytat z materiałów chronionych prawem autorskim.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="152"/>
+        <location filename="../../Misc/Landmarks.cpp" line="187"/>
         <source>Page List</source>
         <translation>Lista stron</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="152"/>
+        <location filename="../../Misc/Landmarks.cpp" line="187"/>
         <source>A list of references to pagebreaks (start locations) from a print version of the ebook</source>
         <translation>Lista odnośników do podziałów stron (miejsc startowych) z wersji drukowanej ebooka</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="153"/>
+        <location filename="../../Misc/Landmarks.cpp" line="188"/>
         <source>Part</source>
         <translation>Część</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="153"/>
+        <location filename="../../Misc/Landmarks.cpp" line="188"/>
         <source>A major structural division of a piece of writing, typically encapsulating a set of related chapters.</source>
         <translation>Główny podział strukturalny kawałka pisma, zazwyczaj razem w zestawie z odpowiednimi jej rozdziałami.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="154"/>
+        <location filename="../../Misc/Landmarks.cpp" line="189"/>
         <source>Preamble</source>
         <translation>Preambuła</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="154"/>
+        <location filename="../../Misc/Landmarks.cpp" line="189"/>
         <source>A section in the beginning of the work, typically containing introductory and/or explanatory prose regarding the scope or nature of the work&apos;s content</source>
         <translation>Sekcja na początku pracy, zwykle zawierająca wstęp i/lub wyjaśnienia dotyczące zakresu i charakteru treści dzieła</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="155"/>
+        <location filename="../../Misc/Landmarks.cpp" line="190"/>
         <source>Preface</source>
         <translation>Wstęp</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="155"/>
+        <location filename="../../Misc/Landmarks.cpp" line="190"/>
         <source>An introductory section that precedes the work, typically written by the work&apos;s author.</source>
         <translation>Sekcja wprowadzająca, która poprzedza pracę, zazwyczaj pisana przez autora utworu.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="156"/>
+        <location filename="../../Misc/Landmarks.cpp" line="191"/>
         <source>Prologue</source>
         <translation>Prolog</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="156"/>
+        <location filename="../../Misc/Landmarks.cpp" line="191"/>
         <source>An introductory section that sets the background to a story, typically part of the narrative.</source>
         <translation>Sekcja wprowadzająca która opisuje kontekst historii, zwykle część narracji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="157"/>
+        <location filename="../../Misc/Landmarks.cpp" line="192"/>
         <source>Questions and Answers</source>
         <translation>Pytania i odpowiedzi</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="157"/>
+        <location filename="../../Misc/Landmarks.cpp" line="192"/>
         <source>A question and answer section.</source>
         <translation>Sekcja pytań i odpowiedzi.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="158"/>
+        <location filename="../../Misc/Landmarks.cpp" line="193"/>
         <source>Rear Notes</source>
         <translation>Końcowe uwagi</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="158"/>
+        <location filename="../../Misc/Landmarks.cpp" line="193"/>
         <source>A collection of notes appearing at the rear (backmatter) of the work, or at the end of a section.</source>
         <translation>Zbiór informacji dodatkowej umieszczonych z tyłu pracy (reszcie publikacji) albo na końcu sekcji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="159"/>
+        <location filename="../../Misc/Landmarks.cpp" line="194"/>
         <source>Revision History</source>
         <translation>Historia zmian</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="159"/>
+        <location filename="../../Misc/Landmarks.cpp" line="194"/>
         <source>A record of changes made to a work.</source>
         <translation>Zapis zmian wprowadzonych do pracy.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="160"/>
+        <location filename="../../Misc/Landmarks.cpp" line="195"/>
         <source>Subchapter</source>
         <translation>Podrozdział</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="160"/>
+        <location filename="../../Misc/Landmarks.cpp" line="195"/>
         <source>A major sub-division of a chapter.</source>
         <translation>Główny podział rozdziału.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="161"/>
+        <location filename="../../Misc/Landmarks.cpp" line="196"/>
         <source>Title Page</source>
         <translation>Strona tytułowa</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="161"/>
+        <location filename="../../Misc/Landmarks.cpp" line="196"/>
         <source>A page at the beginning of a book giving its title, authors, publisher and other publication information.</source>
         <translation>Strona na początku książki, nadająca jej tytuł, autora, wydawcę i inne informacje o publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="162"/>
+        <location filename="../../Misc/Landmarks.cpp" line="197"/>
         <source>Table of Contents</source>
         <translation>Spis treści</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="162"/>
+        <location filename="../../Misc/Landmarks.cpp" line="197"/>
         <source>A table of contents which is a list of the headings or parts of the book or document, organized in the order in which they appear. Typically appearing in the work&apos;s frontmatter, or at the beginning of a section.</source>
         <translation>Spis treści, którym jest lista nagłówków czy też części książki lub dokumentu, zorganizowany w kolejności w jakiej występują. Zazwyczaj pojawia się na początku publikacji, lub na początku sekcji.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="163"/>
+        <location filename="../../Misc/Landmarks.cpp" line="198"/>
         <source>Volume</source>
         <translation>Tom</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="163"/>
+        <location filename="../../Misc/Landmarks.cpp" line="198"/>
         <source>A component of a collection.</source>
         <translation>Element zbioru.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="164"/>
+        <location filename="../../Misc/Landmarks.cpp" line="199"/>
         <source>Warning</source>
         <translation>Ostrzeżenie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Landmarks.cpp" line="164"/>
+        <location filename="../../Misc/Landmarks.cpp" line="199"/>
         <source>A warning or caution about specific material. Status: Deprecated - Replaced by &apos;notice&apos;.</source>
         <translation>Ostrzeżenie lub uwaga na temat konkretnego materiału. Status: Przestarzałe - zastępujemy terminem „wzmianka”.</translation>
     </message>
@@ -3581,7 +4170,7 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Misc/Language.cpp" line="92"/>
         <source>Algeria</source>
-        <translation>Algeria</translation>
+        <translation>Algieria</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="93"/>
@@ -3946,7 +4535,7 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="160"/>
-        <source>Phillippines</source>
+        <source>Philippines</source>
         <translation>Filipiny</translation>
     </message>
     <message>
@@ -4081,7 +4670,7 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Misc/Language.cpp" line="188"/>
         <source>Greek, Modern</source>
-        <translation>Grecki, Nowoczesny</translation>
+        <translation>Grecki nowożytny</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="189"/>
@@ -5316,7 +5905,7 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Misc/Language.cpp" line="429"/>
         <source>Dutch- Middle (ca.1050-1350)</source>
-        <translation>Holenderski - Środkowy (ok.1050 - 1350)</translation>
+        <translation>Średnioniderlandzki (ok. 1050-1350)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="430"/>
@@ -5351,12 +5940,12 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Misc/Language.cpp" line="436"/>
         <source>English- Middle (1100-1500)</source>
-        <translation>Angielski - Środkowy (ok.1100 - 1500)</translation>
+        <translation>Średnioangielski (1100-1500)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="437"/>
         <source>English- Old (ca.450-1100)</source>
-        <translation>Angielski - Stary (ok.450 - 1100)</translation>
+        <translation>Staroangielski (ok. 450-1100)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="438"/>
@@ -5396,12 +5985,12 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Misc/Language.cpp" line="445"/>
         <source>French- Middle (ca.1400-1600)</source>
-        <translation>Francuski - Środkowy (ok.1400 - 1600)</translation>
+        <translation>Średniofrancuski (ok. 1400-1600)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="446"/>
         <source>French- Old (842-ca.1400)</source>
-        <translation>Francuski - Stary (842 - ok.1400)</translation>
+        <translation>Starofrancuski (842 - ok. 1400)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="447"/>
@@ -5436,12 +6025,12 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Misc/Language.cpp" line="453"/>
         <source>German- Middle High (ca.1050-1500)</source>
-        <translation>Niemiecki - Środkowy Wysoki (ok.1050 - 1500)</translation>
+        <translation>Średnio-wysoko-niemiecki (ok. 1050-1500)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="454"/>
         <source>German- Old High (ca.750-1050)</source>
-        <translation>Niemiecki - Stary Wysoki (ok.750 - 1050)</translation>
+        <translation>Staro-wysoko-niemiecki (ok. 750-1050)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="455"/>
@@ -5476,7 +6065,7 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Misc/Language.cpp" line="461"/>
         <source>Greek- Ancient (to 1453)</source>
-        <translation>Grecki - Starożytny (do roku 1453)</translation>
+        <translation>Starogrecki (do roku 1453)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="462"/>
@@ -5546,7 +6135,7 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Misc/Language.cpp" line="475"/>
         <source>Indo-European languages</source>
-        <translation>Języki Indo - Europejskie</translation>
+        <translation>Języki indoeuropejskie</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="476"/>
@@ -5561,12 +6150,12 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Misc/Language.cpp" line="478"/>
         <source>Irish- Middle (900-1200)</source>
-        <translation>Irlandzki - Środkowy (900 - 1200)</translation>
+        <translation>Średnioirlandzki (900-1200)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="479"/>
         <source>Irish- Old (to 900)</source>
-        <translation>Irlandzki - Stary (do 900)</translation>
+        <translation>Staroirlandzki (do 900)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="480"/>
@@ -6001,7 +6590,7 @@ Czy chcesz zapisać zmiany?</translation>
     <message>
         <location filename="../../Misc/Language.cpp" line="566"/>
         <source>Occitan/Provencal- Old (to 1500)</source>
-        <translation>Oksytański/Prowansalski - Stary (do 1500)</translation>
+        <translation>Staroprowansalski (do 1500)</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="567"/>
@@ -6045,406 +6634,411 @@ Czy chcesz zapisać zmiany?</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="575"/>
-        <source>Persian- Old (ca.600-400 B.C.)</source>
-        <translation>Perski - Stary (600 - 400 p.n.e.)</translation>
+        <source>Paraguayan Guaraní</source>
+        <translation>Paragwajski Guaraní</translation>
     </message>
     <message>
         <location filename="../../Misc/Language.cpp" line="576"/>
+        <source>Persian- Old (ca.600-400 B.C.)</source>
+        <translation>Staroperski (ok. 600-400 p.n.e.)</translation>
+    </message>
+    <message>
+        <location filename="../../Misc/Language.cpp" line="577"/>
         <source>Philippine languages</source>
         <translation>Języki filipińskie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="577"/>
+        <location filename="../../Misc/Language.cpp" line="578"/>
         <source>Phoenician</source>
         <translation>Fenicki</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="578"/>
+        <location filename="../../Misc/Language.cpp" line="579"/>
         <source>Pohnpeian</source>
         <translation>Pohnpei</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="579"/>
+        <location filename="../../Misc/Language.cpp" line="580"/>
         <source>Prakrit languages</source>
         <translation>Języki Praktyt</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="580"/>
+        <location filename="../../Misc/Language.cpp" line="581"/>
         <source>Rajasthani</source>
         <translation>Radżastani</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="581"/>
+        <location filename="../../Misc/Language.cpp" line="582"/>
         <source>Rapanui</source>
         <translation>Rapanui</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="582"/>
+        <location filename="../../Misc/Language.cpp" line="583"/>
         <source>Rarotongan, Cook Islands Maori</source>
         <translation>Rarotonga, maoryski Wysp Cooka</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="583"/>
+        <location filename="../../Misc/Language.cpp" line="584"/>
         <source>Reserved for local use</source>
         <translation>Zarezerwowane do użytku lokalnego</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="584"/>
+        <location filename="../../Misc/Language.cpp" line="585"/>
         <source>Romance languages</source>
         <translation>Języki Romańskie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="585"/>
+        <location filename="../../Misc/Language.cpp" line="586"/>
         <source>Romany</source>
         <translation>Romski</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="586"/>
+        <location filename="../../Misc/Language.cpp" line="587"/>
         <source>Salishan languages</source>
         <translation>Języki Salisz</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="587"/>
+        <location filename="../../Misc/Language.cpp" line="588"/>
         <source>Samaritan Aramaic</source>
         <translation>Samarytańsko-Aramejski</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="588"/>
+        <location filename="../../Misc/Language.cpp" line="589"/>
         <source>Sami languages</source>
         <translation>Języki lapońskie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="589"/>
+        <location filename="../../Misc/Language.cpp" line="590"/>
         <source>Sandawe</source>
         <translation>Sandawe</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="590"/>
+        <location filename="../../Misc/Language.cpp" line="591"/>
         <source>Santali</source>
         <translation>Santali</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="591"/>
+        <location filename="../../Misc/Language.cpp" line="592"/>
         <source>Sasak</source>
         <translation>Sasak</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="592"/>
+        <location filename="../../Misc/Language.cpp" line="593"/>
         <source>Scots</source>
         <translation>Szkocki</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="593"/>
+        <location filename="../../Misc/Language.cpp" line="594"/>
         <source>Selkup</source>
         <translation>Selkupski</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="594"/>
+        <location filename="../../Misc/Language.cpp" line="595"/>
         <source>Semitic languages</source>
         <translation>Języki semickie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="595"/>
+        <location filename="../../Misc/Language.cpp" line="596"/>
         <source>Serer</source>
         <translation>Serer</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="596"/>
+        <location filename="../../Misc/Language.cpp" line="597"/>
         <source>Shan</source>
         <translation>Szan</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="597"/>
+        <location filename="../../Misc/Language.cpp" line="598"/>
         <source>Sicilian</source>
         <translation>Sycylijski</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="598"/>
+        <location filename="../../Misc/Language.cpp" line="599"/>
         <source>Sidamo</source>
         <translation>Sidamo</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="599"/>
+        <location filename="../../Misc/Language.cpp" line="600"/>
         <source>Sign Languages</source>
         <translation>Języki migowe</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="600"/>
+        <location filename="../../Misc/Language.cpp" line="601"/>
         <source>Siksika</source>
         <translation>Siksika</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="601"/>
+        <location filename="../../Misc/Language.cpp" line="602"/>
         <source>Sino-Tibetan languages</source>
         <translation>Języki chińsko-tybetańskie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="602"/>
+        <location filename="../../Misc/Language.cpp" line="603"/>
         <source>Siouan languages</source>
         <translation>Języki siouańskie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="603"/>
+        <location filename="../../Misc/Language.cpp" line="604"/>
         <source>Skolt Sami</source>
         <translation>Ugrofiński</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="604"/>
+        <location filename="../../Misc/Language.cpp" line="605"/>
         <source>Slave (Athapascan)</source>
         <translation>Niewolników (Atabasków)</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="605"/>
+        <location filename="../../Misc/Language.cpp" line="606"/>
         <source>Slavic languages</source>
         <translation>Języki słowiańskie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="606"/>
+        <location filename="../../Misc/Language.cpp" line="607"/>
         <source>Sogdian</source>
         <translation>Sogdian</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="607"/>
+        <location filename="../../Misc/Language.cpp" line="608"/>
         <source>Songhai languages</source>
         <translation>Języki songhaj</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="608"/>
+        <location filename="../../Misc/Language.cpp" line="609"/>
         <source>Soninke</source>
         <translation>Soninke</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="609"/>
+        <location filename="../../Misc/Language.cpp" line="610"/>
         <source>Sorbian languages</source>
         <translation>Języki łużyckie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="610"/>
+        <location filename="../../Misc/Language.cpp" line="611"/>
         <source>South American Indian languages</source>
         <translation>Języki Indian Ameryki Południowej</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="611"/>
+        <location filename="../../Misc/Language.cpp" line="612"/>
         <source>Southern Altai</source>
         <translation>Południowoałtajski</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="612"/>
+        <location filename="../../Misc/Language.cpp" line="613"/>
         <source>Southern Sami</source>
         <translation>Południowolapoński</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="613"/>
+        <location filename="../../Misc/Language.cpp" line="614"/>
         <source>Sranan Tongo</source>
         <translation>Sranan tongo</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="614"/>
+        <location filename="../../Misc/Language.cpp" line="615"/>
         <source>Sukuma</source>
         <translation>Sukuma</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="615"/>
+        <location filename="../../Misc/Language.cpp" line="616"/>
         <source>Sumerian</source>
         <translation>Sumeryjski</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="616"/>
+        <location filename="../../Misc/Language.cpp" line="617"/>
         <source>Susu</source>
         <translation>Susu</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="617"/>
+        <location filename="../../Misc/Language.cpp" line="618"/>
         <source>Alsatian, Swiss German, Alemannic</source>
-        <translation>Alzacki, Szwajcarski, Niemiecki, Alemannic</translation>
+        <translation>Gwary alzackie, gwary schwyzertüütsch, dialekt alemański</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="618"/>
+        <location filename="../../Misc/Language.cpp" line="619"/>
         <source>Syriac</source>
         <translation>Syryjski</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="619"/>
+        <location filename="../../Misc/Language.cpp" line="620"/>
         <source>Tai languages</source>
         <translation>Języki tajskie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="620"/>
+        <location filename="../../Misc/Language.cpp" line="621"/>
         <source>Tamashek</source>
         <translation>Tamaszek</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="621"/>
+        <location filename="../../Misc/Language.cpp" line="622"/>
         <source>Tereno</source>
         <translation>Tereno</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="622"/>
+        <location filename="../../Misc/Language.cpp" line="623"/>
         <source>Tetum</source>
         <translation>Tetum</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="623"/>
+        <location filename="../../Misc/Language.cpp" line="624"/>
         <source>Tigre</source>
         <translation>Tigre</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="624"/>
+        <location filename="../../Misc/Language.cpp" line="625"/>
         <source>Timne</source>
         <translation>Timne</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="625"/>
+        <location filename="../../Misc/Language.cpp" line="626"/>
         <source>Tiv</source>
         <translation>Tiw</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="626"/>
+        <location filename="../../Misc/Language.cpp" line="627"/>
         <source>Tlingit</source>
         <translation>Tlingit</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="627"/>
+        <location filename="../../Misc/Language.cpp" line="628"/>
         <source>Tok Pisin</source>
         <translation>Tok pisin</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="628"/>
+        <location filename="../../Misc/Language.cpp" line="629"/>
         <source>Tokelau</source>
         <translation>Tokelau</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="629"/>
+        <location filename="../../Misc/Language.cpp" line="630"/>
         <source>Tonga (Nyasa)</source>
         <translation>Tongijski (Nyasa)</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="630"/>
+        <location filename="../../Misc/Language.cpp" line="631"/>
         <source>Tsimshian</source>
         <translation>Tsimshian</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="631"/>
+        <location filename="../../Misc/Language.cpp" line="632"/>
         <source>Tumbuka</source>
         <translation>Tumbuka</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="632"/>
+        <location filename="../../Misc/Language.cpp" line="633"/>
         <source>Tupi languages</source>
         <translation>Języki tupi</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="633"/>
+        <location filename="../../Misc/Language.cpp" line="634"/>
         <source>Turkish- Ottoman (1500-1928)</source>
-        <translation>Turecki - Otomański (1500 - 1928)</translation>
+        <translation>Osmańskoturecki (1500-1928)</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="634"/>
+        <location filename="../../Misc/Language.cpp" line="635"/>
         <source>Tuvalu</source>
         <translation>Tuvalu</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="635"/>
+        <location filename="../../Misc/Language.cpp" line="636"/>
         <source>Tuvinian</source>
         <translation>Tuwiński</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="636"/>
+        <location filename="../../Misc/Language.cpp" line="637"/>
         <source>Udmurt</source>
         <translation>Udmurcki</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="637"/>
+        <location filename="../../Misc/Language.cpp" line="638"/>
         <source>Ugaritic</source>
         <translation>Ugarycki</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="638"/>
+        <location filename="../../Misc/Language.cpp" line="639"/>
         <source>Umbundu</source>
         <translation>Umbundu</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="639"/>
+        <location filename="../../Misc/Language.cpp" line="640"/>
         <source>Uncoded languages</source>
         <translation>Języki niezakodowane</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="640"/>
+        <location filename="../../Misc/Language.cpp" line="641"/>
         <source>Undetermined</source>
         <translation>Nieokreślony</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="641"/>
+        <location filename="../../Misc/Language.cpp" line="642"/>
         <source>Upper Sorbian</source>
         <translation>Górnołużycki</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="642"/>
+        <location filename="../../Misc/Language.cpp" line="643"/>
         <source>Vai</source>
         <translation>Vai</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="643"/>
+        <location filename="../../Misc/Language.cpp" line="644"/>
         <source>Votic</source>
         <translation>Wotycki</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="644"/>
+        <location filename="../../Misc/Language.cpp" line="645"/>
         <source>Wakashan languages</source>
         <translation>Języki wakaskie</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="645"/>
+        <location filename="../../Misc/Language.cpp" line="646"/>
         <source>Waray</source>
         <translation>Warajski</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="646"/>
+        <location filename="../../Misc/Language.cpp" line="647"/>
         <source>Washo</source>
         <translation>Washo</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="647"/>
+        <location filename="../../Misc/Language.cpp" line="648"/>
         <source>Wolaitta, Wolaytta</source>
         <translation>Wolaitta</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="648"/>
+        <location filename="../../Misc/Language.cpp" line="649"/>
         <source>Yakut</source>
         <translation>Jakucki</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="649"/>
+        <location filename="../../Misc/Language.cpp" line="650"/>
         <source>Yao</source>
         <translation>Yao</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="650"/>
+        <location filename="../../Misc/Language.cpp" line="651"/>
         <source>Yapese</source>
         <translation>Yapese</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="651"/>
+        <location filename="../../Misc/Language.cpp" line="652"/>
         <source>Yupik languages</source>
         <translation>Języki jupik</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="652"/>
+        <location filename="../../Misc/Language.cpp" line="653"/>
         <source>Zande languages</source>
         <translation>Języki zande</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="653"/>
+        <location filename="../../Misc/Language.cpp" line="654"/>
         <source>Zapotec</source>
         <translation>Zapotecki</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="654"/>
+        <location filename="../../Misc/Language.cpp" line="655"/>
         <source>Zenaga</source>
         <translation>Zenaga</translation>
     </message>
     <message>
-        <location filename="../../Misc/Language.cpp" line="655"/>
+        <location filename="../../Misc/Language.cpp" line="656"/>
         <source>Zuni</source>
         <translation>Zuni</translation>
     </message>
@@ -6517,12 +7111,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
         <translation>W dół</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/LinkStylesheets.cpp" line="60"/>
+        <location filename="../../Dialogs/LinkStylesheets.cpp" line="61"/>
         <source>Include</source>
         <translation>Zawiera</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/LinkStylesheets.cpp" line="61"/>
+        <location filename="../../Dialogs/LinkStylesheets.cpp" line="62"/>
         <source>Stylesheet</source>
         <translation>Arkusz stylów</translation>
     </message>
@@ -6545,96 +7139,104 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
         <translation>Filtr:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="65"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="71"/>
         <source>File</source>
         <translation>Plik</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="66"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="72"/>
         <source>Line</source>
         <translation>Linia</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="67"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="73"/>
         <source>ID</source>
         <translation>Identyfikator</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="68"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="74"/>
         <source>Text</source>
         <translation>Tekst</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="69"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="75"/>
         <source>Target File</source>
         <translation>Plik docelowy</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="70"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="76"/>
         <source>Target ID</source>
         <translation>Identyfikator celu</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="71"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="77"/>
         <source>Target Exists?</source>
         <translation>Cel istnieje?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="72"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="78"/>
         <source>Target Text</source>
         <translation>Tekst celu</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="73"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="79"/>
         <source>Target&apos;s Target File</source>
         <translation>Plik docelowy celu</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="74"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="80"/>
         <source>Target&apos;s Target ID</source>
         <translation>Docelowy identyfikator celu</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="75"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="81"/>
         <source>Match?</source>
         <translation>Zgodne?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="81"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="87"/>
         <source>Report shows all source and target links using the anchor tag &quot;a&quot;.</source>
         <translation>Raport pokazuje wszystkie źródłowe i docelowe łącza wykorzystujące tag kotwicy &quot;a&quot;.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="150"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="159"/>
         <source>n/a</source>
         <translation>nd.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="153"/>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="221"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="163"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="231"/>
         <source>no</source>
         <translation>nie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="160"/>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="223"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="173"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="233"/>
         <source>yes</source>
         <translation>tak</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="337"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="352"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Zapisz raport jako plik CSV (wartości rozdzielone przecinkiem)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="350"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="366"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="350"/>
+        <location filename="../../Dialogs/ReportsWidgets/LinksWidget.cpp" line="366"/>
         <source>Cannot save report file.</source>
         <translation>Nie można zapisać pliku raportu.</translation>
+    </message>
+</context>
+<context>
+    <name>ListSelector</name>
+    <message>
+        <location filename="../../Dialogs/ListSelector.h" line="48"/>
+        <source>View selected</source>
+        <translation>Podgląd wybranego elementu</translation>
     </message>
 </context>
 <context>
@@ -6655,203 +7257,266 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
         <translation>&amp;Dodaj</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="88"/>
-        <source>&amp;Edit</source>
-        <translation>&amp;Edycja</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="92"/>
-        <source>C&amp;hange Case</source>
-        <translation>&amp;Wielkość liter</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="117"/>
-        <source>&amp;Insert</source>
-        <translation>&amp;Wstaw</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="121"/>
-        <source>Cli&amp;p</source>
-        <translation>Wycine&amp;k</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="158"/>
-        <source>&amp;Help</source>
-        <translation>Pomo&amp;c</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="168"/>
-        <source>For&amp;mat</source>
-        <translation>For&amp;matuj</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="172"/>
-        <source>&amp;Heading</source>
-        <translation>&amp;Nagłówek</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="213"/>
-        <source>&amp;View</source>
-        <translation>W&amp;idok</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="217"/>
-        <source>&amp;Toolbars</source>
-        <translation>&amp;Paski narzędzi</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="232"/>
-        <source>&amp;Search</source>
-        <translation>&amp;Szukaj</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="236"/>
-        <source>Current Fil&amp;e</source>
-        <translation>Aktualny pli&amp;k</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="268"/>
-        <source>&amp;Window</source>
-        <translation>&amp;Okno</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="280"/>
-        <source>&amp;Tools</source>
-        <translation>&amp;Narzędzia</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="284"/>
-        <source>&amp;Table Of Contents</source>
-        <translation>Spis &amp;treści</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="292"/>
-        <source>Spe&amp;llcheck</source>
-        <translation>&amp;Sprawdzanie pisowni</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="306"/>
-        <source>&amp;Index</source>
-        <translation>&amp;Indeks</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="317"/>
-        <source>Re&amp;format HTML</source>
-        <translation>Ponownie &amp;formatuj HTML</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="324"/>
-        <source>Epub&amp;3 Tools</source>
-        <translation>Narzędzia EPUB&amp;3</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="349"/>
-        <source>Plugins</source>
-        <translation>Wtyczki</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="367"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="573"/>
-        <source>File</source>
-        <translation>Plik</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="382"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="312"/>
-        <source>Edit</source>
-        <translation>Edytujące</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="401"/>
-        <source>View</source>
-        <translation>Widok</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="414"/>
-        <source>Insert</source>
-        <translation>Wstaw</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="431"/>
-        <source>Back</source>
-        <translation>Wstecz</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="443"/>
-        <source>Donate</source>
-        <translation>Wspomóż</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="455"/>
-        <source>Tools</source>
-        <translation>Narzędzia</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="477"/>
-        <source>Heading</source>
-        <translation>Nagłówek</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="495"/>
-        <source>Format</source>
-        <translation>Formatuj</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="512"/>
-        <source>Align</source>
-        <translation>Wyrównanie</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="527"/>
-        <source>List</source>
-        <translation>Lista</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="540"/>
-        <source>Indent</source>
-        <translation>Wcięcie</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="553"/>
-        <source>Change Case</source>
-        <translation>Wielkość liter</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="568"/>
-        <source>Text Direction</source>
-        <translation>Kierunek tekstu</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="582"/>
-        <source>Clip Bar</source>
-        <translation>Belka narzędziowa Wycinków</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="617"/>
+        <location filename="../../Form_Files/main.ui" line="72"/>
         <source>&amp;New</source>
         <translation>&amp;Nowy</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="620"/>
-        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new book.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Nowa&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Utwórz nową książkę.&lt;/p&gt;</translation>
+        <location filename="../../Form_Files/main.ui" line="96"/>
+        <source>&amp;Edit</source>
+        <translation>&amp;Edycja</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="625"/>
+        <location filename="../../Form_Files/main.ui" line="100"/>
+        <source>C&amp;hange Case</source>
+        <translation>&amp;Wielkość liter</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="125"/>
+        <source>&amp;Insert</source>
+        <translation>&amp;Wstaw</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="129"/>
+        <source>Cli&amp;p</source>
+        <translation>Wycine&amp;k</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="154"/>
+        <source>Cli&amp;p2</source>
+        <translation>Wy&amp;cinek2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="192"/>
+        <source>&amp;Help</source>
+        <translation>Pomo&amp;c</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="202"/>
+        <source>For&amp;mat</source>
+        <translation>For&amp;matuj</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="206"/>
+        <source>&amp;Heading</source>
+        <translation>&amp;Nagłówek</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="246"/>
+        <source>&amp;View</source>
+        <translation>W&amp;idok</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="250"/>
+        <source>&amp;Toolbars</source>
+        <translation>&amp;Paski narzędzi</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="262"/>
+        <source>&amp;Search</source>
+        <translation>&amp;Szukaj</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="266"/>
+        <source>Current Fil&amp;e</source>
+        <translation>Aktualny pli&amp;k</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="298"/>
+        <source>&amp;Window</source>
+        <translation>&amp;Okno</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="310"/>
+        <source>&amp;Tools</source>
+        <translation>&amp;Narzędzia</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="314"/>
+        <source>&amp;Table Of Contents</source>
+        <translation>Spis &amp;treści</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="322"/>
+        <source>Spe&amp;llcheck</source>
+        <translation>&amp;Sprawdzanie pisowni</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="336"/>
+        <source>&amp;Index</source>
+        <translation>&amp;Indeks</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="347"/>
+        <source>Re&amp;format HTML</source>
+        <translation>Ponownie &amp;formatuj HTML</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="354"/>
+        <source>Epub&amp;3 Tools</source>
+        <translation>Narzędzia EPUB&amp;3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="382"/>
+        <source>Plugins</source>
+        <translation>Wtyczki</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="388"/>
+        <location filename="../../Form_Files/main.ui" line="427"/>
+        <source>Checkpoints</source>
+        <translation>Punkty kontrolne</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="411"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1140"/>
+        <source>File</source>
+        <translation>Plik</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="442"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="379"/>
+        <source>Edit</source>
+        <translation>Edycja</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="463"/>
+        <source>Insert</source>
+        <translation>Wstaw</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="480"/>
+        <source>Back</source>
+        <translation>Wstecz</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="492"/>
+        <source>Donate</source>
+        <translation>Wspomóż</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="504"/>
+        <source>Tools</source>
+        <translation>Narzędzia</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="518"/>
+        <source>Plugins Set 1</source>
+        <translation>Wtyczki zestaw 1</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="534"/>
+        <source>Plugins Set 2</source>
+        <translation>Wtyczki zestaw 2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="550"/>
+        <source>Heading</source>
+        <translation>Nagłówek</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="564"/>
+        <source>set Heading Level of Selected Text</source>
+        <translation>Ustaw poziom nagłówka</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="577"/>
+        <source>Format</source>
+        <translation>Formatuj</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="594"/>
+        <source>Align</source>
+        <translation>Wyrównanie</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="609"/>
+        <source>List</source>
+        <translation>Lista</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="622"/>
+        <source>Indent</source>
+        <translation>Wcięcie</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="635"/>
+        <source>Change Case</source>
+        <translation>Wielkość liter</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="649"/>
+        <source>set Case of Selected Text</source>
+        <translation>Ustaw wielkość liter</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="659"/>
+        <source>Text Direction</source>
+        <translation>Kierunek tekstu</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="673"/>
+        <source>Clip Bar</source>
+        <translation>Wycinki zestaw 1</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="704"/>
+        <source>Clip Bar2</source>
+        <translation>Wycinki zestaw 2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="740"/>
+        <source>New Default</source>
+        <translation>Nowy domyślny</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="743"/>
+        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new default book.&lt;/p&gt;</source>
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Nowy&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Tworzy nowy dokument EPUB.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="748"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="634"/>
+        <location filename="../../Form_Files/main.ui" line="758"/>
+        <source>ePub&amp;2</source>
+        <translation>ePub&amp;2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="761"/>
+        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New ePub2&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new ePub2 book.&lt;/p&gt;</source>
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Nowy ePub2&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Tworzy nowy dokument ePub2.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="773"/>
+        <source>ePub&amp;3</source>
+        <translation>ePub&amp;3</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="776"/>
+        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;New ePub3&lt;/b&gt;&lt;/p&gt;
+
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a new ePub3 book.&lt;/p&gt;</source>
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Nowy ePub3&lt;/b&gt;&lt;/p&gt;
+Tworzy nowy dokument ePub3.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="788"/>
         <source>&amp;Save</source>
         <translation>Zapi&amp;sz</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="637"/>
+        <location filename="../../Form_Files/main.ui" line="791"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Save&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Save the current book.&lt;/p&gt;</source>
@@ -6860,17 +7525,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Zapisuje bieżącą książkę.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="642"/>
+        <location filename="../../Form_Files/main.ui" line="796"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="647"/>
+        <location filename="../../Form_Files/main.ui" line="801"/>
         <source>Save &amp;As...</source>
         <translation>Zapisz j&amp;ako...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="650"/>
+        <location filename="../../Form_Files/main.ui" line="804"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Save As&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Save the current book with a different filename.&lt;/p&gt;</source>
@@ -6879,27 +7544,27 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Zapisuje bieżącą książkę pod inną nazwą.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="655"/>
+        <location filename="../../Form_Files/main.ui" line="809"/>
         <source>Ctrl+Shift+S</source>
         <translation>Ctrl+Shift+S</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="660"/>
+        <location filename="../../Form_Files/main.ui" line="814"/>
         <source>Save A &amp;Copy...</source>
         <translation>Zapisz j&amp;ako kopię...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="663"/>
+        <location filename="../../Form_Files/main.ui" line="817"/>
         <source>Save a copy of your book to another file name.</source>
         <translation>Zapisuje kopię twojej książki pod inną nazwą.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="672"/>
+        <location filename="../../Form_Files/main.ui" line="826"/>
         <source>Cu&amp;t</source>
         <translation>Wy&amp;tnij</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="675"/>
+        <location filename="../../Form_Files/main.ui" line="829"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Cut&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Cuts the selected text from the document and puts it on the clipboard.&lt;/p&gt;</source>
@@ -6908,12 +7573,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wycina zaznaczony tekst z dokumentu i  umieszcza go w schowku.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="686"/>
+        <location filename="../../Form_Files/main.ui" line="840"/>
         <source>&amp;Paste</source>
         <translation>Wkle&amp;j</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="689"/>
+        <location filename="../../Form_Files/main.ui" line="843"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Paste&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Pastes the content from the clipboard into the book.&lt;/p&gt;</source>
@@ -6922,27 +7587,27 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wkleja zawartość schowka do książki.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="696"/>
+        <location filename="../../Form_Files/main.ui" line="850"/>
         <source>&amp;Closing Tag</source>
-        <translation>Za&amp;mknij tag</translation>
+        <translation>Tag za&amp;mykający</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="699"/>
+        <location filename="../../Form_Files/main.ui" line="853"/>
         <source>Insert a closing tag in Code View.</source>
         <translation>Wstawia tag zamykający w Widoku Kodu.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="702"/>
+        <location filename="../../Form_Files/main.ui" line="856"/>
         <source>Ctrl+.</source>
         <translation>Ctrl+.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="711"/>
+        <location filename="../../Form_Files/main.ui" line="865"/>
         <source>&amp;Undo</source>
         <translation>Cofn&amp;ij</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="714"/>
+        <location filename="../../Form_Files/main.ui" line="868"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Undo&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Reverts the changes of the previous operation.&lt;/p&gt;</source>
@@ -6951,17 +7616,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wycofuje zmiany wykonane przez poprzednią operację.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="719"/>
+        <location filename="../../Form_Files/main.ui" line="873"/>
         <source>Ctrl+Z</source>
         <translation>Ctrl+Z</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="728"/>
+        <location filename="../../Form_Files/main.ui" line="882"/>
         <source>&amp;Redo</source>
         <translation>Ponó&amp;w</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="731"/>
+        <location filename="../../Form_Files/main.ui" line="885"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Redo&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Restores the changes reverted by the previous Undo action.&lt;/p&gt;</source>
@@ -6970,17 +7635,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Ponawia zmiany wycofane akcją Cofnij&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="736"/>
+        <location filename="../../Form_Files/main.ui" line="890"/>
         <source>Ctrl+Y</source>
         <translation>Ctrl+Y</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="745"/>
+        <location filename="../../Form_Files/main.ui" line="899"/>
         <source>&amp;Copy</source>
         <translation>K&amp;opiuj</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="748"/>
+        <location filename="../../Form_Files/main.ui" line="902"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Copy&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Copies the selected text and puts it on the clipboard.&lt;/p&gt;</source>
@@ -6989,40 +7654,40 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Kopiuje zaznaczony tekst i umieszcza go w schowku.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="762"/>
+        <location filename="../../Form_Files/main.ui" line="916"/>
         <source>Align &amp;Left</source>
         <translation>Wyrównaj do &amp;lewej</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="765"/>
+        <location filename="../../Form_Files/main.ui" line="919"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Align Left&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Align the paragraph to the left.&lt;/p&gt;</source>
         <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Wyrównaj do lewej&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wyrównanie akapitu do lewej strony.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wyrównuje akapit do lewej strony.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="779"/>
+        <location filename="../../Form_Files/main.ui" line="933"/>
         <source>Align &amp;Right</source>
         <translation>Wyrównaj do p&amp;rawej</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="782"/>
+        <location filename="../../Form_Files/main.ui" line="936"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Align Right&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Align the paragraph to the right.&lt;/p&gt;</source>
         <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Wyrównaj do prawej&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wyrównanie akapitu do prawej strony.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wyrównuje akapit do prawej strony.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="796"/>
+        <location filename="../../Form_Files/main.ui" line="950"/>
         <source>&amp;Center</source>
         <translation>&amp;Wyśrodkuj</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="799"/>
+        <location filename="../../Form_Files/main.ui" line="953"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Center&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Center the paragraph.&lt;/p&gt;</source>
@@ -7031,17 +7696,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wyśrodkowuje akapit w poziomie.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="804"/>
+        <location filename="../../Form_Files/main.ui" line="958"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="816"/>
+        <location filename="../../Form_Files/main.ui" line="970"/>
         <source>&amp;Justify</source>
         <translation>Wy&amp;justuj</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="819"/>
+        <location filename="../../Form_Files/main.ui" line="973"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Justify&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Align the paragraph to both the left and right margins.&lt;/p&gt;</source>
@@ -7050,17 +7715,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wyrównuje akapit do lewego i prawego marginesu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="824"/>
+        <location filename="../../Form_Files/main.ui" line="978"/>
         <source>Ctrl+J</source>
         <translation>Ctrl+J</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="836"/>
+        <location filename="../../Form_Files/main.ui" line="990"/>
         <source>&amp;Bold</source>
         <translation>Pogru&amp;bienie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="839"/>
+        <location filename="../../Form_Files/main.ui" line="993"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Bold&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Make the selected text bold.&lt;/p&gt;</source>
@@ -7069,17 +7734,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Pogrubia zaznaczony tekst.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="844"/>
+        <location filename="../../Form_Files/main.ui" line="998"/>
         <source>Ctrl+B</source>
         <translation>Ctrl+B</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="856"/>
+        <location filename="../../Form_Files/main.ui" line="1010"/>
         <source>&amp;Italic</source>
         <translation>Pochylen&amp;ie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="859"/>
+        <location filename="../../Form_Files/main.ui" line="1013"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Italic&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Make the selected text italic.&lt;/p&gt;</source>
@@ -7088,17 +7753,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Pochyla zaznaczony tekst.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="864"/>
+        <location filename="../../Form_Files/main.ui" line="1018"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="873"/>
+        <location filename="../../Form_Files/main.ui" line="1027"/>
         <source>&amp;Open...</source>
         <translation>&amp;Otwórz...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="876"/>
+        <location filename="../../Form_Files/main.ui" line="1030"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Open&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Open a book from disk.&lt;/p&gt;</source>
@@ -7107,17 +7772,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Otwiera plik z dysku.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="881"/>
+        <location filename="../../Form_Files/main.ui" line="1035"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="893"/>
+        <location filename="../../Form_Files/main.ui" line="1047"/>
         <source>&amp;Underline</source>
         <translation>Podkreś&amp;lenie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="896"/>
+        <location filename="../../Form_Files/main.ui" line="1050"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Underline&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Underline the selected text.&lt;/p&gt;</source>
@@ -7126,42 +7791,42 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Podkreśla zaznaczony tekst.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="901"/>
+        <location filename="../../Form_Files/main.ui" line="1055"/>
         <source>Ctrl+U</source>
         <translation>Ctrl+U</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="910"/>
+        <location filename="../../Form_Files/main.ui" line="1067"/>
         <source>&amp;Quit</source>
         <translation>&amp;Zakończ</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="913"/>
+        <location filename="../../Form_Files/main.ui" line="1070"/>
         <source>Exit</source>
         <translation>Wyjście</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="916"/>
+        <location filename="../../Form_Files/main.ui" line="1073"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="925"/>
+        <location filename="../../Form_Files/main.ui" line="1085"/>
         <source>&amp;About...</source>
-        <translation>&amp;O...</translation>
+        <translation>&amp;O programie...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="928"/>
+        <location filename="../../Form_Files/main.ui" line="1088"/>
         <source>Show information about Sigil.</source>
         <translation>Pokazuje informacje o Sigilu.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="933"/>
+        <location filename="../../Form_Files/main.ui" line="1093"/>
         <source>Add &amp;Cover...</source>
         <translation>Dodaj &amp;okładkę...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="936"/>
+        <location filename="../../Form_Files/main.ui" line="1096"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Add Cover&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Add a cover.&lt;/p&gt;</source>
@@ -7170,107 +7835,64 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Dodaje okładkę do książki.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="947"/>
+        <location filename="../../Form_Files/main.ui" line="1107"/>
         <source>&amp;Metadata Editor...</source>
         <translation>Edytor &amp;metadanych...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="950"/>
+        <location filename="../../Form_Files/main.ui" line="1110"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Metadata Editor&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edit and display information about your book including the author and title.&lt;/p&gt;</source>
         <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Edytor metadanych&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edytuje i pokazuje informację o książce, jej autorze i tytule.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edytuje i pokazuje informacje o książce, jej autorze i tytule.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="955"/>
+        <location filename="../../Form_Files/main.ui" line="1115"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="964"/>
+        <location filename="../../Form_Files/main.ui" line="1124"/>
         <source>&amp;Generate Table Of Contents...</source>
-        <translation>Wygeneruj &amp;Spis treści...</translation>
+        <translation>Wygeneruj &amp;spis treści...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="967"/>
+        <location filename="../../Form_Files/main.ui" line="1127"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Generate Table of Contents&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Generate a new Table of Contents from headings in your book.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Wygeneruj Spis treści&lt;/b&gt;&lt;/p&gt;
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Wygeneruj spis treści&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Tworzy nowy Spis treści z odpowiednich nagłówków w twojej książce.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Tworzy nowy spis treści z odpowiednich nagłówków w twojej książce.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="972"/>
+        <location filename="../../Form_Files/main.ui" line="1132"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="977"/>
+        <location filename="../../Form_Files/main.ui" line="1137"/>
         <source>&amp;Edit Table Of Contents...</source>
-        <translation>&amp;Edytuj Spis treści...</translation>
+        <translation>&amp;Edytuj spis treści...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="980"/>
+        <location filename="../../Form_Files/main.ui" line="1140"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Edit Table of Contents&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Directly edit the existing Table of Contents.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Edytuj Spis treści&lt;/b&gt;&lt;/p&gt;
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Edytuj spis treści&lt;/b&gt;&lt;/p&gt;
 
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Bezpośrednio edytuje istniejący Spis treści.&lt;/p&gt;</translation>
+&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Bezpośrednio edytuje istniejący spis treści.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="994"/>
-        <source>&amp;Book View</source>
-        <translation>&amp;Widok Książki</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="997"/>
-        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Book View&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edit and display the files in your book as they will appear to readers.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Widok Książki&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edycja i widok plików książki, tak jak widzą je czytający.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1011"/>
-        <source>&amp;Code View</source>
-        <translation>Widok &amp;Kodu</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1014"/>
-        <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Code View&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edit and display the actual contents of the files in your book, including the formatting codes that control how your book will appear to readers.&lt;/p&gt;</source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Widok Kodu&lt;/b&gt;&lt;/p&gt;
-
-&lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Edycja i widok rzeczywistej zawartości plików książki, w tym kody formatujące, które kontrolują to jak widzą je czytający.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1021"/>
-        <source>&amp;Toggle View State</source>
-        <translation>Przełącz wido&amp;k</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1024"/>
-        <source>Toggle Book View to Code View or Code View to Book View</source>
-        <translation>Przełącza z Widoku Książki do Widoku Kodu lub z Widoku Kodu do Widoku Książki</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1027"/>
-        <source>F2</source>
-        <translation>F2</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1036"/>
+        <location filename="../../Form_Files/main.ui" line="1151"/>
         <source>&amp;Split At Cursor</source>
         <translation>Podziel w miej&amp;scu kursora</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1039"/>
+        <location filename="../../Form_Files/main.ui" line="1154"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Split At Cursor&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Split the current file into two files using your cursor location as the dividing point.&lt;/p&gt;</source>
@@ -7281,17 +7903,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1044"/>
+        <location filename="../../Form_Files/main.ui" line="1159"/>
         <source>Ctrl+Return</source>
         <translation>Ctrl+Enter</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1053"/>
+        <location filename="../../Form_Files/main.ui" line="1168"/>
         <source>&amp;File...</source>
         <translation>&amp;Plik...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1056"/>
+        <location filename="../../Form_Files/main.ui" line="1171"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Insert File&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Select image, video or audio files from your book to insert into the text.&lt;/p&gt;
@@ -7304,17 +7926,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Możesz dodać pliki do książki, korzystając z menu Plik - Dodaj - Istniejące pliki.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1063"/>
+        <location filename="../../Form_Files/main.ui" line="1178"/>
         <source>Ctrl+Shift+I</source>
         <translation>Ctrl+Shift+I</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1072"/>
+        <location filename="../../Form_Files/main.ui" line="1187"/>
         <source>&amp;Special Character...</source>
         <translation>Znak &amp;specjalny...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1075"/>
+        <location filename="../../Form_Files/main.ui" line="1190"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Insert Special Character&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Select a character to insert into your text.&lt;/p&gt;</source>
@@ -7323,12 +7945,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wstawia znaki specjalne do tekstu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1086"/>
+        <location filename="../../Form_Files/main.ui" line="1201"/>
         <source>I&amp;D...</source>
-        <translation>I&amp;dentyfikator...</translation>
+        <translation>&amp;Identyfikator...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1089"/>
+        <location filename="../../Form_Files/main.ui" line="1204"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Insert ID&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Insert or edit an anchor with an ID name to use as a link target.&lt;/p&gt;</source>
@@ -7337,12 +7959,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wstawia lub edytuje nazwę identyfikatora zakotwiczenia, by móc wybrać ją jako cel łącza.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1100"/>
+        <location filename="../../Form_Files/main.ui" line="1215"/>
         <source>&amp;Link...</source>
         <translation>Łąc&amp;ze...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1103"/>
+        <location filename="../../Form_Files/main.ui" line="1218"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Insert Link&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Insert or edit an anchor with a hyperlink to a target.&lt;/p&gt;</source>
@@ -7351,12 +7973,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wstawia lub edytuje zakotwiczenie dla celu hiperłącza.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1117"/>
+        <location filename="../../Form_Files/main.ui" line="1232"/>
         <source>&amp;Numbered List</source>
         <translation>Lista &amp;numerowana</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1120"/>
+        <location filename="../../Form_Files/main.ui" line="1235"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Numbering&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a numbered list.&lt;/p&gt;</source>
@@ -7365,12 +7987,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Tworzy listę numerowaną.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1134"/>
+        <location filename="../../Form_Files/main.ui" line="1249"/>
         <source>Bulle&amp;ted List</source>
         <translation>Wypunk&amp;towanie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1137"/>
+        <location filename="../../Form_Files/main.ui" line="1252"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Bullets&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Create a bulleted list.&lt;/p&gt;</source>
@@ -7379,17 +8001,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Tworzy listę wypunktowaną.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1142"/>
+        <location filename="../../Form_Files/main.ui" line="1257"/>
         <source>Ctrl+Shift+L</source>
         <translation>Ctrl+Shift+L</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1154"/>
+        <location filename="../../Form_Files/main.ui" line="1269"/>
         <source>Stri&amp;kethrough</source>
         <translation>Prze&amp;kreślenie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1157"/>
+        <location filename="../../Form_Files/main.ui" line="1272"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Strikethrough&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Draw a line through the selected text.&lt;/p&gt;</source>
@@ -7398,12 +8020,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Przekreśla poziomą linią zaznaczony tekst.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1171"/>
+        <location filename="../../Form_Files/main.ui" line="1286"/>
         <source>&amp;Subscript</source>
         <translation>Indeks &amp;dolny</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1174"/>
+        <location filename="../../Form_Files/main.ui" line="1289"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Subscript&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Set the selected text slightly smaller and below the normal line.&lt;/p&gt;</source>
@@ -7412,12 +8034,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Ustawia zaznaczony tekst jako indeks dolny normalnego tekstu&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1188"/>
+        <location filename="../../Form_Files/main.ui" line="1303"/>
         <source>Su&amp;perscript</source>
         <translation>Indeks &amp;górny</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1191"/>
+        <location filename="../../Form_Files/main.ui" line="1306"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Superscript&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Set the selected text slightly smaller and above the normal line.&lt;/p&gt;</source>
@@ -7426,93 +8048,88 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Ustawia zaznaczony tekst jako indeks górny normalnego tekstu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1202"/>
+        <location filename="../../Form_Files/main.ui" line="1317"/>
         <source>&amp;Print...</source>
         <translation>Dr&amp;ukuj...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1205"/>
+        <location filename="../../Form_Files/main.ui" line="1320"/>
         <source>Print</source>
         <translation>Drukuj</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1208"/>
+        <location filename="../../Form_Files/main.ui" line="1323"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1217"/>
+        <location filename="../../Form_Files/main.ui" line="1332"/>
         <source>Print Pre&amp;view...</source>
         <translation>Podgląd &amp;wydruku...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1220"/>
+        <location filename="../../Form_Files/main.ui" line="1335"/>
         <source>Print Preview</source>
         <translation>Podgląd wydruku</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1225"/>
-        <location filename="../../Form_Files/main.ui" line="1228"/>
+        <location filename="../../Form_Files/main.ui" line="1340"/>
+        <location filename="../../Form_Files/main.ui" line="1343"/>
         <source>Close</source>
         <translation>Zamknij</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1231"/>
+        <location filename="../../Form_Files/main.ui" line="1346"/>
         <source>Ctrl+Shift+W</source>
         <translation>Ctrl+Shift+W</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1240"/>
+        <location filename="../../Form_Files/main.ui" line="1351"/>
+        <source>Restructure Epub to Sigil Norm</source>
+        <translation>Zmień strukturę folderów zgodnie z normami Sigila</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="1354"/>
+        <source>Restructure Epub to Sigil Standard Form</source>
+        <translation>Zmienia strukturę folderów w pliku EPUB zgodnie z domyślnym nazewnictwem Sigila</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="1363"/>
         <source>Zoom &amp;In</source>
         <translation>Pow&amp;iększ</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1243"/>
+        <location filename="../../Form_Files/main.ui" line="1366"/>
         <source>Zoom In</source>
         <translation>Powiększ</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1246"/>
+        <location filename="../../Form_Files/main.ui" line="1369"/>
         <source>Ctrl+=</source>
         <translation>Ctrl+=</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1255"/>
+        <location filename="../../Form_Files/main.ui" line="1378"/>
         <source>Zoom &amp;Out</source>
         <translation>P&amp;omniejsz</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1258"/>
+        <location filename="../../Form_Files/main.ui" line="1381"/>
         <source>Zoom Out</source>
         <translation>Pomniejsz</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1261"/>
+        <location filename="../../Form_Files/main.ui" line="1384"/>
         <source>Ctrl+-</source>
         <translation>Ctrl+-</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1266"/>
-        <source>Sho&amp;w Tag</source>
-        <translation>Pok&amp;aż tag</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1269"/>
-        <source>Show the enclosing tag HTML for the cursor position in Book View.</source>
-        <translation>Pokaż niezamknięte tagi HTML na pozycji kursora w Widoku Książki.</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1272"/>
-        <source>Ctrl+Alt+T</source>
-        <translation>Ctrl+Alt+T</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/main.ui" line="1281"/>
+        <location filename="../../Form_Files/main.ui" line="1393"/>
         <source>&amp;Find &amp;&amp; Replace...</source>
         <translation>&amp;Znajdź &amp;&amp; Zastąp...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1284"/>
+        <location filename="../../Form_Files/main.ui" line="1396"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Find &amp;amp; Replace&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Find and replace text in the document.&lt;/p&gt;</source>
@@ -7521,17 +8138,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Szuka i zastępuje tekst w dokumencie.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1289"/>
+        <location filename="../../Form_Files/main.ui" line="1401"/>
         <source>Ctrl+F</source>
         <translation>Ctrl+F</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1298"/>
+        <location filename="../../Form_Files/main.ui" line="1410"/>
         <source>Incre&amp;ase Indent</source>
         <translation>Zwię&amp;ksz wcięcie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1301"/>
+        <location filename="../../Form_Files/main.ui" line="1413"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Increase Indent&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Increase the indent level of the paragraph.&lt;/p&gt;</source>
@@ -7540,17 +8157,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Zwiększa wcięcie akapitu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1306"/>
+        <location filename="../../Form_Files/main.ui" line="1418"/>
         <source>Ctrl+Alt+M</source>
         <translation>Ctrl+Alt+M</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1315"/>
+        <location filename="../../Form_Files/main.ui" line="1427"/>
         <source>&amp;Decrease Indent</source>
         <translation>Zmniejsz wc&amp;ięcie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1318"/>
+        <location filename="../../Form_Files/main.ui" line="1430"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Decrease Indent&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Decrease the indent level of the paragraph.&lt;/p&gt;</source>
@@ -7559,18 +8176,18 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Zmniejsza wcięcie akapitu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1323"/>
-        <location filename="../../Form_Files/main.ui" line="1734"/>
+        <location filename="../../Form_Files/main.ui" line="1435"/>
+        <location filename="../../Form_Files/main.ui" line="1846"/>
         <source>Ctrl+Shift+M</source>
         <translation>Ctrl+Shift+M</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1332"/>
+        <location filename="../../Form_Files/main.ui" line="1444"/>
         <source>Te&amp;xt Direction LTR</source>
         <translation>Kierunek tek&amp;stu L-D-P</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1335"/>
+        <location filename="../../Form_Files/main.ui" line="1447"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Left-to-Right&lt;/b&gt;&lt;/p&gt;
 
@@ -7583,12 +8200,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1348"/>
+        <location filename="../../Form_Files/main.ui" line="1460"/>
         <source>T&amp;ext Direction RTL</source>
         <translation>Ki&amp;erunek tekstu P-D-L</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1351"/>
+        <location filename="../../Form_Files/main.ui" line="1463"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Right-to-Left&lt;/b&gt;&lt;/p&gt;
 
@@ -7600,12 +8217,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Ustawia w akapicie kierunek pisania tekstu od prawej do lewej.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1364"/>
+        <location filename="../../Form_Files/main.ui" line="1476"/>
         <source>Text Directi&amp;on Default</source>
         <translation>D&amp;omyślny kierunek tekstu</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1367"/>
+        <location filename="../../Form_Files/main.ui" line="1479"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Default&lt;/b&gt;&lt;/p&gt;
 
@@ -7617,45 +8234,45 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Ustawia w akapicie kierunek pisania tekstu na domyślny.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1376"/>
+        <location filename="../../Form_Files/main.ui" line="1488"/>
         <source>Remove &amp;Formatting</source>
         <translation>Usuń &amp;formatowanie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1379"/>
+        <location filename="../../Form_Files/main.ui" line="1491"/>
         <source>Ctrl+Space</source>
         <translation>Ctrl+Space</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1388"/>
+        <location filename="../../Form_Files/main.ui" line="1500"/>
         <source>&amp;Lowercase</source>
         <translation>&amp;małe litery</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1391"/>
+        <location filename="../../Form_Files/main.ui" line="1503"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Lowercase&lt;/b&gt;&lt;/p&gt;
 
      &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Set selected text to lowercase.&lt;/p&gt;
     </source>
         <translation>
-&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Małe litery&lt;/b&gt;&lt;/p&gt;
+&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;małe litery&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Zaznaczony tekst zmienia na zapisany małymi literami.&lt;/p&gt;
 </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1398"/>
+        <location filename="../../Form_Files/main.ui" line="1510"/>
         <source>Alt+L</source>
         <translation>Alt+L</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1407"/>
+        <location filename="../../Form_Files/main.ui" line="1519"/>
         <source>&amp;Uppercase</source>
         <translation>&amp;WIELKIE LITERY</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1410"/>
+        <location filename="../../Form_Files/main.ui" line="1522"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Uppercase&lt;/b&gt;&lt;/p&gt;
 
@@ -7668,17 +8285,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1417"/>
+        <location filename="../../Form_Files/main.ui" line="1529"/>
         <source>Alt+U</source>
         <translation>Alt+U</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1426"/>
+        <location filename="../../Form_Files/main.ui" line="1538"/>
         <source>&amp;Titlecase</source>
         <translation>Jak &amp;Nazwy Własne</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1429"/>
+        <location filename="../../Form_Files/main.ui" line="1541"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Titlecase&lt;/b&gt;&lt;/p&gt;
 
@@ -7691,12 +8308,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1442"/>
+        <location filename="../../Form_Files/main.ui" line="1554"/>
         <source>&amp;Capitalize</source>
-        <translation>&amp;Wielka litera</translation>
+        <translation>Jak w &amp;zdaniu</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1445"/>
+        <location filename="../../Form_Files/main.ui" line="1557"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Capitalize&lt;/b&gt;&lt;/p&gt;
 
@@ -7709,127 +8326,127 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1454"/>
+        <location filename="../../Form_Files/main.ui" line="1566"/>
         <source>Sigil Website...</source>
         <translation>Strona domowa Sigila...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1459"/>
+        <location filename="../../Form_Files/main.ui" line="1571"/>
         <source>&amp;Next Tab</source>
         <translation>&amp;Następna zakładka</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1462"/>
+        <location filename="../../Form_Files/main.ui" line="1574"/>
         <source>Ctrl+PgUp</source>
         <translation>Ctrl+PgUp</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1467"/>
+        <location filename="../../Form_Files/main.ui" line="1579"/>
         <source>&amp;Previous Tab</source>
         <translation>&amp;Poprzednia zakładka</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1470"/>
+        <location filename="../../Form_Files/main.ui" line="1582"/>
         <source>Ctrl+PgDown</source>
         <translation>Ctrl+PgDown</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1475"/>
+        <location filename="../../Form_Files/main.ui" line="1587"/>
         <source>&amp;Close Tab</source>
         <translation>&amp;Zamknij zakładkę</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1478"/>
+        <location filename="../../Form_Files/main.ui" line="1590"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1483"/>
+        <location filename="../../Form_Files/main.ui" line="1595"/>
         <source>Split At &amp;Markers</source>
         <translation>Podziel na &amp;znacznikach podziału</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1486"/>
+        <location filename="../../Form_Files/main.ui" line="1598"/>
         <source>Split At Sigil split file markers</source>
         <translation>Podziel na znacznikach Sigila</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1489"/>
+        <location filename="../../Form_Files/main.ui" line="1601"/>
         <source>F6</source>
         <translation>F6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1494"/>
+        <location filename="../../Form_Files/main.ui" line="1606"/>
         <source>Split &amp;Marker</source>
         <translation>Znacznik po&amp;działu</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1497"/>
+        <location filename="../../Form_Files/main.ui" line="1609"/>
         <source>Insert Sigil split file marker</source>
         <translation>Wstaw znacznik podziału Sigila</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1500"/>
+        <location filename="../../Form_Files/main.ui" line="1612"/>
         <source>Ctrl+Shift+Return</source>
         <translation>Ctrl+Shift+Enter</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1505"/>
+        <location filename="../../Form_Files/main.ui" line="1617"/>
         <source>User &amp;Guide...</source>
         <translation>Przewod&amp;nik użytkownika...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1508"/>
+        <location filename="../../Form_Files/main.ui" line="1620"/>
         <source>User Guide</source>
         <translation>Przewodnik użytkownika</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1511"/>
+        <location filename="../../Form_Files/main.ui" line="1623"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1516"/>
+        <location filename="../../Form_Files/main.ui" line="1628"/>
         <source>&amp;Frequently Asked Questions...</source>
         <translation>Najczęściej zadawan&amp;e pytania...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1519"/>
+        <location filename="../../Form_Files/main.ui" line="1631"/>
         <source>Frequently Asked Questions</source>
         <translation>Najczęściej zadawane pytania</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1524"/>
+        <location filename="../../Form_Files/main.ui" line="1636"/>
         <source>&amp;Tutorials...</source>
         <translation>Po&amp;radnik...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1527"/>
+        <location filename="../../Form_Files/main.ui" line="1639"/>
         <source>Tutorials</source>
         <translation>Poradnik</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1532"/>
+        <location filename="../../Form_Files/main.ui" line="1644"/>
         <source>Well-Formed Check &amp;EPUB</source>
-        <translation>Sprawdź strukturę pliku &amp;EPUB</translation>
+        <translation>Sprawdź poprawność składni w pliku &amp;EPUB</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1535"/>
+        <location filename="../../Form_Files/main.ui" line="1647"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Well-Formed Check EPUB&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Verify your document complies with minimum needed to be successfully parsed. This does not indicate compliance with the relevant epub standards.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Sprawdź strukturę pliku EPUB&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Sprawdza, czy dokument spełnia minimalne wymogi standardu ePub. To nie jest pełne sprawdzenie, a także nie gwarantuje pełnej zgodności.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Sprawdź poprawność składni w pliku EPUB&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Sprawdza, czy dokument spełnia minimalne wymogi standardu EPUB. To nie jest pełne sprawdzenie, a także nie gwarantuje pełnej zgodności.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1538"/>
+        <location filename="../../Form_Files/main.ui" line="1650"/>
         <source>F7</source>
         <translation>F7</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1543"/>
+        <location filename="../../Form_Files/main.ui" line="1655"/>
         <source>Validate Stylesheets With &amp;W3C</source>
         <translation>Sprawdź &amp;arkusze stylów z W3C</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1546"/>
+        <location filename="../../Form_Files/main.ui" line="1658"/>
         <source>
      &lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Validate Stylesheets with W3C&lt;/b&gt;&lt;/p&gt;
 
@@ -7841,12 +8458,12 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1559"/>
+        <location filename="../../Form_Files/main.ui" line="1671"/>
         <source>&amp;Spellcheck...</source>
         <translation>&amp;Sprawdzanie pisowni...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1562"/>
+        <location filename="../../Form_Files/main.ui" line="1674"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Spellcheck&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Find all misspelled words and allow you to add them to a dictionary or ignore them.&lt;/p&gt;</source>
@@ -7855,102 +8472,102 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Szuka wszystkich błędnych słów i pozwala dodać je wszystkie do słownika lub do ignorowanych.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1567"/>
+        <location filename="../../Form_Files/main.ui" line="1679"/>
         <source>Alt+Q</source>
         <translation>Alt+Q</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1575"/>
+        <location filename="../../Form_Files/main.ui" line="1687"/>
         <source>&amp;Highlight Misspelled Words</source>
         <translation>Podświet&amp;l błędne słowa</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1578"/>
+        <location filename="../../Form_Files/main.ui" line="1690"/>
         <source>Enable or disable highlighting of misspelled words in Code View.</source>
         <translation>Odblokuj lub zablokuj podkreślanie błędnych słów w Widoku Kodu.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1583"/>
+        <location filename="../../Form_Files/main.ui" line="1695"/>
         <source>&amp;Next Misspelled Word</source>
         <translation>&amp;Następne błędne słowo</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1586"/>
+        <location filename="../../Form_Files/main.ui" line="1698"/>
         <source>Find the next misspelled word in the book.</source>
         <translation>Szuka następne błędne słowo w książce.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1589"/>
+        <location filename="../../Form_Files/main.ui" line="1701"/>
         <source>F4</source>
         <translation>F4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1594"/>
+        <location filename="../../Form_Files/main.ui" line="1706"/>
         <source>&amp;Add Misspelled Word</source>
         <translation>Dod&amp;aj błędne słowo</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1597"/>
+        <location filename="../../Form_Files/main.ui" line="1709"/>
         <source>Add the current misspelled word under the caret to the default user dictionary.</source>
         <translation>Dodaj bieżące, podkreślone błędne słowo do domyślnego słownika użytkownika.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1602"/>
+        <location filename="../../Form_Files/main.ui" line="1714"/>
         <source>&amp;Ignore Misspelled Word</source>
         <translation>&amp;Ignoruj błędne słowo</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1605"/>
+        <location filename="../../Form_Files/main.ui" line="1717"/>
         <source>Ignore the current misspelled word under the caret until Sigil is restarted.</source>
         <translation>Ignoruj bieżący wyraz pod kursorem, aż do ponownego uruchomienia Sigila.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1610"/>
+        <location filename="../../Form_Files/main.ui" line="1722"/>
         <source>&amp;Clear Ignored Words</source>
         <translation>Us&amp;uń ignorowane słowa</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1613"/>
+        <location filename="../../Form_Files/main.ui" line="1725"/>
         <source>Clear currently ignored words from Spellcheck without having to restart Sigil.</source>
         <translation>Wyczyść obecnie ignorowane słowa z Słownika pisowni bez konieczności ponownego uruchamiania Sigila.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1618"/>
+        <location filename="../../Form_Files/main.ui" line="1730"/>
         <source>&amp;Index Editor...</source>
         <translation>Edytor &amp;indeksu...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1621"/>
+        <location filename="../../Form_Files/main.ui" line="1733"/>
         <source>Ctrl+Alt+I</source>
         <translation>Ctrl+Alt+I</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1626"/>
+        <location filename="../../Form_Files/main.ui" line="1738"/>
         <source>&amp;Delete Unused Media Files...</source>
         <translation>Usuń nieużywane pliki me&amp;diów...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1631"/>
+        <location filename="../../Form_Files/main.ui" line="1743"/>
         <source>Delete &amp;Unused Stylesheet Classes...</source>
-        <translation>Usuń nieużywane klasy w arkuszach stylów...</translation>
+        <translation>Usuń nieużywane &amp;klasy w arkuszach stylów...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1636"/>
+        <location filename="../../Form_Files/main.ui" line="1748"/>
         <source>&amp;Reports...</source>
         <translation>&amp;Raporty...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1639"/>
+        <location filename="../../Form_Files/main.ui" line="1751"/>
         <source>Ctrl+Shift+R</source>
         <translation>Ctrl+Shift+R</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1648"/>
+        <location filename="../../Form_Files/main.ui" line="1760"/>
         <source>&amp;Donate...</source>
         <translation>Wspo&amp;móż twórcę Sigila...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1651"/>
+        <location filename="../../Form_Files/main.ui" line="1763"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Donate&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Donate to support Sigil.&lt;/p&gt;
@@ -7961,427 +8578,627 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1659"/>
+        <location filename="../../Form_Files/main.ui" line="1771"/>
         <source>Close &amp;Other Tabs</source>
         <translation>Zamknij &amp;inne zakładki</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1662"/>
+        <location filename="../../Form_Files/main.ui" line="1774"/>
         <source>Ctrl+Alt+W</source>
         <translation>Ctrl+Alt+W</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1667"/>
+        <location filename="../../Form_Files/main.ui" line="1779"/>
         <source>Go To &amp;Line...</source>
         <translation>Idź do &amp;linii...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1670"/>
+        <location filename="../../Form_Files/main.ui" line="1782"/>
         <source>Ctrl+/</source>
         <translation>Ctrl+/</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1675"/>
+        <location filename="../../Form_Files/main.ui" line="1787"/>
         <source>Find &amp;Next</source>
         <translation>Znajdź &amp;następny</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1678"/>
+        <location filename="../../Form_Files/main.ui" line="1790"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1683"/>
+        <location filename="../../Form_Files/main.ui" line="1795"/>
         <source>Find &amp;Previous</source>
         <translation>Znajdź &amp;poprzedni</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1686"/>
+        <location filename="../../Form_Files/main.ui" line="1798"/>
         <source>Ctrl+Shift+G</source>
         <translation>Ctrl+Shift+G</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1691"/>
+        <location filename="../../Form_Files/main.ui" line="1803"/>
         <source>Replace</source>
         <translation>Zastąp</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1694"/>
+        <location filename="../../Form_Files/main.ui" line="1806"/>
         <source>Ctrl+R</source>
         <translation>Ctrl+R</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1699"/>
+        <location filename="../../Form_Files/main.ui" line="1811"/>
         <source>&amp;Replace/Find Next</source>
         <translation>Za&amp;stąp/Znajdź następny</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1702"/>
+        <location filename="../../Form_Files/main.ui" line="1814"/>
         <source>Ctrl+]</source>
         <translation>Ctrl+]</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1707"/>
+        <location filename="../../Form_Files/main.ui" line="1819"/>
         <source>R&amp;eplace/Find Previous</source>
         <translation>Zas&amp;tąp/Znajdź poprzedni</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1710"/>
+        <location filename="../../Form_Files/main.ui" line="1822"/>
         <source>Ctrl+[</source>
         <translation>Ctrl+[</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1715"/>
+        <location filename="../../Form_Files/main.ui" line="1827"/>
         <source>Replace &amp;All</source>
         <translation>Z&amp;astąp wszystkie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1718"/>
+        <location filename="../../Form_Files/main.ui" line="1830"/>
         <source>Alt+A</source>
         <translation>Alt+A</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1723"/>
+        <location filename="../../Form_Files/main.ui" line="1835"/>
         <source>&amp;Count All</source>
         <translation>Poli&amp;cz wszystkie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1726"/>
+        <location filename="../../Form_Files/main.ui" line="1838"/>
         <source>Alt+C</source>
         <translation>Alt+C</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1731"/>
+        <location filename="../../Form_Files/main.ui" line="1843"/>
         <source>Mar&amp;k Selected Text</source>
         <translation>Zaznacz wybrany te&amp;kst</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1739"/>
+        <location filename="../../Form_Files/main.ui" line="1851"/>
         <source>Find &amp;Next In File</source>
         <translation>Znajdź &amp;następny w pliku</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1744"/>
+        <location filename="../../Form_Files/main.ui" line="1856"/>
         <source>&amp;Replace Next In File</source>
         <translation>Zastąp na&amp;stępny w pliku</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1749"/>
+        <location filename="../../Form_Files/main.ui" line="1861"/>
         <source>Replace &amp;All In File</source>
         <translation>Z&amp;amień wszystkie w pliku</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1754"/>
+        <location filename="../../Form_Files/main.ui" line="1866"/>
         <source>&amp;Count All In File</source>
         <translation>Poli&amp;cz wszystkie w pliku</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1759"/>
+        <location filename="../../Form_Files/main.ui" line="1871"/>
         <source>&amp;Saved Searches...</source>
-        <translation>Zapi&amp;sane Wyszukiwania...</translation>
+        <translation>&amp;Zapisane wyszukiwania...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1762"/>
+        <location filename="../../Form_Files/main.ui" line="1874"/>
         <source>Ctrl+Alt+F</source>
         <translation>Ctrl+Alt+F</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1767"/>
+        <location filename="../../Form_Files/main.ui" line="1879"/>
         <source>&amp;Clip Editor...</source>
-        <translation>Edytor Wy&amp;cinków...</translation>
+        <translation>Edytor wy&amp;cinków...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1770"/>
+        <location filename="../../Form_Files/main.ui" line="1882"/>
         <source>Open the Clip Editor.</source>
-        <translation>Otwarcie Edytora Wycinków.</translation>
+        <translation>Otwarcie edytora wycinków.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1773"/>
+        <location filename="../../Form_Files/main.ui" line="1885"/>
         <source>Ctrl+Alt+C</source>
         <translation>Ctrl+Alt+C</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1778"/>
+        <location filename="../../Form_Files/main.ui" line="1890"/>
         <source>Clip &amp;1</source>
         <translation>Wycinek &amp;1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1781"/>
+        <location filename="../../Form_Files/main.ui" line="1893"/>
         <source>Insert Clip 1</source>
-        <translation>Wstaw Wycinek 1</translation>
+        <translation>Wstaw wycinek 1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1784"/>
+        <location filename="../../Form_Files/main.ui" line="1896"/>
         <source>Ctrl+Alt+1</source>
         <translation>Ctrl+Alt+1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1789"/>
+        <location filename="../../Form_Files/main.ui" line="1901"/>
         <source>Clip &amp;2</source>
         <translation>Wycinek &amp;2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1792"/>
+        <location filename="../../Form_Files/main.ui" line="1904"/>
         <source>Insert Clip 2</source>
-        <translation>Wstaw Wycinek 2</translation>
+        <translation>Wstaw wycinek 2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1795"/>
+        <location filename="../../Form_Files/main.ui" line="1907"/>
         <source>Ctrl+Alt+2</source>
         <translation>Ctrl+Alt+2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1800"/>
+        <location filename="../../Form_Files/main.ui" line="1912"/>
         <source>Clip &amp;3</source>
         <translation>Wycinek &amp;3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1803"/>
+        <location filename="../../Form_Files/main.ui" line="1915"/>
         <source>Insert Clip 3</source>
-        <translation>Wstaw Wycinek 3</translation>
+        <translation>Wstaw wycinek 3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1806"/>
+        <location filename="../../Form_Files/main.ui" line="1918"/>
         <source>Ctrl+Alt+3</source>
         <translation>Ctrl+Alt+3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1811"/>
+        <location filename="../../Form_Files/main.ui" line="1923"/>
         <source>Clip &amp;4</source>
         <translation>Wycinek &amp;4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1814"/>
+        <location filename="../../Form_Files/main.ui" line="1926"/>
         <source>Insert Clip 4</source>
-        <translation>Wstaw Wycinek 4</translation>
+        <translation>Wstaw wycinek 4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1817"/>
+        <location filename="../../Form_Files/main.ui" line="1929"/>
         <source>Ctrl+Alt+4</source>
         <translation>Ctrl+Alt+4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1822"/>
+        <location filename="../../Form_Files/main.ui" line="1934"/>
         <source>Clip &amp;5</source>
         <translation>Wycinek &amp;5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1825"/>
+        <location filename="../../Form_Files/main.ui" line="1937"/>
         <source>Insert Clip 5</source>
-        <translation>Wstaw Wycinek 5</translation>
+        <translation>Wstaw wycinek 5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1828"/>
+        <location filename="../../Form_Files/main.ui" line="1940"/>
         <source>Ctrl+Alt+5</source>
         <translation>Ctrl+Alt+5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1833"/>
+        <location filename="../../Form_Files/main.ui" line="1945"/>
         <source>Clip &amp;6</source>
         <translation>Wycinek &amp;6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1836"/>
+        <location filename="../../Form_Files/main.ui" line="1948"/>
         <source>Insert Clip 6</source>
-        <translation>Wstaw Wycinek 6</translation>
+        <translation>Wstaw wycinek 6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1839"/>
+        <location filename="../../Form_Files/main.ui" line="1951"/>
         <source>Ctrl+Alt+6</source>
         <translation>Ctrl+Alt+6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1844"/>
+        <location filename="../../Form_Files/main.ui" line="1956"/>
         <source>Clip &amp;7</source>
         <translation>Wycinek &amp;7</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1847"/>
+        <location filename="../../Form_Files/main.ui" line="1959"/>
         <source>Insert Clip 7</source>
-        <translation>Wstaw Wycinek 7</translation>
+        <translation>Wstaw wycinek 7</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1850"/>
+        <location filename="../../Form_Files/main.ui" line="1962"/>
         <source>Ctrl+Alt+7</source>
         <translation>Ctrl+Alt+7</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1855"/>
+        <location filename="../../Form_Files/main.ui" line="1967"/>
         <source>Clip &amp;8</source>
         <translation>Wycinek &amp;8</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1858"/>
+        <location filename="../../Form_Files/main.ui" line="1970"/>
         <source>Insert Clip 8</source>
-        <translation>Wstaw Wycinek 8</translation>
+        <translation>Wstaw wycinek 8</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1861"/>
+        <location filename="../../Form_Files/main.ui" line="1973"/>
         <source>Ctrl+Alt+8</source>
         <translation>Ctrl+Alt+8</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1866"/>
+        <location filename="../../Form_Files/main.ui" line="1978"/>
         <source>Clip &amp;9</source>
         <translation>Wycinek &amp;9</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1869"/>
+        <location filename="../../Form_Files/main.ui" line="1981"/>
         <source>Insert Clip 9</source>
-        <translation>Wstaw Wycinek 9</translation>
+        <translation>Wstaw wycinek 9</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1872"/>
+        <location filename="../../Form_Files/main.ui" line="1984"/>
         <source>Ctrl+Alt+9</source>
         <translation>Ctrl+Alt+9</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1877"/>
+        <location filename="../../Form_Files/main.ui" line="1989"/>
         <source>Clip 1&amp;0</source>
         <translation>Wycinek 1&amp;0</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1880"/>
+        <location filename="../../Form_Files/main.ui" line="1992"/>
         <source>Insert Clip 10</source>
-        <translation>Wstaw Wycinek 10</translation>
+        <translation>Wstaw wycinek 10</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1883"/>
+        <location filename="../../Form_Files/main.ui" line="1995"/>
         <source>Ctrl+Alt+0</source>
         <translation>Ctrl+Alt+0</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1888"/>
+        <location filename="../../Form_Files/main.ui" line="2000"/>
         <source>Clip 11</source>
         <translation>Wycinek 11</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1891"/>
+        <location filename="../../Form_Files/main.ui" line="2003"/>
         <source>Insert Clip 11</source>
-        <translation>Wstaw Wycinek 11</translation>
+        <translation>Wstaw wycinek 11</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1896"/>
+        <location filename="../../Form_Files/main.ui" line="2008"/>
         <source>Clip 12</source>
         <translation>Wycinek 12</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1899"/>
+        <location filename="../../Form_Files/main.ui" line="2011"/>
         <source>Insert Clip 12</source>
-        <translation>Wstaw Wycinek 12</translation>
+        <translation>Wstaw wycinek 12</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1904"/>
+        <location filename="../../Form_Files/main.ui" line="2016"/>
         <source>Clip 13</source>
         <translation>Wycinek 13</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1907"/>
+        <location filename="../../Form_Files/main.ui" line="2019"/>
         <source>Insert Clip 13</source>
-        <translation>Wstaw Wycinek 13</translation>
+        <translation>Wstaw wycinek 13</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1912"/>
+        <location filename="../../Form_Files/main.ui" line="2024"/>
         <source>Clip 14</source>
         <translation>Wycinek 14</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1915"/>
+        <location filename="../../Form_Files/main.ui" line="2027"/>
         <source>Insert Clip 14</source>
-        <translation>Wstaw Wycinek 14</translation>
+        <translation>Wstaw wycinek 14</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1920"/>
+        <location filename="../../Form_Files/main.ui" line="2032"/>
         <source>Clip 15</source>
         <translation>Wycinek 15</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1923"/>
+        <location filename="../../Form_Files/main.ui" line="2035"/>
         <source>Insert Clip 15</source>
-        <translation>Wstaw Wycinek 15</translation>
+        <translation>Wstaw wycinek 15</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1928"/>
+        <location filename="../../Form_Files/main.ui" line="2040"/>
         <source>Clip 16</source>
         <translation>Wycinek 16</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1931"/>
+        <location filename="../../Form_Files/main.ui" line="2043"/>
         <source>Insert Clip 16</source>
-        <translation>Wstaw Wycinek 16</translation>
+        <translation>Wstaw wycinek 16</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1936"/>
+        <location filename="../../Form_Files/main.ui" line="2048"/>
         <source>Clip 17</source>
         <translation>Wycinek 17</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1939"/>
+        <location filename="../../Form_Files/main.ui" line="2051"/>
         <source>Insert Clip 17</source>
-        <translation>Wstaw Wycinek 17</translation>
+        <translation>Wstaw wycinek 17</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1944"/>
+        <location filename="../../Form_Files/main.ui" line="2056"/>
         <source>Clip 18</source>
         <translation>Wycinek 18</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1947"/>
+        <location filename="../../Form_Files/main.ui" line="2059"/>
         <source>Insert Clip 18</source>
-        <translation>Wstaw Wycinek 18</translation>
+        <translation>Wstaw wycinek 18</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1952"/>
+        <location filename="../../Form_Files/main.ui" line="2064"/>
         <source>Clip 19</source>
         <translation>Wycinek 19</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1955"/>
+        <location filename="../../Form_Files/main.ui" line="2067"/>
         <source>Insert Clip 19</source>
-        <translation>Wstaw Wycinek 19</translation>
+        <translation>Wstaw wycinek 19</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1960"/>
+        <location filename="../../Form_Files/main.ui" line="2072"/>
         <source>Clip 20</source>
         <translation>Wycinek 20</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1963"/>
+        <location filename="../../Form_Files/main.ui" line="2075"/>
         <source>Insert Clip 20</source>
-        <translation>Wstaw Wycinek 20</translation>
+        <translation>Wstaw wycinek 20</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1968"/>
+        <location filename="../../Form_Files/main.ui" line="2081"/>
+        <source>Clip 21</source>
+        <translation>Wycinek 21</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2084"/>
+        <source>Insert Clip 21</source>
+        <translation>Wstaw wycinek 21</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2089"/>
+        <source>Clip 22</source>
+        <translation>Wycinek 22</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2092"/>
+        <source>Insert Clip 22</source>
+        <translation>Wstaw wycinek 22</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2097"/>
+        <source>Clip 23</source>
+        <translation>Wycinek 23</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2100"/>
+        <source>Insert Clip 23</source>
+        <translation>Wstaw wycinek 23</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2105"/>
+        <source>Clip 24</source>
+        <translation>Wycinek 24</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2108"/>
+        <source>Insert Clip 24</source>
+        <translation>Wstaw wycinek 24</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2113"/>
+        <source>Clip 25</source>
+        <translation>Wycinek 25</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2116"/>
+        <source>Insert Clip 25</source>
+        <translation>Wstaw wycinek 25</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2121"/>
+        <source>Clip 26</source>
+        <translation>Wycinek 26</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2124"/>
+        <source>Insert Clip 26</source>
+        <translation>Wstaw wycinek 26</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2129"/>
+        <source>Clip 27</source>
+        <translation>Wycinek 27</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2132"/>
+        <source>Insert Clip 27</source>
+        <translation>Wstaw wycinek 27</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2137"/>
+        <source>Clip 28</source>
+        <translation>Wycinek 28</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2140"/>
+        <source>Insert Clip 28</source>
+        <translation>Wstaw wycinek 28</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2145"/>
+        <source>Clip 29</source>
+        <translation>Wycinek 29</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2148"/>
+        <source>Insert Clip 29</source>
+        <translation>Wstaw wycinek 29</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2153"/>
+        <source>Clip 30</source>
+        <translation>Wycinek 30</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2156"/>
+        <source>Insert Clip 30</source>
+        <translation>Wstaw wycinek 30</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2161"/>
+        <source>Clip 31</source>
+        <translation>Wycinek 31</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2164"/>
+        <source>Insert Clip 31</source>
+        <translation>Wstaw wycinek 31</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2169"/>
+        <source>Clip 32</source>
+        <translation>Wycinek 32</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2172"/>
+        <source>Insert Clip 32</source>
+        <translation>Wstaw wycinek 32</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2177"/>
+        <source>Clip 33</source>
+        <translation>Wycinek 33</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2180"/>
+        <source>Insert Clip 33</source>
+        <translation>Wstaw wycinek 33</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2185"/>
+        <source>Clip 34</source>
+        <translation>Wycinek 34</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2188"/>
+        <source>Insert Clip 34</source>
+        <translation>Wstaw wycinek 34</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2193"/>
+        <source>Clip 35</source>
+        <translation>Wycinek 35</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2196"/>
+        <source>Insert Clip 35</source>
+        <translation>Wstaw wycinek 35</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2201"/>
+        <source>Clip 36</source>
+        <translation>Wycinek 36</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2204"/>
+        <source>Insert Clip 36</source>
+        <translation>Wstaw wycinek 36</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2209"/>
+        <source>Clip 37</source>
+        <translation>Wycinek 37</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2212"/>
+        <source>Insert Clip 37</source>
+        <translation>Wstaw wycinek 37</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2217"/>
+        <source>Clip 38</source>
+        <translation>Wycinek 38</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2220"/>
+        <source>Insert Clip 38</source>
+        <translation>Wstaw wycinek 38</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2225"/>
+        <source>Clip 39</source>
+        <translation>Wycinek 39</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2228"/>
+        <source>Insert Clip 39</source>
+        <translation>Wstaw wycinek 39</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2233"/>
+        <source>Clip 40</source>
+        <translation>Wycinek 40</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2236"/>
+        <source>Insert Clip 40</source>
+        <translation>Wstaw wycinek 40</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2245"/>
         <source>&amp;Preferences...</source>
         <translation>&amp;Ustawienia...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1971"/>
+        <location filename="../../Form_Files/main.ui" line="2248"/>
         <source>F5</source>
         <translation>F5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1976"/>
+        <location filename="../../Form_Files/main.ui" line="2253"/>
         <source>&amp;Zoom Reset</source>
         <translation>Ro&amp;zmiar pierwotny</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1979"/>
+        <location filename="../../Form_Files/main.ui" line="2256"/>
         <source>Zoom Reset</source>
         <translation>Rozmiar pierwotny</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1982"/>
+        <location filename="../../Form_Files/main.ui" line="2259"/>
         <source>Ctrl+0</source>
         <translation>Ctrl+0</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1994"/>
+        <location filename="../../Form_Files/main.ui" line="2271"/>
         <source>Heading &amp;1</source>
         <translation>Nagłówek &amp;1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="1997"/>
+        <location filename="../../Form_Files/main.ui" line="2274"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 1&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 1 heading.&lt;/p&gt;</source>
@@ -8390,17 +9207,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Formatuje akapit jako nagłówek 1 poziomu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2002"/>
+        <location filename="../../Form_Files/main.ui" line="2279"/>
         <source>Ctrl+1</source>
         <translation>Ctrl+1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2014"/>
+        <location filename="../../Form_Files/main.ui" line="2291"/>
         <source>Heading &amp;2</source>
         <translation>Nagłówek &amp;2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2017"/>
+        <location filename="../../Form_Files/main.ui" line="2294"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 2&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 2 heading.&lt;/p&gt;</source>
@@ -8409,17 +9226,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Formatuje akapit jako nagłówek 2 poziomu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2022"/>
+        <location filename="../../Form_Files/main.ui" line="2299"/>
         <source>Ctrl+2</source>
         <translation>Ctrl+2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2034"/>
+        <location filename="../../Form_Files/main.ui" line="2311"/>
         <source>Heading &amp;3</source>
         <translation>Nagłówek &amp;3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2037"/>
+        <location filename="../../Form_Files/main.ui" line="2314"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 3&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 3 heading.&lt;/p&gt;</source>
@@ -8428,17 +9245,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Formatuje akapit jako nagłówek 3 poziomu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2042"/>
+        <location filename="../../Form_Files/main.ui" line="2319"/>
         <source>Ctrl+3</source>
         <translation>Ctrl+3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2054"/>
+        <location filename="../../Form_Files/main.ui" line="2331"/>
         <source>Heading &amp;4</source>
         <translation>Nagłówek &amp;4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2057"/>
+        <location filename="../../Form_Files/main.ui" line="2334"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 4&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 4 heading.&lt;/p&gt;</source>
@@ -8447,17 +9264,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Formatuje akapit jako nagłówek 4 poziomu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2062"/>
+        <location filename="../../Form_Files/main.ui" line="2339"/>
         <source>Ctrl+4</source>
         <translation>Ctrl+4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2074"/>
+        <location filename="../../Form_Files/main.ui" line="2351"/>
         <source>Heading &amp;5</source>
         <translation>Nagłówek &amp;5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2077"/>
+        <location filename="../../Form_Files/main.ui" line="2354"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 5&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 5 heading.&lt;/p&gt;</source>
@@ -8466,17 +9283,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Formatuje akapit jako nagłówek 5 poziomu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2082"/>
+        <location filename="../../Form_Files/main.ui" line="2359"/>
         <source>Ctrl+5</source>
         <translation>Ctrl+5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2094"/>
+        <location filename="../../Form_Files/main.ui" line="2371"/>
         <source>Heading &amp;6</source>
         <translation>Nagłówek &amp;6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2097"/>
+        <location filename="../../Form_Files/main.ui" line="2374"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Heading 6&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a level 6 heading.&lt;/p&gt;</source>
@@ -8485,17 +9302,17 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Formatuje akapit jako nagłówek 6 poziomu.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2102"/>
+        <location filename="../../Form_Files/main.ui" line="2379"/>
         <source>Ctrl+6</source>
         <translation>Ctrl+6</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2114"/>
+        <location filename="../../Form_Files/main.ui" line="2391"/>
         <source>&amp;Normal</source>
         <translation>&amp;Normalny</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2117"/>
+        <location filename="../../Form_Files/main.ui" line="2394"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Paragraph&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Format paragraph as a normal paragraph.&lt;/p&gt;</source>
@@ -8504,37 +9321,37 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Formatuje tekst jako normalny akapit.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2122"/>
+        <location filename="../../Form_Files/main.ui" line="2399"/>
         <source>Ctrl+7</source>
         <translation>Ctrl+7</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2130"/>
+        <location filename="../../Form_Files/main.ui" line="2407"/>
         <source>&amp;Preserve Existing Attributes</source>
         <translation>Zachowa&amp;j istniejące atrybuty</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2133"/>
+        <location filename="../../Form_Files/main.ui" line="2410"/>
         <source>When applying this style, preserve any existing attributes on the tag</source>
         <translation>Kiedy zastosujesz ten styl, zachowasz wszystkie istniejące atrybuty w tagu</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2138"/>
+        <location filename="../../Form_Files/main.ui" line="2415"/>
         <source>Blank HTML File</source>
         <translation>Pusty plik HTML</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2141"/>
+        <location filename="../../Form_Files/main.ui" line="2418"/>
         <source>Add a new blank HTML file to the book.</source>
         <translation>Dodaje nowy pusty plik HTML do książki.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2150"/>
+        <location filename="../../Form_Files/main.ui" line="2427"/>
         <source>Existing Files...</source>
         <translation>Istniejące pliki...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2153"/>
+        <location filename="../../Form_Files/main.ui" line="2430"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Add Existing Files&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Add files from your computer to the book.&lt;/p&gt;</source>
@@ -8543,278 +9360,451 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Dodaje plik z twojego komputera do książki.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2160"/>
+        <location filename="../../Form_Files/main.ui" line="2437"/>
         <source>Blank Stylesheet</source>
         <translation>Pusty arkusz stylów</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2163"/>
+        <location filename="../../Form_Files/main.ui" line="2440"/>
         <source>Add a new blank stylesheet to the book.</source>
         <translation>Dodaje nowy pusty arkusz stylów do książki.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2168"/>
+        <location filename="../../Form_Files/main.ui" line="2445"/>
         <source>Blank SVG Image</source>
         <translation>Pusty obraz SVG</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2171"/>
+        <location filename="../../Form_Files/main.ui" line="2448"/>
         <source>Add a new blank svg image file to the book.</source>
         <translation>Dodaje nowy pusty plik obrazu SVG do książki.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2176"/>
+        <location filename="../../Form_Files/main.ui" line="2453"/>
         <source>Pre&amp;vious File</source>
         <translation>Pop&amp;rzedni plik</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2179"/>
+        <location filename="../../Form_Files/main.ui" line="2456"/>
         <source>Open previous file of the same type.</source>
         <translation>Otwiera poprzedni plik tego samego typu.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2182"/>
+        <location filename="../../Form_Files/main.ui" line="2459"/>
         <source>Alt+PgUp</source>
         <translation>Alt+PgUp</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2187"/>
+        <location filename="../../Form_Files/main.ui" line="2464"/>
         <source>Next &amp;File</source>
         <translation>Nas&amp;tępny plik</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2190"/>
+        <location filename="../../Form_Files/main.ui" line="2467"/>
         <source>Open next file of the same type.</source>
         <translation>Otwiera następny plik tego samego typu.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2193"/>
+        <location filename="../../Form_Files/main.ui" line="2470"/>
         <source>Alt+PgDown</source>
         <translation>Alt+PgDown</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2198"/>
+        <location filename="../../Form_Files/main.ui" line="2475"/>
         <source>&amp;Add To Index Editor</source>
         <translation>Dod&amp;aj do Edytora indeksu</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2201"/>
+        <location filename="../../Form_Files/main.ui" line="2478"/>
         <source>Add the selected text to the Index Editor.</source>
         <translation>Dodaje wybrany tekst do Edytora indeksu.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2206"/>
+        <location filename="../../Form_Files/main.ui" line="2483"/>
         <source>&amp;Mark For Index</source>
         <translation>O&amp;znacz do indeksowania</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2209"/>
+        <location filename="../../Form_Files/main.ui" line="2486"/>
         <source>Mark the selected text for inclusion in the Index.</source>
         <translation>Zaznacza wybrany tekst do umieszczenia w indeksie.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2212"/>
+        <location filename="../../Form_Files/main.ui" line="2489"/>
         <source>Ctrl+Shift+X</source>
         <translation>Ctrl+Shift+X</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2217"/>
+        <location filename="../../Form_Files/main.ui" line="2494"/>
         <source>&amp;Create Index</source>
         <translation>&amp;Utwórz indeks</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2220"/>
+        <location filename="../../Form_Files/main.ui" line="2497"/>
         <source>Generate a new Index HTML file.</source>
         <translation>Tworzy nowy indeks w pliku HTML.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2225"/>
+        <location filename="../../Form_Files/main.ui" line="2502"/>
         <source>&amp;Create HTML Table Of Contents</source>
-        <translation>Utwórz Spis treści w pliku &amp;HTML</translation>
+        <translation>Utwórz spis treści w pliku &amp;HTML</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2228"/>
+        <location filename="../../Form_Files/main.ui" line="2505"/>
         <source>Create a new HTML file using the current TOC.</source>
         <translation>Tworzy nowy plik HTML używając aktualnego TOC.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2233"/>
+        <location filename="../../Form_Files/main.ui" line="2510"/>
         <source>Book&amp;mark Location</source>
         <translation>Usta&amp;w zakładkę</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2236"/>
+        <location filename="../../Form_Files/main.ui" line="2513"/>
         <source>Ctrl+Alt+B</source>
         <translation>Ctrl+Alt+B</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2241"/>
+        <location filename="../../Form_Files/main.ui" line="2518"/>
         <source>&amp;Go To Link Or Style</source>
         <translation>&amp;Idź do łącza lub stylu</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2244"/>
+        <location filename="../../Form_Files/main.ui" line="2521"/>
         <source>F3</source>
         <translation>F3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2253"/>
+        <location filename="../../Form_Files/main.ui" line="2530"/>
         <source>&amp;Back</source>
-        <translation>Cofn&amp;ij</translation>
+        <translation>Wste&amp;cz</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2256"/>
+        <location filename="../../Form_Files/main.ui" line="2533"/>
         <source>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Back&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Go back to where you last went to a link or style, or bookmarked your location.&lt;/p&gt;
     </source>
-        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Cofnij&lt;/b&gt;&lt;/p&gt;
+        <translation>&lt;p style=&quot;padding-top: 0.5em;&quot; &gt;&lt;b&gt;Wstecz&lt;/b&gt;&lt;/p&gt;
 
 &lt;p style=&quot;margin-left: 0.5em;&quot;&gt;Wróć do miejsca, skąd ostatnio poszedłeś przy pomocy łącza, stylu lub zakładki swojej lokalizacji.&lt;/p&gt;
     </translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2262"/>
+        <location filename="../../Form_Files/main.ui" line="2539"/>
         <source>Ctrl+\</source>
         <translation>Ctrl+\</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2267"/>
+        <location filename="../../Form_Files/main.ui" line="2544"/>
         <source>Edit/Paste From Clipboard &amp;History...</source>
         <translation>Wklej z &amp;historii schowka...</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2270"/>
+        <location filename="../../Form_Files/main.ui" line="2547"/>
         <source>Ctrl+Alt+V</source>
         <translation>Ctrl+Alt+V</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2275"/>
+        <location filename="../../Form_Files/main.ui" line="2552"/>
         <source>&amp;Delete Line</source>
         <translation>Usuń &amp;linię</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2278"/>
+        <location filename="../../Form_Files/main.ui" line="2555"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2283"/>
+        <location filename="../../Form_Files/main.ui" line="2560"/>
         <source>Manage Plugins</source>
         <translation>Zarządzanie wtyczkami</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2292"/>
+        <location filename="../../Form_Files/main.ui" line="2569"/>
         <source>Run Plugin 1</source>
-        <translation>Uruchom Wtyczkę 1</translation>
+        <translation>Uruchom wtyczkę 1</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2301"/>
+        <location filename="../../Form_Files/main.ui" line="2578"/>
         <source>Run Plugin 2</source>
-        <translation>Uruchom Wtyczkę 2</translation>
+        <translation>Uruchom wtyczkę 2</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2310"/>
+        <location filename="../../Form_Files/main.ui" line="2587"/>
         <source>Run Plugin 3</source>
-        <translation>Uruchom Wtyczkę 3</translation>
+        <translation>Uruchom wtyczkę 3</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2319"/>
+        <location filename="../../Form_Files/main.ui" line="2596"/>
         <source>Run Plugin 4</source>
-        <translation>Uruchom Wtyczkę 4</translation>
+        <translation>Uruchom wtyczkę 4</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2328"/>
+        <location filename="../../Form_Files/main.ui" line="2605"/>
         <source>Run Plugin 5</source>
-        <translation>Uruchom Wtyczkę 5</translation>
+        <translation>Uruchom wtyczkę 5</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2333"/>
+        <location filename="../../Form_Files/main.ui" line="2614"/>
+        <source>Run Plugin 6</source>
+        <translation>Uruchom wtyczkę 6</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2623"/>
+        <source>Run Plugin 7</source>
+        <translation>Uruchom wtyczkę 7</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2632"/>
+        <source>Run Plugin 8</source>
+        <translation>Uruchom wtyczkę 8</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2641"/>
+        <source>Run Plugin 9</source>
+        <translation>Uruchom wtyczkę 9</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2650"/>
+        <source>Run Plugin 10</source>
+        <translation>Uruchom wtyczkę 10</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2659"/>
+        <source>Launch External Xhtml Editor</source>
+        <translation>Uruchom zewnętrzny edytor XHTML</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2662"/>
+        <source>F2</source>
+        <translation>F2</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2667"/>
         <source>Mend and &amp;Prettify All HTML Files</source>
-        <translation>Napraw i &amp;popraw wszystkie pliki HTML</translation>
+        <translation>Popraw i &amp;upiększ wszystkie pliki HTML</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2338"/>
+        <location filename="../../Form_Files/main.ui" line="2672"/>
         <source>&amp;Mend All HTML Files</source>
-        <translation>&amp;Napraw wszystkie pliki HTML</translation>
+        <translation>&amp;Popraw wszystkie pliki HTML</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2343"/>
+        <location filename="../../Form_Files/main.ui" line="2677"/>
         <source>&amp;Update Manifest Properties</source>
         <translation>Akt&amp;ualizuj właściwości manifestu</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/main.ui" line="2348"/>
-        <source>Generate NC&amp;X from Nav</source>
-        <translation>Utwórz NC&amp;X z Nav</translation>
+        <location filename="../../Form_Files/main.ui" line="2682"/>
+        <source>Generate &amp;NCX/Guide for epub2 e-readers</source>
+        <translation>Wygeneruj plik &amp;NCX/Guide dla czytników EPUB2</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="300"/>
+        <location filename="../../Form_Files/main.ui" line="2687"/>
+        <source>Create a Custom Empty Epub</source>
+        <translation>Utwórz własny układ pliku EPUB</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2692"/>
+        <source>Remove the NCX and Guide</source>
+        <translation>Usuń plik NCX i sekcję Guide</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2701"/>
+        <source>Create Checkpoint for Epub</source>
+        <translation>Utwórz punkt kontrolny dla EPUB</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2710"/>
+        <source>Create Epub from previous Checkpoint</source>
+        <translation>Utwórz EPUB z poprzedniego punktu kontrolnego</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2719"/>
+        <source>Compare Epub against Checkpoint</source>
+        <translation>Porównaj EPUB z punktem kontrolnym</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/main.ui" line="2728"/>
+        <source>Manage Checkpoint Repositories</source>
+        <translation>Zarządzaj repozytoriami punktów kontrolnych</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="367"/>
         <source>Input</source>
         <translation>Wejściowe</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="306"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="373"/>
         <source>Output</source>
         <translation>Wyjściowe</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="318"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="385"/>
         <source>Validation</source>
         <translation>Sprawdzające</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="464"/>
-        <source>Navigation cancelled as location no longer exists.</source>
-        <translation>Nawigacja anulowana, lokalizacja przestała istnieć.</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="480"/>
-        <source>Location bookmarked.</source>
-        <translation>Ustawiono zakładkę w tej lokalizacji.</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="527"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="759"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="967"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1113"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1495"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1582"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1637"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1645"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1662"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1674"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1777"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1785"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1799"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1804"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1817"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1825"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1836"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1841"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1853"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1863"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1868"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2087"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2094"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2108"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2113"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2137"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2169"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3454"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3460"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3466"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3508"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3514"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3520"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3677"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="3884"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="4084"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="434"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="447"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="455"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="462"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1104"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1437"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1672"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1814"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2295"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2390"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2458"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2466"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2483"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2495"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2600"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2616"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2621"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2634"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2647"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2652"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2664"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2674"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2679"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2838"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2845"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2859"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2864"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2888"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2920"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4087"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4093"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4099"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4134"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4140"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4146"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4400"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4420"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4718"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4928"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="527"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="435"/>
+        <source>Are you sure you want to restructure this epub?
+This action cannot be reversed.</source>
+        <translation>Czy na pewno chcesz zmienić strukturę folderów w tym pliku EPUB?
+Tej akcji nie można cofnąć.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="448"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="456"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="463"/>
+        <source>Restructure cancelled: %1, XML not well formed.</source>
+        <translation>Zmiana struktury folderów anulowana: %1, XML nie jest poprawny składniowo.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="532"/>
+        <source>Restructure completed.</source>
+        <translation>Zakończono zmianę struktury folderów.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="634"/>
+        <source>Checkpoint generation failed.</source>
+        <translation>Nie udało się utworzyć punktu kontrolnego.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="640"/>
+        <source>Checkpoint saved.</source>
+        <translation>Punkt kontrolny został zapisany.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="676"/>
+        <source>Checkout Failed. No checkpoints found</source>
+        <translation>Przywracanie nie powiodło się. Nie znaleziono punktów kontrolnych.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="693"/>
+        <source>Checkout Failed. No checkpoint selected</source>
+        <translation>Przywracanie nie powiodło się. Nie wybrano punktu kontrolnego</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="718"/>
+        <source>Epub Generate from Tag Failed.</source>
+        <translation>Nie udało się wygenerować pliku EPUB</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="723"/>
+        <source>Epub Generation succeeded</source>
+        <translation>Generowanie pliku EPUB powiodło się</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="737"/>
+        <source>Repository Checkout</source>
+        <translation>Przywracanie repozytorium</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="738"/>
+        <source>Your current book will be replaced losing any unsaved changes ... Are you sure you want to proceed?</source>
+        <translation>Aktualna książka zostanie całkowicie zastąpiona, stracisz niezapisane zmiany... Czy na pewno kontynuować?</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="762"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="786"/>
+        <source>Diff Failed. No checkpoints found</source>
+        <translation>Porównywanie nie powiodło się. Nie znaleziono punktów kontrolnych.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="802"/>
+        <source>Diff Failed. No checkpoint selected for comparison</source>
+        <translation>Porównywanie nie powiodło się. Nie wybrano punktu kontrolnego do porównania.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="833"/>
+        <source>Results of Comparison</source>
+        <translation>Wyniki porównania</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="833"/>
+        <source>No differences were found.</source>
+        <translation>Nie znaleziono różnic.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="864"/>
+        <source>External XHtml Editor works only on Html Resources or OPF Resources!</source>
+        <translation>Zewnętrzny edytor XHTML działa tylko z zasobami HTML lub OPF!</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="871"/>
+        <source>No External Xhtml Editor has been specified:  See Preferences</source>
+        <translation>Nie wybrano zewnętrznego edytora XHTML: sprawdź w Ustawieniach</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="878"/>
+        <source>Specified External Xhtml Editor path does not exist</source>
+        <translation>Nie istnieje określona ścieżka dostępu zewnętrznego edytora XHTML</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="922"/>
+        <source>Executing External Xhtml Editor</source>
+        <translation>Uruchamianie zewnętrznego edytora XHTML</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="925"/>
+        <source>Failed to Launch External Xhtml Editor</source>
+        <translation>Nie można uruchomić zewnętrznego edytora XHTML</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1022"/>
+        <source>Navigation cancelled as location no longer exists.</source>
+        <translation>Nawigacja anulowana, lokalizacja przestała istnieć.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1039"/>
+        <source>Location bookmarked.</source>
+        <translation>Ustawiono zakładkę w tej lokalizacji.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1104"/>
         <source>Are you sure you want to open this external link?
 
 %1</source>
@@ -8823,543 +9813,638 @@ Arkusze stylów, które są pierwsze na liście, mają pierwszeństwo przed pó�
 %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="573"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1140"/>
         <source>was updated</source>
         <translation>został zaktualizowany</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="580"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1147"/>
         <source>Warning</source>
         <translation>Ostrzeżenie</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="580"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1147"/>
         <source>The file was NOT well formed and may be corrupted.</source>
-        <translation>Plik NIE jest poprawnie sformatowany i może być uszkodzony.</translation>
+        <translation>Plik NIE jest poprawny składniowo i może być uszkodzony.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="608"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1175"/>
         <source>Opening this EPUB generated warnings.</source>
         <translation>Otwarcie tego EPUB zgłasza ostrzeżenia.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="610"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1177"/>
         <source>Select Show Details for more information.</source>
         <translation>Wybierz Pokaż szczegóły, by uzyskać więcej informacji.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="650"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1305"/>
         <source>Sigil is closing...</source>
         <translation>Zamykanie Sigila...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="700"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1371"/>
         <source>New file created.</source>
         <translation>Utworzono nowy plik.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="721"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1396"/>
         <source>Open File</source>
         <translation>Otwórz plik</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="758"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1436"/>
         <source>This file no longer exists. Click OK to remove it from the menu.
 %1</source>
         <translation>Ten plik już nie istnieje. Kliknij przycisk OK, aby usunąć go z menu.
 %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="828"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1514"/>
         <source>Save File</source>
         <translation>Zapisz plik</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="882"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1568"/>
         <source>Save a Copy</source>
         <translation>Zapisz kopię</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="944"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1607"/>
+        <source>Epub layout discarded.</source>
+        <translation>Układ pliku EPUB został odrzucony.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1614"/>
+        <source>New epub created.</source>
+        <translation>Utworzono nowy plik EPUB.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1649"/>
         <source>Go To Line</source>
         <translation>Idź do linii</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="944"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1649"/>
         <source>Line #</source>
         <translation>Linia #</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="967"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1672"/>
         <source>Image does not exist: </source>
         <translation>Obraz nie istnieje:</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1037"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1725"/>
+        <source>or</source>
+        <translation>lub</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1733"/>
         <source>No CSS styles named</source>
         <translation>Brak nazw stylów CSS</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1109"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1733"/>
+        <source>found, or stylesheet not linked.</source>
+        <translation>lub arkusz stylów nie połączony.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1810"/>
         <source>&lt;html&gt;&lt;p&gt;The href &lt;b&gt;%1&lt;/b&gt; found in &lt;b&gt;%2&lt;/b&gt; does not exist (and there may be more). Splitting or merging under these conditions can result in broken links.&lt;/p&gt;&lt;p&gt;Do you still wish to continue?&lt;/p&gt;&lt;/html&gt;</source>
         <translation>&lt;html&gt;&lt;p&gt;W sekcji&lt;b&gt;%1&lt;/b&gt; nie znaleziono &lt;b&gt;%2&lt;/b&gt; (może być więcej takich wystąpień). Dzielenie i scalanie z takimi błędami może skutkować nie działającymi linkami.&lt;/p&gt;&lt;p&gt;Czy chcesz kontynuować?&lt;/p&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1131"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1834"/>
         <source>Add Cover</source>
         <translation>Dodaj okładkę</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1223"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1883"/>
+        <source>An existing Cover file has been found.</source>
+        <translation>Znaleziono istniejący plik okładki.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="1939"/>
         <source>Unexpected error. Only image files can be used for the cover.</source>
         <translation>Niespodziewany błąd. Tylko pliki obrazów mogą być użyte jako okładka.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1240"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1956"/>
         <source>Cover added.</source>
         <translation>Dodano okładkę.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1249"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1266"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1965"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1982"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2014"/>
         <source>Not Available for epub2.</source>
         <translation>Niedostępne dla epub2.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1257"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="1973"/>
         <source>OPF Manifest Properties Updated.</source>
         <translation>Zaktualizowano właściwości manifestu OPF.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1283"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1337"/>
-        <source>NCX generation failed.</source>
-        <translation>Błąd utworzenia NCX.</translation>
+        <location filename="../../MainUI/MainWindow.cpp" line="2004"/>
+        <source>NCX and Guide removed.</source>
+        <translation>Plik NCX oraz sekcja Guide zostały usunięte.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1332"/>
-        <source>NCX generated.</source>
-        <translation>Utworzono NCX.</translation>
+        <location filename="../../MainUI/MainWindow.cpp" line="2031"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2063"/>
+        <source>NCX and Guide generation failed.</source>
+        <translation>Nie udało się wygenerować pliku NCX oraz sekcji Guide.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1485"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2101"/>
+        <source>NCX and Guide generated.</source>
+        <translation>Wygenerowano plik NCX oraz sekcję Guide.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="2185"/>
+        <source>An existing Index file has been found.</source>
+        <translation>Znaleziono istniejący plik z indeksem.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="2276"/>
         <source>Styles deleted.</source>
         <translation>Style usunięte.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1495"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2284"/>
+        <source>Reports Being Generated.</source>
+        <translation>Generowanie raportów.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="2295"/>
         <source>Reports cancelled due to XML not well formed.</source>
-        <translation>Raport anulowany z powodu błędnego formatowania XML.</translation>
+        <translation>Raport anulowany z powodu błędów składniowych XML.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1582"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2390"/>
         <source>Delete Unused Media Files cancelled due to XML not well formed.</source>
-        <translation>Usuwanie nieużywanych plików mediów anulowane z powodu błędnego formatowania XML.</translation>
+        <translation>Usuwanie nieużywanych plików mediów anulowane z powodu błędów składniowych XML.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1635"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2456"/>
         <source>Unused media files deleted.</source>
         <translation>Usunięto nieużywane pliki mediów.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1637"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2458"/>
         <source>There are no unused image, video or audio files to delete.</source>
         <translation>Brak nieużywanych plików obrazów, plików wideo lub audio do usunięcia.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1645"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2466"/>
         <source>Delete Unused Styles cancelled due to XML not well formed.</source>
-        <translation>Usunięcie nieużywanych stylów anulowane z powodu błędnego formatowania XML.</translation>
+        <translation>Usunięcie nieużywanych stylów anulowane z powodu błędów składniowych XML.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1662"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2483"/>
         <source>There are no unused stylesheet classes to delete.</source>
         <translation>Brak nieużywanych klas w arkuszu stylów do usunięcia.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1674"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2495"/>
         <source>You cannot insert a file at this position.</source>
         <translation>Nie można wstawić pliku w tej pozycji.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1681"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2502"/>
         <source>Insert File</source>
         <translation>Wstaw plik</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1726"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2554"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Plik &quot;%1&quot; nie istnieje.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1777"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1804"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2600"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2621"/>
         <source>You cannot insert an id at this position.</source>
         <translation>Nie można wstawić identyfikatora w tej pozycji.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1785"/>
-        <source>You must select text before inserting a new id.</source>
-        <translation>Musisz zaznaczyć tekst przed wstawieniem nowego identyfikatora.</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1799"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2616"/>
         <source>ID is invalid - must start with a letter, followed by letter number _ : - or .</source>
         <translation>Identyfikator jest błędny - musi zaczynać się od litery, a następnie składać się z litery, liczby, znaków _ : - lub .</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1817"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1841"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2634"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2652"/>
         <source>You cannot insert a link at this position.</source>
         <translation>Nie można wstawić łącza w tym miejscu.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1825"/>
-        <source>You must select text before inserting a new link.</source>
-        <translation>Musisz zaznaczyć tekst przed wstawieniem nowego łącza.</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1836"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2647"/>
         <source>Link is invalid - cannot contain &apos;&lt;&apos; or &apos;&gt;&apos;</source>
         <translation>Łącze jest nieprawidłowe - nie może zawierać &apos;&lt;&apos; lub &apos;&gt;&apos;</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1853"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2664"/>
         <source>You cannot mark an index at this position or without selecting text.</source>
         <translation>Nie można oznaczyć indeksu w tej pozycji lub bez zaznaczania tekstu.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1863"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2674"/>
         <source>Entry is invalid - cannot contain &apos;&lt;&apos; or &apos;&gt;&apos;</source>
         <translation>Wpis jest nieprawidłowy - nie może zawierać &apos;&lt;&apos; lub &apos;&gt;&apos;</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1868"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2679"/>
         <source>You cannot mark an index at this position.</source>
         <translation>Nie można oznaczyć indeksu w tym miejscu.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1922"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="1933"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2048"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2746"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2768"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2787"/>
         <source>Select the destination to paste into first.</source>
-        <translation>Wybierz miejsce docelowe, aby wkleić do pierwszej.</translation>
+        <translation>Najpierw wybierz miejsce docelowe do wklejenia.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="1941"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2776"/>
         <source>Pasted clip entry %1.</source>
-        <translation>Wklejono Wycinek wpisu %1.</translation>
+        <translation>Wklejono wpis wycinka %1.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2087"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2838"/>
         <source>One resource selected and there is no previous resource to merge into.</source>
         <translation>Jeden zasób wybrany i nie ma możliwości scalenia go z poprzednim.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2094"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2845"/>
         <source>Are you sure you want to merge the selected files?
 This action cannot be reversed.</source>
         <translation>Czy na pewno scalić zaznaczone pliki?
 Tej akcji nie można cofnąć.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2108"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2859"/>
         <source>Merge cancelled: %1, XML not well formed.</source>
-        <translation>Scalanie anulowane: %1, XML jest niepoprawnie sformatowany.</translation>
+        <translation>Scalanie anulowane: %1, XML nie jest poprawny składniowo.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2113"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2864"/>
         <source>Merge cancelled due to XML not well formed.</source>
-        <translation>Scalanie anulowane z powodu błędów w formatowaniu XML.</translation>
+        <translation>Scalanie anulowane z powodu błędów składniowych XML.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2137"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2888"/>
         <source>Cannot merge file %1</source>
         <translation>Nie można scalić pliku %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2151"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2902"/>
         <source>Merge completed. You may need to regenerate or edit your Table Of Contents.</source>
-        <translation>Scalanie zakończone. Sprawdź czy nie trzeba poprawić lub edytować Spisu treści.</translation>
+        <translation>Scalanie zakończone. Sprawdź, czy nie trzeba poprawić lub edytować spisu treści.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2169"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="2920"/>
         <source>Link Stylesheets cancelled: %1, XML not well formed.</source>
-        <translation>Łącze do arkusza stylów anulowane: %1, niewłaściwa forma XML.</translation>
+        <translation>Łącze do arkusza stylów anulowane: %1, XML nie jest poprawny składniowo.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2300"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3045"/>
         <source>Word updated.</source>
         <translation>Słowo uaktualniono.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2382"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3117"/>
         <source>File(s) deleted.</source>
         <translation>Plik(ów) usunięto.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2393"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3128"/>
         <source>Edit Table of Contents cancelled.</source>
-        <translation>Anulowano edycję Spisu treści.</translation>
+        <translation>Anulowano edycję spisu treści.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2398"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3133"/>
         <source>Table Of Contents edited.</source>
-        <translation>Edycja Spisu treści.</translation>
+        <translation>Edycja spisu treści.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2416"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3151"/>
         <source>Generate TOC cancelled.</source>
-        <translation>Anulowano generowanie Spisu treści (TOC).</translation>
+        <translation>Anulowano generowanie spisu treści (TOC).</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2440"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3176"/>
         <source>Table Of Contents generated.</source>
-        <translation>Utworzono Spis treści.</translation>
+        <translation>Utworzono spis treści.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2442"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3178"/>
         <source>No Table Of Contents changes were necessary.</source>
-        <translation>Zmiany były konieczne z powodu braku Spisu treści.</translation>
+        <translation>Spis treści nie wymagał zmian.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2578"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3251"/>
+        <source>An existing HTML Table of Contents file has been found.</source>
+        <translation>Znaleziono istniejący plik ze spisem treści HTML.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="3329"/>
         <source>Text selection marked.</source>
         <translation>Wybrany tekst zaznaczono.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2580"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="2598"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3331"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3349"/>
         <source>Text selection unmarked.</source>
         <translation>Wybrany tekst odznaczono.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2686"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3398"/>
         <source>Metadata Editor cancelled.</source>
-        <translation>Anulowanie edycji metadanych.</translation>
+        <translation>Anulowano edycję metadanych.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2689"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3401"/>
         <source>Metadata edited.</source>
         <translation>Edycja metadanych.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2777"/>
-        <source>RunPlugin1</source>
-        <translation>Uruchamianie Wtyczki 1</translation>
+        <location filename="../../MainUI/MainWindow.cpp" line="3509"/>
+        <source>RunPlugin</source>
+        <translation>Uruchom wtyczkę</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2778"/>
-        <source>RunPlugin2</source>
-        <translation>Uruchamianie Wtyczki 2</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2779"/>
-        <source>RunPlugin3</source>
-        <translation>Uruchamianie Wtyczki 3</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2780"/>
-        <source>RunPlugin4</source>
-        <translation>Uruchamianie Wtyczki 4</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2781"/>
-        <source>RunPlugin5</source>
-        <translation>Uruchamianie Wtyczki 5</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="2812"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="3534"/>
         <source>This EPUB does not contain any CSS stylesheets to validate.</source>
         <translation>Ten EPUB nie zawiera żadnych arkuszy stylów CSS do sprawdzania.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3355"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4001"/>
         <source>Line: %1, Col: %2</source>
         <translation>Linia: %1 Kolumna: %2</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3454"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4087"/>
         <source>File cannot be split at this position.</source>
         <translation>Plik nie może być podzielony w tym miejscu.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3460"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4093"/>
         <source>Cannot split since it may not be an HTML file.</source>
         <translation>Nie można podzielić, ponieważ to nie jest plik HTML.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3466"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4099"/>
         <source>The Nav file cannot be split.</source>
         <translation>Plik Nav nie może być podzielony.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3483"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4116"/>
         <source>Split completed.</source>
-        <translation>Dzielenie zakończone.</translation>
+        <translation>Podział zakończony.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3508"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4134"/>
         <source>Cannot split since at least one file is not an HTML file.</source>
         <translation>Nie można podzielić, ponieważ co najmniej jeden plik nie jest plikiem HTML.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3514"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4140"/>
         <source>Cannot split: %1 XML is not well formed</source>
-        <translation>Nie można podzielić: %1 niewłaściwa forma XML.</translation>
+        <translation>Nie można podzielić: %1, XML nie jest poprawny składniowo.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3520"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4146"/>
         <source>Cannot split since at least one file may not be an HTML file.</source>
         <translation>Nie można podzielić, ponieważ co najmniej jeden plik może nie być plikiem HTML.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3553"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4179"/>
         <source>Split completed. You may need to update the Table of Contents.</source>
-        <translation>Podział zakończony. Sprawdź czy nie musisz zaktualizować Spisu treści.</translation>
+        <translation>Podział zakończony. Sprawdź, czy nie musisz zaktualizować spisu treści.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3562"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4181"/>
         <source>No split file markers found. Use Insert-&gt;Split Marker.</source>
         <translation>Nie znaleziono znaczników podziału. Użyj Wstaw -&gt; Znacznik podziału.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3678"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4401"/>
         <source>The document has been modified.
 Do you want to save your changes?</source>
         <translation>Dokument został zmieniony.
 Czy chcesz zapisać swoje zmiany?</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3758"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4422"/>
+        <source>Should Sigil overwrite this file?</source>
+        <translation>Czy Sigil ma nadpisać ten plik?</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/MainWindow.cpp" line="4593"/>
         <source>No importer for file type: %1</source>
         <translation>Nie można zaimportować plików typu: %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3765"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4600"/>
         <source>The following file was not loaded due to invalid content or not well formed XML:
 
 %1 (line %2: %3)
 
 Try setting the Clean Source preference to Mend XHTML Source Code on Open and reloading the file.</source>
-        <translation>Następujący plik nie został załadowany ze względu na nieprawidłowy lub źle sformatowany XML:
+        <translation>Następujący plik nie został załadowany ze względu na nieprawidłowy lub niepoprawny składniowo XML:
 
 %1 (linia %2: %3)
 
-Spróbuj włączyć w ustawieniach naprawę kodu źródłowego XHTML przy otwieraniu oraz ponownie załaduj plik.</translation>
+Spróbuj włączyć w ustawieniach poprawianie kodu źródłowego XHTML przy otwieraniu oraz ponownie załaduj plik.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3770"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4605"/>
         <source>Loading file...</source>
         <translation>Wczytywanie pliku...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3784"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4619"/>
         <source>File loaded.</source>
         <translation>Plik załadowano.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3811"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4646"/>
         <source>The creator of this file has encrypted it with DRM. Sigil cannot open such files.</source>
         <translation>Twórca tego pliku zaszyfrował go przy pomocy technologi DRM. Sigil nie może odczytać takich plików.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3818"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4653"/>
         <source>Cannot load EPUB: %1</source>
         <translation>Nie można wczytać EPUB: %1</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3822"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4657"/>
         <source>Cannot load file %1: %2</source>
         <translation>Nie można załadować pliku %1: %2</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3851"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4685"/>
         <source>Saving EPUB...</source>
         <translation>Zapisywanie EPUB...</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3860"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4694"/>
         <source>Sigil cannot save files of type &quot;%1&quot;.
 Please choose a different format.</source>
         <translation>Sigil nie może zapisać pliku typu &quot;%1&quot;.
 Proszę wybrać inny format.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3885"/>
-        <source>This EPUB has HTML files that are not well formed and your current Clean Source preferences are set to automatically mend on Save. Saving a file that is not well formed will cause it to be automatically fixed, which very rarely may result in data loss.
+        <location filename="../../MainUI/MainWindow.cpp" line="4719"/>
+        <source>This EPUB has HTML files that are not well formed and your current Clean Source preferences are set to automatically mend on Save. Saving a file that is not well formed will cause it to be automatically fixed, which very rarely may result in some data loss.
 
 Do you want to automatically mend the files before saving?</source>
-        <translation>Ten EPUB zawiera pliki HTML, które nie są poprawnie sformatowane, a bieżące Ustawienia nakazują automatycznie naprawienie plików przy zapisywaniu. Zapis niepoprawnie sformatowanego i automatycznie naprawionego pliku, może spowodować utratę danych.
+        <translation>Ten EPUB zawiera pliki HTML z błędami składniowymi, a bieżące ustawienia nakazują automatyczne poprawianie plików podczas zapisu. Zapisanie plików z błędami składni spowoduje ich automatyczne naprawienie, co w bardzo rzadkich przypadkach może spowodować utratę niektórych danych.
 
-Czy automatycznie naprawić plik przed zapisem?</translation>
+Czy automatycznie poprawić pliki przed zapisaniem?</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3916"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4757"/>
         <source>EPUB saved, but not all HTML files are well formed.</source>
-        <translation>EPUB został zapisany, jednak nie wszystkie pliki HTML są poprawnie sformatowane.</translation>
+        <translation>EPUB został zapisany, jednak nie wszystkie pliki HTML są poprawne składniowo.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3918"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4759"/>
         <source>EPUB saved.</source>
         <translation>EPUB zapisany.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="3924"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4765"/>
         <source>Cannot save file %1: %2</source>
         <translation>Nie można zapisać pliku %1: %2</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4059"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4898"/>
         <source>EPUB files (*.epub)</source>
         <translation>Pliki EPUB (*.epub)</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4060"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="4061"/>
-        <location filename="../../MainUI/MainWindow.cpp" line="4062"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4899"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4900"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4901"/>
         <source>HTML files (*.htm *.html *.xhtml)</source>
         <translation>Pliki HTML (*.htm *.html *.xhtml)</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4063"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4902"/>
         <source>Text files (*.txt)</source>
         <translation>Pliki tekstowe (*.txt)</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4064"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4903"/>
         <source>All files (*.*)</source>
         <translation>Wszystkie pliki (*.*)</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4072"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4911"/>
         <source>EPUB file (*.epub)</source>
         <translation>Plik EPUB (*.epub)</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4084"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="4928"/>
         <source>%1[*] - epub%2 - %3</source>
         <translation>%1[*] - epub%2 - %3</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4155"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="5006"/>
         <source>Preserve existing heading attributes is now:</source>
         <translation>Zachowaj istniejące atrybuty nagłówków:</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4156"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="5007"/>
         <source>ON</source>
         <translation>WŁ</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4156"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="5007"/>
         <source>OFF</source>
         <translation>WYŁ</translation>
     </message>
     <message>
-        <location filename="../../MainUI/MainWindow.cpp" line="4181"/>
+        <location filename="../../MainUI/MainWindow.cpp" line="5032"/>
         <source>&amp;%1 %2</source>
         <translation>&amp;%1 %2</translation>
+    </message>
+</context>
+<context>
+    <name>ManageRepos</name>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="14"/>
+        <source>Manage Checkpoint Repositories</source>
+        <translation>Zarządzanie repozytoriami punktów kontrolnych</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="22"/>
+        <source>Checkpoint Repositories</source>
+        <translation>Repozytoria punktów kontrolnych</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="69"/>
+        <source>ePub FileName</source>
+        <translation>Nazwa pliku EPUB</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="74"/>
+        <source>Title</source>
+        <translation>Tytuł</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="79"/>
+        <source>Modified</source>
+        <translation>Zmodyfikowany</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="84"/>
+        <source>Version</source>
+        <translation>Wersja</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="89"/>
+        <source>ePub:UUID</source>
+        <translation>ePub:UUID</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="112"/>
+        <source>Show Log</source>
+        <translation>Pokaż dziennik</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="120"/>
+        <source>Remove</source>
+        <translation>Usuń</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/ManageRepos.ui" line="128"/>
+        <source>Remove All</source>
+        <translation>Usuń wszystkie</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ManageRepos.cpp" line="140"/>
+        <location filename="../../Dialogs/ManageRepos.cpp" line="171"/>
+        <source>Nothing is Selected.</source>
+        <translation>Nic nie wybrano.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ManageRepos.cpp" line="161"/>
+        <source>Repository Log</source>
+        <translation>Dziennik repozytorium</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ManageRepos.cpp" line="196"/>
+        <source>Remove All Repositories</source>
+        <translation>Usuń wszystkie repozytoria</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ManageRepos.cpp" line="197"/>
+        <source>Are you sure sure you want to remove all checkpoint repositories?</source>
+        <translation>Czy na pewno chcesz usunąć wszystkie repozytoria punktów kontrolnych?</translation>
     </message>
 </context>
 <context>
@@ -9402,7 +10487,7 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="114"/>
         <source>Use for a person or organization that reviews, examines and interprets data or information in a specific area.</source>
-        <translation>Zastosuj dla osoby lub organizacji recenzującej, analizujacej i interpretującej dane lub informacje z konkretnej dziedziny.</translation>
+        <translation>Zastosuj dla osoby lub organizacji recenzującej, analizującej i interpretującej dane lub informacje z konkretnej dziedziny.</translation>
     </message>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="115"/>
@@ -10042,7 +11127,7 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="178"/>
         <source>Use for a person or organization relevant to a resource, who enters into a contract with another person or organization to perform a specific task.</source>
-        <translation>Zastosuj dla osoby lub organizacji zawierajęcej umowę z inną osobą lub organizacją celem wykonania określonego zadania.</translation>
+        <translation>Zastosuj dla osoby lub organizacji zawierającej umowę z inną osobą lub organizacją celem wykonania określonego zadania.</translation>
     </message>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="179"/>
@@ -10437,7 +11522,7 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="218"/>
         <source>Event place</source>
-        <translation>Miejsce Wydarzenia</translation>
+        <translation>Miejsce wydarzenia</translation>
     </message>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="218"/>
@@ -10457,7 +11542,7 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="220"/>
         <source>Facsimilist</source>
-        <translation>Wykonujący Faksymile</translation>
+        <translation>Wykonujący faksymile</translation>
     </message>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="220"/>
@@ -11392,7 +12477,7 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="313"/>
         <source>Use for a person or organization who manipulates, controls, or directs puppets or marionettes in a musical or dramatic presentation or entertainment.</source>
-        <translation>Użyj dla osoby lub organizacji kontrolującej lub poruszającej lalkami,  marionetkami itp., w przedstaiwniu teatralnym, musicalu lub innej formie rozrywki.</translation>
+        <translation>Użyj dla osoby lub organizacji kontrolującej lub poruszającej lalkami,  marionetkami itp., w przedstawieniu teatralnym, musicalu lub innej formie rozrywki.</translation>
     </message>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="314"/>
@@ -11618,7 +12703,7 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="336"/>
         <source>Use for a person who is an amanuensis and for a writer of manuscripts proper. For a person who makes pen-facsimiles, use Facsimilist [fac].</source>
-        <translation>Użyj dla osoby, która jest sekretarzem i autorem rękopisów. Dla osoby, która tworzy rękopisy, użyj Wykonujący Faksymile [fac].</translation>
+        <translation>Użyj dla osoby, która jest sekretarzem i autorem rękopisów. Dla osoby, która tworzy rękopisy, użyj Wykonujący faksymile [fac].</translation>
     </message>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="337"/>
@@ -11633,7 +12718,7 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="338"/>
         <source>Second party</source>
-        <translation>Druga Strona</translation>
+        <translation>Druga strona</translation>
     </message>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="338"/>
@@ -11858,7 +12943,7 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="360"/>
         <source>Use for a person who prepares a handwritten or typewritten copy from original material, including from dictated or orally recorded material. For makers of pen-facsimiles, use Facsimilist [fac].</source>
-        <translation>Użyj dla osoby, która przygotowuje odręcznie lub na maszynie kopię z oryginalnego materiału, w tym z materiału podyktowanego lub ustnie nagranego. Dla twórców rękopisów, użyj Wykonujący Faksymile [łac.].</translation>
+        <translation>Użyj dla osoby, która przygotowuje odręcznie lub na maszynie kopię z oryginalnego materiału, w tym z materiału podyktowanego lub ustnie nagranego. Dla twórców rękopisów, użyj Wykonujący faksymile [fac].</translation>
     </message>
     <message>
         <location filename="../../Misc/MarcRelators.cpp" line="361"/>
@@ -12096,710 +13181,721 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="171"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="234"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="239"/>
         <source>[ISBN here]</source>
         <translation>[Tu wpisz ISBN]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="175"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="239"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="244"/>
         <source>[ISSN here]</source>
         <translation>[Tu wpisz ISSN]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="179"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="244"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="249"/>
         <source>[DOI here]</source>
         <translation>[Tu wpisz DOI]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="183"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="249"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="254"/>
         <source>[UUID here]</source>
         <translation>[Tu wpisz UUID]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="194"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="267"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="272"/>
         <source>[Author name here]</source>
         <translation>[Tutaj nazwisko autora]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="200"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="272"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="277"/>
         <source>[Creator name here]</source>
         <translation>[Tutaj nazwisko twórcy]</translation>
     </message>
     <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="204"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="276"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="281"/>
         <source>[Contributor name here]</source>
         <translation>[Tutaj nazwisko współautora]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="254"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="208"/>
+        <source>[meta value here]</source>
+        <translation>[tu wartość elementu]</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="259"/>
         <source>[Custom identifier here]</source>
         <translation>[Tutaj niestandardowy identyfikator]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="443"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="448"/>
         <source>[Place value here]</source>
         <translation>[Miejsce na wartość]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="478"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="483"/>
         <source>[Your value here]</source>
         <translation>[Tutaj twoja wartość]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="542"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="644"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="547"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="649"/>
         <source>Author</source>
         <translation>Autor</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="542"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="644"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="547"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="649"/>
         <source>Represents a primary author of the book or publication</source>
         <translation>Reprezentuje podstawowego autora książki lub publikacji</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="543"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="648"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="548"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="653"/>
         <source>Subject</source>
         <translation>Temat</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="543"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="648"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="548"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="653"/>
         <source>An arbitrary phrase or keyword describing the subject in question. Use multiple &apos;subject&apos; elements if needed.</source>
         <translation>Dowolne frazy lub słowa opisujące temat w pytaniu. Użyj wielu elementów „temat” gdy ich nie ma.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="544"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="649"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="549"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="654"/>
         <source>Description</source>
         <translation>Opis</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="544"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="649"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="549"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="654"/>
         <source>Description of the publication&apos;s content.</source>
         <translation>Opis zawartości publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="545"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="650"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="550"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="655"/>
         <source>Publisher</source>
         <translation>Wydawca</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="545"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="650"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="550"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="655"/>
         <source>An entity responsible for making the publication available.</source>
         <translation>Podmiot odpowiedzialny za udostępnienie publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="546"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="651"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="551"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="656"/>
         <source>Date: Publication</source>
         <translation>Data: publikacji</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="546"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="651"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="551"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="656"/>
         <source>The date of publication.</source>
         <translation>Data publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="547"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="652"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="552"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="657"/>
         <source>Date: Creation</source>
         <translation>Data: utworzenia</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="547"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="652"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="552"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="657"/>
         <source>The date of creation.</source>
         <translation>Data powstania dzieła.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="548"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="553"/>
         <source>Date: Issued</source>
         <translation>Data: wydania</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="548"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="549"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="653"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="553"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="554"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="658"/>
         <source>The date of modification.</source>
         <translation>Data modyfikacji.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="549"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="653"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="554"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="658"/>
         <source>Date: Modification</source>
         <translation>Data: modyfikacji</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="550"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="654"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="555"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="659"/>
         <source>Type</source>
         <translation>Typ</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="550"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="555"/>
         <source>Used to indicate that the given EPUB Publication is of a specialized type..</source>
         <translation>Używana do wskazania, że dana Publikacja EPUB jest typu specjalistycznego...</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="551"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="655"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="556"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="660"/>
         <source>Format</source>
         <translation>Format</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="551"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="655"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="556"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="660"/>
         <source>The media type or dimensions of the publication. Best practice is to use a value from a controlled vocabulary (e.g. MIME media types).</source>
         <translation>Typ nośnika lub wymiary publikacji. Najlepiej jest użyć wartości z kontrolowanego słownictwa (np. typy MIME mediów).</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="552"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="656"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="557"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="661"/>
         <source>Source</source>
         <translation>Źródło</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="552"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="557"/>
         <source>Identifies the related resource(s) from which this EPUB Publication is derived.</source>
         <translation>Identyfikuje zasób(y) związane z którego pochodzi ta publikacja EPUB.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="553"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="657"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="558"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="662"/>
         <source>Language</source>
         <translation>Język</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="553"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="558"/>
         <source>Specifies the language of the publication. Select from the dropdown menu</source>
         <translation>Określa język publikacji. Wybierz z listy rozwijalnej</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="554"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="658"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="559"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="663"/>
         <source>Relation</source>
         <translation>Relacja</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="554"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="658"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="559"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="663"/>
         <source>A reference to a related resource. The recommended best practice is to identify the referenced resource by means of a string or number conforming to a formal identification system.</source>
-        <translation>Odniesienie do powiązanego zasobu. Zalecana praktyką jest identyfikować odwołanie do zasobu poprzez ciąg znaków lub liczb zgodnych z formalnym systemem identyfikacyjnym.</translation>
+        <translation>Odniesienie do powiązanego zasobu. Zalecaną praktyką jest identyfikować odwołanie do zasobu poprzez ciąg znaków lub liczb zgodnych z formalnym systemem identyfikacyjnym.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="555"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="659"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="560"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="664"/>
         <source>Coverage</source>
         <translation>Reportaż</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="555"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="659"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="560"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="664"/>
         <source>The extent or scope of the content of the publication&apos;s content.</source>
         <translation>Zakres lub dziedzina treści publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="556"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="660"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="561"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="665"/>
         <source>Rights</source>
         <translation>Prawa autorskie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="556"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="660"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="561"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="665"/>
         <source>Information about rights held in and over the publication. Rights information often encompasses Intellectual Property Rights (IPR), Copyright, and various Property Rights. If the Rights element is absent, no assumptions may be made about any rights held in or over the publication.</source>
         <translation>Informacje na temat posiadanych praw na publikację. Informacja na temat tego prawa często obejmuje Prawo Własności Intelektualnej (IPR), Prawa Autorskie, i różne Prawa Własności. Jeśli takiego prawa nie ma, nie ma założenia, że można wykorzystać wszelkie posiadane prawa w lub do publikacji.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="557"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="646"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="562"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="651"/>
         <source>Creator</source>
         <translation>Twórca</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="557"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="562"/>
         <source>Represents the name of a person, organization, etc. responsible for the creation of the content of an EPUB Publication. The role property can be attached to the element to indicate the function the creator played in the creation of the content.</source>
         <translation>Reprezentuje nazwę osoby, organizacji itp. odpowiedzialnych za tworzenie zawartości publikacji EPUB itp. Właściwość roli może być dołączona do elementu wskazującego funkcję, jaką Twórca odegrał w tworzeniu treści.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="558"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="647"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="563"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="652"/>
         <source>Contributor</source>
         <translation>Współautor</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="558"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="563"/>
         <source>Represents the name of a person, organization, etc. that played a secondary role in the creation of the content of an EPUB Publication. The role property can be attached to the element to indicate the function the creator played in the creation of the content.</source>
         <translation>Reprezentuje nazwę osoby, organizacji, itp odpowiedzialnej za tworzenie treści publikacji EPUB. Właściwość roli może być dołączona do elementu wskazującego funkcję, jaką Twórca odegrał w tworzeniu treści.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="559"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="564"/>
         <source>Belongs to Collection</source>
         <translation>Należy do zbioru</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="559"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="564"/>
         <source>Identifies the name of a collection to which the EPUB Publication belongs. An EPUB Publication may belong to one or more collections.</source>
         <translation>Identyfikuje nazwę zbioru, do której należy dana publikacja EPUB. Publikacja EPUB może należeć do jednego lub większej ilości zbiorów.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="560"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="645"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="565"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="650"/>
         <source>Title</source>
         <translation>Tytuł</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="560"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="565"/>
         <source>A title of the publication.  A publication may have only one main title but may have numerous other title types.  These include main, subtitle, short, collection, edition, and expanded title types.</source>
         <translation>Tytuł publikacji. Publikacja może mieć tylko jeden główny tytuł, ale może mieć też wiele innych typów tytułów. Obejmuje on [tytuł]; główny, podtytuł, skrócony, zbiór, wydanie, oraz rozszerzony typ tytułów.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="561"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="566"/>
         <source>Identifier: DOI</source>
         <translation>Identyfikator: DOI</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="561"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="566"/>
         <source>Digital Object Identifier associated with the given EPUB publication.</source>
         <translation>Cyfrowy identyfikator obiektu (Digital Object Identifier) związany z daną publikacją EPUB.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="562"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="567"/>
         <source>Identifier: ISBN</source>
         <translation>Identyfikator: ISBN</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="562"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="567"/>
         <source>International Standard Book Number associated with the given EPUB publication.</source>
         <translation>Międzynarodowy znormalizowany numer książki (International Standard Book Number) związany z daną publikacją EPUB.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="563"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="568"/>
         <source>Identifier: ISSN</source>
         <translation>Identyfikator: ISSN</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="563"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="568"/>
         <source>International Standard Serial Number associated with the given EPUB publication.</source>
         <translation>Międzynarodowy standardowy numer seryjny (International Standard Serial Number) związany z daną publikacją EPUB.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="564"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="569"/>
         <source>Identifier: UUID</source>
         <translation>Identyfikator: UUID</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="564"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="569"/>
         <source>A Universally Unique Idenitifier generated for this EPUB publication.</source>
         <translation>Uniwersalny unikatowy identyfikator (Universally Unique Idenitifier) generowany dla tej publikacji EPUB.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="566"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="669"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="571"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="674"/>
         <source>Custom Element</source>
         <translation>Element niestandardowy</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="566"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="669"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="571"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="674"/>
         <source>[Custom element]</source>
         <translation>[Element niestandardowy]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="566"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="571"/>
         <source>An empty metadata element you can modify.</source>
         <translation>Pusty element metadanych, który można zmodyfikować.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="593"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="696"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="572"/>
+        <source>Meta Element (primary)</source>
+        <translation>Element meta (podstawowy)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="572"/>
+        <source>An empty primary meta element you can modify.</source>
+        <translation>Pusty podstawowy element meta, który można zmodyfikować.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="598"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="701"/>
         <source>Id Attribute</source>
         <translation>Id atrybutu</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="593"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="696"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="598"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="701"/>
         <source>Optional, typically short, unique identifier string used as an attribute in the Package (opf) document.</source>
         <translation>Opcjonalne, zwykle krótki, unikatowy identyfikator ciągu używany jako atrybut w dokumencie pakietu (ofe).</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="594"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="697"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="599"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="702"/>
         <source>XML Language</source>
         <translation>Język XML</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="594"/>
-        <source>Optional, language specifying attribute.  Uses same codes as dc:language. Not for use with dc:langauge, dc:date, or dc:identifier metadata elements.</source>
-        <translation>Opcjonalnie, język określania atrybutu. Wykorzystuje te same kody, dc:language. Nie stosować z dc:langauge, dc:date, lub dc:identifier identyfikatorami metadanych.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="595"/>
-        <source>Text Direction: rtl</source>
-        <translation>Kierunek tekstu: pdl</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="595"/>
-        <source>Optional text direction attribute for this metadata item. right-to-left (rtl). Not for use with dc:language, dc:date, or dc:identifier metadata elements.</source>
-        <translation>Opcjonalny atrybut kierunku tekstu dla tego elementu metadanych. od prawej do lewej (PDL). Nie stosować z dc:language, dc:date, lub dc:identifier identyfikatorami metadanych.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="596"/>
-        <source>Text Direction: ltr</source>
-        <translation>Kierunek tekstu: ldp</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="596"/>
-        <source>Optional text direction attribute for this metadata item. left-to-right (ltr). Not for use with dc:language, dc:date, or dc:identifier metadata elements.</source>
-        <translation>Opcjonalny atrybut kierunku tekstu dla tego elementu metadanych. od lewej  do prawej (LDP). Nie stosować z dc:language, dc:date, lub dc:identifier identyfikatorami metadanych.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="597"/>
-        <source>Title Type: main</source>
-        <translation>Typ tytułu: główny</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="597"/>
-        <source>Indicates the associated title is the main title of the publication.  Only one main title should exist.</source>
-        <translation>Wskazuje, że związany tytuł jest głównym tytułem publikacji. Powinien istnieć tylko jeden główny tytuł.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="598"/>
-        <source>Title Type: subtitle</source>
-        <translation>Typ tytułu: podtytuł</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="598"/>
-        <source>Indicates that the associated title is a subtitle of the publication if one exists..</source>
-        <translation>Wskazuje, że związany tytuł jest podtytułem publikacji. O ile taki istnieje.</translation>
-    </message>
-    <message>
         <location filename="../../Dialogs/MetaEditor.cpp" line="599"/>
-        <source>Title Type: short</source>
-        <translation>Typ tytułu: skrócony</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="599"/>
-        <source>Indicates that the associated title is a shortened title of the publication if one exists.</source>
-        <translation>Wskazuje, że związany tytuł jest skróconym tytułem publikacji. O ile taki istnieje...</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="600"/>
-        <source>Title Type: collection</source>
-        <translation>Typ tytułu: zbiór</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="600"/>
-        <source>Indicates that the associated title is the title of a collection that includes this publication belongs to, if one exists.</source>
-        <translation>Wskazuje, powiązany tytuł w nazwie zbioru, który zawiera tę publikację, jeśli taki istnieje.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="601"/>
-        <source>Title Type: edition</source>
-        <translation>Typ tytułu: wydanie</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="601"/>
-        <source>Indicates that the associated title is an edition title for this publications if one exists.</source>
-        <translation>Wskazuje, że nazwa związana jest z nazwą tytułu edycji publikacji, o ile taki istnieje.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="602"/>
-        <source>Title Type: expanded</source>
-        <translation>Typ tytułu: rozszerzony</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="602"/>
-        <source>Indicates that the associated title is an expanded title for this publication if one exists.</source>
-        <translation>Wskazuje, że nazwa związana jest z rozszerzonym tytułem tej publikacji, o ile taki istnieje.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="603"/>
-        <source>Alternate Script</source>
-        <translation>Alternatywny zapis</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="603"/>
-        <source>Provides an alternate expression of the associated property value in a language and script identified by an alternate-language attribute.</source>
-        <translation>Stanowi właściwość alternatywnej ekspresji związanej z wartością w innym języku, i skryptu zidentyfikowanego jako zastępcę - atrybutu języka.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="604"/>
-        <source>Alternate Language</source>
-        <translation>Alternatywny język</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="604"/>
-        <source>Language code for the language used in the associated alternate-script property value.</source>
-        <translation>Kod języka, dla języka używanego w powiązanej wartości, właściwości alternatywnego scenariusza.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="605"/>
-        <source>Collection Type: set</source>
-        <translation>Typ zbioru: zamknięty</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="605"/>
-        <source>Property used with belongs-to-collection. Indicates the form or nature of a collection. The value &apos;set&apos; should be used for a finite collection of works that together constitute a single intellectual unit; typically issued together and able to be sold as a unit..</source>
-        <translation>Właściwość stosować należy do zbioru (kolekcji). Wskazuje formę lub charakter zbioru. Wartość „zamknięty” powinna być wykorzystywana do skończonego zbioru utworów, które razem tworzą jedną całość intelektualną; zazwyczaj wystawianą razem ale może być sprzedawana jako jednostka.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="606"/>
-        <source>Collection Type: series</source>
-        <translation>Typ zbioru: seria</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="606"/>
-        <source>Property used with belongs-to-collection. Indicates the form or nature of a collection. The value &apos;series&apos;&apos; should be used for a sequence of related works that are formally identified as a group; typically open-ended with works issued individually over time.</source>
-        <translation>Właściwość stosować należy do zbioru. Wskazuje formę lub charakter zbioru. Wartości „serii” powinny być wykorzystywane do porządkowania powiązanych prac, które formalnie są identyfikowane jako Grupa; zazwyczaj rozpoczynane-kończone prace wykonywane są indywidualnie w czasie.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="607"/>
-        <source>Display Sequence</source>
-        <translation>Kolejność wyświetlania</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="607"/>
-        <source>Indicates the numeric position in which to display the current property relative to identical metadata properties (e.g., to indicate the order in which to render multiple titles or multiple authors).</source>
-        <translation>Wskazuje pozycję numeryczną by wyświetlić bieżące właściwości względem identycznych metadanych właściwości (np. aby wskazać kolejność, w której pokazać wiele tytułów lub wielu autorów).</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="608"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="698"/>
-        <source>File as</source>
-        <translation>Plik jako</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="608"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="698"/>
-        <source>Provides the normalized form of the associated property for sorting. Typically used with author, creator, and contributor names.</source>
-        <translation>Zapewnia znormalizowaną formę powiązanej właściwości do sortowania. Zwykle używa się nazw autorów, twórców i płatników.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="609"/>
-        <source>Group Position</source>
-        <translation>Pozycja grupy</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="609"/>
-        <source>Indicates the numeric position in which the EPUB Publication is ordered relative to other works belonging to the same group (whether all EPUB Publications or not).</source>
-        <translation>Wskazuje pozycję numeryczną, w której publikacja EPUB jest uporządkowana w stosunku do innych dzieł należących do tej samej grupy (czy wszystkie publikacje EPUB, czy nie).</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="610"/>
-        <source>Identifier Type</source>
-        <translation>Typ identyfikatora</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="610"/>
-        <source>Indicates the form or nature of an identifier. When the identifier-type value is drawn from a code list or other formal enumeration, the scheme attribute should be used to identify its source.</source>
-        <translation>Wskazuje na formę lub rodzaj identyfikatora. Gdy wartość typu identyfikatora jest pobierana z listy kodów lub innych formalnych wyliczeń, atrybut schematu powinien służyć do identyfikacji źródła.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="611"/>
-        <source>Meta Authority</source>
-        <translation>Metadane Instytucji</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="611"/>
-        <source>Identifies the party or authority responsible for an instance of package metadata.</source>
-        <translation>Identyfikuje podmiot lub organ odpowiedzialny za wystąpienie metadanych pakietu.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="612"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="699"/>
-        <source>Role</source>
-        <translation>Rola</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="612"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="699"/>
-        <source>Describes the nature of work performed by a creator or contributor (e.g., that the person is the author or editor of a work).  Typically used with the marc:relators scheme for a controlled vocabulary.</source>
-        <translation>Opisuje charakter pracy wykonanej przez twórcę lub współautorów (np. że osoba jest Autorem lub Redaktorem pracy). Zazwyczaj używany w układzie „marc:relators” dla kontroli słownictwa.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="613"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="700"/>
-        <source>Scheme</source>
-        <translation>Układ</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="613"/>
-        <source>This attribute is typically added to dc:identifier, dc:source: dc:creator, or dc:contributor to indicate the controlled vocabulary system employed. (e.g. marc:relators to specify valid values for the role property.</source>
-        <translation>Atrybut ten jest zazwyczaj dodawany do dc:identifier, dc:source: dc:creator, lub dc:contributor aby wskazać zastosowany system kontrolowania słownictwa. (np. marc:relators aby określić prawidłowe wartości dla właściwości Roli).</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="614"/>
-        <source>Source of Pagination</source>
-        <translation>Źródło stronicowania</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="614"/>
-        <source>Indicates a unique aspect of an adapted source resource that has been retained in the given Rendition of the EPUB Publication. This specification defines the pagination value to indicate that the referenced source element is the source of the pagebreak properties defined in the content. This value should be set whenever pagination is included and the print source is known. Valid values: pagination.</source>
-        <translation>Wskazuje, unikalną cechę dostosowania zasobów źródła, która została utrzymana w danym wydaniu publikacji EPUB. Ta specyfikacja definiuje wartości numeracji stron, aby wskazać, że odwołanie do źródła elementu jest źródłem właściwości podziału strony określonej w treści. Ta wartość powinna być ustawiona, gdy podział na strony jest włączony i znany w źródle wydruku. Prawidłowo values: pagination.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="615"/>
-        <source>Custom Property</source>
-        <translation>Właściwości niestandardowe</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="615"/>
-        <source>[Custom property/attribute]</source>
-        <translation>[Niestandardowa właściwość/atrybut]</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="615"/>
-        <source>An empty metadata property or attribute you can modify.</source>
-        <translation>Puste atrybuty lub właściwości metadanych, które można modyfikować.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="645"/>
-        <source>The main title of the epub publication.  Only one title may exist.</source>
-        <translation>Główny tytuł publikacji epub. Może istnieć tylko jeden tytuł.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="646"/>
-        <source>Represents the name of a person, organization, etc. responsible for the creation of the content of an EPUB Publication. The attributes opf:role, opf:scheme and opf:file-as can be attached to the element to indicate the function the creator played in the creation of the content.</source>
-        <translation>Reprezentuje nazwę osoby, organizacji, itp odpowiedzialnej za stworzenie treści publikacji EPUB. Atrybuty opf:role, opf:scheme i opf:file-as mogą być przywiązane do elementu, aby wskazać funkcję jaką odegrał Twórca w tworzeniu treści.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="647"/>
-        <source>Represents the name of a person, organization, etc. that played a secondary role in the creation of the content of an EPUB Publication&apos;</source>
-        <translation>Reprezentuje nazwę osoby, organizacji, itp. „który grał drugorzędną rolę w tworzeniu treści publikacji EPUB”</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="654"/>
-        <source>The nature or genre of the content of the resource.</source>
-        <translation>Rodzaj lub gatunek zawartości zasobu.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="656"/>
-        <source>A reference to a resource from which the present publication is derived.</source>
-        <translation>Odniesienie do zasobu, z którego wywodzi się obecna publikacja.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="657"/>
-        <source>A language used in the publication. Choose a RFC5646 value.</source>
-        <translation>Język używany w publikacji. Wybierz wartość RFC5646.</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="661"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="662"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="663"/>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="664"/>
-        <source>Identifier</source>
-        <translation>Identyfikator</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="661"/>
-        <source>Digital Object Identifier</source>
-        <translation>Identyfikator Dokumentu Elektronicznego (DOI)</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="662"/>
-        <source>International Standard Book Number</source>
-        <translation>Międzynarodowy Znormalizowany Numer Książki (ISBN)</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="663"/>
-        <source>International Standard Serial Number</source>
-        <translation>Międzynarodowy Znormalizowany Numer Seryjny (ISSN)</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="664"/>
-        <source>Universally Unique Identifier</source>
-        <translation>Uniwersalny Unikalny Identyfikator</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="665"/>
-        <source>Identifier: Custom</source>
-        <translation>Identyfikator: niestandardowy</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="665"/>
-        <source>A custom identifier based on a specified scheme</source>
-        <translation>Niestandardowy identyfikator na podstawie określonego układu</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="666"/>
-        <source>Series</source>
-        <translation>Cykl</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="666"/>
-        <source>Series title or name (from calibre)</source>
-        <translation>Nazwa lub tytuł cyklu (z calibre)</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="667"/>
-        <source>Series Index</source>
-        <translation>Numer w cyklu</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="667"/>
-        <source>Index of this book in the series (from calibre)</source>
-        <translation>Numer tej książki w cyklu (z calibre)</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="668"/>
-        <source>Title for Sorting</source>
-        <translation>Tytuł przy sortowaniu</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="668"/>
-        <source>Version of ebook title to use for sorting(from calibre)</source>
-        <translation>Wersja tytułu ebooka używana przy sortowaniu (z calibre)</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="669"/>
-        <source>An empty metadata element for you to modify</source>
-        <translation>Pusty element metadanych można zmodyfikować</translation>
-    </message>
-    <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="697"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="702"/>
         <source>Optional, language specifying attribute.  Uses same codes as dc:language. Not for use with dc:language, dc:date, or dc:identifier metadata elements.</source>
         <translation>Opcjonalne, określając atrybut języka. Używa tych samych kodów jako dc:language. Nie do użytku z elementami metadanych dc:language, dc:date, lub dc:identifier.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="700"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="600"/>
+        <source>Text Direction: rtl</source>
+        <translation>Kierunek tekstu: pdl</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="600"/>
+        <source>Optional text direction attribute for this metadata item. right-to-left (rtl). Not for use with dc:language, dc:date, or dc:identifier metadata elements.</source>
+        <translation>Opcjonalny atrybut kierunku tekstu dla tego elementu metadanych. od prawej do lewej (PDL). Nie stosować z dc:language, dc:date, lub dc:identifier identyfikatorami metadanych.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="601"/>
+        <source>Text Direction: ltr</source>
+        <translation>Kierunek tekstu: ldp</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="601"/>
+        <source>Optional text direction attribute for this metadata item. left-to-right (ltr). Not for use with dc:language, dc:date, or dc:identifier metadata elements.</source>
+        <translation>Opcjonalny atrybut kierunku tekstu dla tego elementu metadanych. od lewej do prawej (LDP). Nie stosować z dc:language, dc:date, lub dc:identifier identyfikatorami metadanych.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="602"/>
+        <source>Title Type: main</source>
+        <translation>Typ tytułu: główny</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="602"/>
+        <source>Indicates the associated title is the main title of the publication.  Only one main title should exist.</source>
+        <translation>Wskazuje, że związany tytuł jest głównym tytułem publikacji. Powinien istnieć tylko jeden główny tytuł.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="603"/>
+        <source>Title Type: subtitle</source>
+        <translation>Typ tytułu: podtytuł</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="603"/>
+        <source>Indicates that the associated title is a subtitle of the publication if one exists..</source>
+        <translation>Wskazuje, że związany tytuł jest podtytułem publikacji. O ile taki istnieje.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="604"/>
+        <source>Title Type: short</source>
+        <translation>Typ tytułu: skrócony</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="604"/>
+        <source>Indicates that the associated title is a shortened title of the publication if one exists.</source>
+        <translation>Wskazuje, że związany tytuł jest skróconym tytułem publikacji. O ile taki istnieje...</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="605"/>
+        <source>Title Type: collection</source>
+        <translation>Typ tytułu: zbiór</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="605"/>
+        <source>Indicates that the associated title is the title of a collection that includes this publication belongs to, if one exists.</source>
+        <translation>Wskazuje, powiązany tytuł w nazwie zbioru, który zawiera tę publikację, jeśli taki istnieje.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="606"/>
+        <source>Title Type: edition</source>
+        <translation>Typ tytułu: wydanie</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="606"/>
+        <source>Indicates that the associated title is an edition title for this publications if one exists.</source>
+        <translation>Wskazuje, że nazwa związana jest z nazwą tytułu edycji publikacji, o ile taki istnieje.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="607"/>
+        <source>Title Type: expanded</source>
+        <translation>Typ tytułu: rozszerzony</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="607"/>
+        <source>Indicates that the associated title is an expanded title for this publication if one exists.</source>
+        <translation>Wskazuje, że nazwa związana jest z rozszerzonym tytułem tej publikacji, o ile taki istnieje.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="608"/>
+        <source>Alternate Script</source>
+        <translation>Alternatywny zapis</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="608"/>
+        <source>Provides an alternate expression of the associated property value in a language and script identified by an alternate-language attribute.</source>
+        <translation>Stanowi właściwość alternatywnej ekspresji związanej z wartością w innym języku, i skryptu zidentyfikowanego jako zastępcę - atrybutu języka.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="609"/>
+        <source>Alternate Language</source>
+        <translation>Alternatywny język</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="609"/>
+        <source>Language code for the language used in the associated alternate-script property value.</source>
+        <translation>Kod języka, dla języka używanego w powiązanej wartości, właściwości alternatywnego scenariusza.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="610"/>
+        <source>Collection Type: set</source>
+        <translation>Typ zbioru: zamknięty</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="610"/>
+        <source>Property used with belongs-to-collection. Indicates the form or nature of a collection. The value &apos;set&apos; should be used for a finite collection of works that together constitute a single intellectual unit; typically issued together and able to be sold as a unit..</source>
+        <translation>Właściwość stosować należy do zbioru (kolekcji). Wskazuje formę lub charakter zbioru. Wartość „zamknięty” powinna być wykorzystywana do skończonego zbioru utworów, które razem tworzą jedną całość intelektualną; zazwyczaj wystawianą razem ale może być sprzedawana jako jednostka.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="611"/>
+        <source>Collection Type: series</source>
+        <translation>Typ zbioru: seria</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="611"/>
+        <source>Property used with belongs-to-collection. Indicates the form or nature of a collection. The value &apos;series&apos;&apos; should be used for a sequence of related works that are formally identified as a group; typically open-ended with works issued individually over time.</source>
+        <translation>Właściwość stosować należy do zbioru. Wskazuje formę lub charakter zbioru. Wartości „serii” powinny być wykorzystywane do porządkowania powiązanych prac, które formalnie są identyfikowane jako grupa; zazwyczaj rozpoczynane-kończone prace wykonywane są indywidualnie w czasie.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="612"/>
+        <source>Display Sequence</source>
+        <translation>Kolejność wyświetlania</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="612"/>
+        <source>Indicates the numeric position in which to display the current property relative to identical metadata properties (e.g., to indicate the order in which to render multiple titles or multiple authors).</source>
+        <translation>Wskazuje pozycję numeryczną by wyświetlić bieżące właściwości względem identycznych metadanych właściwości (np. aby wskazać kolejność, w której pokazać wiele tytułów lub wielu autorów).</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="613"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="703"/>
+        <source>File as</source>
+        <translation>Plik jako</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="613"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="703"/>
+        <source>Provides the normalized form of the associated property for sorting. Typically used with author, creator, and contributor names.</source>
+        <translation>Zapewnia znormalizowaną formę powiązanej właściwości do sortowania. Zwykle używa się nazw autorów, twórców i współautorów.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="614"/>
+        <source>Group Position</source>
+        <translation>Pozycja grupy</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="614"/>
+        <source>Indicates the numeric position in which the EPUB Publication is ordered relative to other works belonging to the same group (whether all EPUB Publications or not).</source>
+        <translation>Wskazuje pozycję numeryczną, w której publikacja EPUB jest uporządkowana w stosunku do innych dzieł należących do tej samej grupy (czy wszystkie publikacje EPUB, czy nie).</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="615"/>
+        <source>Identifier Type</source>
+        <translation>Typ identyfikatora</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="615"/>
+        <source>Indicates the form or nature of an identifier. When the identifier-type value is drawn from a code list or other formal enumeration, the scheme attribute should be used to identify its source.</source>
+        <translation>Wskazuje na formę lub rodzaj identyfikatora. Gdy wartość typu identyfikatora jest pobierana z listy kodów lub innych formalnych wyliczeń, atrybut schematu powinien służyć do identyfikacji źródła.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="616"/>
+        <source>Meta Authority</source>
+        <translation>Metadane Instytucji</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="616"/>
+        <source>Identifies the party or authority responsible for an instance of package metadata.</source>
+        <translation>Identyfikuje podmiot lub organ odpowiedzialny za wystąpienie metadanych pakietu.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="617"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="704"/>
+        <source>Role</source>
+        <translation>Rola</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="617"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="704"/>
+        <source>Describes the nature of work performed by a creator or contributor (e.g., that the person is the author or editor of a work).  Typically used with the marc:relators scheme for a controlled vocabulary.</source>
+        <translation>Opisuje charakter pracy wykonanej przez twórcę lub współautorów (np. że osoba jest Autorem lub Redaktorem pracy). Zazwyczaj używany w układzie „marc:relators” dla kontroli słownictwa.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="618"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="705"/>
+        <source>Scheme</source>
+        <translation>Układ</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="618"/>
+        <source>This attribute is typically added to dc:identifier, dc:source: dc:creator, or dc:contributor to indicate the controlled vocabulary system employed. (e.g. marc:relators to specify valid values for the role property.</source>
+        <translation>Atrybut ten jest zazwyczaj dodawany do dc:identifier, dc:source: dc:creator, lub dc:contributor aby wskazać zastosowany system kontrolowania słownictwa. (np. marc:relators aby określić prawidłowe wartości dla właściwości Roli).</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="619"/>
+        <source>Source of Pagination</source>
+        <translation>Źródło stronicowania</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="619"/>
+        <source>Indicates a unique aspect of an adapted source resource that has been retained in the given Rendition of the EPUB Publication. This specification defines the pagination value to indicate that the referenced source element is the source of the pagebreak properties defined in the content. This value should be set whenever pagination is included and the print source is known. Valid values: pagination.</source>
+        <translation>Wskazuje, unikalną cechę dostosowania zasobów źródła, która została utrzymana w danym wydaniu publikacji EPUB. Ta specyfikacja definiuje wartości numeracji stron, aby wskazać, że odwołanie do źródła elementu jest źródłem właściwości podziału strony określonej w treści. Ta wartość powinna być ustawiona, gdy podział na strony jest włączony i znany w źródle wydruku. Prawidłowo values: pagination.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="620"/>
+        <source>Custom Property</source>
+        <translation>Właściwości niestandardowe</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="620"/>
+        <source>[Custom property/attribute]</source>
+        <translation>[Niestandardowa właściwość/atrybut]</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="620"/>
+        <source>An empty metadata property or attribute you can modify.</source>
+        <translation>Puste atrybuty lub właściwości metadanych, które można modyfikować.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="650"/>
+        <source>The main title of the epub publication.  Only one title may exist.</source>
+        <translation>Główny tytuł publikacji epub. Może istnieć tylko jeden tytuł.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="651"/>
+        <source>Represents the name of a person, organization, etc. responsible for the creation of the content of an EPUB Publication. The attributes opf:role, opf:scheme and opf:file-as can be attached to the element to indicate the function the creator played in the creation of the content.</source>
+        <translation>Reprezentuje nazwę osoby, organizacji, itp odpowiedzialnej za stworzenie treści publikacji EPUB. Atrybuty opf:role, opf:scheme i opf:file-as mogą być przywiązane do elementu, aby wskazać funkcję jaką odegrał Twórca w tworzeniu treści.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="652"/>
+        <source>Represents the name of a person, organization, etc. that played a secondary role in the creation of the content of an EPUB Publication&apos;</source>
+        <translation>Reprezentuje nazwę osoby, organizacji, itp. „który grał drugorzędną rolę w tworzeniu treści publikacji EPUB”</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="659"/>
+        <source>The nature or genre of the content of the resource.</source>
+        <translation>Rodzaj lub gatunek zawartości zasobu.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="661"/>
+        <source>A reference to a resource from which the present publication is derived.</source>
+        <translation>Odniesienie do zasobu, z którego wywodzi się obecna publikacja.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="662"/>
+        <source>A language used in the publication. Choose a RFC5646 value.</source>
+        <translation>Język używany w publikacji. Wybierz wartość RFC5646.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="666"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="667"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="668"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="669"/>
+        <source>Identifier</source>
+        <translation>Identyfikator</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="666"/>
+        <source>Digital Object Identifier</source>
+        <translation>Identyfikator Dokumentu Elektronicznego (DOI)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="667"/>
+        <source>International Standard Book Number</source>
+        <translation>Międzynarodowy Znormalizowany Numer Książki (ISBN)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="668"/>
+        <source>International Standard Serial Number</source>
+        <translation>Międzynarodowy Znormalizowany Numer Seryjny (ISSN)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="669"/>
+        <source>Universally Unique Identifier</source>
+        <translation>Uniwersalny Unikatowy Identyfikator</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="670"/>
+        <source>Identifier: Custom</source>
+        <translation>Identyfikator: niestandardowy</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="670"/>
+        <source>A custom identifier based on a specified scheme</source>
+        <translation>Niestandardowy identyfikator na podstawie określonego układu</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="671"/>
+        <source>Series</source>
+        <translation>Cykl</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="671"/>
+        <source>Series title or name (from calibre)</source>
+        <translation>Nazwa lub tytuł cyklu (z calibre)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="672"/>
+        <source>Series Index</source>
+        <translation>Numer w cyklu</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="672"/>
+        <source>Index of this book in the series (from calibre)</source>
+        <translation>Numer tej książki w cyklu (z calibre)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="673"/>
+        <source>Title for Sorting</source>
+        <translation>Tytuł przy sortowaniu</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="673"/>
+        <source>Version of ebook title to use for sorting (from calibre)</source>
+        <translation>Wersja tytułu ebooka używana przy sortowaniu (z calibre)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="674"/>
+        <source>An empty element for you to modify</source>
+        <translation>Pusty element, który można zmodyfikować</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="705"/>
         <source>This attribute is typically added to dc:identifier to indicate the type of identifier being used: DOI, ISBN, ISSN, or UUID.</source>
         <translation>Ten atrybut jest zazwyczaj dodawany do elementu dc:identifier, aby określić typ używanego identyfikatora: DOI, ISBN, ISSN, lub UUID.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="701"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="706"/>
         <source>Event</source>
         <translation>Wydarzenie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="701"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="706"/>
         <source>This attribute is typically added to dc:date elements to specify the date type: publication, creation, or modification.</source>
         <translation>Ten atrybut jest zazwyczaj dodawany do elementów dc:date, aby określić typ danych: publikacja, utworzenie, lub modyfikacja.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="702"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="707"/>
         <source>Custom Attribute</source>
         <translation>Atrybut niestandardowy</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="702"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="707"/>
         <source>[Custom metadata property/attribute]</source>
         <translation>[Niestandardowa właściwość/atrybut metadanych]</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/MetaEditor.cpp" line="702"/>
+        <location filename="../../Dialogs/MetaEditor.cpp" line="707"/>
         <source>An empty metadata attribute you can modify.</source>
         <translation>Pusty atrybut metadanych, który można zmodyfikować.</translation>
     </message>
@@ -12807,40 +13903,148 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
 <context>
     <name>NCXResource</name>
     <message>
-        <location filename="../../ResourceObjects/NCXResource.cpp" line="159"/>
-        <location filename="../../ResourceObjects/NCXResource.cpp" line="161"/>
+        <location filename="../../ResourceObjects/NCXResource.cpp" line="183"/>
+        <location filename="../../ResourceObjects/NCXResource.cpp" line="185"/>
         <source>Start</source>
-        <translation>Start</translation>
+        <translation>Początek czytania</translation>
+    </message>
+</context>
+<context>
+    <name>Navigator</name>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="48"/>
+        <source>Left</source>
+        <translation>Lewy</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="49"/>
+        <source>Right</source>
+        <translation>Prawy</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="55"/>
+        <source>Go to previous change - [p]</source>
+        <translation>Przejdź do poprzedniej zmiany - [p]</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="61"/>
+        <source>Go to next change - [n]</source>
+        <translation>Przejdź do następnej zmiany - [n]</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="67"/>
+        <source>Search ...</source>
+        <translation>Szukaj...</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="71"/>
+        <source>Find Next</source>
+        <translation>Znajdź następny</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="77"/>
+        <source>Find Previous</source>
+        <translation>Znajdź poprzedni</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="82"/>
+        <source>Use Left Panel</source>
+        <translation>Użyj lewego panelu</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="85"/>
+        <source>Use Right Panel</source>
+        <translation>Użyj prawego panelu</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="90"/>
+        <source>Close this window</source>
+        <translation>Zamknij to okno</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator.h" line="91"/>
+        <source>Done</source>
+        <translation>Gotowe</translation>
+    </message>
+</context>
+<context>
+    <name>Navigator2</name>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="53"/>
+        <source>Go to previous page - [p]</source>
+        <translation>Przejdź do poprzedniej strony - [p]</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="60"/>
+        <source>Go to next page - [n]</source>
+        <translation>Przejdź do następnej strony - [n]</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="67"/>
+        <source>Search ...</source>
+        <translation>Szukaj...</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="72"/>
+        <source>Find Next</source>
+        <translation>Znajdź Następne</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="79"/>
+        <source>Find Previous</source>
+        <translation>Znajdź poprzednie</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="85"/>
+        <source>Close this window</source>
+        <translation>Zamknij to okno</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/Navigator2.h" line="86"/>
+        <source>Done</source>
+        <translation>Gotowe</translation>
     </message>
 </context>
 <context>
     <name>OPFModel</name>
     <message>
-        <location filename="../../MainUI/OPFModel.cpp" line="596"/>
+        <location filename="../../MainUI/OPFModel.cpp" line="713"/>
         <source>A filename cannot contains the character &quot;%1&quot;.</source>
         <translation>Nazwa pliku nie może zawierać znaku &quot;%1&quot;.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/OPFModel.cpp" line="607"/>
+        <location filename="../../MainUI/OPFModel.cpp" line="724"/>
         <source>The filename cannot be empty.</source>
         <translation>Nazwa pliku nie może być pusta.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/OPFModel.cpp" line="614"/>
+        <location filename="../../MainUI/OPFModel.cpp" line="736"/>
         <source>The filename &quot;%1&quot; is already in use.
 </source>
         <translation>Nazwa pliku &quot;%1&quot; jest już w użyciu.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/OPFModel.cpp" line="748"/>
+        <source>The book path cannot be empty.</source>
+        <translation>Ścieżka do książki nie może być pusta.</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/OPFModel.cpp" line="755"/>
+        <source>That book path &quot;%1&quot; is already in use.
+</source>
+        <translation>Ścieżka do książki &quot;%1&quot; jest już w użyciu
+</translation>
     </message>
 </context>
 <context>
     <name>OPFResource</name>
     <message>
-        <location filename="../../ResourceObjects/OPFResource.cpp" line="1120"/>
+        <location filename="../../ResourceObjects/OPFResource.cpp" line="1241"/>
         <source>[Title here]</source>
         <translation>[Tutaj tytuł]</translation>
     </message>
     <message>
-        <location filename="../../ResourceObjects/OPFResource.cpp" line="1122"/>
+        <location filename="../../ResourceObjects/OPFResource.cpp" line="1247"/>
         <source>[Main title here]</source>
         <translation>[Tutaj tytuł główny]</translation>
     </message>
@@ -12878,7 +14082,7 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     <message>
         <location filename="../../Form_Files/PluginRunner.ui" line="14"/>
         <source>Plugin Runner</source>
-        <translation>Uruchamianie Wtyczki</translation>
+        <translation>Uruchamianie wtyczki</translation>
     </message>
     <message>
         <location filename="../../Form_Files/PluginRunner.ui" line="28"/>
@@ -12913,180 +14117,181 @@ Czy automatycznie naprawić plik przed zapisem?</translation>
     <message>
         <location filename="../../Form_Files/PluginRunner.ui" line="139"/>
         <source>Status: </source>
-        <translation>Status:</translation>
+        <translation>Status: </translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="104"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="125"/>
         <source>Error: A plugin by that name does not exist</source>
         <translation>Błąd: Wtyczka o tej nazwie nie istnieje</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="135"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="156"/>
         <source>Error: Interpreter</source>
         <translation>Błąd: Interpreter</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="135"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="156"/>
         <source>has no path set</source>
         <translation>nie ma poprawnie ustawionej ścieżki dostępu</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="148"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="169"/>
         <source>Installation Error: plugin launcher</source>
         <translation>Błąd instalacji: program uruchamiający wtyczki</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="149"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="170"/>
         <source>does not exist</source>
         <translation>nie istnieje</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="154"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="175"/>
         <source>Error: plugin engine</source>
         <translation>Błąd: silnik wtyczki</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="155"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="176"/>
         <source>is not supported (yet!)</source>
         <translation>nie jest obsługiwany (jeszcze!)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="161"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="182"/>
         <source>Status: ready</source>
         <translation>Status: gotowość</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="223"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="272"/>
         <source>Error: plugin can not start</source>
         <translation>Błąd: wtyczki nie można uruchomić</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="371"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="424"/>
         <source>Status: running</source>
         <translation>Status: uruchamianie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="388"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="441"/>
         <source>Launcher process crashed</source>
         <translation>Awaria procesu uruchamiania</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="399"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="452"/>
         <source>Status: finished</source>
         <translation>Status: ukończone</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="406"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="459"/>
         <source>Status: failed</source>
         <translation>Status: nie powiodło się</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="412"/>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="421"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="465"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="474"/>
         <source>Status: No Changes Made</source>
         <translation>Status: Nie dokonano zmian</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="420"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="473"/>
         <source>Error: Plugin Tried to Remove the Last XHTML file .. aborting changes</source>
         <translation>Błąd: Wtyczka próbowała usunąć ostatni plik XHTML... porzucono zmiany</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="484"/>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="555"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="537"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="623"/>
         <source>Status:</source>
         <translation>Status:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="511"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="564"/>
         <source>Plugin failed to start</source>
         <translation>Uruchomienie wtyczki nie powiodło się</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="519"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="572"/>
         <source>Status: error</source>
         <translation>Status: błąd</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="533"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="601"/>
         <source>Plugin cancelled</source>
-        <translation>Anulowanie wtyczki</translation>
+        <translation>Anulowano uruchomienie wtyczki</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="534"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="602"/>
         <source>Status: cancelled</source>
         <translation>Status: anulowanie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="627"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="695"/>
         <source>Error Parsing Result XML:  </source>
-        <translation>Rezultat analizy błędów XML:</translation>
+        <translation>Błąd podczas analizowania wynikowego pliku XML: </translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="684"/>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="699"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="752"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="767"/>
         <source>Status: checking</source>
         <translation>Status: sprawdzanie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="688"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="756"/>
         <source>Incorrect XHTML:</source>
         <translation>Nieprawidłowy XHTML:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="688"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="756"/>
         <source>Line/Col</source>
         <translation>Linia/Kolumna</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="715"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="783"/>
         <source>Check Report</source>
         <translation>Sprawdź raport</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="716"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="784"/>
         <source>Incorrect XHTML/XML Detected
 Are you Sure You Want to Continue?</source>
         <translation>Wykryto nieprawidłowy XHTML/XML
 Czy na pewno kontynuować?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="734"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="802"/>
         <source>Status: cleaning up - deleting files</source>
         <translation>Status: czyszczenie - usuwanie plików</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="759"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="835"/>
         <source>Status: deleting</source>
         <translation>Status: usuwanie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="798"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="874"/>
         <source>Status: Loading</source>
         <translation>Status: ładowanie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="809"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="893"/>
         <source>Input Plugin</source>
         <translation>Wtyczka wejściowa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="810"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="894"/>
         <source>Your current book will be completely replaced losing any unsaved changes ...  Are you sure you want to proceed</source>
         <translation>Aktualna książka zostanie całkowicie zastąpiona, stracisz niezapisane zmiany... Czy na pewno kontynuować?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="836"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="920"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="934"/>
         <source>Status: adding</source>
         <translation>Status: dodawanie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="877"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="972"/>
         <source>Status: cleaning up - modifying files</source>
         <translation>Status: czyszczenie - modyfikacja plików</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PluginRunner.cpp" line="906"/>
+        <location filename="../../Dialogs/PluginRunner.cpp" line="1009"/>
         <source>Status: modifying</source>
         <translation>Status: modyfikacja</translation>
     </message>
@@ -13095,157 +14300,197 @@ Czy na pewno kontynuować?</translation>
     <name>PluginWidget</name>
     <message>
         <location filename="../../Form_Files/PPluginWidget.ui" line="14"/>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="167"/>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="116"/>
         <source>Plugins</source>
         <translation>Wtyczki</translation>
     </message>
     <message>
         <location filename="../../Form_Files/PPluginWidget.ui" line="28"/>
-        <source>Assign as Plugin 1</source>
-        <translation>Przypisz jako Wtyczka 1</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="75"/>
-        <source>Name</source>
-        <translation>Nazwa</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="80"/>
-        <source>Version</source>
-        <translation>Wersja</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="85"/>
-        <source>Author</source>
-        <translation>Autor</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="90"/>
-        <source>Type</source>
-        <translation>Typ</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="95"/>
-        <source>Interpreter</source>
-        <translation>Interpreter</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="109"/>
-        <source>≥Python3.4:</source>
-        <translation>≥ Python 3.4:</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="128"/>
-        <source>Auto</source>
-        <translation>Auto</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="135"/>
-        <source>Set</source>
-        <translation>Ustaw</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="174"/>
-        <source>Add Plugin</source>
-        <translation>Dodaj wtyczkę</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="181"/>
-        <source>Remove All</source>
-        <translation>Usuń wszystkie</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="188"/>
-        <source>Remove Plugin</source>
-        <translation>Usuń wtyczkę</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="214"/>
         <source>Path to Interpreter Executable</source>
         <translation>Ścieżka do programu interpretera</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="224"/>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="38"/>
         <source>Should the bundled Python interpreter be used if present?</source>
         <translation>Czy użyć dołączonego interpretera Pythona, jeżeli jest dostępny?</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="227"/>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="41"/>
         <source>Use Bundled Python</source>
         <translation>Użyj dołączonego Pythona</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="234"/>
-        <source>Assign as Plugin 2</source>
-        <translation>Przypisz jako Wtyczka 2</translation>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="54"/>
+        <source>≥Python3.4:</source>
+        <translation>≥ Python 3.4:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="73"/>
+        <source>Auto</source>
+        <translation>Auto</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="80"/>
+        <source>Set</source>
+        <translation>Ustaw</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="108"/>
+        <source>Add/Remove</source>
+        <translation>Dodaj/Usuń</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="163"/>
+        <source>Name</source>
+        <translation>Nazwa</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="168"/>
+        <source>Version</source>
+        <translation>Wersja</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="173"/>
+        <source>Author</source>
+        <translation>Autor</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="178"/>
+        <source>Type</source>
+        <translation>Typ</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="183"/>
+        <source>Interpreter</source>
+        <translation>Interpreter</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="204"/>
+        <source>Add Plugin</source>
+        <translation>Dodaj wtyczkę</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="211"/>
+        <source>Remove Plugin</source>
+        <translation>Usuń wtyczkę</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="218"/>
+        <source>Remove All</source>
+        <translation>Usuń wszystkie</translation>
     </message>
     <message>
         <location filename="../../Form_Files/PPluginWidget.ui" line="241"/>
-        <source>Assign as Plugin 3</source>
-        <translation>Przypisz jako Wtyczka 3</translation>
+        <source>Shortcuts</source>
+        <translation>Wtyczki na paskach narzędzi</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="248"/>
-        <source>Assign as Plugin 4</source>
-        <translation>Przypisz jako Wtyczka 4</translation>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="249"/>
+        <source>Quick Launch Plugin Assignments</source>
+        <translation>Przypisanie wtyczek do ikon</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PPluginWidget.ui" line="255"/>
-        <source>Assign as Plugin 5</source>
-        <translation>Przypisz jako Wtyczka 5</translation>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="259"/>
+        <source>Plugin 1:</source>
+        <translation>Wtyczka 1:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="184"/>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="272"/>
+        <source>Plugin 6:</source>
+        <translation>Wtyczka 6:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="285"/>
+        <source>Plugin 2:</source>
+        <translation>Wtyczka 2:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="298"/>
+        <source>Plugin 7:</source>
+        <translation>Wtyczka 7:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="311"/>
+        <source>Plugin 3:</source>
+        <translation>Wtyczka 3:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="324"/>
+        <source>Plugin 8:</source>
+        <translation>Wtyczka 8:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="337"/>
+        <source>Plugin 4:</source>
+        <translation>Wtyczka 4:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="350"/>
+        <source>Plugin 9:</source>
+        <translation>Wtyczka 9:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="363"/>
+        <source>Plugin 5:</source>
+        <translation>Wtyczka 5:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PPluginWidget.ui" line="376"/>
+        <source>Plugin 10:</source>
+        <translation>Wtyczka 10:</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="209"/>
         <source>Select Plugin Zip Archive</source>
         <translation>Wybierz archiwum zip z wtyczką</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="184"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="211"/>
         <source>Plugin Files (*.zip)</source>
         <translation>Pliki wtyczek (*.zip)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="200"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="229"/>
         <source>Error: Plugin plugin.xml is invalid or not supported on your operating system.</source>
         <translation>Błąd: Plik plugin.xml tej wtyczki jest uszkodzony lub nie wspiera Twojego systemu operacyjnego.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="203"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="232"/>
         <source>Warning: A plugin by that name already exists</source>
         <translation>Ostrzeżenie: Wtyczka o tej nazwie już istnieje</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="206"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="235"/>
         <source>Error: Plugin Could Not be Unzipped.</source>
         <translation>Błąd: Nie można rozpakować wtyczki.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="209"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="238"/>
         <source>Error: Plugin not a valid Sigil plugin.</source>
         <translation>Błąd: Wtyczka nie jest prawidłową wtyczką Sigila.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="249"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="276"/>
         <source>Nothing is Selected.</source>
         <translation>Nic nie wybrano.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="307"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="324"/>
         <source>Remove All Plugins</source>
         <translation>Usuń wszystkie wtyczki</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="308"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="325"/>
         <source>Are you sure sure you want to remove all of your plugins?</source>
         <translation>Czy na pewno usunąć wszystkie twoje wtyczki?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="366"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="382"/>
         <source>Select Interpreter</source>
         <translation>Wybór interpretera</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="391"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PluginWidget.cpp" line="411"/>
         <source>Incorrect Interpreter Path selected</source>
         <translation>Wybrano nieprawidłową ścieżkę interpretera</translation>
     </message>
@@ -13258,17 +14503,17 @@ Czy na pewno kontynuować?</translation>
         <translation>Ustawienia</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/Preferences.cpp" line="102"/>
+        <location filename="../../Dialogs/Preferences.cpp" line="116"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/Preferences.cpp" line="102"/>
+        <location filename="../../Dialogs/Preferences.cpp" line="116"/>
         <source>Changes will take effect when you restart Sigil.</source>
         <translation>Zmiany dadzą efekt po restarcie Sigila.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/Preferences.cpp" line="174"/>
+        <location filename="../../Dialogs/Preferences.cpp" line="198"/>
         <source>Open Preferences Location</source>
         <translation>Otwórz folder z ustawieniami</translation>
     </message>
@@ -13289,7 +14534,7 @@ Czy na pewno kontynuować?</translation>
         <location filename="../../Form_Files/PPreserveEntitiesWidget.ui" line="47"/>
         <source>Enter or paste entities to add to the list.
 Entities can be separated by lines, commas, or spaces.</source>
-        <translation>Wprowadź lub wklej encje do tej listy.
+        <translation>Wpisz lub wklej encje, by dodać je do tej listy.
 Encje mogą być oddzielone liniami, przecinkami lub spacjami.</translation>
     </message>
     <message>
@@ -13308,12 +14553,12 @@ Encje mogą być oddzielone liniami, przecinkami lub spacjami.</translation>
         <translation>Usuń wszystkie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PreserveEntitiesWidget.cpp" line="63"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PreserveEntitiesWidget.cpp" line="67"/>
         <source>Add Entities</source>
         <translation>Dodaj encje</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/PreserveEntitiesWidget.cpp" line="63"/>
+        <location filename="../../Dialogs/PreferenceWidgets/PreserveEntitiesWidget.cpp" line="67"/>
         <source>Entities:</source>
         <translation>Encje:</translation>
     </message>
@@ -13321,42 +14566,75 @@ Encje mogą być oddzielone liniami, przecinkami lub spacjami.</translation>
 <context>
     <name>PreviewWindow</name>
     <message>
-        <location filename="../../MainUI/PreviewWindow.cpp" line="42"/>
-        <location filename="../../MainUI/PreviewWindow.cpp" line="252"/>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="57"/>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="67"/>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="344"/>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="352"/>
         <source>Preview</source>
         <translation>Podgląd</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="183"/>
+        <source>Inspect Page</source>
+        <translation>Sprawdź stronę</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="186"/>
+        <source>Select-All</source>
+        <translation>Zaznacz wszystko</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="189"/>
+        <source>Copy Selection To ClipBoard</source>
+        <translation>Kopiuj zaznaczenie do schowka</translation>
+    </message>
+    <message>
+        <location filename="../../MainUI/PreviewWindow.cpp" line="192"/>
+        <source>Update Preview Window</source>
+        <translation>Uaktualnij okno Podglądu</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../BookManipulation/Book.cpp" line="1051"/>
+        <location filename="../../BookManipulation/Book.cpp" line="1149"/>
         <source>Merging Files..</source>
         <translation>Scalanie plików...</translation>
     </message>
     <message>
-        <location filename="../../BookManipulation/BookReports.cpp" line="53"/>
-        <location filename="../../BookManipulation/BookReports.cpp" line="124"/>
-        <source>Collecting classes...</source>
-        <translation>Zbieranie klas...</translation>
-    </message>
-    <message>
-        <location filename="../../BookManipulation/CleanSource.cpp" line="292"/>
+        <location filename="../../BookManipulation/CleanSource.cpp" line="312"/>
         <source>Cleaning...</source>
         <translation>Czyszczenie...</translation>
     </message>
     <message>
-        <location filename="../../BookManipulation/Index.cpp" line="47"/>
+        <location filename="../../BookManipulation/Index.cpp" line="48"/>
         <source>Creating Index...</source>
         <translation>Tworzenie indeksu...</translation>
     </message>
     <message>
-        <location filename="../../BookManipulation/Index.cpp" line="47"/>
+        <location filename="../../BookManipulation/Index.cpp" line="48"/>
         <source>Cancel</source>
         <translation>Anuluj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/Reports.cpp" line="114"/>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="89"/>
+        <location filename="../../Dialogs/EmptyLayout.cpp" line="289"/>
+        <source>Custom Epub Layout Designer</source>
+        <translation>Projektant własnego układu pliku EPUB</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="163"/>
+        <location filename="../../Misc/OpenExternally.cpp" line="244"/>
+        <source>Applications</source>
+        <translation>Aplikacje</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/PreferenceWidgets/GeneralSettingsWidget.cpp" line="181"/>
+        <source>Select External Xhtml Editor</source>
+        <translation>Wybierz zewnętrzny edytor XHTML</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/Reports.cpp" line="124"/>
         <source>Creating reports...</source>
         <translation>Tworzenie raportów...</translation>
     </message>
@@ -13366,113 +14644,107 @@ Encje mogą być oddzielone liniami, przecinkami lub spacjami.</translation>
         <translation>Nie można odczytać EPUB: %1</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="221"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="245"/>
         <source>The OPF file does not contain a valid spine.</source>
         <translation>Plik OPF nie zawiera prawidłowego szkieletu (spine).</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="222"/>
-        <location filename="../../Importers/ImportEPUB.cpp" line="710"/>
-        <location filename="../../Importers/ImportEPUB.cpp" line="713"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="246"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="860"/>
         <source>Sigil has created a new one for you.</source>
         <translation>Sigil utworzył nowy dla ciebie.</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="259"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="290"/>
         <source>Error parsing encryption xml.
 Line: %1 Column %2 - %3</source>
         <translation>Błąd podczas analizowania szyfrowanego xml.
 Linia: %1  Kolumna %2 - %3</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="391"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="406"/>
         <source>Cannot unzip EPUB: %1</source>
         <translation>Nie można rozpakować EPUB: %1</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="431"/>
-        <location filename="../../Importers/ImportEPUB.cpp" line="440"/>
-        <location filename="../../Importers/ImportEPUB.cpp" line="457"/>
-        <location filename="../../Importers/ImportEPUB.cpp" line="465"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="462"/>
+        <source>Possible evil or corrupt epub file name: %1</source>
+        <translation>Możliwa zła lub uszkodzona nazwa pliku EPUB: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Importers/ImportEPUB.cpp" line="489"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="498"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="515"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="523"/>
         <source>Cannot extract file: %1</source>
         <translation>Nie można wyodrębnić pliku: %1</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="478"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="535"/>
         <source>Cannot open EPUB: %1</source>
         <translation>Nie można otworzyć EPUB: %1</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="530"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="589"/>
         <source>Unable to parse container.xml file.
 Line: %1 Column %2 - %3</source>
         <translation>Nie można przeanalizować pliku container.xml
 Linia: %1  Kolumna %2 - %3</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="538"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="601"/>
         <source>No appropriate OPF file found</source>
         <translation>Nie znaleziono stosownych plików OPF</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="577"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="652"/>
         <source>Unable to read OPF file.
 Line: %1 Column %2 - %3</source>
         <translation>Nie można odczytać pliku OPF.
 Linia: %1 Kolumna %2 - %3</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="631"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="739"/>
+        <source>The OPF uses an unrecognized media type &quot;%1&quot; for file &quot;%2&quot;</source>
+        <translation>Plik OPF zawiera nierozpoznany typ mediów &quot;%1&quot; dla pliku &quot;%2&quot;</translation>
+    </message>
+    <message>
+        <location filename="../../Importers/ImportEPUB.cpp" line="740"/>
+        <source>A temporary media type of &quot;%1&quot; has been assigned. You should edit your OPF file to fix this problem.</source>
+        <translation>Został przypisany tymczasowy typ mediów &quot;%1&quot; . Należy edytować plik OPF by naprawić ten problem.</translation>
+    </message>
+    <message>
+        <location filename="../../Importers/ImportEPUB.cpp" line="763"/>
         <source>The OPF manifest contains duplicate ids for: %1</source>
         <translation>Manifest OPF zawiera zduplikowane identyfikatory: %1</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="632"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="764"/>
         <source>A temporary id has been assigned to load this EPUB. You should edit your OPF file to remove the duplication.</source>
         <translation>Tymczasowe nazwy identyfikatorów zakotwiczeń zostały przypisane do załadowanego pliku EPUB. Należy edytować plik OPF by usunąć dublowania.</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="676"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="835"/>
         <source>The OPF file did not identify the NCX file correctly.</source>
         <translation>W pliku OPF nie można poprawnie określić pliku NCX.</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="677"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="836"/>
         <source>Sigil has used the following file as the NCX:</source>
         <translation>Sigil wykorzysta następujący plik jako NCX:</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="705"/>
-        <source>Sigil has created a template NCX</source>
-        <translation>Sigil utworzył szablon NCX</translation>
-    </message>
-    <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="706"/>
-        <source>to support epub2 backwards compatibility.</source>
-        <translation>dla zachowania wstecznej kompatybilności z EPUB2.</translation>
-    </message>
-    <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="709"/>
+        <location filename="../../Importers/ImportEPUB.cpp" line="859"/>
         <source>The OPF file does not contain an NCX file.</source>
         <translation>Plik OPF nie zawiera pliku NCX.</translation>
     </message>
     <message>
-        <location filename="../../Importers/ImportEPUB.cpp" line="712"/>
-        <source>The NCX file is not present in this EPUB.</source>
-        <translation>W tym pliku EPUB brak pliku NCX.</translation>
-    </message>
-    <message>
-        <location filename="../../MainUI/BookBrowser.cpp" line="576"/>
+        <location filename="../../MainUI/BookBrowser.cpp" line="641"/>
         <source>Adding Existing Files..</source>
         <translation>Dodawanie istniejących plików...</translation>
     </message>
     <message>
-        <location filename="../../Misc/OpenExternally.cpp" line="183"/>
-        <source>Applications</source>
-        <translation>Aplikacje</translation>
-    </message>
-    <message>
-        <location filename="../../Misc/OpenExternally.cpp" line="193"/>
+        <location filename="../../Misc/OpenExternally.cpp" line="262"/>
         <source>Open With</source>
         <translation>Otwórz za pomocą</translation>
     </message>
@@ -13487,57 +14759,129 @@ Linia: %1 Kolumna %2 - %3</translation>
         <translation>Zastępowanie frazy...</translation>
     </message>
     <message>
-        <location filename="../../Misc/TOCHTMLWriter.cpp" line="105"/>
+        <location filename="../../Misc/TOCHTMLWriter.cpp" line="111"/>
         <source>Table of Contents</source>
         <translation>Spis treści</translation>
     </message>
     <message>
-        <location filename="../../Misc/UpdateChecker.cpp" line="97"/>
+        <location filename="../../Misc/UpdateChecker.cpp" line="98"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Misc/UpdateChecker.cpp" line="98"/>
+        <location filename="../../Misc/UpdateChecker.cpp" line="99"/>
         <source>&lt;p&gt;A newer version of Sigil is available, version &lt;b&gt;%1&lt;/b&gt;.&lt;br/&gt;&lt;p&gt;Would you like to go to the download page?&lt;/p&gt;</source>
         <translation>&lt;p&gt;Nowy Sigil w wersji &lt;b&gt;%1&lt;/b&gt; jest już dostępny.&lt;br/&gt;&lt;p&gt;Czy przejść do strony pobierania?&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Misc/Utility.cpp" line="420"/>
+        <location filename="../../Misc/Utility.cpp" line="505"/>
         <source>Cannot read file %1:
 %2.</source>
         <translation>Nie można odczytać pliku %1:
 %2.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Utility.cpp" line="535"/>
+        <location filename="../../Misc/Utility.cpp" line="632"/>
         <source>Sigil has encountered a problem.</source>
         <translation>Sigil napotkał problem.</translation>
     </message>
     <message>
-        <location filename="../../Misc/Utility.cpp" line="536"/>
+        <location filename="../../Misc/Utility.cpp" line="633"/>
         <source>Sigil may need to close.</source>
         <translation>Sigil może wymagać zamknięcia.</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/IndexHTMLWriter.cpp" line="70"/>
+        <location filename="../../MiscEditors/IndexHTMLWriter.cpp" line="75"/>
         <source>Index</source>
         <translation>Indeks</translation>
     </message>
     <message>
-        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="207"/>
-        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="273"/>
+        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="211"/>
+        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="279"/>
         <source>Invalid HTML file: %1</source>
         <translation>Uszkodzony plik HTML: %1</translation>
     </message>
     <message>
-        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="316"/>
+        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="324"/>
         <source>Invalid OPF file: %1</source>
         <translation>Uszkodzony plik OPF: %1</translation>
     </message>
     <message>
-        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="341"/>
+        <location filename="../../SourceUpdates/UniversalUpdates.cpp" line="350"/>
         <source>Invalid NCX file: %1</source>
         <translation>Uszkodzony plik NCX: %1</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="587"/>
+        <location filename="../../main.cpp" line="643"/>
+        <source>Quit</source>
+        <translation>Wyjście</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="599"/>
+        <source>About</source>
+        <translation>O programie</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="610"/>
+        <source>Preferences</source>
+        <translation>Ustawienia</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="621"/>
+        <source>New</source>
+        <translation>Nowy</translation>
+    </message>
+    <message>
+        <location filename="../../main.cpp" line="632"/>
+        <source>Open</source>
+        <translation>Otwierania</translation>
+    </message>
+</context>
+<context>
+    <name>RERenamer</name>
+    <message>
+        <location filename="../../Form_Files/RERenamer.ui" line="14"/>
+        <source>RE File Renamer</source>
+        <translation>Zmień nazwy plików z wykorzystaniem wyrażeń regularnych</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RERenamer.ui" line="42"/>
+        <source>Enter Regular Expression to be Replaced</source>
+        <translation>Wpisz wyrażenie regularne, które ma zostać zastąpione</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RERenamer.ui" line="55"/>
+        <source>Regular Expression:</source>
+        <translation>Wyrażenie regularne:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RERenamer.ui" line="68"/>
+        <source>Replacement:</source>
+        <translation>Zastąpienie:</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RERenamer.ui" line="81"/>
+        <source>Enter Replacement text (can use subgroups replacements)</source>
+        <translation>Wpisz tekst zastępujący (można użyć podgrup)</translation>
+    </message>
+</context>
+<context>
+    <name>RETable</name>
+    <message>
+        <location filename="../../Form_Files/RETable.ui" line="14"/>
+        <source>Rename Table</source>
+        <translation>Tabela zmiany nazwy</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RETable.ui" line="39"/>
+        <source>Prior Filename</source>
+        <translation>Pierwotna nazwa pliku</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/RETable.ui" line="44"/>
+        <source>Revised Filename</source>
+        <translation>Zmieniona nazwa pliku</translation>
     </message>
 </context>
 <context>
@@ -13545,7 +14889,7 @@ Linia: %1 Kolumna %2 - %3</translation>
     <message>
         <location filename="../../Form_Files/RenameTemplate.ui" line="20"/>
         <source>Rename Files</source>
-        <translation>Zmień nazwę plików</translation>
+        <translation>Zmień nazwy plików</translation>
     </message>
     <message>
         <location filename="../../Form_Files/RenameTemplate.ui" line="28"/>
@@ -13582,7 +14926,7 @@ Należy uważać by każde rozszerzenie było odpowiednie do rodzaju wybranego p
     <message>
         <location filename="../../Form_Files/RenameTemplate.ui" line="45"/>
         <source>Rename Files Starting At: </source>
-        <translation>Zmiana nazwy pliku począwszy od:</translation>
+        <translation>Zmiana nazw plików począwszy od:</translation>
     </message>
     <message>
         <location filename="../../Form_Files/RenameTemplate.ui" line="52"/>
@@ -13608,7 +14952,7 @@ Należy uważać by każde rozszerzenie było odpowiednie do rodzaju wybranego p
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="14"/>
         <source>Saved Searches</source>
-        <translation>Zapisane Wyszukiwania</translation>
+        <translation>Zapisane wyszukiwania</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="23"/>
@@ -13628,25 +14972,25 @@ Należy uważać by każde rozszerzenie było odpowiednie do rodzaju wybranego p
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="65"/>
         <source>Load the selected entry into the Find &amp; Replace window.</source>
-        <translation>Załaduj wybrany Wpis do okna Znajdź i Zastąp.</translation>
+        <translation>Załaduj wybrany wpis do okna Znajdź i Zastąp.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="68"/>
         <source>Load Search</source>
-        <translation>Wczytaj Wyszukiwania</translation>
+        <translation>Wczytaj wyszukiwania</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="91"/>
         <source>Run Find using the selected entry.
 If a group is selected, find the first entry in the list, 
 then if not found look for the second entry in the list, etc.</source>
-        <translation>Uruchom Znajdź używając wybranego Wpisu.
-Jeżeli zaznaczona jest Grupa, znajdź pierwszy Wpis na liście, 
-następnie, jeżeli nie znajdzie, patrzy na następny Wpis na liście itd.</translation>
+        <translation>Uruchom Znajdź używając wybranego wpisu.
+Jeżeli zaznaczona jest grupa, znajdź pierwszy wpis na liście, 
+następnie, jeżeli nie znajdzie, patrzy na następny wpis na liście itd.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="96"/>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="67"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="68"/>
         <source>Find</source>
         <translation>Znajdź</translation>
     </message>
@@ -13655,13 +14999,13 @@ następnie, jeżeli nie znajdzie, patrzy na następny Wpis na liście itd.</tran
         <source>Run Replace using the selected entry.
 If a group is selected, loop through each entry
 and stop at the first successful replace.</source>
-        <translation>Uruchom Zastąp stosując wybrany Wpis.
-Jeśli Grupa jest wybrana, wykona pętlę dla każdego Wpisu
+        <translation>Uruchom Zastąp stosując wybrany wpis.
+Jeśli grupa jest wybrana, wykona pętlę dla każdego wpisu
 i zatrzyma na pierwszym udanym zastąpieniu.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="108"/>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="68"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="69"/>
         <source>Replace</source>
         <translation>Zastąp</translation>
     </message>
@@ -13670,8 +15014,8 @@ i zatrzyma na pierwszym udanym zastąpieniu.</translation>
         <source>Run Replace/Find using the selected entry.
 If a group is selected, loop through each entry
 and stop at the first successful replace/find.</source>
-        <translation>Uruchom Zastąp/Znajdź stosując wybrany Wpis.
-Jeśli Grupa jest wybrana, wykona pętlę dla każdego Wpisu
+        <translation>Uruchom Zastąp/Znajdź stosując wybrany wpis.
+Jeśli grupa jest wybrana, wykona pętlę dla każdego wpisu
 i zatrzyma na pierwszym udanym zastąpieniu/szukaniu.</translation>
     </message>
     <message>
@@ -13684,7 +15028,7 @@ i zatrzyma na pierwszym udanym zastąpieniu/szukaniu.</translation>
         <source>Run Replace All for the selected entries in the order selected.
 Select a group to replace all entries in the group in order.</source>
         <translation>Uruchom Zastąp wszystko dla wybranych pozycji w wybranej kolejności.
-Wybierz Grupę, by zastąpić wszystkie Wpisy w docelowej grupie.</translation>
+Wybierz grupę, by zastąpić wszystkie wpisy wg kolejności w grupie.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="147"/>
@@ -13695,8 +15039,9 @@ Wybierz Grupę, by zastąpić wszystkie Wpisy w docelowej grupie.</translation>
         <location filename="../../Form_Files/SearchEditor.ui" line="170"/>
         <source>Run Count All for the selected entries in the order selected,
 including entries in selected groups.</source>
-        <translation>Uruchom Zlicz wszystko dla zaznaczonych Wpisów w celu
-wybrania Wpisów w wybranych Grupach.</translation>
+        <translation>Uruchom Zlicz wszystko dla zaznaczonych wpisów
+w kolejności zaznaczania, włączając także wpisy
+w zaznaczonych grupach.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="174"/>
@@ -13706,7 +15051,7 @@ wybrania Wpisów w wybranych Grupach.</translation>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="199"/>
         <source>Move an entry up one level in the same group.</source>
-        <translation>Przesuń Wpis górę o jeden poziom w tej samej Grupie.</translation>
+        <translation>Przesuń wpis górę o jeden poziom w tej samej grupie.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="202"/>
@@ -13719,17 +15064,17 @@ wybrania Wpisów w wybranych Grupach.</translation>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="229"/>
         <source>Move an entry to the level of its parent.</source>
-        <translation>Przesuń Wpis do poziomu nadrzędnego.</translation>
+        <translation>Przesuń wpis do poziomu nadrzędnego.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="258"/>
         <source>You must select an item immediately under a group to move it into the group.</source>
-        <translation>Należy wybrać i puścić Wpis bezpośrednio pod Grupą, aby przenieść go do Grupy.</translation>
+        <translation>Należy wybrać i puścić wpis bezpośrednio pod grupą, aby przenieść go do grupy.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="288"/>
         <source>Move an entry down one level in the same group.</source>
-        <translation>Przesuń Wpis w dół o jeden poziom w tej samej Grupie.</translation>
+        <translation>Przesuń wpis w dół o jeden poziom w tej samej grupie.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SearchEditor.ui" line="354"/>
@@ -13738,208 +15083,208 @@ wybrania Wpisów w wybranych Grupach.</translation>
 Kliknij OK, aby załadować wyszukiwania, zapisać dane i zamknąć.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="61"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="62"/>
         <source>All searches default to Regex, All HTML Files, Down.</source>
         <translation>Domyślnie wyszukiwania korzystają z ustawień: Wyrażenia regularne, Wszystkie pliki HTML, W dół.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="62"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="63"/>
         <source>Hold Ctrl down while clicking Find, Replace, etc. to temporarily search only the Current File.</source>
         <translation>Przytrzymaj Ctrl kiedy klikasz Znajdź, Zastąp itp., by tymczasowo szukać tylko w aktualnym pliku.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="63"/>
-        <source>Right click on an entry to see a context menu of actions.</source>
-        <translation>Kliknij prawym klawiszem myszy na Wpisie by zobaczyć menu kontekstowe działań.</translation>
-    </message>
-    <message>
         <location filename="../../Dialogs/SearchEditor.cpp" line="64"/>
-        <source>You can also right click on the Find text box in the Find &amp; Replace window to select an entry.</source>
-        <translation>Można również kliknąć w polu tekstowym Znajdź w oknie Znajdź &amp;&amp; Zastąp, aby wybrać Wpis.</translation>
+        <source>Right click on an entry to see a context menu of actions.</source>
+        <translation>Kliknij prawym przyciskiem myszy na wpis, aby zobaczyć menu kontekstowe działań.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="66"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="65"/>
+        <source>You can also right click on the Find text box in the Find &amp; Replace window to select an entry.</source>
+        <translation>Można również kliknąć w polu tekstowym Znajdź w oknie Znajdź &amp;&amp; Zastąp, aby wybrać wpis.</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="67"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="66"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="67"/>
         <source>Name of your entry or group.</source>
-        <translation>Nazwa Wpisu lub Grupy.</translation>
+        <translation>Nazwa wpisu lub grupy.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="67"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="68"/>
         <source>The text to put into the Find box.</source>
         <translation>Tekst do umieszczenia w polu Znajdź.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="68"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="69"/>
         <source>The text to put into the Replace box.</source>
         <translation>Tekst do umieszczenia w polu Zastąp.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="72"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="73"/>
         <source>Save</source>
         <translation>Zapisz</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="72"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="73"/>
         <source>Save your changes.</source>
         <translation>Zapisz wprowadzone zmiany.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="72"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="73"/>
         <source>If any other instances of Sigil are running they will be automatically updated with your changes.</source>
         <translation>Jeżeli są uruchomione jakiekolwiek inne instancje Sigila, wszelkie wprowadzone zmiany będą wyświetlane automatycznie.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="89"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="90"/>
         <source>Cannot save entries.</source>
-        <translation>Nie można zapisać Wpisów.</translation>
+        <translation>Nie można zapisać wpisów.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="163"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="170"/>
         <source>Saved Searches loaded from file.</source>
-        <translation>Zapisane Wyszukiwania wczytano z pliku.</translation>
+        <translation>Zapisane wyszukiwania wczytano z pliku.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="195"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="206"/>
         <source>You cannot select more than one entry when using this action.</source>
-        <translation>Nie można zaznaczyć więcej niż jeden Wpis, podczas korzystania z tego działania.</translation>
+        <translation>Nie można zaznaczyć więcej niż jeden wpis, podczas korzystania z tego działania.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="203"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="214"/>
         <source>You cannot select a group for this action.</source>
         <translation>Nie można zaznaczyć grupy do tego działania.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="245"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="260"/>
         <source>You cannot select an entry and a group containing the entry.</source>
-        <translation>Nie można wybrać Wpisu i Grupy zawierającej Wpis.</translation>
+        <translation>Nie można wybrać wpisu i grupy zawierającej wpis.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="328"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="343"/>
         <source>You cannot Copy or Cut groups - use drag-and-drop.</source>
-        <translation>Nie można użyć Kopiuj lub Wklej na Grupach - użyj przeciągnij-i-upuść.</translation>
+        <translation>Nie można kopiować lub wycinać grup - użyj przeciągnij-i-upuść.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="395"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="410"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="395"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="410"/>
         <source>Are you sure you want to reload all entries?  This will overwrite any unsaved changes.</source>
-        <translation>Czy jesteś pewien, że chcesz aby ponownie załadować wszystkie Wpisy?
-To spowoduje nadpisanie wszystkich niezapisanych zmian.</translation>
+        <translation>Czy jesteś pewien, że chcesz, aby ponownie załadować wszystkie wpisy?
+Spowoduje to nadpisanie wszystkich niezapisanych zmian.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="411"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="430"/>
         <source>Import Search Entries</source>
-        <translation>Import Wpisów Wyszukiwania</translation>
+        <translation>Import wpisów wyszukiwania</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="484"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="510"/>
         <source>Export Selected Searches</source>
-        <translation>Eksport zaznaczonych Wyszukiwań</translation>
+        <translation>Eksport zaznaczonych wyszukiwań</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="649"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="676"/>
         <source>Add Entry</source>
-        <translation>Dodaj Wpis</translation>
+        <translation>Dodaj wpis</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="650"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="677"/>
         <source>Add Group</source>
-        <translation>Dodaj Grupę</translation>
+        <translation>Dodaj grupę</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="651"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="678"/>
         <source>Edit</source>
         <translation>Edytuj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="652"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="679"/>
         <source>Cut</source>
         <translation>Wytnij</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="653"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="680"/>
         <source>Copy</source>
         <translation>Kopiuj</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="654"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="681"/>
         <source>Paste</source>
         <translation>Wklej</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="655"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="682"/>
         <source>Delete</source>
         <translation>Usuń</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="656"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="683"/>
         <source>Import</source>
         <translation>Import</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="657"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="684"/>
         <source>Reload</source>
         <translation>Wczytaj ponownie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="658"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="685"/>
         <source>Export</source>
         <translation>Eksport</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="659"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="686"/>
         <source>Export All</source>
         <translation>Eksport wszystkich</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="660"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="687"/>
         <source>Collapse All</source>
         <translation>Zwiń wszystko</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="661"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="688"/>
         <source>Expand All</source>
         <translation>Rozwiń wszystko</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="738"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="765"/>
         <source>Search entries saved.</source>
-        <translation>Zapisano Wpisy Wyszukiwania.</translation>
+        <translation>Zapisano wpisy wyszukiwania.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="767"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="794"/>
         <source>Sigil: Saved Searches</source>
-        <translation>Sigil: Zapisane Wyszukiwania</translation>
+        <translation>Sigil: Zapisane wyszukiwania</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SearchEditor.cpp" line="768"/>
+        <location filename="../../Dialogs/SearchEditor.cpp" line="795"/>
         <source>The Search entries may have been modified.
 Do you want to save your changes?</source>
-        <translation>Wpisy Wyszukiwanych mogły być zmienione.
+        <translation>Wpisy wyszukiwania mogły być zmienione.
 Czy chcesz zapisać zmiany?</translation>
     </message>
 </context>
 <context>
     <name>SearchEditorModel</name>
     <message>
-        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="65"/>
+        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="66"/>
         <source>Name</source>
         <translation>Nazwa</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="66"/>
+        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="67"/>
         <source>Find</source>
         <translation>Znajdź</translation>
     </message>
     <message>
-        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="67"/>
+        <location filename="../../MiscEditors/SearchEditorModel.cpp" line="68"/>
         <source>Replace</source>
         <translation>Zastąp</translation>
     </message>
@@ -13955,6 +15300,19 @@ Czy chcesz zapisać zmiany?</translation>
         <location filename="../../Form_Files/SelectCharacter.ui" line="14"/>
         <source>Insert Special Character</source>
         <translation>Wstaw znak specjalny</translation>
+    </message>
+</context>
+<context>
+    <name>SelectCheckpoint</name>
+    <message>
+        <location filename="../../Form_Files/SelectCheckpoint.ui" line="14"/>
+        <source>Select Checkpoint Version</source>
+        <translation>Wybierz wersję punktu kontrolnego</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/SelectCheckpoint.ui" line="56"/>
+        <source>Description of Checkpoint</source>
+        <translation>Opis punktu kontrolnego</translation>
     </message>
 </context>
 <context>
@@ -13992,54 +15350,76 @@ do książki i automatycznie wstawić do dokumentu.</translation>
         <translation>Wielkość miniatury:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="80"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="85"/>
         <source>All</source>
         <translation>Wszystko</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="81"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="86"/>
         <source>Images</source>
         <translation>Obrazy</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="82"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="87"/>
         <source>Video</source>
         <translation>Wideo</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="83"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="88"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="127"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="136"/>
         <source>Files In the Book</source>
-        <translation>Plików w książce</translation>
+        <translation>Pliki w książce</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="130"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="139"/>
         <source>Thumbnails</source>
         <translation>Miniatury</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="286"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="299"/>
         <source>shades</source>
-        <translation>odcienie</translation>
+        <translation>odcieni(e)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="286"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="299"/>
         <source>colors</source>
-        <translation>kolor</translation>
+        <translation>kolory(ów)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="287"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="300"/>
         <source>Grayscale</source>
         <translation>Skala szarości</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectFiles.cpp" line="287"/>
+        <location filename="../../Dialogs/SelectFiles.cpp" line="300"/>
         <source>Color</source>
         <translation>Kolor</translation>
+    </message>
+</context>
+<context>
+    <name>SelectFolder</name>
+    <message>
+        <location filename="../../Form_Files/SelectFolder.ui" line="14"/>
+        <source>Select Destination Folder </source>
+        <translation>Wybierz folder docelowy</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/SelectFolder.ui" line="22"/>
+        <source>Enter or select an ebook path to the desired destination folder.
+
+The dropdown box shows existing Folder paths for this file type.</source>
+        <translation>Wprowadź lub wybierz ścieżkę do żądanego folderu docelowego w pliku EPUB.
+
+Rozwijana lista pokazuje istniejące ścieżki folderów dla tego typu plików.</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/SelectFolder.ui" line="27"/>
+        <source>Folders:</source>
+        <translation>Foldery:</translation>
     </message>
 </context>
 <context>
@@ -14052,7 +15432,7 @@ do książki i automatycznie wstawić do dokumentu.</translation>
     <message>
         <location filename="../../Form_Files/SelectHyperlink.ui" line="22"/>
         <source>List only the entries that match the text you enter.</source>
-        <translation>Lista Wpisów, które pasują do wprowadzanego tekstu.</translation>
+        <translation>Lista wpisów, które pasują do wprowadzanego tekstu.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SelectHyperlink.ui" line="25"/>
@@ -14072,7 +15452,7 @@ podwójnie kliknąć na docelowe miejsce w książce z listy poniżej.</translat
         <translation>Cel:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SelectHyperlink.cpp" line="61"/>
+        <location filename="../../Dialogs/SelectHyperlink.cpp" line="69"/>
         <source>Targets in the Book</source>
         <translation>Cele w książce</translation>
     </message>
@@ -14095,7 +15475,7 @@ ID names must be unique and start with a letter.</source>
 
 Lista rozwijalna w okienku pokazuje istniejące Identyfikatory w bieżącym pliku.
 
-Nazwa Identyfikatora musi być unikalna i zaczynać się od litery.</translation>
+Nazwa Identyfikatora musi być unikatowa i zaczynać się od litery.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SelectId.ui" line="29"/>
@@ -14129,60 +15509,54 @@ Nazwa Identyfikatora musi być unikalna i zaczynać się od litery.</translation
         <translation>Słowniki pisowni</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="34"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="22"/>
         <source>Dictionary:</source>
         <translation>Słownik:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="64"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="52"/>
         <source>Highlight misspelled words in Code View.</source>
         <translation>Podkreślanie błędnych słów w Widoku Kodu.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="67"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="55"/>
         <source>Highlight Misspelled Words</source>
         <translation>Podkreślanie błędnych słów</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="74"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="75"/>
         <source>Check words with numbers in them.</source>
         <translation>Sprawdź wyrazy, które zawierają liczby.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="77"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="78"/>
         <source>Check Numbers</source>
         <translation>Sprawdź wyrazy z liczbami</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="130"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="149"/>
         <source>User Dictionaries</source>
         <translation>Słownik użytkownika</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="138"/>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="222"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="159"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="264"/>
         <source>Add</source>
         <translation>Dodaj</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="145"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="212"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="166"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="217"/>
         <source>Rename</source>
         <translation>Zmień nazwę</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="152"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="173"/>
         <source>Copy</source>
         <translation>Kopiuj</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="159"/>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="236"/>
-        <source>Remove</source>
-        <translation>Usuń</translation>
-    </message>
-    <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="162"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="180"/>
         <source>Remove the selected dictionary.
 
 You cannot remove the last dictionary.</source>
@@ -14191,114 +15565,120 @@ You cannot remove the last dictionary.</source>
 Nie można usunąć ostatniego słownika.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="189"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="185"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="278"/>
+        <source>Remove</source>
+        <translation>Usuń</translation>
+    </message>
+    <message>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="223"/>
         <source>Mark which dictionaries are enabled for
 spell checking.
 
 Select a dictionary to display its words,
 and to make it the default dictionary.</source>
-        <translation>Zaznacz, które słowniki mają być uwzględniane przy
-sprawdzaniu pisowni.
+        <translation>Zaznacz, które słowniki mają być uwzględniane
+podczas sprawdzania pisowni.
 
 Wybierz słownik, aby wyświetlić jego słowa
 i aby ustawić go jako słownik domyślny.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="203"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="250"/>
         <source>User Dictionary Word List</source>
-        <translation>Lista słów słownika użytkownika</translation>
+        <translation>Lista słów w słowniku użytkownika</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="218"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="260"/>
         <source>Enter or paste words to add to the dictionary.
 Words can be separated by lines, commas, or spaces.</source>
-        <translation>Wpisuje lub wkleja słowa by dodać do słownika.
-Słowa mogą być oddzielone liniami, przecinkiem lub spacją.</translation>
+        <translation>Wpisz lub wklej słowa, by dodać je do słownika.
+Słowa mogą być oddzielone liniami, przecinkami lub spacjami.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="229"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="271"/>
         <source>Edit</source>
         <translation>Edytuj</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="243"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="285"/>
         <source>Remove All</source>
         <translation>Usuń wszystkie</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="272"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="348"/>
         <source>The default dictionary is used when you add words to the
 default dictionary or use the shortcuts for Add Misspelled Words.</source>
         <translation>Domyślny słownik jest używany do dodawania słów do słownika domyślnego, lub przy użyciu skrótu Dodaj błędne słowo.</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="276"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="352"/>
         <source>Default Dictionary:</source>
         <translation>Domyślny słownik:</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="283"/>
+        <location filename="../../Form_Files/PSpellCheckWidget.ui" line="359"/>
         <source>none</source>
         <translation>brak</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="52"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="53"/>
         <source>Enable</source>
-        <translation>Włączony</translation>
+        <translation>Włącz</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="53"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="54"/>
         <source>Dictionary</source>
         <translation>Słownik</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="109"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="114"/>
         <source>Add Dictionary</source>
         <translation>Dodaj słownik</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="109"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="212"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="114"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="217"/>
         <source>Name:</source>
         <translation>Nazwa:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="123"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="163"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="225"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="233"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="252"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="128"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="168"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="230"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="238"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="257"/>
         <source>Error</source>
         <translation>Błąd</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="123"/>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="225"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="128"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="230"/>
         <source>A user dictionary already exists with this name!</source>
         <translation>Słownik użytkownika o tej nazwie już istnieje!</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="132"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="137"/>
         <source>Add Words</source>
         <translation>Dodaj słowa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="132"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="137"/>
         <source>Words:</source>
         <translation>Słowa:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="163"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="168"/>
         <source>Could not create file!</source>
         <translation>Utworzenie pliku się nie powiodło!</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="233"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="238"/>
         <source>Could not rename file!</source>
         <translation>Zmiana nazwy pliku się nie powiodła!</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="252"/>
+        <location filename="../../Dialogs/PreferenceWidgets/SpellCheckWidget.cpp" line="257"/>
         <source>You cannot delete the last dictionary.</source>
         <translation>Nie można usunąć ostatniego słownika.</translation>
     </message>
@@ -14329,7 +15709,7 @@ restartu programu lub otwarcia nowej książki.</translation>
     </message>
     <message>
         <location filename="../../Form_Files/SpellcheckEditor.ui" line="62"/>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="532"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="541"/>
         <source>Ignore</source>
         <translation>Ignoruj</translation>
     </message>
@@ -14350,8 +15730,8 @@ słownika wybranego poniżej.</translation>
         <source>Change all occurrences of the selected word  in
 HTML files to the word you select or type below.
 The selected word does not have to be misspelled.</source>
-        <translation>Zmień wybrane słowo we wszystkich wystąpieniach
-w pliku HTML do miejsca wybrania słowa lub wpisz poniżej.
+        <translation>Zmień wszystkie wystąpienia wybranego słowa w plikach
+HTML na słowo wybrane lub wpisane poniżej.
 Wybrane słowo nie musi być błędne.</translation>
     </message>
     <message>
@@ -14387,104 +15767,104 @@ Użyj, jeśli edytowałeś jakieś pliki HTML podczas sprawdzania pisowni.</tran
         <translation>Odśwież</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="53"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="54"/>
         <source>f</source>
         <comment>Filter</comment>
         <translation>f</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="54"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="55"/>
         <source>s</source>
         <comment>ShowAllWords</comment>
         <translation>s</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="55"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="56"/>
         <source>c</source>
         <comment>Case-InsensitiveSort</comment>
         <translation>c</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="56"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="57"/>
         <source>r</source>
         <comment>Refresh</comment>
         <translation>r</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="154"/>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="177"/>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="216"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="155"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="178"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="217"/>
         <source>No words selected.</source>
         <translation>Nie zaznaczono słów.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="170"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="171"/>
         <source>Ignored word(s).</source>
         <translation>Ignorowane słowo(a).</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="205"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="206"/>
         <source>Added word(s) to dictionary.</source>
         <translation>Dodano słowo(a) do słownika.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="207"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="208"/>
         <source>Added word(s) to dictionary. The dictionary is not enabled in Preferences.</source>
         <translation>Dodanie słów(a) do słownika. Słownik nie jest włączony w Ustawieniach.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="222"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="223"/>
         <source>The new word cannot contain &quot;&lt;&quot;, &quot;&gt;&quot;, or &quot;&amp;&quot;.</source>
         <translation>Nowe słowo nie może zawierać &quot;&lt;&quot;, &quot;&gt;&quot; lub &quot;&amp;&quot;.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="233"/>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="301"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="234"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="302"/>
         <source>No</source>
         <translation>Nie</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="252"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="253"/>
         <source>Word</source>
         <translation>Słowo</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="253"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="254"/>
         <source>Count</source>
         <translation>Wystąpień</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="254"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="255"/>
         <source>Misspelled?</source>
         <translation>Błędne?</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="299"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="300"/>
         <source>Yes</source>
         <translation>Tak</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="314"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="318"/>
         <source>Misspelled Words</source>
         <translation>Błędne słowa</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="314"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="318"/>
         <source>Total Unique Words</source>
-        <translation>Wszystkich unikalnych słów</translation>
+        <translation>Łączna liczba unikatowych słów</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="533"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="542"/>
         <source>Add to Dictionary</source>
         <translation>Dodaj do słownika</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="534"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="543"/>
         <source>Find in Text</source>
         <translation>Szukaj w tekście</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="535"/>
+        <location filename="../../Dialogs/SpellcheckEditor.cpp" line="544"/>
         <source>Select All</source>
         <translation>Zaznacz wszystko</translation>
     </message>
@@ -14493,8 +15873,8 @@ Użyj, jeśli edytowałeś jakieś pliki HTML podczas sprawdzania pisowni.</tran
     <name>StylesInCSSFilesWidget</name>
     <message>
         <location filename="../../Form_Files/ReportsStylesInCSSFilesWidget.ui" line="14"/>
-        <source>Style Classes in CSS Files</source>
-        <translation>Klasy stylów w plikach CSS</translation>
+        <source>CSS Classes</source>
+        <translation>Klasy CSS</translation>
     </message>
     <message>
         <location filename="../../Form_Files/ReportsStylesInCSSFilesWidget.ui" line="34"/>
@@ -14507,52 +15887,52 @@ Użyj, jeśli edytowałeś jakieś pliki HTML podczas sprawdzania pisowni.</tran
         <translation>Filtr:</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="80"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="86"/>
         <source>CSS File</source>
         <translation>Plik CSS</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="81"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="87"/>
         <source>Class Selector</source>
-        <translation>Selektor Klas</translation>
+        <translation>Selektor klasy</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="82"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="88"/>
         <source>Used In HTML File</source>
         <translation>Użyty w pliku HTML</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="88"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="94"/>
         <source>&lt;p&gt;This is a list of the class based selectors in all CSS files and whether or not the selector was matched from a style in an HTML file.&lt;p&gt;</source>
         <translation>&lt;p&gt;To jest lista klas opartych na selektorach wszystkich plików CSS i czy selektor został dopasowany ze stylu w pliku HTML.&lt;p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="89"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="95"/>
         <source>&lt;p&gt;NOTE:&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Notatka:&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;UWAGA:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="90"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="96"/>
         <source>&lt;p&gt;Due to the complexities of CSS you must check your code manually to be certain if a style is used or not.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Z powodu zawiłości CSS należy sprawdzić swój kod ręcznie, aby mieć pewność, czy styl jest używany, czy nie.&lt;/ p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="246"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="258"/>
         <source>Save Report As Comma Separated File</source>
         <translation>Zapisz raport jako plik CSV (wartości rozdzielone przecinkiem)</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="259"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="272"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="259"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="272"/>
         <source>Cannot save report file.</source>
         <translation>Nie można zapisać pliku raportu.</translation>
     </message>
     <message>
-        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="270"/>
+        <location filename="../../Dialogs/ReportsWidgets/StylesInCSSFilesWidget.cpp" line="283"/>
         <source>Delete From Stylesheet</source>
         <translation>Usuń z arkusza stylów</translation>
     </message>
@@ -14560,7 +15940,7 @@ Użyj, jeśli edytowałeś jakieś pliki HTML podczas sprawdzania pisowni.</tran
 <context>
     <name>TabBar</name>
     <message>
-        <location filename="../../Tabs/TabBar.cpp" line="67"/>
+        <location filename="../../Tabs/TabBar.cpp" line="83"/>
         <source>Close Other Tabs</source>
         <translation>Zamknij inne zakładki</translation>
     </message>
@@ -14568,7 +15948,7 @@ Użyj, jeśli edytowałeś jakieś pliki HTML podczas sprawdzania pisowni.</tran
 <context>
     <name>TabManager</name>
     <message>
-        <location filename="../../Tabs/TabManager.cpp" line="217"/>
+        <location filename="../../Tabs/TabManager.cpp" line="264"/>
         <source>Cannot edit file</source>
         <translation>Nie można edytować pliku</translation>
     </message>
@@ -14581,17 +15961,17 @@ Użyj, jeśli edytowałeś jakieś pliki HTML podczas sprawdzania pisowni.</tran
         <translation>Spis treści</translation>
     </message>
     <message>
-        <location filename="../../MainUI/TableOfContents.cpp" line="123"/>
+        <location filename="../../MainUI/TableOfContents.cpp" line="127"/>
         <source>The file &quot;%1&quot; does not exist.</source>
         <translation>Plik &quot;%1&quot; nie istnieje.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/TableOfContents.cpp" line="154"/>
+        <location filename="../../MainUI/TableOfContents.cpp" line="158"/>
         <source>Collapse All</source>
         <translation>Zwiń wszystko</translation>
     </message>
     <message>
-        <location filename="../../MainUI/TableOfContents.cpp" line="155"/>
+        <location filename="../../MainUI/TableOfContents.cpp" line="159"/>
         <source>Expand All</source>
         <translation>Rozwiń wszystko</translation>
     </message>
@@ -14599,24 +15979,52 @@ Użyj, jeśli edytowałeś jakieś pliki HTML podczas sprawdzania pisowni.</tran
 <context>
     <name>TextTab</name>
     <message>
-        <location filename="../../Tabs/TextTab.cpp" line="309"/>
+        <location filename="../../Tabs/TextTab.cpp" line="314"/>
         <source>Print %1</source>
         <translation>Drukowanie %1</translation>
     </message>
 </context>
 <context>
+    <name>TextView</name>
+    <message>
+        <location filename="../../ViewEditors/TextView.cpp" line="436"/>
+        <source>Reformat HTML</source>
+        <translation>Ponownie formatuj HTML</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/TextView.cpp" line="438"/>
+        <source>Mend and Prettify Code</source>
+        <translation>Popraw i upiększ kod</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/TextView.cpp" line="439"/>
+        <source>Mend and Prettify Code - All HTML Files</source>
+        <translation>Popraw i upiększ kod - wszystkie pliki HTML</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/TextView.cpp" line="440"/>
+        <source>Mend Code</source>
+        <translation>Popraw kod</translation>
+    </message>
+    <message>
+        <location filename="../../ViewEditors/TextView.cpp" line="441"/>
+        <source>Mend Code - All HTML Files</source>
+        <translation>Popraw kod - wszystkie pliki HTML</translation>
+    </message>
+</context>
+<context>
     <name>Utility</name>
     <message>
-        <location filename="../../Misc/Utility.cpp" line="648"/>
+        <location filename="../../Misc/Utility.cpp" line="740"/>
         <source>Sigil</source>
         <translation>Sigil</translation>
     </message>
     <message>
-        <location filename="../../Misc/Utility.cpp" line="649"/>
+        <location filename="../../Misc/Utility.cpp" line="741"/>
         <source>The requested file name contains non-ASCII characters. You should only use ASCII characters in filenames. Using non-ASCII characters can prevent the EPUB from working with some readers.
 
 Continue using the requested filename?</source>
-        <translation>Żądana nazwa pliku zawiera znaki spoza zestawu ASCII. Należy używać tylko znaków ASCII w nazwach plików. Używanie znaków spoza ASCII może  powodować problemy z odczytem plików EPUB na niektórych czytnikach.
+        <translation>Żądana nazwa pliku zawiera znaki spoza zestawu ASCII. Należy używać tylko znaków ASCII w nazwach plików. Używanie znaków spoza ASCII może powodować problemy z odczytem plików EPUB na niektórych czytnikach.
 
 Czy kontynuować przy użyciu żądanej nazwy pliku?</translation>
     </message>
@@ -14624,75 +16032,141 @@ Czy kontynuować przy użyciu żądanej nazwy pliku?</translation>
 <context>
     <name>ValidationResultsView</name>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="44"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="48"/>
         <source>Validation Results</source>
-        <translation>Rezultaty sprawdzania</translation>
+        <translation>Wyniki sprawdzania</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="227"/>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="231"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="246"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="250"/>
         <source>N/A</source>
         <translation>nd.</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="254"/>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="270"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="273"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="289"/>
         <source>Message</source>
         <translation>Wiadomość</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="255"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="274"/>
         <source>No problems found!</source>
         <translation>Nie znaleziono problemów!</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="270"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="289"/>
         <source>File</source>
         <translation>Plik</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="270"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="289"/>
         <source>Line</source>
         <translation>Linia</translation>
     </message>
     <message>
-        <location filename="../../MainUI/ValidationResultsView.cpp" line="270"/>
+        <location filename="../../MainUI/ValidationResultsView.cpp" line="289"/>
         <source>Offset</source>
         <translation>Offset</translation>
     </message>
 </context>
 <context>
-    <name>ViewImage</name>
+    <name>ViewAV</name>
     <message>
-        <location filename="../../Form_Files/ViewImage.ui" line="20"/>
-        <source>View Image</source>
-        <translation>Podgląd obrazu</translation>
+        <location filename="../../Dialogs/ViewAV.cpp" line="86"/>
+        <source>Close this window</source>
+        <translation>Zamknij to okno</translation>
     </message>
     <message>
-        <location filename="../../Form_Files/ViewImage.ui" line="33"/>
-        <source>about:blank</source>
-        <translation>about:blank</translation>
+        <location filename="../../Dialogs/ViewAV.cpp" line="87"/>
+        <source>Done</source>
+        <translation>Gotowe</translation>
+    </message>
+</context>
+<context>
+    <name>ViewFont</name>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="88"/>
+        <source>Close this window</source>
+        <translation>Zamknij to okno</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="89"/>
+        <source>Done</source>
+        <translation>Gotowe</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="147"/>
+        <source>abcdefghijklmnopqrstuvwxyz</source>
+        <translation>aąbcćdeęfghijklłmnńoópqrsśtuvwxyzżź</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="148"/>
+        <source>ABCDEFGHIJKLMNOPQRSTUVWXYZ</source>
+        <translation>AĄBCĆDEĘFGHIJKLŁMNŃOÓPQRSŚTUVWXYZŻŹ</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="149"/>
+        <source>0123456789.:,;(*!?&apos;\/&quot;)$%^&amp;-+@=_-~&gt;&lt;</source>
+        <translation>0123456789.:,;(*!?&apos;\/&quot;)$%^&amp;-+@=_-~„&gt;&lt;”</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewFont.cpp" line="150"/>
+        <source>The quick brown fox jumps over the lazy dog</source>
+        <translation>Mężny bądź, chroń pułk twój i sześć flag</translation>
+    </message>
+</context>
+<context>
+    <name>ViewImage</name>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="76"/>
+        <source>Close this window</source>
+        <translation>Zamknij to okno</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="77"/>
+        <source>Done</source>
+        <translation>Gotowe</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="106"/>
+        <source>shades</source>
+        <translation>odcieni(e)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="106"/>
+        <source>colors</source>
+        <translation>kolory(ów)</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="107"/>
+        <source>Grayscale</source>
+        <translation>Skala szarości</translation>
+    </message>
+    <message>
+        <location filename="../../Dialogs/ViewImage.cpp" line="107"/>
+        <source>Color</source>
+        <translation>Kolor</translation>
     </message>
 </context>
 <context>
     <name>WellFormedCheckComponent</name>
     <message>
-        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="42"/>
+        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="43"/>
         <source>&lt;p&gt;The operation you requested cannot be performed because &lt;b&gt;%1&lt;/b&gt; is not a well-formed XML document.&lt;/p&gt;&lt;p&gt;An error was found &lt;b&gt;at or above line %2: %3.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The &lt;i&gt;Fix Manually&lt;/i&gt; option will let you fix the problem by hand.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Operacja nie może być wykonana ponieważ &lt;b&gt;%1&lt;/b&gt; nie jest poprawnie zbudowanym dokumentem XML.&lt;/p&gt;&lt;p&gt;Błąd został znaleziony &lt;b&gt; powyżej linii %2: %3.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Opcja &lt;i&gt;Napraw Ręcznie&lt;/i&gt; da ci sposobność naprawienia błędu ręcznie.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Operacja nie może być wykonana ponieważ &lt;b&gt;%1&lt;/b&gt; nie jest poprawnym składniowo dokumentem XML.&lt;/p&gt;&lt;p&gt;Błąd został znaleziony &lt;b&gt; powyżej linii %2: %3.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;Opcja &lt;i&gt;Napraw ręcznie&lt;/i&gt; da ci sposobność naprawienia błędu ręcznie.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="47"/>
+        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="48"/>
         <source>&lt;p&gt;The &lt;i&gt;Fix Automatically&lt;/i&gt; option will instruct Sigil to try to repair the document. &lt;b&gt;This option may lead to loss of data!&lt;/b&gt;&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Opcja &lt;i&gt;Napraw Automatycznie&lt;/i&gt; poinstruuje program Sigil by sam spróbował naprawić dokument. &lt;b&gt;Ta opcja może prowadzić do utraty danych!&lt;/b&gt;&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Opcja &lt;i&gt;Napraw automatycznie&lt;/i&gt; poinstruuje program Sigil by sam spróbował naprawić dokument. &lt;b&gt;Ta opcja może prowadzić do utraty danych!&lt;/b&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="54"/>
+        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="55"/>
         <source>Fix &amp;Automatically</source>
         <translation>Napraw &amp;automatycznie</translation>
     </message>
     <message>
-        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="56"/>
+        <location filename="../../Tabs/WellFormedCheckComponent.cpp" line="57"/>
         <source>Fix &amp;Manually</source>
         <translation>Napraw &amp;ręcznie</translation>
     </message>
@@ -14797,7 +16271,7 @@ Czy kontynuować przy użyciu żądanej nazwy pliku?</translation>
     <message>
         <location filename="../../Misc/XMLEntities.cpp" line="116"/>
         <source>registered sign</source>
-        <translation>znak registred (znak zastrzeżony)</translation>
+        <translation>znak registered (znak zastrzeżony)</translation>
     </message>
     <message>
         <location filename="../../Misc/XMLEntities.cpp" line="117"/>
@@ -14862,7 +16336,7 @@ Czy kontynuować przy użyciu żądanej nazwy pliku?</translation>
     <message>
         <location filename="../../Misc/XMLEntities.cpp" line="129"/>
         <source>right-pointing double angle quotation mark</source>
-        <translation>prawy cydzysłów</translation>
+        <translation>prawy cudzysłów</translation>
     </message>
     <message>
         <location filename="../../Misc/XMLEntities.cpp" line="130"/>

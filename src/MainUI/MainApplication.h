@@ -1,8 +1,9 @@
 /************************************************************************
 **
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012 Grant Drake
-**  Copyright (C) 2012 Dave Heiland
+**  Copyright (C) 2019-2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012      Grant Drake
+**  Copyright (C) 2012      Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -28,6 +29,8 @@
 #include <QEvent>
 #include <QtWidgets/QApplication>
 
+class QStyle;
+
 class MainApplication : public QApplication
 {
     Q_OBJECT
@@ -35,12 +38,23 @@ class MainApplication : public QApplication
 public:
     MainApplication(int &argc, char **argv);
 
+    bool isDarkMode() { return m_isDark; }
+    void fixMacDarkModePalette(QPalette &pal);
+
 signals:
     void applicationActivated();
     void applicationDeactivated();
+    void applicationPaletteChanged();
+
+public slots:
+    void EmitPaletteChanged();
 
 protected:
     bool event(QEvent *pEvent);
+
+private:
+    QStyle * m_Style;
+    bool m_isDark;
 };
 
 #endif // MAINAPPLICATION_H

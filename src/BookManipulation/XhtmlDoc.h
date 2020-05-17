@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015 Kevin B. Hendricks Stratford, ON, Canada 
+**  Copyright (C) 2015-2019 Kevin B. Hendricks Stratford, ON, Canada 
 **  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -26,7 +26,6 @@
 
 #include <memory>
 
-#include <QtWebKit/QWebElement>
 #include "Misc/GumboInterface.h"
 #include "ViewEditors/ViewEditor.h"
 
@@ -98,16 +97,16 @@ public:
     //   <h1>Hello <b>Qt</b>&nbsp;this is great</h1>
     // returns
     //   Hello Qt this is great
-    static QString GetTextInHtml(const QString &source);
+    // static QString GetTextInHtml(const QString &source);
 
     // Resolves HTML entities in the provided string.
     // For instance:
     //    Bonnie &amp; Clyde
     // returns
     //    Bonnie & Clyde
-    static QString ResolveHTMLEntities(const QString &text);
+    // static QString ResolveHTMLEntities(const QString &text);
 
-    static QList<QWebElement> QWebElementChildren(const QWebElement &element);
+    // static QList<QWebElement> QWebElementChildren(const QWebElement &element);
 
     /**
      * Splits the provided source on SGF section breaks.
@@ -137,6 +136,8 @@ public:
     static GumboNode *GetAncestorBlockElement(GumboInterface &gi, GumboNode *node);
 
     static GumboNode *GetAncestorIDElement(GumboInterface &gi, GumboNode *node);
+
+    static QStringList GetHrefSrcPaths(const QString &source);
 
     static QStringList GetPathsToMediaFiles(const QString &source);
 

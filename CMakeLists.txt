@@ -27,12 +27,14 @@ set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}/lib )
 set( PACKAGE_DIRECTORY ${PROJECT_BINARY_DIR}/package )
 set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake_extras" )
 
-set( SIGIL_MAJOR_VERSION 0 )
-set( SIGIL_MINOR_VERSION 9 )
-set( SIGIL_REVISION_VERSION 10 )
+set( SIGIL_MAJOR_VERSION 1 )
+set( SIGIL_MINOR_VERSION 2 )
+set( SIGIL_REVISION_VERSION 1 )
 set( SIGIL_FULL_VERSION ${SIGIL_MAJOR_VERSION}.${SIGIL_MINOR_VERSION}.${SIGIL_REVISION_VERSION} )
 
 if( UNIX AND NOT APPLE )
+   include(GNUInstallDirs)
+
    # Make sure the correct rpath is set for the sigil executable
    # on Linux -- for both the build and the installed versions.
    # Needed to make sure the installed shared hunspell and gumbo
@@ -45,7 +47,7 @@ if( UNIX AND NOT APPLE )
    # (but later on when installing)
    SET(CMAKE_BUILD_WITH_INSTALL_RPATH FALSE)
 
-   SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib/sigil")
+   SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_FULL_LIBDIR}/sigil")
 
    # add the automatically determined parts of the RPATH
    # which point to directories outside the build tree to the install RPATH.

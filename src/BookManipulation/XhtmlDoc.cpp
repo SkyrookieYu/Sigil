@@ -1,8 +1,8 @@
-/**
-**  Copyright (C) 2015 Kevin B. Hendricks Stratford, ON, Canada 
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012 Dave Heiland
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+/***************************************************************************
+**  Copyright (C) 2015-2019 Kevin B. Hendricks Stratford, ON, Canada 
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012      Dave Heiland
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -27,8 +27,8 @@
 #include <QtCore/QList>
 #include <QtCore/QString>
 #include <QtCore/QXmlStreamReader>
-#include <QtWebKitWidgets/QWebFrame>
-#include <QtWebKitWidgets/QWebPage>
+// #include <QtWebKitWidgets/QWebFrame>
+// #include <QtWebKitWidgets/QWebPage>
 #include <QtXml/QXmlInputSource>
 #include <QtXml/QXmlSimpleReader>
 #include <QRegularExpression>
@@ -105,6 +105,8 @@ QString XhtmlDoc::ResolveCustomEntities(const QString &source)
 
     // ...and now replace all occurrences
     foreach(QString key, entities.keys()) {
+        // this could be dangerous so remove them to be safest
+        // new_source.replace(key, "");
         new_source.replace(key, entities[ key ]);
     }
     // Clean up what's left of the custom entity declaration field
@@ -297,7 +299,7 @@ bool XhtmlDoc::IsDataWellFormed(const QString &data, QString version)
     return error.line == -1;
 }
 
-
+#if 0
 // Accepts a string with HTML and returns the text
 // in that HTML fragment. For instance:
 //   <h1>Hello <b>Qt</b>&nbsp;this is great</h1>
@@ -310,7 +312,6 @@ QString XhtmlDoc::GetTextInHtml(const QString &source)
     return page.mainFrame()->toPlainText();
 }
 
-
 // Resolves HTML entities in the provided string.
 // For instance:
 //    Bonnie &amp; Clyde
@@ -322,7 +323,10 @@ QString XhtmlDoc::ResolveHTMLEntities(const QString &text)
     QString newsource = "<div>" + text + "</div>";
     return GetTextInHtml(newsource);
 }
+#endif
 
+#if 0 
+//this should no longer be needed without BookView
 
 // A tree node class without a children() function...
 // appallingly stupid, isn't it?
@@ -344,7 +348,7 @@ QList<QWebElement> XhtmlDoc::QWebElementChildren(const QWebElement &element)
 
     return children;
 }
-
+#endif
 
 QStringList XhtmlDoc::GetSGFSectionSplits(const QString &source,
         const QString &custom_header)
@@ -540,13 +544,30 @@ GumboNode *XhtmlDoc::GetAncestorIDElement(GumboInterface &gi, GumboNode *node)
 }
 
 
+// the returned paths are the href attribute values url decoded
+QStringList XhtmlDoc::GetHrefSrcPaths(const QString &source)
+{
+    QStringList destination_paths;
+    GumboInterface gi = GumboInterface(source, "any_version");
+    foreach(QString apath, gi.get_all_values_for_attribute("src")) {
+	destination_paths << Utility::URLDecodePath(apath);
+    }
+    foreach(QString apath, gi.get_all_values_for_attribute("href")) {
+	destination_paths << Utility::URLDecodePath(apath);
+    }
+    destination_paths.removeDuplicates();
+    return destination_paths;
+}
+
+
+// the returned media paths are the href attribute values url decoded
 QStringList XhtmlDoc::GetPathsToMediaFiles(const QString &source)
 {
-  QList<GumboTag> tags = QList<GumboTag>() << GIMAGE_TAGS << GVIDEO_TAGS << GAUDIO_TAGS;
-  QStringList media_paths = GetAllMediaPathsFromMediaChildren(source, tags);
-  // Remove duplicate references
-  media_paths.removeDuplicates();
-  return media_paths;
+    QList<GumboTag> tags = QList<GumboTag>() << GIMAGE_TAGS << GVIDEO_TAGS << GAUDIO_TAGS;
+    QStringList media_paths = GetAllMediaPathsFromMediaChildren(source, tags);
+    // Remove duplicate references
+    media_paths.removeDuplicates();
+    return media_paths;
 }
 
 QStringList XhtmlDoc::GetPathsToStyleFiles(const QString &source)

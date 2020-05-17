@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -24,11 +25,12 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QFileIconProvider>
 #include <QMessageBox>
-
+#include <QDebug>
 #include "BookManipulation/Book.h"
 #include "BookManipulation/FolderKeeper.h"
 #include "MainUI/OPFModel.h"
 #include "MainUI/OPFModelItem.h"
+#include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
 #include "ResourceObjects/Resource.h"
 #include "ResourceObjects/HTMLResource.h"
@@ -302,18 +304,29 @@ void OPFModel::ItemChangedHandler(QStandardItem *item)
     const QString &identifier = item->data().toString();
 
     if (!identifier.isEmpty()) {
-        const QString &new_filename = item->text();
+
         Resource *resource = m_Book->GetFolderKeeper()->GetResourceByIdentifier(identifier);
+
+        // extract just the filename from the ShortPathName or BookPath
+        QString new_filename = item->text();
+        if (!new_filename.isEmpty()) {
+	    new_filename = new_filename.split('/').last();
+        }
 
         if (new_filename != resource->Filename()) {
             if (!Utility::use_filename_warning(new_filename)) {
-                item->setText(resource->Filename());
+	        SettingsStore ss;
+		if (ss.showFullPathOn()) {
+	            item->setText(resource->GetRelativePath());
+		} else {
+	            item->setText(resource->ShortPathName());
+		}
                 return;
             }
             RenameResource(resource, new_filename);
-        }
-    }
+	}
 
+    }
     emit ResourceRenamed();
 }
 
@@ -327,19 +340,23 @@ bool OPFModel:: RenameResource(Resource *resource, const QString &new_filename)
     return RenameResourceList(resources, filenames);
 }
 
-bool OPFModel:: RenameResourceList(QList<Resource *> resources, QList<QString> new_filenames)
+bool OPFModel:: RenameResourceList(const QList<Resource *> &resources, const QStringList &new_filenames)
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
     QStringList not_renamed;
     QHash<QString, QString> update;
+    SettingsStore ss;
+    int i = 0;
     foreach(Resource * resource, resources) {
-        const QString &old_bookrelpath = resource->GetRelativePathToRoot();
+        QString old_bookpath = resource->GetRelativePath();
         QString old_filename = resource->Filename();
         QString extension = old_filename.right(old_filename.length() - old_filename.lastIndexOf('.'));
 
-        QString new_filename = new_filenames.first();
-        new_filenames.removeFirst();
+        QString new_filename = new_filenames.at(i++);
         QString new_filename_with_extension = new_filename;
+
+        // do not rename files in META-INF
+	if (old_bookpath.startsWith("META-INF/")) continue;
 
         if (!new_filename.contains('.')) {
             new_filename_with_extension.append(extension);
@@ -349,19 +366,41 @@ bool OPFModel:: RenameResourceList(QList<Resource *> resources, QList<QString> n
             continue;
         }
 
-        if (!FilenameIsValid(old_filename, new_filename_with_extension)) {
-            not_renamed.append(resource->Filename());
+        if (!FilenameIsValid(old_bookpath, new_filename_with_extension)) {
+	    if (ss.showFullPathOn()) {
+	        not_renamed.append(resource->GetRelativePath());
+	    } else {
+	        not_renamed.append(resource->ShortPathName());
+	    }
+
             continue;
         }
 
-        bool rename_success = resource->RenameTo(new_filename_with_extension);
-
+	bool rename_success;
+	// special case the OPFResource and the NCXResource
+	if (resource->Type() == Resource::OPFResourceType) {
+	    OPFResource* opfres = qobject_cast<OPFResource*>(resource);
+	    if (opfres) {
+	        rename_success = opfres->RenameTo(new_filename_with_extension);
+	    }
+	} else if (resource->Type() == Resource::NCXResourceType) {
+	    NCXResource* ncxres = qobject_cast<NCXResource*>(resource);
+	    if (ncxres) {
+	        rename_success = ncxres->RenameTo(new_filename_with_extension);
+	    }
+	} else {
+            rename_success = resource->RenameTo(new_filename_with_extension);
+	}
         if (!rename_success) {
-            not_renamed.append(resource->Filename());
+	    if (ss.showFullPathOn()) {
+		not_renamed.append(resource->GetRelativePath());
+	    } else {
+		not_renamed.append(resource->ShortPathName());
+	    }
             continue;
         }
 
-        update[ old_bookrelpath ] = "../" + resource->GetRelativePathToOEBPS();
+        update[ old_bookpath ] = resource->GetRelativePath();
     }
 
     if (update.count() > 0) {
@@ -379,6 +418,67 @@ bool OPFModel:: RenameResourceList(QList<Resource *> resources, QList<QString> n
     return false;
 }
 
+bool OPFModel::MoveResourceList(const QList<Resource *> &resources, const QStringList &new_bookpaths)
+{
+    QApplication::setOverrideCursor(Qt::WaitCursor);
+    QStringList not_moved;
+    QHash<QString, QString> update;
+    int i = 0;
+    foreach(Resource * resource, resources) {
+        const QString &oldbookpath = resource->GetRelativePath();
+        QString filename = resource->Filename();
+        QString newbookpath = new_bookpaths.at(i++);
+
+        // do not move files out of META-INF
+	if (oldbookpath.startsWith("META-INF/")) continue;
+
+        if (!BookPathIsValid(oldbookpath, newbookpath)) {
+	    // qDebug() << "OPFModel: invalid bookpath " << oldbookpath, newbookpath;
+            not_moved.append(oldbookpath);
+            continue;
+        }
+
+	bool move_success;
+	// special case the OPFResource and the NCXResource
+	if (resource->Type() == Resource::OPFResourceType) {
+	    OPFResource* opfres = qobject_cast<OPFResource*>(resource);
+	    if (opfres) {
+	        move_success = opfres->MoveTo(newbookpath);
+	    }
+	} else if (resource->Type() == Resource::NCXResourceType) {
+	    NCXResource* ncxres = qobject_cast<NCXResource*>(resource);
+	    if (ncxres) {
+	        move_success = ncxres->MoveTo(newbookpath);
+	    }
+	} else {
+            move_success = resource->MoveTo(newbookpath);
+	}
+
+        if (!move_success) {
+            not_moved.append(oldbookpath);
+	    // qDebug() << "OPFModel: not moved " << oldbookpath;
+            continue;
+        }
+
+	resource->SetCurrentBookRelPath(oldbookpath);
+        update[ oldbookpath ] = resource->GetRelativePath();
+    }
+
+    if (update.count() > 0) {
+        UniversalUpdates::PerformUniversalUpdates(true, m_Book->GetFolderKeeper()->GetResourceList(), update);
+        emit BookContentModified();
+    }
+
+    Refresh();
+    QApplication::restoreOverrideCursor();
+
+    if (not_moved.isEmpty()) {
+        return true;
+    }
+
+    return false;
+}
+
 void OPFModel::InitializeModel()
 {
     Q_ASSERT(m_Book);
@@ -388,6 +488,7 @@ void OPFModel::InitializeModel()
     QString version = m_Book->GetConstOPF()->GetEpubVersion();
     QHash <QString, QString> semantic_type_all;
     QHash <QString, QString> manifest_properties_all;
+    SettingsStore ss;
     if (version.startsWith('3')) {
         NavProcessor navproc(m_Book->GetConstOPF()->GetNavResource());
         semantic_type_all = navproc.GetLandmarkNameForPaths();
@@ -397,11 +498,22 @@ void OPFModel::InitializeModel()
     }
 
     foreach(Resource * resource, resources) {
-        AlphanumericItem *item = new AlphanumericItem(resource->Icon(), resource->Filename());
+        AlphanumericItem * item;
+        if (ss.showFullPathOn()) {
+            item = new AlphanumericItem(resource->Icon(), resource->GetRelativePath());
+        } else {
+            item = new AlphanumericItem(resource->Icon(), resource->ShortPathName());
+	}
         item->setDropEnabled(false);
         item->setData(resource->GetIdentifier());
-        QString tooltip = resource->Filename();
-        QString path = resource->GetRelativePathToOEBPS();
+        QString tooltip = resource->GetRelativePath();
+        QString path = resource->GetRelativePath();
+	if (resource->Type() == Resource::FontResourceType) {
+	    FontResource* font_res = qobject_cast<FontResource *>(resource);
+	    if (font_res) {
+	        tooltip = tooltip + " (" + font_res->GetDescription() + ")";
+	    }
+	}
 
         if (semantic_type_all.contains(path)) {
             tooltip += " (" + semantic_type_all[path] + ")";
@@ -421,7 +533,12 @@ void OPFModel::InitializeModel()
 
             item->setData(reading_order, READING_ORDER_ROLE);
             // Remove the extension for alphanumeric sorting
-            QString name = resource->Filename().left(resource->Filename().lastIndexOf('.'));
+	    QString name;
+            if (ss.showFullPathOn()) {
+                name = resource->GetRelativePath().left(resource->GetRelativePath().lastIndexOf('.'));
+	    } else {
+                name = resource->ShortPathName().left(resource->ShortPathName().lastIndexOf('.'));
+	    }
             item->setData(name, ALPHANUMERIC_ORDER_ROLE);
             m_TextFolderItem->appendRow(item);
         } else if (resource->Type() == Resource::CSSResourceType) {
@@ -443,8 +560,9 @@ void OPFModel::InitializeModel()
             m_VideoFolderItem->appendRow(item);
         } else if (resource->Type() == Resource::OPFResourceType ||
                    resource->Type() == Resource::NCXResourceType) {
-            item->setEditable(false);
+            item->setEditable(true);
             item->setDragEnabled(false);
+	    item->setToolTip(resource->GetRelativePath());
             appendRow(item);
         } else {
             item->setDragEnabled(false);
@@ -587,7 +705,7 @@ void OPFModel::SortHTMLFilesByAlphanumeric(QList <QModelIndex> index_list)
 }
 
 
-bool OPFModel::FilenameIsValid(const QString &old_filename, const QString &new_filename)
+bool OPFModel::FilenameIsValid(const QString &old_bookpath, const QString &new_filename)
 {
     foreach(QChar character, new_filename) {
         if (FORBIDDEN_FILENAME_CHARS.contains(character)) {
@@ -608,15 +726,37 @@ bool OPFModel::FilenameIsValid(const QString &old_filename, const QString &new_f
         return false;
     }
 
-    if (new_filename != m_Book->GetFolderKeeper()->GetUniqueFilenameVersion(new_filename)) {
+    // now validate proposed new bookpath does not already exist 
+    // even on case insensitive filesystem as many e-readers and devices have
+    QString sdir = Utility::startingDir(old_bookpath);
+    QString proposed_bookpath = sdir.isEmpty() ? new_filename : sdir + "/" + new_filename;
+    const QStringList existing_bookpaths = m_Book->GetFolderKeeper()->GetAllBookPaths();
+    if (existing_bookpaths.contains(proposed_bookpath, Qt::CaseInsensitive)) {
         Utility::DisplayStdErrorDialog(
-            tr("The filename \"%1\" is already in use.\n")
-            .arg(new_filename)
+	    tr("The filename \"%1\" is already in use.\n").arg(new_filename));
+        return false;
+    }
+    return true;
+}
+
+
+bool OPFModel::BookPathIsValid(const QString &old_bookpath, const QString &new_bookpath)
+{
+    QStringList existing_bookpaths = m_Book->GetFolderKeeper()->GetAllBookPaths();
+    if (new_bookpath.isEmpty()) {
+        Utility::DisplayStdErrorDialog(
+            tr("The book path cannot be empty.")
+        );
+        return false;
+    }
+
+    if (existing_bookpaths.contains(new_bookpath)) {
+        Utility::DisplayStdErrorDialog(
+            tr("That book path \"%1\" is already in use.\n")
+            .arg(new_bookpath)
         );
         return false;
     }
 
     return true;
 }
-
-

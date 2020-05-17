@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2011  John Schember <john@nachtimwald.com>
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2011      John Schember <john@nachtimwald.com>
 **
 **  This file is part of Sigil.
 **
@@ -55,17 +56,19 @@ LanguageWidget::LanguageWidget()
     readSettings();
 }
 
-PreferencesWidget::ResultAction LanguageWidget::saveSettings()
+PreferencesWidget::ResultActions LanguageWidget::saveSettings()
 {
+    PreferencesWidget::ResultActions results = PreferencesWidget::ResultAction_None;
+
     SettingsStore settings;
     settings.setDefaultMetadataLang(Language::instance()->GetLanguageCode(ui.cbMetadataLanguage->currentText()));
     settings.setUILanguage(Language::instance()->GetLanguageCode(ui.cbUILanguage->currentText()).replace("-", "_"));
 
     if (ui.cbUILanguage->currentText() != m_UILanguage) {
-        return PreferencesWidget::ResultAction_RestartSigil;
+        results = results | PreferencesWidget::ResultAction_RestartSigil;
     }
-
-    return PreferencesWidget::ResultAction_None;
+    results = results & PreferencesWidget::ResultAction_Mask;
+    return results;
 }
 
 void LanguageWidget::readSettings()
@@ -81,10 +84,17 @@ void LanguageWidget::readSettings()
             index = 0;
         }
     }
-
     ui.cbMetadataLanguage->setCurrentIndex(index);
-    // UI Language
-    index = ui.cbUILanguage->findText(Language::instance()->GetLanguageName(settings.uiLanguage().replace("_", "-")));
+    
+// UI Language
+    QString langcode = settings.uiLanguage().replace("_","-");
+    index = ui.cbUILanguage->findText(Language::instance()->GetLanguageName(langcode));
+
+    // try again with just part of language code that exists before the "-"
+    if (index == -1) {
+	langcode = langcode.split("-").at(0);
+        index = ui.cbUILanguage->findText(Language::instance()->GetLanguageName(langcode));
+    }
 
     if (index == -1) {
         index = ui.cbUILanguage->findText(Language::instance()->GetLanguageName("en"));

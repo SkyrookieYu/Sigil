@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2016 Kevin B. Hendricks, Stratford, Ontario, Canada
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -24,15 +24,14 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QStringList>
+
 #include "Misc/Utility.h"
 #include "SourceUpdates/PerformXMLUpdates.h"
 #include "sigil_constants.h"
 
 
-
-
-
 PerformXMLUpdates::PerformXMLUpdates(const QString &source,
+				     const QString &newbookpath,
                                      const QHash<QString, QString> &xml_updates,
                                      const QString &currentpath,
                                      const QString &mtype)
@@ -40,7 +39,8 @@ PerformXMLUpdates::PerformXMLUpdates(const QString &source,
     m_Source(source),
     m_XMLUpdates(xml_updates),
     m_CurrentPath(currentpath),
-    m_MediaType(mtype)
+    m_MediaType(mtype),
+    m_newbookpath(newbookpath)
 {
 }
 
@@ -48,13 +48,12 @@ PerformXMLUpdates::PerformXMLUpdates(const QString &source,
 QString PerformXMLUpdates::operator()()
 {
     QString newsource = m_Source;
-    QString currentdir = QFileInfo(m_CurrentPath).dir().path();
 
     // serialize the hash for passing to python
     QStringList dictkeys = m_XMLUpdates.keys();
     QStringList dictvals;
     foreach(QString key, dictkeys) {
-      dictvals.append(m_XMLUpdates.value(key));
+        dictvals.append(m_XMLUpdates.value(key));
     }
 
     int rv = 0;
@@ -62,7 +61,8 @@ QString PerformXMLUpdates::operator()()
 
     QList<QVariant> args;
     args.append(QVariant(newsource));
-    args.append(QVariant(currentdir));
+    args.append(QVariant(m_newbookpath));
+    args.append(QVariant(m_CurrentPath));
     args.append(QVariant(dictkeys));
     args.append(QVariant(dictvals));
 
@@ -72,10 +72,12 @@ QString PerformXMLUpdates::operator()()
     if (MISC_XML_MIMETYPES.contains(m_MediaType)) {
         if (m_MediaType == "application/smil+xml") {
             routine = "performSMILUpdates";
-        } else if (m_MediaType == "application/oebps-page-map+xml")  {
+        } else if ((m_MediaType == "application/oebps-page-map+xml") || 
+		   (m_MediaType == "application/vnd.adobe-page-map+xml"))  {
             routine = "performPageMapUpdates";
         } else {
-            // We allow editing, but currently have no python parsing/repair/link-updating routines. Make no changes.
+            // We allow editing, but currently have no python parsing/repair/link-updating routines. 
+	    // Make no changes.
             // application/adobe-page-template+xml, application/vnd.adobe-page-template+xml, "application/pls+xml"
             return newsource;
         }

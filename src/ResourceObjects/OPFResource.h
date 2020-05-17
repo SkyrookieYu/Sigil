@@ -1,6 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2015  Kevin B. Hendricks, Stratford ON
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford ON
+**  Copyright (C) 2013      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -46,11 +48,13 @@ public:
      *                     resource is representing.
      * @param parent The object's parent.
      */
-    OPFResource(const QString &mainfolder, const QString &fullfilepath, QObject *parent = NULL);
+    OPFResource(const QString &mainfolder, const QString &fullfilepath, const QString &version=QString(), QObject *parent = NULL);
 
     // inherited
 
     virtual bool RenameTo(const QString &new_filename);
+
+    virtual bool MoveTo(const QString &newbookpath);
 
     virtual ResourceType Type() const;
 
@@ -58,13 +62,19 @@ public:
 
     virtual void SetText(const QString &text);
 
+    virtual bool LoadFromDisk();
+
     QString GetGuideSemanticCodeForResource(const Resource *resource) const;
     QString GetGuideSemanticNameForResource(Resource *resource);
     QHash <QString, QString> GetSemanticCodeForPaths();
     QHash <QString, QString> GetGuideSemanticNameForPaths();
 
+    void ClearSemanticCodesInGuide();
+
     int GetReadingOrder(const HTMLResource *html_resource) const;
     QHash <Resource *, int> GetReadingOrderAll( const QList <Resource *> resources);
+
+    QList<Resource*> GetSpineOrderResources(const QList<Resource *> &resources);
 
     QString GetMainIdentifierValue() const;
 
@@ -77,13 +87,15 @@ public:
 
     void EnsureUUIDIdentifierPresent();
 
-    QString AddNCXItem(const QString &ncx_path);
+    QString AddNCXItem(const QString &ncx_path, QString id="ncx");
+
+    void RemoveNCXOnSpine();
 
     void UpdateNCXOnSpine(const QString &new_ncx_id);
 
     void UpdateNCXLocationInManifest(const NCXResource *ncx);
 
-    void AddModificationDateMeta();
+    QString AddModificationDateMeta();
 
     void AddSigilVersionMeta();
 
@@ -91,7 +103,7 @@ public:
 
     void AutoFixWellFormedErrors();
 
-    QStringList GetSpineOrderFilenames() const;
+    QStringList GetSpineOrderBookPaths() const;
 
     void SetItemRefLinear(Resource * resource, bool linear);
 
@@ -103,6 +115,12 @@ public:
      *        in order to the spine.
      **/
     // void SetSpineOrderFromFilenames(const QStringList spineOrder);
+
+    // returns first (primary) dc:language value found
+    QString GetPrimaryBookLanguage() const;
+
+    // returns first (primary) dc:title value found
+    QString GetPrimaryBookTitle() const;
 
     /**
      * Returns the book's Dublin Core metadata.
@@ -118,10 +136,12 @@ public:
      */
     QList<QVariant> GetDCMetadataValues(QString text) const;
 
-    QString GetRelativePathToRoot() const;
-
     void SetNavResource(HTMLResource* nav);
     HTMLResource* GetNavResource() const;
+
+ signals:
+    void TextChanging();
+    void LoadedFromDisk();
 
 public slots:
 
@@ -144,6 +164,8 @@ public slots:
     void UpdateSpineOrder(const QList<HTMLResource *> html_files);
 
     void ResourceRenamed(const Resource *resource, QString old_full_path);
+
+    void ResourceMoved(const Resource *resource, QString old_full_path);
 
     void UpdateManifestProperties(const QList<Resource *> resources);
 
@@ -186,7 +208,7 @@ private:
 
     QString GetGuideSemanticCodeForResource(const Resource *resource, const OPFParser &p) const;
 
-    void SetGuideSemanticCodeForResource(QString code, const Resource *resource, OPFParser &p);
+    void SetGuideSemanticCodeForResource(QString code, const Resource *resource, OPFParser &p, const QString &lang);
 
     void RemoveDuplicateGuideCodes(QString code, OPFParser &p);
 
@@ -195,7 +217,9 @@ private:
 
     QString GetResourceManifestID(const Resource *resource, const OPFParser &p) const;
 
-    QHash<Resource *, QString> GetResourceManifestIDMapping(const QList<Resource *> resources, const OPFParser &p);
+    QHash<Resource *, QString> GetResourceManifestIDMapping(const QList<Resource *> &resources, const OPFParser &p);
+
+    QHash<QString, Resource *> GetManifestIDResourceMapping(const QList<Resource *> &resources, const OPFParser &p);
 
     void RemoveDCElements(OPFParser &p);
 
@@ -218,11 +242,9 @@ private:
      */
     void WriteIdentifier(const QString &metaname, const QString &metavalue, OPFParser &p);
 
-    QStringList GetRelativePathsToAllFilesInOEPBS() const;
-
     static QString GetOPFDefaultText(const QString &version);
 
-    void FillWithDefaultText();
+    void FillWithDefaultText(const QString &version=QString());
 
     QString GetUniqueID(const QString &preferred_id, const OPFParser &p) const;
 
@@ -234,20 +256,9 @@ private:
 
     QString ValidatePackageVersion(const QString &source);
 
-    /**
-     * Initializes m_Mimetypes.
-     */
-    void CreateMimetypes();
-
     ///////////////////////////////
     // PRIVATE MEMBER VARIABLES
     ///////////////////////////////
-
-    /**
-     * A mapping between file extensions
-     * and appropriate MIME types.
-     */
-    QHash<QString, QString> m_Mimetypes;
 
     HTMLResource * m_NavResource;
     bool m_WarnedAboutVersion;

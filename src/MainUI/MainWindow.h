@@ -1,5 +1,6 @@
 /************************************************************************
 **
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
 **  Copyright (C) 2012-2015 John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012 Dave Heiland
 **  Copyright (C) 2009-2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
@@ -46,6 +47,7 @@
 #include "MiscEditors/IndexEditorModel.h"
 #include "MiscEditors/SearchEditorModel.h"
 #include "Tabs/ContentTab.h"
+#include "ViewEditors/ElementIndex.h"
 
 const int MAX_RECENT_FILES = 5;
 const int STATUSBAR_MSG_DISPLAY_TIME = 7000;
@@ -55,6 +57,7 @@ class QLabel;
 class QSignalMapper;
 class QSlider;
 class QTimer;
+class QActionGroup;
 class FindReplace;
 class TabManager;
 class BookBrowser;
@@ -99,8 +102,17 @@ public:
      * @param parent The window's parent object.
      * @param flags The flags used to modify window behavior.
      */
-    MainWindow(const QString &openfilepath = QString(), bool is_internal = false, QWidget *parent = 0, Qt::WindowFlags flags = 0);
+    MainWindow(const QString &openfilepath = QString(), 
+	       const QString version = QString(),
+	       bool is_internal = false, 
+	       QWidget *parent = 0, 
+	       Qt::WindowFlags flags = 0);
     ~MainWindow();
+
+    void maybe_fixup_dockwidget_geometry(QDockWidget * widget);
+
+    // returns true if MainWindow is Maximized or is FullScreen
+    bool isMaxOrFull();
 
     /**
      * The book currently being edited.
@@ -149,31 +161,13 @@ public:
     void SelectResources(QList<Resource *> resources);
 
     /**
-     * Describes the type of the View mode
-     * currently used in FlowTab.
-     */
-    enum ViewState {
-        ViewState_Unknown = 0,     /**< Default non view that we don't know or care what it is */
-        ViewState_BookView = 10,   /**< The WYSIWYG view. */
-        ViewState_CodeView = 30    /**< The XHTML code editing view. */
-    };
-
-    /**
      * The location of the last bookmark.
      */
     struct LocationBookmark {
-        QString filename;
-        MainWindow::ViewState view_state;
+        QString bookpath;
         QString bv_caret_location_update;
         int cv_cursor_position;
     };
-
-    /**
-     * Returns the current view state.
-     *
-     * @return The current view state.
-     */
-    MainWindow::ViewState GetViewState();
 
     void CloseAllTabs();
 
@@ -209,11 +203,13 @@ public:
 
     QString GetCurrentFilePath();
 
-
+    void DebugCurrentWidgetSizes();
+    
 public slots:
-    void AnyCodeView();
 
     void OpenUrl(const QUrl &url);
+
+    void ScrollCVToFragment(const QString &fragment);
 
     /**
      * Opens the specified resource in the specified view state.
@@ -222,7 +218,6 @@ public slots:
                       int line_to_scroll_to = -1,
                       int position_to_scroll_to = -1,
                       const QString &caret_location_to_scroll_to = QString(),
-                      MainWindow::ViewState view_state = MainWindow::ViewState_Unknown,
                       const QUrl &fragment = QUrl(),
                       bool precede_current_tab = false);
 
@@ -230,26 +225,40 @@ public slots:
                                         int line_to_scroll_to = -1,
                                         int position_to_scroll_to = -1,
                                         const QString &caret_location_to_scroll_to = QString(),
-                                        MainWindow::ViewState view_state = MainWindow::ViewState_Unknown,
                                         const QUrl &fragment = QUrl(),
                                         bool precede_current_tab = false);
 
     void UpdateManifestProperties();
 
-    void GenerateNCXFromNav();
+    void GenerateNCXGuideFromNav();
+
+    void RemoveNCXGuideFromEpub3();
 
     void CreateIndex();
 
     void runPlugin(QAction *action);
 
-    void ResourcesAddedOrDeleted();
+    void ResourcesAddedOrDeletedOrMoved();
 
+    void launchExternalXEditor();
+
+    void RepoCommit();
+    void RepoCheckout(QString bookid="", QString destpath="", QString filename="", bool loadnow=true);
+    void RepoDiff(QString bookid="");
+    void RepoManage();
+
+    void StandardizeEpub();
+
+    void CreateEpubLayout();
 
 signals:
     void SettingsChanged();
 
 protected:
     void showEvent(QShowEvent *event);
+
+    void changeEvent(QEvent * event);
+
     /**
      * Workaround for Qt 4.8 bug, which does not save/restore window state
      * correctly if maximized at the time of calling saveGeometry().
@@ -267,12 +276,20 @@ protected:
 
 private slots:
 
+    void UpdateLastSizes();
+
+    void RestoreLastNormalGeometry();
+
     void AddCover();
+
 
     /**
      * Implements New action functionality.
      */
-    void New();
+    void New(const QString version = QString());
+    void NewDefault();
+    void NewEpub2();
+    void NewEpub3();
 
     /**
      * Implements Open action functionality.
@@ -356,13 +373,15 @@ private slots:
      */
     void ApplicationFocusChanged(QWidget *old, QWidget *now);
 
+    void ApplicationPaletteChanged();
+
     /** 
      *  Quick Launch Plugins via icon button
      */
     void QuickLaunchPlugin(int i);
 
     /**
-     * Some controls (CodeView, BookView and combo boxes in F&R) inherit PasteTarget
+     * Some controls (CodeView and combo boxes in F&R) inherit PasteTarget
      * to allow various modeless/popup dialogs like Clipboard History, Clip Editor and
      * Insert Special Characters to insert text into the focused "PasteTarget" control.
      * These two slots will delegate the relevant signal to the current target if any.
@@ -371,31 +390,6 @@ private slots:
     void PasteClipEntriesIntoCurrentTarget(const QList<ClipEditorModel::clipEntry *> &clips);
     void PasteClipEntriesIntoPreviousTarget(const QList<ClipEditorModel::clipEntry *> &clips);
     void PasteClipIntoCurrentTarget(int clip_number);
-    void PasteClip1IntoCurrentTarget();
-    void PasteClip2IntoCurrentTarget();
-    void PasteClip3IntoCurrentTarget();
-    void PasteClip4IntoCurrentTarget();
-    void PasteClip5IntoCurrentTarget();
-    void PasteClip6IntoCurrentTarget();
-    void PasteClip7IntoCurrentTarget();
-    void PasteClip8IntoCurrentTarget();
-    void PasteClip9IntoCurrentTarget();
-    void PasteClip10IntoCurrentTarget();
-    void PasteClip11IntoCurrentTarget();
-    void PasteClip12IntoCurrentTarget();
-    void PasteClip13IntoCurrentTarget();
-    void PasteClip14IntoCurrentTarget();
-    void PasteClip15IntoCurrentTarget();
-    void PasteClip16IntoCurrentTarget();
-    void PasteClip17IntoCurrentTarget();
-    void PasteClip18IntoCurrentTarget();
-    void PasteClip19IntoCurrentTarget();
-    void PasteClip20IntoCurrentTarget();
-
-    /**
-     * Implements the set BookView functionality.
-     */
-    void BookView();
 
     /**
      * Implements the set CodeView functionality.
@@ -468,7 +462,7 @@ private slots:
      * Updates the toolbars/menus based on current state
      * and updates the tab state if requested
      */
-    void UpdateViewState(bool set_tab_state = true);
+    void UpdateMWState(bool set_tab_state = true);
 
     /**
      * Updates the toolbars based on current tab state and changes.
@@ -484,11 +478,6 @@ private slots:
      * Performs needed changes when the user switches tabs.
      */
     void UpdateUIWhenTabsSwitch();
-
-    /**
-     * Set initial state for actions in Book View
-     */
-    void SetStateActionsBookView();
 
     /**
      * Set initial state for actions in Code View
@@ -513,6 +502,7 @@ private slots:
 
     void UpdatePreviewRequest();
     void UpdatePreviewCSSRequest();
+    void ScrollPreview();
     void UpdatePreview();
     void InspectHTML();
 
@@ -562,7 +552,7 @@ private slots:
      * @param originating_resource  The original resource from which the content
      *                              was extracted to create the "old" tab/resource.
      * @see FlowTab::SplitSection, FlowTab::OldTabRequest,
-     *      BookViewEditor::SplitSection, Book::CreateSectionBreakOriginalResource
+     *      Book::CreateSectionBreakOriginalResource
      */
     void CreateSectionBreakOldTab(QString content, HTMLResource *originating_resource);
 
@@ -616,14 +606,12 @@ private slots:
     void EditTOCDialog();
     void CreateHTMLTOC();
 
-    void ChangeCasing(int casing_mode);
+    void ChangeCasing(QAction* act);
 
     void MarkSelection();
     void ClearMarkedText(ContentTab *old_tab = NULL);
 
-    void ToggleViewState();
-
-    void ApplyHeadingStyleToTab(const QString &heading_type);
+    void ApplyHeadingStyleToTab(QAction* act);
     void SetPreserveHeadingAttributes(bool new_state);
 
     void GoBackFromLinkOrStyle();
@@ -645,7 +633,8 @@ private slots:
     void DeleteReportsStyles(QList<BookReports::StyleData *> reports_styles_to_delete);
 
     void DeleteFilenames(QStringList files_to_delete);
-    void OpenFile(QString filename, int line = -1);
+
+    void OpenFile(QString file_bookpath, int line = -1, int position = -1);
 
     void UpdateClipsUI();
 
@@ -656,8 +645,9 @@ private slots:
     void unloadPluginsMenu();
 
 private:
+    void createJumpList();
     void updateToolTipsOnPluginIcons();
-    void UpdateClipButton(int clip_number, QAction *ui_action);
+    void UpdateClipButton(QAction *ui_action);
     void InsertFiles(const QStringList &selected_images);
     void InsertFilesFromDisk();
 
@@ -676,8 +666,6 @@ private:
      */
     void WriteSettings();
 
-    void SetDefaultViewState();
-
     /**
      * Gets called on possible saves and asks the user
      * does he want to save.
@@ -688,6 +676,8 @@ private:
      * @return \c true if we are allowed to proceed with the current operation.
      */
     bool MaybeSaveDialogSaysProceed();
+
+    bool ProceedToOverwrite(const QString &msg, const QString &filename );
 
     /**
      * Makes the provided book the current one.
@@ -700,7 +690,7 @@ private:
      * Creates a new, empty book and replaces
      * the current one with it.
      */
-    void CreateNewBook();
+    void CreateNewBook(const QString version=QString(), const QStringList &book_paths=QStringList());
 
     /**
      * Saves the current book to the file specified.
@@ -759,7 +749,7 @@ private:
      *
      * @param fullfilepath The path to the currently edited file.
      */
-    void UpdateUiWithCurrentFile(const QString &fullfilepath);
+    void UpdateUiWithCurrentFile(const QString &fullfilepath, bool just_name = false);
 
     /**
      * Selects the appropriate entry in the heading combo box
@@ -787,6 +777,11 @@ private:
     void PlatformSpecificTweaks();
 
     /**
+     * Tweak default UI fonts based on the OS platform.
+     */
+    void SetupUiFont();
+
+    /**
      * Extends the UI with extra widgets and tweaks.
      * Qt Designer is not able to create all the widgets
      * we want in the MainWindow, so we use this function
@@ -809,7 +804,7 @@ private:
      *
      * @param openfilepath The path to the file to load. Can be empty.
      */
-    void LoadInitialFile(const QString &openfilepath, bool is_internal = false);
+    void LoadInitialFile(const QString &openfilepath, const QString version=QString(), bool is_internal = false);
 
     /**
      * Connects all the required signals to their slots.
@@ -830,14 +825,10 @@ private:
      */
     void BreakTabConnections(ContentTab *tab);
 
-    /**
-     * Sets the view state of the current tab to view_state
-     *
-     * @param view_state - The view state to set.
-     */
-    void SetViewState(MainWindow::ViewState view_state);
-
     void SetupPreviewTimer();
+
+    void FixDuplicateFilenames();
+    void MoveContentFilesToStdFolders();
 
     ///////////////////////////////
     // PRIVATE MEMBER VARIABLES
@@ -953,16 +944,9 @@ private:
     const QMap<QString, QString> c_LoadFilters;
 
     /**
-     * Holds the view state for new/switched tabs
-     */
-    MainWindow::ViewState m_ViewState;
-
-    /**
      * Collects signals and sends specific parameters to the connected slots.
      */
-    QSignalMapper *m_headingMapper;
-    QSignalMapper *m_casingChangeMapper;
-    QSignalMapper *m_pluginMapper;
+    QActionGroup *m_casingChangeGroup;
 
     /**
      * The Search Manager dialog
@@ -1003,12 +987,16 @@ private:
      * Workaround for Qt 4.8 bug, to track the last known window size when not maximized.
      */
     QByteArray m_LastWindowSize;
+    QByteArray m_LastState;
+    bool m_FirstTime;
+    bool m_PendingLastSizeUpdate;
+    bool m_SaveLastEnabled;
 
     QTimer m_PreviewTimer;
 
     HTMLResource *m_PreviousHTMLResource;
     QString m_PreviousHTMLText;
-    QList<ViewEditor::ElementIndex> m_PreviousHTMLLocation;
+    QList<ElementIndex> m_PreviousHTMLLocation;
 
     /**
      * dynamically updated plugin menus and actions
@@ -1022,6 +1010,17 @@ private:
 
     QStringList m_pluginList;
     bool m_SaveCSS;
+    bool m_IsClosing;
+
+    QList<QAction*> m_qlactions;
+
+    QList<QAction*> m_clactions;
+
+
+    /**
+     * Collects signals and sends specific parameters to the connected slots.
+     */
+    QActionGroup *m_headingActionGroup;
 
     /**
      * Holds all the widgets Qt Designer created for us.

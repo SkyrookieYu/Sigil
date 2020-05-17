@@ -10,7 +10,8 @@ from urllib.parse import urlsplit
 from lxml import etree
 from io import BytesIO
 from opf_newparser import Opf_Parser
-
+from hrefutils import startingDir, buildBookPath, buildRelativePath
+from collections import OrderedDict
 
 ASCII_CHARS   = set(chr(x) for x in range(128))
 URL_SAFE      = set('ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -69,7 +70,7 @@ def _well_formed(data):
     if isinstance(newdata, str):
         newdata = newdata.encode('utf-8')
     try:
-        parser = etree.XMLParser(encoding='utf-8', recover=False)
+        parser = etree.XMLParser(encoding='utf-8', recover=False, resolve_entities=False)
         tree = etree.parse(BytesIO(newdata), parser)
     except Exception:
         result = False
@@ -80,7 +81,7 @@ def _reformat(data):
     newdata = data
     if isinstance(newdata, str):
         newdata = newdata.encode('utf-8')
-    parser = etree.XMLParser(encoding='utf-8', recover=True, ns_clean=True, 
+    parser = etree.XMLParser(encoding='utf-8', recover=True, ns_clean=True,
                              remove_comments=True, remove_pis=True, strip_cdata=True, resolve_entities=False)
     tree = etree.parse(BytesIO(newdata), parser)
     newdata = etree.tostring(tree.getroot(),encoding='UTF-8', xml_declaration=False)
@@ -153,7 +154,7 @@ def WellFormedXMLErrorCheck(data, mtype=""):
     column = "-1"
     message = "well-formed"
     try:
-        parser = etree.XMLParser(encoding='utf-8', recover=False)
+        parser = etree.XMLParser(encoding='utf-8', recover=False, resolve_entities=False)
         tree = etree.parse(BytesIO(newdata), parser)
     except Exception:
         line = "0"
@@ -200,37 +201,66 @@ def repairXML(data, mtype="", indent_chars="  "):
     return newdata
 
 
-def anchorNCXUpdates(data, originating_filename, keylist, valuelist):
+# this is used after a xhtml file split to update hrefs in the ncx
+def anchorNCXUpdates(data, ncx_bookpath, originating_bookpath, keylist, valuelist):
     data = _remove_xml_header(data)
     # lxml on a Mac does not seem to handle full unicode properly, so encode as utf-8
     data = data.encode('utf-8')
     # rebuild serialized lookup dictionary
-    id_dict = {}
+    id_dict = OrderedDict()
     for i in range(0, len(keylist)):
         id_dict[ keylist[i] ] = valuelist[i]
+    startdir = startingDir(ncx_bookpath)
     xmlbuilder = LXMLTreeBuilderForXML(parser=None, empty_element_tags=ebook_xml_empty_tags)
     soup = BeautifulSoup(data, features=None, from_encoding="utf-8", builder=xmlbuilder)
-    original_filename_with_relative_path = TEXT_FOLDER_NAME  + "/" + originating_filename
     for tag in soup.find_all("content"):
         if "src" in tag.attrs:
             src = tag["src"]
             if src.find(":") == -1:
                 parts = src.split('#')
-                if (parts is not None) and (len(parts) > 1) and (parts[0] == original_filename_with_relative_path) and (parts[1] != ""):
+                ahref = unquoteurl(parts[0])
+                # convert this href to its target bookpath
+                target_bookpath = buildBookPath(ahref,startdir)
+                if (parts is not None) and (len(parts) > 1) and (target_bookpath == originating_bookpath) and (parts[1] != ""):
                     fragment_id = parts[1]
                     if fragment_id in id_dict:
-                        attribute_value = TEXT_FOLDER_NAME + "/" + quoteurl(id_dict[fragment_id]) + "#" + fragment_id
-                        tag["src"] = attribute_value
+                        target_bookpath = id_dict[fragment_id]
+                        attribute_value = buildRelativePath(ncx_bookpath, target_bookpath) + "#" + fragment_id
+                        tag["src"] = quoteurl(attribute_value)
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
 
 
-def performNCXSourceUpdates(data, currentdir, keylist, valuelist):
+def anchorNCXUpdatesAfterMerge(data, ncx_bookpath, sink_bookpath, merged_bookpaths):
+    data = _remove_xml_header(data)
+    startdir = startingDir(ncx_bookpath)
+    # lxml on a Mac does not seem to handle full unicode properly, so encode as utf-8
+    data = data.encode('utf-8')
+    xmlbuilder = LXMLTreeBuilderForXML(parser=None, empty_element_tags=ebook_xml_empty_tags)
+    soup = BeautifulSoup(data, features=None, from_encoding="utf-8", builder=xmlbuilder)
+    for tag in soup.find_all("content"):
+        if "src" in tag.attrs:
+            src = tag["src"]
+            if src.find(":") == -1:
+                parts = src.split('#')
+                if parts is not None:
+                    ahref = unquoteurl(parts[0])
+                    target_bookpath = buildBookPath(ahref, startdir)
+                    if target_bookpath in merged_bookpaths:
+                        attribute_value = buildRelativePath(ncx_bookpath, sink_bookpath)
+                        if len(parts) > 1 and parts[1] != "":
+                            attribute_value += "#" + parts[1]
+                        tag["src"] = quoteurl(attribute_value)
+    newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
+    return newdata
+
+
+def performNCXSourceUpdates(data, newbkpath, oldbkpath, keylist, valuelist):
     data = _remove_xml_header(data)
     # lxml on a Mac does not seem to handle full unicode properly, so encode as utf-8
     data = data.encode('utf-8')
     # rebuild serialized lookup dictionary
-    updates = {}
+    updates = OrderedDict()
     for i in range(0, len(keylist)):
         updates[ keylist[i] ] = valuelist[i]
     xmlbuilder = LXMLTreeBuilderForXML(parser=None, empty_element_tags=ebook_xml_empty_tags)
@@ -240,29 +270,27 @@ def performNCXSourceUpdates(data, currentdir, keylist, valuelist):
             src = tag["src"]
             if src.find(":") == -1:
                 parts = src.split('#')
-                url = parts[0]
+                ahref = unquoteurl(parts[0])
                 fragment = ""
                 if len(parts) > 1:
                     fragment = parts[1]
-                bookrelpath = os.path.join(currentdir, unquoteurl(url))
-                bookrelpath = os.path.normpath(bookrelpath)
-                bookrelpath = bookrelpath.replace(os.sep, "/")
-                if bookrelpath in updates:
-                    attribute_value = updates[bookrelpath]
-                    if fragment != "":
-                        attribute_value = attribute_value + "#" + fragment
-                    attribute_value = quoteurl(attribute_value)
-                    tag["src"] = attribute_value
+                oldtarget = buildBookPath(ahref, startingDir(oldbkpath))
+                newtarget = updates.get(oldtarget, oldtarget)
+                attribute_value = buildRelativePath(newbkpath, newtarget)
+                if fragment != "":
+                    attribute_value = attribute_value + "#" + fragment
+                attribute_value = quoteurl(attribute_value)
+                tag["src"] = attribute_value
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
 
 
-def performOPFSourceUpdates(data, currentdir, keylist, valuelist):
+def performOPFSourceUpdates(data, newbkpath, oldbkpath, keylist, valuelist):
     data = _remove_xml_header(data)
     # lxml on a Mac does not seem to handle full unicode properly, so encode as utf-8
     data = data.encode('utf-8')
     # rebuild serialized lookup dictionary
-    updates = {}
+    updates = OrderedDict()
     for i in range(0, len(keylist)):
         updates[ keylist[i] ] = valuelist[i]
     xmlbuilder = LXMLTreeBuilderForXML(parser=None, empty_element_tags=ebook_xml_empty_tags)
@@ -272,19 +300,17 @@ def performOPFSourceUpdates(data, currentdir, keylist, valuelist):
             href = tag["href"]
             if href.find(":") == -1 :
                 parts = href.split('#')
-                url = parts[0]
+                ahref = unquoteurl(parts[0])
                 fragment = ""
                 if len(parts) > 1:
                     fragment = parts[1]
-                bookrelpath = os.path.join(currentdir, unquoteurl(url))
-                bookrelpath = os.path.normpath(bookrelpath)
-                bookrelpath = bookrelpath.replace(os.sep, "/")
-                if bookrelpath in updates:
-                    attribute_value = updates[bookrelpath]
-                    if fragment != "":
-                        attribute_value = attribute_value + "#" + fragment
-                    attribute_value = quoteurl(attribute_value)
-                    tag["href"] = attribute_value
+                oldtarget = buildBookPath(ahref, startingDir(oldbkpath))
+                newtarget = updates.get(oldtarget, oldtarget)
+                attribute_value = buildRelativePath(newbkpath, newtarget)
+                if fragment != "":
+                    attribute_value = attribute_value + "#" + fragment
+                attribute_value = quoteurl(attribute_value)
+                tag["href"] = attribute_value
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
 
@@ -292,50 +318,48 @@ def performOPFSourceUpdates(data, currentdir, keylist, valuelist):
 # Note xml_updates has paths relative to the OEBPS folder as base
 # As if they were meant only for OEBPS/content.opf and OEBPS/toc.ncx
 # So adjust them to be relative to the Misc directory where .smil files live in Sigil
-def performSMILUpdates(data, currentdir, keylist, valuelist):
+def performSMILUpdates(data, newbkpath, oldbkpath, keylist, valuelist):
     data = _remove_xml_header(data)
     # lxml on a Mac does not seem to handle full unicode properly, so encode as utf-8
     data = data.encode('utf-8')
     # rebuild serialized lookup dictionary of xml_updates, properly adjusted
-    updates = {}
+    updates = OrderedDict()
     for i in range(0, len(keylist)):
-        updates[ keylist[i] ] = "../" + valuelist[i]
+        updates[ keylist[i] ] = valuelist[i]
     xml_empty_tags = ["text", "audio"]
     xmlbuilder = LXMLTreeBuilderForXML(parser=None, empty_element_tags=xml_empty_tags)
     soup = BeautifulSoup(data, features=None, from_encoding="utf-8", builder=xmlbuilder)
-    for tag in soup.find_all(["body","seq","text","audio"]):
+    for tag in soup.find_all(["body","seq","text","audio","smil","par"]):
         for att in ["src", "epub:textref"]:
             if att in tag.attrs :
                 ref = tag[att]
                 if ref.find(":") == -1 :
                     parts = ref.split('#')
-                    url = parts[0]
+                    ahref = unquoteurl(parts[0])
                     fragment = ""
                     if len(parts) > 1:
                         fragment = parts[1]
-                    bookrelpath = os.path.join(currentdir, unquoteurl(url))
-                    bookrelpath = os.path.normpath(bookrelpath)
-                    bookrelpath = bookrelpath.replace(os.sep, "/")
-                    if bookrelpath in updates:
-                        attribute_value = updates[bookrelpath]
-                        if fragment != "":
-                            attribute_value = attribute_value + "#" + fragment
-                        attribute_value = quoteurl(attribute_value)
-                        tag[att] = attribute_value
+                    oldtarget = buildBookPath(ahref, startingDir(oldbkpath))
+                    newtarget = updates.get(oldtarget, oldtarget)
+                    attribute_value = buildRelativePath(newbkpath, newtarget)
+                    if fragment != "":
+                        attribute_value = attribute_value + "#" + fragment
+                    attribute_value = quoteurl(attribute_value)
+                    tag[att] = attribute_value
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
 
 # Note xml_updates has urls/iris relative to the OEBPS folder as base
 # As if they were meant only for OEBPS/content.opf and OEBPS/toc.ncx
 # So adjust them to be relative to the Misc directory where page-map.xml lives
-def performPageMapUpdates(data, currentdir, keylist, valuelist):
+def performPageMapUpdates(data, newbkpath, oldbkpath, keylist, valuelist):
     data = _remove_xml_header(data)
     # lxml on a Mac does not seem to handle full unicode properly, so encode as utf-8
     data = data.encode('utf-8')
     # rebuild serialized lookup dictionary of xml_updates properly adjusted
-    updates = {}
+    updates = OrderedDict()
     for i in range(0, len(keylist)):
-        updates[ keylist[i] ] = "../" + valuelist[i]
+        updates[ keylist[i] ] = valuelist[i]
     xml_empty_tags = ["page"]
     xmlbuilder = LXMLTreeBuilderForXML(parser=None, empty_element_tags=xml_empty_tags)
     soup = BeautifulSoup(data, features=None, from_encoding="utf-8", builder=xmlbuilder)
@@ -345,19 +369,17 @@ def performPageMapUpdates(data, currentdir, keylist, valuelist):
                 ref = tag[att]
                 if ref.find(":") == -1 :
                     parts = ref.split('#')
-                    url = parts[0]
+                    ahref = unquoteurl(parts[0])
                     fragment = ""
                     if len(parts) > 1:
                         fragment = parts[1]
-                    bookrelpath = os.path.join(currentdir, unquoteurl(url))
-                    bookrelpath = os.path.normpath(bookrelpath)
-                    bookrelpath = bookrelpath.replace(os.sep, "/")
-                    if bookrelpath in updates:
-                        attribute_value = updates[bookrelpath]
-                        if fragment != "":
-                            attribute_value = attribute_value + "#" + fragment
-                        attribute_value = quoteurl(attribute_value)
-                        tag[att] = attribute_value
+                    oldtarget = buildBookPath(ahref, startingDir(oldbkpath))
+                    newtarget = updates.get(oldtarget, oldtarget)
+                    attribute_value = buildRelativePath(newbkpath, newtarget)
+                    if fragment != "":
+                        attribute_value = attribute_value + "#" + fragment
+                    attribute_value = quoteurl(attribute_value)
+                    tag[att] = attribute_value
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
 

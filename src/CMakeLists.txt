@@ -1,8 +1,8 @@
 ########################################################
-#  
+#
 #  This is a CMake configuration file.
-#  To use it you need CMake which can be 
-#  downloaded from here: 
+#  To use it you need CMake which can be
+#  downloaded from here:
 #    http://www.cmake.org/cmake/resources/software.html
 #
 #########################################################
@@ -54,8 +54,20 @@ endif()
 
 #############################################################################
 
-# Qt5 packages minimum version 5.4
-find_package(Qt5 5.4 COMPONENTS Core Network Svg WebKit WebKitWidgets Widgets Xml XmlPatterns Concurrent PrintSupport LinguistTools)
+if( UNIX AND NOT APPLE )
+    # Qt5 packages minimum version 5.9 for Linux
+    set(QT5_NEEDED 5.9)
+else()
+    # Qt5 packages minimum version 5.12 for Mac/Windows
+    set(QT5_NEEDED 5.12)
+endif()
+
+set( PKGS_TO_FIND Core Network WebEngine WebEngineWidgets Widgets Xml Concurrent PrintSupport LinguistTools )
+if ( WIN32 )
+    list( APPEND PKGS_TO_FIND WinExtras )
+endif()
+find_package( Qt5 ${QT5_NEEDED} COMPONENTS ${PKGS_TO_FIND} )
+
 set(CMAKE_AUTOMOC ON)
 
 set( MAIN_FILES
@@ -64,8 +76,8 @@ set( MAIN_FILES
     sigil_exception.h
     main.cpp
     )
-    
-set( BOOK_MANIPULATION_FILES 
+
+set( BOOK_MANIPULATION_FILES
     BookManipulation/Book.cpp
     BookManipulation/Book.h
     BookManipulation/BookReports.cpp
@@ -116,7 +128,7 @@ set( RESOURCE_OBJECT_FILES
     ResourceObjects/XMLResource.cpp
     ResourceObjects/XMLResource.h
     )
-        
+
 set( DIALOG_FILES
     Dialogs/About.cpp
     Dialogs/About.h
@@ -132,10 +144,31 @@ set( DIALOG_FILES
     Dialogs/DeleteStyles.h
     Dialogs/EditTOC.cpp
     Dialogs/EditTOC.h
+    Dialogs/EmptyLayout.cpp
+    Dialogs/EmptyLayout.h
+    Dialogs/ManageRepos.cpp
+    Dialogs/ManageRepos.h
     Dialogs/OpenWithName.cpp
     Dialogs/OpenWithName.h
+    Dialogs/RepoLog.cpp
+    Dialogs/RepoLog.h
+    Dialogs/ChgViewer.cpp
+    Dialogs/ChgViewer.h
+    Dialogs/SourceViewer.cpp
+    Dialogs/SourceViewer.h
+    Dialogs/ListSelector.h
+    Dialogs/CPCompare.cpp
+    Dialogs/CPCompare.h
+    Dialogs/RERenamer.cpp
+    Dialogs/RERenamer.h
+    Dialogs/RETable.cpp
+    Dialogs/RETable.h
     Dialogs/SelectCharacter.cpp
     Dialogs/SelectCharacter.h
+    Dialogs/SelectCheckpoint.cpp
+    Dialogs/SelectCheckpoint.h
+    Dialogs/SelectFolder.cpp
+    Dialogs/SelectFolder.h
     Dialogs/SelectHyperlink.cpp
     Dialogs/SelectHyperlink.h
     Dialogs/SelectId.cpp
@@ -204,6 +237,27 @@ set( DIALOG_FILES
     Dialogs/SpellcheckEditor.h
     Dialogs/ViewImage.cpp
     Dialogs/ViewImage.h
+    Dialogs/ViewAV.cpp
+    Dialogs/ViewAV.h
+    Dialogs/ViewFont.cpp
+    Dialogs/ViewFont.h
+    Dialogs/Inspector.cpp
+    Dialogs/Inspector.h
+    )
+
+set( WIDGET_FILES
+    Widgets/ImageView.cpp
+    Widgets/ImageView.h
+    Widgets/AVView.cpp
+    Widgets/AVView.h
+    Widgets/FontView.cpp
+    Widgets/FontView.h
+    Widgets/Navigator.h
+    Widgets/Navigator2.h
+    Widgets/TextView.cpp
+    Widgets/TextView.h
+    Widgets/TVLineNumberArea.cpp
+    Widgets/TVLineNumberArea.h
     )
 
 set( EXPORTER_FILES
@@ -219,7 +273,7 @@ set( EXPORTER_FILES
     Exporters/EncryptionXmlWriter.cpp
     Exporters/EncryptionXmlWriter.h
     )
-    
+
 set( IMPORTER_FILES
     Importers/ImportEPUB.cpp
     Importers/ImportEPUB.h
@@ -233,12 +287,7 @@ set( IMPORTER_FILES
     Importers/ImportTXT.h
     )
 
-
-# These may now be obsolete if so remove them
-#    Misc/HTMLPrettyPrint.cpp
-#    Misc/HTMLPrettyPrint.h
-    
-set( MISC_FILES    
+set( MISC_FILES
     Misc/AppEventFilter.cpp
     Misc/AppEventFilter.h
     Misc/UpdateChecker.cpp
@@ -256,6 +305,7 @@ set( MISC_FILES
     Misc/CSSHighlighter.h
     Misc/CSSInfo.cpp
     Misc/CSSInfo.h
+    Misc/DiffRec.h
     Misc/HTMLEncodingResolver.cpp
     Misc/HTMLEncodingResolver.h
     Misc/HTMLSpellCheck.cpp
@@ -269,8 +319,6 @@ set( MISC_FILES
     Misc/PluginDB.h
     Misc/QCodePage437Codec.cpp
     Misc/QCodePage437Codec.h
-    Misc/RasterizeImageResource.cpp
-    Misc/RasterizeImageResource.h
     Misc/SearchOperations.cpp
     Misc/SearchOperations.h
     Misc/Language.cpp
@@ -283,6 +331,7 @@ set( MISC_FILES
     Misc/MarcRelators.cpp
     Misc/MarcRelators.h
     Misc/UILanguage.cpp
+    Misc/UILanguage.h
     Misc/SettingsStore.cpp
     Misc/SettingsStore.h
     Misc/SpellCheck.cpp
@@ -308,6 +357,7 @@ set( MISC_FILES
     Misc/ValidationResult.cpp
     Misc/WrapIndicator.h
     Misc/XMLEntities.cpp
+    Misc/XMLEntities.h
     Misc/PyObjectPtr.h
     Misc/PyObjectPtr.cpp
     Misc/EmbeddedPython.h
@@ -316,9 +366,15 @@ set( MISC_FILES
     Misc/GumboInterface.cpp
     Misc/PythonRoutines.h
     Misc/PythonRoutines.cpp
+    Misc/TextDocument.h
+    Misc/TextDocument.cpp
+    Misc/MediaTypes.cpp
+    Misc/MediaTypes.h
+    Misc/TagAtts.cpp
+    Misc/TagAtts.h
     )
 
-set( MISC_EDITORS_FILES    
+set( MISC_EDITORS_FILES
     MiscEditors/ClipEditorModel.cpp
     MiscEditors/ClipEditorModel.h
     MiscEditors/ClipEditorTreeView.cpp
@@ -347,23 +403,25 @@ set( SPCRE_FILES
     )
 
 set( VIEW_EDITOR_FILES
-    ViewEditors/BookViewEditor.cpp
-    ViewEditors/BookViewEditor.h
-    ViewEditors/BookViewPreview.cpp
-    ViewEditors/BookViewPreview.h
     ViewEditors/CodeViewEditor.cpp
     ViewEditors/CodeViewEditor.h
+    ViewEditors/WebEngPage.cpp
+    ViewEditors/WebEngPage.h
+    ViewEditors/SimplePage.cpp
+    ViewEditors/SimplePage.h
+    ViewEditors/ViewPreview.cpp
+    ViewEditors/ViewPreview.h
     ViewEditors/LineNumberArea.cpp
     ViewEditors/LineNumberArea.h
     ViewEditors/Searchable.cpp
     ViewEditors/Searchable.h
-    ViewEditors/Zoomable.h 
-    ViewEditors/ViewEditor.h     
-    ViewEditors/ViewWebPage.cpp
-    ViewEditors/ViewWebPage.h 
-    )
+    ViewEditors/Zoomable.h
+    ViewEditors/ElementIndex.h
+    ViewEditors/ViewEditor.h
+    ViewEditors/Viewer.h
+     )
 
-set( MAINUI_FILES 
+set( MAINUI_FILES
     MainUI/MainApplication.cpp
     MainUI/MainApplication.h
     MainUI/MainWindow.cpp
@@ -394,15 +452,17 @@ set( TAB_FILES
     Tabs/TabManager.cpp
     Tabs/TabManager.h
     Tabs/FlowTab.cpp
-    Tabs/FlowTab.h 
+    Tabs/FlowTab.h
     Tabs/ContentTab.cpp
-    Tabs/ContentTab.h 
+    Tabs/ContentTab.h
     Tabs/TextTab.cpp
     Tabs/TextTab.h
     Tabs/CSSTab.cpp
     Tabs/CSSTab.h
     Tabs/AVTab.cpp
     Tabs/AVTab.h
+    Tabs/FontTab.cpp
+    Tabs/FontTab.h
     Tabs/ImageTab.cpp
     Tabs/ImageTab.h
     Tabs/MiscTextTab.cpp
@@ -419,24 +479,29 @@ set( TAB_FILES
     Tabs/XMLTab.h
     Tabs/WellFormedContent.h
     )
-            
-set( UI_FILES   
-    Form_Files/main.ui 
+
+set( UI_FILES
+    Form_Files/main.ui
     Form_Files/ClipboardHistorySelector.ui
     Form_Files/DeleteFiles.ui
     Form_Files/DeleteStyles.ui
+    Form_Files/ManageRepos.ui
     Form_Files/OpenWithName.ui
+    Form_Files/RERenamer.ui
+    Form_Files/RETable.ui
     Form_Files/SelectCharacter.ui
+    Form_Files/SelectFolder.ui
     Form_Files/SelectHyperlink.ui
     Form_Files/SelectId.ui
     Form_Files/SelectIndexTitle.ui
     Form_Files/SelectFiles.ui
-    Form_Files/MetaEditor.ui 
+    Form_Files/MetaEditor.ui
+    Form_Files/EmptyLayout.ui
     Form_Files/AddMetadata.ui
-    Form_Files/AddSemantics.ui 
-    Form_Files/About.ui 
-    Form_Files/EditTOC.ui 
-    Form_Files/HeadingSelector.ui 
+    Form_Files/AddSemantics.ui
+    Form_Files/About.ui
+    Form_Files/EditTOC.ui
+    Form_Files/HeadingSelector.ui
     Form_Files/FindReplace.ui
     Form_Files/PAppearanceWidget.ui
     Form_Files/Preferences.ui
@@ -446,7 +511,7 @@ set( UI_FILES
     Form_Files/PSpellCheckWidget.ui
     Form_Files/PPreserveEntitiesWidget.ui
     Form_Files/PPluginWidget.ui
-    Form_Files/RenameTemplate.ui 
+    Form_Files/RenameTemplate.ui
     Form_Files/Reports.ui
     Form_Files/ReportsAllFilesWidget.ui
     Form_Files/ReportsHTMLFilesWidget.ui
@@ -456,17 +521,17 @@ set( UI_FILES
     Form_Files/ReportsClassesInHTMLFilesWidget.ui
     Form_Files/ReportsStylesInCSSFilesWidget.ui
     Form_Files/ReportsCharactersInHTMLFilesWidget.ui
-    Form_Files/LinkStylesheets.ui 
+    Form_Files/LinkStylesheets.ui
+    Form_Files/SelectCheckpoint.ui
     Form_Files/SearchEditor.ui
     Form_Files/ClipEditor.ui
-    Form_Files/IndexEditor.ui 
-    Form_Files/SpellcheckEditor.ui 
-    Form_Files/PluginRunner.ui 
-    Form_Files/ViewImage.ui
+    Form_Files/IndexEditor.ui
+    Form_Files/SpellcheckEditor.ui
+    Form_Files/PluginRunner.ui
     )
-    
-set( SOURCEUPDATE_FILES   
-    SourceUpdates/PerformHTMLUpdates.cpp 
+
+set( SOURCEUPDATE_FILES
+    SourceUpdates/PerformHTMLUpdates.cpp
     SourceUpdates/PerformHTMLUpdates.h
     SourceUpdates/PerformOPFUpdates.cpp
     SourceUpdates/PerformOPFUpdates.h
@@ -485,13 +550,19 @@ set( SOURCEUPDATE_FILES
     SourceUpdates/UniversalUpdates.cpp
     SourceUpdates/UniversalUpdates.h
     )
-            
-set( QRC_FILES  
+
+set( QRC_FILES
     Resource_Files/main/main.qrc
     Resource_Files/About/About.qrc
     Resource_Files/javascript/javascript.qrc
-    Resource_Files/icon/icon.qrc  
+    Resource_Files/icon/icon.qrc
+    Resource_Files/dark/dark.qrc
     )
+
+if ( APPLE )
+    LIST( APPEND MISC_FILES Misc/macos_menu_and_window_fixes.mm )
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -framework AppKit")
+endif()
 
 file( GLOB TS_FILES Resource_Files/ts/sigil_*.ts )
 
@@ -544,7 +615,7 @@ if ( NOT DEFINED INSTALL_BUNDLED_DICTS )
     set ( INSTALL_BUNDLED_DICTS 1 )
 endif()
 
-set( RAW_SOURCES ${MAIN_FILES} ${TAB_FILES} ${SOURCEUPDATE_FILES} ${BOOK_MANIPULATION_FILES} ${RESOURCE_OBJECT_FILES} ${DIALOG_FILES} ${EXPORTER_FILES} ${IMPORTER_FILES} ${MISC_FILES} ${MISC_EDITORS_FILES} ${SPCRE_FILES} ${VIEW_EDITOR_FILES} ${MAINUI_FILES} )
+set( RAW_SOURCES ${MAIN_FILES} ${TAB_FILES} ${SOURCEUPDATE_FILES} ${BOOK_MANIPULATION_FILES} ${RESOURCE_OBJECT_FILES} ${DIALOG_FILES} ${WIDGET_FILES} ${EXPORTER_FILES} ${IMPORTER_FILES} ${MISC_FILES} ${MISC_EDITORS_FILES} ${SPCRE_FILES} ${VIEW_EDITOR_FILES} ${MAINUI_FILES} )
 
 #############################################################################
 
@@ -569,6 +640,7 @@ source_group( "Resource Files"    FILES ${QRC_FILES} )
 source_group( "Book Manipulation" FILES ${BOOK_MANIPULATION_FILES} )
 source_group( "Resource Objects"  FILES ${RESOURCE_OBJECT_FILES} )
 source_group( "Dialogs"           FILES ${DIALOG_FILES} )
+source_group( "Widgets"           FILES ${WIDGET_FILES} )
 source_group( "Exporters"         FILES ${EXPORTER_FILES} )
 source_group( "Importers"         FILES ${IMPORTER_FILES} )
 source_group( "Misc"              FILES ${MISC_FILES} )
@@ -585,7 +657,12 @@ source_group( "Source Updates"    FILES ${SOURCEUPDATE_FILES} )
 
 set( ALL_SOURCES ${RAW_SOURCES} ${UI_FILES_H} ${QRC_FILES_CPP} ${QM_FILES} )
 
+# Location of the MathJax zip archive for all platforms
+set( MATHJAX_ZIP "${CMAKE_SOURCE_DIR}/src/Resource_Files/polyfills/ML.zip" )
+
 # Adding resource (RC) files for Windows
+# Grab the current year so copyright notice is updated on Windows file properties
+string( TIMESTAMP SIGIL_BUILD_YEAR "%Y" )
 if ( WIN32 )
     configure_file( Resource_files/windows/version.rc.in ${PROJECT_BINARY_DIR}/version.rc )
     set( WINDOWS_RC_FILES
@@ -606,7 +683,7 @@ if( APPLE )
     if( CMAKE_GENERATOR STREQUAL Xcode )
         exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
         exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/polyfills")
-        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/polyfills/MathJax.js ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/polyfills")
+        exec_program("unzip ${MATHJAX_ZIP} -d ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/polyfills")
         exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/Sigil.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
         exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
         exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/epub.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
@@ -621,7 +698,7 @@ if( APPLE )
     else()
         exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
         exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/polyfills")
-        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/polyfills/MathJax.js ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/polyfills")
+        exec_program("unzip ${MATHJAX_ZIP} -d ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/polyfills")
         exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/Sigil.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
         exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
         exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/epub.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
@@ -641,7 +718,7 @@ if( APPLE )
 
     # Copy the PLIST file...
     exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/mac/MacOSXBundleInfo.plist ${PROJECT_BINARY_DIR}")
-    
+
     # ...and set the Sigil version string
     exec_program("sed -i -e 's/SGVERSION/${SIGIL_FULL_VERSION}/g' ${PROJECT_BINARY_DIR}/MacOSXBundleInfo.plist")
 endif()
@@ -664,7 +741,7 @@ include_directories( BEFORE
 
 #############################################################################
 
-# We make bundles for Mac OS X
+# We make bundles for Mac OS X 
 if ( APPLE )
     add_executable( ${PROJECT_NAME} MACOSX_BUNDLE ${ALL_SOURCES} )
     set_target_properties( ${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_BINARY_DIR}/MacOSXBundleInfo.plist )
@@ -675,8 +752,14 @@ else()
 endif()
 
 # No need to explicity link Qt5::WinMain or to use the qt5_use_modules macro since CMAKE 2.8.11. We require CMAKE 3.0.0
-target_link_libraries( ${PROJECT_NAME} ${HUNSPELL_LIBRARIES} ${PCRE_LIBRARIES} ${GUMBO_LIBRARIES} ${MINIZIP_LIBRARIES} ${PYTHON_LIBRARIES}
-    Qt5::Widgets  Qt5::Xml  Qt5::XmlPatterns  Qt5::PrintSupport  Qt5::Svg  Qt5::WebKit  Qt5::WebKitWidgets  Qt5::Network  Qt5::Concurrent )
+set( LIBS_TO_LINK ${HUNSPELL_LIBRARIES} ${PCRE_LIBRARIES} ${GUMBO_LIBRARIES} 
+                  ${MINIZIP_LIBRARIES} ${PYTHON_LIBRARIES}
+                  Qt5::Widgets  Qt5::Xml  Qt5::PrintSupport  Qt5::WebEngine  
+                  Qt5::WebEngineWidgets  Qt5::Network  Qt5::Concurrent )
+if ( WIN32 )
+    list( APPEND LIBS_TO_LINK Qt5::WinExtras )
+endif()
+target_link_libraries( ${PROJECT_NAME} ${LIBS_TO_LINK} )
 
 #############################################################################
 
@@ -695,7 +778,7 @@ add_definitions( -DQT_USE_FAST_OPERATOR_PLUS )
 if( MSVC )
     add_definitions( /DUNICODE /D_UNICODE /DHAVE_ROUND )
     set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MP")
-    set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" ) 
+    set( CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /Oi /GL" )
     set( CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} /LTCG" )
 
 # "Print all warnings" flag for GCC
@@ -717,6 +800,8 @@ endfunction(QUERY_QMAKE)
 
 # For Mac, add frameworks and make a DMG
 if( APPLE )
+    query_qmake(QT_INSTALL_TRANSLATIONS QT_TRANSLATIONS_DIR)
+
     if(CMAKE_GENERATOR STREQUAL Xcode)
         set( WORK_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release" )
     else()
@@ -727,20 +812,32 @@ if( APPLE )
     if ("${CODE_SIGN_ID}" STREQUAL "")
         add_custom_target(  addframeworks
                             COMMAND macdeployqt Sigil.app
-                            WORKING_DIRECTORY ${WORK_DIR}
-                            DEPENDS ${PROJECT_NAME} )
-    ELSE ()
+                            WORKING_DIRECTORY ${WORK_DIR} )
+#                            DEPENDS ${PROJECT_NAME} )
+    else()
         add_custom_target(  addframeworks
                             COMMAND macdeployqt  Sigil.app -codesign="${CODE_SIGN_ID}"
                             WORKING_DIRECTORY ${WORK_DIR}
                             DEPENDS ${PROJECT_NAME} )
-    ENDIF ()
+    endif()
 
-    add_custom_target(  makedmg 
+    add_custom_target(  makedmg
                         COMMAND macdeployqt Sigil.app -dmg
                         WORKING_DIRECTORY ${WORK_DIR})
 
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp ${PROJECT_BINARY_DIR}/*.qm ${WORK_DIR}/Sigil.app/Contents/translations/ )
+    foreach( QM ${QM_FILES} )
+        # Copy Qt's qm files that coincide with the above
+        # message( "QM = ${QM}")
+        string( REGEX REPLACE "(.*)(sigil_)(.*)(\\.qm)" "\\1;\\2;\\3;\\4" PATH_ELEMENTS "${QM}" )
+        list( GET PATH_ELEMENTS 2 LANG_ID )
+        # message( "LANG_ID = ${LANG_ID}")
+        set( QTBASE_QM ${QT_TRANSLATIONS_DIR}/qtbase_${LANG_ID}.qm )
+        # message( "QTBASE_QM = ${QTBASE_QM}" )
+        if ( EXISTS ${QTBASE_QM} )
+            add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp ${QTBASE_QM} ${WORK_DIR}/Sigil.app/Contents/translations/ )
+        endif()
+    endforeach( QM )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp ${CMAKE_SOURCE_DIR}/src/Resource_Files/dictionaries/* ${WORK_DIR}/Sigil.app/Contents/hunspell_dictionaries )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp -r ${CMAKE_SOURCE_DIR}/src/Resource_Files/plugin_launchers/python/* ${WORK_DIR}/Sigil.app/Contents/plugin_launchers/python )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp -r ${CMAKE_SOURCE_DIR}/src/Resource_Files/python3lib/* ${WORK_DIR}/Sigil.app/Contents/python3lib )
@@ -750,7 +847,7 @@ if( APPLE )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp ${CMAKE_SOURCE_DIR}/src/Resource_Files/examples/* ${WORK_DIR}/Sigil.app/Contents/examples )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/../lib/*.dylib ${WORK_DIR}/Sigil.app/Contents/lib/ )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND install_name_tool -rpath ${CMAKE_BINARY_DIR}/lib "@executable_path/../lib" ${WORK_DIR}/Sigil.app/Contents/MacOS/Sigil )
- 
+
 # For Linux and Windows, provide binary installers.
 # For this to work on Windows, Inno Setup's iscc compiler needs to be installed and on the system path.
 elseif (MSVC)
@@ -763,7 +860,8 @@ elseif (MSVC)
     set( MAIN_PACKAGE_DIR ${TEMP_PACKAGE_DIR}/Sigil )
     set( OUTPUT_PACKAGE_DIR ${CMAKE_BINARY_DIR}/installer )
     set( PYTHON_DEST_DIR ${MAIN_PACKAGE_DIR}/python3 )
-    
+    set( VCREDIST_VER "2017" ) 
+
     # ISS conf file for the Inno Setup compiler
     # We first create a CMake configured version of the ISS file,
     # and then we copy it to the temp folder every time we need to build the installer.
@@ -777,8 +875,8 @@ elseif (MSVC)
         set( ISS_ARCH "x64" )
         set( ISS_SETUP_FILENAME_PLATFORM "-x64" )
     endif()
-    
-    # Creates a copy of the ISS file in ${ISS_CONFIGURED_LOCATION} and then configures it 
+
+    # Creates a copy of the ISS file in ${ISS_CONFIGURED_LOCATION} and then configures it
     # Used in the ISS CMake configuration
     set( LICENSE_LOCATION ${CMAKE_SOURCE_DIR}/installer/win_installer_note.txt  )
     configure_file( ${ISS_MAIN_LOCATION} ${ISS_CONFIGURED_LOCATION} )
@@ -794,7 +892,7 @@ elseif (MSVC)
     endif()
 
     # Run Inno Setup's iscc compiler (*AFTER* all the PRE_BUILD custom commands execute)
-    add_custom_target(  makeinstaller 
+    add_custom_target(  makeinstaller
         COMMAND cmake -E echo "For this to work, Inno Setup's iscc compiler needs to be installed and on the system path."
         COMMAND iscc ${ISS_TEMP_LOCATION} )
 
@@ -805,24 +903,24 @@ elseif (MSVC)
                         DEPENDS ${PROJECT_NAME} )
 
     add_dependencies( makeinstaller copyfiles )
-    
+
     # Copy ISS file to temp folder location
-    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
-                        COMMAND cmake -E copy ${ISS_CONFIGURED_LOCATION} ${ISS_TEMP_LOCATION} )     
+    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
+                        COMMAND cmake -E copy ${ISS_CONFIGURED_LOCATION} ${ISS_TEMP_LOCATION} )
 
     # windeployqt
     add_custom_command( TARGET ${TARGET_FOR_COPY} POST_BUILD COMMAND
-	    windeployqt.exe --release --no-webkit2 --no-opengl-sw --no-translations --no-compiler-runtime --dir ${MAIN_PACKAGE_DIR} --libdir ${MAIN_PACKAGE_DIR} ${MAIN_PACKAGE_DIR}/${PROJECT_NAME}${CMAKE_EXECUTABLE_SUFFIX} )
+	    windeployqt.exe --release --no-translations --no-compiler-runtime --dir ${MAIN_PACKAGE_DIR} --libdir ${MAIN_PACKAGE_DIR} ${MAIN_PACKAGE_DIR}/${PROJECT_NAME}${CMAKE_EXECUTABLE_SUFFIX} )
 
-    set( LIBXML2 ${QT_INSTALL_BINS}/libxml2.dll )
-    if ( EXISTS ${LIBXML2} )
-        add_custom_command( TARGET ${TARGET_FOR_COPY} POST_BUILD COMMAND cmake -E copy ${LIBXML2} ${MAIN_PACKAGE_DIR} )
-    endif()
+    #set( LIBXML2 ${QT_INSTALL_BINS}/libxml2.dll )
+    #if ( EXISTS ${LIBXML2} )
+    #    add_custom_command( TARGET ${TARGET_FOR_COPY} POST_BUILD COMMAND cmake -E copy ${LIBXML2} ${MAIN_PACKAGE_DIR} )
+    #endif()
 
-    set( LIBXSLT ${QT_INSTALL_BINS}/libxslt.dll )
-    if ( EXISTS ${LIBXSLT} )
-        add_custom_command( TARGET ${TARGET_FOR_COPY} POST_BUILD COMMAND cmake -E copy ${LIBXSLT} ${MAIN_PACKAGE_DIR} )
-    endif()
+    #set( LIBXSLT ${QT_INSTALL_BINS}/libxslt.dll )
+    #if ( EXISTS ${LIBXSLT} )
+    #    add_custom_command( TARGET ${TARGET_FOR_COPY} POST_BUILD COMMAND cmake -E copy ${LIBXSLT} ${MAIN_PACKAGE_DIR} )
+    #endif()
 
     # Copy the translation qm files
     add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD COMMAND cmake -E make_directory ${MAIN_PACKAGE_DIR}/translations/ )
@@ -841,10 +939,10 @@ elseif (MSVC)
         endif()
     endforeach( QM )
 
-    # Copy the MathJax polyfill
-    set( MATHJAX_FILE ${CMAKE_SOURCE_DIR}/src/Resource_Files/polyfills/MathJax_win.js  )
-    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD COMMAND cmake -E make_directory ${MAIN_PACKAGE_DIR}/polyfills/ )
-    add_custom_command( TARGET ${TARGET_FOR_COPY} POST_BUILD COMMAND cmake -E copy ${MATHJAX_FILE} ${MAIN_PACKAGE_DIR}/polyfills/MathJax.js )
+    # Extract the MathJax polyfill archive into the package directory
+    set( MATHJAX_UNZIP_DEST ${MAIN_PACKAGE_DIR}/polyfills )
+    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD COMMAND cmake -E make_directory ${MATHJAX_UNZIP_DEST} )
+    add_custom_command( TARGET ${TARGET_FOR_COPY} POST_BUILD COMMAND cmake -E tar xzf ${MATHJAX_ZIP} WORKING_DIRECTORY ${MATHJAX_UNZIP_DEST} )
 
     # Copy the dictionary files
     add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD COMMAND cmake -E make_directory ${MAIN_PACKAGE_DIR}/hunspell_dictionaries/ )
@@ -882,52 +980,51 @@ elseif (MSVC)
     # Copy the application executable
     add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
                         COMMAND cmake -E copy ${EXE_PATH} ${MAIN_PACKAGE_DIR} )
-                        
+
     # We need to copy the CRT dlls
     # Add -DWIN_INSTALLER_USE_64BIT_CRT=1 to the cmake call if you want to build
     # an installer for the x64 verison of Sigil. This will make sure that the
     # correct CRT libs are included in the installer.
-    # All components now use the VC++ 2015 redistributable.
     add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD COMMAND cmake -E make_directory ${TEMP_PACKAGE_DIR}/vendor/ )
     if ( WIN_INSTALLER_USE_64BIT_CRT )
         message( STATUS "Using the 64 bit CRT in the Sigil Windows installer" )
-        message( STATUS "Ensure vcredist_x64.exe for VS2015 has been placed in installer/ if you plan on running makeinstaller" )
+        message( STATUS "Ensure vcredist_x64.exe for VS${VCREDIST_VER} has been placed in installer/ if you plan on running makeinstaller" )
         add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
-            COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/installer/vcredist_x64.exe ${TEMP_PACKAGE_DIR}/vendor/vcredist2015.exe )
+            COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/installer/vcredist_x64.exe ${TEMP_PACKAGE_DIR}/vendor/vcredist.exe )
     else()
         message( STATUS "Using the 32 bit CRT in the Sigil Windows installer" )
-        message( STATUS "Ensure vcredist_x86.exe for VS2015 has been placed in installer/ if you plan on running makeinstaller" )
+        message( STATUS "Ensure vcredist_x86.exe for VS${VCREDIST_VER} has been placed in installer/ if you plan on running makeinstaller" )
         add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
-            COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/installer/vcredist_x86.exe ${TEMP_PACKAGE_DIR}/vendor/vcredist2015.exe )
+            COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/installer/vcredist_x86.exe ${TEMP_PACKAGE_DIR}/vendor/vcredist.exe )
     endif()
 
     # Copy the Changelog
-    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
+    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
                         COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/ChangeLog.txt ${MAIN_PACKAGE_DIR} )
-    
+
     # Copy the license file
-    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
+    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
                         COMMAND cmake -E copy ${CMAKE_SOURCE_DIR}/COPYING.txt ${MAIN_PACKAGE_DIR} )
 
     # The folder for miscellaneous files (icon files etc.)
     add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD COMMAND cmake -E make_directory ${MAIN_PACKAGE_DIR}/misc/ )
-                        
+
     # Copy the icon file (used on Linux for the application icon)
-    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
+    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
                         COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/Resource_Files/icon/app_icon_48.png ${MAIN_PACKAGE_DIR}/misc/ )
-                        
+
     # Copy the SGF ICO file (used on Windows as the SGF file type icon)
-    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD 
+    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
                         COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.ico ${MAIN_PACKAGE_DIR}/misc/ )
-                        
-    # Remove the temp directory used for building the installer 
-    add_custom_command( TARGET makeinstaller POST_BUILD 
+
+    # Remove the temp directory used for building the installer
+    add_custom_command( TARGET makeinstaller POST_BUILD
                         COMMAND cmake -E remove_directory ${TEMP_PACKAGE_DIR}
                         COMMENT "Removing temporary directory..." )
 endif()
 
 #############################################################################
-# You can change the install location by 
+# You can change the install location by
 # running cmake like this:
 #
 #   cmake -DCMAKE_INSTALL_PREFIX=/new/install/prefix
@@ -958,12 +1055,25 @@ if( UNIX AND NOT APPLE )
     set_property (
         SOURCE sigil_constants.cpp
         PROPERTY COMPILE_DEFINITIONS
-        SIGIL_SHARE_ROOT="${SIGIL_SHARE_ROOT}" DICTS_ARE_BUNDLED=${INSTALL_BUNDLED_DICTS} EXTRA_DICT_DIRS="${EXTRA_DICT_DIRS}"
+        SIGIL_SHARE_ROOT="${SIGIL_SHARE_ROOT}" DICTS_ARE_BUNDLED=${INSTALL_BUNDLED_DICTS}
+        EXTRA_DICT_DIRS="${EXTRA_DICT_DIRS}" MATHJAX_DIR="${MATHJAX_DIR}"
     )
 
     # Launch script for sigil
     set( LINUX_LAUNCH_INSTALL_SCRIPT_CONFIGURED ${CMAKE_BINARY_DIR}/sigil-sh_install_configured )
     set( SIGIL_EXECUTABLE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}${CMAKE_EXECUTABLE_SUFFIX} )
+
+    # Destination directory for unzipped MathJax archive
+    set( MATHJAX_UNZIP_DEST "${CMAKE_BINARY_DIR}/polyfills" )
+    # Remove previous directories
+    if ( EXISTS ${MATHJAX_UNZIP_DEST} )
+        file( REMOVE_RECURSE ${MATHJAX_UNZIP_DEST} )
+    endif()
+    # Create the polyfills dir and extract the MathJax archive to it
+    if ( NOT DEFINED MATHJAX_DIR )
+        file( MAKE_DIRECTORY ${MATHJAX_UNZIP_DEST} )
+        execute_process( COMMAND cmake -E tar xvzf ${MATHJAX_ZIP} WORKING_DIRECTORY ${MATHJAX_UNZIP_DEST} )
+    endif()
 
     # Configure Linux launch script
     configure_file( ${LINUX_LAUNCH_INSTALL_SCRIPT} ${LINUX_LAUNCH_INSTALL_SCRIPT_CONFIGURED} )
@@ -981,15 +1091,15 @@ if( UNIX AND NOT APPLE )
     endif()
 
     # Standard Linux 'make install'
-    install( TARGETS sigil DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/sigil/ )
-    install( PROGRAMS ${LINUX_LAUNCH_INSTALL_SCRIPT_CONFIGURED} DESTINATION ${CMAKE_INSTALL_PREFIX}/bin/ RENAME ${PROJECT_NAME} )
+    install( TARGETS sigil DESTINATION ${CMAKE_INSTALL_LIBDIR}/sigil )
+    install( PROGRAMS ${LINUX_LAUNCH_INSTALL_SCRIPT_CONFIGURED} DESTINATION ${CMAKE_INSTALL_BINDIR} RENAME ${PROJECT_NAME} )
     if( NOT USE_SYSTEM_LIBS OR NOT HUNSPELL_FOUND )
-        install( PROGRAMS ${HUNSPELL_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/sigil/ )
+        install( PROGRAMS ${HUNSPELL_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/sigil )
     endif()
-    install( PROGRAMS ${GUMBO_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/sigil/ )
+    install( PROGRAMS ${GUMBO_NAME} DESTINATION ${CMAKE_INSTALL_LIBDIR}/sigil )
     if( BUILD_PATCHED_LIBXML2 )
-        install( PROGRAMS ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libsigilxml2.so.2.9.4 DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/sigil/ )
-        install( FILES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libxml2.so.2 DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/sigil/ )
+        install( PROGRAMS ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libsigilxml2.so.2.9.4 DESTINATION ${CMAKE_INSTALL_LIBDIR}/sigil )
+        install( FILES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libxml2.so.2 DESTINATION ${CMAKE_INSTALL_LIBDIR}/sigil )
     endif()
     install( FILES ${LINUX_DESKTOP_FILE} DESTINATION ${SHARE_INSTALL_PREFIX}/share/applications/ )
     install( FILES ${LINUX_DESKTOP_ICON_FILE} DESTINATION ${SHARE_INSTALL_PREFIX}/share/pixmaps RENAME sigil.png )
@@ -997,7 +1107,11 @@ if( UNIX AND NOT APPLE )
     if ( INSTALL_BUNDLED_DICTS )
         install( FILES ${DIC_FILES} DESTINATION ${SIGIL_SHARE_ROOT}/hunspell_dictionaries/ )
     endif()
-    install( FILES ${CMAKE_SOURCE_DIR}/src/Resource_Files/polyfills/MathJax.js DESTINATION ${SIGIL_SHARE_ROOT}/polyfills/ )
+    if ( MATHJAX_DIR )
+        install( FILES ${CMAKE_SOURCE_DIR}/src/Resource_Files/polyfills/SIGIL_EBOOK_MML_SVG.js DESTINATION ${MATHJAX_DIR}/config/local/ )
+    else()
+        install( DIRECTORY ${MATHJAX_UNZIP_DEST}/MJ/ DESTINATION ${SIGIL_SHARE_ROOT}/polyfills/MJ )
+    endif()
     install( DIRECTORY ${CMAKE_SOURCE_DIR}/src/Resource_Files/plugin_launchers/python/ DESTINATION ${SIGIL_SHARE_ROOT}/plugin_launchers/python )
     install( DIRECTORY ${CMAKE_SOURCE_DIR}/src/Resource_Files/python3lib/ DESTINATION ${SIGIL_SHARE_ROOT}/python3lib )
     install( FILES ${EXAMPLE_FILES} DESTINATION ${SIGIL_SHARE_ROOT}/examples/ )

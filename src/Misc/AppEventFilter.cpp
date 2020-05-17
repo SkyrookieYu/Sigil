@@ -1,5 +1,6 @@
 /************************************************************************
 **
+**  Copyright (C) 2019 Kevin B. Hendricks, Stratford, Ontario Canada
 **  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -31,6 +32,16 @@ AppEventFilter::AppEventFilter(QObject *parent)
 {
 }
 
+void AppEventFilter::setInitialFilePath(const QString & filepath)
+{
+    m_initialFilePath = filepath;
+}
+
+QString AppEventFilter::getInitialFilePath()
+{
+    return m_initialFilePath;
+}
+
 // The event filter used to catch OS X's
 // QFileOpenEvents. These signal the user used the OS's
 // services to start Sigil with an existing document
@@ -38,8 +49,12 @@ bool AppEventFilter::eventFilter(QObject *watched_object, QEvent *event)
 {
     if (event->type() == QEvent::FileOpen) {
         QFileOpenEvent *openEvent = static_cast<QFileOpenEvent *>(event);
-        MainWindow *widget = new MainWindow(openEvent->file());
-        widget->show();
+	if (m_initialFilePath.isEmpty()) {
+	    m_initialFilePath = openEvent->file();
+	} else { 
+            MainWindow *widget = new MainWindow(openEvent->file());
+            widget->show();
+	}
         return true;
     }
 

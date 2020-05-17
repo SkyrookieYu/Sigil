@@ -2,7 +2,8 @@
 # -*- coding: utf-8 -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 
-# Copyright (c) 2014 Kevin B. Hendricks, John Schember, and Doug Massay
+# Copyright (c) 2014-2020 Kevin B. Hendricks, and Doug Massay
+# Copyright (c) 2014      John Schember
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification,
@@ -157,7 +158,7 @@ class ProcessScript(object):
         if script_type == "edit":
             for ftype, id, href in container._w.deleted:
                 if ftype == 'manifest':
-                    bookhref = 'OEBPS/' + href
+                    bookhref = href
                     mime = container._w.getmime(bookhref)
                 else:
                     bookhref = id
@@ -166,9 +167,8 @@ class ProcessScript(object):
                 self.wrapout.append('<deleted href="%s" id="%s" media-type="%s" />\n' % (quoteurl(bookhref), id, mime))
         if script_type in ['input', 'edit']:
             for id in container._w.added:
-                if id in container._w.id_to_href:
-                    href = container._w.id_to_href[id]
-                    bookhref = 'OEBPS/' + href
+                if id in container._w.id_to_bookpath:
+                    bookhref = container._w.id_to_bookpath[id]
                     mime = container._w.id_to_mime[id]
                 else:
                     bookhref = id
@@ -177,9 +177,8 @@ class ProcessScript(object):
                 self.wrapout.append('<added href="%s" id="%s" media-type="%s" />\n' % (quoteurl(bookhref), id, mime))
         if script_type == 'edit':
             for id in container._w.modified:
-                if id in container._w.id_to_href:
-                    href = container._w.id_to_href[id]
-                    bookhref = 'OEBPS/' + href
+                if id in container._w.id_to_bookpath:
+                    bookhref = container._w.id_to_bookpath[id]
                     mime = container._w.id_to_mime[id]
                 else:
                     bookhref = id
@@ -188,7 +187,7 @@ class ProcessScript(object):
                 self.wrapout.append('<modified href="%s" id="%s" media-type="%s" />\n' % (quoteurl(bookhref), id, mime))
         if script_type == 'validation':
             for vres in container.results:
-                self.wrapout.append('<validationresult type="%s" filename="%s" linenumber="%s" charoffset="%s" message="%s" />\n' % (vres.restype, vres.filename, vres.linenumber, vres.charoffset, vres.message))
+                self.wrapout.append('<validationresult type="%s" bookpath="%s" linenumber="%s" charoffset="%s" message="%s" />\n' % (vres.restype, vres.bookpath, vres.linenumber, vres.charoffset, vres.message))
         self.wrapout.append('</changes>\n')
         self.exitcode = 0
         return
@@ -230,6 +229,13 @@ def main(argv=unicode_argv()):
     plugin_dir = os.path.dirname(script_home)
     script_module = os.path.splitext(os.path.basename(target_file))[0]
 
+    # remap cssutils to css_parser
+    try:
+        import css_parser
+        sys.modules['cssutils'] = css_parser
+    except ImportError:
+        pass
+
     # do basic sanity checking anyway
     if script_type not in SUPPORTED_SCRIPT_TYPES:
         failed(None, msg="Launcher: script type %s is not supported" % script_type)
@@ -248,10 +254,15 @@ def main(argv=unicode_argv()):
 
     # load and parse opf if present
     op = None
-    opf_path = os.path.join(ebook_root,'OEBPS','content.opf')
+    cfg = ''
+    with open(os.path.join(outdir, 'sigil.cfg'), 'rb') as f:
+        cfg = f.read().decode('utf-8')
+    cfg = cfg.replace("\r", "")
+    cfg_lst = cfg.split("\n")
+    opfbookpath = cfg_lst[0]
+    opf_path = os.path.join(ebook_root, opfbookpath.replace("/", os.sep))
     if unipath.exists(opf_path) and unipath.isfile(opf_path):
-        op = Opf_Parser(opf_path)
-
+        op = Opf_Parser(opf_path, opfbookpath)
     # create a wrapper for record keeping and safety
     rk = Wrapper(ebook_root, outdir, op, plugin_dir, plugin_name)
 

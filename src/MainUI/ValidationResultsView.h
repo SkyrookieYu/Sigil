@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -83,13 +84,11 @@ signals:
      *
      * @param resource The resource that should be opened.
      * @param line_to_scroll_to To which line should the resource scroll.
-     * @param view_state In which View should the resource open or switch to.
      */
     void OpenResourceRequest(Resource *resource,
                              int line_to_scroll_to = -1,
                              int position_to_scroll_to = -1,
-                             const QString &caret_location_to_scroll_to = QString(),
-                             MainWindow::ViewState view_state = MainWindow::ViewState_Unknown);
+                             const QString &caret_location_to_scroll_to = QString());
 
 private slots:
 
@@ -134,6 +133,8 @@ private:
      * @return The cleaned path.
      */
     static QString RemoveEpubPathPrefix(const QString &path);
+
+    void SetItemPalette(QTableWidgetItem * item, QBrush &row_brush);
 
 
     ///////////////////////////////

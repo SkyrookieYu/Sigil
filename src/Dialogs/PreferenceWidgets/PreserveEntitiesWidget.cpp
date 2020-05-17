@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2014 Kevin Hendricks
+**  Copyright (C) 2014-2020 Kevin Hendricks, Stratford, Ontario Canada
 **
 **  This file is part of Sigil.
 **
@@ -35,10 +35,12 @@ PreserveEntitiesWidget::PreserveEntitiesWidget()
 }
 
 
-PreferencesWidget::ResultAction PreserveEntitiesWidget::saveSettings()
+PreferencesWidget::ResultActions PreserveEntitiesWidget::saveSettings()
 {
+    PreferencesWidget::ResultActions results = PreferencesWidget::ResultAction_None;
+
     if (!m_isDirty) {
-        return PreferencesWidget::ResultAction_None;
+        return results;
     }
 
     // Save preserve entities information
@@ -54,12 +56,14 @@ PreferencesWidget::ResultAction PreserveEntitiesWidget::saveSettings()
     }
     settings.setPreserveEntityCodeNames(codenames);
 
-    return PreferencesWidget::ResultAction_None;
+    return results;
 }
 
 
 void PreserveEntitiesWidget::addEntities()
 {
+    QStringList invalid = QStringList() << "&amp;" << "&gt;" << "&lt;";
+
     QString list = QInputDialog::getText(this, tr("Add Entities"), tr("Entities:"));
 
     if (list.isEmpty()) {
@@ -68,11 +72,12 @@ void PreserveEntitiesWidget::addEntities()
 
     list.replace(" ", ",");
     list.replace(",", "\n");
+
     QStringList names = list.split("\n");
 
     // Add the entities to the list
     foreach(QString name, names) {
-        if (!name.isEmpty()) {
+        if (!name.isEmpty() && !invalid.contains(name)) {
             if (XMLEntities::instance()->GetEntityCode(name) > 0) {
                 QListWidgetItem *item = new QListWidgetItem(name, ui.entityList);
                 item->setFlags(item->flags() | Qt::ItemIsEditable);

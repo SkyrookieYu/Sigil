@@ -1,6 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2012 Dave Heiland, John Schember
+**  Copyright (C) 2015-2020  Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2019-2020  Doug Massay
+**  Copyright (C) 2012       Dave Heiland, John Schember
 **
 **  This file is part of Sigil.
 **
@@ -19,35 +21,50 @@
 **
 *************************************************************************/
 
+#include <QEvent>
+#include <QMouseEvent>
 #include <QApplication>
-#include <QtWidgets/QSplitter>
-#include <QtWidgets/QStackedWidget>
+#include <QClipboard>
 #include <QVBoxLayout>
-#include <QtWebKitWidgets/QWebInspector>
+#include <QHBoxLayout>
+#include <QToolBar>
+#include <QtWebEngineWidgets/QWebEngineView>
 #include <QDir>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QStylePainter>
+#include <QStyleOptionFrame>
+#include <QTimer>
+#include <QDebug>
 
 #include "MainUI/PreviewWindow.h"
+#include "Dialogs/Inspector.h"
+#include "Misc/GumboInterface.h"
 #include "Misc/SleepFunctions.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
-#include "ViewEditors/BookViewPreview.h"
+#include "ViewEditors/ViewPreview.h"
 #include "sigil_constants.h"
 
+static const QStringList HEADERTAGS = QStringList() << "h1" << "h2" << "h3" << "h4" << "h5" << "h6";
+
 static const QString SETTINGS_GROUP = "previewwindow";
+
+#define DBG if(0)
 
 PreviewWindow::PreviewWindow(QWidget *parent)
     :
     QDockWidget(tr("Preview"), parent),
     m_MainWidget(new QWidget(this)),
     m_Layout(new QVBoxLayout(m_MainWidget)),
-    m_Preview(new BookViewPreview(this)),
-    m_Inspector(new QWebInspector(this)),
-    m_Splitter(new QSplitter(this)),
-    m_StackedViews(new QStackedWidget(this)),
-    m_Filepath(QString())
+    m_buttons(new QHBoxLayout()),
+    m_Preview(new ViewPreview(this)),
+    m_Inspector(new Inspector(this)),
+    m_Filepath(QString()),
+    m_titleText(QString()),
+    m_updatingPage(false)
 {
+    setWindowTitle(tr("Preview"));
     SetupView();
     LoadSettings();
     ConnectSignalsToSlots();
@@ -63,29 +80,18 @@ PreviewWindow::~PreviewWindow()
     // QWebInspector and the application will SegFault. This is an issue
     // with how QWebPages interface with QWebInspector.
 
-    if (m_Inspector) {
-        m_Inspector->setPage(0);
-        m_Inspector->close();
-    }
-
     if (m_Preview) {
         delete m_Preview;
-        m_Preview = 0;
+        m_Preview = nullptr;
     }
 
     if (m_Inspector) {
+        if (m_Inspector->isVisible()) {
+            m_Inspector->StopInspection();
+	    m_Inspector->close();
+	}
         delete m_Inspector;
-        m_Inspector = 0;
-    }
-
-    if (m_Splitter) {
-        delete m_Splitter;
-        m_Splitter = 0;
-    }
-
-    if (m_StackedViews) {
-        delete(m_StackedViews);
-        m_StackedViews= 0;
+        m_Inspector = nullptr;
     }
 }
 
@@ -101,46 +107,42 @@ void PreviewWindow::resizeEvent(QResizeEvent *event)
 void PreviewWindow::hideEvent(QHideEvent * event)
 {
     if (m_Inspector) {
-        // break the link between the inspector and the page it is inspecting
-        // to prevent memory corruption from Qt modified after free issue
-        m_Inspector->setPage(0);
-        if (m_Inspector->isVisible()) {
-            m_Inspector->hide();
-        }
+        m_Inspector->StopInspection();
+	m_Inspector->close();
     }
+
     if ((m_Preview) && m_Preview->isVisible()) {
         m_Preview->hide();
-    }
-    if ((m_Splitter) && m_Splitter->isVisible()) {
-        m_Splitter->hide();
-    }
-    if ((m_StackedViews) && m_StackedViews->isVisible()) {
-        m_StackedViews->hide();
     }
 }
 
 void PreviewWindow::showEvent(QShowEvent * event)
 {
-    // restablish the link between the inspector and its page
-    if ((m_Inspector) && (m_Preview)) {
-        m_Inspector->setPage(m_Preview->page());
-    }
     // perform the show for all children of this widget
     if ((m_Preview) && !m_Preview->isVisible()) {
         m_Preview->show();
     }
-    if ((m_Inspector) && !m_Inspector->isVisible()) {
-        m_Inspector->show();
-    }
-    if ((m_Splitter) && !m_Splitter->isVisible()) {
-        m_Splitter->show();
-    }
-    if ((m_StackedViews) && !m_StackedViews->isVisible()) {
-        m_StackedViews->show();
-    }
+
     QDockWidget::showEvent(event);
     raise();
     emit Shown();
+}
+
+void PreviewWindow::paintEvent(QPaintEvent *event)
+{
+    // Allow title text to be set independently of tab text
+    // (when QDockWidget is tabified).
+    QStylePainter painter(this);
+
+    if (isFloating()) {
+        QStyleOptionFrame options;
+        options.initFrom(this);
+        painter.drawPrimitive(QStyle::PE_FrameDockWidget, options);
+    }
+    QStyleOptionDockWidget options;
+    initStyleOption(&options);
+    options.title = titleText();
+    painter.drawControl(QStyle::CE_DockWidgetTitle, options);
 }
 
 bool PreviewWindow::IsVisible()
@@ -165,20 +167,37 @@ void PreviewWindow::SetupView()
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    m_Inspector->setPage(m_Preview->page());
+    // QWebEngineView events are routed to their parent
+    m_Preview->installEventFilter(this);
 
-    m_Layout->setContentsMargins(0, 0, 0, 0);
-#ifdef Q_OS_MAC
-    m_Layout->setSpacing(4);
+#if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
+    // this may be needed by all platforms in the future
+    QWidget * fp = m_Preview->focusProxy();
+    if (fp) fp->installEventFilter(this);
 #endif
 
-    m_Layout->addWidget(m_StackedViews);
+    m_Layout->setContentsMargins(0, 0, 0, 0);
+    m_Layout->addWidget(m_Preview);
 
-    m_Splitter->setOrientation(Qt::Vertical);
-    m_Splitter->addWidget(m_Preview);
-    m_Splitter->addWidget(m_Inspector);
-    m_Splitter->setSizes(QList<int>() << 400 << 200);
-    m_StackedViews->addWidget(m_Splitter);
+    m_inspectAction = new QAction(QIcon(":main/inspect_48px.png"),"", this);
+    m_inspectAction->setToolTip(tr("Inspect Page"));
+
+    m_selectAction  = new QAction(QIcon(":main/edit-select-all_48px.png"),"", this);
+    m_selectAction->setToolTip(tr("Select-All"));
+
+    m_copyAction    = new QAction(QIcon(":main/edit-copy_48px.png"),"", this);
+    m_copyAction->setToolTip(tr("Copy Selection To ClipBoard"));
+
+    m_reloadAction  = new QAction(QIcon(":main/reload-page_48px.png"),"", this);
+    m_reloadAction->setToolTip(tr("Update Preview Window"));
+
+    QToolBar * tb = new QToolBar();
+    tb->addAction(m_inspectAction);
+    tb->addAction(m_selectAction);
+    tb->addAction(m_copyAction);
+    tb->addAction(m_reloadAction);
+    m_buttons->addWidget(tb);
+    m_Layout->addLayout(m_buttons);
 
     m_MainWidget->setLayout(m_Layout);
     setWidget(m_MainWidget);
@@ -188,60 +207,129 @@ void PreviewWindow::SetupView()
     QApplication::restoreOverrideCursor();
 }
 
-void PreviewWindow::UpdatePage(QString filename, QString text, QList<ViewEditor::ElementIndex> location)
+bool PreviewWindow::UpdatePage(QString filename_url, QString text, QList<ElementIndex> location)
 {
+
+    DBG qDebug() << "Entered PV UpdatePage with filename: " << filename_url;
+
     if (!m_Preview->isVisible()) {
-        return;
+        DBG qDebug() << "ignoring PV UpdatePage since PV is not visible";
+        return true;
+    }
+   
+    if (m_updatingPage) {
+        DBG qDebug() << "delaying PV UpdatePage request as currently loading a page: ";
+	return false;
     }
 
-    // If this page uses the mathml, inject a polyfill
+    m_updatingPage = true;
+
+    DBG qDebug() << "PV UpdatePage " << filename_url;
+    DBG foreach(ElementIndex ei, location) qDebug()<< "PV name: " << ei.name << " index: " << ei.index;
+
+    //if isDarkMode is set, inject a local style in head
+    SettingsStore settings;
+    if (Utility::IsDarkMode() && settings.previewDark()) {
+        text = Utility::AddDarkCSS(text);
+        DBG qDebug() << "Preview injecting dark style: ";
+    }
+    m_Preview->page()->setBackgroundColor(Utility::WebViewBackgroundColor(true));
+
+    // If the user has set a default stylesheet inject it
+    // it can override anything above it
+    if (!m_usercssurl.isEmpty()) {
+        int endheadpos = text.indexOf("</head>");
+        if (endheadpos > 1) {
+            QString inject_userstyles = 
+              "<link rel=\"stylesheet\" type=\"text/css\" "
+	      "href=\"" + m_usercssurl + "\" />\n";
+	    DBG qDebug() << "Preview injecting stylesheet: " << inject_userstyles;
+            text.insert(endheadpos, inject_userstyles);
+	}
+    }
+
+    // If this page uses mathml tags, inject a polyfill
     // MathJax.js so that the mathml appears in the Preview Window
     QRegularExpression mathused("<\\s*math [^>]*>");
     QRegularExpressionMatch mo = mathused.match(text);
     if (mo.hasMatch()) {
-        QString mathjaxurl;
-
-        // The path to MathJax.js is platform dependent
-#ifdef Q_OS_MAC
-        // On Mac OS X QCoreApplication::applicationDirPath() points to Sigil.app/Contents/MacOS/ 
-        QDir execdir(QCoreApplication::applicationDirPath());
-        execdir.cdUp();
-        mathjaxurl = execdir.absolutePath() + "/polyfills/MathJax.js";
-#elif defined(Q_OS_WIN32)
-        mathjaxurl = "/" + QCoreApplication::applicationDirPath() + "/polyfills/MathJax.js";
-#else
-        // all flavours of linux / unix
-        // user supplied environment variable to 'share/sigil' directory will overrides everything
-        if (!sigil_extra_root.isEmpty()) {
-            mathjaxurl = sigil_extra_root + "/polyfills/MathJax.js";
-        } else {
-            mathjaxurl = sigil_share_root + "/polyfills/MathJax.js";
-        }
-#endif
-
-        mathjaxurl = "file://" + Utility::URLEncodePath(mathjaxurl);
         int endheadpos = text.indexOf("</head>");
         if (endheadpos > 1) {
             QString inject_mathjax = 
-              "<script type=\"text/javascript\" "
-              "src=\"" + mathjaxurl + "\"></script>";
+              "<script type=\"text/javascript\" async=\"async\" "
+              "src=\"" + m_mathjaxurl + "\"></script>\n";
             text.insert(endheadpos, inject_mathjax);
         }
     }
 
-    m_Filepath = filename;
-    m_Preview->CustomSetDocument(filename, text);
+    if (fixup_fullscreen_svg_images(text)) {
+        QRegularExpression svg_height("<\\s*svg\\s[^>]*height\\s*=\\s*[\"'](100%)[\"'][^>]*>",
+				                   QRegularExpression::CaseInsensitiveOption |
+				                   QRegularExpression::MultilineOption | 
+                                                   QRegularExpression::DotMatchesEverythingOption);
+        QRegularExpressionMatch hmo = svg_height.match(text, 0);
+        if (hmo.hasMatch()) {
+	    int bp = hmo.capturedStart(1);
+            int n = hmo.capturedLength(1);
+	    text = text.replace(bp, n, "100vh"); 
+	}
+
+        QRegularExpression svg_width("<\\s*svg\\s[^>]*width\\s*=\\s*[\"'](100%)[\"'][^>]*>",
+				                   QRegularExpression::CaseInsensitiveOption |
+				                   QRegularExpression::MultilineOption | 
+                                                   QRegularExpression::DotMatchesEverythingOption);
+        QRegularExpressionMatch wmo = svg_width.match(text, 0);
+        if (wmo.hasMatch()) {
+	    int bp = wmo.capturedStart(1);
+            int n = wmo.capturedLength(1);
+	    text = text.replace(bp, n, "100vw"); 
+	}
+    }
+
+    m_Filepath = filename_url;
+    m_Preview->CustomSetDocument(filename_url, text);
+
+    // this next bit is allowing javascript to run before
+    // the page is finished loading somehow? 
+    // but we explicitly prevent that
 
     // Wait until the preview is loaded before moving cursor.
     while (!m_Preview->IsLoadingFinished()) {
+        // This line broke close via titlebar on macOS so revert it
+        // qApp->processEvents(QEventLoop::ExcludeUserInputEvents, 100);
         qApp->processEvents();
-        SleepFunctions::msleep(100);
     }
+
+    if (!m_Preview->WasLoadOkay()) qDebug() << "PV loadFinished with okay set to false!";
+ 
+    DBG qDebug() << "PreviewWindow UpdatePage load is Finished";
+    DBG qDebug() << "PreviewWindow UpdatePage final step scroll to location";
+
+#if 0
+    // use javascript to set the proper colors on the body tag in a style
+    if (Utility::IsDarkMode() && settings.previewDark()) {
+	QPalette pal = qApp->palette();
+	QString back = pal.color(QPalette::Base).name();
+	QString fore = pal.color(QPalette::Text).name();
+        m_Preview->SetPreviewColors(back, fore);
+    }
+#endif  
 
     m_Preview->StoreCaretLocationUpdate(location);
     m_Preview->ExecuteCaretUpdate();
-    m_Preview->InspectElement();
     UpdateWindowTitle();
+    m_updatingPage = false;
+    return true;
+}
+
+void PreviewWindow::ScrollTo(QList<ElementIndex> location)
+{
+    DBG qDebug() << "received a PreviewWindow ScrollTo event";
+    if (!m_Preview->isVisible()) {
+        return;
+    }
+    m_Preview->StoreCaretLocationUpdate(location);
+    m_Preview->ExecuteCaretUpdate();
 }
 
 void PreviewWindow::UpdateWindowTitle()
@@ -249,13 +337,54 @@ void PreviewWindow::UpdateWindowTitle()
     if ((m_Preview) && m_Preview->isVisible()) {
         int height = m_Preview->height();
         int width = m_Preview->width();
-        setWindowTitle(tr("Preview") + " (" + QString::number(width) + "x" + QString::number(height) + ")");
+        QString filename;
+        if (!m_Filepath.isEmpty()) {
+            filename = QFileInfo(m_Filepath).fileName();
+	}
+        setTitleText(tr("Preview") + 
+		       " (" + QString::number(width) + "x" + QString::number(height) + ") " +
+		       filename);
+    }
+    // qDebug() << "QDockWidget" << isFloating() << isVisible();
+    if (isFloating()) {
+        setWindowTitle(titleText());
+    } else {
+        setWindowTitle(tr("Preview"));
     }
 }
 
-QList<ViewEditor::ElementIndex> PreviewWindow::GetCaretLocation()
+// Set DockWidget titlebar text independently of tab text
+// (when QDockWidget is tabified)
+void PreviewWindow::setTitleText(const QString &text)
 {
-    return m_Preview->GetCaretLocation();
+    m_titleText = text;
+    // qDebug() << "In setTitleText: " << text;
+    repaint();
+}
+
+const QString PreviewWindow::titleText()
+{
+    if (m_titleText.isEmpty()) {
+        return windowTitle();
+    }
+    return m_titleText;
+}
+
+// Needed to update Preview's title when undocked on some platforms
+void PreviewWindow::previewFloated(bool wasFloated) {
+    // qDebug() << "In previewFloated (pre-if): " << wasFloated;
+    if (wasFloated) {
+        // qDebug() << "In previewFloated: (post-if)" << wasFloated;
+        UpdateWindowTitle();
+    }
+}
+
+QList<ElementIndex> PreviewWindow::GetCaretLocation()
+{
+    DBG qDebug() << "PreviewWindow in GetCaretLocation";
+    QList<ElementIndex> hierarchy = m_Preview->GetCaretLocation();
+    DBG foreach(ElementIndex ei, hierarchy) qDebug() << "name: " << ei.name << " index: " << ei.index;
+    return hierarchy;
 }
 
 void PreviewWindow::SetZoomFactor(float factor)
@@ -263,19 +392,86 @@ void PreviewWindow::SetZoomFactor(float factor)
     m_Preview->SetZoomFactor(factor);
 }
 
-void PreviewWindow::SplitterMoved(int pos, int index)
+void PreviewWindow::EmitGoToPreviewLocationRequest()
 {
-    Q_UNUSED(pos);
-    Q_UNUSED(index);
-    SettingsStore settings;
-    settings.beginGroup(SETTINGS_GROUP);
-    settings.setValue("splitter", m_Splitter->saveState());
-    settings.endGroup();
-    UpdateWindowTitle();
+    DBG qDebug() << "EmitGoToPreviewLocationRequest request";
+    emit GoToPreviewLocationRequest();
+}
+
+bool PreviewWindow::eventFilter(QObject *object, QEvent *event)
+{
+  switch (event->type()) {
+    case QEvent::ChildAdded:
+      if (object == m_Preview) {
+	  DBG qDebug() << "child add event";
+	  const QChildEvent *childEvent(static_cast<QChildEvent*>(event));
+	  if (childEvent->child()) {
+	      childEvent->child()->installEventFilter(this);
+	  }
+      }
+      break;
+    case QEvent::MouseButtonPress:
+      {
+	  DBG qDebug() << "Preview mouse button press event " << object;
+	  const QMouseEvent *mouseEvent(static_cast<QMouseEvent*>(event));
+	  if (mouseEvent) {
+	      if (mouseEvent->button() == Qt::LeftButton) {
+		  DBG qDebug() << "Detected Left Mouse Button Press Event";
+		  QString hoverurl = m_Preview->GetHoverUrl();
+		  if (hoverurl.isEmpty()) {
+ 		      DBG qDebug() << "emitting GoToPreviewLocationRequest";
+	              QTimer::singleShot(50, this, SLOT(EmitGoToPreviewLocationRequest()));
+                  } else {
+		      QUrl link2url(hoverurl);
+                      QUrl currenturl(m_Preview->url());
+		      DBG qDebug() << "mouse press with : " << link2url.toString();
+		      DBG qDebug() << "  with current url: " << currenturl.toString();
+                      QString fragment;
+                      if (link2url.hasFragment()) {
+			  fragment = link2url.fragment();
+                          link2url.setFragment(QString());
+                      }
+                      if (currenturl.hasFragment()) {
+			  currenturl.setFragment(QString());
+		      }
+                      // test for local in-page link
+		      // otherwise do nothing and acceptNavigationRequest will handle it
+                      if (link2url == currenturl) {
+			  DBG qDebug() << "we have a local link to fragment: " << fragment;
+			  // tell current CV tab to scroll to fragment or top
+                          emit ScrollToFragmentRequest(fragment);  
+         	      }
+		  }
+	      } else if (mouseEvent->button() == Qt::RightButton) {
+		  QString hoverurl = m_Preview->GetHoverUrl();
+		  if (!hoverurl.isEmpty()) {
+		      QApplication::clipboard()->setText(hoverurl);
+		  }
+	      }
+	  }
+      }
+      break;
+    case QEvent::MouseButtonRelease:
+      {
+	  DBG qDebug() << "Preview mouse button release event " << object;
+	  const QMouseEvent *mouseEvent(static_cast<QMouseEvent*>(event));
+	  if (mouseEvent) {
+	      if (mouseEvent->button() == Qt::LeftButton) {
+	          DBG qDebug() << "Detected Left Mouse Button Release Event";
+	      }
+	  }
+      }
+      break;
+    default:
+      break;
+  }
+  return QObject::eventFilter(object, event);
 }
 
 void PreviewWindow::LinkClicked(const QUrl &url)
 {
+    DBG qDebug() << "in PreviewWindow LinkClicked with url :" << url.toString();
+
     if (url.toString().isEmpty()) {
         return;
     }
@@ -291,23 +487,129 @@ void PreviewWindow::LinkClicked(const QUrl &url)
             url_string.insert(url_string.indexOf("/#") + 1, finfo.fileName());
         }
     }
-
     emit OpenUrlRequest(QUrl(url_string));
+}
+
+void PreviewWindow::InspectorClosed(int i)
+{
+    DBG qDebug() << "received finished with argument: " << i;
+}
+
+void PreviewWindow::InspectPreviewPage()
+{
+    // non-modal dialog
+    if (!m_Inspector->isVisible()) {
+        DBG qDebug() << "inspecting";
+        m_Inspector->InspectPageofView(m_Preview);
+        m_Inspector->show();
+        m_Inspector->raise();
+        m_Inspector->activateWindow();
+	return;
+    }
+    m_Inspector->StopInspection();
+    m_Inspector->close();
+}
+
+void PreviewWindow::SelectAllPreview()
+{
+    m_Preview->triggerPageAction(QWebEnginePage::SelectAll);
+}
+
+void PreviewWindow::CopyPreview()
+{
+    m_Preview->triggerPageAction(QWebEnginePage::Copy);
+}
+
+void PreviewWindow::ReloadPreview()
+{
+    // m_Preview->triggerPageAction(QWebEnginePage::ReloadAndBypassCache);
+    // m_Preview->triggerPageAction(QWebEnginePage::Reload);
+    emit RequestPreviewReload();
 }
 
 void PreviewWindow::LoadSettings()
 {
     SettingsStore settings;
     settings.beginGroup(SETTINGS_GROUP);
-    m_Splitter->restoreState(settings.value("splitter").toByteArray());
+    // m_Layout->restoreState(settings.value("layout").toByteArray());
     settings.endGroup();
 }
 
 void PreviewWindow::ConnectSignalsToSlots()
 {
-    connect(m_Splitter,  SIGNAL(splitterMoved(int, int)), this, SLOT(SplitterMoved(int, int)));
     connect(m_Preview,   SIGNAL(ZoomFactorChanged(float)), this, SIGNAL(ZoomFactorChanged(float)));
     connect(m_Preview,   SIGNAL(LinkClicked(const QUrl &)), this, SLOT(LinkClicked(const QUrl &)));
-    connect(m_Preview,   SIGNAL(GoToPreviewLocationRequest()), this, SIGNAL(GoToPreviewLocationRequest()));
+    connect(m_inspectAction, SIGNAL(triggered()),     this, SLOT(InspectPreviewPage()));
+    connect(m_selectAction,  SIGNAL(triggered()),     this, SLOT(SelectAllPreview()));
+    connect(m_copyAction,    SIGNAL(triggered()),     this, SLOT(CopyPreview()));
+    connect(m_reloadAction,  SIGNAL(triggered()),     this, SLOT(ReloadPreview()));
+    connect(m_Inspector,     SIGNAL(finished(int)),   this, SLOT(InspectorClosed(int)));
+    connect(this,     SIGNAL(topLevelChanged(bool)),   this, SLOT(previewFloated(bool)));
 }
 
+// Note: You can not use gumbo to perform the replacement as being
+// a repair parser, it will fix all kinds of mistakes hiding the errors
+bool PreviewWindow::fixup_fullscreen_svg_images(const QString &text) 
+{
+    GumboInterface gi = GumboInterface(text, "any_version");
+
+    QList<GumboNode*> image_tags = gi.get_all_nodes_with_tag(GUMBO_TAG_IMAGE);
+    if (image_tags.count() != 1) return false;
+
+    QList<GumboNode*> svg_tags = gi.get_all_nodes_with_tag(GUMBO_TAG_SVG);
+    if (svg_tags.count() != 1) return false;
+
+    QList<GumboNode*> body_tags = gi.get_all_nodes_with_tag(GUMBO_TAG_BODY);
+    if (body_tags.count() != 1) return false;
+    
+    GumboNode* image_node = image_tags.at(0);
+    GumboNode* svg_node   = svg_tags.at(0);
+    GumboNode* body_node  = body_tags.at(0);
+
+    // loop through immediate children of body ignore script and style tags
+    // and empty headers to make sure the div or svg is only child of body
+    QStringList child_names;
+    int elcount = 0;
+    GumboVector* children = &body_node->v.element.children;
+    for (unsigned int i = 0; i < children->length; ++i) {
+        GumboNode* child = static_cast<GumboNode*>(children->data[i]);
+        if (child->type == GUMBO_NODE_ELEMENT) {
+	    QString name = QString::fromStdString(gi.get_tag_name(child));
+	    bool ignore_tag = (name == "script") || (name == "style");
+	    if (HEADERTAGS.contains(name)) {
+		QString contents = gi.get_local_text_of_node(child);
+		ignore_tag = ignore_tag || contents.isEmpty();
+	    }
+	    if (!ignore_tag) {
+		child_names << name;
+		elcount++;
+	    }
+	    if (elcount > 1) break;
+	}
+    }
+    const QStringList allowed_tags = QStringList() << "div" << "svg"; 
+    if ((elcount != 1) || !allowed_tags.contains(child_names.at(0))) return false;
+    
+    // verify either body->div->svg->image or body->svg->image 
+    // structure exists (ignoring script and style tags)
+    GumboNode* anode = image_node;
+    QStringList path_pieces = QStringList() << QString::fromStdString(gi.get_tag_name(anode));
+    while (anode && !((anode->type == GUMBO_NODE_ELEMENT) && (anode->v.element.tag == GUMBO_TAG_BODY))) {
+        GumboNode* myparent = anode->parent;
+        QString parent_name = QString::fromStdString(gi.get_tag_name(myparent));
+        if ((parent_name != "script") && (parent_name != "style")) {
+	    path_pieces.prepend(parent_name);
+        }
+        anode = myparent;
+    }
+    const QString apath = path_pieces.join(",");
+    if ((apath != "body,div,svg,image") && (apath != "body,svg,image")) return false;
+    
+    // finally check if svg height and width attributes are both "100%"
+    // and if so change them to 100vh and 100vw respectively
+    QHash<QString,QString> svgatts = gi.get_attributes_of_node(svg_node);
+    if ((svgatts.value("width","") == "100%") && (svgatts.value("height","") == "100%")) {
+	return true;
+    }
+    return false;
+}

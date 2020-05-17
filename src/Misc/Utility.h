@@ -1,6 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2016-2020 Doug Massay
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -23,12 +25,15 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+
 #include <QCoreApplication>
 #include <QtCore/QString>
+#include <QColor>
 
 class QStringList;
 class QStringRef;
 class QWidget;
+class QMenu;
 
 struct ExceptionBase;
 
@@ -45,10 +50,25 @@ public:
         Casing_Capitalize,    /**< Change first character of sentence to uppercase, rest to lowercase. */
     };
 
+    enum Val_Msg_Type {
+        INFO_BRUSH,
+        WARNING_BRUSH,
+        ERROR_BRUSH,
+    };
+
     static QString ChangeCase(const QString &text, const Casing &casing);
 
     // Define the user preferences location to be used
     static QString DefinePrefsDir();
+
+    // Indicates if application palette in dark mode
+    static bool IsDarkMode();
+
+    // Indicates Windows system dark mode is enabled
+    static bool IsWindowsSysDarkMode();
+
+    // Should Windows Sigil be using dark mode?
+    static bool WindowsShouldUseDarkMode();
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
     // Return correct path(s) for Linux hunspell dictionaries
@@ -77,8 +97,6 @@ public:
     // with string "after" in string "string"
     static QString ReplaceFirst(const QString &before, const QString &after, const QString &string);
 
-    static QStringList GetAbsolutePathsToFolderDescendantFiles(const QString &fullfolderpath);
-
     // Copies every file and folder in the source folder
     // to the destination folder; the paths to the folders are submitted;
     // the destination folder needs to be created in advance
@@ -91,6 +109,8 @@ public:
     static bool SDeleteFile(const QString &fullfilepath);
 
     static bool ForceCopyFile(const QString &fullinpath, const QString &fulloutpath);
+
+    static bool SMoveFile(const QString &oldfilepath, const QString &newfilepath);
 
     static bool RenameFile(const QString &oldfilepath, const QString &newfilepath);
 
@@ -170,8 +190,43 @@ public:
 
     static bool UnZip(const QString &zippath, const QString &destdir);
     static QStringList ZipInspect(const QString &zippath);
-};
 
+    // Generate relative path to destination from starting directory path
+    // Both paths should be absolute and preferably cannonical
+    static QString relativePath(const QString & destination, const QString & starting_dir); 
+
+    // works with absolute or book paths
+    static QString longestCommonPath(const QStringList& filepaths, const QString& sep);
+
+    // works with absolute or book paths
+    static QString resolveRelativeSegmentsInFilePath(const QString& file_path, const QString &sep);
+
+    // start_folder is the book path (internal to epub) to the starting folder
+    static QString buildBookPath(const QString& dest_relpath, const QString& start_folder);
+
+    // both the "from" and "to" book paths are to FILES
+    static QString buildRelativePath(const QString &from_file_bkpath, const QString &to_file_bkpath);
+
+    static std::pair<QString, QString> parseHREF(const QString &relative_href);
+    
+    static QString startingDir(const QString &file_bookpath);
+
+    // sort list of strings by list of counts in a decreasing fashion, highest count first
+    static bool sort_pair_in_reverse(const std::pair<int,QString> &a, const std::pair<int,QString> &b);
+    static QStringList sortByCounts(const QStringList &folderlst, const QList<int> &countlst);
+
+    // perform a locale aware string sort
+    static QStringList LocaleAwareSort(const QStringList &names);
+
+    // inject dark mode css into html for Preview, AVTab, ImageTab, ViewImage, and SelectFiles
+    static QString AddDarkCSS(const QString &html);
+
+    // return the proper background color for QWebEngineView
+    static QColor WebViewBackgroundColor(bool followpref = false);
+    
+    // return the qbrushes for ValidationResultsView
+    static QBrush ValidationResultBrush(const Val_Msg_Type &valres);
+};
 #endif // UTILITY_H
 
 

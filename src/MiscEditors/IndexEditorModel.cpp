@@ -1,7 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012 Dave Heiland
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012      Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -189,34 +190,33 @@ void IndexEditorModel::LoadData(const QString &filename, QStandardItem *item)
                 entry->pattern = line;
             }
             AddFullNameEntry(entry, item);
+	    delete entry;
         }
         return;
     }
 
     // Read standard ini files
-    SettingsStore *settings;
+    QString settings_path = filename;
+    if (settings_path.isEmpty()) settings_path = m_SettingsPath;
 
-    if (filename.isEmpty()) {
-        settings = new SettingsStore(m_SettingsPath);
-    } else {
-        settings = new SettingsStore(filename);
-    }
+    SettingsStore ss(settings_path);
 
-    int size = settings->beginReadArray(SETTINGS_GROUP);
+    int size = ss.beginReadArray(SETTINGS_GROUP);
 
     // Add one entry at a time to the list
     for (int i = 0; i < size; ++i) {
-        settings->setArrayIndex(i);
+        ss.setArrayIndex(i);
         IndexEditorModel::indexEntry *entry = new IndexEditorModel::indexEntry();
-        entry->pattern = settings->value(ENTRY_PATTERN).toString();
-        entry->index_entry = settings->value(ENTRY_INDEX_ENTRY).toString();
+        entry->pattern = ss.value(ENTRY_PATTERN).toString();
+        entry->index_entry = ss.value(ENTRY_INDEX_ENTRY).toString();
 
         if (!entry->pattern.isEmpty() || !entry->index_entry.isEmpty()) {
             AddFullNameEntry(entry, item);
         }
+	delete entry;
     }
 
-    settings->endArray();
+    ss.endArray();
 }
 
 QStandardItem *IndexEditorModel::AddFullNameEntry(IndexEditorModel::indexEntry *entry, QStandardItem *parent_item, int row)
@@ -239,6 +239,8 @@ QStandardItem *IndexEditorModel::AddFullNameEntry(IndexEditorModel::indexEntry *
 
 QStandardItem *IndexEditorModel::AddEntryToModel(IndexEditorModel::indexEntry *entry, QStandardItem *parent_item, int row)
 {
+    bool clean_up = false;
+
     // parent_item must be a group item
     if (!parent_item) {
         parent_item = invisibleRootItem();
@@ -249,6 +251,7 @@ QStandardItem *IndexEditorModel::AddEntryToModel(IndexEditorModel::indexEntry *e
         entry = new IndexEditorModel::indexEntry();
         entry->pattern = "";
         entry->index_entry = "";
+	clean_up = true;
     }
 
     QList<QStandardItem *> rowItems;
@@ -266,6 +269,8 @@ QStandardItem *IndexEditorModel::AddEntryToModel(IndexEditorModel::indexEntry *e
     }
 
     SetDataModified(true);
+    if (clean_up) delete entry;
+
     return new_item;
 }
 
@@ -312,59 +317,75 @@ IndexEditorModel::indexEntry *IndexEditorModel::GetEntry(QStandardItem *item)
 QString IndexEditorModel::SaveData(QList<IndexEditorModel::indexEntry *> entries, const QString &filename)
 {
     QString message = "";
+    bool clean_up_needed = false;
+    QString settings_path = filename;
+    if (settings_path.isEmpty()) settings_path = m_SettingsPath;
 
     // Save everything if no entries selected
     if (entries.isEmpty()) {
         QList<QStandardItem *> items = GetItems();
 
         if (!items.isEmpty()) {
+            // GetEntries calls GetEntry which creates each entry with new
             entries = GetEntries(items);
+	    clean_up_needed = true;
         }
     }
 
     // Stop watching the file while we save it
-    if (m_FSWatcher->files().contains(m_SettingsPath)) {
-        m_FSWatcher->removePath(m_SettingsPath);
+    if (m_FSWatcher->files().contains(settings_path)) {
+        m_FSWatcher->removePath(settings_path);
     }
 
     // Open the default file for save, or specific file for export
-    SettingsStore *settings;
+    {  
+        SettingsStore ss(settings_path);
 
-    if (filename.isEmpty()) {
-        settings = new SettingsStore(m_SettingsPath);
-    } else {
-        settings = new SettingsStore(filename);
-    }
+        // ss.sync();
 
-    settings->sync();
+        if (!ss.isWritable()) {
+            message = tr("Unable to create file %1").arg(filename);
+            // Watch the file again
+            m_FSWatcher->addPath(settings_path);
 
-    if (!settings->isWritable()) {
-        message = tr("Unable to create file %1").arg(filename);
-        // Watch the file again
-        m_FSWatcher->addPath(m_SettingsPath);
-        return message;
-    }
-
-    // Remove the old values to account for deletions
-    settings->remove(SETTINGS_GROUP);
-    settings->beginWriteArray(SETTINGS_GROUP);
-    int i = 0;
-    foreach(IndexEditorModel::indexEntry * entry, entries) {
-        if (entry->pattern.isEmpty() && entry->index_entry.isEmpty()) {
-            continue;
+            // delete each entry if we created them above 
+            if (clean_up_needed) {
+	        foreach(IndexEditorModel::indexEntry* entry, entries) {
+	            delete entry;
+	        }
+            }
+            return message;
         }
 
-        foreach(QString pattern, entry->pattern.split("\n")) {
-            settings->setArrayIndex(i++);
-            settings->setValue(ENTRY_PATTERN, pattern);
-            settings->setValue(ENTRY_INDEX_ENTRY, entry->index_entry);
+        // Remove the old values to account for deletions
+        ss.remove(SETTINGS_GROUP);
+        ss.beginWriteArray(SETTINGS_GROUP);
+        int i = 0;
+        foreach(IndexEditorModel::indexEntry * entry, entries) {
+            if (entry->pattern.isEmpty() && entry->index_entry.isEmpty()) {
+                continue;
+            }
+
+            foreach(QString pattern, entry->pattern.split("\n")) {
+                ss.setArrayIndex(i++);
+                ss.setValue(ENTRY_PATTERN, pattern);
+                ss.setValue(ENTRY_INDEX_ENTRY, entry->index_entry);
+            }
         }
+
+        // delete each entry if we created them above 
+        if (clean_up_needed) {
+	    foreach(IndexEditorModel::indexEntry* entry, entries) {
+	        delete entry;
+	    }
+        }
+        ss.endArray();
+        // Make sure file is created/updated so it can be checked
+        ss.sync();
     }
-    settings->endArray();
-    // Make sure file is created/updated so it can be checked
-    settings->sync();
+
     // Watch the file again
-    m_FSWatcher->addPath(m_SettingsPath);
+    m_FSWatcher->addPath(settings_path);
     SetDataModified(false);
     return message;
 }

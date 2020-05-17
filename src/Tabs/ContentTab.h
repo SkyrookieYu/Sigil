@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -34,7 +35,6 @@ class QLayout;
 class Searchable;
 class Resource;
 
-
 /**
  * A generic tab widget for editing/viewing a resource.
  */
@@ -63,6 +63,8 @@ public:
      * @return The filename of the displayed resource.
      */
     QString GetFilename();
+
+    QString GetShortPathName();
 
     /**
      * Returns the icon appropriate for the displayed resource.
@@ -156,19 +158,6 @@ public:
         return false;
     }
     virtual bool ToggleAutoSpellcheckEnabled() {
-        return false;
-    }
-
-    virtual bool ViewStatesEnabled() {
-        return false;
-    }
-
-    /**
-     * Checked state of the BookView action.
-     *
-     * @return \c true if the BookView action should be checked.
-     */
-    virtual bool BookViewChecked()      {
         return false;
     }
 
@@ -322,6 +311,7 @@ public:
         return false;
     }
 
+
 public slots:
 
     /**
@@ -354,6 +344,11 @@ public slots:
      * Change casing of the selected text.
      */
     virtual void ChangeCasing(const Utility::Casing casing);
+
+    /**
+     * Returns state of underlying resource
+     */
+    bool GetResourceWasDeleted();
 
 signals:
 
@@ -404,7 +399,7 @@ signals:
 
     /**
      * Emitted when we want to do some operations with the clipboard
-     * to paste things into Book View, but restoring state afterwards
+     * to paste things into elsewhere, but restoring state afterwards
      * so that Clipboard History and current clipboard contents are
      * left unaffected.
      */
@@ -423,6 +418,11 @@ signals:
     void ClearMarkedTextRequest();
 
 protected slots:
+
+    /**
+     * Invoked when underlying resource sends out its Deleted signal
+     */
+    void UnderlyingResourceDeleted();
 
     /**
      * Emits the DeleteMe signal.
@@ -468,6 +468,12 @@ protected:
      * The main layout of the widget.
      */
     QLayout *m_Layout;
+
+    /**
+     * Has our underlying resource been deleted
+     */
+    bool m_resource_was_deleted;
+
 };
 
 #endif // CONTENTTAB_H

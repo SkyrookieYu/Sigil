@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -101,21 +102,11 @@ public:
 
     QString GetRelativePath() const;
 
-    /**
-     * Returns the resource's path relative to the OEBPS folder.
-     * Returned \em without leading "../" characters.
-     *
-     * @return The resource's path relative to the OEBPS folder.
-     */
-    QString GetRelativePathToOEBPS() const;
+    QString ShortPathName() const;
 
-    /**
-     * Returns the resource's path relative to the publication's
-     * root folder. Returned \em without leading "../" characters.
-     *
-     * @return The root-relative path.
-     */
-    virtual QString GetRelativePathToRoot() const;
+    QString GetRelativePathFromResource(const Resource* start_resource) const;
+
+    QString GetRelativePathToResource(const Resource* dest_resource) const;
 
     /**
      * Returns the resource's full file path.
@@ -125,6 +116,13 @@ public:
      * @return The resource's full file path.
      */
     QString GetFullPath() const;
+
+    /**
+     * Returns the full path to the folder containing
+     * this resource
+     * @return The resource's full path to its containing folder.
+     */
+    QString GetFullFolderPath() const;
 
     /**
      * Returns the URL to the parent folder ("base URL") of this resource.
@@ -158,6 +156,14 @@ public:
     QString GetMediaType() const;
 
     /**
+     * gets and sets the resources Longest Common Path Group
+     */
+
+    void SetShortPathName(const QString& );
+
+    QString GetFullPathToBookFolder() const;
+
+    /**
      * Returns a reference to the resource's ReadWriteLock.
      *
      * @return The resource's ReadWriteLock.
@@ -178,6 +184,15 @@ public:
      * @return \c true if the operation was successful.
      */
     virtual bool RenameTo(const QString &new_filename);
+
+
+    /**
+     * Moves the resource.
+     *
+     * @param new_bookpath The new bookpath.
+     * @return \c true if the operation was successful.
+     */
+    virtual bool MoveTo(const QString &new_bookpath);
 
     /**
      * Deletes the resource.
@@ -217,6 +232,13 @@ signals:
      * @param resource The resource's that was renamed.
      */
     void Renamed(const Resource *resource, QString old_full_path);
+
+    /**
+     * Emitted whenever the resource changes location.
+     *
+     * @param resource The resource's that was moved.
+     */
+    void Moved(const Resource *resource, QString old_full_path);
 
     /**
      * Emitted when the resource has been scheduled for deletion.
@@ -306,6 +328,8 @@ private:
      */
     QString m_MediaType;
 
+
+    QString m_ShortName;
 
     /**
      * The ReadWriteLock guarding access to the resource's data.

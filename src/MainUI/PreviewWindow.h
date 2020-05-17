@@ -1,6 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2012 Dave Heiland, John Schember
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2019 Doug Massay
+**  Copyright (C) 2012      Dave Heiland, John Schember
 **
 **  This file is part of Sigil.
 **
@@ -23,14 +25,18 @@
 #ifndef PREVIEWWINDOW_H
 #define PREVIEWWINDOW_H
 
+#include <QPushButton>
+#include <QAction>
+#include <QtWebEngineWidgets/QWebEngineView>
 #include <QtWidgets/QDockWidget>
-#include <ViewEditors/ViewEditor.h>
+#include <ViewEditors/Viewer.h>
+#include <Dialogs/Inspector.h>
 
-class BookViewPreview;
-class QSplitter;
-class QStackedWidget;
-class QWebInspector;
+class ViewPreview;
+class Inspector;
+class QWebEngineView;
 class QVBoxLayout;
+class QHBoxLayout;
 
 class PreviewWindow : public QDockWidget
 {
@@ -39,26 +45,51 @@ class PreviewWindow : public QDockWidget
 public:
     PreviewWindow(QWidget *parent = 0);
     ~PreviewWindow();
-    QList<ViewEditor::ElementIndex> GetCaretLocation();
+    QList<ElementIndex> GetCaretLocation();
     bool IsVisible();
     bool HasFocus();
     float GetZoomFactor();
+    bool eventFilter(QObject *object, QEvent *event);
+    void setMathJaxURL(QString mathjaxurl) { m_mathjaxurl = mathjaxurl; };
+    void setUserCSSURL(QString usercssurl) { m_usercssurl = usercssurl; }
 
 public slots:
-    void UpdatePage(QString filename, QString text, QList<ViewEditor::ElementIndex> location);
+    bool UpdatePage(QString filename, QString text, QList<ElementIndex> location);
+    void ScrollTo(QList<ElementIndex> location);
     void SetZoomFactor(float factor);
-    void SplitterMoved(int pos, int index);
     void LinkClicked(const QUrl &url);
+    void EmitGoToPreviewLocationRequest();
+    void InspectPreviewPage();
+    void SelectAllPreview();
+    void CopyPreview();
+    void ReloadPreview();
+    void InspectorClosed(int);
+
+    /**
+     * Set DockWidget titlebar text independently of tab text (when tabbed)
+     * @param text The title to use.
+     */
+    void setTitleText(const QString &text);
+    void previewFloated(bool wasFloated);
 
 signals:
     void Shown();
     void ZoomFactorChanged(float factor);
     void GoToPreviewLocationRequest();
+    void RequestPreviewReload();
+
     /**
      * Emitted whenever Preview wants to open an URL.
      * @param url The URL to open.
      */
     void OpenUrlRequest(const QUrl &url);
+
+    /**
+     * Emitted whenever Preview wants current CV tab to scroll
+     * to fragment
+     * @param url The URL to open.
+     */
+    void ScrollToFragmentRequest(const QString &fragment);
 
 
 protected:
@@ -66,20 +97,38 @@ protected:
     virtual void showEvent(QShowEvent* event);
     void resizeEvent(QResizeEvent * event);
 
+    /**
+     * Reimplemented from QDockWidget to enable setTitleText()
+     * @param event The underlying QPaintEvent.
+     */
+    virtual void paintEvent(QPaintEvent* event);
+
 private:
     void SetupView();
     void LoadSettings();
     void ConnectSignalsToSlots();
     void UpdateWindowTitle();
+    bool fixup_fullscreen_svg_images(const QString &text);
+    const QString titleText();
 
     QWidget *m_MainWidget;
     QVBoxLayout *m_Layout;
+    QHBoxLayout *m_buttons;
 
-    BookViewPreview *m_Preview;
-    QWebInspector *m_Inspector;
-    QSplitter *m_Splitter;
-    QStackedWidget *m_StackedViews;
+    ViewPreview *m_Preview;
+    Inspector *m_Inspector;
     QString m_Filepath;
+    QString m_titleText;
+
+    QString m_mathjaxurl;
+    QString m_usercssurl;
+
+    QAction * m_inspectAction;
+    QAction * m_selectAction;
+    QAction * m_copyAction;
+    QAction * m_reloadAction;
+
+    bool m_updatingPage;
 };
 
 #endif // PREVIEWWINDOW_H

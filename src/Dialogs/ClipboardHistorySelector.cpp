@@ -1,5 +1,6 @@
 /************************************************************************
 **
+**  Copyright (C) 2018, 2019 Kevin B. Hendricks, Stratford, Ontario, Canada
 **  Copyright (C) 2012 John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012 Dave Heiland
 **
@@ -65,8 +66,7 @@ void ClipboardHistorySelector::showEvent(QShowEvent *event)
 
 void ClipboardHistorySelector::ApplicationActivated()
 {
-    // Turned on when Sigil is activated, put the latest text if any at the top of the history
-    ClipboardChanged();
+    // Turned on when Sigil is activated
     connect(QApplication::clipboard(), SIGNAL(dataChanged()), this, SLOT(ClipboardChanged()));
 
     // If we are currently showing this dialog, refresh the display
@@ -161,6 +161,7 @@ void ClipboardHistorySelector::SetupClipboardHistoryTable()
     }
 }
 
+#if (QT_VERSION < QT_VERSION_CHECK(5,12,2))
 // This is only needed for Linux
 // See:  https://bugreports.qt.io/browse/QTBUG-44849
 void ClipboardHistorySelector::TakeOwnershipOfClip()
@@ -187,6 +188,7 @@ QMimeData *ClipboardHistorySelector::copyMimeData(const QMimeData *mimeReference
     }
     return mimeCopy;
 }
+#endif
 
 void ClipboardHistorySelector::ClipboardChanged()
 {
@@ -198,7 +200,7 @@ void ClipboardHistorySelector::ClipboardChanged()
 
 // This is only needed for Linux
 // See:  https://bugreports.qt.io/browse/QTBUG-44849
-#if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
+#if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC) && (QT_VERSION < QT_VERSION_CHECK(5,12,2))
     // if there is something on the clipboard make sure we own it
     if (!QApplication::clipboard()->ownsClipboard()) {
         m_lastclip = QApplication::clipboard()->mimeData(QClipboard::Clipboard);

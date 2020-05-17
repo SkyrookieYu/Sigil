@@ -1,7 +1,9 @@
 /************************************************************************
 **
-**  Copyright (C) 2011, 2012, 2013  John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012, 2013  Dave Heiland
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2020      Doug Massay
+**  Copyright (C) 2011-2013 John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012-2013 Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -56,12 +58,19 @@ public:
      */
     QString uiLanguage();
 
+    QString uiFont();
+    QString originalUIFont();
+
+    int uiDragDistanceTweak();
+
     /**
      * The default langauge to use when creating new books.
      *
      * @return The language as a string.
      */
     QString defaultMetadataLang();
+
+    QString externalXEditorPath();
 
     /**
      * The zoom factor used by the component.
@@ -72,6 +81,7 @@ public:
     float zoomText();
     float zoomWeb();
     float zoomPreview();
+    float zoomInspector();
 
     /**
      * The name of the dictionary to use for spell check.
@@ -116,8 +126,6 @@ public:
 
     bool spellCheckNumbers();
 
-    int viewState();
-
     /**
      * The name of the file containing user words
      *
@@ -134,6 +142,14 @@ public:
 
     int remoteOn();
 
+    int javascriptOn();
+
+    int showFullPathOn();
+
+    int highDPI();
+
+    int previewDark();
+
     int cleanOn();
 
     QStringList pluginMap();
@@ -143,7 +159,7 @@ public:
     /**
      * All appearance settings related to BookView.
      */
-    struct BookViewAppearance {
+    struct PreviewAppearance {
         QString font_family_standard;
         QString font_family_serif;
         QString font_family_sans_serif;
@@ -156,12 +172,6 @@ public:
     struct CodeViewAppearance {
         QString font_family;
         int font_size;
-
-        QColor background_color;
-        QColor foreground_color;
-
-        QColor selection_background_color;
-        QColor selection_foreground_color;
 
         QColor css_comment_color;
         QColor css_property_color;
@@ -200,14 +210,17 @@ public:
     int appearancePrefsTabIndex();
 
     /**
-     * The default font to use for rendering Book View/Preview.
+     * The default font to use for rendering Preview.
      */
-    BookViewAppearance bookViewAppearance();
+    PreviewAppearance previewAppearance();
 
     /**
      * The appearance settings to use for editing in Code View.
      */
     CodeViewAppearance codeViewAppearance();
+
+    CodeViewAppearance codeViewDarkAppearance();
+
 
     /**
      * The appearance settings to use for editing in Code View.
@@ -228,7 +241,7 @@ public:
     int clipboardHistoryLimit();
 
     /**
-     * Clear all Book View, Code View and Special Characters settings back to their defaults.
+     * Clear all Preview, Code View and Special Characters settings back to their defaults.
      */
     void clearAppearanceSettings();
 
@@ -240,6 +253,12 @@ public slots:
      * @param lang The language to set.
      */
     void setUILanguage(const QString &language_code);
+    
+    void setUIFont(const QString &font_data);
+
+    void setOriginalUIFont(const QString &font_data);
+
+    void setUiDragDistanceTweak(int tweak);
 
     /**
      * Set the default language to use when creating new books.
@@ -247,6 +266,8 @@ public slots:
      * @param lang The language to set.
      */
     void setDefaultMetadataLang(const QString &lang);
+
+    void setExternalXEditorPath(const QString &path);
 
     /**
      * Set the zoom factor used by the component.
@@ -257,6 +278,7 @@ public slots:
     void setZoomText(float zoom);
     void setZoomWeb(float zoom);
     void setZoomPreview(float zoom);
+    void setZoomInspector(float zoom);
 
     /**
      * Set the name of the dictionary the user has selected.
@@ -302,8 +324,6 @@ public slots:
     
     void setSpellCheckNumbers(bool enabled);
 
-    void setViewState(int state);
-
     /**
      * Set the name of the dictionary file to store user words.
      *
@@ -320,9 +340,17 @@ public slots:
 
     void setRemoteOn(int on);
 
+    void setJavascriptOn(int on);
+
+    void setShowFullPathOn(int on);
+
+    void setHighDPI(int value);
+
+    void setPreviewDark(int enabled);
+
     void setCleanOn(int on);
 
-    void setPluginMap(QStringList & map);
+    void setPluginMap(const QStringList & map);
 
     void setDefaultVersion(const QString &version);
 
@@ -334,11 +362,13 @@ public slots:
     /**
      * Set the default font settings to use for rendering Book View/Preview
      */
-    void setBookViewAppearance(const BookViewAppearance &book_view_appearance);
+    void setPreviewAppearance(const PreviewAppearance &preview_appearance);
     /**
      * Set the appearance settings to use for editing in Code View
      */
     void setCodeViewAppearance(const CodeViewAppearance &code_view_appearance);
+
+    void setCodeViewDarkAppearance(const CodeViewAppearance &code_view_appearance);
     /**
     * Set the default font settings to use for Special Characters popup window
     */

@@ -1,10 +1,11 @@
 /************************************************************************
 **
-**  Copyright (C) 2015 Kevin B. Hendricks Stratford, ON Canada
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012, 2013 Dave Heiland
-**  Copyright (C) 2012 Grant Drake
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>, Nokia Corporation
+**  Copyright (C) 2019-2020 Doug Massay
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012-2013 Dave Heiland
+**  Copyright (C) 2012      Grant Drake
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>, Nokia Corporation
 **
 **  This file is part of Sigil.
 **
@@ -37,6 +38,7 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QRegularExpressionMatchIterator>
+#include <QDebug>
 
 #include "BookManipulation/Book.h"
 #include "BookManipulation/CleanSource.h"
@@ -48,12 +50,16 @@
 #include "Misc/CSSHighlighter.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/SpellCheck.h"
+#include "Misc/TextDocument.h"
 #include "Misc/HTMLSpellCheck.h"
 #include "Misc/Utility.h"
 #include "PCRE/PCRECache.h"
 #include "ViewEditors/CodeViewEditor.h"
 #include "ViewEditors/LineNumberArea.h"
 #include "sigil_constants.h"
+
+const int PROGRESS_BAR_MINIMUM_DURATION = 1000;
+const QString BREAK_TAG_INSERT    = "<hr class=\"sigil_split_marker\" />";
 
 static const int TAB_SPACES_WIDTH        = 4;
 static const int LINE_NUMBER_MARGIN      = 5;
@@ -65,6 +71,9 @@ static const QString TAG_NAME_SEARCH        = "<\\s*([^\\s>]+)";
 static const QString STYLE_ATTRIBUTE_SEARCH = "style\\s*=\\s*\"[^\"]*\"";
 static const QString ATTRIBUTE_NAME_POSTFIX_SEARCH = "\\s*=\\s*\"[^\"]*\"";
 static const QString ATTRIB_VALUES_SEARCH   = "\"([^\"]*)";
+
+static const QString OPEN_TAG_STARTS_SELECTION = "^\\s*(<\\s*([a-zA-Z0-9]+)[^>]*>)";
+static const QString STARTING_INDENT_USED = "(^\\s*)[^\\s]";
 
 static const int MAX_SPELLING_SUGGESTIONS = 10;
 
@@ -80,7 +89,7 @@ CodeViewEditor::CodeViewEditor(HighlighterType high_type, bool check_spelling, Q
     m_ScrollOneLineDown(new QShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_Down), this, 0, 0, Qt::WidgetShortcut)),
     m_isLoadFinished(false),
     m_DelayedCursorScreenCenteringRequired(false),
-    m_CaretUpdate(QList<ViewEditor::ElementIndex>()),
+    m_CaretUpdate(QList<ElementIndex>()),
     m_checkSpelling(check_spelling),
     m_reformatCSSEnabled(false),
     m_reformatHTMLEnabled(false),
@@ -104,8 +113,26 @@ CodeViewEditor::CodeViewEditor(HighlighterType high_type, bool check_spelling, Q
 
     setFocusPolicy(Qt::StrongFocus);
     ConnectSignalsToSlots();
+    SetAppearance();
+}
+
+CodeViewEditor::~CodeViewEditor()
+{
+    m_ScrollOneLineUp->deleteLater();
+    m_ScrollOneLineDown->deleteLater();
+}
+
+void CodeViewEditor::SetAppearance()
+{
     SettingsStore settings;
-    m_codeViewAppearance = settings.codeViewAppearance();
+    if (Utility::IsDarkMode()) {
+        // qDebug() << "IsDarkMode returned: true";
+        m_codeViewAppearance = settings.codeViewDarkAppearance();
+    } else {
+        // qDebug() << "IsDarkMode returned: false";
+        m_codeViewAppearance = settings.codeViewAppearance();
+    }
+
     SetAppearanceColors();
     UpdateLineNumberAreaMargin();
     HighlightCurrentLine();
@@ -115,11 +142,6 @@ CodeViewEditor::CodeViewEditor(HighlighterType high_type, bool check_spelling, Q
     Zoom();
 }
 
-CodeViewEditor::~CodeViewEditor()
-{
-    m_ScrollOneLineUp->deleteLater();
-    m_ScrollOneLineDown->deleteLater();
-}
 
 QSize CodeViewEditor::sizeHint() const
 {
@@ -127,7 +149,7 @@ QSize CodeViewEditor::sizeHint() const
 }
 
 
-void CodeViewEditor::CustomSetDocument(QTextDocument &document)
+void CodeViewEditor::CustomSetDocument(TextDocument &document)
 {
     setDocument(&document);
     document.setModified(false);
@@ -195,12 +217,13 @@ void CodeViewEditor::HighlightMarkedText()
     selection.format.setFontUnderline(QTextCharFormat::DotLine);
     selection.cursor.clearSelection();
     selection.cursor.setPosition(0);
-    selection.cursor.setPosition(toPlainText().length());
+    int textlen = textLength();
+    selection.cursor.setPosition(textlen);
     extraSelections.append(selection);
     setExtraSelections(extraSelections);
     extraSelections.clear();
 
-    if (m_MarkedTextStart < 0 || m_MarkedTextEnd > toPlainText().length()) {
+    if (m_MarkedTextStart < 0 || m_MarkedTextEnd > textlen) {
         return;
     }
     selection.format.setFontUnderline(QTextCharFormat::DotLine);
@@ -550,6 +573,17 @@ void CodeViewEditor::ReplaceDocumentText(const QString &new_text)
     cursor.removeSelectedText();
     cursor.insertText(new_text);
     cursor.endEditBlock();
+
+#if 0
+    // should we instead be calling clear on the underlying document
+    // and then inserting the new text?  Does this impact memory consumption?
+    document()->clear();
+    QTextCursor cursor = textCursor();
+    cursor.beginEditBlock();
+    cursor.setPosition(0);
+    cursor.insertText(new_text);
+    cursor.endEditBlock();
+#endif
 }
 
 
@@ -620,6 +654,30 @@ void CodeViewEditor::ScrollToFragment(const QString &fragment)
     QRegularExpression fragment_search("id=\"" % fragment % "\"");
     int index = toPlainText().indexOf(fragment_search);
     ScrollToPosition(index);
+}
+
+// return the length in QChars in plain text inside
+int CodeViewEditor::textLength() const
+{
+    TextDocument * doc = qobject_cast<TextDocument *> (document());
+    return doc->textLength();
+}
+
+// overrides document toPlainText to prevent loss of nbsp
+QString CodeViewEditor::toPlainText() const
+{
+    TextDocument * doc = qobject_cast<TextDocument *> (document());
+    return doc->toText();
+}
+
+// overrides createMimeDataFromSelection()
+QMimeData *CodeViewEditor::createMimeDataFromSelection() const
+{ 
+  QString selected_text = textCursor().selectedText();
+  selected_text = selected_text.replace(QChar::ParagraphSeparator, '\n');
+  QMimeData* md = new QMimeData();
+  md->setText(selected_text);
+  return md;
 }
 
 bool CodeViewEditor::IsLoadingFinished()
@@ -720,9 +778,10 @@ bool CodeViewEditor::FindNext(const QString &search_regex,
 {
     SPCRE *spcre = PCRECache::instance()->getObject(search_regex);
     SPCRE::MatchInfo match_info;
+    QString txt = toPlainText();
     int start_offset = 0;
     int start = 0;
-    int end = toPlainText().length();
+    int end = txt.length();
     if (marked_text) {
         if (!MoveToMarkedText(search_direction, wrap)) {
             return false;
@@ -735,15 +794,15 @@ bool CodeViewEditor::FindNext(const QString &search_regex,
 
     if (search_direction == Searchable::Direction_Up) {
         if (misspelled_words) {
-            match_info = GetMisspelledWord(toPlainText(), 0, selection_offset, search_regex, search_direction);
+            match_info = GetMisspelledWord(txt, 0, selection_offset, search_regex, search_direction);
         } else {
-            match_info = spcre->getLastMatchInfo(Utility::Substring(start, selection_offset, toPlainText()));
+            match_info = spcre->getLastMatchInfo(Utility::Substring(start, selection_offset, txt));
         }
     } else {
         if (misspelled_words) {
-            match_info = GetMisspelledWord(toPlainText(), selection_offset, toPlainText().count(), search_regex, search_direction);
+            match_info = GetMisspelledWord(txt, selection_offset, txt.count(), search_regex, search_direction);
         } else {
-            match_info = spcre->getFirstMatchInfo(Utility::Substring(selection_offset, end, toPlainText()));
+            match_info = spcre->getFirstMatchInfo(Utility::Substring(selection_offset, end, txt));
         }
 
         start_offset = selection_offset;
@@ -782,8 +841,7 @@ bool CodeViewEditor::FindNext(const QString &search_regex,
 int CodeViewEditor::Count(const QString &search_regex, Searchable::Direction direction, bool wrap, bool marked_text)
 {
     SPCRE *spcre = PCRECache::instance()->getObject(search_regex);
-    QString text;
-    text = toPlainText();
+    QString text= toPlainText();
     int start = 0;
     int end = text.length();
 
@@ -828,7 +886,7 @@ bool CodeViewEditor::ReplaceSelected(const QString &search_regex, const QString 
     if (in_marked_text) {
         m_ReplacingInMarkedText = true;
     }
-    int original_text_length = toPlainText().length();
+    int original_text_length = textLength();
     replacement_made = spcre->replaceText(selected_text, m_lastMatch.capture_groups_offsets, replacement, replaced_text);
 
     if (replacement_made) {
@@ -860,7 +918,7 @@ bool CodeViewEditor::ReplaceSelected(const QString &search_regex, const QString 
         // Adjust size of marked text.
         if (in_marked_text) {
             m_ReplacingInMarkedText = false;
-            m_MarkedTextEnd += toPlainText().length() - original_text_length;
+            m_MarkedTextEnd += textLength() - original_text_length;
         }
 
         if (!hasFocus()) {
@@ -912,7 +970,7 @@ int CodeViewEditor::ReplaceAll(const QString &search_regex,
                 if (match_info.at(i).offset.first > position) {
                     break;
                 }
-            } else if (!wrap) {
+            } else { 
                 if (match_info.at(i).offset.second < position) {
                     break;
                 }
@@ -1084,7 +1142,7 @@ void CodeViewEditor::mouseReleaseEvent(QMouseEvent *event)
 void CodeViewEditor::contextMenuEvent(QContextMenuEvent *event)
 {
     QMenu *menu = createStandardContextMenu();
-
+    
     if (m_reformatCSSEnabled) {
         AddReformatCSSContextMenu(menu);
     }
@@ -1184,7 +1242,7 @@ bool CodeViewEditor::AddSpellCheckContextMenu(QMenu *menu)
 
             // Allow the user to select a dictionary
             QStringList dictionaries = sc->userDictionaries();
-            QMenu *dictionary_menu = new QMenu(this);
+            QMenu *dictionary_menu = new QMenu(menu);
             dictionary_menu->setTitle(tr("Add To Dictionary"));
 
             if (topAction) {
@@ -1265,6 +1323,7 @@ void CodeViewEditor::AddReformatCSSContextMenu(QMenu *menu)
     }
 
     QMenu *reformatCSSMenu = new QMenu(tr("Reformat CSS"), menu);
+
     QAction *multiLineCSSAction = new QAction(tr("Multiple Lines Per Style"), reformatCSSMenu);
     QAction *singleLineCSSAction = new QAction(tr("Single Line Per Style"), reformatCSSMenu);
     connect(multiLineCSSAction, SIGNAL(triggered()), this, SLOT(ReformatCSSMultiLineAction()));
@@ -1292,10 +1351,11 @@ void CodeViewEditor::AddReformatHTMLContextMenu(QMenu *menu)
     }
 
     QMenu *reformatMenu = new QMenu(tr("Reformat HTML"), menu);
-    QAction *cleanAction = new QAction(tr("Mend and Prettify Code"), menu);
-    QAction *cleanAllAction = new QAction(tr("Mend and Prettify Code - All HTML Files"), menu);
-    QAction *toValidAction = new QAction(tr("Mend Code"), menu);
-    QAction *toValidAllAction = new QAction(tr("Mend Code - All HTML Files"), menu);
+
+    QAction *cleanAction = new QAction(tr("Mend and Prettify Code"), reformatMenu);
+    QAction *cleanAllAction = new QAction(tr("Mend and Prettify Code - All HTML Files"), reformatMenu);
+    QAction *toValidAction = new QAction(tr("Mend Code"), reformatMenu);
+    QAction *toValidAllAction = new QAction(tr("Mend Code - All HTML Files"), reformatMenu);
     connect(cleanAction, SIGNAL(triggered()), this, SLOT(ReformatHTMLCleanAction()));
     connect(cleanAllAction, SIGNAL(triggered()), this, SLOT(ReformatHTMLCleanAllAction()));
     connect(toValidAction, SIGNAL(triggered()), this, SLOT(ReformatHTMLToValidAction()));
@@ -1326,7 +1386,6 @@ void CodeViewEditor::AddGoToLinkOrStyleContextMenu(QMenu *menu)
     }
 
     QAction *goToLinkOrStyleAction = new QAction(tr("Go To Link Or Style"), menu);
-
     if (!topAction) {
         menu->addAction(goToLinkOrStyleAction);
     } else {
@@ -1402,7 +1461,7 @@ void CodeViewEditor::AddClipContextMenu(QMenu *menu)
         topAction = menu->actions().at(0);
     }
 
-    QMenu *clips_menu = new QMenu(this);
+    QMenu *clips_menu = new QMenu(menu);
     clips_menu->setTitle(tr("Clips"));
 
     if (topAction) {
@@ -1441,7 +1500,7 @@ bool CodeViewEditor::CreateMenuEntries(QMenu *parent_menu, QAction *topAction, Q
     if (!item->text().isEmpty()) {
         // If item has no children, add entry to the menu, else create menu
         if (!item->data().toBool()) {
-            clipAction = new QAction(item->text(), this);
+            clipAction = new QAction(item->text(), parent_menu);
             connect(clipAction, SIGNAL(triggered()), m_clipMapper, SLOT(map()));
             m_clipMapper->setMapping(clipAction, ClipEditorModel::instance()->GetFullName(item));
 
@@ -1451,7 +1510,7 @@ bool CodeViewEditor::CreateMenuEntries(QMenu *parent_menu, QAction *topAction, Q
                 parent_menu->insertAction(topAction, clipAction);
             }
         } else {
-            group_menu = new QMenu(this);
+            group_menu = new QMenu(parent_menu);
             group_menu->setTitle(item->text());
 
             if (topAction) {
@@ -1791,7 +1850,14 @@ bool CodeViewEditor::MarkForIndex(const QString &title)
     const QString &element_name = "a";
     const QString &attribute_name = "class";
 
-    if (!InsertTagAttribute(element_name, attribute_name, SIGIL_INDEX_CLASS, ANCHOR_TAGS)) {
+    // first see if an achor is the immediate parent of selected text
+    // and if so get any existing attribute class values to append
+    // so we do not overwrite them
+    QString existing_class = GetAttribute("class",ANCHOR_TAGS, false);
+    QString new_class = SIGIL_INDEX_CLASS;
+    if (!existing_class.isEmpty()) new_class = new_class + " " + existing_class;
+
+    if (!InsertTagAttribute(element_name, attribute_name, new_class, ANCHOR_TAGS)) {
         ok = false;
     }
 
@@ -1902,8 +1968,8 @@ void CodeViewEditor::HighlightCurrentLine()
 
     // Add highlighting of the marked text
     if (IsMarkedText()) {
-        if (m_MarkedTextEnd > toPlainText().length()) {
-            m_MarkedTextEnd = toPlainText().length();
+        if (m_MarkedTextEnd > textLength()) {
+            m_MarkedTextEnd = textLength();
         }
 
         QTextEdit::ExtraSelection selection;
@@ -2069,18 +2135,26 @@ void CodeViewEditor::UpdateLineNumberAreaFont(const QFont &font)
 
 void CodeViewEditor::SetAppearanceColors()
 {
-    QPalette pal = palette();
 
+    QPalette app_pal = qApp->palette();
+    setPalette(app_pal);
+    return;
+
+#if 0
+    // Linux and other platforms, let the user specify the colors
+    QPalette pal = palette();
     if (m_codeViewAppearance.background_color.isValid()) {
         pal.setColor(QPalette::Base, m_codeViewAppearance.background_color);
         pal.setColor(QPalette::Window, m_codeViewAppearance.background_color);
         setBackgroundVisible(true);
+        // qDebug() << "setting background color" << m_codeViewAppearance.background_color.name();
     } else {
         setBackgroundVisible(false);
     }
 
     if (m_codeViewAppearance.foreground_color.isValid()) {
         pal.setColor(QPalette::Text, m_codeViewAppearance.foreground_color);
+        // qDebug() << "setting foreground color" << m_codeViewAppearance.foreground_color.name();
     }
 
     if (m_codeViewAppearance.selection_background_color.isValid()) {
@@ -2090,8 +2164,9 @@ void CodeViewEditor::SetAppearanceColors()
     if (m_codeViewAppearance.selection_foreground_color.isValid()) {
         pal.setColor(QPalette::HighlightedText, m_codeViewAppearance.selection_foreground_color);
     }
-
     setPalette(pal);
+#endif
+
 }
 
 
@@ -2103,6 +2178,11 @@ void CodeViewEditor::DelayedCursorScreenCentering()
 {
     if (m_DelayedCursorScreenCenteringRequired) {
         centerCursor();
+#if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
+        // The Code View viewport stopped updating on Linux somewhere
+        // around Qt5.12.0 in this delayed call to center the cursor.
+        viewport()->update();
+#endif
         m_DelayedCursorScreenCenteringRequired = false;
     }
 }
@@ -2121,7 +2201,7 @@ int CodeViewEditor::GetSelectionOffset(Searchable::Direction search_direction, b
             if (marked_text) {
                 offset = m_MarkedTextEnd;
             } else {
-                offset = toPlainText().length();
+                offset = textLength();
             }
         } else {
             offset = textCursor().selectionStart();
@@ -2157,8 +2237,12 @@ void CodeViewEditor::ScrollByLine(bool down)
     }
 }
 
+QString CodeViewEditor::GetCaretElementName() 
+{
+    return m_element_name;
+}
 
-QList<ViewEditor::ElementIndex> CodeViewEditor::GetCaretLocation()
+QList<ElementIndex> CodeViewEditor::GetCaretLocation()
 {
     // We search for the first opening tag *behind* the caret.
     // This specifies the element the caret is located in.
@@ -2179,11 +2263,22 @@ QList<ViewEditor::ElementIndex> CodeViewEditor::GetCaretLocation()
         offset = start;
         len = mo.capturedLength();
     }
-    return ConvertStackToHierarchy(GetCaretLocationStack(offset + len));
+    QList<ElementIndex> hierarchy = ConvertStackToHierarchy(GetCaretLocationStack(offset + len));
+
+    // determine last block element containing caret
+    QString element_name;
+    foreach(ElementIndex ei, hierarchy) {
+        if (BLOCK_LEVEL_TAGS.contains(ei.name)) {
+	    element_name = ei.name;
+        }
+    }
+    m_element_name = element_name;
+
+    return hierarchy;
 }
 
 
-void CodeViewEditor::StoreCaretLocationUpdate(const QList<ViewEditor::ElementIndex> &hierarchy)
+void CodeViewEditor::StoreCaretLocationUpdate(const QList<ElementIndex> &hierarchy)
 {
     m_CaretUpdate = hierarchy;
 }
@@ -2234,7 +2329,7 @@ QStack<CodeViewEditor::StackElement> CodeViewEditor::GetCaretLocationStack(int o
 }
 
 
-QString CodeViewEditor::ConvertHierarchyToQWebPath(const QList<ViewEditor::ElementIndex>& hierarchy) const
+QString CodeViewEditor::ConvertHierarchyToQWebPath(const QList<ElementIndex>& hierarchy) const
 {
     QStringList pathparts;
     for (int i=0; i < hierarchy.count(); i++) {
@@ -2245,11 +2340,11 @@ QString CodeViewEditor::ConvertHierarchyToQWebPath(const QList<ViewEditor::Eleme
 }
 
 
-QList<ViewEditor::ElementIndex> CodeViewEditor::ConvertStackToHierarchy(const QStack<StackElement> stack) const
+QList<ElementIndex> CodeViewEditor::ConvertStackToHierarchy(const QStack<StackElement> stack) const
 {
-    QList<ViewEditor::ElementIndex> hierarchy;
+    QList<ElementIndex> hierarchy;
     foreach(StackElement stack_element, stack) {
-        ViewEditor::ElementIndex new_element;
+        ElementIndex new_element;
         new_element.name  = stack_element.name;
         new_element.index = stack_element.num_children - 1;
         hierarchy.append(new_element);
@@ -2258,7 +2353,7 @@ QList<ViewEditor::ElementIndex> CodeViewEditor::ConvertStackToHierarchy(const QS
 }
 
 
-std::tuple<int, int> CodeViewEditor::ConvertHierarchyToCaretMove(const QList<ViewEditor::ElementIndex> &hierarchy) const
+std::tuple<int, int> CodeViewEditor::ConvertHierarchyToCaretMove(const QList<ElementIndex> &hierarchy) const
 {
     QString source = toPlainText();
     QString version = "any_version";
@@ -2281,7 +2376,6 @@ std::tuple<int, int> CodeViewEditor::ConvertHierarchyToCaretMove(const QList<Vie
     }
     QTextCursor cursor(document());
     return std::make_tuple(line - cursor.blockNumber(), col);
-
 }
 
 
@@ -2993,15 +3087,19 @@ QString CodeViewEditor::ProcessAttribute(const QString &attribute_name, QStringL
         }
     }
 
-    pos--;
+    // If you highlight a pasage of text including the entire opening p tag itself
+    // The selection start position shows text[pos] = "<" so there is no need
+    // to decrement the starting position for some reason as was done here
 
-    if (pos <= 0) {
+    // pos--;
+
+    if (pos <=  0) {
         return QString();
     }
 
     QStringList pairs;
 
-    // Search backwards for the next opening tag
+    // Search forwards for the last opening tag before pos
     while (true) {
         QRegularExpressionMatchIterator i = tag_search.globalMatch(text);
         while (i.hasNext()) {
@@ -3193,6 +3291,9 @@ void CodeViewEditor::FormatStyle(const QString &property_name, const QString &pr
                 } else {
                     property_values.append(QString("%1: %2").arg(css_property->name).arg(css_property->value));
                 }
+		// CSSInfo.getCSSProperties creates each CSSProperty pointer with new
+		// and it must be cleaned by caller to prevent memory leak
+		if (css_property) delete css_property;
             }
             style_attribute_value = QString("%1;").arg(property_values.join("; "));
         }
@@ -3324,7 +3425,7 @@ void CodeViewEditor::ReformatHTML(bool all, bool to_valid)
     QString original_text;
     QString new_text;
     QWidget *mainWindow_w = Utility::GetMainWindow();
-    MainWindow *mainWindow = dynamic_cast<MainWindow *>(mainWindow_w);
+    MainWindow *mainWindow = qobject_cast<MainWindow *>(mainWindow_w);
     if (!mainWindow) {
         Utility::DisplayStdErrorDialog("Could not determine main window.");
         return;
@@ -3353,6 +3454,172 @@ void CodeViewEditor::ReformatHTML(bool all, bool to_valid)
 	    ExecuteCaretUpdate();
         }
     }
+}
+
+QString CodeViewEditor::RemoveFirstTag(const QString &text, const QString &tagname)
+{
+    QString result = text;
+    int p = result.indexOf(">");
+    if (p > -1) {
+        QString tag = result.mid(0,p+1);
+        if (tag.contains(tagname)) {
+            result = result.mid(p+1,-1);
+        }
+    }
+    return result;
+}
+
+QString CodeViewEditor::RemoveLastTag(const QString &text, const QString &tagname)
+{
+    QString result = text;
+    int p = result.lastIndexOf("<");
+    if (p > -1) {
+        QString tag = result.mid(p,-1);
+        if (tag.contains(tagname)) {
+	    result = result.mid(0,p);
+	}
+    }
+    return result;
+}
+
+bool CodeViewEditor::IsSelectionValid(const QString & text) 
+{
+    // whatever is selected must either be pure text or have balanced
+    // opening and closing tags (ie. well-formed).
+    // fastest way to check this is parse the fragment
+    GumboInterface gi = GumboInterface(text, "any_version");
+    QList<GumboWellFormedError> results = gi.fragment_error_check();
+    if (!results.isEmpty()) {
+      return false;
+    }
+    return true;
+}
+
+void CodeViewEditor::WrapSelectionInElement(const QString& element, bool unwrap)
+{
+    QTextCursor cursor = textCursor();
+    const QString selected_text = cursor.selectedText();
+
+    if (selected_text.isEmpty()) {
+        return;
+    }
+
+    QString new_text = selected_text;
+ 
+    if (!IsSelectionValid(new_text)) return;
+
+    QRegularExpression start_indent(STARTING_INDENT_USED);
+    QRegularExpressionMatch indent_mo = start_indent.match(new_text);
+    QString indent;
+    if (indent_mo.hasMatch()) {
+        indent = indent_mo.captured(1);
+	indent = indent.replace("\t","    ");
+    }
+ 
+    QRegularExpression open_tag_at_start(OPEN_TAG_STARTS_SELECTION);
+    QRegularExpressionMatch open_mo = open_tag_at_start.match(new_text);
+    QString tagname;
+    if (open_mo.hasMatch()) {
+        tagname = open_mo.captured(2);
+    }
+
+    if (unwrap) {
+        if (tagname == element) {
+            new_text = RemoveFirstTag(new_text, element);
+	    new_text = RemoveLastTag(new_text, element);
+	    new_text = new_text.trimmed();
+	    new_text = indent + new_text;
+	}
+    }
+    else {
+        new_text = new_text.trimmed();
+        QStringList result;
+	result.append(indent + "<" + element + ">");
+	result.append(indent + "    " + new_text);
+	result.append(indent + "</" + element + ">\n");
+	new_text = result.join('\n');
+    }
+    
+    if (new_text == selected_text) {
+        return;
+    }
+
+    const int pos = cursor.selectionStart();
+    cursor.beginEditBlock();
+    cursor.removeSelectedText();
+    cursor.insertText(new_text);
+    cursor.setPosition(pos + new_text.length());
+    cursor.setPosition(pos, QTextCursor::KeepAnchor);
+    cursor.endEditBlock();
+    setTextCursor(cursor);
+}
+
+
+void CodeViewEditor::ApplyListToSelection(const QString &element)
+{
+    QTextCursor cursor = textCursor();
+    const QString selected_text = cursor.selectedText();
+
+    if (selected_text.isEmpty()) {
+        return;
+    }
+
+    QString new_text = selected_text;
+
+    QRegularExpression start_indent(STARTING_INDENT_USED);
+    QRegularExpressionMatch indent_mo = start_indent.match(new_text);
+    QString indent;
+    if (indent_mo.hasMatch()) {
+        indent = indent_mo.captured(1);
+	indent = indent.replace("\t","    ");
+    }
+ 
+    QRegularExpression open_tag_at_start(OPEN_TAG_STARTS_SELECTION);
+    QRegularExpressionMatch open_mo = open_tag_at_start.match(new_text);
+    QString tagname;
+    if (open_mo.hasMatch()) {
+        tagname = open_mo.captured(2);
+    }
+
+    if (((tagname == "ol") && (element == "ol")) || 
+	((tagname == "ul") && (element == "ul"))) 
+    {
+        new_text = RemoveFirstTag(new_text, element);
+	new_text = RemoveLastTag(new_text, element);
+	new_text = new_text.trimmed();
+	// now split remaining text by new lines and 
+	// remove any beginning and ending li tags
+	QStringList alist = new_text.split(QChar::ParagraphSeparator, QString::SkipEmptyParts);
+	QStringList result;
+	foreach(QString aitem, alist) {
+	    result.append(indent + RemoveLastTag(RemoveFirstTag(aitem,"li"), "li"));
+	}
+	result.append("");
+	new_text = result.join("\n");
+    }
+    else if ((tagname == "p") || tagname.isEmpty()) {
+        QStringList alist = new_text.split(QChar::ParagraphSeparator, QString::SkipEmptyParts);
+	QStringList result;
+	result.append(indent + "<" + element + ">");
+	foreach(QString aitem, alist) {
+	    result.append(indent + "    " + "<li>" + aitem.trimmed() + "</li>"); 
+	}
+	result.append(indent + "</" + element + ">\n");
+	new_text = result.join('\n');
+    }
+    
+    if (new_text == selected_text) {
+        return;
+    }
+
+    const int pos = cursor.selectionStart();
+    cursor.beginEditBlock();
+    cursor.removeSelectedText();
+    cursor.insertText(new_text);
+    cursor.setPosition(pos + new_text.length());
+    cursor.setPosition(pos, QTextCursor::KeepAnchor);
+    cursor.endEditBlock();
+    setTextCursor(cursor);
 }
 
 void CodeViewEditor::ApplyCaseChangeToSelection(const Utility::Casing &casing)
@@ -3551,6 +3818,9 @@ void CodeViewEditor::SelectAndScrollIntoView(int start_position, int end_positio
     if (scroll_to_center) {
         centerCursor();
     }
+
+    // Tell FlowTab to Tell Preview to Sync to this Location
+    emit PageClicked();
 }
 
 void CodeViewEditor::ConnectSignalsToSlots()

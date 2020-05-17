@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015 Kevin B. Hendricks Stratford, ON Canada 
+**  Copyright (C) 2015-2019 Kevin B. Hendricks Stratford, ON Canada 
 **  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -34,6 +34,7 @@
 #include "Misc/PasteTarget.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
+#include "Misc/TextDocument.h"
 #include "MiscEditors/ClipEditorModel.h"
 #include "MiscEditors/IndexEditorModel.h"
 #include "ViewEditors/ViewEditor.h"
@@ -77,6 +78,8 @@ public:
     CodeViewEditor(HighlighterType highlighter_type, bool check_spelling = false, QWidget *parent = 0);
     ~CodeViewEditor();
 
+    void SetAppearance();
+
     QSize sizeHint() const;
 
     /**
@@ -85,7 +88,7 @@ public:
      *
      * @param document The new text document.
      */
-    void CustomSetDocument(QTextDocument &document);
+    void CustomSetDocument(TextDocument &document);
 
     void DeleteLine();
 
@@ -101,7 +104,9 @@ public:
 
     bool TextIsSelected();
     bool TextIsSelectedAndNotInStartOrEndTag();
-    bool TextIsSelectedAndNotContainingTag();
+
+    // No Longer Exists?
+    // bool TextIsSelectedAndNotContainingTag();
 
     QString StripCodeTags(QString text);
 
@@ -126,7 +131,9 @@ public:
     bool InsertHyperlink(const QString &attribute_value);
     bool IsInsertIdAllowed();
     bool IsInsertHyperlinkAllowed();
-    bool InsertTagAttribute(const QString &element_name, const QString &attribute_name, const QString &attribute_value, const QStringList &tag_list, bool ignore_seletion = false);
+    bool InsertTagAttribute(const QString &element_name, const QString &attribute_name, 
+			    const QString &attribute_value, const QStringList &tag_list, 
+			    bool ignore_seletion = false);
 
     /**
     * Splits the section and returns the "upper" content.
@@ -199,6 +206,19 @@ public:
 
     void ScrollToFragment(const QString &fragment);
 
+    // get length of plain text
+    int textLength() const;
+
+    // override and hide the toPlainText() call to prevent
+    // issues with lost non-breaking spaces (improperly
+    // converted to normal spaces)
+    QString toPlainText() const;
+
+    // override the createMimeDataFromSelection() to 
+    // prevent copy and cut from losing nbsp
+    // ala Kovid's solution in calibre PlainTextEdit
+    virtual QMimeData *createMimeDataFromSelection() const;
+
     // inherited
     bool IsLoadingFinished();
 
@@ -250,11 +270,13 @@ public:
      */
     void SetDelayedCursorScreenCenteringRequired();
 
-    // inherited
-    QList<ViewEditor::ElementIndex> GetCaretLocation();
+    QString GetCaretElementName();
 
     // inherited
-    void StoreCaretLocationUpdate(const QList<ViewEditor::ElementIndex> &hierarchy);
+    QList<ElementIndex> GetCaretLocation();
+
+    // inherited
+    void StoreCaretLocationUpdate(const QList<ElementIndex> &hierarchy);
 
     // inherited
     bool ExecuteCaretUpdate(bool default_to_top = false);
@@ -308,6 +330,12 @@ public:
      * @param property_value The new value to be assigned to this property.
      */
     void FormatCSSStyle(const QString &property_name, const QString &property_value);
+
+    bool IsSelectionValid(const QString &text);
+
+    void WrapSelectionInElement(const QString &element, bool unwrap = false);
+
+    void ApplyListToSelection(const QString &element);
 
     void ApplyCaseChangeToSelection(const Utility::Casing &casing);
 
@@ -417,7 +445,10 @@ public slots:
     void GoToLinkOrStyle();
 
     bool MarkSelection();
+
     bool ClearMarkedText();
+
+    void RehighlightDocument();
 
 protected:
 
@@ -475,8 +506,6 @@ private slots:
      * It does this based on the availability of undo.
      */
     void TextChangedFilter();
-
-    void RehighlightDocument();
 
     void PasteClipEntryFromName(const QString &name);
 
@@ -537,6 +566,9 @@ private slots:
 
 private:
     bool IsMarkedText();
+
+    QString RemoveFirstTag(const QString &text, const QString &tagname);
+    QString RemoveLastTag(const QString &text, const QString &tagname);
 
     QString GetCurrentWordAtCaret(bool select_word);
 
@@ -649,7 +681,7 @@ private:
 
 
     // Used to convert Hierarchy to QWedPath used by BV and Gumbo
-    QString ConvertHierarchyToQWebPath(const QList<ViewEditor::ElementIndex>& hierarchy) const;
+    QString ConvertHierarchyToQWebPath(const QList<ElementIndex>& hierarchy) const;
 
     /**
      * Converts a ViewEditor element hierarchy to a tuple describing necessary caret moves.
@@ -658,7 +690,7 @@ private:
      * @param hierarchy The caret location as ElementIndex hierarchy.
      * @return The info needed to move the caret to the new location.
      */
-    std::tuple<int, int> ConvertHierarchyToCaretMove(const QList<ViewEditor::ElementIndex> &hierarchy) const;
+    std::tuple<int, int> ConvertHierarchyToCaretMove(const QList<ElementIndex> &hierarchy) const;
 
     /**
      * Insert HTML tags around the current selection.
@@ -783,7 +815,7 @@ private:
      * Stores the update for the caret location
      * when switching from BookView to CodeView.
      */
-    QList<ViewEditor::ElementIndex> m_CaretUpdate;
+    QList<ElementIndex> m_CaretUpdate;
 
     /**
      * Whether spell checking is enabled on this view.
@@ -834,6 +866,7 @@ private:
      * Whether spelling highlighting should be reapplied when this tab is next given focus.
      */
     bool m_pendingSpellingHighlighting;
+    QString m_element_name;
 };
 
 #endif // CODEVIEWEDITOR_H

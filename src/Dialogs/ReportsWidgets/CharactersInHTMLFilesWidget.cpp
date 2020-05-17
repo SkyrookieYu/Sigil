@@ -1,5 +1,6 @@
 /************************************************************************
 **
+**  Copyright (C) 2019 Kevin B. Hendricks, Stratford, Ontario, Canada
 **  Copyright (C) 2012 John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012 Dave Heiland
 **
@@ -19,9 +20,6 @@
 **  along with Sigil.  If not, see <http://www.gnu.org/licenses/>.
 **
 *************************************************************************/
-#include <QWebView>
-#include <QWebPage>
-#include "Misc/SleepFunctions.h"
 
 #include <QtCore/QFile>
 #include <QtCore/QHashIterator>
@@ -38,6 +36,7 @@
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
 #include "Misc/XMLEntities.h"
+#include "Misc/GumboInterface.h"
 #include "ResourceObjects/HTMLResource.h"
 
 static const QString SETTINGS_GROUP = "reports";
@@ -52,6 +51,11 @@ CharactersInHTMLFilesWidget::CharactersInHTMLFilesWidget()
 {
     ui.setupUi(this);
     connectSignalsSlots();
+}
+
+CharactersInHTMLFilesWidget::~CharactersInHTMLFilesWidget()
+{
+    delete m_ItemModel;
 }
 
 void CharactersInHTMLFilesWidget::CreateReport(QSharedPointer<Book> book)
@@ -130,35 +134,15 @@ void CharactersInHTMLFilesWidget::AddTableData()
     }
 }
 
-void CharactersInHTMLFilesWidget::PageLoaded()
-{
-    m_PageLoaded = true;
-}
-
 QList <QChar> CharactersInHTMLFilesWidget::GetDisplayedCharacters(QList<HTMLResource *> resources)
 {
-    QWebView *view = new QWebView();
-    view->setGeometry(0,0,200,200);
-    connect(view->page(), SIGNAL(loadFinished(bool)), this, SLOT(PageLoaded()));
-    m_PageLoaded = false;
-
     QString all_characters;
     foreach (HTMLResource *resource, resources) {
         QString replaced_html = resource->GetText();
         replaced_html = replaced_html.replace("<html>", "<html xmlns=\"http://www.w3.org/1999/xhtml\">");
-        // Skip displaying images, etc. to improve performance
-        replaced_html = replaced_html.replace("<(img|video|audio)", "<ignore");
-        replaced_html = replaced_html.replace("</(img|video|audio)", "</ignore");
-        view->setContent(replaced_html.toUtf8(), "application/xhtml+xml", QUrl::fromLocalFile(resource->GetFullPath()));
-
-        while (!m_PageLoaded) {
-            qApp->processEvents();
-            SleepFunctions::msleep(100);
-        }
-        m_PageLoaded = false;
-
-        view->page()->triggerAction(QWebPage::SelectAll);
-        QString text = view->page()->selectedText();
+	QString version = "any_version";
+	GumboInterface gi = GumboInterface(replaced_html, version);
+	QString text = gi.get_body_text();
         all_characters.append(text);
     }
 
@@ -261,11 +245,17 @@ void CharactersInHTMLFilesWidget::Save()
     QString filter_string = "*.csv;;*.txt;;*.*";
     QString default_filter = "";
     QString save_path = m_LastDirSaved + "/" + m_LastFileSaved;
+    QFileDialog::Options options = QFileDialog::Options();
+#ifdef Q_OS_MAC
+    options = options | QFileDialog::DontUseNativeDialog;
+#endif
+
     QString destination = QFileDialog::getSaveFileName(this,
                           tr("Save Report As Comma Separated File"),
                           save_path,
                           filter_string,
-                          &default_filter
+			  &default_filter,
+                          options
                                                       );
 
     if (destination.isEmpty()) {

@@ -1,8 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2017, 2018 Kevin B. Hendricks, Stratford, Ontario
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012, 2013 Dave Heiland
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012-2013 Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -52,6 +52,11 @@ AllFilesWidget::AllFilesWidget()
     connectSignalsSlots();
 }
 
+AllFilesWidget::~AllFilesWidget()
+{
+  delete m_ItemModel;
+}
+
 void AllFilesWidget::CreateReport(QSharedPointer<Book> book)
 {
     m_Book = book;
@@ -83,7 +88,7 @@ void AllFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         QString fullpath = resource->GetFullPath();
         QString filepath = resource->GetRelativePath();
         QString directory = resource->GetFolder();
-        QString filename = resource->Filename();
+        QString file_spname = resource->ShortPathName();
         QList<QStandardItem *> rowItems;
         QStandardItem *item;
         // Directory
@@ -92,7 +97,8 @@ void AllFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         rowItems << item;
         // Filename
         item = new QStandardItem();
-        item->setText(filename);
+        item->setText(file_spname);
+	item->setData(filepath);
         item->setToolTip(filepath);
         rowItems << item;
         // File Size
@@ -201,8 +207,8 @@ void AllFilesWidget::DoubleClick()
     QModelIndex index = ui.fileTree->selectionModel()->selectedRows(1).first();
 
     if (index.row() != m_ItemModel->rowCount() - 1) {
-        QString filename = m_ItemModel->itemFromIndex(index)->text();
-        emit OpenFileRequest(filename, 1);
+        QString filepath = m_ItemModel->itemFromIndex(index)->data().toString();
+        emit OpenFileRequest(filepath, 1);
     }
 }
 
@@ -252,11 +258,17 @@ void AllFilesWidget::Save()
     QString filter_string = "*.csv;;*.txt;;*.*";
     QString default_filter = "";
     QString save_path = m_LastDirSaved + "/" + m_LastFileSaved;
+    QFileDialog::Options options = QFileDialog::Options();
+#ifdef Q_OS_MAC
+    options = options | QFileDialog::DontUseNativeDialog;
+#endif
+
     QString destination = QFileDialog::getSaveFileName(this,
                           tr("Save Report As Comma Separated File"),
                           save_path,
                           filter_string,
-                          &default_filter
+			  &default_filter,
+                          options
                                                       );
 
     if (destination.isEmpty()) {

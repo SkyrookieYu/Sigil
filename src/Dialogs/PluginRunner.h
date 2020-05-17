@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  Copyright (C) 2014
+ **  Copyright (C) 2014-2019 Kevin B. Hendricks, Stratford Ontario Canada
  **
  **  This file is part of Sigil.
  **
@@ -27,9 +27,10 @@
 #include <QDialog>
 #include <QProgressBar>
 #include <QProcess>
+// #include <QDebug>
+
 #include "Misc/TempFolder.h"
 #include "Misc/ValidationResult.h"
-
 #include "ResourceObjects/CSSResource.h"
 #include "ResourceObjects/FontResource.h"
 #include "ResourceObjects/HTMLResource.h"
@@ -74,6 +75,7 @@ public:
 
 public slots:
     int exec(const QString &name);
+    void reject();
 
 private slots:
     void startPlugin();

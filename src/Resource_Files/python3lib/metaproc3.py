@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim:ts=4:sw=4:softtabstop=4:smarttab:expandtab
 
-# Copyright (c) 2016 Kevin B. Hendricks, Stratford, and Doug Massay
+# Copyright (c) 2016-2020 Kevin B. Hendricks, Stratford, and Doug Massay
 # All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without modification,
@@ -28,6 +28,7 @@
 import sys
 import os
 from metadata_utils import quoteurl, unquoteurl, xmldecode, buildxml, valid_id, OPFMetadataParser
+from collections import OrderedDict
 
 import re
 
@@ -102,7 +103,7 @@ class MetadataProcessor(object):
         self.pkg = None
         self.id2rec = {}
         self.idlst = []
-        self.metadata_attr = {}
+        self.metadata_attr = OrderedDict()
 
     def extract_recognized_metadata(self):
         self.op = OPFMetadataParser(self.opfdata)
@@ -133,11 +134,13 @@ class MetadataProcessor(object):
                 numrec += 1
             elif mname == "meta" and "refines" in mattr:
                 self.refines.append(mentry)
-            elif mname == "meta" and "property" in mattr and mattr["property"] in _recognized_meta:
+            elif mname == "meta" and "property" in mattr:
                 # primary meta tag
-                property = mattr["property"]
-                del mattr["property"]
-                mname = property
+                # handle recognized meta/property combinations
+                if mattr["property"] in _recognized_meta:
+                    property = mattr["property"]
+                    del mattr["property"]
+                    mname = property
                 mentry = (mname, mcontent, mattr)
                 self.rec.append(mentry)
                 id = mattr.get("id",None)
@@ -240,8 +243,8 @@ def set_new_metadata(data, other, idlst, metatag, opfdata):
         mname = None
         mcontent = None
         id = None
-        mattr = {}
-        refines = {}
+        mattr = OrderedDict()
+        refines = OrderedDict()
         (name, value) = line.split(_US)
         mname = name.strip()
         mcontent = value.strip()
@@ -259,7 +262,10 @@ def set_new_metadata(data, other, idlst, metatag, opfdata):
             (name, value) = line.split(_US)
             name = name.strip()
             value = value.strip()
-            if name in ["id", "xml:lang", "dir"]:
+            attrlist = ["id", "xml:lang", "dir"]
+            if mname == "meta":
+                attrlist.append("property")
+            if name in attrlist:
                 if name == "id":
                     id = valid_id(value, idlst)
                     mattr["id"] = id
@@ -287,7 +293,7 @@ def set_new_metadata(data, other, idlst, metatag, opfdata):
                 continue
             if prop == "altlang":
                 continue
-            rattr = {}
+            rattr = OrderedDict()
             rattr["refines"] = "#" + id
             rattr["property"] = prop
             rname = "meta"

@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
+**  Copyright (C) 2019-2020 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **
 **  This file is part of Sigil.
 **
@@ -22,64 +23,35 @@
 #include <QtCore/QString>
 #include <QtCore/QUrl>
 #include <QtWidgets/QLayout>
-#include <QtWebKitWidgets/QWebView>
+#include <QGuiApplication>
+#include <QApplication>
 #include "MainUI/MainWindow.h"
-#include "Tabs/AVTab.h"
+#include "Misc/Utility.h"
 #include "sigil_constants.h"
-
-const QString AUDIO_HTML_BASE =
-    "<html>"
-    "<head>"
-    "<style type=\"text/css\">"
-    "body { -webkit-user-select: none; }"
-    "audio { display: block; margin-left: auto; margin-right: auto; }"
-    "</style>"
-    "<body>"
-    "<p><audio controls=\"controls\" src=\"%1\"></audio></p>"
-    "</body>"
-    "</html>";
-
-const QString VIDEO_HTML_BASE =
-    "<html>"
-    "<head>"
-    "<style type=\"text/css\">"
-    "body { -webkit-user-select: none; }"
-    "video { display: block; margin-left: auto; margin-right: auto; }"
-    "</style>"
-    "<body>"
-    "<p><video controls=\"controls\" width=\"560\" src=\"%1\"></video></p>"
-    "</body>"
-    "</html>";
+#include "Widgets/AVView.h"
+#include "Tabs/AVTab.h"
 
 AVTab::AVTab(Resource *resource, QWidget *parent)
     : ContentTab(resource, parent),
-      m_WebView(new QWebView(this))
+      m_av(new AVView(this))
 {
-    m_WebView->setContextMenuPolicy(Qt::NoContextMenu);
-    m_WebView->setFocusPolicy(Qt::NoFocus);
-    m_WebView->setAcceptDrops(false);
-    m_Layout->addWidget(m_WebView);
+    m_Layout->addWidget(m_av);
     ConnectSignalsToSlots();
-    RefreshContent();
+    ShowAV();
+}
+
+void AVTab::ShowAV()
+{
+    m_av->ShowAV(m_Resource->GetFullPath());
 }
 
 void AVTab::RefreshContent()
 {
-    MainWindow::clearMemoryCaches();
-    QString html;
-    const QString path = m_Resource->GetFullPath();
-    const QUrl resourceUrl = QUrl::fromLocalFile(path);
-    if (m_Resource->Type() == Resource::AudioResourceType) {
-        html = AUDIO_HTML_BASE.arg(resourceUrl.toString());
-    } else {
-        html = VIDEO_HTML_BASE.arg(resourceUrl.toString());
-    }
-    m_WebView->setHtml(html, resourceUrl);
+    m_av->ReloadViewer();
 }
 
 void AVTab::ConnectSignalsToSlots()
 {
     connect(m_Resource, SIGNAL(ResourceUpdatedOnDisk()), this, SLOT(RefreshContent()));
-    connect(m_Resource, SIGNAL(Deleted(Resource)), this, SLOT(Close()));
+    connect(m_Resource, SIGNAL(Deleted(const Resource*)), this, SLOT(Close()));
 }
-

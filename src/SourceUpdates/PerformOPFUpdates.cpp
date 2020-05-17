@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -28,12 +29,14 @@
 
 
 PerformOPFUpdates::PerformOPFUpdates(const QString &source,
+				     const QString &newbookpath,
                                      const QHash<QString, QString> &xml_updates,
                                      const QString& currentpath)
   :
   m_XMLUpdates(xml_updates),
   m_CurrentPath(currentpath),
-  m_source(source)
+  m_source(source),
+  m_newbookpath(newbookpath)
 {
 }
 
@@ -41,7 +44,6 @@ PerformOPFUpdates::PerformOPFUpdates(const QString &source,
 QString PerformOPFUpdates::operator()()
 {
   QString newsource = m_source;
-  QString currentdir = QFileInfo(m_CurrentPath).dir().path();
 
   // serialize the hash for passing to python
   QStringList dictkeys = m_XMLUpdates.keys();
@@ -55,7 +57,8 @@ QString PerformOPFUpdates::operator()()
 
   QList<QVariant> args;
   args.append(QVariant(m_source));
-  args.append(QVariant(currentdir));
+  args.append(QVariant(m_newbookpath));
+  args.append(QVariant(m_CurrentPath));
   args.append(QVariant(dictkeys));
   args.append(QVariant(dictvals));
 

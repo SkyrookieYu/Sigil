@@ -1,8 +1,9 @@
 /************************************************************************
 **
-**  Copyright (C) 2011, 2012  John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012  Dave Heiland
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2011-2012 John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012      Dave Heiland
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -601,11 +602,7 @@ void FindReplace::SetCodeViewIfNeeded(bool force)
     if (force ||
         (!m_LookWhereCurrentFile &&
          (GetLookWhere() == FindReplace::LookWhere_AllHTMLFiles ||
-          GetLookWhere() == FindReplace::LookWhere_SelectedHTMLFiles) &&
-         (m_MainWindow->GetViewState() == MainWindow::ViewState_BookView))) {
-        // Force change to Code View
-        m_MainWindow->AnyCodeView();
-
+          GetLookWhere() == FindReplace::LookWhere_SelectedHTMLFiles))) {
         if (has_focus) {
             SetFocus();
         }
@@ -674,7 +671,7 @@ bool FindReplace::IsCurrentFileInHTMLSelection()
 
     if (current_html_resource) {
         foreach(Resource * resource, resources) {
-            if (resource->Filename() == current_html_resource->Filename()) {
+            if (resource->GetRelativePath() == current_html_resource->GetRelativePath()) {
                 found = true;
                 break;
             }
@@ -871,7 +868,7 @@ HTMLResource *FindReplace::GetNextHTMLResource(HTMLResource *current_resource, S
     // Find the current resource in the selected/all html entries
     int i = 0;
     foreach(Resource * resource, resources) {
-        if (resource->Filename() == current_resource->Filename()) {
+        if (resource->GetRelativePath() == current_resource->GetRelativePath()) {
             current_reading_order = i;
             break;
         }
@@ -1169,6 +1166,10 @@ void FindReplace::LoadSearch(SearchEditorModel::searchEntry *search_entry)
     if (!search_entry->name.isEmpty()) {
         message = QString("%1: %2 ").arg(tr("Loaded")).arg(search_entry->name.replace('<', "&lt;").replace('>', "&gt;").left(50));
     }
+
+    // prevent memory leak in FindSearch, ReplaceCurrentSearch, ReplaceSearch,
+    // CountAllSearch, and ReplaceAllSearch
+    delete search_entry;
 
     ShowMessage(message);
 }

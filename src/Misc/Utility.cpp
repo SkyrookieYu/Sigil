@@ -1,6 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2016-2020 Doug Massay
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -32,6 +34,9 @@
 #include <time.h>
 #include <string>
 
+#include <utility>
+#include <vector>
+
 #include <QApplication>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
@@ -51,12 +56,20 @@
 #include <QRegularExpressionMatch>
 #include <QFile>
 #include <QFileInfo>
+#include <QCollator>
+#include <QMenu>
+#include <QDebug>
 
 #include "sigil_constants.h"
 #include "sigil_exception.h"
 #include "Misc/QCodePage437Codec.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/SleepFunctions.h"
+#include "MainUI/MainApplication.h"
+
+static const QString DARK_STYLE =
+    "<style>:root { background-color: %1; color: %2; } ::-webkit-scrollbar { display: none; }</style>"
+    "<link rel=\"stylesheet\" type=\"text/css\" href=\"%3\" />";
 
 #ifndef MAX_PATH
 // Set Max length to 256 because that's the max path size on many systems.
@@ -100,6 +113,39 @@ QString Utility::DefinePrefsDir()
     }
 }
 
+bool Utility::IsDarkMode()
+{
+#ifdef Q_OS_MAC
+    MainApplication *mainApplication = qobject_cast<MainApplication *>(qApp);
+    return mainApplication->isDarkMode();
+#else
+    // Windows, Linux and Other platforms
+    QPalette app_palette = qApp->palette();
+    bool isdark = app_palette.color(QPalette::Active,QPalette::WindowText).lightness() > 128;
+    return isdark;
+#endif
+}
+
+bool Utility::IsWindowsSysDarkMode()
+{
+    QSettings s("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", QSettings::NativeFormat);
+    if (s.status() == QSettings::NoError) {
+        // qDebug() << "Registry Value = " << s.value("AppsUseLightTheme");
+        return s.value("AppsUseLightTheme") == 0;
+    }
+    return false;
+}
+
+bool Utility::WindowsShouldUseDarkMode()
+{
+    QString override(GetEnvironmentVar("SIGIL_USES_DARK_MODE"));
+    if (override.isEmpty()) {
+        //Env var unset - use system registry setting.
+        return IsWindowsSysDarkMode();
+    }
+    // Otherwise use the env var: anything other than "0" is true.
+    return (override == "0" ? false : true);
+}
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
 // Return correct path(s) for Linux hunspell dictionaries
@@ -250,27 +296,6 @@ QString Utility::ReplaceFirst(const QString &before, const QString &after, const
 }
 
 
-QStringList Utility::GetAbsolutePathsToFolderDescendantFiles(const QString &fullfolderpath)
-{
-    QDir folder(fullfolderpath);
-    QStringList files;
-    foreach(QFileInfo file, folder.entryInfoList()) {
-        if ((file.fileName() != ".") && (file.fileName() != "..")) {
-            // If it's a file, add it to the list
-            if (file.isFile()) {
-                files.append(Utility::URLEncodePath(file.absoluteFilePath()));
-            }
-            // Else it's a directory, so
-            // we add all files from that dir
-            else {
-                files.append(GetAbsolutePathsToFolderDescendantFiles(file.absoluteFilePath()));
-            }
-        }
-    }
-    return files;
-}
-
-
 // Copies every file and folder in the source folder
 // to the destination folder; the paths to the folders are submitted;
 // the destination folder needs to be created in advance
@@ -278,6 +303,11 @@ void Utility::CopyFiles(const QString &fullfolderpath_source, const QString &ful
 {
     QDir folder_source(fullfolderpath_source);
     QDir folder_destination(fullfolderpath_destination);
+    folder_source.setFilter(QDir::AllDirs |
+			    QDir::Files |
+			    QDir::NoDotAndDotDot |
+			    QDir::NoSymLinks |
+			    QDir::Hidden);
     // Erase all the files in this folder
     foreach(QFileInfo file, folder_source.entryInfoList()) {
         if ((file.fileName() != ".") && (file.fileName() != "..")) {
@@ -319,7 +349,7 @@ bool Utility::removeDir(const QString &dirName)
             if (info.isDir()) {
                 result = removeDir(info.absoluteFilePath());
             } else {
-                result = QFile::remove(info.absoluteFilePath());
+                result = SDeleteFile(info.absoluteFilePath());
             }
 
             if (!result) {
@@ -328,7 +358,6 @@ bool Utility::removeDir(const QString &dirName)
         }
         result = dir.rmdir(dirName);
     }
-
     return result;
 }
 
@@ -365,6 +394,38 @@ bool Utility::ForceCopyFile(const QString &fullinpath, const QString &fulloutpat
         Utility::SDeleteFile(fulloutpath);
     }
     return QFile::copy(fullinpath, fulloutpath);
+}
+
+
+// Needed to add the S to this routine name to prevent collisions on Windows
+// We had to do the same thing for DeleteFile earlier
+bool Utility::SMoveFile(const QString &oldfilepath, const QString &newfilepath)
+{
+    // Make sure the path exists, otherwise very
+    // bad things could happen
+    if (!QFileInfo(oldfilepath).exists()) {
+        return false;
+    }
+
+    // check if these are identical files on the file system
+    // and if so no copy and delete sequence is needed
+    if (QFileInfo(oldfilepath) == QFileInfo(newfilepath)) {
+        return true;
+    }
+
+    // Ensure that the newfilepath doesn't already exist but due to case insenstive file systems
+    // check if we are actually moving to an identical path with a different case.
+    if (QFileInfo(newfilepath).exists() && QFileInfo(oldfilepath) != QFileInfo(newfilepath)) {
+        return false;
+    }
+
+    // copy file from old file path to new file path
+    bool success = QFile::copy(oldfilepath, newfilepath);
+    // if and only if copy succeeds then delete old file 
+    if (success) {
+        Utility::SDeleteFile(oldfilepath);
+    }
+    return success;
 }
 
 
@@ -521,6 +582,12 @@ QString Utility::URLEncodePath(const QString &path)
         scheme = scheme + "://";
         newpath.remove(0, scheme.length());
     }
+
+    // some very poorly written software uses xml escaping of the 
+    // "&" instead of url encoding when building hrefs
+    // So run xmldecode first to convert them to normal characters before 
+    // url encoding them
+    newpath = DecodeXML(newpath);
     QByteArray encoded_url = QUrl::toPercentEncoding(newpath, QByteArray("/#"));
     return scheme + QString::fromUtf8(encoded_url.constData(), encoded_url.count());
 }
@@ -528,7 +595,13 @@ QString Utility::URLEncodePath(const QString &path)
 
 QString Utility::URLDecodePath(const QString &path)
 {
-    return QUrl::fromPercentEncoding(path.toUtf8());
+    QString apath(path);
+    // some very poorly written software uses xml-escape on hrefs
+    // instead of properly url encoding them, so look for the
+    // the "&" character which should *not* exist if properly
+    // url encoded and if found try to xml decode them first
+    apath = DecodeXML(apath);
+    return QUrl::fromPercentEncoding(apath.toUtf8());
 }
 
 
@@ -547,14 +620,10 @@ void Utility::DisplayExceptionErrorDialog(const QString &error_info)
     detailed_text << "Error info: "    + error_info
                   << "Sigil version: " + QString(SIGIL_FULL_VERSION)
                   << "Runtime Qt: "    + QString(qVersion())
-                  << "Compiled Qt: "   + QString(QT_VERSION_STR);
-#if defined Q_OS_WIN32
-    detailed_text << "Platform: Windows SysInfo ID " + QString::number(QSysInfo::WindowsVersion);
-#elif defined Q_OS_MAC
-    detailed_text << "Platform: Mac SysInfo ID " + QString::number(QSysInfo::MacintoshVersion);
-#else
-    detailed_text << "Platform: Linux";
-#endif
+                  << "Compiled Qt: "   + QString(QT_VERSION_STR)
+                  << "System: "        + QSysInfo::prettyProductName()
+                  << "Architecture: "  + QSysInfo::currentCpuArchitecture();
+
     message_box.setDetailedText(detailed_text.join("\n"));
     message_box.exec();
 }
@@ -599,17 +668,15 @@ void Utility::DisplayStdWarningDialog(const QString &warning_message, const QStr
 // if the env var isn't set, it returns an empty string
 QString Utility::GetEnvironmentVar(const QString &variable_name)
 {
-    // Renaming this function (and all references to it)
-    // to GetEnvironmentVariable gets you a linker error
-    // on MSVC 9. Funny, innit?
-    QRegularExpression search_for_name("^" + QRegularExpression::escape(variable_name) + "=");
-    QString variable = QProcess::systemEnvironment().filter(search_for_name).value(0);
-
-    if (!variable.isEmpty()) {
-        return variable.split("=")[ 1 ];
-    } else {
-        return QString();
-    }
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+    // The only time this might fall down is on Linux when an
+    // environment variable holds bytedata. Don't use this
+    // utility function for retrieval if that's the case.
+    return qEnvironmentVariable(variable_name.toUtf8().constData(), "").trimmed();
+#else
+    // This will typically only be used on older Qts on Linux
+    return QProcessEnvironment::systemEnvironment().value(variable_name, "").trimmed();
+#endif
 }
 
 
@@ -624,7 +691,7 @@ QWidget *Utility::GetMainWindow()
 {
     QWidget *parent_window = QApplication::activeWindow();
 
-    while (parent_window && !(dynamic_cast<QMainWindow *>(parent_window))) {
+    while (parent_window && !(qobject_cast<QMainWindow *>(parent_window))) {
         parent_window = parent_window->parentWidget();
     }
 
@@ -638,6 +705,7 @@ QString Utility::getSpellingSafeText(const QString &raw_text)
     // Hunspell dictionaries typically store their main wordlist using
     // the dumb apostrophe variants only to save space and speed checking
     QString text(raw_text);
+    text.replace(QChar(0x00ad),"");
     return text.replace(QChar(0x2019),QChar(0x27));
 }
 
@@ -715,6 +783,44 @@ bool Utility::UnZip(const QString &zippath, const QString &destpath)
 
             // If there is no file name then we can't do anything with it.
             if (!qfile_name.isEmpty()) {
+
+	        // for security reasons against maliciously crafted zip archives
+	        // we need the file path to always be inside the target folder 
+	        // and not outside, so we will remove all illegal backslashes
+	        // and all relative upward paths segments "/../" from the zip's local 
+	        // file name/path before prepending the target folder to create 
+	        // the final path
+
+	        QString original_path = qfile_name;
+	        bool evil_or_corrupt_epub = false;
+
+	        if (qfile_name.contains("\\")) evil_or_corrupt_epub = true; 
+	        qfile_name = "/" + qfile_name.replace("\\","");
+
+	        if (qfile_name.contains("/../")) evil_or_corrupt_epub = true;
+	        qfile_name = qfile_name.replace("/../","/");
+
+	        while(qfile_name.startsWith("/")) { 
+		  qfile_name = qfile_name.remove(0,1);
+	        }
+                
+	        if (cp437_file_name.contains("\\")) evil_or_corrupt_epub = true; 
+	        cp437_file_name = "/" + cp437_file_name.replace("\\","");
+
+	        if (cp437_file_name.contains("/../")) evil_or_corrupt_epub = true;
+	        cp437_file_name = cp437_file_name.replace("/../","/");
+
+	        while(cp437_file_name.startsWith("/")) { 
+		  cp437_file_name = cp437_file_name.remove(0,1);
+	        }
+
+	        if (evil_or_corrupt_epub) {
+		    unzCloseCurrentFile(zfile);
+		    unzClose(zfile);
+		    // throw (UNZIPLoadParseError(QString(QObject::tr("Possible evil or corrupt zip file name: %1")).arg(original_path).toStdString()));
+                    return false;
+	        }
+
                 // We use the dir object to create the path in the temporary directory.
                 // Unfortunately, we need a dir ojbect to do this as it's not a static function.
                 // Full file path in the temporary directory.
@@ -726,7 +832,7 @@ bool Utility::UnZip(const QString &zippath, const QString &destpath)
                     dir.mkpath(qfile_name);
                     continue;
                 } else {
-                    dir.mkpath(qfile_info.path());
+		    if (!qfile_info.path().isEmpty()) dir.mkpath(qfile_info.path());
                 }
 
                 // Open the file entry in the archive for reading.
@@ -833,5 +939,291 @@ QStringList Utility::ZipInspect(const QString &zippath)
     return filelist;
 }
 
+// some utilities for working with absolute and book relative paths
+
+#if 0
+// brute force method
+QString Utility::longestCommonPath(const QStringList& filepaths, const QString& sep)
+{
+    // handle special cases
+    if (filepaths.isEmpty()) return QString();
+    if (filepaths.length() == 1) return QFileInfo(filepaths.at(0)).absolutePath() + sep;
+    
+    // split each path into its component segments
+    QList<QStringList> fpaths;
+    int minlen = -1;
+    foreach(QString apath, filepaths) {
+        QStringList segs = apath.split(sep);
+        int n = segs.length();
+        if (minlen == -1) minlen = n;
+        if (n < minlen) minlen = n;
+        fpaths.append(segs);
+    }
+
+    // now build up the results
+    QStringList res;
+    int numpaths = fpaths.length();
+    for(int i=0; i < minlen; i++) {
+        QString aseg = fpaths.at(0).at(i);
+        bool amatch = true;
+        int j = 1;
+        while(amatch && j < numpaths) {
+            amatch = (aseg == fpaths.at(j).at(i));
+            j++;
+        }
+        if (amatch) {
+            res << aseg;
+        } else {
+            break;
+        }
+    }
+    if (res.isEmpty()) return "";
+    return res.join(sep) + sep;
+}
+
+#else
+
+QString Utility::longestCommonPath(const QStringList& filepaths, const QString& sep)
+{
+    if (filepaths.isEmpty()) return QString();
+    if (filepaths.length() == 1) return QFileInfo(filepaths.at(0)).absolutePath() + sep;
+    QStringList fpaths(filepaths);
+    fpaths.sort();
+    const QStringList segs1 = fpaths.first().split(sep);
+    const QStringList segs2 = fpaths.last().split(sep);
+    QStringList res;
+    int i = 0;
+    while((i < segs1.length()) && (i < segs2.length()) && (segs1.at(i) == segs2.at(i))) {
+        res.append(segs1.at(i));
+        i++;
+    }
+    if (res.length() == 0) return sep;
+    return res.join(sep) + sep;
+}
+
+#endif
 
 
+// works with absolute paths and book (internal to epub) paths
+QString Utility::resolveRelativeSegmentsInFilePath(const QString& file_path, const QString &sep)
+{
+    const QStringList segs = file_path.split(sep);
+    QStringList res;
+    for (int i = 0; i < segs.length(); i++) {
+        // FIXME skip empty segments but not at the front when windows
+        if (segs.at(i) == ".") continue;
+        if (segs.at(i) == "..") {
+            if (!res.isEmpty()) {
+	        res.removeLast();
+            } else {
+	        qDebug() << "Error resolving relative path segments";
+		qDebug() << "original file path: " << file_path;
+            }
+        } else {
+            res << segs.at(i);
+        }
+    }
+    return res.join(sep);
+}
+
+
+// Generate relative path to destination from starting directory path
+// Both paths should be cannonical
+QString Utility::relativePath(const QString & destination, const QString & start_dir)
+{
+    QString dest(destination);
+    QString start(start_dir);
+
+    // first handle the special case
+    if (start_dir.isEmpty()) return destination;
+
+    QChar sep = '/';
+
+    // remove any trailing path separators from both paths
+    while (dest.endsWith(sep)) dest.chop(1);
+    while (start.endsWith(sep)) start.chop(1);
+
+    QStringList dsegs = dest.split(sep, QString::KeepEmptyParts);
+    QStringList ssegs = start.split(sep, QString::KeepEmptyParts);
+    QStringList res;
+    int i = 0;
+    int nd = dsegs.size();
+    int ns = ssegs.size();
+    // skip over starting common path segments in both paths 
+    while (i < ns && i < nd && (dsegs.at(i) == ssegs.at(i))) {
+        i++;
+    }
+    // now "move up" for each remaining path segment in the starting directory
+    int p = i;
+    while (p < ns) {
+        res.append("..");
+        p++;
+    }
+    // And append the remaining path segments from the destination 
+    p = i;
+    while(p < nd) {
+        res.append(dsegs.at(p));
+        p++;
+    }
+    return res.join(sep);
+}
+
+// dest_relpath is the relative path to the destination file
+// start_folder is the *book path* (path internal to the epub) to the starting folder
+QString Utility::buildBookPath(const QString& dest_relpath, const QString& start_folder)
+{
+    QString bookpath(start_folder);
+    while (bookpath.endsWith("/")) bookpath.chop(1);
+    if (!bookpath.isEmpty()) { 
+        bookpath = bookpath + "/" + dest_relpath;
+    } else {
+        bookpath = dest_relpath;
+    }
+    bookpath = resolveRelativeSegmentsInFilePath(bookpath, "/");
+    return bookpath;
+}
+
+// no ending path separator
+QString Utility::startingDir(const QString &file_bookpath)
+{
+    QString start_dir(file_bookpath);
+    int pos = start_dir.lastIndexOf('/');
+    if (pos > -1) { 
+        start_dir = start_dir.left(pos);
+    } else {
+        start_dir = "";
+    }
+    return start_dir;
+}
+
+// This is the equivalent of Resource.cpp's GetRelativePathFromResource but using book paths
+QString Utility::buildRelativePath(const QString &from_file_bkpath, const QString & to_file_bkpath)
+{
+    // handle special case of "from" and "to" being identical
+    if (from_file_bkpath == to_file_bkpath) return "";
+
+    // convert start_file_bkpath to start_dir by stripping off existing filename component
+    return relativePath(to_file_bkpath, startingDir(from_file_bkpath));
+}   
+
+std::pair<QString, QString> Utility::parseHREF(const QString &relative_href)
+{
+    QString fragment;
+    QString attpath = relative_href;
+    int fragpos = attpath.lastIndexOf("#");
+    // fragment will include any # if one exists
+    if (fragpos != -1) {
+        fragment = attpath.mid(fragpos, -1);
+        attpath = attpath.mid(0, fragpos);
+    }
+    if (attpath.startsWith("./")) attpath = attpath.mid(2,-1);
+    return std::make_pair(attpath, fragment);
+}
+
+
+bool Utility::sort_pair_in_reverse(const std::pair<int,QString> &a, const std::pair<int,QString> &b)
+{
+    return (a.first > b.first);
+}
+
+QStringList Utility::sortByCounts(const QStringList &folderlst, const QList<int> &countlst)
+{
+    std::vector< std::pair<int , QString> > vec;
+    int i = 0;
+    foreach(QString afolder, folderlst) {
+        vec.push_back(std::make_pair(countlst.at(i++), afolder));
+    }
+    std::sort(vec.begin(), vec.end(), sort_pair_in_reverse);
+    QStringList sortedlst;
+    for(int j=0; j < vec.size(); j++) {
+        sortedlst << vec[j].second;
+    }
+    return sortedlst;
+}
+
+QStringList Utility::LocaleAwareSort(const QStringList &names)
+{
+  SettingsStore ss;
+  QStringList nlist(names);
+  QLocale uiLocale(ss.uiLanguage());
+  QCollator uiCollator(uiLocale);
+  uiCollator.setCaseSensitivity(Qt::CaseInsensitive);
+  // use uiCollator.compare(s1, s2)
+  std::sort(nlist.begin(), nlist.end(), uiCollator);
+  return nlist;
+}
+
+
+QString Utility::AddDarkCSS(const QString &html)
+{
+    QString text = html;
+    int endheadpos = text.indexOf("</head>");
+    if (endheadpos == -1) return text;
+    QPalette pal = qApp->palette();
+    QString back = pal.color(QPalette::Base).name();
+    QString fore = pal.color(QPalette::Text).name();
+#ifdef Q_OS_MAC
+    // on macOS the Base role is used for the background not the Window role
+    QString dark_css_url = "qrc:///dark/mac_dark_scrollbar.css";
+#elif defined(Q_OS_WIN32)
+    QString dark_css_url = "qrc:///dark/win_dark_scrollbar.css";
+#else
+    QString dark_css_url = "qrc:///dark/lin_dark_scrollbar.css";
+#endif
+    QString inject_dark_style = DARK_STYLE.arg(back).arg(fore).arg(dark_css_url);
+    // qDebug() << "Injecting dark style: ";
+    text.insert(endheadpos, inject_dark_style);
+    return text;
+}
+
+
+QColor Utility::WebViewBackgroundColor(bool followpref)
+{
+    QColor back_color = Qt::white;
+    if (IsDarkMode()) {
+        if (followpref) {
+            SettingsStore ss;
+            if (!ss.previewDark()) {
+                return back_color;    
+            }
+        }
+        QPalette pal = qApp->palette();
+        back_color = pal.color(QPalette::Base);
+    }
+    return back_color; 
+}
+
+QBrush Utility::ValidationResultBrush(const Val_Msg_Type &valres)
+{
+    if (Utility::IsDarkMode()) {
+        switch (valres) {
+            case Utility::INFO_BRUSH: {
+               return QBrush(QColor(114, 165, 212)); 
+            }
+            case Utility::WARNING_BRUSH: {
+                return QBrush(QColor(212, 165, 114));
+            }
+            case Utility::ERROR_BRUSH: {
+                return QBrush(QColor(222, 94, 94));
+            }
+            default:
+                QPalette pal = qApp->palette();
+                return QBrush(pal.color(QPalette::Text));
+        }
+    } else {
+        switch (valres) {
+            case Utility::INFO_BRUSH: {
+                return QBrush(QColor(224, 255, 255));;
+            }
+            case Utility::WARNING_BRUSH: {
+                return QBrush(QColor(255, 255, 230));
+            }
+            case Utility::ERROR_BRUSH: {
+                return QBrush(QColor(255, 230, 230));
+            }
+            default:
+                QPalette pal = qApp->palette();
+                return QBrush(pal.color(QPalette::Window));
+        }
+    }
+}

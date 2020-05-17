@@ -1,7 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2013 Dave Heiland
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2013      Dave Heiland
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -63,10 +64,12 @@ void SpellCheckWidget::setUpTable()
     ui.userDictList->setAlternatingRowColors(true);
 }
 
-PreferencesWidget::ResultAction SpellCheckWidget::saveSettings()
+PreferencesWidget::ResultActions SpellCheckWidget::saveSettings()
 {
+    PreferencesWidget::ResultActions results = PreferencesWidget::ResultAction_None;
+
     if (!m_isDirty) {
-        return PreferencesWidget::ResultAction_None;
+        return results;
     }
 
     // Save the current dictionary's word list
@@ -88,7 +91,9 @@ PreferencesWidget::ResultAction SpellCheckWidget::saveSettings()
     SpellCheck *sc = SpellCheck::instance();
     sc->setDictionary(settings.dictionary(), true);
 
-    return PreferencesWidget::ResultAction_RefreshSpelling;
+    results = results | PreferencesWidget::ResultAction_RefreshSpelling;
+    results = results & PreferencesWidget::ResultAction_Mask;
+    return results;
 }
 
 QStringList SpellCheckWidget::EnabledDictionaries()
@@ -354,12 +359,31 @@ void SpellCheckWidget::readSettings()
     QStringList dicts = sc->dictionaries();
     ui.dictionaries->clear();
     foreach(QString dict, dicts) {
-        QString name = lang->GetLanguageName(dict);
-
-        if (name.isEmpty()) {
-            name = dict;
-        }
-
+        QString name;
+        QString fix_dict = dict;
+	fix_dict.replace("_", "-");
+	QStringList parts = fix_dict.split("-");
+	int n = parts.count();
+	if (n == 1) {
+            name = lang->GetLanguageName(fix_dict);
+	} else {
+	    // try with the first two parts
+	    fix_dict = parts.at(0) + "-" + parts.at(1);
+	    name = lang->GetLanguageName(fix_dict);
+	    if (!name.isEmpty()) {
+	        // append any extra information to end
+	        for(int j=2; j < n; j++) name.append(" - " + parts.at(j)); 
+	    }
+	    if (name.isEmpty()) {
+	        // try with just the first part
+	        name = lang->GetLanguageName(parts.at(0));
+		if (!name.isEmpty()) {
+	            // append any extra information to end
+	            for(int j=1; j < n; j++) name.append(" - " + parts.at(j)); 
+		}
+	    }
+	}
+	if (name.isEmpty()) name = dict;
         ui.dictionaries->addItem(name, dict);
     }
     // Select the current dictionary.

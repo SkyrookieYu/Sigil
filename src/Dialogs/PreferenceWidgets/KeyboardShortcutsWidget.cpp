@@ -1,7 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2011 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2011 Grzegorz Wolszczak <grzechu81@gmail.com>
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2011      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2011      Grzegorz Wolszczak <grzechu81@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -23,6 +24,7 @@
 #include <QtCore/QEvent>
 #include <QtCore/QStringList>
 #include <QtGui/QKeyEvent>
+#include <QDebug>
 
 #include "KeyboardShortcutsWidget.h"
 #include "Misc/KeyboardShortcutManager.h"
@@ -41,8 +43,10 @@ KeyboardShortcutsWidget::KeyboardShortcutsWidget()
     readSettings();
 }
 
-PreferencesWidget::ResultAction KeyboardShortcutsWidget::saveSettings()
+PreferencesWidget::ResultActions KeyboardShortcutsWidget::saveSettings()
 {
+    PreferencesWidget::ResultActions results = PreferencesWidget::ResultAction_None;
+
     KeyboardShortcutManager *sm = KeyboardShortcutManager::instance();
 
     for (int i = 0; i < ui.commandList->topLevelItemCount(); i++) {
@@ -52,7 +56,7 @@ PreferencesWidget::ResultAction KeyboardShortcutsWidget::saveSettings()
         sm->setKeySequence(id, keySequence);
     }
 
-    return PreferencesWidget::ResultAction_None;
+    return results;
 }
 
 bool KeyboardShortcutsWidget::eventFilter(QObject *object, QEvent *event)
@@ -190,7 +194,11 @@ void KeyboardShortcutsWidget::resetAllButtonClickedSlot()
     for (int i = 0; i < ui.commandList->topLevelItemCount(); i++) {
         QTreeWidgetItem *item = ui.commandList->topLevelItem(i);
         QKeySequence seq = sm->keyboardShortcut(item->text(COL_ID)).defaultKeySequence();
+#ifdef Q_OS_MAC
         item->setText(COL_SHORTCUT, seq.toString());
+#else
+        item->setText(COL_SHORTCUT, seq.toString(QKeySequence::PortableText));
+#endif
     }
 
     markSequencesAsDuplicatedIfNeeded();
@@ -207,7 +215,11 @@ void KeyboardShortcutsWidget::readSettings()
         if (!shortcut.isEmpty()) {
             QTreeWidgetItem *item = new QTreeWidgetItem();
             item->setText(COL_NAME, shortcut.name());
+#ifdef Q_OS_MAC
             item->setText(COL_SHORTCUT, shortcut.keySequence().toString());
+#else
+            item->setText(COL_SHORTCUT, shortcut.keySequence().toString(QKeySequence::PortableText));
+#endif
             item->setText(COL_DESCRIPTION, shortcut.description());
             item->setToolTip(COL_DESCRIPTION, shortcut.toolTip());
             item->setText(COL_ID, id);
@@ -233,11 +245,17 @@ void KeyboardShortcutsWidget::handleKeyEvent(QKeyEvent *event)
 {
     int nextKey = event->key();
 
-    if (nextKey == Qt::Key_Control ||
-        nextKey == Qt::Key_Shift   ||
-        nextKey == Qt::Key_Meta    ||
-        nextKey == Qt::Key_Alt     ||
-        nextKey == Qt::Key_Backspace || // This button cannot be assigned, because we want to 'clear' shortcut after backspace push
+    if (nextKey == Qt::Key_Control    ||
+        nextKey == Qt::Key_Shift      ||
+        nextKey == Qt::Key_Meta       ||
+        nextKey == Qt::Key_Alt        ||
+        nextKey == Qt::Key_AltGr      ||
+        nextKey == Qt::Key_CapsLock   ||
+        nextKey == Qt::Key_NumLock    ||
+	nextKey == Qt::Key_ScrollLock ||
+        nextKey == 0                  ||
+        nextKey == Qt::Key_unknown    ||
+        nextKey == Qt::Key_Backspace  || // This button cannot be assigned, because we want to 'clear' shortcut after backspace push
         ui.commandList->currentItem() == 0 // Do not allow writting in shortcut line edit if no item is selected
        ) {
         // If key was Qt::Key_Backspace additionaly clear sequence dialog
@@ -247,9 +265,13 @@ void KeyboardShortcutsWidget::handleKeyEvent(QKeyEvent *event)
 
         return;
     }
-
     nextKey |= translateModifiers(event->modifiers(), event->text());
+
+#ifdef Q_OS_MAC
     ui.targetEdit->setText(QKeySequence(nextKey).toString());
+#else
+    ui.targetEdit->setText(QKeySequence(nextKey).toString(QKeySequence::PortableText));
+#endif
     event->accept();
 }
 
@@ -313,7 +335,7 @@ void KeyboardShortcutsWidget::markSequencesAsDuplicatedIfNeeded()
             foreach(QTreeWidgetItem * item, itemSet.values()) {
                 QFont font = item->font(COL_SHORTCUT);
                 font.setBold(false);
-                item->setForeground(COL_SHORTCUT, QColor(Qt::black));
+                item->setForeground(COL_SHORTCUT, QPalette().color(QPalette::Text));
                 item->setFont(COL_SHORTCUT, font);
             }
         }

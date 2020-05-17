@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015 Kevin B. Hendricks Stratford, ON, Canada 
+**  Copyright (C) 2015-2019 Kevin B. Hendricks Stratford, ON, Canada 
 **  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -32,7 +32,6 @@
 
 #include "BookManipulation/CleanSource.h"
 #include "BookManipulation/XhtmlDoc.h"
-#include "Misc/HTMLPrettyPrint.h"
 #include "Misc/GumboInterface.h"
 #include "Misc/SettingsStore.h"
 #include "sigil_constants.h"
@@ -42,6 +41,9 @@
 
 static const QString HEAD_END = "</\\s*head\\s*>";
 const QString SVG_NAMESPACE_PREFIX = "<\\s*[^>]*(xmlns\\s*:\\s*svg\\s*=\\s*(?:\"|')[^\"']+(?:\"|'))[^>]*>";
+
+static const QStringList NUMERIC_NBSP = QStringList() << "&#160;" << "&#xa0;" << "&#x00a0;";
+
 
 // Performs general cleaning (and improving)
 // of provided book XHTML source code
@@ -72,7 +74,7 @@ QString CleanSource::Mend(const QString &source, const QString &version)
 
     GumboInterface gp = GumboInterface(newsource, version);
     newsource = gp.repair();
-    newsource = CharToEntity(newsource);
+    newsource = CharToEntity(newsource, version);
     newsource = PrettifyDOCTYPEHeader(newsource);
     return newsource;
 }
@@ -84,7 +86,7 @@ QString CleanSource::MendPrettify(const QString &source, const QString &version)
     QString newsource = PreprocessSpecialCases(source);
     GumboInterface gi = GumboInterface(newsource, version);
     newsource = gi.prettyprint();
-    newsource = CharToEntity(newsource);
+    newsource = CharToEntity(newsource, version);
     newsource = PrettifyDOCTYPEHeader(newsource);
     return newsource;
 }
@@ -274,14 +276,32 @@ QString CleanSource::PrettifyDOCTYPEHeader(const QString &source)
 }
 
 
-QString CleanSource::CharToEntity(const QString &source)
+QString CleanSource::CharToEntity(const QString &source, const QString &version)
 {
     SettingsStore settings;
     QString new_source = source;
     QList<std::pair <ushort, QString>> codenames = settings.preserveEntityCodeNames();
     std::pair <ushort, QString> epair;
+    bool has_numeric_nbsp = false;
     foreach(epair, codenames) {
-        new_source.replace(QChar(epair.first), epair.second);
+        QString codename = epair.second.toLower();
+        if (NUMERIC_NBSP.contains(codename)) {
+	    has_numeric_nbsp = true;
+        } 
+    }
+    // now intelligently handle the replacements
+    foreach(epair, codenames) {
+        QString codename = epair.second.toLower();
+        if (version.startsWith("2")) {
+            new_source.replace(QChar(epair.first), codename);
+	} else if (version.startsWith("3")) {
+	    // only use numeric entities in epub3
+	    if (codename.startsWith("&#")) { 
+                new_source.replace(QChar(epair.first), codename);
+	    } else if ((codename == "&nbsp;") && !has_numeric_nbsp) {
+                new_source.replace(QChar(epair.first), "&#160;");
+	    }
+	}
     }
     return new_source;
 }

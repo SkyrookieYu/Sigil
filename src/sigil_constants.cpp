@@ -17,8 +17,8 @@ const QString SIGIL_PREFS_DIR = QString(getenv("SIGIL_PREFS_DIR"));
 
 #if __APPLE__
 const QString PATH_LIST_DELIM = ":";
-// const QString PYTHON_MAIN_PATH = "/Frameworks/Python.framework/Versions/3.5/lib/python3.5";
 const QString PYTHON_MAIN_BIN_PATH = "/Frameworks/Python.framework/Versions/3.7/bin/python3";
+const QString PYTHON_SITE_PACKAGES = "/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages";
 const QStringList PYTHON_SYS_PATHS = QStringList () << "/plat-darwin" << "/lib-dynload" << "/site-packages";
 #endif
 
@@ -28,11 +28,14 @@ const QString PATH_LIST_DELIM = ":";
 const QString sigil_extra_root = QString(getenv("SIGIL_EXTRA_ROOT"));
 // Runtime env var override of hunspell dictionaries directory to use
 const QString hunspell_dicts_override = QString(getenv("SIGIL_DICTIONARIES"));
+// Runtime env var to force the use of Sigil's darkmode palette instead of platform QPA themes/styles
+const QString force_sigil_darkmode_palette = QString(getenv("FORCE_SIGIL_DARKMODE_PALETTE"));
 // Standard build-time location of Sigil's 'share/sigil' directory. Set in src/CMakeLists.txt with the line:
 // set_source_files_properties( sigil_constants.cpp PROPERTIES COMPILE_DEFINITIONS SIGIL_SHARE_ROOT="${SIGIL_SHARE_ROOT}" )
 const QString sigil_share_root = QString(SIGIL_SHARE_ROOT);
 const bool dicts_are_bundled = DICTS_ARE_BUNDLED;
 const QString extra_dict_dirs = QString(EXTRA_DICT_DIRS);
+const QString mathjax_dir = QString(MATHJAX_DIR);
 const QString PYTHON_MAIN_PATH = "/python3/lib/python3.5";
 #if __x86_64__ || __ppc64__
 const QStringList PYTHON_SYS_PATHS = QStringList () << "/plat-x86_64-linux-gnu" << "/plat-linux" << "/lib-dynload" << "/site-packages";

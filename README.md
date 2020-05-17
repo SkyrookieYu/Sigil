@@ -1,8 +1,8 @@
-About
+Sigil
 =====
 
-Sigil is a free, open source, multi-platform ebook editor.
-It is designed to edit books in ePub format (both ePub 2 and ePub 3).
+Sigil is a free, open source, multi-platform ebook editor that uses
+Qt (and QtWebEngine). It is designed to edit books in ePub format (both ePub 2 and ePub 3).
 
 
 Links
@@ -54,17 +54,16 @@ For Building on Mac OS X
 Building using purely XCode is no longer supported on Mac OS X.  The easiest 
 way to build Sigil on Mac OS X is to use cmake 3.0 and the command line.   
 
-Also because Sigil now embeds Python 3.5.X, see  
+Also because Sigil now embeds Python 3.7.2, see  
 
-> [docs/Building_A_Relocatable_Python_Framework_on_MacOSX.txt](./docs/Building_A_Relocatable_Python_Framework_on_MacOSX.txt)
+> [docs/Building_A_Relocatable_Python_3.7_Framework_on_MacOSX.txt](./docs/Building_A_Relocatable_Python_3.7_Framework_on_MacOSX.txt)
 
-for detailed instructions on how to build a fully relocatable Python 3.5.X framework before
+for detailed instructions on how to build a fully relocatable Python 3.7.X framework before
 building Sigil.  
 
-Sigil requires at least Qt 5.4.2, or Qt 5.5.1.  If you use a newer Qt version you must
-add back QtWebkit to the Qt sources and build all of Qt yourself from source, see
+Sigil uses Qt-5.12.3 currently and will move to Qt-5.12.4 for the next release, see  
 
-> [docs/Building_Qt5_From_Source_with_QtWebkit_Added_Back_on_MacOSX.txt](./docs/Building_Qt5_From_Source_with_QtWebkit_Added_Back_on_MacOSX.txt)
+> [docs/Building_Qt5_From_Source_on_MacOSX.txt](./docs/Building_Qt5_From_Source_on_MacOSX.txt)
 
 
 And finally to build Sigil itself see:
@@ -101,7 +100,7 @@ Currently these projects include:
 * ZLib Data Compression Library (zlib 1.2.8)
 * jQuery-2.2.4 (src/Resource_Files/javascript/jquery-2.2.4.min.js)
 * jQuery.ScrollTo-2.1.2 (src/Resource_Files/javascript/jquery.scrollTo-2.1.2.min.js)
-* MathJax.js single file version: (src/Resource_Files/polyfills)
+* MathJax.js Version 2.75: (src/Resource_Files/polyfills)
 
 In addtion, Sigil uses the following other packages that have been specifically
 modified for use inside Sigil:
