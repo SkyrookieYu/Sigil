@@ -29,6 +29,7 @@
 #include <QtWidgets/QCompleter>
 #include <QtGui/QContextMenuEvent>
 #include <QtWidgets/QMenu>
+#include <QPointer>
 
 #include "Misc/Utility.h"
 #include "Misc/FindReplaceQLineEdit.h"
@@ -49,12 +50,24 @@ FindReplaceQLineEdit::~FindReplaceQLineEdit()
 
 void FindReplaceQLineEdit::contextMenuEvent(QContextMenuEvent *event)
 {
-    QMenu *menu = createStandardContextMenu();
+    QPointer<QMenu> menu = createStandardContextMenu();
     QAction *topAction = 0;
 
     if (!menu->actions().isEmpty()) {
         topAction = menu->actions().at(0);
     }
+
+    QAction *clearHistoryAction = new QAction(tr("Clear Find Replace History"), menu);
+    connect(clearHistoryAction, SIGNAL(triggered()), m_FindReplace, SLOT(ClearHistory()));
+
+    if (topAction) {
+        menu->insertAction(topAction, clearHistoryAction);
+        menu->insertSeparator(topAction);
+    } else {
+        menu->addAction(clearHistoryAction);
+    }
+
+    topAction = clearHistoryAction;
 
     if (m_tokeniseEnabled) {
         QAction *tokeniseAction = new QAction(tr("Tokenise Selection"), menu);
@@ -81,7 +94,9 @@ void FindReplaceQLineEdit::contextMenuEvent(QContextMenuEvent *event)
     }
 
     menu->exec(mapToGlobal(event->pos()));
-    delete menu;
+    if (!menu.isNull()) {
+        delete menu.data();
+    }
 }
 
 bool FindReplaceQLineEdit::CreateMenuEntries(QMenu *parent_menu, QAction *topAction, QStandardItem *item)

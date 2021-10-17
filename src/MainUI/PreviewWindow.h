@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
-**  Copyright (C) 2015-2019 Doug Massay
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2021 Doug Massay
 **  Copyright (C) 2012      Dave Heiland, John Schember
 **
 **  This file is part of Sigil.
@@ -29,6 +29,7 @@
 #include <QAction>
 #include <QtWebEngineWidgets/QWebEngineView>
 #include <QtWidgets/QDockWidget>
+#include <QTimer>
 #include <ViewEditors/Viewer.h>
 #include <Dialogs/Inspector.h>
 
@@ -37,6 +38,8 @@ class Inspector;
 class QWebEngineView;
 class QVBoxLayout;
 class QHBoxLayout;
+class QProgressBar;
+class OverlayHelperWidget;
 
 class PreviewWindow : public QDockWidget
 {
@@ -46,6 +49,7 @@ public:
     PreviewWindow(QWidget *parent = 0);
     ~PreviewWindow();
     QList<ElementIndex> GetCaretLocation();
+    void SetCaretLocation(const QList<ElementIndex> &loc);
     bool IsVisible();
     bool HasFocus();
     float GetZoomFactor();
@@ -55,6 +59,8 @@ public:
 
 public slots:
     bool UpdatePage(QString filename, QString text, QList<ElementIndex> location);
+    void UpdatePageDone();
+    void DelayedScrollTo();
     void ScrollTo(QList<ElementIndex> location);
     void SetZoomFactor(float factor);
     void LinkClicked(const QUrl &url);
@@ -64,7 +70,9 @@ public slots:
     void CopyPreview();
     void ReloadPreview();
     void InspectorClosed(int);
-
+    void setProgress(int);
+    void ShowOverlay();
+    
     /**
      * Set DockWidget titlebar text independently of tab text (when tabbed)
      * @param text The title to use.
@@ -109,14 +117,19 @@ private:
     void ConnectSignalsToSlots();
     void UpdateWindowTitle();
     bool fixup_fullscreen_svg_images(const QString &text);
+    void SetupOverlayTimer();
+    
     const QString titleText();
 
     QWidget *m_MainWidget;
     QVBoxLayout *m_Layout;
     QHBoxLayout *m_buttons;
+    OverlayHelperWidget *m_overlayBase;
 
     ViewPreview *m_Preview;
     Inspector *m_Inspector;
+    QProgressBar* m_progress;
+
     QString m_Filepath;
     QString m_titleText;
 
@@ -128,7 +141,11 @@ private:
     QAction * m_copyAction;
     QAction * m_reloadAction;
 
+    QList<ElementIndex> m_location;
+    
+    QTimer m_OverlayTimer;
     bool m_updatingPage;
+    bool m_usingMathML;
 };
 
 #endif // PREVIEWWINDOW_H

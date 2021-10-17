@@ -29,43 +29,13 @@ import sys
 import os
 
 from collections import OrderedDict
-
-from urllib.parse import unquote
-from urllib.parse import urlsplit
-
-ASCII_CHARS   = set(chr(x) for x in range(128))
-URL_SAFE      = set('ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-                    'abcdefghijklmnopqrstuvwxyz'
-                    '0123456789' '#' '_.-/~')
-IRI_UNSAFE = ASCII_CHARS - URL_SAFE
-
-# returns a quoted IRI (not a URI)
-def quoteurl(href):
-    if isinstance(href,bytes):
-        href = href.decode('utf-8')
-    (scheme, netloc, path, query, fragment) = urlsplit(href, scheme="", allow_fragments=True)
-    if scheme != "":
-        scheme += "://"
-        href = href[len(scheme):]
-    result = []
-    for char in href:
-        if char in IRI_UNSAFE:
-            char = "%%%02x" % ord(char)
-        result.append(char)
-    return scheme + ''.join(result)
-
-# unquotes url/iri
-def unquoteurl(href):
-    if isinstance(href,bytes):
-        href = href.decode('utf-8')
-    href = unquote(href)
-    return href
+from hrefutils import urldecodepart, urlencodepart
 
 # encode to make xml safe
 def xmlencode(data):
     if data is None:
         return ''
-    newdata = data
+    newdata = xmldecode(data)
     newdata = newdata.replace('&', '&amp;')
     newdata = newdata.replace('<', '&lt;')
     newdata = newdata.replace('>', '&gt;')
@@ -187,9 +157,9 @@ class OPFMetadataParser(object):
                 nid = "xid%03d" %  cnt
                 cnt += 1
                 id = tattr.pop("id",nid)
-                href = tattr.pop("href","")
                 mtype = tattr.pop("media-type","")
-                href = unquoteurl(href)
+                # return all manifest hrefs in raw urlencoded form
+                href = tattr.pop("href","")
                 self.manifest.append((id, href, mtype, tattr))
                 self.idlst.append(id)
                 continue
@@ -209,7 +179,8 @@ class OPFMetadataParser(object):
             if tname == "reference" and  prefix.endswith("guide"):
                 type = tattr.pop("type","")
                 title = tattr.pop("title","")
-                href = unquoteurl(tattr.pop("href",""))
+                href = tattr.pop("href","")
+                # return all guide hrefs in urlencoded form
                 self.guide.append((type, title, href))
                 if "id" in tattr:
                     self.idlst.append(tattr["id"])

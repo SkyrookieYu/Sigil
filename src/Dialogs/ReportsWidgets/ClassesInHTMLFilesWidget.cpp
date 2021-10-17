@@ -1,8 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012 Dave Heiland
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012      Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -32,7 +32,7 @@
 #include "sigil_exception.h"
 #include "BookManipulation/FolderKeeper.h"
 #include "Dialogs/ReportsWidgets/ClassesInHTMLFilesWidget.h"
-#include "Misc/CSSInfo.h"
+#include "Parsers/CSSInfo.h"
 #include "Misc/NumericItem.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
@@ -110,15 +110,15 @@ void ClassesInHTMLFilesWidget::AddTableData(const QList<BookReports::StyleData *
         QList<QStandardItem *> rowItems;
         // File name
         QStandardItem *filename_item = new QStandardItem();
-	QString bookpath = class_usage->html_filename;
+        QString bookpath = class_usage->html_filename;
         QString shortname = bookpath.split('/').last();
-	try {
-	    Resource * res = m_Book->GetFolderKeeper()->GetResourceByBookPath(bookpath);
-	    shortname = res->ShortPathName();
-	} catch (ResourceDoesNotExist) {
-	} 
+        try {
+            Resource * res = m_Book->GetFolderKeeper()->GetResourceByBookPath(bookpath);
+            shortname = res->ShortPathName();
+        } catch (ResourceDoesNotExist&) {
+        } 
         filename_item->setText(shortname);
-	filename_item->setData(bookpath);
+        filename_item->setData(bookpath);
         rowItems << filename_item;
         // Element name
         QStandardItem *element_name_item = new QStandardItem();
@@ -184,13 +184,13 @@ void ClassesInHTMLFilesWidget::DoubleClick()
 {
     QModelIndex index = ui.fileTree->selectionModel()->selectedRows(0).first();
     QString bookpath = m_ItemModel->itemFromIndex(index)->data().toString();
-    emit OpenFileRequest(bookpath, 1);
+    emit OpenFileRequest(bookpath, 1, -1);
 }
 
 void ClassesInHTMLFilesWidget::Save()
 {
-    QString report_info;
-    QString row_text;
+    QStringList report_info;
+    QStringList heading_row;
 
     // Get headings
     for (int col = 0; col < ui.fileTree->header()->count(); col++) {
@@ -199,35 +199,25 @@ void ClassesInHTMLFilesWidget::Save()
         if (item) {
             text = item->text();
         }
-        if (col == 0) {
-            row_text.append(text);
-        } else {
-            row_text.append("," % text);
-        }
+        heading_row << text;
     }
-
-    report_info.append(row_text % "\n");
+    report_info << Utility::createCSVLine(heading_row);
 
     // Get data from table
     for (int row = 0; row < m_ItemModel->rowCount(); row++) {
-        row_text = "";
-
+        QStringList data_row;
         for (int col = 0; col < ui.fileTree->header()->count(); col++) {
             QStandardItem *item = m_ItemModel->item(row, col);
             QString text = "";
             if (item) {
                 text = item->text();
             }
-            if (col == 0) {
-                row_text.append(text);
-            } else {
-                row_text.append("," % text);
-            }
+            data_row << text;
         }
-
-        report_info.append(row_text % "\n");
+        report_info << Utility::createCSVLine(data_row);
     }
 
+    QString data = report_info.join('\n') + '\n';
     // Save the file
     ReadSettings();
     QString filter_string = "*.csv;;*.txt;;*.*";
@@ -239,20 +229,19 @@ void ClassesInHTMLFilesWidget::Save()
 #endif
 
     QString destination = QFileDialog::getSaveFileName(this,
-                          tr("Save Report As Comma Separated File"),
-                          save_path,
-                          filter_string,
-			  &default_filter,
-                          options
-                                                      );
+                                                       tr("Save Report As Comma Separated File"),
+                                                       save_path,
+                                                       filter_string,
+                                                       &default_filter,
+                                                       options);
 
     if (destination.isEmpty()) {
         return;
     }
 
     try {
-        Utility::WriteUnicodeTextFile(report_info, destination);
-    } catch (CannotOpenFile) {
+        Utility::WriteUnicodeTextFile(data, destination);
+    } catch (CannotOpenFile&) {
         QMessageBox::warning(this, tr("Sigil"), tr("Cannot save report file."));
     }
 

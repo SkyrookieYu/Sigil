@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford, Ontario Canada
 **  Copyright (C) 2012      Dave Heiland
 **  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **
@@ -29,7 +29,7 @@
 
 #include "ResourceObjects/HTMLResource.h"
 #include "Misc/Utility.h"
-#include "Misc/GumboInterface.h"
+#include "Parsers/GumboInterface.h"
 #include "BookManipulation/CleanSource.h"
 #include "sigil_constants.h"
 #include "SourceUpdates/LinkUpdates.h"
@@ -48,7 +48,7 @@ void LinkUpdates::UpdateLinksInOneFile(HTMLResource *html_resource, QList<QStrin
     foreach(QString stylesheet, new_stylesheets) {
         QString ahref = Utility::buildRelativePath(html_resource->GetRelativePath(), stylesheet);
         ahref = Utility::URLEncodePath(ahref);
-        newcsslinks += "<link href=\"" + ahref + "\" type=\"text/css\" rel=\"stylesheet\"/>\n";
+        newcsslinks += "  <link href=\"" + ahref + "\" type=\"text/css\" rel=\"stylesheet\"/>\n";
     }
     QWriteLocker locker(&html_resource->GetLock());
     QString newsource = html_resource->GetText();

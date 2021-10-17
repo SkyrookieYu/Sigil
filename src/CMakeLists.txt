@@ -54,6 +54,9 @@ endif()
 
 #############################################################################
 
+# quiet Qt 5.15 deprecat4ed warnings for now as we must support Qt 5.12.X and even earlier
+add_definitions(-DQT_NO_DEPRECATED_WARNINGS)
+
 if( UNIX AND NOT APPLE )
     # Qt5 packages minimum version 5.9 for Linux
     set(QT5_NEEDED 5.9)
@@ -65,6 +68,11 @@ endif()
 set( PKGS_TO_FIND Core Network WebEngine WebEngineWidgets Widgets Xml Concurrent PrintSupport LinguistTools )
 if ( WIN32 )
     list( APPEND PKGS_TO_FIND WinExtras )
+    if ( USE_ALT_ICONS )
+        set(APP_ICON_PATH "${CMAKE_SOURCE_DIR}/src/Resource_Files/icon/app_icons_alt/app.ico" )
+    else()
+        set(APP_ICON_PATH "${CMAKE_SOURCE_DIR}/src/Resource_Files/icon/app_icons_orig/app.ico" )
+    endif()
 endif()
 find_package( Qt5 ${QT5_NEEDED} COMPONENTS ${PKGS_TO_FIND} )
 
@@ -177,12 +185,20 @@ set( DIALOG_FILES
     Dialogs/SelectIndexTitle.h
     Dialogs/SelectFiles.cpp
     Dialogs/SelectFiles.h
+    Dialogs/AddAutomateTool.cpp
+    Dialogs/AddAutomateTool.h
+    Dialogs/AddAutomatePlugin.cpp
+    Dialogs/AddAutomatePlugin.h
+    Dialogs/AutomateEditor.cpp
+    Dialogs/AutomateEditor.h
     Dialogs/MetaEditor.cpp
     Dialogs/MetaEditor.h
     Dialogs/TreeItem.cpp
     Dialogs/TreeItem.h
     Dialogs/TreeModel.cpp
     Dialogs/TreeModel.h
+    Dialogs/MetaEditorItemDelegate.cpp
+    Dialogs/MetaEditorItemDelegate.h
     Dialogs/HeadingSelector.cpp
     Dialogs/HeadingSelector.h
     Dialogs/PluginRunner.cpp
@@ -227,8 +243,14 @@ set( DIALOG_FILES
     Dialogs/ReportsWidgets/ReportsWidget.h
     Dialogs/LinkStylesheets.cpp
     Dialogs/LinkStylesheets.h
+    Dialogs/LinkJavascripts.cpp
+    Dialogs/LinkJavascripts.h
     Dialogs/SearchEditor.cpp
     Dialogs/SearchEditor.h
+    Dialogs/Controls.cpp
+    Dialogs/Controls.h
+    Dialogs/SearchEditorItemDelegate.cpp
+    Dialogs/SearchEditorItemDelegate.h
     Dialogs/ClipEditor.cpp
     Dialogs/ClipEditor.h
     Dialogs/IndexEditor.cpp
@@ -256,6 +278,8 @@ set( WIDGET_FILES
     Widgets/Navigator2.h
     Widgets/TextView.cpp
     Widgets/TextView.h
+    Widgets/TextDocument.h
+    Widgets/TextDocument.cpp
     Widgets/TVLineNumberArea.cpp
     Widgets/TVLineNumberArea.h
     )
@@ -287,11 +311,64 @@ set( IMPORTER_FILES
     Importers/ImportTXT.h
     )
 
+set ( QUERY_FILES
+    Query/CNode.cpp
+    Query/CNode.h
+    Query/CObject.cpp
+    Query/CObject.h
+    Query/CParser.cpp
+    Query/CParser.h
+    Query/CQueryUtil.cpp
+    Query/CQueryUtil.h
+    Query/CSelection.cpp
+    Query/CSelection.h
+    Query/CSelector.cpp
+    Query/CSelector.h
+    )
+
+
+set( PARSERS_FILES
+    Parsers/CSSInfo.cpp
+    Parsers/CSSInfo.h
+    Parsers/HTMLStyleInfo.cpp
+    Parsers/HTMLStyleInfo.h
+    Parsers/qCSSParser.cpp
+    Parsers/qCSSParser.h
+    Parsers/qCSSUtils.cpp
+    Parsers/qCSSUtils.h
+    Parsers/qCSSProperties.cpp
+    Parsers/qCSSProperties.h
+    Parsers/GumboInterface.h
+    Parsers/GumboInterface.cpp
+    Parsers/TagAtts.cpp
+    Parsers/TagAtts.h
+    Parsers/QuickParser.cpp
+    Parsers/QuickParser.h
+    Parsers/TagLister.cpp
+    Parsers/TagLister.h
+   )
+
+set( EMBEDPYTHON_FILES
+    EmbedPython/DiffRec.h
+    EmbedPython/PyObjectPtr.h
+    EmbedPython/PyObjectPtr.cpp
+    EmbedPython/EmbeddedPython.h
+    EmbedPython/EmbeddedPython.cpp
+    EmbedPython/PythonRoutines.h
+    EmbedPython/PythonRoutines.cpp
+    )
+
 set( MISC_FILES
     Misc/AppEventFilter.cpp
     Misc/AppEventFilter.h
+    Misc/AsciiFy.cpp
+    Misc/AsciiFy.h
     Misc/UpdateChecker.cpp
     Misc/UpdateChecker.h
+    Misc/URLInterceptor.cpp
+    Misc/URLInterceptor.h
+    Misc/URLSchemeHandler.cpp
+    Misc/URLSchemeHandler.h
     Misc/Utility.cpp
     Misc/Utility.h
     Misc/SleepFunctions.h
@@ -301,15 +378,16 @@ set( MISC_FILES
     Misc/FilenameDelegate.h
     Misc/XHTMLHighlighter.cpp
     Misc/XHTMLHighlighter.h
+    Misc/XHTMLHighlighter2.cpp
+    Misc/XHTMLHighlighter2.h
     Misc/CSSHighlighter.cpp
     Misc/CSSHighlighter.h
-    Misc/CSSInfo.cpp
-    Misc/CSSInfo.h
-    Misc/DiffRec.h
     Misc/HTMLEncodingResolver.cpp
     Misc/HTMLEncodingResolver.h
     Misc/HTMLSpellCheck.cpp
     Misc/HTMLSpellCheck.h
+    Misc/HTMLSpellCheckML.cpp
+    Misc/HTMLSpellCheckML.h
     Misc/PasteTargetComboBox.cpp
     Misc/PasteTargetComboBox.h
     Misc/PasteTarget.h
@@ -321,6 +399,8 @@ set( MISC_FILES
     Misc/QCodePage437Codec.h
     Misc/SearchOperations.cpp
     Misc/SearchOperations.h
+    Misc/SigilDarkStyle.cpp
+    Misc/SigilDarkStyle.h
     Misc/Language.cpp
     Misc/Language.h
     Misc/DescriptiveInfo.h
@@ -358,20 +438,8 @@ set( MISC_FILES
     Misc/WrapIndicator.h
     Misc/XMLEntities.cpp
     Misc/XMLEntities.h
-    Misc/PyObjectPtr.h
-    Misc/PyObjectPtr.cpp
-    Misc/EmbeddedPython.h
-    Misc/EmbeddedPython.cpp
-    Misc/GumboInterface.h
-    Misc/GumboInterface.cpp
-    Misc/PythonRoutines.h
-    Misc/PythonRoutines.cpp
-    Misc/TextDocument.h
-    Misc/TextDocument.cpp
     Misc/MediaTypes.cpp
     Misc/MediaTypes.h
-    Misc/TagAtts.cpp
-    Misc/TagAtts.h
     )
 
 set( MISC_EDITORS_FILES
@@ -400,6 +468,8 @@ set( SPCRE_FILES
     PCRE/PCRECache.h
     PCRE/PCREReplaceTextBuilder.cpp
     PCRE/PCREReplaceTextBuilder.h
+    PCRE/PCREErrors.cpp
+    PCRE/PCREErrors.h
     )
 
 set( VIEW_EDITOR_FILES
@@ -419,6 +489,7 @@ set( VIEW_EDITOR_FILES
     ViewEditors/ElementIndex.h
     ViewEditors/ViewEditor.h
     ViewEditors/Viewer.h
+    ViewEditors/Overlay.h
      )
 
 set( MAINUI_FILES
@@ -496,6 +567,9 @@ set( UI_FILES
     Form_Files/SelectIndexTitle.ui
     Form_Files/SelectFiles.ui
     Form_Files/MetaEditor.ui
+    Form_Files/AddAutomateTool.ui
+    Form_Files/AddAutomatePlugin.ui
+    Form_Files/AutomateEditor.ui
     Form_Files/EmptyLayout.ui
     Form_Files/AddMetadata.ui
     Form_Files/AddSemantics.ui
@@ -522,12 +596,14 @@ set( UI_FILES
     Form_Files/ReportsStylesInCSSFilesWidget.ui
     Form_Files/ReportsCharactersInHTMLFilesWidget.ui
     Form_Files/LinkStylesheets.ui
+    Form_Files/LinkJavascripts.ui
     Form_Files/SelectCheckpoint.ui
     Form_Files/SearchEditor.ui
     Form_Files/ClipEditor.ui
     Form_Files/IndexEditor.ui
     Form_Files/SpellcheckEditor.ui
     Form_Files/PluginRunner.ui
+    Form_Files/Controls.ui
     )
 
 set( SOURCEUPDATE_FILES
@@ -543,8 +619,12 @@ set( SOURCEUPDATE_FILES
     SourceUpdates/PerformXMLUpdates.h
     SourceUpdates/AnchorUpdates.cpp
     SourceUpdates/AnchorUpdates.h
+    SourceUpdates/FragmentUpdates.cpp
+    SourceUpdates/FragmentUpdates.h
     SourceUpdates/LinkUpdates.cpp
     SourceUpdates/LinkUpdates.h
+    SourceUpdates/JavascriptUpdates.cpp
+    SourceUpdates/JavascriptUpdates.h
     SourceUpdates/WordUpdates.cpp
     SourceUpdates/WordUpdates.h
     SourceUpdates/UniversalUpdates.cpp
@@ -552,11 +632,27 @@ set( SOURCEUPDATE_FILES
     )
 
 set( QRC_FILES
-    Resource_Files/main/main.qrc
     Resource_Files/About/About.qrc
     Resource_Files/javascript/javascript.qrc
     Resource_Files/icon/icon.qrc
     Resource_Files/dark/dark.qrc
+    )
+if( UNIX AND NOT APPLE )
+    if ( USE_ALT_ICONS )
+        LIST( APPEND QRC_FILES Resource_Files/icon/app_icons_alt/app_icons.qrc )
+    else()
+        LIST( APPEND QRC_FILES Resource_Files/icon/app_icons_orig/app_icons.qrc )
+    endif()
+endif()
+
+set( MAIN_BINARY_QRC_FILES
+    Resource_Files/main/main.qrc
+    )
+set( FLUENT_BINARY_QRC_FILES
+    Resource_Files/fluent/fluent.qrc
+    )
+set( MATERIAL_BINARY_QRC_FILES
+    Resource_Files/material/material.qrc
     )
 
 if ( APPLE )
@@ -577,7 +673,7 @@ set( LINUX_DESKTOP_FILE
     )
 
 set( LINUX_DESKTOP_ICON_FILE
-    Resource_Files/icon/app_icon_48.png
+    app_icon_48.png
     )
 
 set( LINUX_LAUNCH_INSTALL_SCRIPT
@@ -615,7 +711,14 @@ if ( NOT DEFINED INSTALL_BUNDLED_DICTS )
     set ( INSTALL_BUNDLED_DICTS 1 )
 endif()
 
-set( RAW_SOURCES ${MAIN_FILES} ${TAB_FILES} ${SOURCEUPDATE_FILES} ${BOOK_MANIPULATION_FILES} ${RESOURCE_OBJECT_FILES} ${DIALOG_FILES} ${WIDGET_FILES} ${EXPORTER_FILES} ${IMPORTER_FILES} ${MISC_FILES} ${MISC_EDITORS_FILES} ${SPCRE_FILES} ${VIEW_EDITOR_FILES} ${MAINUI_FILES} )
+# use -DDISABLE_UPDATE_CHECK=1 to disable the builtin update check.
+# Mainly for use by *nix distros whose Sigil packages can't make use of the
+# new release downloads anyway.
+if ( NOT DEFINED DISABLE_UPDATE_CHECK )
+    set ( DISABLE_UPDATE_CHECK 0 )
+endif()
+
+set( RAW_SOURCES ${MAIN_FILES} ${TAB_FILES} ${SOURCEUPDATE_FILES} ${BOOK_MANIPULATION_FILES} ${RESOURCE_OBJECT_FILES} ${DIALOG_FILES} ${WIDGET_FILES} ${EXPORTER_FILES} ${IMPORTER_FILES} ${MISC_FILES} ${MISC_EDITORS_FILES} ${QUERY_FILES} ${PARSERS_FILES} ${EMBEDPYTHON_FILES} ${SPCRE_FILES} ${VIEW_EDITOR_FILES} ${MAINUI_FILES} )
 
 #############################################################################
 
@@ -625,8 +728,18 @@ set_property( SOURCE ${UI_FILES_H} PROPERTY SKIP_AUTOMOC ON )
 # Runs RCC on specified files
 qt5_add_resources( QRC_FILES_CPP ${QRC_FILES} )
 set_property( SOURCE ${QRC_FILES_CPP} PROPERTY SKIP_AUTOMOC ON )
+qt5_add_binary_resources( main  ${MAIN_BINARY_QRC_FILES} )
+qt5_add_binary_resources( fluent ${FLUENT_BINARY_QRC_FILES} )
+qt5_add_binary_resources( material ${MATERIAL_BINARY_QRC_FILES} )
 # Runs lrelease on the specified files
 qt5_add_translation( QM_FILES ${TS_FILES} )
+
+# Compiled binary resource files
+set( EXT_RCC_FILES
+    ${PROJECT_BINARY_DIR}/main.rcc
+    ${PROJECT_BINARY_DIR}/fluent.rcc
+    ${PROJECT_BINARY_DIR}/material.rcc
+    )
 
 # Define the Sigil version string for use in source files
 set_source_files_properties( Dialogs/About.cpp PROPERTIES COMPILE_DEFINITIONS SIGIL_FULL_VERSION="${SIGIL_FULL_VERSION}" )
@@ -642,9 +755,12 @@ source_group( "Resource Objects"  FILES ${RESOURCE_OBJECT_FILES} )
 source_group( "Dialogs"           FILES ${DIALOG_FILES} )
 source_group( "Widgets"           FILES ${WIDGET_FILES} )
 source_group( "Exporters"         FILES ${EXPORTER_FILES} )
+source_group( "EmbedPython"       FILES ${EMBEDPYTHON_FILES} )
 source_group( "Importers"         FILES ${IMPORTER_FILES} )
 source_group( "Misc"              FILES ${MISC_FILES} )
 source_group( "MiscEditors"       FILES ${MISC_EDITORS_FILES} )
+source_group( "Query"             FILES ${QUERY_FILES} )
+source_group( "Parsers"           FILES ${PARSERS_FILES} )
 source_group( "SPCRE"             FILES ${SPCRE_FILES} )
 source_group( "View Editors"      FILES ${VIEW_EDITOR_FILES} )
 source_group( "Tabs"              FILES ${TAB_FILES} )
@@ -664,9 +780,10 @@ set( MATHJAX_ZIP "${CMAKE_SOURCE_DIR}/src/Resource_Files/polyfills/ML.zip" )
 # Grab the current year so copyright notice is updated on Windows file properties
 string( TIMESTAMP SIGIL_BUILD_YEAR "%Y" )
 if ( WIN32 )
+    configure_file( Resource_files/windows/icon.rc.in ${PROJECT_BINARY_DIR}/icon.rc )
     configure_file( Resource_files/windows/version.rc.in ${PROJECT_BINARY_DIR}/version.rc )
     set( WINDOWS_RC_FILES
-         Resource_Files/icon/icon.rc
+         ${PROJECT_BINARY_DIR}/icon.rc
          ${PROJECT_BINARY_DIR}/version.rc
          )
     list( APPEND ALL_SOURCES ${WINDOWS_RC_FILES} )
@@ -680,12 +797,17 @@ if( APPLE )
     # TODO: put these in some sort of add_custom_command( TARGET ${PROJECT_NAME} PRE_BUILD COMMAND ...)
     # also delete the Sigil.app folder as PRE_BUILD of Sigil executable
 
+    if ( USE_ALT_ICONS )
+        set( ICON_SRC_PATH  ${PROJECT_SOURCE_DIR}/Resource_Files/icon/app_icons_alt/Sigil.icns )
+    else()
+        set( ICON_SRC_PATH  ${PROJECT_SOURCE_DIR}/Resource_Files/icon/app_icons_orig/Sigil.icns )
+    endif()
+
     if( CMAKE_GENERATOR STREQUAL Xcode )
         exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
         exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/polyfills")
         exec_program("unzip ${MATHJAX_ZIP} -d ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/polyfills")
-        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/Sigil.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
-        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
+        exec_program("cp ${ICON_SRC_PATH} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
         exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/epub.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/Resources")
         # Create translation directory.
         exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release/Sigil.app/Contents/translations")
@@ -699,8 +821,7 @@ if( APPLE )
         exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
         exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/polyfills")
         exec_program("unzip ${MATHJAX_ZIP} -d ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/polyfills")
-        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/Sigil.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
-        exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
+        exec_program("cp ${ICON_SRC_PATH} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
         exec_program("cp ${PROJECT_SOURCE_DIR}/Resource_Files/icon/epub.icns ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/Resources")
         # Create translation directory.
         exec_program("mkdir -p ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Sigil.app/Contents/translations")
@@ -752,10 +873,16 @@ else()
 endif()
 
 # No need to explicity link Qt5::WinMain or to use the qt5_use_modules macro since CMAKE 2.8.11. We require CMAKE 3.0.0
-set( LIBS_TO_LINK ${HUNSPELL_LIBRARIES} ${PCRE_LIBRARIES} ${GUMBO_LIBRARIES} 
-                  ${MINIZIP_LIBRARIES} ${PYTHON_LIBRARIES}
+set( LIBS_TO_LINK ${HUNSPELL_LIBRARIES} ${PCRE_LIBRARIES} ${GUMBO_LIBRARIES} ${MINIZIP_LIBRARIES}
                   Qt5::Widgets  Qt5::Xml  Qt5::PrintSupport  Qt5::WebEngine  
                   Qt5::WebEngineWidgets  Qt5::Network  Qt5::Concurrent )
+if (${USE_NEWER_FINDPYTHON3})
+    message(STATUS "Using newer Python3::Python target to link to Python")
+    list( APPEND LIBS_TO_LINK Python3::Python )
+else()
+    message(STATUS "Using older PYTHON_LIBRARIES CMAKE variable to link to Python")
+    list( APPEND LIBS_TO_LINK ${PYTHON_LIBRARIES} )
+endif()
 if ( WIN32 )
     list( APPEND LIBS_TO_LINK Qt5::WinExtras )
 endif()
@@ -802,6 +929,13 @@ endfunction(QUERY_QMAKE)
 if( APPLE )
     query_qmake(QT_INSTALL_TRANSLATIONS QT_TRANSLATIONS_DIR)
 
+    # Set a define that sigil_constants.cpp can then access
+    set_property (
+        SOURCE sigil_constants.cpp
+        PROPERTY COMPILE_DEFINITIONS
+        DONT_CHECK_UPDATES=${DISABLE_UPDATE_CHECK}
+    )
+
     if(CMAKE_GENERATOR STREQUAL Xcode)
         set( WORK_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Release" )
     else()
@@ -841,9 +975,17 @@ if( APPLE )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp ${CMAKE_SOURCE_DIR}/src/Resource_Files/dictionaries/* ${WORK_DIR}/Sigil.app/Contents/hunspell_dictionaries )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp -r ${CMAKE_SOURCE_DIR}/src/Resource_Files/plugin_launchers/python/* ${WORK_DIR}/Sigil.app/Contents/plugin_launchers/python )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp -r ${CMAKE_SOURCE_DIR}/src/Resource_Files/python3lib/* ${WORK_DIR}/Sigil.app/Contents/python3lib )
+
     if ( PKG_SYSTEM_PYTHON )
-        add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${PYTHON_EXECUTABLE} ARGS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osx_add_python_framework.py )
+        if ( ${USE_NEWER_FINDPYTHON3} )
+            set( PY_INTERP ${Python3_EXECUTABLE} )
+        else()
+            set( PY_INTERP ${PYTHON_EXECUTABLE} )
+        endif()
+        add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${PY_INTERP} ARGS ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/osx_add_python_framework.py )
+        message(STATUS "Using ${PY_INTERP} to bundle python")
     endif()
+    add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp ${PROJECT_BINARY_DIR}/*.rcc ${WORK_DIR}/Sigil.app/Contents/Resources/ )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp ${CMAKE_SOURCE_DIR}/src/Resource_Files/examples/* ${WORK_DIR}/Sigil.app/Contents/examples )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND cp ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/../lib/*.dylib ${WORK_DIR}/Sigil.app/Contents/lib/ )
     add_custom_command( TARGET ${PROJECT_NAME} POST_BUILD COMMAND install_name_tool -rpath ${CMAKE_BINARY_DIR}/lib "@executable_path/../lib" ${WORK_DIR}/Sigil.app/Contents/MacOS/Sigil )
@@ -856,11 +998,23 @@ elseif (MSVC)
     query_qmake(QT_INSTALL_PLUGINS QT_PLUGINS_DIR)
     query_qmake(QT_INSTALL_TRANSLATIONS QT_TRANSLATIONS_DIR)
 
+    # Set a define that sigil_constants.cpp can then access
+    set_property (
+        SOURCE sigil_constants.cpp
+        PROPERTY COMPILE_DEFINITIONS
+        DONT_CHECK_UPDATES=${DISABLE_UPDATE_CHECK}
+    )
+
     set( TEMP_PACKAGE_DIR ${CMAKE_BINARY_DIR}/temp_folder )
     set( MAIN_PACKAGE_DIR ${TEMP_PACKAGE_DIR}/Sigil )
     set( OUTPUT_PACKAGE_DIR ${CMAKE_BINARY_DIR}/installer )
     set( PYTHON_DEST_DIR ${MAIN_PACKAGE_DIR}/python3 )
-    set( VCREDIST_VER "2017" ) 
+    set( VCREDIST_VER "2017" )
+    if ( USE_ALT_ICONS )
+        set( ICON_SRC_PATH  ${PROJECT_SOURCE_DIR}/Resource_Files/icon/app_icons_alt )
+    else()
+        set( ICON_SRC_PATH  ${PROJECT_SOURCE_DIR}/Resource_Files/icon/app_icons_orig )
+    endif()
 
     # ISS conf file for the Inno Setup compiler
     # We first create a CMake configured version of the ISS file,
@@ -958,9 +1112,19 @@ elseif (MSVC)
 
     # Create python virtual environment
     if ( PKG_SYSTEM_PYTHON )
+        if ( ${USE_NEWER_FINDPYTHON3} )
+            set( PY_INTERP ${Python3_EXECUTABLE} )
+        else()
+            set( PY_INTERP ${PYTHON_EXECUTABLE} )
+        endif()
+        message(STATUS "Using ${PY_INTERP} to bundle python")
         add_custom_command( TARGET ${TARGET_FOR_COPY} POST_BUILD
-                        COMMAND ${PYTHON_EXECUTABLE} ARGS ${CMAKE_BINARY_DIR}/windows_python_gather.py )
+                            COMMAND ${PY_INTERP} ARGS ${CMAKE_BINARY_DIR}/windows_python_gather.py )
     endif()
+
+    # Add external binary resource files
+    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD COMMAND cmake -E make_directory ${MAIN_PACKAGE_DIR}/iconthemes/ )
+    add_custom_command( TARGET ${TARGET_FOR_COPY} POST_BUILD COMMAND cmake -E copy ${EXT_RCC_FILES} ${MAIN_PACKAGE_DIR}/iconthemes )
 
     # Copy the example files
     add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD COMMAND cmake -E make_directory ${MAIN_PACKAGE_DIR}/examples/ )
@@ -1011,11 +1175,11 @@ elseif (MSVC)
 
     # Copy the icon file (used on Linux for the application icon)
     add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
-                        COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/Resource_Files/icon/app_icon_48.png ${MAIN_PACKAGE_DIR}/misc/ )
+                        COMMAND cmake -E copy ${ICON_SRC_PATH}/app_icon_48.png ${MAIN_PACKAGE_DIR}/misc/ )
 
     # Copy the SGF ICO file (used on Windows as the SGF file type icon)
-    add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
-                        COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.ico ${MAIN_PACKAGE_DIR}/misc/ )
+    #add_custom_command( TARGET ${TARGET_FOR_COPY} PRE_BUILD
+    #                    COMMAND cmake -E copy ${PROJECT_SOURCE_DIR}/Resource_Files/icon/sgf.ico ${MAIN_PACKAGE_DIR}/misc/ )
 
     # Remove the temp directory used for building the installer
     add_custom_command( TARGET makeinstaller POST_BUILD
@@ -1057,6 +1221,7 @@ if( UNIX AND NOT APPLE )
         PROPERTY COMPILE_DEFINITIONS
         SIGIL_SHARE_ROOT="${SIGIL_SHARE_ROOT}" DICTS_ARE_BUNDLED=${INSTALL_BUNDLED_DICTS}
         EXTRA_DICT_DIRS="${EXTRA_DICT_DIRS}" MATHJAX_DIR="${MATHJAX_DIR}"
+        DONT_CHECK_UPDATES=${DISABLE_UPDATE_CHECK}
     )
 
     # Launch script for sigil
@@ -1078,10 +1243,6 @@ if( UNIX AND NOT APPLE )
     # Configure Linux launch script
     configure_file( ${LINUX_LAUNCH_INSTALL_SCRIPT} ${LINUX_LAUNCH_INSTALL_SCRIPT_CONFIGURED} )
 
-    # Experimental linux installer creation -- removed 1/28/2017.
-    # All experimental stand-alone Sigil linux packaging is now taking place entirely externally
-    # (via docker containers/images) at https://github.com/dougmassay/pkg-sigil
-
     if ( CMAKE_BUILD_TYPE STREQUAL "Debug")
         set( HUNSPELL_NAME ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libhunspelld.so )
         set( GUMBO_NAME ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libsigilgumbod.so )
@@ -1102,11 +1263,28 @@ if( UNIX AND NOT APPLE )
         install( FILES ${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/libxml2.so.2 DESTINATION ${CMAKE_INSTALL_LIBDIR}/sigil )
     endif()
     install( FILES ${LINUX_DESKTOP_FILE} DESTINATION ${SHARE_INSTALL_PREFIX}/share/applications/ )
-    install( FILES ${LINUX_DESKTOP_ICON_FILE} DESTINATION ${SHARE_INSTALL_PREFIX}/share/pixmaps RENAME sigil.png )
+
+    if ( USE_ALT_ICONS )
+        set( ICON_SRC_PATH  ${PROJECT_SOURCE_DIR}/Resource_Files/icon/app_icons_alt )
+    else()
+        set( ICON_SRC_PATH  ${PROJECT_SOURCE_DIR}/Resource_Files/icon/app_icons_orig )
+    endif()
+    if( INSTALL_HICOLOR_ICONS )
+        set( ICON_SIZE 16 32 48 64 128 256 512)
+        foreach( SIZE ${ICON_SIZE} )
+            install( FILES ${ICON_SRC_PATH}/app_icon_${SIZE}.png DESTINATION
+                               ${SHARE_INSTALL_PREFIX}/share/icons/hicolor/${SIZE}x${SIZE}/apps RENAME sigil.png )
+        endforeach( SIZE )
+        install( FILES ${ICON_SRC_PATH}/app_icon_scalable.svg DESTINATION
+                               ${SHARE_INSTALL_PREFIX}/share/icons/hicolor/scalable/apps RENAME sigil.svg )
+    else()
+        install( FILES ${ICON_SRC_PATH}/${LINUX_DESKTOP_ICON_FILE} DESTINATION ${SHARE_INSTALL_PREFIX}/share/pixmaps RENAME sigil.png )
+    endif()
     install( FILES ${QM_FILES} DESTINATION ${SIGIL_SHARE_ROOT}/translations/ )
     if ( INSTALL_BUNDLED_DICTS )
         install( FILES ${DIC_FILES} DESTINATION ${SIGIL_SHARE_ROOT}/hunspell_dictionaries/ )
     endif()
+    install( FILES ${EXT_RCC_FILES} DESTINATION ${SIGIL_SHARE_ROOT}/iconthemes/ )
     if ( MATHJAX_DIR )
         install( FILES ${CMAKE_SOURCE_DIR}/src/Resource_Files/polyfills/SIGIL_EBOOK_MML_SVG.js DESTINATION ${MATHJAX_DIR}/config/local/ )
     else()

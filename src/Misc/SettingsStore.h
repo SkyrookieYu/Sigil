@@ -60,6 +60,7 @@ public:
 
     QString uiFont();
     QString originalUIFont();
+    QString uiIconTheme();
 
     int uiDragDistanceTweak();
 
@@ -91,6 +92,9 @@ public:
     QString dictionary();
 
     QStringList enabledUserDictionaries();
+
+    QString secondary_dictionary();
+
 
     /**
      * Get the list of entities/code pairs to preserve
@@ -196,6 +200,11 @@ public:
     };
 
     /**
+     * Highlight the matching open/close tag when the cursor is in a tag
+     */
+    bool highlightOpenCloseTags();
+
+    /**
      * All appearance settings related to Special Characters.
      */
     struct SpecialCharacterAppearance {
@@ -245,6 +254,8 @@ public:
      */
     void clearAppearanceSettings();
 
+    bool enableAltGr();
+
 public slots:
 
     /**
@@ -257,6 +268,8 @@ public slots:
     void setUIFont(const QString &font_data);
 
     void setOriginalUIFont(const QString &font_data);
+
+    void setUIIconTheme(const QString &iconthemename);
 
     void setUiDragDistanceTweak(int tweak);
 
@@ -288,6 +301,8 @@ public slots:
     void setDictionary(const QString &name);
 
     void setEnabledUserDictionaries(const QStringList name);
+
+    void setSecondaryDictionary(const QString &name);
 
     /**
      * Set the list of paired code, entity strings to preserve.
@@ -368,6 +383,11 @@ public slots:
      */
     void setCodeViewAppearance(const CodeViewAppearance &code_view_appearance);
 
+    /**
+     * Set whether to highlight the matching open/close tag when the cursor is in a tag
+     */
+    void setHighlightOpenCloseTags(bool enabled);
+
     void setCodeViewDarkAppearance(const CodeViewAppearance &code_view_appearance);
     /**
     * Set the default font settings to use for Special Characters popup window
@@ -383,6 +403,8 @@ public slots:
      * Set the number of clipboard history items to retain
      */
     void setClipboardHistoryLimit(int limit);
+
+    void setEnableAltGr(bool enabled);
 
 private:
     /**

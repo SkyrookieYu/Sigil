@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford, Ontario, Canada
 **  Copyright (C) 2013      John Schember <john@nachtimwald.com>
 **  Copyright (C) 2013      Dave Heiland
 **
@@ -112,7 +112,7 @@ void LinksWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
             QString source_file = file_spname;
             item->setText(source_file);
             item->setToolTip(filepath);
-	    item->setData(filepath);
+            item->setData(filepath);
             rowItems << item;
 
             // Source Line Number
@@ -157,17 +157,17 @@ void LinksWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
 
             // Target exists in book
             QString target_valid = tr("n/a");
-	    QString bkpath;
+            QString bkpath;
             if (is_target_file) {
                 if (!href.isEmpty()) {
                     target_valid = tr("no");
                     // first handle the case of local internal link (just fragment)
-		    if (href_file.isEmpty()) {
-		        bkpath = filepath;
-		    } else {
+                    if (href_file.isEmpty()) {
+                        bkpath = filepath;
+                    } else {
                         // find bookpath of target
-		        bkpath = Utility::buildBookPath(href_file, resource->GetFolder());
-		    }	
+                        bkpath = Utility::buildBookPath(href_file, resource->GetFolder());
+                    }
                     if (html_filenames.contains(bkpath)) {
                         if (href_id.isEmpty() || all_ids[bkpath].contains(href_id)) {
                             target_valid = tr("yes");
@@ -220,14 +220,14 @@ void LinksWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
                     item->setText(target_href_id);
                     rowItems << item;
 
-		    QString target_bkpath;
+                    QString target_bkpath;
                     // Match - destination link points to source
                     if (target_href_file.isEmpty()) {
-		        target_bkpath = bkpath;
+                        target_bkpath = bkpath;
                     } else {
-		        Resource * res =  m_Book->GetFolderKeeper()->GetResourceByBookPath(bkpath);
-		        target_bkpath = Utility::buildBookPath(target_href_file, res->GetFolder());
-		    }
+                        Resource * res =  m_Book->GetFolderKeeper()->GetResourceByBookPath(bkpath);
+                        target_bkpath = Utility::buildBookPath(target_href_file, res->GetFolder());
+                    }
                     QString match = tr("no");
                     if (!source_id.isEmpty() && filepath == target_bkpath && source_id == target_href_id) {
                         match = tr("yes");
@@ -293,14 +293,14 @@ void LinksWidget::DoubleClick()
         // This should match order of header above
         QString bookpath = m_ItemModel->item(index.row(), 0)->data().toString();
         QString lineno = m_ItemModel->item(index.row(), 1)->text();
-        emit OpenFileRequest(bookpath, lineno.toInt());
+        emit OpenFileRequest(bookpath, lineno.toInt(), -1);
     }
 }
 
 void LinksWidget::Save()
 {
-    QString report_info;
-    QString row_text;
+    QStringList report_info;
+    QStringList heading_row;
 
     // Get headings
     for (int col = 0; col < ui.fileTree->header()->count(); col++) {
@@ -309,35 +309,25 @@ void LinksWidget::Save()
         if (item) {
             text = item->text();
         }
-        if (col == 0) {
-            row_text.append(text);
-        } else {
-            row_text.append("," % text);
-        }
+        heading_row << text;
     }
-
-    report_info.append(row_text % "\n");
+    report_info << Utility::createCSVLine(heading_row);
 
     // Get data from table
     for (int row = 0; row < m_ItemModel->rowCount(); row++) {
-        row_text = "";
-
+        QStringList data_row;
         for (int col = 0; col < ui.fileTree->header()->count(); col++) {
             QStandardItem *item = m_ItemModel->item(row, col);
             QString text = "";
             if (item) {
                 text = item->text();
             }
-            if (col == 0) {
-                row_text.append(text);
-            } else {
-                row_text.append("," % text);
-            }
+            data_row << text;
         }
-
-        report_info.append(row_text % "\n");
+        report_info << Utility::createCSVLine(data_row);
     }
 
+    QString data = report_info.join('\n') + '\n';
     // Save the file
     ReadSettings();
     QString filter_string = "*.csv;;*.txt;;*.*";
@@ -349,20 +339,19 @@ void LinksWidget::Save()
 #endif
 
     QString destination = QFileDialog::getSaveFileName(this,
-                          tr("Save Report As Comma Separated File"),
-                          save_path,
-                          filter_string,
-			  &default_filter,
-                          options
-                                                      );
+                                                       tr("Save Report As Comma Separated File"),
+                                                       save_path,
+                                                       filter_string,
+                                                       &default_filter,
+                                                       options);
 
     if (destination.isEmpty()) {
         return;
     }
 
     try {
-        Utility::WriteUnicodeTextFile(report_info, destination);
-    } catch (CannotOpenFile) {
+        Utility::WriteUnicodeTextFile(data, destination);
+    } catch (CannotOpenFile&) {
         QMessageBox::warning(this, tr("Sigil"), tr("Cannot save report file."));
     }
 

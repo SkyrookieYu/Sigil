@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2016-2020 Doug Massay
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
@@ -26,6 +26,7 @@
 #endif
 
 #include "unzip.h"
+
 #ifdef _WIN32
 #include "iowin32.h"
 #endif
@@ -58,6 +59,8 @@
 #include <QFileInfo>
 #include <QCollator>
 #include <QMenu>
+#include <QSet>
+#include <QVector>
 #include <QDebug>
 
 #include "sigil_constants.h"
@@ -66,6 +69,8 @@
 #include "Misc/SettingsStore.h"
 #include "Misc/SleepFunctions.h"
 #include "MainUI/MainApplication.h"
+
+static const QString URL_SAFE = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.-/~";
 
 static const QString DARK_STYLE =
     "<style>:root { background-color: %1; color: %2; } ::-webkit-scrollbar { display: none; }</style>"
@@ -271,12 +276,22 @@ bool Utility::IsMixedCase(const QString &string)
     return false;
 }
 
+// Returns a substring from a specified QStringRef;
+// the characters included are in the interval:
+// [ start_index, end_index >
+QString Utility::Substring(int start_index, int end_index, const QStringRef &string)
+{
+    return string.mid(start_index, end_index - start_index).toString();
+}
+
+
 // Returns a substring of a specified string;
 // the characters included are in the interval:
 // [ start_index, end_index >
 QString Utility::Substring(int start_index, int end_index, const QString &string)
 {
     return string.mid(start_index, end_index - start_index);
+
 }
 
 // Returns a substring of a specified string;
@@ -304,10 +319,10 @@ void Utility::CopyFiles(const QString &fullfolderpath_source, const QString &ful
     QDir folder_source(fullfolderpath_source);
     QDir folder_destination(fullfolderpath_destination);
     folder_source.setFilter(QDir::AllDirs |
-			    QDir::Files |
-			    QDir::NoDotAndDotDot |
-			    QDir::NoSymLinks |
-			    QDir::Hidden);
+                            QDir::Files |
+                            QDir::NoDotAndDotDot |
+                            QDir::NoSymLinks |
+                            QDir::Hidden);
     // Erase all the files in this folder
     foreach(QFileInfo file, folder_source.entryInfoList()) {
         if ((file.fileName() != ".") && (file.fileName() != "..")) {
@@ -569,27 +584,82 @@ QString Utility::DecodeXML(const QString &text)
 
 QString Utility::EncodeXML(const QString &text)
 {
-    QString newtext(text);
+    QString newtext = Utility::DecodeXML(text);
     return newtext.toHtmlEscaped();
 }
 
+
+
+// From the IRI spec rfc3987
+// iunreserved    = ALPHA / DIGIT / "-" / "." / "_" / "~" / ucschar
+// 
+//    ucschar        = %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF
+//                   / %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD
+//                   / %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD
+//                   / %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD
+//                   / %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD
+//                   / %xD0000-DFFFD / %xE1000-EFFFD
+// But currently nothing *after* the 0x30000 plane is even defined
+
+bool Utility::NeedToPercentEncode(uint32_t cp)
+{
+    // sequence matters for both correctness and speed
+    if (cp < 128) {
+        if (URL_SAFE.contains(QChar(cp))) return false;
+        return true;
+    }
+    if (cp < 0xA0) return true;
+    if (cp <= 0xD7FF) return false;
+    if (cp < 0xF900) return true;
+    if (cp <= 0xFDCF) return false;
+    if (cp < 0xFDF0) return true;
+    if (cp <= 0xFFEF) return false;
+    if (cp < 0x10000) return true;
+    if (cp <= 0x1FFFD) return false;
+    if (cp < 0x20000) return true;
+    if (cp <= 0x2FFFD) return false;
+    if (cp < 0x30000) return true;
+    if (cp <= 0x3FFFD) return false;
+    return true;
+}
+
+// this is meant to work on paths, not paths and fragments and schemes
+// therefore do not leave # chars unencoded
 QString Utility::URLEncodePath(const QString &path)
 {
-    QString newpath = path;
-    QUrl href = QUrl(newpath);
-    QString scheme = href.scheme();
-    if (!scheme.isEmpty()) {
-        scheme = scheme + "://";
-        newpath.remove(0, scheme.length());
-    }
-
     // some very poorly written software uses xml escaping of the 
     // "&" instead of url encoding when building hrefs
     // So run xmldecode first to convert them to normal characters before 
     // url encoding them
-    newpath = DecodeXML(newpath);
-    QByteArray encoded_url = QUrl::toPercentEncoding(newpath, QByteArray("/#"));
-    return scheme + QString::fromUtf8(encoded_url.constData(), encoded_url.count());
+    QString newpath = DecodeXML(path);
+
+    // then undo any existing url encoding
+    newpath = URLDecodePath(newpath);
+
+    QString result = "";
+    QVector<uint32_t> codepoints = newpath.toUcs4();
+    for (int i = 0; i < codepoints.size(); i++) {
+        uint32_t cp = codepoints.at(i);
+        QString s = QString::fromUcs4(&cp, 1);
+        if (NeedToPercentEncode(cp)) {
+            QByteArray b = s.toUtf8();
+            for (int j = 0; j < b.size(); j++) {
+                uint8_t bval = b.at(j);
+                QString val = QString::number(bval,16);
+                val = val.toUpper();
+                if (val.size() == 1) val.prepend("0");
+                val.prepend("%");
+                result.append(val);
+            }
+        } else {
+            result.append(s);
+        }
+    }
+    // qDebug() << "In Utility URLEncodePath: " << result;
+    // Previously was:
+    // encoded_url = QUrl::toPercentEncoding(newpath, QByteArray("/"), QByteArray("#"));
+    // encoded_path = scheme + QString::fromUtf8(encoded_url.constData(), encoded_url.count());
+    return result;
 }
 
 
@@ -660,7 +730,7 @@ void Utility::DisplayStdWarningDialog(const QString &warning_message, const QStr
     if (!detailed_text.isEmpty()) {
         message_box.setDetailedText(detailed_text);
     }
-    message_box.setStandardButtons(QMessageBox::Close);
+    message_box.setStandardButtons(QMessageBox::Ok);
     message_box.exec();
 }
 
@@ -690,13 +760,13 @@ float Utility::RoundToOneDecimal(float number)
 QWidget *Utility::GetMainWindow()
 {
     QWidget *parent_window = QApplication::activeWindow();
-
     while (parent_window && !(qobject_cast<QMainWindow *>(parent_window))) {
         parent_window = parent_window->parentWidget();
     }
 
     return parent_window;
 }
+
 
 QString Utility::getSpellingSafeText(const QString &raw_text)
 {
@@ -784,42 +854,42 @@ bool Utility::UnZip(const QString &zippath, const QString &destpath)
             // If there is no file name then we can't do anything with it.
             if (!qfile_name.isEmpty()) {
 
-	        // for security reasons against maliciously crafted zip archives
-	        // we need the file path to always be inside the target folder 
-	        // and not outside, so we will remove all illegal backslashes
-	        // and all relative upward paths segments "/../" from the zip's local 
-	        // file name/path before prepending the target folder to create 
-	        // the final path
+                // for security reasons against maliciously crafted zip archives
+                // we need the file path to always be inside the target folder 
+                // and not outside, so we will remove all illegal backslashes
+                // and all relative upward paths segments "/../" from the zip's local 
+                // file name/path before prepending the target folder to create 
+                // the final path
 
-	        QString original_path = qfile_name;
-	        bool evil_or_corrupt_epub = false;
+                QString original_path = qfile_name;
+                bool evil_or_corrupt_epub = false;
 
-	        if (qfile_name.contains("\\")) evil_or_corrupt_epub = true; 
-	        qfile_name = "/" + qfile_name.replace("\\","");
+                if (qfile_name.contains("\\")) evil_or_corrupt_epub = true; 
+                qfile_name = "/" + qfile_name.replace("\\","");
 
-	        if (qfile_name.contains("/../")) evil_or_corrupt_epub = true;
-	        qfile_name = qfile_name.replace("/../","/");
+                if (qfile_name.contains("/../")) evil_or_corrupt_epub = true;
+                qfile_name = qfile_name.replace("/../","/");
+    
+                while(qfile_name.startsWith("/")) { 
+                    qfile_name = qfile_name.remove(0,1);
+                }
+                    
+                if (cp437_file_name.contains("\\")) evil_or_corrupt_epub = true; 
+                cp437_file_name = "/" + cp437_file_name.replace("\\","");
 
-	        while(qfile_name.startsWith("/")) { 
-		  qfile_name = qfile_name.remove(0,1);
-	        }
-                
-	        if (cp437_file_name.contains("\\")) evil_or_corrupt_epub = true; 
-	        cp437_file_name = "/" + cp437_file_name.replace("\\","");
+                if (cp437_file_name.contains("/../")) evil_or_corrupt_epub = true;
+                cp437_file_name = cp437_file_name.replace("/../","/");
+    
+                while(cp437_file_name.startsWith("/")) { 
+                  cp437_file_name = cp437_file_name.remove(0,1);
+                }
 
-	        if (cp437_file_name.contains("/../")) evil_or_corrupt_epub = true;
-	        cp437_file_name = cp437_file_name.replace("/../","/");
-
-	        while(cp437_file_name.startsWith("/")) { 
-		  cp437_file_name = cp437_file_name.remove(0,1);
-	        }
-
-	        if (evil_or_corrupt_epub) {
-		    unzCloseCurrentFile(zfile);
-		    unzClose(zfile);
-		    // throw (UNZIPLoadParseError(QString(QObject::tr("Possible evil or corrupt zip file name: %1")).arg(original_path).toStdString()));
+                if (evil_or_corrupt_epub) {
+                    unzCloseCurrentFile(zfile);
+                    unzClose(zfile);
+                    // throw (UNZIPLoadParseError(QString(QObject::tr("Possible evil or corrupt zip file name: %1")).arg(original_path).toStdString()));
                     return false;
-	        }
+                }
 
                 // We use the dir object to create the path in the temporary directory.
                 // Unfortunately, we need a dir ojbect to do this as it's not a static function.
@@ -832,7 +902,7 @@ bool Utility::UnZip(const QString &zippath, const QString &destpath)
                     dir.mkpath(qfile_name);
                     continue;
                 } else {
-		    if (!qfile_info.path().isEmpty()) dir.mkpath(qfile_info.path());
+                    if (!qfile_info.path().isEmpty()) dir.mkpath(qfile_info.path());
                 }
 
                 // Open the file entry in the archive for reading.
@@ -941,48 +1011,6 @@ QStringList Utility::ZipInspect(const QString &zippath)
 
 // some utilities for working with absolute and book relative paths
 
-#if 0
-// brute force method
-QString Utility::longestCommonPath(const QStringList& filepaths, const QString& sep)
-{
-    // handle special cases
-    if (filepaths.isEmpty()) return QString();
-    if (filepaths.length() == 1) return QFileInfo(filepaths.at(0)).absolutePath() + sep;
-    
-    // split each path into its component segments
-    QList<QStringList> fpaths;
-    int minlen = -1;
-    foreach(QString apath, filepaths) {
-        QStringList segs = apath.split(sep);
-        int n = segs.length();
-        if (minlen == -1) minlen = n;
-        if (n < minlen) minlen = n;
-        fpaths.append(segs);
-    }
-
-    // now build up the results
-    QStringList res;
-    int numpaths = fpaths.length();
-    for(int i=0; i < minlen; i++) {
-        QString aseg = fpaths.at(0).at(i);
-        bool amatch = true;
-        int j = 1;
-        while(amatch && j < numpaths) {
-            amatch = (aseg == fpaths.at(j).at(i));
-            j++;
-        }
-        if (amatch) {
-            res << aseg;
-        } else {
-            break;
-        }
-    }
-    if (res.isEmpty()) return "";
-    return res.join(sep) + sep;
-}
-
-#else
-
 QString Utility::longestCommonPath(const QStringList& filepaths, const QString& sep)
 {
     if (filepaths.isEmpty()) return QString();
@@ -1001,8 +1029,6 @@ QString Utility::longestCommonPath(const QStringList& filepaths, const QString& 
     return res.join(sep) + sep;
 }
 
-#endif
-
 
 // works with absolute paths and book (internal to epub) paths
 QString Utility::resolveRelativeSegmentsInFilePath(const QString& file_path, const QString &sep)
@@ -1014,10 +1040,10 @@ QString Utility::resolveRelativeSegmentsInFilePath(const QString& file_path, con
         if (segs.at(i) == ".") continue;
         if (segs.at(i) == "..") {
             if (!res.isEmpty()) {
-	        res.removeLast();
+                res.removeLast();
             } else {
-	        qDebug() << "Error resolving relative path segments";
-		qDebug() << "original file path: " << file_path;
+                qDebug() << "Error resolving relative path segments";
+                qDebug() << "original file path: " << file_path;
             }
         } else {
             res << segs.at(i);
@@ -1104,22 +1130,43 @@ QString Utility::buildRelativePath(const QString &from_file_bkpath, const QStrin
 
     // convert start_file_bkpath to start_dir by stripping off existing filename component
     return relativePath(to_file_bkpath, startingDir(from_file_bkpath));
-}   
+}
 
-std::pair<QString, QString> Utility::parseHREF(const QString &relative_href)
+// return fully decoded path and fragment (if any) from a raw relative href string.
+// any fragment will start with '#', use QUrl to handle parsing and Percent Decoding
+std::pair<QString, QString> Utility::parseRelativeHREF(const QString &relative_href)
 {
-    QString fragment;
-    QString attpath = relative_href;
-    int fragpos = attpath.lastIndexOf("#");
-    // fragment will include any # if one exists
-    if (fragpos != -1) {
-        fragment = attpath.mid(fragpos, -1);
-        attpath = attpath.mid(0, fragpos);
+    QUrl href(relative_href);
+    Q_ASSERT(href.isRelative());
+    Q_ASSERT(!href.hasQuery());
+    QString attpath = href.path();
+    QString fragment = href.fragment();
+    // fragment will include any # if fragment exists
+    if (relative_href.indexOf("#") != -1) {
+        fragment = "#" + fragment;
     }
     if (attpath.startsWith("./")) attpath = attpath.mid(2,-1);
     return std::make_pair(attpath, fragment);
 }
 
+// return a url encoded string for given decoded path and fragment (if any)
+// Note: Any fragment will start with a "#" ! to allow links to root as just "#"
+QString Utility::buildRelativeHREF(const QString &apath, const QString &afrag)
+{
+    QString newhref = URLEncodePath(apath);
+    QString id = afrag;
+    if (!id.isEmpty()) {
+        if (id.startsWith("#")) {
+            id = id.mid(1, -1);
+        } else {
+            qDebug() << "Warning: buildRelativeHREF has fragment that does not start with #" << afrag;
+        }
+        // technically fragments should be percent encoded if needed
+        id = URLEncodePath(id);
+        newhref = newhref + "#" + id;
+    }
+    return newhref;
+}
 
 bool Utility::sort_pair_in_reverse(const std::pair<int,QString> &a, const std::pair<int,QString> &b)
 {
@@ -1135,7 +1182,7 @@ QStringList Utility::sortByCounts(const QStringList &folderlst, const QList<int>
     }
     std::sort(vec.begin(), vec.end(), sort_pair_in_reverse);
     QStringList sortedlst;
-    for(int j=0; j < vec.size(); j++) {
+    for(unsigned int j=0; j < vec.size(); j++) {
         sortedlst << vec[j].second;
     }
     return sortedlst;
@@ -1143,14 +1190,14 @@ QStringList Utility::sortByCounts(const QStringList &folderlst, const QList<int>
 
 QStringList Utility::LocaleAwareSort(const QStringList &names)
 {
-  SettingsStore ss;
-  QStringList nlist(names);
-  QLocale uiLocale(ss.uiLanguage());
-  QCollator uiCollator(uiLocale);
-  uiCollator.setCaseSensitivity(Qt::CaseInsensitive);
-  // use uiCollator.compare(s1, s2)
-  std::sort(nlist.begin(), nlist.end(), uiCollator);
-  return nlist;
+    SettingsStore ss;
+    QStringList nlist(names);
+    QLocale uiLocale(ss.uiLanguage());
+    QCollator uiCollator(uiLocale);
+    uiCollator.setCaseSensitivity(Qt::CaseInsensitive);
+    // use uiCollator.compare(s1, s2)
+    std::sort(nlist.begin(), nlist.end(), uiCollator);
+    return nlist;
 }
 
 
@@ -1226,4 +1273,75 @@ QBrush Utility::ValidationResultBrush(const Val_Msg_Type &valres)
                 return QBrush(pal.color(QPalette::Window));
         }
     }
+}
+
+
+QString Utility::createCSVLine(const QStringList &data)
+{
+    QStringList csvline;
+    foreach(QString val, data) {
+        bool need_quotes = val.contains(',');
+        QString cval = "";
+        if (need_quotes) cval.append('"');
+        foreach(QChar c, val) {
+            if (c == '"') cval.append('"');
+            cval.append(c);
+        }
+        if (need_quotes) cval.append('"');
+        csvline.append(cval);
+    }
+    return csvline.join(',');
+}
+
+
+QStringList Utility::parseCSVLine(const QString &data)
+{
+    auto unquote_val = [](const QString &av) {
+        QString nv(av);
+        if (nv.startsWith('"')) nv = nv.mid(1);
+        if (nv.endsWith('"')) nv = nv.mid(0, nv.length()-1);
+        return nv;
+    };
+    
+    bool in_quote = false;
+    QStringList vals;
+    QString v;
+    int n = data.size();
+    int i = 0;
+    while(i < n) {
+        QChar c = data.at(i);
+        if (!in_quote) {
+            if (c == ',') {
+                vals.append(unquote_val(v.trimmed()));
+                v = "";
+            } else  {
+                v.append(c);
+                if (c == '"') in_quote = true;
+            }
+        } else {
+            v.append(c);
+            if (c == '"') {
+                if ((i+1 < n) && (data.at(i+1) == '"')) { 
+                    i++;
+                } else {
+                    in_quote = false;
+                }
+            }
+        }
+        i++;
+    }
+    if (!v.isEmpty()) vals.append(unquote_val(v.trimmed()));
+    return vals;
+}
+
+
+QString Utility::GenerateUniqueId(const QString &id, const QSet<QString>& Used)
+{
+    int cnt = 1;
+    QString new_id = id + "_" + QString::number(cnt);
+    while (Used.contains(new_id)) {
+        cnt++;
+        new_id = id + "_" + QString::number(cnt);
+    }
+    return new_id;
 }

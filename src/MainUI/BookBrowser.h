@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -26,6 +26,7 @@
 
 #include <QtCore/QSharedPointer>
 #include <QWidget>
+#include <QPointer>
 #include <QtWidgets/QDockWidget>
 
 #include "BookManipulation/Book.h"
@@ -77,9 +78,16 @@ public:
     int AllSelectedItemCount();
 
     /**
-     * Valid resources selected in the Book Browser
+     * Valid HTML resources selected in the Book Browser
      */
     QList <Resource *> ValidSelectedHTMLResources();
+
+
+    /**
+     * CSS resources selected in the Book Browser
+     */
+    QList <Resource *> ValidSelectedCSSResources();
+
 
     /**
      * All HTML resources in the Book Browser in order
@@ -97,6 +105,8 @@ public:
      * All CSS resources in the Book Browser in order
      */
     QList <Resource *> AllCSSResources();
+
+    QList <Resource *> AllJSResources();
 
     void SelectResources(QList<Resource *> resources);
 
@@ -173,6 +183,7 @@ public slots:
     void CopyCSS();
     void AddNewHTML();
     void AddNewCSS();
+    void AddNewJS();
     void AddNewSVG();
     CSSResource* CreateHTMLTOCCSSFile();
     CSSResource* CreateIndexCSSFile();
@@ -249,9 +260,11 @@ signals:
 
     void LinkStylesheetsToResourcesRequest(QList<Resource *> resources);
 
+    void LinkJavascriptsToResourcesRequest(QList<Resource *> resources);
+
     void RemoveResourcesRequest();
 
-    void OpenFileRequest(QString, int);
+    void OpenFileRequest(QString, int, int);
 
 private slots:
 
@@ -337,6 +350,8 @@ private slots:
     void Merge();
 
     void LinkStylesheets();
+
+    void LinkJavascripts();
 
     /**
      * Clears obfuscation for the current resource.
@@ -476,7 +491,7 @@ private:
     /**
      * The right-click context menu.
      */
-    QMenu *m_ContextMenu;
+    QPointer<QMenu> m_ContextMenu;
 
     /**
      * The sub-menu for marking fonts
@@ -491,6 +506,7 @@ private:
     QAction *m_CopyCSS;
     QAction *m_AddNewHTML;
     QAction *m_AddNewCSS;
+    QAction *m_AddNewJS;
     QAction *m_AddNewSVG;
     QAction *m_AddExisting;
     QAction *m_Rename;
@@ -506,6 +522,7 @@ private:
     QAction *m_SortHTML;
     QAction *m_RenumberTOC;
     QAction *m_LinkStylesheets;
+    QAction *m_LinkJavascripts;
     QAction *m_AddSemantics;
     QAction *m_SaveAs;
     QAction *m_ValidateWithW3C;

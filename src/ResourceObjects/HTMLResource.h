@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2015 Kevin B. Hendricks Stratford, ON, Canada 
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2021 Kevin B. Hendricks Stratford, ON, Canada 
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -26,7 +26,7 @@
 
 #include <QtCore/QHash>
 
-#include "Misc/CSSInfo.h"
+#include "Parsers/CSSInfo.h"
 #include "ResourceObjects/XMLResource.h"
 
 class QString;
@@ -95,9 +95,16 @@ public:
      */
     QStringList GetLinkedStylesheets();
 
+    QStringList GetLinkedJavascripts();
+
     QStringList GetManifestProperties() const;
 
     bool DeleteCSStyles(QList<CSSInfo::CSSSelector *> css_selectors);
+
+    QString GetLanguageAttribute();
+    void SetLanguageAttribute(const QString& langcode);
+
+
 
 signals:
     void LinkedResourceUpdated();

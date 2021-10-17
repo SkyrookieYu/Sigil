@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2016 Kevin B. Hendricks, Stratford, ON, Canada
+**  Copyright (C) 2016-2021 Kevin B. Hendricks, Stratford, ON, Canada
 **
 **  This file is part of Sigil.
 **
@@ -36,7 +36,7 @@ AddSemantics::AddSemantics(const QHash<QString, DescriptiveInfo> &infomap, const
     ui.setupUi(this);
 
     connect(ui.lwProperties, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)),
-            this,	          SLOT(UpdateDescription(QListWidgetItem *)));
+            this, SLOT(UpdateDescription(QListWidgetItem *)));
     connect(this, SIGNAL(accepted()), this, SLOT(WriteSettings()));
     connect(ui.lwProperties, SIGNAL(doubleClicked(const QModelIndex &)), this, SLOT(accept()));
 
@@ -44,11 +44,15 @@ AddSemantics::AddSemantics(const QHash<QString, DescriptiveInfo> &infomap, const
     QStringList names;
     foreach (QString code, m_SemanticsInfo.keys()) {
         QString name = m_SemanticsInfo.value(code, DescriptiveInfo()).name;
+        // Some translations are broken, add code in parentheses after translate4d name
+        // To force them to be visually unique without having to read the entire Description
+        name = name + " (" + code + ")"; 
+        
         // add a space and check mark to the end of the name if current semantic set 
         if (code == current_code) {
-	    name.append(' ');
+            name.append(' ');
             name.append(QChar(10003));
-	}
+        }
         m_Name2Code[name] = code;
         names.append(name);
     }

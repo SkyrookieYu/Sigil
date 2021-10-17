@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2019-2020 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2019-2021 Kevin B. Hendricks, Stratford, Ontario, Canada
 **  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012      Dave Heiland
 **  Copyright (C) 2012      Grant Drake
@@ -33,7 +33,7 @@
 
 #include "BookManipulation/FolderKeeper.h"
 #include "Dialogs/ClipEditor.h"
-#include "Misc/CSSInfo.h"
+#include "Parsers/CSSInfo.h"
 #include "Misc/Utility.h"
 #include "ResourceObjects/CSSResource.h"
 
@@ -192,6 +192,7 @@ bool ClipEditor::ItemsAreUnique(QList<QStandardItem *> items)
     // Although saving a group and a sub item works, it could be confusing to users to
     // have and entry appear twice so its more predictable just to prevent it and warn the user
     if (items.toSet().count() != items.count()) {
+    // In Qt 5.15 if (QSet<QStandardItem *>(items.begin(), items.end()).count() != items.count()) {
         Utility::DisplayStdErrorDialog(tr("You cannot select an entry and a group containing the entry."));
         return false;
     }
@@ -263,7 +264,7 @@ bool ClipEditor::Copy()
     while (m_SavedClipEntries.count()) {
         // these were previously generated with new
         ClipEditorModel::clipEntry * p = m_SavedClipEntries.at(0);
-	delete p;
+        delete p;
         m_SavedClipEntries.removeAt(0);
     }
 
@@ -280,10 +281,10 @@ bool ClipEditor::Copy()
 
         if (entry->is_group) {
             Utility::DisplayStdErrorDialog(tr("You cannot Copy or Cut groups - use drag-and-drop.")) ;
-	    delete entry;
+            delete entry;
             return false;
         }
-	delete entry;
+        delete entry;
     }
     foreach(ClipEditorModel::clipEntry * entry, entries) {
         // need to clean up m_SavedClipEntries when done to prevent memory leak
@@ -374,10 +375,9 @@ void ClipEditor::Import()
     QString filename = QFileDialog::getOpenFileName(this,
                        tr("Import Entries"),
                        m_LastFolderOpen,
-		       filter_string,
-		       NULL,
-                       options
-                                                   );
+                       filter_string,
+                       NULL,
+                       options);
 
     // Load the file and save the last folder opened
     if (!filename.isEmpty()) {
@@ -435,7 +435,7 @@ void ClipEditor::ExportItems(QList<QStandardItem *> items)
             parent_path = m_ClipEditorModel->GetFullName(item->parent());
         }
 
-	// Note GetEntry creates the clipEntry with new and it is just a struct
+        // Note GetEntry creates the clipEntry with new and it is just a struct
         foreach(QStandardItem * item, sub_items) {
             ClipEditorModel::clipEntry *entry = m_ClipEditorModel->GetEntry(item);
             // Remove the top level paths since we're exporting a subset
@@ -456,9 +456,8 @@ void ClipEditor::ExportItems(QList<QStandardItem *> items)
                        tr("Export Selected Entries"),
                        m_LastFolderOpen,
                        filter_string,
-		       &default_filter,
-                       options
-                                                   );
+                       &default_filter,
+                       options);
 
     if (filename.isEmpty()) {
         return;
@@ -501,19 +500,19 @@ void ClipEditor::AutoFill()
     QList<CSSResource *> css_resources = m_Book->GetFolderKeeper()->GetResourceTypeList<CSSResource>(false);
 
     foreach(CSSResource * css_resource, css_resources) {
-        CSSInfo css_info(css_resource->GetText(), true);
+        CSSInfo css_info(css_resource->GetText());
         QList<CSSInfo::CSSSelector *> selectors = css_info.getClassSelectors();
         foreach(CSSInfo::CSSSelector *selector, selectors) {
-            QString group = selector->groupText;
-            if (!group.contains(".")) {
+            QString text = selector->text;
+            if (!text.contains(".")) {
                 continue;
             }
-            if (group.startsWith(".")) {
-                css_list.append("p" % group);
-                css_list.append("span" % group);
-                css_list.append("div" % group);
+            if (text.startsWith(".")) {
+                css_list.append("p" % text);
+                css_list.append("span" % text);
+                css_list.append("div" % text);
             } else {
-                css_list.append(group);
+                css_list.append(text);
             }
         }
     }
@@ -681,22 +680,24 @@ void ClipEditor::OpenContextMenu(const QPoint &point)
 {
     SetupContextMenu(point);
     m_ContextMenu->exec(ui.ClipEditorTree->viewport()->mapToGlobal(point));
-    m_ContextMenu->clear();
-    // Make sure every action is enabled - in case shortcut is used after context menu disables some.
-    m_AddEntry->setEnabled(true);
-    m_AddGroup->setEnabled(true);
-    m_Edit->setEnabled(true);
-    m_Cut->setEnabled(true);
-    m_Copy->setEnabled(true);
-    m_Paste->setEnabled(true);
-    m_Delete->setEnabled(true);
-    m_Import->setEnabled(true);
-    m_Reload->setEnabled(true);
-    m_Export->setEnabled(true);
-    m_ExportAll->setEnabled(true);
-    m_CollapseAll->setEnabled(true);
-    m_ExpandAll->setEnabled(true);
-    m_AutoFill->setEnabled(true);
+    if (!m_ContextMenu.isNull()) {
+        m_ContextMenu->clear();
+        // Make sure every action is enabled - in case shortcut is used after context menu disables some.
+        m_AddEntry->setEnabled(true);
+        m_AddGroup->setEnabled(true);
+        m_Edit->setEnabled(true);
+        m_Cut->setEnabled(true);
+        m_Copy->setEnabled(true);
+        m_Paste->setEnabled(true);
+        m_Delete->setEnabled(true);
+        m_Import->setEnabled(true);
+        m_Reload->setEnabled(true);
+        m_Export->setEnabled(true);
+        m_ExportAll->setEnabled(true);
+        m_CollapseAll->setEnabled(true);
+        m_ExpandAll->setEnabled(true);
+        m_AutoFill->setEnabled(true);
+    }
 }
 
 void ClipEditor::SetupContextMenu(const QPoint &point)

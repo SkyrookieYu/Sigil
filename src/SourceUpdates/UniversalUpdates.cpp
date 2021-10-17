@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019  Kevin B. Hendricks  Stratford, Ontario Canada
+**  Copyright (C) 2015-2021  Kevin B. Hendricks  Stratford, Ontario Canada
 **  Copyright (C) 2009-2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -70,7 +70,6 @@ QStringList UniversalUpdates::PerformUniversalUpdates(bool resources_already_loa
     for (int i = 0; i < num_files; ++i) {
         Resource *resource = resources.at(i);
 
-
         if (resource->Type() == Resource::HTMLResourceType) {
             html_resources.append(qobject_cast<HTMLResource *>(resource));
         } else if (resource->Type() == Resource::CSSResourceType) {
@@ -113,7 +112,7 @@ QStringList UniversalUpdates::PerformUniversalUpdates(bool resources_already_loa
     foreach(XMLResource * xml_resource, xml_resources) {
         QString mtype = xml_resource->GetMediaType();
         QString currentpath = xml_resource->GetCurrentBookRelPath();
-	QString new_bookpath = xml_resource->GetRelativePath();
+        QString new_bookpath = xml_resource->GetRelativePath();
         QString version = xml_resource->GetEpubVersion();
         const QString &source = Utility::ReadUnicodeTextFile(xml_resource->GetFullPath());
         xml_resource->SetText(PerformXMLUpdates(source, new_bookpath, xml_updates, currentpath, mtype)());
@@ -199,12 +198,12 @@ QString UniversalUpdates::UpdateOneHTMLFile(HTMLResource *html_resource,
         QString version = html_resource->GetEpubVersion();
         QString source = html_resource->GetText();
         QString newsource = source;
-	QString newbookpath = html_resource->GetRelativePath();
+        QString newbookpath = html_resource->GetRelativePath();
         newsource = PerformHTMLUpdates(newsource, newbookpath, html_updates, css_updates, currentpath, version)();
         html_resource->SetText(newsource);
         html_resource->SetCurrentBookRelPath("");
         return QString();
-    } catch (ErrorBuildingDOM) {
+    } catch (ErrorBuildingDOM&) {
         // It would be great if we could just let this exception bubble up,
         // but we can't since QtConcurrent doesn't let exceptions cross threads.
         // So we just leave the old source in the resource.
@@ -224,6 +223,7 @@ void UniversalUpdates::UpdateOneCSSFile(CSSResource *css_resource,
     const QString source = css_resource->GetText();
     const QString newbookpath = css_resource->GetRelativePath();
     css_resource->SetText(PerformCSSUpdates(source, newbookpath, css_updates, currentpath)());
+    css_resource->SaveToDisk();
     css_resource->SetCurrentBookRelPath("");
 }
 
@@ -272,12 +272,12 @@ QString UniversalUpdates::LoadAndUpdateOneHTMLFile(HTMLResource *html_resource,
         }
         html_resource->SetText(source);
         return QString();
-    } catch (ErrorBuildingDOM) {
+    } catch (ErrorBuildingDOM&) {
         // It would be great if we could just let this exception bubble up,
         // but we can't since QtConcurrent doesn't let exceptions cross threads.
         // So we just leave the old source in the resource.
         return QString(QObject::tr("Invalid HTML file: %1")).arg(html_resource->GetRelativePath());
-    } catch (QString err) {
+    } catch (QString& err) {
         return QString("%1: %2").arg(err).arg(html_resource->GetRelativePath());
     } catch (...) {
         return QString("Cannot perform HTML updates there was an unrecoverable error: %1").arg(html_resource->GetRelativePath());
@@ -317,7 +317,7 @@ QString UniversalUpdates::UpdateOPFFile(OPFResource *opf_resource,
         opf_resource->SetText(newsource);
         opf_resource->SetCurrentBookRelPath("");
         return QString();
-    } catch (ErrorBuildingDOM) {
+    } catch (ErrorBuildingDOM&) {
         // It would be great if we could just let this exception bubble up,
         // but we can't since QtConcurrent doesn't let exceptions cross threads.
         // So we just leave the old source in the resource.
@@ -343,7 +343,7 @@ QString UniversalUpdates::UpdateNCXFile(NCXResource *ncx_resource,
         ncx_resource->SetText(CleanSource::PrettifyDOCTYPEHeader(newsource));
         ncx_resource->SetCurrentBookRelPath("");
         return QString();
-    } catch (ErrorBuildingDOM) {
+    } catch (ErrorBuildingDOM&) {
         // It would be great if we could just let this exception bubble up,
         // but we can't since QtConcurrent doesn't let exceptions cross threads.
         // So we just leave the old source in the resource.

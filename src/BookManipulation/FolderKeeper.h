@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford, Ontario Canada
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -93,8 +93,8 @@ public:
     Resource *AddContentFileToFolder(const QString &fullfilepath,
                                      bool update_opf = true,
                                      const QString &mimetype = QString(),
-				     const QString &bookpath = QString(),
-				     const QString &folderpath = QString("\\"));
+                                     const QString &bookpath = QString(),
+                                     const QString &folderpath = QString("\\"));
 
     /**
      * Returns the highest reading order number present in the book.
@@ -123,6 +123,8 @@ public:
     QList<Resource *> GetResourceList() const;
 
     QList<Resource *> GetResourceListByType(Resource::ResourceType type) const;
+
+    QList<Resource *> GetResourceListByMediaTypes(const QStringList &mtypes) const;
 
     /**
      * Returns a list of all resources of type T in a list
@@ -179,8 +181,8 @@ public:
     NCXResource *GetNCX() const;
 
     NCXResource* AddNCXToFolder(const QString &version,
-				const QString& bookpath=QString(),
-				const QString& first_textdir=QString("\\"));
+                                const QString& bookpath=QString(),
+                                const QString& first_textdir=QString("\\"));
 
     void RemoveNCXFromFolder();
 
@@ -250,6 +252,8 @@ public slots:
      * @param resource The resource to remove.
      */
     void RemoveResource(const Resource *resource);
+
+    void BulkRemoveResources(const QList<Resource *> resources);
 
 private slots:
 
@@ -380,7 +384,7 @@ template<typename T> inline
 QList<T *> FolderKeeper::ListResourceSort(const QList<T *> &resource_list)  const
 {
     QList<T *> sorted_list = resource_list;
-    qSort(sorted_list.begin(), sorted_list.end(), FolderKeeper::PointerLessThan<T>);
+    std::sort(sorted_list.begin(), sorted_list.end(), FolderKeeper::PointerLessThan<T>);
     return sorted_list;
 }
 

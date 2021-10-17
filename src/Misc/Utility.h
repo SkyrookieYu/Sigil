@@ -29,6 +29,7 @@
 #include <QCoreApplication>
 #include <QtCore/QString>
 #include <QColor>
+#include <QSet>
 
 class QStringList;
 class QStringRef;
@@ -82,6 +83,11 @@ public:
     // Returns true if the string is mixed case, false otherwise.
     // For instance, "test" and "TEST" return false, "teSt" returns true.
     static bool IsMixedCase(const QString &string);
+
+    // Returns a substring of a QStringRef as a real string
+    // the characters included are in the interval:
+    // [ start_index, end_index >
+    static QString Substring(int start_index, int end_index, const QStringRef &string);
 
     // Returns a substring of a specified string;
     // the characters included are in the interval:
@@ -153,6 +159,7 @@ public:
      * @param path The path to encode.
      * @return The encoded path string.
      */
+    static bool NeedToPercentEncode(uint cp);
     static QString URLEncodePath(const QString &path);
 
     /**
@@ -207,7 +214,9 @@ public:
     // both the "from" and "to" book paths are to FILES
     static QString buildRelativePath(const QString &from_file_bkpath, const QString &to_file_bkpath);
 
-    static std::pair<QString, QString> parseHREF(const QString &relative_href);
+    static std::pair<QString, QString> parseRelativeHREF(const QString &relative_href);
+    
+    static QString buildRelativeHREF(const QString &apath, const QString &afrag);
     
     static QString startingDir(const QString &file_bookpath);
 
@@ -226,6 +235,16 @@ public:
     
     // return the qbrushes for ValidationResultsView
     static QBrush ValidationResultBrush(const Val_Msg_Type &valres);
+
+    // parse a line of data from a csv file into a list of string values
+    static QStringList parseCSVLine(const QString &data);
+
+    // create a line of data in csv format
+    static QString createCSVLine(const QStringList &data);
+    
+    // Generate a Unique Id given a root id and Used Set
+    static QString GenerateUniqueId(const QString &id, const QSet<QString>& Used);
+
 };
 #endif // UTILITY_H
 

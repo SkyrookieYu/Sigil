@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2009-2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -48,32 +48,19 @@ TabManager::TabManager(QWidget *parent)
     QTabWidget(parent),
     m_LastContentTab(NULL),
     m_TabsToDelete(QList<ContentTab*>()),
-    m_tabs_deletion_in_use(false)
+    m_tabs_deletion_in_use(false),
+    m_newTab(NULL)
 {
     QTabBar *tab_bar = new TabBar(this);
     setTabBar(tab_bar);
     connect(tab_bar, SIGNAL(TabBarClicked()),            this, SLOT(SetFocusInTab()));
     connect(tab_bar, SIGNAL(CloseOtherTabsRequest(int)), this, SLOT(CloseOtherTabs(int)));
-    connect(this, SIGNAL(currentChanged(int)),         this, SLOT(EmitTabChanged(int)));
-    connect(this, SIGNAL(tabCloseRequested(int)),      this, SLOT(CloseTab(int)));
+    connect(this, SIGNAL(currentChanged(int)),           this, SLOT(EmitTabChanged(int)));
+    connect(this, SIGNAL(tabCloseRequested(int)),        this, SLOT(CloseTab(int)));
     setDocumentMode(true);
 
     // re-enable tab drag and drop as a test to see if last commit helped
-#if 0    
-    // QTabBar has a bug when a user "presses and flicks" on a non current tab it will cause it 
-    // to setCurrentIndex() but during EmitTabChanged(int) it then may allows the resulting mouseMoveEvent
-    // be processed on the same index that is being set in setCurrentIndex which causes a crash.
-    // This bug makes it dangerous to enable dragging and dropping to move tabs in the QTabBar
-    // So default to non-movable but let a environment variable override this decision
-    if (qEnvironmentVariableIsSet("SIGIL_ALLOW_TAB_MOVEMENT")) {
-        setMovable(true);
-    } else {
-        setMovable(false);
-    }
-#else
     setMovable(true);
-#endif
-
     setTabsClosable(true);
     // setElideMode(Qt::ElideRight); this is the default after qt-5.6
     setUsesScrollButtons(true);
@@ -107,6 +94,19 @@ QList<Resource *> TabManager::GetTabResources()
     QList <Resource *> tab_resources;
     foreach(ContentTab *tab, tabs) {
         tab_resources.append(tab->GetLoadedResource());
+    }
+    return tab_resources;
+}
+
+QList<Resource *> TabManager::GetTabResourcesOfType(Resource::ResourceType resource_type)
+{
+    QList <ContentTab *> tabs = GetContentTabs();
+    QList <Resource *> tab_resources;
+    foreach(ContentTab *tab, tabs) {
+        Resource* resource = tab->GetLoadedResource();
+        if (resource->Type() == resource_type) {
+            tab_resources.append(resource);
+        }
     }
     return tab_resources;
 }
@@ -177,11 +177,6 @@ void TabManager::ReopenTabs()
         CloseTabForResource(resource, true);
         OpenResource(resource, -1, -1, QString());
     }
-#if 0
-    foreach(Resource *resource, resources) {
-        OpenResource(resource, -1, -1, QString());
-    }
-#endif
     OpenResource(currentTab->GetLoadedResource(), -1, -1, QString());
 }
 
@@ -201,43 +196,37 @@ void TabManager::LinkClicked(const QUrl &url)
 {
     QString url_string = url.toString();
 
-    if (url_string.isEmpty()) {
+    if (url.toString().isEmpty()) {
         return;
     }
     
     ContentTab *tab = GetCurrentContentTab();
 
-    if (url_string.indexOf(':') == -1) {
+    if (url.isRelative()) {
 
         // we have a relative url, so build an internal
         // book: scheme url book:///bookpath#fragment
-        QString attpath = Utility::URLDecodePath(url_string);
-	QString dest_bookpath;
-	int fragpos = attpath.lastIndexOf('#');
-	bool has_fragment = fragpos != -1;
-	QString fragment = "";
-	if (has_fragment) {
-	    fragment = url_string.mid(fragpos+1, -1);
-	    attpath = attpath.mid(0, fragpos);
-	}
-	if (attpath.isEmpty()) {
-	    dest_bookpath = tab->GetLoadedResource()->GetRelativePath();
-	} else {
-	    QString startdir = tab->GetLoadedResource()->GetFolder();
-	    dest_bookpath = Utility::buildBookPath(attpath, startdir);
-	}
-	if (!fragment.isEmpty()) {
-	    dest_bookpath = dest_bookpath + "#" + fragment;
-	}
-	url_string = "book:///" + dest_bookpath;
-	// QUrl will take care of encoding the url path
+        QString attpath = url.path();
+        QString fragment = "";
+        if (url.hasFragment()) {
+            fragment = url.fragment();
+        }
+        QString dest_bookpath;
+        if (attpath.isEmpty()) {
+            dest_bookpath = tab->GetLoadedResource()->GetRelativePath();
+        } else {
+            QString startdir = tab->GetLoadedResource()->GetFolder();
+            dest_bookpath = Utility::buildBookPath(attpath, startdir);
+        }
+        url_string = "book:///" + Utility::buildRelativeHREF(dest_bookpath, fragment);
+    // QUrl will take care of encoding the url path
     } else {
         // we have a scheme and are absolute
         if (url.scheme() == "file") {
             if (url_string.contains("/#")) {
                 url_string.insert(url_string.indexOf("/#") + 1, tab->GetFilename());
             }
-	}
+        }
     }
 
     emit OpenUrlRequest(QUrl(url_string));
@@ -259,6 +248,7 @@ void TabManager::OpenResource(Resource *resource,
                           caret_location_to_scroll_to, fragment, grab_focus);
 
     if (new_tab) {
+        m_newTab = new_tab;
         AddNewContentTab(new_tab, precede_current_tab);
         emit ShowStatusMessageRequest("");
     } else {
@@ -371,10 +361,16 @@ void TabManager::EmitTabChanged(int new_index)
     ContentTab *current_tab = qobject_cast<ContentTab *>(currentWidget());
     // the result of the qobject_cast can be NULL and that is okay
     if (m_LastContentTab != current_tab) {
+        // qDebug() << "Emitting TabChanged Signal";
         ContentTab * prev_tab = m_LastContentTab;
         m_LastContentTab = current_tab;
         emit TabChanged(prev_tab, current_tab);
+        if (current_tab != m_newTab) {
+            // qDebug() << "Emitting UpdatePreviewAfterExistingTabSwitch";
+            emit UpdatePreviewAfterExistingTabSwitch();
+        }
     }
+    m_newTab = NULL;
 }
 
 
@@ -441,7 +437,7 @@ void TabManager::DeleteTab(ContentTab *tab_to_delete)
 
 
     while(!m_TabsToDelete.isEmpty()) {
-	ContentTab *tab = m_TabsToDelete.takeLast();
+    ContentTab *tab = m_TabsToDelete.takeLast();
 
         Q_ASSERT(tab);
 
@@ -457,13 +453,14 @@ void TabManager::DeleteTab(ContentTab *tab_to_delete)
         // Only the current tab is ever connected to the main ui
         // so do our own version of EmitTabChanged() only if needed
         // to disconnect and reconnect ui signals
-        ContentTab *new_tab = qobject_cast<ContentTab *>(currentWidget());
-        if (m_LastContentTab != new_tab) {
+        ContentTab *next_tab = qobject_cast<ContentTab *>(currentWidget());
+        if (m_LastContentTab != next_tab) {
             // move updating of m_LastContentTab to be upfront *before* emitting the signal
             ContentTab* prevtab = m_LastContentTab;
-            m_LastContentTab = new_tab;
+            m_LastContentTab = next_tab;
             // flow control is lost in following line
-            emit TabChanged(prevtab,  new_tab);
+            emit TabChanged(prevtab,  next_tab);
+            emit UpdatePreviewAfterExistingTabSwitch();
         }
         tab->deleteLater();
         m_tabs_deletion_in_use = !m_TabsToDelete.isEmpty();
@@ -552,7 +549,7 @@ bool TabManager::SwitchedToExistingTab(const Resource *resource,
         if (flow_tab != NULL) {
             if (!caret_location_to_scroll_to.isEmpty()) {
                 flow_tab->ScrollToCaretLocation(caret_location_to_scroll_to);
-            } else if (position_to_scroll_to > 0) {
+            } else if (position_to_scroll_to >= 0) {
                 flow_tab->ScrollToPosition(position_to_scroll_to);
             } else if (!fragment.toString().isEmpty()) {
                 flow_tab->ScrollToFragment(fragment.toString());
@@ -562,7 +559,7 @@ bool TabManager::SwitchedToExistingTab(const Resource *resource,
 
 
             // manually update the Preview Location
-	    // flow_tab->EmitScrollPreviewImmediately();
+            flow_tab->EmitScrollPreviewImmediately();
 
             return true;
         }
@@ -570,7 +567,7 @@ bool TabManager::SwitchedToExistingTab(const Resource *resource,
         TextTab *text_tab = qobject_cast<TextTab *>(tab);
 
         if (text_tab != NULL) {
-            if (position_to_scroll_to > 0) {
+            if (position_to_scroll_to >= 0) {
                 text_tab->ScrollToPosition(position_to_scroll_to);
             } else {
                 text_tab->ScrollToLine(line_to_scroll_to);

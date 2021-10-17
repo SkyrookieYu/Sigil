@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2016  Kevin B. Hendricks, Stratford, ON, Canada
-**  Copyright (C) 2011  John Schember <john@nachtimwald.com>
+**  Copyright (C) 2016-2021 Kevin B. Hendricks, Stratford, ON, Canada
+**  Copyright (C) 2011      John Schember <john@nachtimwald.com>
 **
 **  This file is part of Sigil.
 **
@@ -36,14 +36,14 @@ Language *Language::instance()
     return m_instance;
 }
 
-QString Language::GetLanguageName(QString code)
+QString Language::GetLanguageName(QString code, QString ow)
 {
-    return m_languageCodeMap.value(code, QString());
+    return m_languageCodeMap.value(code, ow);
 }
 
-QString Language::GetLanguageCode(QString name)
+QString Language::GetLanguageCode(QString name, QString ow)
 {
-    return m_languageNameMap.value(name, QString());
+    return m_languageNameMap.value(name, ow);
 }
 
 QStringList Language::GetSortedPrimaryLanguageNames()
@@ -296,7 +296,7 @@ void Language::SetLanguageMap()
          "es-AR" << tr("Spanish") + QString(" - ") + tr("Argentina") <<
          "es-BO" << tr("Spanish") + QString(" - ") + tr("Bolivia") <<
          "es-CL" << tr("Spanish") + QString(" - ") + tr("Chile") <<
-         "es-CO" << tr("Spanish") + QString(" - ") + tr("Columbia") <<
+         "es-CO" << tr("Spanish") + QString(" - ") + tr("Colombia") <<
          "es-CR" << tr("Spanish") + QString(" - ") + tr("Costa Rica") <<
          "es-DO" << tr("Spanish") + QString(" - ") + tr("Dominican Republic") <<
          "es-EC" << tr("Spanish") + QString(" - ") + tr("Ecuador") <<

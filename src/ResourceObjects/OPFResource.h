@@ -134,10 +134,13 @@ public:
      *
      * @return A list of values
      */
-    QList<QVariant> GetDCMetadataValues(QString text) const;
+    QStringList GetDCMetadataValues(QString text) const;
 
     void SetNavResource(HTMLResource* nav);
     HTMLResource* GetNavResource() const;
+
+    void UpdateGuideAfterMerge(QList<Resource*> &merged_resources, QHash<QString,QString> &section_id_map);
+    void UpdateGuideFragments(QHash<QString,QString> &idupdates);
 
  signals:
     void TextChanging();
@@ -156,6 +159,7 @@ public slots:
     void AddResource(const Resource *resource);
 
     void RemoveResource(const Resource *resource);
+    void BulkRemoveResources(const QList<Resource *>resources);
 
     void AddGuideSemanticCode(HTMLResource *html_resource, QString code, bool toggle = true);
 

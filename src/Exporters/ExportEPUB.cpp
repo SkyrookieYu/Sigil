@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -26,6 +26,7 @@
 
 #include <string>
 #include <string.h>
+
 #include <zip.h>
 #ifdef _WIN32
 #include <iowin32.h>
@@ -90,7 +91,9 @@ void ExportEPUB::WriteBook()
         m_Book->GetOPF()->EnsureUUIDIdentifierPresent();
     }
 
-    m_Book->GetOPF()->AddSigilVersionMeta();
+    if (Utility::GetEnvironmentVar("SIGIL_DISABLE_VERSION_META").isEmpty()) {
+        m_Book->GetOPF()->AddSigilVersionMeta();
+    }
     m_Book->GetOPF()->AddModificationDateMeta();
     m_Book->SaveAllResourcesToDisk();
     TempFolder tempfolder;

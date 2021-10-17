@@ -1,5 +1,6 @@
 /************************************************************************
 **
+**  Copyright (C) 2020 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2012 John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012 Dave Heiland
 **  Copyright (C) 2012 Grant Drake
@@ -29,12 +30,15 @@
 #include <QtGui/QStandardItemModel>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QMenu>
+#include <QPointer>
 
 #include "Misc/SettingsStore.h"
 #include "MiscEditors/SearchEditorModel.h"
 #include "MiscEditors/SearchEditorTreeView.h"
 
 #include "ui_SearchEditor.h"
+
+class SearchEditorItemDelegate;
 
 /**
  * The editor used to create and modify saved searches
@@ -51,6 +55,8 @@ public slots:
     QStandardItem *AddEntry(bool is_group = false, SearchEditorModel::searchEntry *search_entry = NULL, bool insert_after = true);
 
     void ShowMessage(const QString &message);
+
+    QList<SearchEditorModel::searchEntry *> GetEntriesFromFullName(const QString& name);
 
 signals:
     void LoadSelectedSearchRequest(SearchEditorModel::searchEntry *search_entry);
@@ -82,7 +88,8 @@ private slots:
     void ExportAll();
     void CollapseAll();
     void ExpandAll();
-
+    void FillControls();
+    
     void Apply();
     bool Save();
 
@@ -119,12 +126,15 @@ private:
 
     SearchEditorModel::searchEntry *GetSelectedEntry(bool show_warning = true);
     QList<SearchEditorModel::searchEntry *> GetSelectedEntries();
-
+    
     QList<QStandardItem *> GetSelectedItems();
 
     bool ItemsAreUnique(QList<QStandardItem *> items);
 
     bool SaveData(QList<SearchEditorModel::searchEntry *> entries = QList<SearchEditorModel::searchEntry *>() , QString filename = QString());
+
+    bool SaveTextData(QList<SearchEditorModel::searchEntry *> entries = QList<SearchEditorModel::searchEntry *>() ,
+                      QString filename = QString(), QChar sep=QChar(9));
 
     bool FilterEntries(const QString &text, QStandardItem *item = NULL);
     bool SelectFirstVisibleNonGroup(QStandardItem *item);
@@ -150,14 +160,17 @@ private:
     QAction *m_ExportAll;
     QAction *m_CollapseAll;
     QAction *m_ExpandAll;
+    QAction *m_FillIn;
 
     SearchEditorModel *m_SearchEditorModel;
 
     QString m_LastFolderOpen;
 
-    QMenu *m_ContextMenu;
+    QPointer<QMenu> m_ContextMenu;
 
     QList<SearchEditorModel::searchEntry *> m_SavedSearchEntries;
+
+    SearchEditorItemDelegate * m_CntrlDelegate;
 
     Ui::SearchEditor ui;
 };

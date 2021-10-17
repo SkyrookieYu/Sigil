@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2016-2020 Kevin B. Hendricks, Stratford, Ontario, Canada
-**  Copyright (C) 2013 Dave Heiland
+**  Copyright (C) 2016-2021 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2013      Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -52,9 +52,9 @@ EditTOC::EditTOC(QSharedPointer<Book> book, QList<Resource *> resources, QWidget
     //  is it the ncx or the nav
     QString version = m_Book->GetConstOPF()->GetEpubVersion();
     if (version.startsWith("3")) {
-	m_BaseResource = m_Book->GetConstOPF()->GetNavResource();
+        m_BaseResource = m_Book->GetConstOPF()->GetNavResource();
     } else {
-	m_BaseResource = m_Book->GetNCX();
+        m_BaseResource = m_Book->GetNCX();
     }
 
     // Remove the Nav resource from list of HTMLResources if it exists (EPUB3)
@@ -375,17 +375,19 @@ void EditTOC::SelectTarget()
     // convert bookpath (epub root relative href) to relative to ncx or nav as appropriate
     QString ahref = item->text();
     if (ahref.indexOf(':') == -1) {
-        std::pair<QString,QString> parts = Utility::parseHREF(ahref);
-        ahref = Utility::buildRelativePath(m_BaseResource->GetRelativePath(), parts.first) + parts.second;
+        std::pair<QString,QString> parts = Utility::parseRelativeHREF(ahref);
+        ahref = Utility::buildRelativeHREF(Utility::buildRelativePath(m_BaseResource->GetRelativePath(),
+                                                                      parts.first), parts.second);
     }
 
     SelectHyperlink select_target(ahref, m_BaseResource, "toc", m_Resources, m_Book, this);
 
     if (select_target.exec() == QDialog::Accepted) {
-	QString href = select_target.GetTarget();
+        QString href = select_target.GetTarget();
         // now convert ncx or nav relative path back to bookpath epub root relative)
-	QString bookpath = Utility::buildBookPath(href, m_BaseResource->GetFolder());
-        item->setText(bookpath);
+        std::pair<QString,QString> parts = Utility::parseRelativeHREF(href);
+        QString bookpath = Utility::buildBookPath(parts.first, m_BaseResource->GetFolder());
+        item->setText(Utility::buildRelativeHREF(bookpath, parts.second));
     }
 }
 
@@ -484,7 +486,9 @@ void EditTOC::OpenContextMenu(const QPoint &point)
 {
     SetupContextMenu(point);
     m_ContextMenu->exec(ui.TOCTree->viewport()->mapToGlobal(point));
-    m_ContextMenu->clear();
+    if (!m_ContextMenu.isNull()) {
+        m_ContextMenu->clear();
+    }
 }
 
 void EditTOC::SetupContextMenu(const QPoint &point)

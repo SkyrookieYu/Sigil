@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012      Dave Heiland
 **
@@ -300,10 +300,9 @@ void IndexEditor::Open()
     QString filename = QFileDialog::getOpenFileName(this,
                        tr("Load Entries From File"),
                        m_LastFolderOpen,
-		       filter_string, 
-		       NULL,
-                       options
-                                                   );
+                       filter_string, 
+                       NULL,
+                       options);
 
     // Load the file and save the last folder opened
     if (!filename.isEmpty()) {
@@ -342,9 +341,8 @@ void IndexEditor::SaveAs()
                        tr("Save Entries to File"),
                        m_LastFolderOpen,
                        filter_string,
-		       &default_filter,
-                       options
-                                                   );
+                       &default_filter,
+                       options);
 
     if (filename.isEmpty()) {
         return;
@@ -462,19 +460,21 @@ void IndexEditor::OpenContextMenu(const QPoint &point)
 {
     SetupContextMenu(point);
     m_ContextMenu->exec(ui.IndexEditorTree->viewport()->mapToGlobal(point));
-    m_ContextMenu->clear();
-    // Make sure every action is enabled - in case shortcut is used after context menu disables some.
-    m_AddEntry->setEnabled(true);
-    m_Edit->setEnabled(true);
-    m_Cut->setEnabled(true);
-    m_Copy->setEnabled(true);
-    m_Paste->setEnabled(true);
-    m_Delete->setEnabled(true);
-    m_AutoFill->setEnabled(true);
-    m_Open->setEnabled(true);
-    m_Reload->setEnabled(true);
-    m_SaveAs->setEnabled(true);
-    m_SelectAll->setEnabled(true);
+    if (!m_ContextMenu.isNull()) {
+        m_ContextMenu->clear();
+        // Make sure every action is enabled - in case shortcut is used after context menu disables some.
+        m_AddEntry->setEnabled(true);
+        m_Edit->setEnabled(true);
+        m_Cut->setEnabled(true);
+        m_Copy->setEnabled(true);
+        m_Paste->setEnabled(true);
+        m_Delete->setEnabled(true);
+        m_AutoFill->setEnabled(true);
+        m_Open->setEnabled(true);
+        m_Reload->setEnabled(true);
+        m_SaveAs->setEnabled(true);
+        m_SelectAll->setEnabled(true);
+    }
 }
 
 void IndexEditor::SetupContextMenu(const QPoint &point)

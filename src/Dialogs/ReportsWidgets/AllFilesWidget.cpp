@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford, Ontario
 **  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012-2013 Dave Heiland
 **
@@ -98,7 +98,7 @@ void AllFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         // Filename
         item = new QStandardItem();
         item->setText(file_spname);
-	item->setData(filepath);
+        item->setData(filepath);
         item->setToolTip(filepath);
         rowItems << item;
         // File Size
@@ -107,6 +107,7 @@ void AllFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         QString fsize = QString::number(ffsize, 'f', 2);
         NumericItem *size_item = new NumericItem();
         size_item->setText(fsize);
+        size_item->setTextAlignment(Qt::AlignRight);
         rowItems << size_item;
         // Type
         item = new QStandardItem();
@@ -151,6 +152,7 @@ void AllFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
     // File size
     nitem = new NumericItem();
     nitem->setText(QLocale().toString(total_size, 'f', 2));
+    nitem->setTextAlignment(Qt::AlignRight);
     rowItems << nitem;
 
     QFont font;
@@ -208,14 +210,14 @@ void AllFilesWidget::DoubleClick()
 
     if (index.row() != m_ItemModel->rowCount() - 1) {
         QString filepath = m_ItemModel->itemFromIndex(index)->data().toString();
-        emit OpenFileRequest(filepath, 1);
+        emit OpenFileRequest(filepath, 1, -1);
     }
 }
 
 void AllFilesWidget::Save()
 {
-    QString report_info;
-    QString row_text;
+    QStringList report_info;
+    QStringList heading_row;
 
     // Get headings
     for (int col = 0; col < ui.fileTree->header()->count(); col++) {
@@ -224,35 +226,25 @@ void AllFilesWidget::Save()
         if (item) {
             text = item->text();
         }
-        if (col == 0) {
-            row_text.append(text);
-        } else {
-            row_text.append("," % text);
-        }
+        heading_row << text;
     }
-
-    report_info.append(row_text % "\n");
+    report_info << Utility::createCSVLine(heading_row);
 
     // Get data from table
     for (int row = 0; row < m_ItemModel->rowCount(); row++) {
-        row_text = "";
-
+        QStringList data_row;
         for (int col = 0; col < ui.fileTree->header()->count(); col++) {
             QStandardItem *item = m_ItemModel->item(row, col);
             QString text = "";
             if (item) {
                 text = item->text();
             }
-            if (col == 0) {
-                row_text.append(text);
-            } else {
-                row_text.append("," % text);
-            }
+            data_row << text;
         }
-
-        report_info.append(row_text % "\n");
+        report_info << Utility::createCSVLine(data_row);
     }
 
+    QString data = report_info.join('\n') + '\n';
     // Save the file
     ReadSettings();
     QString filter_string = "*.csv;;*.txt;;*.*";
@@ -264,20 +256,19 @@ void AllFilesWidget::Save()
 #endif
 
     QString destination = QFileDialog::getSaveFileName(this,
-                          tr("Save Report As Comma Separated File"),
-                          save_path,
-                          filter_string,
-			  &default_filter,
-                          options
-                                                      );
+                                                       tr("Save Report As Comma Separated File"),
+                                                       save_path,
+                                                       filter_string,
+                                                       &default_filter,
+                                                       options);
 
     if (destination.isEmpty()) {
         return;
     }
 
     try {
-        Utility::WriteUnicodeTextFile(report_info, destination);
-    } catch (CannotOpenFile) {
+        Utility::WriteUnicodeTextFile(data, destination);
+    } catch (CannotOpenFile&) {
         QMessageBox::warning(this, tr("Sigil"), tr("Cannot save report file."));
     }
 

@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  Copyright (C) 2020 Kevin B. Hendricks
+ **  Copyright (C) 2020-2021 Kevin B. Hendricks
  **
  **  This file is part of Sigil.
  **
@@ -43,7 +43,7 @@ static const QString FONT_HTML_BASE =
     "  <title></title>"
     "  <style>" 
     "    @font-face {"
-    "      src: url(%1);"
+    "      src: url(\"%1\");"
     "      font-family: \"%2\";"
     "      font-weight: \"%3\";"
     "      font-style: \"%4\";"
@@ -121,12 +121,12 @@ void FontView::ShowFont(QString path)
     } else desc = tr("No reliable font data");
 
     const QUrl furl = QUrl::fromLocalFile(path);
-    QString html = FONT_HTML_BASE.arg(furl.toString())
+    QString html = FONT_HTML_BASE.arg(furl.toEncoded().constData())
                                  .arg(font_name)
-	                         .arg(weight_name)
+                                 .arg(weight_name)
                                  .arg(style_name)
-	                         .arg(desc)
-	                         .arg(file_name)
+                                 .arg(desc)
+                                 .arg(file_name)
                                  .arg(QString::number(file_size));
     // allow translators to control over what the font is displaying
     html = html.replace("LOWERCASE_LETTERS", tr("abcdefghijklmnopqrstuvwxyz"));

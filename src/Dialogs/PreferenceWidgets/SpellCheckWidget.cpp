@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford, Ontario, Canada
 **  Copyright (C) 2013      Dave Heiland
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
@@ -85,11 +85,16 @@ PreferencesWidget::ResultActions SpellCheckWidget::saveSettings()
     settings.setEnabledUserDictionaries(EnabledDictionaries());
     settings.setDefaultUserDictionary(ui.defaultUserDictionary->text());
     settings.setDictionary(ui.dictionaries->itemData(ui.dictionaries->currentIndex()).toString());
+    settings.setSecondaryDictionary(ui.dictionaries->itemData(ui.dictionaries2d->currentIndex()).toString());
     settings.setSpellCheck(ui.HighlightMisspelled->checkState() == Qt::Checked);
     settings.setSpellCheckNumbers(ui.CheckNumbers->checkState() == Qt::Checked);
 
     SpellCheck *sc = SpellCheck::instance();
     sc->setDictionary(settings.dictionary(), true);
+    if (!settings.secondary_dictionary().isEmpty()) {
+        sc->setDictionary(settings.secondary_dictionary(), true);
+    }
+    sc->UpdateLangCodeToDictMapping();
 
     results = results | PreferencesWidget::ResultAction_RefreshSpelling;
     results = results & PreferencesWidget::ResultAction_Mask;
@@ -358,36 +363,40 @@ void SpellCheckWidget::readSettings()
     SpellCheck *sc = SpellCheck::instance();
     QStringList dicts = sc->dictionaries();
     ui.dictionaries->clear();
+    ui.dictionaries2d->clear();
     foreach(QString dict, dicts) {
         QString name;
         QString fix_dict = dict;
-	fix_dict.replace("_", "-");
-	QStringList parts = fix_dict.split("-");
-	int n = parts.count();
-	if (n == 1) {
+        fix_dict.replace("_", "-");
+        QStringList parts = fix_dict.split("-");
+        int n = parts.count();
+        if (n == 1) {
             name = lang->GetLanguageName(fix_dict);
-	} else {
-	    // try with the first two parts
-	    fix_dict = parts.at(0) + "-" + parts.at(1);
-	    name = lang->GetLanguageName(fix_dict);
-	    if (!name.isEmpty()) {
-	        // append any extra information to end
-	        for(int j=2; j < n; j++) name.append(" - " + parts.at(j)); 
-	    }
-	    if (name.isEmpty()) {
-	        // try with just the first part
-	        name = lang->GetLanguageName(parts.at(0));
-		if (!name.isEmpty()) {
-	            // append any extra information to end
-	            for(int j=1; j < n; j++) name.append(" - " + parts.at(j)); 
-		}
-	    }
-	}
-	if (name.isEmpty()) name = dict;
+        } else {
+            // try with the first two parts
+            fix_dict = parts.at(0) + "-" + parts.at(1);
+            name = lang->GetLanguageName(fix_dict);
+            if (!name.isEmpty()) {
+                // append any extra information to end
+                for(int j=2; j < n; j++) name.append(" - " + parts.at(j)); 
+            }
+            if (name.isEmpty()) {
+                // try with just the first part
+                name = lang->GetLanguageName(parts.at(0));
+                if (!name.isEmpty()) {
+                    // append any extra information to end
+                    for(int j=1; j < n; j++) name.append(" - " + parts.at(j)); 
+                }
+            }
+        }
+        if (name.isEmpty()) name = dict;
         ui.dictionaries->addItem(name, dict);
+        ui.dictionaries2d->addItem(name, dict);
     }
+    ui.dictionaries2d->addItem("", "");
+
     // Select the current dictionary.
-    QString currentDict = sc->currentDictionary();
+    QString currentDict = sc->currentPrimaryDictionary();
     SettingsStore settings;
 
     if (!currentDict.isEmpty()) {
@@ -396,6 +405,11 @@ void SpellCheckWidget::readSettings()
         if (index > -1) {
             ui.dictionaries->setCurrentIndex(index);
         }
+    }
+    currentDict = settings.secondary_dictionary();
+    int index = ui.dictionaries2d->findData(currentDict);
+    if (index > -1) {
+        ui.dictionaries2d->setCurrentIndex(index);
     }
 
     // Load the list of user dictionaries.
@@ -502,7 +516,7 @@ void SpellCheckWidget::saveUserDictionaryWordList(QString dict_name)
         }
     }
 
-    QStringList words = unique_words.toList();
+    QStringList words = unique_words.values();
     words.sort();
     // Replace words in the user dictionary.
     QFile userDictFile(dict_path);
@@ -601,6 +615,7 @@ void SpellCheckWidget::connectSignalsToSlots()
     connect(ui.removeWord, SIGNAL(clicked()), this, SLOT(removeWord()));
     connect(ui.removeAll, SIGNAL(clicked()), this, SLOT(removeAll()));
     connect(ui.dictionaries, SIGNAL(currentIndexChanged(int)), this, SLOT(dictionariesCurrentIndexChanged(int)));
+    connect(ui.dictionaries2d, SIGNAL(currentIndexChanged(int)), this, SLOT(dictionariesCurrentIndexChanged(int)));
     connect(ui.HighlightMisspelled, SIGNAL(stateChanged(int)), this, SLOT(highlightChanged(int)));
     connect(ui.CheckNumbers, SIGNAL(stateChanged(int)), this, SLOT(checkNumbersChanged(int)));
 

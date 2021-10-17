@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2015 Kevin B. Hendricks Stratford, ON, Canada 
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada 
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -24,10 +24,10 @@
 #ifndef BOOK_H
 #define BOOK_H
 
-#include <QtCore/QHash>
-#include <QtCore/QObject>
-#include <QtCore/QUrl>
-#include <QtCore/QVariant>
+#include <QHash>
+#include <QObject>
+#include <QUrl>
+#include <QPair>
 #include "ResourceObjects/OPFParser.h"
 #include "BookManipulation/XhtmlDoc.h"
 #include "ResourceObjects/Resource.h"
@@ -38,6 +38,7 @@ class FolderKeeper;
 class HTMLResource;
 class NCXResource;
 class OPFResource;
+class MiscTextResource;
 class Resource;
 
 /**
@@ -115,7 +116,7 @@ public:
      *
      * @return A list of values
      */
-    QList<QVariant> GetMetadataValues(QString text) const;
+    QStringList GetMetadataValues(QString text) const;
 
     /**
      * Replaces the book's current meta information with the received metadata.
@@ -151,9 +152,9 @@ public:
      * Creates a new HTML Nav file with a basic nav structure.
      */
     HTMLResource *CreateEmptyNavFile(bool update_opf = false, 
-				     const QString &folderpath=QString("\\"), 
-				     const QString &navname=QString("nav.xhtml"),
-				     const QString &first_textdir=QString("\\"));
+                                     const QString &folderpath=QString("\\"), 
+                                     const QString &navname=QString("nav.xhtml"),
+                                     const QString &first_textdir=QString("\\"));
 
     /**
      * Creates a new HTMLResource file with a basic XHTML structure
@@ -169,6 +170,8 @@ public:
     CSSResource *CreateEmptyCSSFile(const QString &folderpath = QString("\\"));
 
     SVGResource *CreateEmptySVGFile(const QString &folderpath = QString("\\"));
+
+    MiscTextResource *CreateEmptyJSFile(const QString &folderpath = QString("\\"));
 
     HTMLResource *CreateHTMLCoverFile(QString text);
 
@@ -225,7 +228,7 @@ public:
     QStringList GetClassesInHTMLFile(HTMLResource* html_resource);
 
     QSet<QString> GetWordsInHTMLFiles();
-    static QStringList GetWordsInHTMLFileMapped(HTMLResource *html_resource);
+    static QStringList GetWordsInHTMLFileMapped(HTMLResource *html_resource, const QString &default_lang);
 
     QHash<QString, int> GetUniqueWordsInHTMLFiles();
 
@@ -245,7 +248,9 @@ public:
     static std::tuple<QString, QStringList> GetVideoInHTMLFileMapped(HTMLResource *html_resource);
     static std::tuple<QString, QStringList> GetAudioInHTMLFileMapped(HTMLResource *html_resource);
     static std::tuple<QString, std::pair<int,int> > GetWordCountsInHTMLFileMapped(HTMLResource *html_resource);
+    
 
+    bool CheckHTMLFilesForWellFormedness(const QList<HTMLResource*> html_resources);
     QList<HTMLResource *> GetNonWellFormedHTMLFiles();
     static std::pair<HTMLResource*, bool> ResourceWellFormedMap(HTMLResource * html_resource);
 
@@ -256,6 +261,8 @@ public:
      * If the merge fails, returns resource which caused the failure, otherwise returns null.
      */
     Resource *MergeResources(QList<Resource *> resources);
+    static QPair<QString, QString> UpdateAndExtractBodyInOneFile(Resource * resource, const QStringList &merged_bookpaths);
+
 
     QList <Resource *> GetAllResources();
 
@@ -433,7 +440,6 @@ private:
      */
     FolderKeeper *m_Mainfolder;
 
-
     /**
      * Stores the modified state of the book.
      */
@@ -442,5 +448,3 @@ private:
 };
 
 #endif // BOOK_H
-
-

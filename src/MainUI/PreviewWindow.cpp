@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2020  Kevin B. Hendricks, Stratford Ontario Canada
-**  Copyright (C) 2019-2020  Doug Massay
+**  Copyright (C) 2015-2021  Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2019-2021  Doug Massay
 **  Copyright (C) 2012       Dave Heiland, John Schember
 **
 **  This file is part of Sigil.
@@ -35,20 +35,34 @@
 #include <QStylePainter>
 #include <QStyleOptionFrame>
 #include <QTimer>
+#include <QProgressBar>
 #include <QDebug>
 
 #include "MainUI/PreviewWindow.h"
 #include "Dialogs/Inspector.h"
-#include "Misc/GumboInterface.h"
+#include "Parsers/GumboInterface.h"
 #include "Misc/SleepFunctions.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
 #include "ViewEditors/ViewPreview.h"
+#include "ViewEditors/Overlay.h"
 #include "sigil_constants.h"
 
 static const QStringList HEADERTAGS = QStringList() << "h1" << "h2" << "h3" << "h4" << "h5" << "h6";
 
 static const QString SETTINGS_GROUP = "previewwindow";
+
+static const QString MATHJAX_CLEANUP = 
+   "<script type=\"text/x-mathjax-config\">"
+   "  MathJax.Hub.Register.StartupHook('End', function () {"
+   "    var mscripts = document.querySelectorAll(\"script[type='math/mml']\");"
+   "    function pruneScripts(item, index) {"
+   "      item.parentNode.removeChild(item);"
+   "    }"
+   "    mscripts.forEach(pruneScripts);"
+   "  });"
+   "</script>";;
+
 
 #define DBG if(0)
 
@@ -58,14 +72,21 @@ PreviewWindow::PreviewWindow(QWidget *parent)
     m_MainWidget(new QWidget(this)),
     m_Layout(new QVBoxLayout(m_MainWidget)),
     m_buttons(new QHBoxLayout()),
-    m_Preview(new ViewPreview(this)),
+    m_overlayBase(new OverlayHelperWidget(this)),
+    m_Preview(new ViewPreview(m_overlayBase)),
     m_Inspector(new Inspector(this)),
+    m_progress(new QProgressBar(this)),
     m_Filepath(QString()),
     m_titleText(QString()),
-    m_updatingPage(false)
+    m_updatingPage(false),
+    m_usingMathML(false)
 {
+    m_progress->reset();
+    m_progress->setMinimum(0);
+    m_progress->setMaximum(100);
     setWindowTitle(tr("Preview"));
     SetupView();
+    SetupOverlayTimer();
     LoadSettings();
     ConnectSignalsToSlots();
 }
@@ -88,13 +109,30 @@ PreviewWindow::~PreviewWindow()
     if (m_Inspector) {
         if (m_Inspector->isVisible()) {
             m_Inspector->StopInspection();
-	    m_Inspector->close();
-	}
+            m_Inspector->close();
+        }
         delete m_Inspector;
         m_Inspector = nullptr;
     }
+
+    if (m_progress) {
+        m_progress->reset();
+    }
 }
 
+void PreviewWindow::SetupOverlayTimer()
+{
+    m_OverlayTimer.setSingleShot(true);
+    m_OverlayTimer.setInterval(2000);
+    connect(&m_OverlayTimer, SIGNAL(timeout()), this, SLOT(ShowOverlay()));
+    m_OverlayTimer.stop();
+}
+
+void PreviewWindow::ShowOverlay()
+{
+    m_OverlayTimer.stop();
+    m_Preview->ShowOverlay();
+}
 
 void PreviewWindow::resizeEvent(QResizeEvent *event)
 {
@@ -108,7 +146,7 @@ void PreviewWindow::hideEvent(QHideEvent * event)
 {
     if (m_Inspector) {
         m_Inspector->StopInspection();
-	m_Inspector->close();
+        m_Inspector->close();
     }
 
     if ((m_Preview) && m_Preview->isVisible()) {
@@ -179,16 +217,16 @@ void PreviewWindow::SetupView()
     m_Layout->setContentsMargins(0, 0, 0, 0);
     m_Layout->addWidget(m_Preview);
 
-    m_inspectAction = new QAction(QIcon(":main/inspect_48px.png"),"", this);
+    m_inspectAction = new QAction(QIcon(":/main/inspect.svg"),"", this);
     m_inspectAction->setToolTip(tr("Inspect Page"));
 
-    m_selectAction  = new QAction(QIcon(":main/edit-select-all_48px.png"),"", this);
+    m_selectAction  = new QAction(QIcon(":/main/edit-select-all.svg"),"", this);
     m_selectAction->setToolTip(tr("Select-All"));
 
-    m_copyAction    = new QAction(QIcon(":main/edit-copy_48px.png"),"", this);
+    m_copyAction    = new QAction(QIcon(":/main/edit-copy.svg"),"", this);
     m_copyAction->setToolTip(tr("Copy Selection To ClipBoard"));
 
-    m_reloadAction  = new QAction(QIcon(":main/reload-page_48px.png"),"", this);
+    m_reloadAction  = new QAction(QIcon(":/main/reload-page.svg"),"", this);
     m_reloadAction->setToolTip(tr("Update Preview Window"));
 
     QToolBar * tb = new QToolBar();
@@ -196,6 +234,8 @@ void PreviewWindow::SetupView()
     tb->addAction(m_selectAction);
     tb->addAction(m_copyAction);
     tb->addAction(m_reloadAction);
+    tb->addWidget(m_progress);
+
     m_buttons->addWidget(tb);
     m_Layout->addLayout(m_buttons);
 
@@ -207,6 +247,10 @@ void PreviewWindow::SetupView()
     QApplication::restoreOverrideCursor();
 }
 
+// Note every call to Update Page needs to be followed by a call
+// to Zoom() as it is not properly zooming after loading
+// But Zoom() is not done synchronously so after zooming
+// you must delay before trying to update Preview to a specific location
 bool PreviewWindow::UpdatePage(QString filename_url, QString text, QList<ElementIndex> location)
 {
 
@@ -216,16 +260,25 @@ bool PreviewWindow::UpdatePage(QString filename_url, QString text, QList<Element
         DBG qDebug() << "ignoring PV UpdatePage since PV is not visible";
         return true;
     }
-   
+
     if (m_updatingPage) {
         DBG qDebug() << "delaying PV UpdatePage request as currently loading a page: ";
-	return false;
+        return false;
     }
 
     m_updatingPage = true;
+    SetCaretLocation(location);
+    m_progress->setRange(0,100);
+    m_progress->setValue(0);
+    m_OverlayTimer.start();
+
+    QRegularExpression mathused("<\\s*math [^>]*>");
+    QRegularExpressionMatch mo = mathused.match(text);
+    m_usingMathML = mo.hasMatch();
 
     DBG qDebug() << "PV UpdatePage " << filename_url;
     DBG foreach(ElementIndex ei, location) qDebug()<< "PV name: " << ei.name << " index: " << ei.index;
+
 
     //if isDarkMode is set, inject a local style in head
     SettingsStore settings;
@@ -242,20 +295,18 @@ bool PreviewWindow::UpdatePage(QString filename_url, QString text, QList<Element
         if (endheadpos > 1) {
             QString inject_userstyles = 
               "<link rel=\"stylesheet\" type=\"text/css\" "
-	      "href=\"" + m_usercssurl + "\" />\n";
-	    DBG qDebug() << "Preview injecting stylesheet: " << inject_userstyles;
+              "href=\"" + m_usercssurl + "\" />\n";
+            DBG qDebug() << "Preview injecting stylesheet: " << inject_userstyles;
             text.insert(endheadpos, inject_userstyles);
-	}
+        }
     }
 
     // If this page uses mathml tags, inject a polyfill
     // MathJax.js so that the mathml appears in the Preview Window
-    QRegularExpression mathused("<\\s*math [^>]*>");
-    QRegularExpressionMatch mo = mathused.match(text);
-    if (mo.hasMatch()) {
+    if (m_usingMathML) {
         int endheadpos = text.indexOf("</head>");
         if (endheadpos > 1) {
-            QString inject_mathjax = 
+            QString inject_mathjax = MATHJAX_CLEANUP + 
               "<script type=\"text/javascript\" async=\"async\" "
               "src=\"" + m_mathjaxurl + "\"></script>\n";
             text.insert(endheadpos, inject_mathjax);
@@ -264,62 +315,58 @@ bool PreviewWindow::UpdatePage(QString filename_url, QString text, QList<Element
 
     if (fixup_fullscreen_svg_images(text)) {
         QRegularExpression svg_height("<\\s*svg\\s[^>]*height\\s*=\\s*[\"'](100%)[\"'][^>]*>",
-				                   QRegularExpression::CaseInsensitiveOption |
-				                   QRegularExpression::MultilineOption | 
-                                                   QRegularExpression::DotMatchesEverythingOption);
+                                     QRegularExpression::CaseInsensitiveOption |
+                                     QRegularExpression::MultilineOption | 
+                                     QRegularExpression::DotMatchesEverythingOption);
         QRegularExpressionMatch hmo = svg_height.match(text, 0);
         if (hmo.hasMatch()) {
-	    int bp = hmo.capturedStart(1);
+            int bp = hmo.capturedStart(1);
             int n = hmo.capturedLength(1);
-	    text = text.replace(bp, n, "100vh"); 
-	}
+            text = text.replace(bp, n, "100vh"); 
+        }
 
         QRegularExpression svg_width("<\\s*svg\\s[^>]*width\\s*=\\s*[\"'](100%)[\"'][^>]*>",
-				                   QRegularExpression::CaseInsensitiveOption |
-				                   QRegularExpression::MultilineOption | 
-                                                   QRegularExpression::DotMatchesEverythingOption);
+                                    QRegularExpression::CaseInsensitiveOption |
+                                    QRegularExpression::MultilineOption | 
+                                    QRegularExpression::DotMatchesEverythingOption);
         QRegularExpressionMatch wmo = svg_width.match(text, 0);
         if (wmo.hasMatch()) {
-	    int bp = wmo.capturedStart(1);
+            int bp = wmo.capturedStart(1);
             int n = wmo.capturedLength(1);
-	    text = text.replace(bp, n, "100vw"); 
-	}
+            text = text.replace(bp, n, "100vw"); 
+        }
     }
 
     m_Filepath = filename_url;
     m_Preview->CustomSetDocument(filename_url, text);
 
-    // this next bit is allowing javascript to run before
-    // the page is finished loading somehow? 
-    // but we explicitly prevent that
+    m_progress->setValue(10);
+    return true;
+}
 
-    // Wait until the preview is loaded before moving cursor.
-    while (!m_Preview->IsLoadingFinished()) {
-        // This line broke close via titlebar on macOS so revert it
-        // qApp->processEvents(QEventLoop::ExcludeUserInputEvents, 100);
-        qApp->processEvents();
-    }
-
+void PreviewWindow::UpdatePageDone()
+{
     if (!m_Preview->WasLoadOkay()) qDebug() << "PV loadFinished with okay set to false!";
  
     DBG qDebug() << "PreviewWindow UpdatePage load is Finished";
     DBG qDebug() << "PreviewWindow UpdatePage final step scroll to location";
 
-#if 0
-    // use javascript to set the proper colors on the body tag in a style
-    if (Utility::IsDarkMode() && settings.previewDark()) {
-	QPalette pal = qApp->palette();
-	QString back = pal.color(QPalette::Base).name();
-	QString fore = pal.color(QPalette::Text).name();
-        m_Preview->SetPreviewColors(back, fore);
-    }
-#endif  
-
-    m_Preview->StoreCaretLocationUpdate(location);
-    m_Preview->ExecuteCaretUpdate();
+    // Zoom is handled internally to mPreview just before this is called
     UpdateWindowTitle();
+    m_OverlayTimer.stop();
+    m_progress->setValue(100);
+    m_progress->reset();
+    m_Preview->HideOverlay();
+    // need to delay long enough for Zoom changes to be reflected in View widget
+    // before trying to center it on a location.
+    QTimer::singleShot(30, this, SLOT(DelayedScrollTo()));
     m_updatingPage = false;
-    return true;
+}
+
+void PreviewWindow::DelayedScrollTo()
+{
+    m_Preview->StoreCaretLocationUpdate(m_location);
+    m_Preview->ExecuteCaretUpdate();
 }
 
 void PreviewWindow::ScrollTo(QList<ElementIndex> location)
@@ -328,8 +375,12 @@ void PreviewWindow::ScrollTo(QList<ElementIndex> location)
     if (!m_Preview->isVisible()) {
         return;
     }
-    m_Preview->StoreCaretLocationUpdate(location);
-    m_Preview->ExecuteCaretUpdate();
+    DBG foreach(ElementIndex ei, location) qDebug() << "name: " << ei.name << " index: " << ei.index;
+    SetCaretLocation(location);
+    if (!m_updatingPage) {
+        m_Preview->StoreCaretLocationUpdate(m_location);
+        m_Preview->ExecuteCaretUpdate();
+    }
 }
 
 void PreviewWindow::UpdateWindowTitle()
@@ -340,10 +391,10 @@ void PreviewWindow::UpdateWindowTitle()
         QString filename;
         if (!m_Filepath.isEmpty()) {
             filename = QFileInfo(m_Filepath).fileName();
-	}
+        }
         setTitleText(tr("Preview") + 
-		       " (" + QString::number(width) + "x" + QString::number(height) + ") " +
-		       filename);
+                        " (" + QString::number(width) + "x" + QString::number(height) + ") " +
+                        filename);
     }
     // qDebug() << "QDockWidget" << isFloating() << isVisible();
     if (isFloating()) {
@@ -383,8 +434,32 @@ QList<ElementIndex> PreviewWindow::GetCaretLocation()
 {
     DBG qDebug() << "PreviewWindow in GetCaretLocation";
     QList<ElementIndex> hierarchy = m_Preview->GetCaretLocation();
-    DBG foreach(ElementIndex ei, hierarchy) qDebug() << "name: " << ei.name << " index: " << ei.index;
+    for (int i = 0; i < hierarchy.length(); i++) {
+        if (m_usingMathML && (hierarchy[i].name == "body")) {
+            // compensate for MathJax added two divs injected as first children of body
+            hierarchy[i].index = hierarchy[i].index - 2;
+        }
+        DBG qDebug() << "name: " << hierarchy[i].name << " index: " << hierarchy[i].index;
+    }
     return hierarchy;
+}
+
+
+void PreviewWindow::SetCaretLocation(const QList<ElementIndex> &loc)
+{
+    DBG qDebug() << "PreviewWindow in SetCaretLocation";
+    QList<ElementIndex> hierarchy;
+    foreach(ElementIndex ei, loc) {
+        if (m_usingMathML && (ei.name == "body")) {
+            // compensate for MathJax added two divs injected as first children of body
+            ei.index = ei.index + 2;
+        }
+        hierarchy << ei;
+        DBG qDebug() << "name: " << ei.name << " index: " << ei.index;
+    }
+    m_location = hierarchy;
+    // Any Zoom must come *before* we do any caret updating
+    // *BUT* Zoom() does not complete instantaneously/synchronously
 }
 
 void PreviewWindow::SetZoomFactor(float factor)
@@ -403,63 +478,63 @@ bool PreviewWindow::eventFilter(QObject *object, QEvent *event)
   switch (event->type()) {
     case QEvent::ChildAdded:
       if (object == m_Preview) {
-	  DBG qDebug() << "child add event";
-	  const QChildEvent *childEvent(static_cast<QChildEvent*>(event));
-	  if (childEvent->child()) {
-	      childEvent->child()->installEventFilter(this);
-	  }
+          DBG qDebug() << "child add event";
+          const QChildEvent *childEvent(static_cast<QChildEvent*>(event));
+          if (childEvent->child()) {
+              childEvent->child()->installEventFilter(this);
+          }
       }
       break;
     case QEvent::MouseButtonPress:
       {
-	  DBG qDebug() << "Preview mouse button press event " << object;
-	  const QMouseEvent *mouseEvent(static_cast<QMouseEvent*>(event));
-	  if (mouseEvent) {
-	      if (mouseEvent->button() == Qt::LeftButton) {
-		  DBG qDebug() << "Detected Left Mouse Button Press Event";
-		  QString hoverurl = m_Preview->GetHoverUrl();
-		  if (hoverurl.isEmpty()) {
- 		      DBG qDebug() << "emitting GoToPreviewLocationRequest";
-	              QTimer::singleShot(50, this, SLOT(EmitGoToPreviewLocationRequest()));
+          DBG qDebug() << "Preview mouse button press event " << object;
+          const QMouseEvent *mouseEvent(static_cast<QMouseEvent*>(event));
+          if (mouseEvent) {
+              if (mouseEvent->button() == Qt::LeftButton) {
+                  DBG qDebug() << "Detected Left Mouse Button Press Event";
+                  QString hoverurl = m_Preview->GetHoverUrl();
+                  if (hoverurl.isEmpty()) {
+                       DBG qDebug() << "emitting GoToPreviewLocationRequest";
+                      QTimer::singleShot(50, this, SLOT(EmitGoToPreviewLocationRequest()));
                   } else {
-		      QUrl link2url(hoverurl);
+                      QUrl link2url(hoverurl);
                       QUrl currenturl(m_Preview->url());
-		      DBG qDebug() << "mouse press with : " << link2url.toString();
-		      DBG qDebug() << "  with current url: " << currenturl.toString();
+                      DBG qDebug() << "mouse press with : " << link2url.toString();
+                      DBG qDebug() << "  with current url: " << currenturl.toString();
                       QString fragment;
                       if (link2url.hasFragment()) {
-			  fragment = link2url.fragment();
+                          fragment = link2url.fragment();
                           link2url.setFragment(QString());
                       }
                       if (currenturl.hasFragment()) {
-			  currenturl.setFragment(QString());
-		      }
+                          currenturl.setFragment(QString());
+                      }
                       // test for local in-page link
-		      // otherwise do nothing and acceptNavigationRequest will handle it
+                      // otherwise do nothing and acceptNavigationRequest will handle it
                       if (link2url == currenturl) {
-			  DBG qDebug() << "we have a local link to fragment: " << fragment;
-			  // tell current CV tab to scroll to fragment or top
+                          DBG qDebug() << "we have a local link to fragment: " << fragment;
+                          // tell current CV tab to scroll to fragment or top
                           emit ScrollToFragmentRequest(fragment);  
-         	      }
-		  }
-	      } else if (mouseEvent->button() == Qt::RightButton) {
-		  QString hoverurl = m_Preview->GetHoverUrl();
-		  if (!hoverurl.isEmpty()) {
-		      QApplication::clipboard()->setText(hoverurl);
-		  }
-	      }
-	  }
+                       }
+                  }
+              } else if (mouseEvent->button() == Qt::RightButton) {
+                  QString hoverurl = m_Preview->GetHoverUrl();
+                  if (!hoverurl.isEmpty()) {
+                      QApplication::clipboard()->setText(hoverurl);
+                  }
+              }
+          }
       }
       break;
     case QEvent::MouseButtonRelease:
       {
-	  DBG qDebug() << "Preview mouse button release event " << object;
-	  const QMouseEvent *mouseEvent(static_cast<QMouseEvent*>(event));
-	  if (mouseEvent) {
-	      if (mouseEvent->button() == Qt::LeftButton) {
-	          DBG qDebug() << "Detected Left Mouse Button Release Event";
-	      }
-	  }
+          DBG qDebug() << "Preview mouse button release event " << object;
+          const QMouseEvent *mouseEvent(static_cast<QMouseEvent*>(event));
+          if (mouseEvent) {
+              if (mouseEvent->button() == Qt::LeftButton) {
+                  DBG qDebug() << "Detected Left Mouse Button Release Event";
+              }
+          }
       }
       break;
     default:
@@ -504,7 +579,7 @@ void PreviewWindow::InspectPreviewPage()
         m_Inspector->show();
         m_Inspector->raise();
         m_Inspector->activateWindow();
-	return;
+        return;
     }
     m_Inspector->StopInspection();
     m_Inspector->close();
@@ -524,7 +599,20 @@ void PreviewWindow::ReloadPreview()
 {
     // m_Preview->triggerPageAction(QWebEnginePage::ReloadAndBypassCache);
     // m_Preview->triggerPageAction(QWebEnginePage::Reload);
+
+    //force reset m_updatingPage in case a signal is lost
+    m_progress->reset();
+    m_OverlayTimer.stop();
+    m_Preview->HideOverlay();
+    m_updatingPage = false;
     emit RequestPreviewReload();
+}
+
+void PreviewWindow::setProgress(int val)
+{
+    if (val > 10 && val < 100) {
+      m_progress->setValue(val);
+    }
 }
 
 void PreviewWindow::LoadSettings()
@@ -537,14 +625,16 @@ void PreviewWindow::LoadSettings()
 
 void PreviewWindow::ConnectSignalsToSlots()
 {
-    connect(m_Preview,   SIGNAL(ZoomFactorChanged(float)), this, SIGNAL(ZoomFactorChanged(float)));
+    connect(m_Preview,   SIGNAL(ZoomFactorChanged(float)),  this, SIGNAL(ZoomFactorChanged(float)));
     connect(m_Preview,   SIGNAL(LinkClicked(const QUrl &)), this, SLOT(LinkClicked(const QUrl &)));
-    connect(m_inspectAction, SIGNAL(triggered()),     this, SLOT(InspectPreviewPage()));
-    connect(m_selectAction,  SIGNAL(triggered()),     this, SLOT(SelectAllPreview()));
-    connect(m_copyAction,    SIGNAL(triggered()),     this, SLOT(CopyPreview()));
-    connect(m_reloadAction,  SIGNAL(triggered()),     this, SLOT(ReloadPreview()));
-    connect(m_Inspector,     SIGNAL(finished(int)),   this, SLOT(InspectorClosed(int)));
-    connect(this,     SIGNAL(topLevelChanged(bool)),   this, SLOT(previewFloated(bool)));
+    connect(m_Preview,   SIGNAL(DocumentLoaded()),          this, SLOT(UpdatePageDone()));
+    connect(m_Preview,   SIGNAL(ViewProgress(int)),         this, SLOT(setProgress(int)));
+    connect(m_inspectAction, SIGNAL(triggered()),           this, SLOT(InspectPreviewPage()));
+    connect(m_selectAction,  SIGNAL(triggered()),           this, SLOT(SelectAllPreview()));
+    connect(m_copyAction,    SIGNAL(triggered()),           this, SLOT(CopyPreview()));
+    connect(m_reloadAction,  SIGNAL(triggered()),           this, SLOT(ReloadPreview()));
+    connect(m_Inspector,     SIGNAL(finished(int)),         this, SLOT(InspectorClosed(int)));
+    connect(this,     SIGNAL(topLevelChanged(bool)),        this, SLOT(previewFloated(bool)));
 }
 
 // Note: You can not use gumbo to perform the replacement as being
@@ -574,18 +664,18 @@ bool PreviewWindow::fixup_fullscreen_svg_images(const QString &text)
     for (unsigned int i = 0; i < children->length; ++i) {
         GumboNode* child = static_cast<GumboNode*>(children->data[i]);
         if (child->type == GUMBO_NODE_ELEMENT) {
-	    QString name = QString::fromStdString(gi.get_tag_name(child));
-	    bool ignore_tag = (name == "script") || (name == "style");
-	    if (HEADERTAGS.contains(name)) {
-		QString contents = gi.get_local_text_of_node(child);
-		ignore_tag = ignore_tag || contents.isEmpty();
-	    }
-	    if (!ignore_tag) {
-		child_names << name;
-		elcount++;
-	    }
-	    if (elcount > 1) break;
-	}
+            QString name = QString::fromStdString(gi.get_tag_name(child));
+            bool ignore_tag = (name == "script") || (name == "style");
+            if (HEADERTAGS.contains(name)) {
+                QString contents = gi.get_local_text_of_node(child);
+                ignore_tag = ignore_tag || contents.isEmpty();
+            }
+            if (!ignore_tag) {
+                child_names << name;
+                elcount++;
+            }
+            if (elcount > 1) break;
+        }
     }
     const QStringList allowed_tags = QStringList() << "div" << "svg"; 
     if ((elcount != 1) || !allowed_tags.contains(child_names.at(0))) return false;
@@ -598,7 +688,7 @@ bool PreviewWindow::fixup_fullscreen_svg_images(const QString &text)
         GumboNode* myparent = anode->parent;
         QString parent_name = QString::fromStdString(gi.get_tag_name(myparent));
         if ((parent_name != "script") && (parent_name != "style")) {
-	    path_pieces.prepend(parent_name);
+            path_pieces.prepend(parent_name);
         }
         anode = myparent;
     }
@@ -609,7 +699,7 @@ bool PreviewWindow::fixup_fullscreen_svg_images(const QString &text)
     // and if so change them to 100vh and 100vw respectively
     QHash<QString,QString> svgatts = gi.get_attributes_of_node(svg_node);
     if ((svgatts.value("width","") == "100%") && (svgatts.value("height","") == "100%")) {
-	return true;
+        return true;
     }
     return false;
 }

@@ -1,9 +1,9 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford, Ontario, Canada
 **  Copyright (C) 2012-2015 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012 Dave Heiland
-**  Copyright (C) 2009-2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2012      Dave Heiland
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -39,7 +39,7 @@
 #include "Dialogs/ViewImage.h"
 #include "MainUI/FindReplace.h"
 #include "MainUI/TOCModel.h"
-#include "Misc/CSSInfo.h"
+#include "Parsers/CSSInfo.h"
 #include "Misc/PasteTarget.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/ValidationResult.h"
@@ -103,10 +103,11 @@ public:
      * @param flags The flags used to modify window behavior.
      */
     MainWindow(const QString &openfilepath = QString(), 
-	       const QString version = QString(),
-	       bool is_internal = false, 
-	       QWidget *parent = 0, 
-	       Qt::WindowFlags flags = 0);
+               const QString version = QString(),
+               bool is_internal = false, 
+               QWidget *parent = 0, 
+               Qt::WindowFlags flags = Qt::WindowFlags());
+
     ~MainWindow();
 
     void maybe_fixup_dockwidget_geometry(QDockWidget * widget);
@@ -145,6 +146,10 @@ public:
      * @return List of valid selected HTML resources
      */
     QList <Resource *> GetValidSelectedHTMLResources();
+    QList <Resource *> GetValidSelectedCSSResources();
+
+    QList <Resource *> GetTabbedHTMLResources();
+    QList <Resource *> GetTabbedCSSResources();
 
     /**
      * Returns a list of all HTML resources in book browser order
@@ -152,7 +157,10 @@ public:
      * @return List of all HTML resources in book browser order
      */
     QList <Resource *> GetAllHTMLResources();
+    QList <Resource *> GetAllCSSResources();
 
+    QList <Resource *> GetOPFResource();
+    QList <Resource *> GetNCXResource();
 
     /**
      * Select resources in the Book Browser
@@ -204,8 +212,13 @@ public:
     QString GetCurrentFilePath();
 
     void DebugCurrentWidgetSizes();
-    
+
+    QString GetMathJaxFolder() { return m_mathjaxfolder; };
+
+
 public slots:
+
+    bool Automate(const QStringList &commands);
 
     void OpenUrl(const QUrl &url);
 
@@ -228,11 +241,11 @@ public slots:
                                         const QUrl &fragment = QUrl(),
                                         bool precede_current_tab = false);
 
-    void UpdateManifestProperties();
+    bool UpdateManifestProperties();
 
-    void GenerateNCXGuideFromNav();
+    bool GenerateNCXGuideFromNav();
 
-    void RemoveNCXGuideFromEpub3();
+    bool RemoveNCXGuideFromEpub3();
 
     void CreateIndex();
 
@@ -242,12 +255,22 @@ public slots:
 
     void launchExternalXEditor();
 
-    void RepoCommit();
+    bool RepoCommit();
     void RepoCheckout(QString bookid="", QString destpath="", QString filename="", bool loadnow=true);
     void RepoDiff(QString bookid="");
     void RepoManage();
 
-    void StandardizeEpub();
+    void RunAutomate1();
+    void RunAutomate2();
+    void RunAutomate3();
+    void RunAutomate(const QString &automatefile);
+
+    void EditAutomate1();
+    void EditAutomate2();
+    void EditAutomate3();
+    void EditAutomate(const QString &automatefile);
+    
+    bool StandardizeEpub();
 
     void CreateEpubLayout();
 
@@ -280,7 +303,7 @@ private slots:
 
     void RestoreLastNormalGeometry();
 
-    void AddCover();
+    bool AddCover();
 
 
     /**
@@ -354,8 +377,8 @@ private slots:
 
     bool DeleteCSSStyles(const QString &filename, QList<CSSInfo::CSSSelector *> css_selectors);
 
-    void DeleteUnusedMedia();
-    void DeleteUnusedStyles();
+    bool DeleteUnusedMedia(bool in_automate = false);
+    bool DeleteUnusedStyles(bool in_automate = false);
 
     void InsertFileDialog();
 
@@ -442,9 +465,11 @@ private slots:
     /**
      * Implements Validate Epub action functionality.
      */
-    void WellFormedCheckEpub();
+    bool WellFormedCheckEpub();
 
-    void ValidateStylesheetsWithW3C();
+    bool ValidateStylesheetsWithW3C();
+
+    bool ReformatAllStylesheets(bool multiple_line_format);
 
     bool CharLessThan(const QChar &s1, const QChar &s2);
 
@@ -567,15 +592,15 @@ private slots:
     /**
      * Creates new section/XHTML documents.
      */
-    void SplitOnSGFSectionMarkers();
+    bool SplitOnSGFSectionMarkers();
 
     void SetAutoSpellCheck(bool new_state);
 
     /**
      * Reformats all the book's html resources using Book.cpp's ReformatAllHTML() function.
      */
-    void MendPrettifyHTML();
-    void MendHTML();
+    bool MendPrettifyHTML();
+    bool MendHTML();
 
     void ClearIgnoredWords();
 
@@ -584,6 +609,8 @@ private slots:
     void MergeResources(QList <Resource *> resources);
 
     void LinkStylesheetsToResources(QList <Resource *> resources);
+
+    void LinkJavascriptsToResources(QList <Resource *> resources);
 
     void ResourceUpdatedFromDisk(Resource *resource);
 
@@ -600,11 +627,15 @@ private slots:
      */
     QStringList GetStylesheetsAlreadyLinked(Resource *resource);
 
+    QList<std::pair<QString, bool>> GetJavascriptsMap(QList<Resource *> resources);
+    QStringList GetJavascriptsAlreadyLinked(Resource *resource);
+
+
     void RemoveResources(QList<Resource *> resources = QList<Resource *>());
 
-    void GenerateToc();
+    bool GenerateTOC(bool skip_selector = false);
+    bool CreateHTMLTOC();
     void EditTOCDialog();
-    void CreateHTMLTOC();
 
     void ChangeCasing(QAction* act);
 
@@ -1022,6 +1053,13 @@ private:
      */
     QActionGroup *m_headingActionGroup;
 
+    QString m_mathjaxfolder;
+
+    bool m_FRVisible;
+
+    bool m_UsingAutomate;
+    QStringList m_AutomateLog;
+    
     /**
      * Holds all the widgets Qt Designer created for us.
      */

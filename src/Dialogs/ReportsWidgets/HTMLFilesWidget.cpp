@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, ON
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford, ON
 **  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012      Dave Heiland
 **
@@ -108,7 +108,7 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         QStandardItem *name_item = new QStandardItem();
         name_item->setText(filename);
         name_item->setToolTip(filepath);
-	name_item->setData(filepath);
+        name_item->setData(filepath);
         rowItems << name_item;
         // File Size
         double ffsize = QFile(path).size() / 1024.0;
@@ -116,23 +116,27 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         QString fsize = QString::number(ffsize, 'f', 2);
         NumericItem *size_item = new NumericItem();
         size_item->setText(fsize);
+        size_item->setTextAlignment(Qt::AlignRight);
         rowItems << size_item;
         // All words
-	std::pair<int, int> counts = word_count_hash[filepath];
+        std::pair<int, int> counts = word_count_hash[filepath];
         total_all_words += counts.first;
         NumericItem *words_item = new NumericItem();
         words_item->setText(QString::number(counts.first));
+        words_item->setTextAlignment(Qt::AlignRight);
         rowItems << words_item;
         // Misspelled words
         total_misspelled_words += counts.second;
         NumericItem *misspelled_item = new NumericItem();
         misspelled_item->setText(QString::number(counts.second));
+        misspelled_item->setTextAlignment(Qt::AlignRight);
         rowItems << misspelled_item;
         // Images
         NumericItem *image_item = new NumericItem();
         QStringList image_names = image_names_hash[filepath];
         total_images += image_names.count();
         image_item->setText(QString::number(image_names.count()));
+        image_item->setTextAlignment(Qt::AlignRight);
         if (!image_names.isEmpty()) {
             image_item->setToolTip(image_names.join("\n"));
         }
@@ -142,6 +146,7 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         QStringList video_names = video_names_hash[filepath];
         total_video += video_names.count();
         video_item->setText(QString::number(video_names.count()));
+        video_item->setTextAlignment(Qt::AlignRight);
         if (!video_names.isEmpty()) {
             video_item->setToolTip(video_names.join("\n"));
         }
@@ -151,6 +156,7 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         QStringList audio_names = audio_names_hash[filepath];
         total_audio += audio_names.count();
         audio_item->setText(QString::number(audio_names.count()));
+        audio_item->setTextAlignment(Qt::AlignRight);
         if (!audio_names.isEmpty()) {
             audio_item->setToolTip(audio_names.join("\n"));
         }
@@ -160,6 +166,7 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         QStringList stylesheet_names = stylesheet_names_hash[filepath];
         total_stylesheets += stylesheet_names.count();
         stylesheet_item->setText(QString::number(stylesheet_names.count()));
+        stylesheet_item->setTextAlignment(Qt::AlignRight);
         if (!stylesheet_names.isEmpty()) {
             stylesheet_item->setToolTip(stylesheet_names.join("\n"));
         }
@@ -194,30 +201,37 @@ void HTMLFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
     // File size
     nitem = new NumericItem();
     nitem->setText(QLocale().toString(total_size, 'f', 2));
+    nitem->setTextAlignment(Qt::AlignRight);
     rowItems << nitem;
     // All Words
     nitem = new NumericItem();
     nitem->setText(QString::number(total_all_words));
+    nitem->setTextAlignment(Qt::AlignRight);
     rowItems << nitem;
     // Misspelled Words
     nitem = new NumericItem();
     nitem->setText(QString::number(total_misspelled_words));
+    nitem->setTextAlignment(Qt::AlignRight);
     rowItems << nitem;
     // Images
     nitem = new NumericItem();
     nitem->setText(QString::number(total_images));
+    nitem->setTextAlignment(Qt::AlignRight);
     rowItems << nitem;
     // Video
     nitem = new NumericItem();
     nitem->setText(QString::number(total_video));
+    nitem->setTextAlignment(Qt::AlignRight);
     rowItems << nitem;
     // Audio
     nitem = new NumericItem();
     nitem->setText(QString::number(total_audio));
+    nitem->setTextAlignment(Qt::AlignRight);
     rowItems << nitem;
     // Stylesheets
     nitem = new NumericItem();
     nitem->setText(QString::number(total_stylesheets));
+    nitem->setTextAlignment(Qt::AlignRight);
     rowItems << nitem;
     // Well formed
     nitem = new NumericItem();
@@ -279,14 +293,14 @@ void HTMLFilesWidget::DoubleClick()
 
     if (index.row() != m_ItemModel->rowCount() - 1) {
         QString filepath = m_ItemModel->itemFromIndex(index)->data().toString();
-        emit OpenFileRequest(filepath, 1);
+        emit OpenFileRequest(filepath, 1, -1);
     }
 }
 
 void HTMLFilesWidget::Save()
 {
-    QString report_info;
-    QString row_text;
+    QStringList report_info;
+    QStringList heading_row;
 
     // Get headings
     for (int col = 0; col < ui.fileTree->header()->count(); col++) {
@@ -295,35 +309,25 @@ void HTMLFilesWidget::Save()
         if (item) {
             text = item->text();
         }
-        if (col == 0) {
-            row_text.append(text);
-        } else {
-            row_text.append("," % text);
-        }
+        heading_row << text;
     }
-
-    report_info.append(row_text % "\n");
+    report_info << Utility::createCSVLine(heading_row);
 
     // Get data from table
     for (int row = 0; row < m_ItemModel->rowCount(); row++) {
-        row_text = "";
-
+        QStringList data_row;
         for (int col = 0; col < ui.fileTree->header()->count(); col++) {
             QStandardItem *item = m_ItemModel->item(row, col);
             QString text = "";
             if (item) {
                 text = item->text();
             }
-            if (col == 0) {
-                row_text.append(text);
-            } else {
-                row_text.append("," % text);
-            }
+            data_row << text;
         }
-
-        report_info.append(row_text % "\n");
+        report_info << Utility::createCSVLine(data_row);
     }
 
+    QString data = report_info.join('\n') + '\n';
     // Save the file
     ReadSettings();
     QString filter_string = "*.csv;;*.txt;;*.*";
@@ -335,20 +339,19 @@ void HTMLFilesWidget::Save()
 #endif
 
     QString destination = QFileDialog::getSaveFileName(this,
-                          tr("Save Report As Comma Separated File"),
-                          save_path,
-                          filter_string,
-			  &default_filter,
-                          options
-                                                      );
+                                                       tr("Save Report As Comma Separated File"),
+                                                       save_path,
+                                                       filter_string,
+                                                       &default_filter,
+                                                       options);
 
     if (destination.isEmpty()) {
         return;
     }
 
     try {
-        Utility::WriteUnicodeTextFile(report_info, destination);
-    } catch (CannotOpenFile) {
+        Utility::WriteUnicodeTextFile(data, destination);
+    } catch (CannotOpenFile&) {
         QMessageBox::warning(this, tr("Sigil"), tr("Cannot save report file."));
     }
 
@@ -363,8 +366,8 @@ void HTMLFilesWidget::Delete()
 
     if (ui.fileTree->selectionModel()->hasSelection()) {
         foreach(QModelIndex index, ui.fileTree->selectionModel()->selectedRows(0)) {
-	    QString bookpath = m_ItemModel->itemFromIndex(index)->data().toString();
-	    files_to_delete.append(bookpath);
+            QString bookpath = m_ItemModel->itemFromIndex(index)->data().toString();
+            files_to_delete.append(bookpath);
         }
     }
 
@@ -384,7 +387,9 @@ void HTMLFilesWidget::OpenContextMenu(const QPoint &point)
 {
     SetupContextMenu(point);
     m_ContextMenu->exec(ui.fileTree->viewport()->mapToGlobal(point));
-    m_ContextMenu->clear();
+    if (!m_ContextMenu.isNull()) {
+        m_ContextMenu->clear();
+    }
 }
 
 void HTMLFilesWidget::SetupContextMenu(const QPoint &point)

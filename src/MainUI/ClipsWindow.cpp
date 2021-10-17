@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -25,6 +25,7 @@
 #include <QtGui/QContextMenuEvent>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QMenu>
+#include <QPointer>
 
 #include "Misc/Utility.h"
 #include "MainUI/ClipsWindow.h"
@@ -67,7 +68,7 @@ void ClipsWindow::SetupTreeView()
     m_TreeView->setAlternatingRowColors(false);
 
     m_TreeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    m_TreeView->sortByColumn(-1);
+    m_TreeView->sortByColumn(-1, Qt::AscendingOrder);
     m_TreeView->setUniformRowHeights(true);
     m_TreeView->setDragEnabled(false);
     m_TreeView->setAcceptDrops(false);
@@ -96,7 +97,7 @@ void ClipsWindow::ItemClickedHandler(const QModelIndex &index)
 
 void ClipsWindow::contextMenuEvent(QContextMenuEvent *event)
 {
-    QMenu *menu = new QMenu(this);
+    QPointer<QMenu> menu = new QMenu(this);
     // Add menu options
     QAction *collapseAction = new QAction(tr("Collapse All"), menu);
     QAction *expandAction = new QAction(tr("Expand All"), menu);
@@ -105,4 +106,7 @@ void ClipsWindow::contextMenuEvent(QContextMenuEvent *event)
     menu->addAction(expandAction);
     connect(expandAction, SIGNAL(triggered()), m_TreeView, SLOT(expandAll()));
     menu->exec(mapToGlobal(event->pos()));
+    if (!menu.isNull()) {
+        delete menu.data();
+    }
 }

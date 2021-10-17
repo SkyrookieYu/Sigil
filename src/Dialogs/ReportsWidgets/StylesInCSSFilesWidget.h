@@ -1,8 +1,8 @@
 /************************************************************************
 **
-**  Copyright (C) 2019 Kevin B. Hendricks, Stratford, Ontario, Canada
-**  Copyright (C) 2012 John Schember <john@nachtimwald.com>
-**  Copyright (C) 2012 Dave Heiland
+**  Copyright (C) 2019-2020 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2012      John Schember <john@nachtimwald.com>
+**  Copyright (C) 2012      Dave Heiland
 **
 **  This file is part of Sigil.
 **
@@ -31,6 +31,7 @@
 #include <QtCore/QSharedPointer>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QMenu>
+#include <QPointer>
 
 #include "ResourceObjects/Resource.h"
 #include "BookManipulation/Book.h"
@@ -54,7 +55,7 @@ public:
 
 signals:
     void CloseDialog();
-    void OpenFileRequest(QString, int);
+    void OpenFileRequest(QString, int, int);
     void DeleteStylesRequest(QList<BookReports::StyleData *>);
 
 private slots:
@@ -83,7 +84,7 @@ private:
 
     QStandardItemModel *m_ItemModel;
 
-    QMenu *m_ContextMenu;
+    QPointer<QMenu> m_ContextMenu;
 
     QAction *m_Delete;
 

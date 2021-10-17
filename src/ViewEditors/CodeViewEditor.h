@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks Stratford, ON Canada 
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2021 Kevin B. Hendricks Stratford, ON Canada 
+**  Copyright (C) 2009-2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -30,11 +30,13 @@
 #include <QtGui/QStandardItem>
 #include <QtCore/QUrl>
 
-#include "Misc/CSSInfo.h"
+#include "Parsers/CSSInfo.h"
+#include "Parsers/HTMLStyleInfo.h"
 #include "Misc/PasteTarget.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
-#include "Misc/TextDocument.h"
+#include "Widgets/TextDocument.h"
+#include "Parsers/TagLister.h"
 #include "MiscEditors/ClipEditorModel.h"
 #include "MiscEditors/IndexEditorModel.h"
 #include "ViewEditors/ViewEditor.h"
@@ -102,6 +104,9 @@ public:
     void CutCodeTags();
     bool IsCutCodeTagsAllowed();
 
+    void CutTagPair();
+    bool IsCutTagPairAllowed();
+
     bool TextIsSelected();
     bool TextIsSelectedAndNotInStartOrEndTag();
 
@@ -132,8 +137,8 @@ public:
     bool IsInsertIdAllowed();
     bool IsInsertHyperlinkAllowed();
     bool InsertTagAttribute(const QString &element_name, const QString &attribute_name, 
-			    const QString &attribute_value, const QStringList &tag_list, 
-			    bool ignore_seletion = false);
+                            const QString &attribute_value, const QStringList &tag_list, 
+                            bool ignore_seletion = false);
 
     /**
     * Splits the section and returns the "upper" content.
@@ -346,7 +351,10 @@ public:
      * get appropriate attribute_value for attribute_name.
      *
      */
-    QString GetAttribute(const QString &attribute_name, QStringList tag_list = QStringList(), bool must_be_in_attribute = false, bool skip_paired_tags = false);
+    QString GetAttribute(const QString &attribute_name, QStringList tag_list = QStringList(),
+                         bool must_be_in_attribute = false, bool skip_paired_tags = false,
+                         bool must_be_in_body = true);
+
 
     QString SetAttribute(const QString &attribute_name, QStringList tag_list = QStringList(), const QString &attribute_value = QString(), bool must_be_in_attribute = false, bool skip_paired_tags = false);
 
@@ -357,8 +365,11 @@ public:
      * @param attribute_name The name of the attribute to be inserted/replaced.
      * @param attribute_value The new value to be assigned to this attribute.
      */
-    QString ProcessAttribute(const QString &attribute_name, QStringList tag_list = QStringList(), const QString &attribute_value = QString(), bool set_attribute = false , bool must_be_in_attribute = false, bool skip_paired_tags = false);
-
+    QString ProcessAttribute(const QString &attribute_name, QStringList tag_list = QStringList(),
+                             const QString &attribute_value = QString(), bool set_attribute = false,
+                             bool must_be_in_attribute = false, bool skip_paired_tags = false,
+                             bool must_be_in_body = true);
+    
     /**
      * Control whether the Reformat CSS submenu is available on the context menu.
      */
@@ -475,6 +486,8 @@ protected:
 
     void mouseReleaseEvent(QMouseEvent *event);
 
+    void mouseDoubleClickEvent(QMouseEvent *event);
+    
     /**
      * Handles the content menu event for the editor.
      *
@@ -534,7 +547,7 @@ private slots:
     /**
      * Highlights the line the user is editing.
      */
-    void HighlightCurrentLine();
+    void HighlightCurrentLine(bool highlight_tags=true);
 
     /**
      * Wrapper slot for the Scroll One Line Up shortcut.
@@ -567,17 +580,14 @@ private slots:
 private:
     bool IsMarkedText();
 
+    void MaybeRegenerateTagList();
+
     QString RemoveFirstTag(const QString &text, const QString &tagname);
     QString RemoveLastTag(const QString &text, const QString &tagname);
 
     QString GetCurrentWordAtCaret(bool select_word);
 
     bool PasteClipEntry(ClipEditorModel::clipEntry *clip);
-
-    /**
-     * Returns the text inside < > if cursor is in < >
-     */
-    QString GetTagText();
 
     /**
      * Resets the currently used font.
@@ -702,14 +712,14 @@ private:
     /**
      * Is this position within the <body> tag of this text.
      */
-    bool IsPositionInBody(const int &pos = -1, const QString &text = QString());
-    bool IsPositionInTag(const int &pos = -1, const QString &text = QString());
-    bool IsPositionInOpeningTag(const int &pos = -1, const QString &text = QString());
-    bool IsPositionInClosingTag(const int &pos = -1, const QString &text = QString());
-    QString GetOpeningTagName(const int &pos, const QString &text);
-    QString GetClosingTagName(const int &pos, const QString &text);
+    bool IsPositionInBody(int pos);
+    bool IsPositionInTag(int pos);
+    bool IsPositionInOpeningTag(int pos);
+    bool IsPositionInClosingTag(int pos);
+    QString GetOpeningTagName(int pos);
+    QString GetClosingTagName(int pos);
 
-    void FormatSelectionWithinElement(const QString &element_name, const int &previous_tag_index, const QString &text);
+    void FormatSelectionWithinElement(const QString &element_name, int tagno, const QString &text);
 
     void ReplaceTags(const int &opening_tag_start, const int &opening_tag_end, const QString &opening_tag_text,
                      const int &closing_tag_start, const int &closing_tag_end, const QString &closing_tag_text);
@@ -741,13 +751,13 @@ private:
      * Given a list of CSS properties perform any pruning/replacing/adding as necessary to
      * ensure that property_name:property_value is added (or removed if it already exists).
      */
-    void ApplyChangeToProperties(QList<CSSInfo::CSSProperty *> &css_properties, const QString &property_name, const QString &property_value);
+    void ApplyChangeToProperties(QList<HTMLStyleInfo::CSSProperty> &css_properties, const QString &property_name, const QString &property_value);
 
     void ReformatCSS(bool multiple_line_format);
 
     void ReformatHTML(bool all, bool to_valid);
 
-    QStringList GetUnmatchedTagsForBlock(const int &pos, const QString &text) const;
+    QStringList GetUnmatchedTagsForBlock(int pos);
 
     void SelectAndScrollIntoView(int start_position, int end_position, Searchable::Direction direction, bool wrapped);
 
@@ -867,6 +877,9 @@ private:
      */
     bool m_pendingSpellingHighlighting;
     QString m_element_name;
+
+    TagLister m_TagList;
+    bool m_regen_taglist;
 };
 
 #endif // CODEVIEWEDITOR_H

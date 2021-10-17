@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2020 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2020-2021 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2020 Doug Massay
 **
 **  Based on CodeViewEditor.cpp portions of which were:
@@ -32,6 +32,7 @@
 #include <QSignalMapper>
 #include <QAction>
 #include <QMenu>
+#include <QPointer>
 #include <QColor>
 #include <QPainter>
 #include <QScrollBar>
@@ -88,11 +89,11 @@ int TextView::CalculateLineNumberAreaWidth()
     int max_width = 0;
     foreach(const QString& aval, m_blockmap) {
         if (aval.length() > max_width) {
-	    max_width = aval.length();
-	}
+            max_width = aval.length();
+        }
     }
     if (max_width == 0) {
-	return 0;
+        return 0;
     }
     int num_digits = 1;
     int max_value = std::max(1, blockCount());
@@ -102,7 +103,12 @@ int TextView::CalculateLineNumberAreaWidth()
         max_value /= 10;
         num_digits++;
     }
+#if QT_VERSION >= QT_VERSION_CHECK(5, 11, 0)
+    return LINE_NUMBER_MARGIN * 2 + fontMetrics().horizontalAdvance(QChar('0')) * num_digits;
+#else
     return LINE_NUMBER_MARGIN * 2 + fontMetrics().width(QChar('0')) * num_digits;
+#endif
+
 }
 
 void TextView::UpdateLineNumberAreaFont(const QFont &font)
@@ -147,18 +153,18 @@ void TextView::LineNumberAreaPaintEvent(QPaintEvent *event)
     // We loop through all the visible and
     // unobscured blocks and paint line numbers for each
     while (block.isValid() && (top <= event->rect().bottom())) {
-	if (block.isVisible() && (bottom >= event->rect().top())) {
+        if (block.isVisible() && (bottom >= event->rect().top())) {
             QString numlbl = "";
-	    if (blockNumber < m_blockmap.count()) {
-		numlbl = m_blockmap.at(blockNumber);
-	    }
-	    // Draw the number in the line number area.
-	    painter.setPen(m_codeViewAppearance.line_number_foreground_color);
-	    // painter.setPen(Qt::black);
-	    painter.drawText(0, top, m_LineNumberArea->width(), height, Qt::AlignRight, numlbl);
-	}
+            if (blockNumber < m_blockmap.count()) {
+                numlbl = m_blockmap.at(blockNumber);
+            }
+            // Draw the number in the line number area.
+            painter.setPen(m_codeViewAppearance.line_number_foreground_color);
+            // painter.setPen(Qt::black);
+            painter.drawText(0, top, m_LineNumberArea->width(), height, Qt::AlignRight, numlbl);
+        }
         block = block.next();
-	top = bottom;
+        top = bottom;
         bottom = top + blockBoundingRect(block).height();
         blockNumber++;
     }
@@ -167,19 +173,19 @@ void TextView::LineNumberAreaPaintEvent(QPaintEvent *event)
 void TextView::DoHighlightDocument(HighlighterType high_type)
 {
     if (m_Highlighter) {
-	delete m_Highlighter;
-	m_Highlighter = nullptr;
+        delete m_Highlighter;
+        m_Highlighter = nullptr;
     }
     if (!m_Highlighter) {
-	if (high_type == TextView::Highlight_XHTML) {
-	    m_Highlighter = new XHTMLHighlighter(false, this);
-	} else if (high_type == TextView::Highlight_CSS) {
-	    m_Highlighter = new CSSHighlighter(this);
-	}
+        if (high_type == TextView::Highlight_XHTML) {
+            m_Highlighter = new XHTMLHighlighter(false, this);
+        } else if (high_type == TextView::Highlight_CSS) {
+            m_Highlighter = new CSSHighlighter(this);
+        }
     }
     if (m_Highlighter) {
         m_Highlighter->setDocument(document());
-	RehighlightDocument();
+        RehighlightDocument();
     }
 }
 
@@ -196,12 +202,12 @@ void TextView::RehighlightDocument()
     }
 
     if (m_Highlighter) {
-	// We block signals from the document while highlighting takes place,
-	// because we do not want the contentsChanged() signal to be fired
-	// which would mark the underlying resource as needing saving.
-	document()->blockSignals(true);
-	m_Highlighter->rehighlight();
-	document()->blockSignals(false);
+        // We block signals from the document while highlighting takes place,
+        // because we do not want the contentsChanged() signal to be fired
+        // which would mark the underlying resource as needing saving.
+        document()->blockSignals(true);
+        m_Highlighter->rehighlight();
+        document()->blockSignals(false);
     }
 }
 
@@ -282,15 +288,15 @@ QString TextView::selected_text_from_cursor(const QTextCursor& cursor) const
             case 0xfdd1: // QTextEndOfFrame
             case QChar::ParagraphSeparator:
             case QChar::LineSeparator:
-	        *uc = QLatin1Char('\n');
-	        break;
+                *uc = QLatin1Char('\n');
+                break;
             default:
-	    ;
+            ;
         }
     }
     QStringList result;
     foreach(QString line, txt.split('\n')) {
-    	result << rstrip_pad(line);	
+        result << rstrip_pad(line); 
     }
     txt = result.join('\n');
     return txt;
@@ -357,8 +363,7 @@ void TextView::resizeEvent(QResizeEvent *event)
                                         contents_area.top(),
                                         CalculateLineNumberAreaWidth(),
                                         contents_area.height()
-                                       )
-                                 );
+                                       ));
 }
 
 
@@ -399,55 +404,14 @@ void TextView::mouseReleaseEvent(QMouseEvent *event)
 // menu to disappear and thus be inaccessible to the user.
 void TextView::contextMenuEvent(QContextMenuEvent *event)
 {
-    QMenu *menu = createStandardContextMenu();
+    QPointer<QMenu> menu = createStandardContextMenu();
     
     menu->exec(event->globalPos());
-    delete menu;
-}
-
-#if 0
-void TextView::AddReformatHTMLContextMenu(QMenu *menu)
-{
-    QAction *topAction = 0;
-
-    if (!menu->actions().isEmpty()) {
-        topAction = menu->actions().at(0);
-    }
-
-    QMenu *reformatMenu = new QMenu(tr("Reformat HTML"), menu);
-
-    QAction *cleanAction = new QAction(tr("Mend and Prettify Code"), reformatMenu);
-    QAction *cleanAllAction = new QAction(tr("Mend and Prettify Code - All HTML Files"), reformatMenu);
-    QAction *toValidAction = new QAction(tr("Mend Code"), reformatMenu);
-    QAction *toValidAllAction = new QAction(tr("Mend Code - All HTML Files"), reformatMenu);
-    connect(cleanAction, SIGNAL(triggered()), this, SLOT(ReformatHTMLCleanAction()));
-    connect(cleanAllAction, SIGNAL(triggered()), this, SLOT(ReformatHTMLCleanAllAction()));
-    connect(toValidAction, SIGNAL(triggered()), this, SLOT(ReformatHTMLToValidAction()));
-    connect(toValidAllAction, SIGNAL(triggered()), this, SLOT(ReformatHTMLToValidAllAction()));
-    reformatMenu->addAction(cleanAction);
-    reformatMenu->addAction(cleanAllAction);
-    reformatMenu->addSeparator();
-    reformatMenu->addAction(toValidAction);
-    reformatMenu->addAction(toValidAllAction);
-
-    if (!topAction) {
-        menu->addMenu(reformatMenu);
-    } else {
-        menu->insertMenu(topAction, reformatMenu);
-    }
-
-    if (topAction) {
-        menu->insertSeparator(topAction);
+    if (!menu.isNull()) {
+        delete menu.data();
     }
 }
-#endif
 
-#if 0
-void TextView::GoToLinkOrStyle()
-{
-    // emit LinkClicked(QUrl(url_name));
-}
-#endif
 
 // Overridden so we can emit the FocusGained() signal.
 void TextView::focusInEvent(QFocusEvent *event)
@@ -464,31 +428,6 @@ void TextView::focusOutEvent(QFocusEvent *event)
     emit FocusLost(this);
     QPlainTextEdit::focusOutEvent(event);
 }
-
-#if 0
-void TextView::ScrollOneLineUp()
-{
-    ScrollByLine(false);
-}
-
-void TextView::ScrollOneLineDown()
-{
-    ScrollByLine(true);
-}
-#endif
-
-#if 0
-void TextView::ResetFont()
-{
-    // Let's try to use our user specified value as our font (default Courier New)
-    QFont font(m_textViewAppearance.font_family, m_textViewAppearance.font_size);
-    // But just in case, say we want a fixed width font if font is not present
-    font.setStyleHint(QFont::TypeWriter);
-    setFont(font);
-    setTabStopWidth(TAB_SPACES_WIDTH * QFontMetrics(font).width(' '));
-    UpdateLineNumberAreaFont(font);
-}
-#endif
 
 
 void TextView::SetAppearanceColors()
@@ -528,23 +467,23 @@ void TextView::keyPressEvent(QKeyEvent* ev)
     int key = ev->key();
     if ((key == Qt::Key_Up) || (key == Qt::Key_Down) || (key == Qt::Key_J) || (key ==  Qt::Key_K)) {
         amount = m_verticalScrollBar->singleStep();
-	if ((key == Qt::Key_Up) || (key ==  Qt::Key_K)) d = -1;
+        if ((key == Qt::Key_Up) || (key ==  Qt::Key_K)) d = -1;
 
     } else if ((key == Qt::Key_PageUp) || (key == Qt::Key_PageDown)) {
-	amount = m_verticalScrollBar->pageStep();
-	if (key == Qt::Key_PageUp) d = -1;
+        amount = m_verticalScrollBar->pageStep();
+        if (key == Qt::Key_PageUp) d = -1;
 
     } else if ((key == Qt::Key_Home) || (key == Qt::Key_End)) {
-	if (key == Qt::Key_Home) {
-	    m_verticalScrollBar->setValue(0);
-	} else {
-	    m_verticalScrollBar->maximum();
-	}
+        if (key == Qt::Key_Home) {
+            m_verticalScrollBar->setValue(0);
+        } else {
+            m_verticalScrollBar->maximum();
+        }
         return;
 
     } else if ((key == Qt::Key_N) || (key == Qt::Key_P)) {
-	if (key == Qt::Key_N) emit NextChange(1);
-	if (key == Qt::Key_P) emit NextChange(-1);
+        if (key == Qt::Key_N) emit NextChange(1);
+        if (key == Qt::Key_P) emit NextChange(-1);
         return;
     }
 

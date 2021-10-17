@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -32,6 +33,8 @@
 #include "sigil_exception.h"
 
 const int MAX_WORD_LENGTH  = 90;
+
+const QString ENTITYWORDCHARS = ";#01234567890abcdefABCDEFxX";
 
 QList<HTMLSpellCheck::MisspelledWord> HTMLSpellCheck::GetMisspelledWords(const QString &orig_text,
         int start_offset,
@@ -76,7 +79,7 @@ QList<HTMLSpellCheck::MisspelledWord> HTMLSpellCheck::GetMisspelledWords(const Q
             if (IsBoundary(prev_c, c, next_c, wordChars, use_nums)) {
                 // If we're in an entity and we hit a boundary and it isn't
                 // part of an entity then this is an invalid entity.
-                if (in_entity && c != QChar(';')) {
+                if (in_entity && !ENTITYWORDCHARS.contains(c)) {
                     in_entity = false;
                 }
 
@@ -85,7 +88,7 @@ QList<HTMLSpellCheck::MisspelledWord> HTMLSpellCheck::GetMisspelledWords(const Q
                     QString word = Utility::Substring(word_start, i, text);
 
                     if (!word.isEmpty() && word_start > start_offset && word_start <= end_offset) {
-                        if (include_all_words || !sc->spell(word)) {
+                        if (include_all_words || !sc->spellPS(word)) {
                             int cap_start = -1;
 
                             if (!search_regex.isEmpty()) {

@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2009, 2010, 2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
+**  Copyright (C) 2015-2020 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
 **
@@ -23,9 +24,8 @@
 #ifndef IMPORTHTML_H
 #define IMPORTHTML_H
 
-#include "Misc/GumboInterface.h"
-#include "BookManipulation/XhtmlDoc.h"
 #include "Importers/Importer.h"
+#include "BookManipulation/XhtmlDoc.h"
 
 class HTMLResource;
 class CSSResource;
@@ -93,4 +93,3 @@ private:
 };
 
 #endif // IMPORTHTML_H
-

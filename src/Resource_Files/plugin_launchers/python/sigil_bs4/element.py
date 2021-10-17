@@ -1,31 +1,18 @@
-from __future__ import unicode_literals, division, absolute_import, print_function
-
+try:
+    from collections.abc import Callable # Python 3.6
+except ImportError as e:
+    from collections import Callable
 import sys
 from collections import OrderedDict
 
-PY3 = sys.version_info[0] >= 3
-if PY3:
-    text_type = str
-    binary_type = bytes
-    unicode = str
-    basestring = str
-else:
-    range = xrange
-    text_type = unicode
-    binary_type = str
-    chr = unichr
-
 from pdb import set_trace
-import collections
 import re
 import warnings
 from sigil_bs4.dammit import EntitySubstitution
 
 DEFAULT_OUTPUT_ENCODING = "utf-8"
-PY3K = (sys.version_info[0] > 2)
 
 whitespace_re = re.compile("\s+")
-
 
 NON_BREAKING_INLINE_TAGS = ("a","abbr","acronym","b","bdo","big","br",
     "button","cite","code","del","dfn","em","font","i","image","img",
@@ -67,23 +54,23 @@ def _alias(attr):
     return alias
 
 
-class NamespacedAttribute(unicode):
+class NamespacedAttribute(str):
 
     def __new__(cls, prefix, name, namespace=None):
         if name is None:
-            obj = unicode.__new__(cls, prefix)
+            obj = str.__new__(cls, prefix)
 
         elif prefix is None:
             # Not really namespaced.
-            obj = unicode.__new__(cls, name)
+            obj = str.__new__(cls, name)
         else:
-            obj = unicode.__new__(cls, prefix + ":" + name)
+            obj = str.__new__(cls, prefix + ":" + name)
         obj.prefix = prefix
         obj.name = name
         obj.namespace = namespace
         return obj
 
-class AttributeValueWithCharsetSubstitution(unicode):
+class AttributeValueWithCharsetSubstitution(str):
     """A stand-in object for a character encoding specified in HTML."""
 
 class CharsetMetaAttributeValue(AttributeValueWithCharsetSubstitution):
@@ -94,7 +81,7 @@ class CharsetMetaAttributeValue(AttributeValueWithCharsetSubstitution):
     """
 
     def __new__(cls, original_value):
-        obj = unicode.__new__(cls, original_value)
+        obj = str.__new__(cls, original_value)
         obj.original_value = original_value
         return obj
 
@@ -117,9 +104,9 @@ class ContentMetaAttributeValue(AttributeValueWithCharsetSubstitution):
         match = cls.CHARSET_RE.search(original_value)
         if match is None:
             # No substitution necessary.
-            return unicode.__new__(str, original_value)
+            return str.__new__(str, original_value)
 
-        obj = unicode.__new__(cls, original_value)
+        obj = str.__new__(cls, original_value)
         obj.original_value = original_value
         return obj
 
@@ -193,13 +180,13 @@ class PageElement(object):
 
     XML_FORMATTERS = {
         "html" : EntitySubstitution.substitute_html,
-        "minimal" : EntitySubstitution.substitute_xml,
+        "minimal" : EntitySubstitution.substitute_xml_containing_entities,
         None : None
         }
 
     def format_string(self, s, formatter='minimal'):
         """Format the given string using the given formatter."""
-        if not isinstance(formatter, collections.Callable):
+        if not isinstance(formatter, Callable):
             formatter = self._formatter_for_name(formatter)
         if formatter is None:
             output = s
@@ -342,7 +329,7 @@ class PageElement(object):
     def insert(self, position, new_child):
         if new_child is self:
             raise ValueError("Cannot insert a tag into itself.")
-        if (isinstance(new_child, basestring)
+        if (isinstance(new_child, str)
             and not isinstance(new_child, NavigableString)):
             new_child = NavigableString(new_child)
 
@@ -563,7 +550,7 @@ class PageElement(object):
                 result = (element for element in generator
                           if isinstance(element, Tag))
                 return ResultSet(strainer, result)
-            elif isinstance(name, basestring):
+            elif isinstance(name, str):
                 # Optimization to find all tags with a given name.
                 result = (element for element in generator
                           if isinstance(element, Tag)
@@ -714,7 +701,7 @@ class PageElement(object):
         return self.parents
 
 
-class NavigableString(unicode, PageElement):
+class NavigableString(str, PageElement):
 
     PREFIX = ''
     SUFFIX = ''
@@ -727,10 +714,10 @@ class NavigableString(unicode, PageElement):
         passed in to the superclass's __new__ or the superclass won't know
         how to handle non-ASCII characters.
         """
-        if isinstance(value, unicode):
-            u = unicode.__new__(cls, value)
+        if isinstance(value, str):
+            u = str.__new__(cls, value)
         else:
-            u = unicode.__new__(cls, value, DEFAULT_OUTPUT_ENCODING)
+            u = str.__new__(cls, value, DEFAULT_OUTPUT_ENCODING)
         u.setup()
         return u
 
@@ -741,7 +728,7 @@ class NavigableString(unicode, PageElement):
         return type(self)(self)
 
     def __getnewargs__(self):
-        return (unicode(self),)
+        return (str(self),)
 
     def __getattr__(self, attr):
         """text.string gives you text. This is for backwards
@@ -1078,26 +1065,11 @@ class Tag(PageElement):
 
     def __repr__(self, encoding="unicode-escape"):
         """Renders this tag as a string."""
-        if PY3K:
-            # "The return value must be a string object", i.e. Unicode
-            return self.decode()
-        else:
-            # "The return value must be a string object", i.e. a bytestring.
-            # By convention, the return value of __repr__ should also be
-            # an ASCII string.
-            return self.encode(encoding)
-
-    def __unicode__(self):
+        # "The return value must be a string object", i.e. Unicode
         return self.decode()
 
     def __str__(self):
-        if PY3K:
-            return self.decode()
-        else:
-            return self.encode()
-
-    if PY3K:
-        __str__ = __repr__ = __unicode__
+        return self.decode()
 
     def encode(self, encoding=DEFAULT_OUTPUT_ENCODING,
                indent_level=None, formatter="minimal",
@@ -1130,7 +1102,7 @@ class Tag(PageElement):
 
         # First off, turn a string formatter into a function. This
         # will stop the lookup from happening over and over again.
-        if not isinstance(formatter, collections.Callable):
+        if not isinstance(formatter, Callable):
             formatter = self._formatter_for_name(formatter)
 
         attrs = []
@@ -1141,8 +1113,8 @@ class Tag(PageElement):
                 else:
                     if isinstance(val, list) or isinstance(val, tuple):
                         val = ' '.join(val)
-                    elif not isinstance(val, basestring):
-                        val = unicode(val)
+                    elif not isinstance(val, str):
+                        val = str(val)
                     elif (
                         isinstance(val, AttributeValueWithCharsetSubstitution)
                         and eventual_encoding is not None):
@@ -1150,7 +1122,7 @@ class Tag(PageElement):
 
                     text = self.format_string(val, formatter)
                     decoded = (
-                        unicode(key) + '='
+                        str(key) + '='
                         + EntitySubstitution.quoted_attribute_value(text))
                 attrs.append(decoded)
         close = ''
@@ -1234,7 +1206,7 @@ class Tag(PageElement):
         """
         # First off, turn a string formatter into a function. This
         # will stop the lookup from happening over and over again.
-        if not isinstance(formatter, collections.Callable):
+        if not isinstance(formatter, Callable):
             formatter = self._formatter_for_name(formatter)
 
         pretty_print = (indent_level is not None)
@@ -1260,7 +1232,7 @@ class Tag(PageElement):
 
         # First off, turn a string formatter into a function. This
         # will stop the lookup from happening over and over again.
-        if not isinstance(formatter, collections.Callable):
+        if not isinstance(formatter, Callable):
             formatter = self._formatter_for_name(formatter)
 
         is_xmlparent = self.name.lower() in EBOOK_XML_PARENT_TAGS
@@ -1338,7 +1310,7 @@ class Tag(PageElement):
         """
         # First off, turn a string formatter into a function. This
         # will stop the lookup from happening over and over again.
-        if not isinstance(formatter, collections.Callable):
+        if not isinstance(formatter, Callable):
             formatter = self._formatter_for_name(formatter)
 
         is_xmlparent = self.name.lower() in EBOOK_XML_PARENT_TAGS
@@ -1361,7 +1333,7 @@ class Tag(PageElement):
     def serialize_xhtml(self, eventual_encoding=DEFAULT_OUTPUT_ENCODING, formatter="minimal"):
         # First off, turn a string formatter into a function. This
         # will stop the lookup from happening over and over again.
-        if not isinstance(formatter, collections.Callable):
+        if not isinstance(formatter, Callable):
             formatter = self._formatter_for_name(formatter)
 
         prefix = ''
@@ -1424,7 +1396,7 @@ class Tag(PageElement):
 
         # First off, turn a string formatter into a function. This
         # will stop the lookup from happening over and over again.
-        if not isinstance(formatter, collections.Callable):
+        if not isinstance(formatter, Callable):
             formatter = self._formatter_for_name(formatter)
 
         s = []
@@ -1448,7 +1420,7 @@ class Tag(PageElement):
 
         # First off, turn a string formatter into a function. This
         # will stop the lookup from happening over and over again.
-        if not isinstance(formatter, collections.Callable):
+        if not isinstance(formatter, Callable):
             formatter = self._formatter_for_name(formatter)
 
         is_structural = self.name in STRUCTURAL_TAGS
@@ -1543,7 +1515,7 @@ class Tag(PageElement):
         """
         # First off, turn a string formatter into a function. This
         # will stop the lookup from happening over and over again.
-        if not isinstance(formatter, collections.Callable):
+        if not isinstance(formatter, Callable):
             formatter = self._formatter_for_name(formatter)
 
         is_structural = self.name in STRUCTURAL_TAGS
@@ -1973,7 +1945,7 @@ class SoupStrainer(object):
     def _normalize_search_value(self, value):
         # Leave it alone if it's a Unicode string, a callable, a
         # regular expression, a boolean, or None.
-        if (isinstance(value, text_type) or isinstance(value, collections.Callable) or hasattr(value, 'match')
+        if (isinstance(value, str) or isinstance(value, Callable) or hasattr(value, 'match')
             or isinstance(value, bool) or value is None):
             return value
 
@@ -1986,7 +1958,7 @@ class SoupStrainer(object):
             new_value = []
             for v in value:
                 if (hasattr(v, '__iter__') and not isinstance(v, bytes)
-                    and not isinstance(v, text_type)):
+                    and not isinstance(v, str)):
                     # This is almost certainly the user's mistake. In the
                     # interests of avoiding infinite loops, we'll let
                     # it through as-is rather than doing a recursive call.
@@ -1996,9 +1968,7 @@ class SoupStrainer(object):
             return new_value
 
         # Otherwise, convert it into a Unicode string.
-        # The unicode(str()) thing is so this will do the same thing on Python 2
-        # and Python 3.
-        return unicode(unicode(value))
+        return str(value)
 
     def __str__(self):
         if self.text:
@@ -2013,7 +1983,7 @@ class SoupStrainer(object):
             markup = markup_name
             markup_attrs = markup
         call_function_with_tag_data = (
-            isinstance(self.name, collections.Callable)
+            isinstance(self.name, Callable)
             and not isinstance(markup_name, Tag))
 
         if ((not self.name)
@@ -2052,7 +2022,7 @@ class SoupStrainer(object):
         found = None
         # If given a list of items, scan it for a text element that
         # matches.
-        if hasattr(markup, '__iter__') and not isinstance(markup, (Tag, basestring)):
+        if hasattr(markup, '__iter__') and not isinstance(markup, (Tag, str)):
             for element in markup:
                 if isinstance(element, NavigableString) \
                        and self.search(element):
@@ -2065,7 +2035,7 @@ class SoupStrainer(object):
                 found = self.search_tag(markup)
         # If it's text, make sure the text matches.
         elif isinstance(markup, NavigableString) or \
-                 isinstance(markup, basestring):
+                 isinstance(markup, str):
             if not self.name and not self.attrs and self._matches(markup, self.text):
                 found = markup
         else:
@@ -2079,7 +2049,7 @@ class SoupStrainer(object):
         if isinstance(markup, list) or isinstance(markup, tuple):
             # This should only happen when searching a multi-valued attribute
             # like 'class'.
-            if (isinstance(match_against, unicode)
+            if (isinstance(match_against, str)
                 and ' ' in match_against):
                 # A bit of a special case. If they try to match "foo
                 # bar" on a multivalue attribute's value, only accept
@@ -2099,7 +2069,7 @@ class SoupStrainer(object):
             # True matches any non-None value.
             return markup is not None
 
-        if isinstance(match_against, collections.Callable):
+        if isinstance(match_against, Callable):
             return match_against(markup)
 
         # Custom callables take the tag as an argument, but all
@@ -2114,7 +2084,7 @@ class SoupStrainer(object):
             # None matches None, False, an empty string, an empty list, and so on.
             return not match_against
 
-        if isinstance(match_against, unicode):
+        if isinstance(match_against, str):
             # Exact string match
             return markup == match_against
 

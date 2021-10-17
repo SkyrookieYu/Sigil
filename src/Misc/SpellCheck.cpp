@@ -1,6 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2011  John Schember <john@nachtimwald.com>
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2011      John Schember <john@nachtimwald.com>
 **
 **  This file is part of Sigil.
 **
@@ -21,20 +22,26 @@
 
 #include <hunspell.hxx>
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QIODevice>
-#include <QtCore/QTextCodec>
-#include <QtCore/QTextStream>
-#include <QtCore/QUrl>
-#include <QtWidgets/QApplication>
+#include <QCoreApplication>
+#include <QDir>
+#include <QFile>
+#include <QFileInfo>
+#include <QIODevice>
+#include <QTextCodec>
+#include <QTextStream>
+#include <QUrl>
+#include <QApplication>
+#include <QMutex>
+#include <QMutexLocker>
+#include <QDebug>
 
+#include "Misc/HTMLSpellCheckML.h"
 #include "Misc/SpellCheck.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
 #include "sigil_constants.h"
+
+#define DBG if(0)
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
 # include <stdlib.h>
@@ -51,11 +58,12 @@ SpellCheck *SpellCheck::instance()
     return m_instance;
 }
 
-SpellCheck::SpellCheck() :
-    m_hunspell(0),
-    m_codec(0),
-    m_wordchars("")
+SpellCheck::SpellCheck()
 {
+    DBG qDebug() << "In SpellCheck Constructor";
+    m_primary.handle = NULL;
+    m_secondary.handle = NULL;
+
     // There is a considerable lag involved in loading the Spellcheck dictionaries
     QApplication::setOverrideCursor(Qt::WaitCursor);
     loadDictionaryNames();
@@ -76,18 +84,76 @@ SpellCheck::SpellCheck() :
         }
     }
 
-    // Load the dictionary the user has selected if one was saved.
-    SettingsStore settings;
-    setDictionary(settings.dictionary());
     QApplication::restoreOverrideCursor();
+
+    UpdateLangCodeToDictMapping();
+
+    // Load the dictionary the user has selected
+    // now open primary and secondary dictionaries
+    SettingsStore settings;
+    loadDictionary(settings.dictionary());
+    if (!settings.secondary_dictionary().isEmpty()) {
+        loadDictionary(settings.secondary_dictionary());
+    }
+}
+
+void SpellCheck::UpdateLangCodeToDictMapping()
+{
+    DBG qDebug() << "In UpdateLangCodeToDictMapping";
+    m_langcode2dict.clear();
+
+    // create language code to dictionary name mapping
+    foreach(QString dname, m_dictionaries.keys()) {
+        QString lc = dname;
+        lc.replace("_","-");
+        m_langcode2dict[lc] = dname;
+        if (lc.length() > 3) {
+            lc = lc.mid(0,2);
+            m_langcode2dict[lc] = dname;
+        }
+    }
+
+    // make sure 2 letter mapping equivalent is properly set
+    // for primary and secondary dictionaries
+    // Note: must be done last to overwrite any earlier values
+    SettingsStore settings;
+    QString cd = settings.secondary_dictionary();
+    cd.replace("_","-");
+    if (!cd.isEmpty() && (cd.length() > 3)) {
+        m_langcode2dict[cd.mid(0,2)] = settings.secondary_dictionary();
+    }
+    cd = settings.dictionary();
+    cd.replace("_","-");
+    if (!cd.isEmpty() && (cd.length() > 3)) {
+        m_langcode2dict[cd.mid(0,2)] = settings.dictionary();
+    }
+}
+
+void SpellCheck::UnloadDictionary(const QString &dname)
+{
+    DBG qDebug() << "In UnloadDictionary";
+    QMutexLocker locker(&mutex);
+    if (m_opendicts.contains(dname)) {
+        HDictionary hdic = m_opendicts[dname];
+        if (hdic.handle) {
+            delete hdic.handle;
+        }
+        m_opendicts.remove(dname);
+    }
+}
+
+void SpellCheck::UnloadAllDictionaries()
+{
+    DBG qDebug() << "In UnloadAllDictionaries";
+    foreach(QString name, m_opendicts.keys()) {
+        UnloadDictionary(name);
+    }
 }
 
 SpellCheck::~SpellCheck()
 {
-    if (m_hunspell) {
-        delete m_hunspell;
-        m_hunspell = 0;
-    }
+    DBG qDebug() << "In SpellCheck destructor";
+    UnloadAllDictionaries();
 
     if (m_instance) {
         delete m_instance;
@@ -97,6 +163,7 @@ SpellCheck::~SpellCheck()
 
 QStringList SpellCheck::userDictionaries()
 {
+    DBG qDebug() << "In userDictionaries";
     // Load the list of user dictionaries.
     QDir userDictDir(userDictionaryDirectory());
     QStringList user_dicts = userDictDir.entryList(QDir::Files | QDir::NoDotAndDotDot);
@@ -106,6 +173,7 @@ QStringList SpellCheck::userDictionaries()
 
 QStringList SpellCheck::dictionaries()
 {
+    DBG qDebug() << "In dictionaries";
     loadDictionaryNames();
     QStringList dicts;
     dicts = m_dictionaries.keys();
@@ -113,135 +181,245 @@ QStringList SpellCheck::dictionaries()
     return dicts;
 }
 
-QString SpellCheck::currentDictionary() const
+QString SpellCheck::currentPrimaryDictionary() const
 {
-    return m_dictionaryName;
+    DBG qDebug() << "In currentPrimaryDictionary";
+    SettingsStore settings;
+    return settings.dictionary();
 }
 
 bool SpellCheck::spell(const QString &word)
 {
-    if (!m_hunspell) {
-        return true;
-    }
+    DBG qDebug() << "In spell";
+    QString dname = m_langcode2dict.value(HTMLSpellCheckML::langOf(word), "");
 
-    return m_hunspell->spell(m_codec->fromUnicode(Utility::getSpellingSafeText(word)).constData()) != 0;
+    // if no dictionary exists for this language treat it as correct
+    if (dname.isEmpty()) return true;
+
+    // if a dictionary exists but is not open yet, open it first
+    if (!m_opendicts.contains(dname)) {
+        loadDictionary(dname);
+    }
+    if (!m_opendicts.contains(dname)) return true;
+    HDictionary hdic = m_opendicts[dname];
+    Q_ASSERT(hdic.codec != nullptr);
+    Q_ASSERT(hdic.handle != nullptr);
+    bool res = hdic.handle->spell(hdic.codec->fromUnicode(Utility::getSpellingSafeText(HTMLSpellCheckML::textOf(word))).constData()) != 0;
+    res = res || isIgnored(HTMLSpellCheckML::textOf(word));
+    return res;
 }
+
+
+// Speed here is very important as it is invoked by the XHTMLHighlighter2 code
+// and this is the limiting factor
+// spell check word without langcode info in Primary and Secondary Dictionaries
+bool SpellCheck::spellPS(const QString &word)
+{
+    if (!m_primary.handle) return true;
+    if(m_ignoredWords.contains(word)) return true;
+    bool res = m_primary.handle->spell(m_primary.codec->fromUnicode(Utility::getSpellingSafeText(word)).constData()) != 0;
+    if (res) return true;
+    if (!m_secondary.handle) return false;
+    return m_secondary.handle->spell(m_secondary.codec->fromUnicode(Utility::getSpellingSafeText(word)).constData()) != 0;
+}
+
 
 QStringList SpellCheck::suggest(const QString &word)
 {
-    if (!m_hunspell) {
-        return QStringList();
-    }
-
+    DBG qDebug() << "In suggest";
     QStringList suggestions;
     char **suggestedWords;
-    int count = m_hunspell->suggest(&suggestedWords, m_codec->fromUnicode(Utility::getSpellingSafeText(word)).constData());
+    QString dname = m_langcode2dict.value(HTMLSpellCheckML::langOf(word), "");
+    if (dname.isEmpty()) return suggestions;
+    if (!m_opendicts.contains(dname)) return suggestions;
+    HDictionary hdic = m_opendicts[dname];
+    Q_ASSERT(hdic.codec != nullptr);
+    Q_ASSERT(hdic.handle != nullptr);
+    int count = hdic.handle->suggest(&suggestedWords, hdic.codec->fromUnicode(Utility::getSpellingSafeText(HTMLSpellCheckML::textOf(word))).constData());
 
     for (int i = 0; i < count; ++i) {
-        suggestions << m_codec->toUnicode(suggestedWords[i]);
+        suggestions << hdic.codec->toUnicode(suggestedWords[i]);
     }
 
-    m_hunspell->free_list(&suggestedWords, count);
+    hdic.handle->free_list(&suggestedWords, count);
     return suggestions;
 }
 
+
+// suggesttions for word without langcode using Primary and Secondary Dictionaries
+QStringList SpellCheck::suggestPS(const QString &word)
+{
+    QStringList suggestions;
+    char **suggestedWords;
+    char **suggestedWords2;
+    if (!m_primary.handle) return suggestions;
+    int count = m_primary.handle->suggest(&suggestedWords, m_primary.codec->fromUnicode(Utility::getSpellingSafeText(word)).constData());
+    int limit = count;
+    if (limit > 4) limit = 4;
+    for (int i = 0; i < limit; ++i) {
+        suggestions << m_primary.codec->toUnicode(suggestedWords[i]);
+    }
+    m_primary.handle->free_list(&suggestedWords, count);
+    if (!m_secondary.handle) return suggestions; 
+    count = m_secondary.handle->suggest(&suggestedWords2, m_secondary.codec->fromUnicode(Utility::getSpellingSafeText(word)).constData());
+    limit = count;
+    if (limit > 4) limit = 4;
+    for (int i = 0; i < limit; ++i) {
+        suggestions << m_secondary.codec->toUnicode(suggestedWords2[i]);
+    }
+    m_secondary.handle->free_list(&suggestedWords2, count);
+    return suggestions;
+}
+
+
 void SpellCheck::clearIgnoredWords()
 {
+    DBG qDebug() << "In clearIgnoredWords";
     m_ignoredWords.clear();
-    reloadDictionary();
 }
+
 
 void SpellCheck::ignoreWord(const QString &word)
 {
-    ignoreWordInDictionary(word);
-
-    m_ignoredWords.append(word);
+    DBG qDebug() << "In ignoreWord";
+    m_ignoredWords.insert(word);
 }
 
-void SpellCheck::ignoreWordInDictionary(const QString &word)
-{
-    if (!m_hunspell) {
-        return;
-    }
 
-    m_hunspell->add(m_codec->fromUnicode(Utility::getSpellingSafeText(word)).constData());
+bool SpellCheck::isIgnored(const QString &word) {
+    DBG qDebug() << "In isIgnored";
+    return m_ignoredWords.contains(word);
 }
 
-void SpellCheck::setDictionary(const QString &name, bool forceReplace)
+
+void SpellCheck::addWordToDictionary(const QString &word, const QString &dname)
 {
-    // See if we are already using a hunspell object for this language.
-    if (!forceReplace && m_dictionaryName == name && m_hunspell) {
-        return;
+    DBG qDebug() << "In addWordToDictionary";
+    if (dname.isEmpty()) return;
+    if (m_opendicts.contains(dname)) {
+        HDictionary hdic = m_opendicts[dname];
+        hdic.handle->add(hdic.codec->fromUnicode(Utility::getSpellingSafeText(HTMLSpellCheckML::textOf(word))).constData());
     }
+}
 
-    // Delete the current hunspell object.
-    if (m_hunspell) {
-        delete m_hunspell;
-        m_hunspell = 0;
-    }
 
-    // Save the dictionary name for use later.
-    m_dictionaryName = name;
-
+void SpellCheck::loadDictionary(const QString &dname)
+{
+    DBG qDebug() << "In loadDictionary: " << dname;
+    QMutexLocker locker(&mutex);
     // If we don't have a dictionary we cannot continue.
-    if (name.isEmpty() || !m_dictionaries.contains(name)) {
+    if (dname.isEmpty() || !m_dictionaries.contains(dname)) {
+        qDebug() << "attempted to load a non-existent dictionary: " << dname;
         return;
     }
 
     // Dictionary files to use.
-    QString aff = QString("%1%2.aff").arg(m_dictionaries.value(name)).arg(name);
-    QString dic = QString("%1%2.dic").arg(m_dictionaries.value(name)).arg(name);
+    QString aff = QString("%1%2.aff").arg(m_dictionaries.value(dname)).arg(dname);
+    QString dic = QString("%1%2.dic").arg(m_dictionaries.value(dname)).arg(dname);
+    QString dic_delta = QString("%1/%2.dic_delta").arg(dictionaryDirectory()).arg(dname);
+    QString alt_dic_delta = QString("%1%2.dic_delta").arg(m_dictionaries.value(dname)).arg(dname);
+    // qDebug() << dic_delta;
+    // qDebug() << alt_dic_delta;
+
     // Create a new hunspell object.
-    m_hunspell = new Hunspell(aff.toLocal8Bit().constData(), dic.toLocal8Bit().constData());
-
-    // Note: these are encoded hyphenation dictionaries and their entries are not
-    // meaningful words in and of themselves.
-    // So the following makes no sense and is not accompishing anything.
-    // That said, look into getting the raw hyphenation lists that were used
-    // to generate these hyph_dic files for libhyphen
-
-    // QString hyph_dic = QString("%1hyph_%2.dic").arg(m_dictionaries.value(name)).arg(name);
-    // Load the hyphenation dictionary if it exists.
-    // if (QFile::exists(hyph_dic)) {
-    //    m_hunspell->add_dic(hyph_dic.toLocal8Bit().constData());
-    //}
+    HDictionary hdic;
+    hdic.name = dname;
+    hdic.handle = new Hunspell(aff.toLocal8Bit().constData(), dic.toLocal8Bit().constData());
+    if (!hdic.handle) {
+        qDebug() << "failed to load new Hunspell dictionary " << dname;
+        return;
+    }
 
     // Get the encoding for the text in the dictionary.
-    m_codec = QTextCodec::codecForName(m_hunspell->get_dic_encoding());
-
-    if (m_codec == 0) {
-        m_codec = QTextCodec::codecForName("UTF-8");
+    hdic.codec = QTextCodec::codecForName(hdic.handle->get_dic_encoding());
+    if (hdic.codec == nullptr) {
+        hdic.codec = QTextCodec::codecForName("UTF-8");
+    }
+    if (!hdic.codec) {
+        qDebug() << "failed to load codec " << dname;
+        return;
     }
 
     // Get the extra wordchars used for tokenization
-    m_wordchars = m_codec->toUnicode(m_hunspell->get_wordchars());
+    hdic.wordchars = hdic.codec->toUnicode(hdic.handle->get_wordchars());
 
-    // Load in the words from the user dictionaries.
-    foreach(QString word, allUserDictionaryWords()) {
-        ignoreWordInDictionary(word);
+    // register it as an open dictionary
+    m_opendicts[dname] = hdic;
+
+    // check for appropriate .dic_delta file and add it
+    // check in user prefs hunspell_dictionaries first
+    // so that user's version is given preference over 
+    // any system version
+    QStringList deltaWords;
+    if (QFile(dic_delta).exists()) {
+        dicDeltaWords(dic_delta, deltaWords);
+    } else if (QFile(alt_dic_delta).exists()) {
+        dicDeltaWords(alt_dic_delta, deltaWords);
+    }
+    foreach(QString word, deltaWords){
+        addWordToDictionary(word, dname);
     }
 
-    // Reload the words in the "Ignored" dictionary.
-    foreach(QString word, m_ignoredWords) {
-        ignoreWordInDictionary(word);
+    // add UserDictionary words to the Primary Dictionary only
+    if (dname == currentPrimaryDictionary()) {
+        // Load in the words from the user dictionaries.
+        foreach(QString word, allUserDictionaryWords()) {
+            addWordToDictionary(word, dname);
+        }
     }
+
+    SettingsStore settings;
+    // store the primary and secondary dictionary info for speed
+    if (dname == settings.dictionary()) {
+        m_primary = hdic;
+    }
+    else if (dname == settings.secondary_dictionary()) {
+        m_secondary = hdic;
+    }
+    return;
 }
 
 
-QString SpellCheck::getWordChars()
+void SpellCheck::setDictionary(const QString &dname, bool forceReplace)
 {
-    return m_wordchars;
+    DBG qDebug() << "In setDictionary " << dname;
+    // See if we are already using a hunspell object for this language.
+    if (!forceReplace && m_opendicts.contains(dname)) {
+        return;
+    }
+
+    UnloadDictionary(dname);
+    loadDictionary(dname);
 }
 
 
-
-void SpellCheck::reloadDictionary()
+QString SpellCheck::getWordChars(const QString &lang)
 {
-    setDictionary(m_dictionaryName, true);
+    DBG qDebug() << "In getWordChars";
+    QString dname;
+    if (lang.isEmpty()) { 
+        dname = currentPrimaryDictionary();
+    } else {
+        dname = m_langcode2dict.value(lang, "");
+    }
+
+    if (dname.isEmpty()) return "";
+
+    // if a dictionary exists but is not open yet, open it first
+    if (!m_opendicts.contains(dname)) {
+        loadDictionary(dname);
+    }
+    if (!m_opendicts.contains(dname)) return "";
+    HDictionary hdic = m_opendicts[dname];
+    Q_ASSERT(hdic.codec != nullptr);
+    Q_ASSERT(hdic.handle != nullptr);
+    return hdic.wordchars;
 }
+
 
 void SpellCheck::addToUserDictionary(const QString &word, QString dict_name)
 {
+    DBG qDebug() << "In AddToUserDictionary";
     // Adding to the user dictionary also marks the word as a correct spelling.
     if (word.isEmpty()) {
         return;
@@ -252,9 +430,9 @@ void SpellCheck::addToUserDictionary(const QString &word, QString dict_name)
         dict_name = settings.defaultUserDictionary();
     }
 
-    // Ignore the word only if the dictionary is enabled
+    // Add the word only if the dictionary is enabled
     if (settings.enabledUserDictionaries().contains(dict_name)) {
-        ignoreWordInDictionary(word);
+        addWordToDictionary(word, currentPrimaryDictionary());
     }
 
     if (!userDictionaryWords(dict_name).contains(word)) {
@@ -278,6 +456,7 @@ void SpellCheck::addToUserDictionary(const QString &word, QString dict_name)
 
 QStringList SpellCheck::allUserDictionaryWords()
 {
+    DBG qDebug() << "In allUserDictionaryWords";
     QStringList userWords;
     SettingsStore settings;
     foreach (QString dict_name, settings.enabledUserDictionaries()) {
@@ -288,6 +467,7 @@ QStringList SpellCheck::allUserDictionaryWords()
 
 QStringList SpellCheck::userDictionaryWords(QString dict_name)
 {
+    DBG qDebug() << "In userDictionaryWords";
     QStringList userWords;
     // Read each word from the user dictionary.
 
@@ -313,8 +493,30 @@ QStringList SpellCheck::userDictionaryWords(QString dict_name)
     return userWords;
 }
 
+
+void SpellCheck::dicDeltaWords(const QString &delta_path, QStringList & word_list)
+{
+    DBG qDebug() << "In dicDeltaWords";
+    QFile deltaFile(delta_path);
+    if (deltaFile.open(QIODevice::ReadOnly)) {
+        QTextStream deltaStream(&deltaFile);
+        deltaStream.setCodec("UTF-8");
+        QString line;
+        do {
+            line = deltaStream.readLine();
+            if (!line.isEmpty()) {
+                word_list << line;
+            }
+        } while (!line.isNull());
+        deltaFile.close();
+    }
+    return;
+}
+
+
 void SpellCheck::loadDictionaryNames()
 {
+    DBG qDebug() << "In loadDictionaryNames";
     QStringList dictExts;
     dictExts << ".aff"
              << ".dic";
@@ -365,22 +567,25 @@ void SpellCheck::loadDictionaryNames()
 
 QString SpellCheck::dictionaryDirectory()
 {
+    DBG qDebug() << "In dictionaryDirectory";
     return Utility::DefinePrefsDir() + "/hunspell_dictionaries";
 }
 
 QString SpellCheck::userDictionaryDirectory()
 {
+    DBG qDebug() << "In userDictionaryDirectory";
     return Utility::DefinePrefsDir() + "/user_dictionaries";
 }
 
 QString SpellCheck::currentUserDictionaryFile()
 {
+    DBG qDebug() << "In currentUserDictionaryFile";
     SettingsStore settings;
     return userDictionaryDirectory() + "/" + settings.defaultUserDictionary();
 }
 
 QString SpellCheck::userDictionaryFile(QString dict_name)
 {
+    DBG qDebug() << "In userDictionaryFile";
     return userDictionaryDirectory() + "/" + dict_name;
 }
-

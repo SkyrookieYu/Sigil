@@ -1,16 +1,217 @@
-pre-1.3.0
+Sigil-1.8.0
+    Bug Fixes:
+     - Reports now generate properly quoted csv when saved
+     - Workaround Bug in QtWebengine when using custom scheme handler and specific audio/video codecs
+     - Fix CV -> Preview sync after intial load when Preview Zoom is not equal to 100%
+     - Fix link tags with rel set to stylesheets via Mend and Mend and Prettify that are missing type
+     - Fix GoToLinkOrStyle to work on css link tags in head
+     - Fix logic in GoToLinkOrStyle to better identify the actual target with styles
+     - Fix insert media file when cursor at very start of tag
+     - Fix Windows and macOS bugs when generating Keyboard Shortcuts
+     - Fix insert closing tag when cursor at very start of tag
+     - Fix double copy to Clipboard from OPF and NCX Tabs
+     - Fix GoToLinkOrStyle when class attribute present but cursor not in the class attribute
+     - Fix TabManager scroll to position to properly handle position of 0
+
     New Features:
-      - Added FontTab to show a specific font by double-clicking in BookBrowser
-      - Reorganized the source code to add a Widgets folder to reduce code duplication
-      - Updated to use Qt 5.12.8 with added patches and backported crash fixes
+     - BookBrowser can now link javascripts similarly to how it links stylesheets
+     - Epub3 javascripts can now open windows if javascript is enabled
+     - Add Find and Replace context menu to clear its curent values and history
+     - Add support for 3 Automation lists that support editing and automatically running a list of
+         commands that can include all Sigil plugins and a limited set of Tools
+     - Add support for BookBrowser to insert a blank javascript file
+     - Do not require replacement prompt if current book is unmodified and input plugin is run
+
+
+Sigil-1.7.0
+    Bug Fixes
+     - Workaround to ensure the Saved Searches Controls editor widget is movable on all platforms
+     - Make the External Xhtml Editor Button/Feature work with both PageEdit and non-PageEdit editors again
+     - Fix Preview sync when CV transitions from xhtml to css and back to xhtml
+     - Fix Preview sync when Find and Replace opens new tab with search target
+     - Fix Preview sync when Validation error clicked on
+     - Fix Preview sync when mathml is being used (compensate for mathjax changes)
+     - Fix mathml use when external MathJax directory is specified in builds on Linux
+     - Prevent Sigil from loading any manifested mimtype file from bad epubs, give load warning
+     - Make Spellcheck dialog use double-click to control search in CV, to speed paging word list.
+     - Prevent duplicate translated semantic names
+     - Fix heading tool issues after self-closed BLOCK tags
+     - Prevent stack overflow crashes in pcre lib due to recursion with some valid regex
+     - Fix second window opening on macOS when first launching app with file
+     - Remove [other.] semantic indicators for epub2
+     - Fix crash in CSS Selectors Report when using Filters
+
+    New Features:
+     - added Find Replace Regular Expression validator
+     - added SIGIL_DISABLE_VERSION_META environment variable to control writing of Sigil Version
+     - enable JIT compiler for pcre library to improve regex look-up performance
+     - update the pcre library to version 8.45 (Final EOL)
+
+
+Sigil-1.6.0
+    Bug Fixes:
+     - add Qt workaround for restoring Sigil window sizes when FindReplace left open on macOS
+     - add missing tr() calls to the tooltips in the Special Character selection dialog
+     - fix bug when all unused selectors are removed as unused in css stylesheet - uses a placeholder
+     - make empty Nav have a title to help empty epub passing epubcheck
+     - fix bug where fonts couldn't be previewed when a space was in the path
+     - redesigned code to make Merging large numbers of files much faster
+     - fix bug in blank language field in Spellcheck Dialog (Thank you Tex2002ans)
+     - fix use of different indentation of css via PR from BeckyEbook (Thank you)
+     - fix typos in plugin framework guide (Thank you Doitsu)
+     - fix hang on launch when opf manifested files exist inside the META_INF (Thank you un_pogaz)
+     - fix Metadata Editor bugs related to alternate-script (Thank you Carmina16) (#613)
+     - fix Metadata Editor bugs related to epub2 event dates (Thank you Octet-nl) (#616)
+
+    New Features:
+     - extended Find and Replace search targets to include tabbed files, CSS files, OPF, and NCX files
+     - extended Saved Searches to allow a user to set full search controls for each search including:
+          mode, direction, options, and target file sets
+     - Preview loading has been made completely asynchronous with a new progress bar and loading placeholder 
+     - merge will now automatically prevent duplicate ids.
+     - merge will now automatically add ids at previous file boundaries to maintain the guide,
+          nav, and ncx links
+     - completely redesigned the XHtmlHighlighter to speedup highlighting especially when Working
+          with single large xhtml files
+     - rewrote CV spellchecking code to speed it up (closer to old Sigil 1.3.0 performance levels)
+          but if working on large single book html files pre-split, turning off CV spellchecking
+          will result in much improved performance
+     - added PyQtWebEngine as a required python module for Sigil plugins.  This will greatly expand the
+          capability of PyQt5 plugins for Sigil.  Allows us to supply a ReadiumReader plugin for Sigil.
+
+
+Sigil-1.5.1
+    Bug Fixes:
+     - change when highlight open close tag pair is triggered to eliminate noise
+     - change select tag to use shift-double-click, and select tag and contents to alt-double-click
+     - add missing ability to edit name fields of custom metadata tags in the MetaEditor
+
+
+Sigil-1.5.0 (Beta release)
+    Bug Fixes:
+      - fix issue with custom ncx names in non-standard empty epub layouts
+      - fix Import Text to properly add ncx if missing for epub2
+      - fix issue with "Delete Unused Styles" not properly detecting all used selectors
+      - fix issues with repeated use of Mend and Prettify on bare text in structural tags
+      - fix extra line issue with Link to Stylesheet (Thank you BeckyEBook!)
+      - fix bug in id assignment in epub3 Metadata editor
+      - fix bug in trailing slash in Move To Folder paths
+      - fix bug in spelling of Columbia->Colombia in Languages (Thank you Tex2002ans!)
+      - fix bug in Clip Editor pasting of multiple clips
+      - fix bug in PerformCSSUpdates related to quoted string in content: values
+      - fix bug related to iframe handling when loading Preview
+      - fix typos in XMLEntities descriptions (Thank you BeckEbook!)
+      - fix numeric table alignment to align right in multiple tables (Thank you BeckyEbook!)
+      - fix bug in Add Existing not properly using QProgressDialog for long import
+      - remove long deprecated and now invalid use of "altlang" in epub3 Metadata Editor
+
+    New Features:
+      - added "sigil" url scheme and schemehandler to break 2mb limit on single xhtml file size
+      - highlight matched open close tag pairs while editing in CodeView
+      - added capability to delete highlighted open close tag pairs (Remove Tag Pair)
+      - added default selection of text for basic CodeView formatting including bold, italic, etc
+      - added default tag double-click (and shift double-click) to select tag contents (including tag)
+      - extended split on Sigil Split Marker capabilities to work better with nested tags
+      - added a CSS Parser and Query engine that works with Sigil's version of Gumbo
+      - the Reports tool for "CSS Selectors" now lists all CSS selectors not just classes
+      - the "Delete Unused Styles" tool now handles all unused CSS Selectors not just classes
+      - the Reports for "CSS Selectors" and "Delete Unused Selectors" now handle selectors in XHTML Style tags
+      - added ability to load text and csv files to Group Saved Searches to automate lists of replacements
+      - reworked the Metadata Editor to be much more Human Readable with tooltips to show xml tags
+      - added semantic code to the descriptive field in Add Semantics as a learning aid (Thank You BeckyEbook!)
+      - Checkpoint ManageRepos now has the ability to sort the repo table by any column (Thank You BeckyEbook!)
+
+
+Sigil-1.4.3
+    Bug Fixes:
+      - fix multiple mismatched wait cursor setting and restoring in MainWindow
+      - fix crashes if no dictionaries or preferred dictionary does not exist on start-up
+      - fix link breakage when runing split on a file with bare internal links
+      - fix bug which caused split to lose fragments from some link targets
+      - fix double # chars in fragment ids during merge
+      - fix hang on load with bad encryption.xml font uris
+      - quiet uneeded debug output
+      - fix opf cleanup bug when identical xmlns values are used with two different prefixes
+      - properly update the language code to dictionary mappings when a user changes Primary/Secondary dictionaries
+
+Sigil-1.4.2
+    Bug Fixes:
+      - fix bug in "Add Existing" files when file names would require percent encoding
+      - fix bug in multiple language spellchecking dialog word lookup 
+            when no language attributes used
+      - update de, nl, sv, ko, ru translations that missed the Sigil 1.4.0 initial release
+      - fix bug in OPF metadata attributes that use named entities
+
+Sigil-1.4.1
+    Bug Fixes:
+      - critical bug fix for *over* xml encoding html used inside metadata in the opf
+      - return use of ctrl-f to its long standing functionality
+
+Sigil-1.4.0
+    New Features:
+      - Two different types of Multiple Language Spellchecking support added:
+          - A user can now specify a Primary and a Secondary Language dictionary 
+               for real-time spellchecking (red squiggley underline).
+          - The Spellcheck Dialog will now support spell checking as determined by
+               xml:lang and lang attributes in any languages with dictionaries
+      - Main UI icons now use scalable svg files to better serve higher res displays.
+        All provided by BeckyEbook (ala BeckyDTP).  A huge Thank You! to BeckyEbook
+      - New brighter Sigil Application Icon is now being used.
+      - Alternate Sigil main Application Icon now available as a build-time option
+      - Sigil now provides 3 different Icon Themes for the user: Main, Fluent, and Material
+           Again all thanks goes to BeckyEbook for creating/collecting all of the icon themes!
+      - Sigil will now support a custom user-determined Icon theme via a custom .rcc file.
+          - pre-made icon themes for Legacy and Material themes in different base colors 
+            are now available with more user-contributed theme files to hopefully come.
+            Again Thank BeckyEbook!
+      - New main toolbar icons are now available and improved icon groupings have
+          been made to provide the user with a greater degree of toolbar customization.
+          Users may need to drag and drop icon grouping and modfy their selections of Toolbars
+          to see some of these new options.
+      - Improved support for IRI (international) hrefs.  OPF newly added file manifest ids 
+          now converted to plain ascii to prevent issues with older readers
 
     Bug Fixes:
+      - Fix bugs in Marking for Index
+      - Perform major URL en/decode refactoring to properly handle '#' 
+            (and other reserved chars) in file names
+      - Translate "Table of Contents" using book language not ui langauge
+      - Fix handling of links when using Add Existing on xhtml files with links
+            to other xhtml files
+      - Fix split code to better handle duplicate target ids that reside in different files
+      - Bug fixes for the plugin interface from wrCisco (Thank you!)
+      - Bug fixes for the plugin interface setguide from BeckyDTP (Thank you!)
+      - Fix bug in OPF parsing when valid but non-traditional namespace prefixes are used
+      - Fix rare off by one condition in clip number to clip enditor model conversion
+
+
+Sigil-1.3.0
+    New Features:
+      - Added FontTab to show a specific font by double-clicking in BookBrowser
+      - Added Index Toolbar
+      - Windows/macOS release build updated to Qt 5.12.9 with added bug fixes
+      - Windows/macOS release build updated to Python 3.8.3
+      - Added increased protection against evil epubs manipulating file: urls
+      - Changes to support building with Visual Studio 2019 on Windows
+      - Improved Windows Installer and handling of C++ runtime libraries
+      - Updated Build instructions for MacOS, Windows, and Linux
+
+    Bug Fixes:
+      - Reorganized the source code to add a Widgets folder to reduce code duplication
       - Fixed spelling mistakes in MetaEditor user interface and xmlsanitycheck error messages
       - Fixed mistakes handling font files (and other files) whose names start with a "." on macOS/Linux
       - Improved embedded python error messages
+      - Improved some error messages on epub load
       - Fix TabConnections to properly handle the new FontTab tabs
-      - grew Preferences Colour widths to better handle non-Enlgish colour names (Thanks BeckyEbook)
-      - Better handle missing local links when using Add Existing ...
+      - grew Preferences Colour widths to better handle non-English colour names (Thanks BeckyEbook)
+      - Fixed bug in handling missing local links when using Add Existing ...
+      - Removed all python2 remanants from the Sigil plugin and pythonlib code
+      - If "Mend on Open" set, better handle import of huge file of of run-on lines
+      - Bug fix for css url updating
+      - Fix bug that prevented css updates from being shown in Preview without reload
+      - Fix gcc8 build warnings where possible
+      - Prevent BookBrowser's Rename and RERename from using URI delimiters ("#",etc) in file names
+
 
 Sigil-1.2.1
     Bug Fix:
@@ -81,7 +282,7 @@ Sigil-1.1.0
 Sigil-1.0.0
     Bug Fixes:
       - All bugs reported in alpha release have been fixed. 
-        Special thanks to Vroni, BeckEBook, Doitsu, Odamizu, 
+        Special thanks to Vroni, BeckyEBook, Doitsu, Odamizu, 
         Un_Pogaz, snarkophilus, and many others who ran tests and reported bugs.
       - Fix for crash on macOS opening Preferences following New MainWindow
       - Workaround Qt bug in restoreState after maximize with Find and Replace open
@@ -109,7 +310,7 @@ Sigil-1.0.0
 Sigil-0.9.991 (pre1.0 Alpha Release)
     Bug Fixes:
       - handle javascript location.href style in Preview 
-      - use CaseInsensitive sort in Plugins menu (Thank you BeckDTP)
+      - use CaseInsensitive sort in Plugins menu (Thank you BeckyDTP)
       - use Locale aware sort routines for AddMetadata, and MetaData Names (Thankyou Doitsu)
       - recognize x-font-otf style media types
       - recognize vnd.adobe.page-template+xml media type
@@ -207,7 +408,7 @@ Sigil-0.9.15 - A Beta Release of Sigil ported to QtWebEngine to replace QtWebKit
      - adds action to launch one preferred external xhtml editor via shortcut or icon
            (can be used to fast launch PageEdit app or any other xhtml open-with editor)
      - adds 5 more plugin quicklaunch buttons to main menu for a total of 10
-           (with all new icons! Thanks so much Becky!)
+           (with all new icons! Thanks so much BeckyEbook!)
 
 It also includes all of the fixes and updates from Sigil-0.9.14.
 

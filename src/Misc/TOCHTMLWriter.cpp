@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2016-2019 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2016-2021 Kevin B. Hendricks, Stratford, Ontario, Canada
 **  Copyright (C) 2012      Dave Heiland
 **  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **
@@ -30,13 +30,15 @@
 const QString SGC_TOC_CSS_FILENAME = "sgc-toc.css";
 
 TOCHTMLWriter::TOCHTMLWriter(const QString &toc_bookpath,
-			     const QString &css_bookpath, 
-			     TOCModel::TOCEntry toc_root_entry)
+                             const QString &css_bookpath, 
+                             TOCModel::TOCEntry toc_root_entry,
+                             const QString &title)
     :
     m_Writer(0),
     m_TOCRootEntry(toc_root_entry),
     m_TOCBookPath(toc_bookpath),
-    m_CSSBookPath(css_bookpath)
+    m_CSSBookPath(css_bookpath),
+    m_title(title)
 {
 }
 
@@ -84,12 +86,13 @@ void TOCHTMLWriter::WriteHead()
     // Title
     m_Writer->writeStartElement("head");
     m_Writer->writeCharacters("\n");
-    m_Writer->writeTextElement("title",  "Contents");
+    m_Writer->writeTextElement("title", m_title);
     m_Writer->writeCharacters("\n");
 
     // TOC
     m_Writer->writeStartElement("link");
     QString href = Utility::buildRelativePath(m_TOCBookPath, m_CSSBookPath);
+    href = Utility::URLEncodePath(href);
     m_Writer->writeAttribute("href", href);
     m_Writer->writeAttribute("rel", "stylesheet");
     m_Writer->writeAttribute("type", "text/css");
@@ -108,7 +111,7 @@ void TOCHTMLWriter::WriteBody()
     // Page heading
     m_Writer->writeStartElement("div");
     m_Writer->writeAttribute("class", "sgc-toc-title");
-    m_Writer->writeCharacters(QObject::tr("Table of Contents"));
+    m_Writer->writeCharacters(m_title);
     m_Writer->writeEndElement();
     m_Writer->writeCharacters("\n");
     // Entries
@@ -123,16 +126,15 @@ void TOCHTMLWriter::WriteEntries(TOCModel::TOCEntry parent_entry, int level)
         m_Writer->writeCharacters("\n");
         m_Writer->writeCharacters("  ");
         m_Writer->writeStartElement("a");
-	// entry.target is now a full bookpath that may have a fragment
-	QString href = entry.target;
-	// only process internal not external hrefs
-	if (href.indexOf(":") == -1) {
-	    std::pair<QString, QString> pieces = Utility::parseHREF(entry.target);
-	    QString fragment = pieces.second;
-	    href = Utility::buildRelativePath(m_TOCBookPath, pieces.first);
-	    if (!fragment.isEmpty()) href = href + fragment;
-	}
-        href = Utility::URLEncodePath(href);
+        // entry.target is now a full urlencoded bookpath that may have a fragment
+        QString href = entry.target;
+        // only process internal not external hrefs
+        if (href.indexOf(":") == -1) {
+            std::pair<QString, QString> pieces = Utility::parseRelativeHREF(entry.target);
+            QString fragment = pieces.second;
+            href = Utility::buildRelativePath(m_TOCBookPath, pieces.first);
+            href = Utility::buildRelativeHREF(href, pieces.second);
+        }
         m_Writer->writeAttribute("href", href);
         m_Writer->writeCharacters(entry.text);
         m_Writer->writeEndElement();

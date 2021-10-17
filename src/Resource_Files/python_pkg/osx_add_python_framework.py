@@ -33,11 +33,12 @@ fwk_struct = ['Python.framework/Versions/' + pversion + '/lib/' + stdlib_name + 
 ]
 
 # minimal set of PyQt modules to support the plugin gui
-PYQT_MODULES = ['%s.so' % x for x in ('Qt', 'QtCore', 'QtDBus', 'QtGui', 'QtNetwork', 'QtPrintSupport', 'QtSvg', 'QtWidgets', 'sip')]
+PYQT_MODULES = ['%s.so' % x for x in ('Qt', 'QtCore', 'QtDBus', 'QtGui', 'QtNetwork', 'QtPrintSupport',
+                                      'QtSvg', 'QtWidgets', 'QtWebEngine', 'QtWebEngineCore',
+                                      'QtWebEngineWidgets', 'QtWebChannel','sip')]
 
 EXCLUDED_UIC_WIDGET_PLUGINS = ['%s.py' % x for x in ('qaxcontainer', 
-                                                     'qscintilla', 'qtcharts', 'qtquickwidgets', 
-                                                     'qtwebenginewidgets', 'qtwebkit')
+                                                     'qscintilla', 'qtcharts', 'qtquickwidgets', 'qtwebkit')
 ]
 
 # additional external python modules/packages that need to be included
@@ -217,7 +218,8 @@ def main():
     os.symlink(os.path.join('Versions', 'Current', 'Resources'), 'Resources')
 
     os.chdir(os.path.join(app_dir, 'Python.framework', 'Versions', pversion, 'lib'))
-    dylibname = 'libpython' + pversion + 'm.dylib'
+    # dylibname = 'libpython' + pversion + 'm.dylib'
+    dylibname = 'libpython' + pversion + '.dylib'
     os.symlink('../Python', dylibname)
 
     # Change any Python.framework rpaths in the Sigil executable to point to the new local Python.framework

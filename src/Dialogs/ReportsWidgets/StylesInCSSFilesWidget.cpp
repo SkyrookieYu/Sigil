@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012      Dave Heiland
 **
@@ -32,7 +32,7 @@
 #include "sigil_exception.h"
 #include "BookManipulation/FolderKeeper.h"
 #include "Dialogs/ReportsWidgets/StylesInCSSFilesWidget.h"
-#include "Misc/CSSInfo.h"
+#include "Parsers/CSSInfo.h"
 #include "Misc/NumericItem.h"
 #include "Misc/SettingsStore.h"
 #include "Misc/Utility.h"
@@ -40,7 +40,7 @@
 #include "ResourceObjects/CSSResource.h"
 
 static const QString SETTINGS_GROUP = "reports";
-static const QString DEFAULT_REPORT_FILE = "StyleClassesInCSSFilesReport.csv";
+static const QString DEFAULT_REPORT_FILE = "StyleSelectorsInCSSFilesReport.csv";
 
 StylesInCSSFilesWidget::StylesInCSSFilesWidget()
     :
@@ -62,11 +62,7 @@ void StylesInCSSFilesWidget::CreateReport(QSharedPointer<Book> book)
 {
     m_Book = book;
     SetupTable();
-    // Get the list of classes in HTML and what selectors they match
-    QList<BookReports::StyleData *> html_classes_usage = BookReports::GetAllHTMLClassUsage(m_Book);
-    // Get the list of selectors in CSS files and if they were matched by HTML classes
-    QList<BookReports::StyleData *> css_selector_usage = BookReports::GetCSSSelectorUsage(m_Book, html_classes_usage);
-    qDeleteAll(html_classes_usage);
+    QList<BookReports::StyleData *> css_selector_usage = BookReports::GetAllCSSSelectorsUsed(m_Book, true);
     AddTableData(css_selector_usage);
     qDeleteAll(css_selector_usage);
 
@@ -84,16 +80,16 @@ void StylesInCSSFilesWidget::SetupTable()
     m_ItemModel->clear();
     QStringList header;
     header.append(tr("CSS File"));
-    header.append(tr("Class Selector"));
+    header.append(tr("CSS Selector"));
     header.append(tr("Used In HTML File"));
     m_ItemModel->setHorizontalHeaderLabels(header);
     ui.fileTree->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui.fileTree->setModel(m_ItemModel);
     ui.fileTree->header()->setSortIndicatorShown(true);
     ui.fileTree->header()->setToolTip(
-        tr("<p>This is a list of the class based selectors in all CSS files and whether or not the selector was matched from a style in an HTML file.<p>") %
+        tr("<p>This is a list of the CSS selectors in all CSS files and whether or not the selector was matched in an HTML file.<p>") %
         tr("<p>NOTE:</p>") %
-        tr("<p>Due to the complexities of CSS you must check your code manually to be certain if a style is used or not.</p>")
+        tr("<p>Due to the complexities of CSS you must check your code manually to be absolutely certain if a selector is used or not.</p>") % tr("<p>Note: Only one HTML File is listed among the many possible matches.</p>")
     );
 }
 
@@ -107,13 +103,13 @@ void StylesInCSSFilesWidget::AddTableData(const QList<BookReports::StyleData *> 
         QString css_short_filename = selector_usage->css_filename;
         css_short_filename = css_short_filename.right(css_short_filename.length() - css_short_filename.lastIndexOf('/') - 1);
         filename_item->setText(css_short_filename);
-	filename_item->setData(selector_usage->css_filename);
+        filename_item->setData(selector_usage->css_filename);
         filename_item->setToolTip(selector_usage->css_filename);
         rowItems << filename_item;
         // Selector
         QStandardItem *selector_text_item = new QStandardItem();
         selector_text_item->setText(selector_usage->css_selector_text);
-        selector_text_item->setData(selector_usage->css_selector_line);
+        selector_text_item->setData(selector_usage->css_selector_position);
         rowItems << selector_text_item;
         // Found in
         QStandardItem *found_in_item = new QStandardItem();
@@ -140,8 +136,7 @@ void StylesInCSSFilesWidget::FilterEditTextChangedSlot(const QString &text)
     for (int row = 0; row < root_item->rowCount(); row++) {
         if (text.isEmpty() || root_item->child(row, 0)->text().toLower().contains(lowercaseText) ||
             root_item->child(row, 1)->text().toLower().contains(lowercaseText) ||
-            root_item->child(row, 2)->text().toLower().contains(lowercaseText) ||
-            root_item->child(row, 3)->text().toLower().contains(lowercaseText)) {
+            root_item->child(row, 2)->text().toLower().contains(lowercaseText)) {
             ui.fileTree->setRowHidden(row, parent_index, false);
 
             if (first_visible_row == -1) {
@@ -166,8 +161,8 @@ void StylesInCSSFilesWidget::DoubleClick()
 {
     QModelIndex index = ui.fileTree->selectionModel()->selectedRows(0).first();
     QString bookpath = m_ItemModel->itemFromIndex(index)->data().toString();
-    int line = m_ItemModel->itemFromIndex(index.sibling(index.row(), 1))->data().toInt();
-    emit OpenFileRequest(bookpath, line);
+    int pos = m_ItemModel->itemFromIndex(index.sibling(index.row(), 1))->data().toInt();
+    emit OpenFileRequest(bookpath, -1, pos);
 }
 
 void StylesInCSSFilesWidget::Delete()
@@ -197,7 +192,7 @@ void StylesInCSSFilesWidget::Delete()
         BookReports::StyleData *style = new BookReports::StyleData();
         style->css_filename = m_ItemModel->itemFromIndex(index)->data().toString();
         style->css_selector_text = m_ItemModel->itemFromIndex(index.sibling(index.row(), 1))->text();
-        style->css_selector_line = m_ItemModel->itemFromIndex(index.sibling(index.row(), 1))->data().toInt();
+        style->css_selector_position = m_ItemModel->itemFromIndex(index.sibling(index.row(), 1))->data().toInt();
         styles_to_delete.append(style);
     }
     emit DeleteStylesRequest(styles_to_delete);
@@ -205,8 +200,8 @@ void StylesInCSSFilesWidget::Delete()
 
 void StylesInCSSFilesWidget::Save()
 {
-    QString report_info;
-    QString row_text;
+    QStringList report_info;
+    QStringList heading_row;
 
     // Get headings
     for (int col = 0; col < ui.fileTree->header()->count(); col++) {
@@ -215,35 +210,25 @@ void StylesInCSSFilesWidget::Save()
         if (item) {
             text = item->text();
         }
-        if (col == 0) {
-            row_text.append(text);
-        } else {
-            row_text.append("," % text);
-        }
+        heading_row << text;
     }
-
-    report_info.append(row_text % "\n");
+    report_info << Utility::createCSVLine(heading_row);
 
     // Get data from table
     for (int row = 0; row < m_ItemModel->rowCount(); row++) {
-        row_text = "";
-
+        QStringList data_row;
         for (int col = 0; col < ui.fileTree->header()->count(); col++) {
             QStandardItem *item = m_ItemModel->item(row, col);
             QString text = "";
             if (item) {
                 text = item->text();
             }
-            if (col == 0) {
-                row_text.append(text);
-            } else {
-                row_text.append("," % text);
-            }
+            data_row << text;
         }
-
-        report_info.append(row_text % "\n");
+        report_info << Utility::createCSVLine(data_row);
     }
 
+    QString data = report_info.join('\n') + '\n';
     // Save the file
     ReadSettings();
     QString filter_string = "*.csv;;*.txt;;*.*";
@@ -255,20 +240,19 @@ void StylesInCSSFilesWidget::Save()
 #endif
 
     QString destination = QFileDialog::getSaveFileName(this,
-                          tr("Save Report As Comma Separated File"),
-                          save_path,
-                          filter_string,
-			  &default_filter,
-                          options
-                                                      );
+                                                       tr("Save Report As Comma Separated File"),
+                                                       save_path,
+                                                       filter_string,
+                                                       &default_filter,
+                                                       options);
 
     if (destination.isEmpty()) {
         return;
     }
 
     try {
-        Utility::WriteUnicodeTextFile(report_info, destination);
-    } catch (CannotOpenFile) {
+        Utility::WriteUnicodeTextFile(data, destination);
+    } catch (CannotOpenFile&) {
         QMessageBox::warning(this, tr("Sigil"), tr("Cannot save report file."));
     }
 
@@ -276,7 +260,6 @@ void StylesInCSSFilesWidget::Save()
     m_LastFileSaved = QFileInfo(destination).fileName();
     WriteSettings();
 }
-
 
 void StylesInCSSFilesWidget::CreateContextMenuActions()
 {
@@ -290,7 +273,9 @@ void StylesInCSSFilesWidget::OpenContextMenu(const QPoint &point)
 {
     SetupContextMenu(point);
     m_ContextMenu->exec(ui.fileTree->viewport()->mapToGlobal(point));
-    m_ContextMenu->clear();
+    if (!m_ContextMenu.isNull()) {
+        m_ContextMenu->clear();
+    }
 }
 
 void StylesInCSSFilesWidget::SetupContextMenu(const QPoint &point)

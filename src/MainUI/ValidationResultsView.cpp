@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -20,7 +20,7 @@
 **
 *************************************************************************/
 
-#include "Misc/EmbeddedPython.h"
+#include "EmbedPython/EmbeddedPython.h"
 
 #include <QtCore/QFileInfo>
 #include <QtWidgets/QApplication>
@@ -46,7 +46,8 @@ const QString ValidationResultsView::SEP = QString(QChar(31));
 ValidationResultsView::ValidationResultsView(QWidget *parent)
     :
     QDockWidget(tr("Validation Results"), parent),
-    m_ResultTable(new QTableWidget(this))
+    m_ResultTable(new QTableWidget(this)),
+    m_NoProblems(false)
 {
     setWidget(m_ResultTable);
     setAllowedAreas(Qt::BottomDockWidgetArea | Qt::TopDockWidgetArea);
@@ -99,7 +100,7 @@ void ValidationResultsView::ValidateCurrentBook()
     foreach (Resource * resource, resources) {
         if (resource->Type() == Resource::HTMLResourceType) {
             QString apath = resource->GetFullPath();
-	    QString bookpath = resource->GetRelativePath();
+            QString bookpath = resource->GetRelativePath();
             QStringList reslst = ValidateFile(apath);
             if (!reslst.isEmpty()) {
                 foreach (QString res, reslst) {
@@ -185,7 +186,7 @@ void ValidationResultsView::ResultDoubleClicked(QTableWidgetItem *item)
         } else {
             emit OpenResourceRequest(resource, line, -1, QString());
         }
-    } catch (ResourceDoesNotExist) {
+    } catch (ResourceDoesNotExist&) {
         return;
     }
 }
@@ -204,8 +205,10 @@ void ValidationResultsView::SetUpTable()
 void ValidationResultsView::DisplayResults(const QList<ValidationResult> &results)
 {
     m_ResultTable->clear();
+    m_NoProblems = false;
 
     if (results.empty()) {
+        m_NoProblems = true;
         DisplayNoProblemsMessage();
         return;
     }
@@ -225,19 +228,19 @@ void ValidationResultsView::DisplayResults(const QList<ValidationResult> &result
 
         m_ResultTable->insertRow(rownum);
  
-	QString path;
-	QString bookpath = result.BookPath();
-	try {
-	    Resource * resource = m_Book->GetFolderKeeper()->GetResourceByBookPath(bookpath);
-	    path = resource->ShortPathName();
-	} catch (ResourceDoesNotExist) {
+        QString path;
+        QString bookpath = result.BookPath();
+        try {
+            Resource * resource = m_Book->GetFolderKeeper()->GetResourceByBookPath(bookpath);
+            path = resource->ShortPathName();
+        } catch (ResourceDoesNotExist&) {
             if (bookpath.isEmpty()) {
-	        path = "***Invalid Book Path Provided ***";
+                path = "***Invalid Book Path Provided ***";
             } else {
                 path = bookpath;
-	    }
-	}
-	
+            }
+        }
+
         item = new QTableWidgetItem(RemoveEpubPathPrefix(path));
         item->setData(Qt::UserRole+1, bookpath);
         SetItemPalette(item, row_brush);
@@ -264,6 +267,11 @@ void ValidationResultsView::DisplayResults(const QList<ValidationResult> &result
     //m_ResultTable->resizeColumnsToContents();
 }
 
+int ValidationResultsView::ResultCount()
+{
+    if (m_NoProblems) return 0;
+    return m_ResultTable->rowCount();
+}
 
 void ValidationResultsView::DisplayNoProblemsMessage()
 {

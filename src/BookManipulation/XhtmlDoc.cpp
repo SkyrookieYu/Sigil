@@ -1,5 +1,5 @@
 /***************************************************************************
-**  Copyright (C) 2015-2019 Kevin B. Hendricks Stratford, ON, Canada 
+**  Copyright (C) 2015-2021 Kevin B. Hendricks Stratford, ON, Canada 
 **  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012      Dave Heiland
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
@@ -39,6 +39,7 @@
 #include "BookManipulation/CleanSource.h"
 #include "BookManipulation/XhtmlDoc.h"
 #include "Misc/Utility.h"
+#include "Parsers/TagLister.h"
 #include "sigil_constants.h"
 #include "sigil_exception.h"
 
@@ -62,7 +63,7 @@ const QStringList ID_TAGS = QStringList() << BLOCK_LEVEL_TAGS <<
                             "font" << "i" << "label" << "mark" << "pre" << "small" <<
                             "span" << "strike" << "strong" << "sub" << "sup" << "u";
 const QStringList ANCHOR_TAGS = QStringList() << "a";
-const QStringList SRC_TAGS = QStringList() << "link" << "img";
+const QStringList SRC_TAGS = QStringList() << "img";
 
 
 const int XML_DECLARATION_SEARCH_PREFIX_SIZE = 150;
@@ -71,6 +72,9 @@ static const QString ENTITY_SEARCH = "<!ENTITY\\s+(\\w+)\\s+\"([^\"]+)\">";
 static const QString URL_ATTRIBUTE_SEARCH = ":.*(url\\s*\\([^\\)]+\\))";
 
 const QString BREAK_TAG_SEARCH  = "(<div>\\s*)?<hr\\s*class\\s*=\\s*\"[^\"]*(sigil_split_marker|sigilChapterBreak)[^\"]*\"\\s*/>(\\s*</div>)?";
+
+static const QString NEXT_TAG_LOCATION      = "<[^!>]+>";
+static const QString TAG_NAME_SEARCH        = "<\\s*([^\\s>]+)";
 
 // Resolves custom ENTITY declarations
 QString XhtmlDoc::ResolveCustomEntities(const QString &source)
@@ -280,14 +284,54 @@ XhtmlDoc::WellFormedError XhtmlDoc::GumboWellFormedErrorForSource(const QString 
 XhtmlDoc::WellFormedError XhtmlDoc::WellFormedErrorForSource(const QString &source, QString version)
 {
     QXmlStreamReader reader(source);
+    int ndoctypes = 0;
+    int nhtmltags = 0;
+    int nheadtags = 0;
+    int nbodytags = 0;
+
     while (!reader.atEnd()) {
         reader.readNext();
+        if (reader.isDTD()) ndoctypes++;
+        if (reader.isStartElement()) {
+            if (reader.name() == "html") nhtmltags++;
+            if (reader.name() == "head") nheadtags++;
+            if (reader.name() == "body") nbodytags++;
+        }
     }
     if (reader.hasError()) {
         XhtmlDoc::WellFormedError error;
         error.line    = reader.lineNumber();
         error.column  = reader.columnNumber();
         error.message = QString(reader.errorString());
+        return error;
+    }
+    // make sure basic structure in place
+    if (ndoctypes != 1) {
+        XhtmlDoc::WellFormedError error;
+        error.line    = 1;
+        error.column  = 1;
+        error.message = "Missing DOCTYPE";
+        return error;
+    }
+    if (nhtmltags != 1) {
+        XhtmlDoc::WellFormedError error;
+        error.line    = 1;
+        error.column  = 1;
+        error.message = "Missing html tag";
+        return error;
+    }
+    if (nheadtags != 1) {
+        XhtmlDoc::WellFormedError error;
+        error.line    = 1;
+        error.column  = 1;
+        error.message = "Missing head tag";
+        return error;
+    }
+    if (nbodytags != 1) {
+        XhtmlDoc::WellFormedError error;
+        error.line    = 1;
+        error.column  = 1;
+        error.message = "Missing body tag";
         return error;
     }
     return XhtmlDoc::WellFormedError();
@@ -299,101 +343,73 @@ bool XhtmlDoc::IsDataWellFormed(const QString &data, QString version)
     return error.line == -1;
 }
 
-#if 0
-// Accepts a string with HTML and returns the text
-// in that HTML fragment. For instance:
-//   <h1>Hello <b>Qt</b>&nbsp;this is great</h1>
-// returns
-//   Hello Qt this is great
-QString XhtmlDoc::GetTextInHtml(const QString &source)
-{
-    QWebPage page;
-    page.mainFrame()->setHtml(source);
-    return page.mainFrame()->toPlainText();
-}
-
-// Resolves HTML entities in the provided string.
-// For instance:
-//    Bonnie &amp; Clyde
-// returns
-//    Bonnie & Clyde
-QString XhtmlDoc::ResolveHTMLEntities(const QString &text)
-{
-    // Faking some HTML... this is the easiest way to do it
-    QString newsource = "<div>" + text + "</div>";
-    return GetTextInHtml(newsource);
-}
-#endif
-
-#if 0 
-//this should no longer be needed without BookView
-
-// A tree node class without a children() function...
-// appallingly stupid, isn't it?
-QList<QWebElement> XhtmlDoc::QWebElementChildren(const QWebElement &element)
-{
-    QList<QWebElement> children;
-    const QWebElement &first_child = element.firstChild();
-
-    if (!first_child.isNull()) {
-        children.append(first_child);
-    }
-
-    QWebElement next_sibling = first_child.nextSibling();
-
-    while (!next_sibling.isNull()) {
-        children.append(next_sibling);
-        next_sibling = next_sibling.nextSibling();
-    }
-
-    return children;
-}
-#endif
-
 QStringList XhtmlDoc::GetSGFSectionSplits(const QString &source,
         const QString &custom_header)
 {
-    QRegularExpression body_start_tag(BODY_START);
-    QRegularExpressionMatch body_start_tag_match = body_start_tag.match(source);
-    QRegularExpression body_end_tag(BODY_END);
-
-    int body_end   = source.indexOf(body_end_tag, 0);
-    int main_index = body_start_tag_match.capturedEnd();
-
-    QString header = !custom_header.isEmpty() ? custom_header + "<body>\n" : source.left(main_index);
+    
     QStringList sections;
-    QRegularExpression break_tag(BREAK_TAG_SEARCH);
+    TagLister taglist(source);
 
-    while (main_index != body_end) {
-        QRegularExpressionMatch match = break_tag.match(source, main_index);
-        QString body;
-
-        // We search for our HR break tag
-        if (match.hasMatch()) {
-            // We break up the remainder of the file on the HR tag index if it's found
-            int break_index = match.capturedStart();
-            body = Utility::Substring(main_index, break_index, source);
-            main_index = break_index + match.capturedLength();
-        } else {
-            // Otherwise, we take the rest of the file
-            body = Utility::Substring(main_index, body_end, source);
-            main_index = body_end;
-        }
-
-        sections.append(header + body + "</body> </html>");
+    // abort if no body tags exist
+    int bo = taglist.findBodyOpenTag();
+    int bc = taglist.findBodyCloseTag();
+    if (bo == -1 || bc == -1) {
+        sections << source;
+        return sections;
     }
 
+    int body_tag_start = taglist.at(bo).pos;
+    int body_tag_end   = body_tag_start + taglist.at(bo).len;
+    int body_contents_end = taglist.at(bc).pos;
+
+    QString header = source.left(body_tag_end);
+    if (!custom_header.isEmpty()) {
+        header = custom_header + "<body>\n";
+    }
+
+    QList<int>section_starts;
+    QList<int>section_ends;
+
+    QRegularExpression break_tag(BREAK_TAG_SEARCH);
+    QRegularExpression match;
+
+    // create a list of section starts and ends inside the body
+    int start_pos = body_tag_end;
+    while (start_pos < body_contents_end) {
+        QRegularExpressionMatch match = break_tag.match(source, start_pos);
+        if (match.hasMatch()) {
+            int split_pos = match.capturedStart();
+            if (split_pos < body_contents_end) {
+                section_starts << start_pos;
+                section_ends << split_pos;
+            }
+            start_pos = split_pos + match.capturedLength();
+        } else {
+            section_starts << start_pos;
+            section_ends << body_contents_end;
+            start_pos = body_contents_end;
+        }
+    }
+    for (int i=0; i < section_starts.size(); i++) {
+        QString text = Utility::Substring(section_starts[i], section_ends[i], source);
+        QStringList open_tag_list = GetUnmatchedTagsForPosition(section_starts[i], taglist);
+        QString open_tag_source = "";
+        if (!open_tag_list.isEmpty()) open_tag_source = open_tag_list.join(" ");
+        sections.append(header + open_tag_source + text + "</body>\n</html>\n");
+        // let gumbo/mend fill in any necessary closing tags for any open tags
+        // at the end of each section
+    } 
     return sections;
 }
 
-
+// return all links in raw encoded form
 QStringList XhtmlDoc::GetLinkedStylesheets(const QString &source)
 {
     QList<XhtmlDoc::XMLElement> link_tag_nodes;
 
     try {
         link_tag_nodes = XhtmlDoc::GetTagsInHead(source, "link");
-    } catch (ErrorParsingXml) {
+    } catch (ErrorParsingXml&) {
         // Nothing really. If we can't get the CSS style tags,
         // than that's it. No CSS returned.
     }
@@ -408,10 +424,35 @@ QStringList XhtmlDoc::GetLinkedStylesheets(const QString &source)
             element.attributes.contains("rel") &&
             (element.attributes.value("rel").toLower() == "stylesheet") &&
             element.attributes.contains("href")) {
-            linked_css_paths.append(Utility::URLDecodePath(element.attributes.value("href")));
+           linked_css_paths.append(element.attributes.value("href"));
         }
     }
     return linked_css_paths;
+}
+
+
+// return all linked javascripts in raw encoded form
+QStringList XhtmlDoc::GetLinkedJavascripts(const QString &source)
+{
+    QList<XhtmlDoc::XMLElement> script_tag_nodes;
+
+    try {
+        script_tag_nodes = XhtmlDoc::GetTagsInHead(source, "script");
+    } catch (ErrorParsingXml&) {
+        // Nothing really. If we can't get the script tags,                                                      
+        // than that's it. No scripts returned.
+    }
+
+    QStringList linked_js_paths;
+    foreach(XhtmlDoc::XMLElement element, script_tag_nodes) {
+        if (element.attributes.contains("type") &&
+            ((element.attributes.value("type").toLower() == "text/javascript") ||
+             (element.attributes.value("type").toLower() == "application/javascript"))
+            && element.attributes.contains("src")) {
+            linked_js_paths.append(element.attributes.value("src"));
+        }
+    }
+    return linked_js_paths;
 }
 
 
@@ -544,16 +585,16 @@ GumboNode *XhtmlDoc::GetAncestorIDElement(GumboInterface &gi, GumboNode *node)
 }
 
 
-// the returned paths are the href attribute values url decoded
+// the returned paths are the raw href attribute values url encoded
 QStringList XhtmlDoc::GetHrefSrcPaths(const QString &source)
 {
     QStringList destination_paths;
     GumboInterface gi = GumboInterface(source, "any_version");
     foreach(QString apath, gi.get_all_values_for_attribute("src")) {
-	destination_paths << Utility::URLDecodePath(apath);
+        destination_paths << apath;
     }
     foreach(QString apath, gi.get_all_values_for_attribute("href")) {
-	destination_paths << Utility::URLDecodePath(apath);
+        destination_paths << apath;
     }
     destination_paths.removeDuplicates();
     return destination_paths;
@@ -580,10 +621,13 @@ QStringList XhtmlDoc::GetPathsToStyleFiles(const QString &source)
         GumboNode* node = nodes.at(i);
         GumboAttribute* attr = gumbo_get_attribute(&node->v.element.attributes, "href");
         if (attr) {
-            QString relative_path = Utility::URLDecodePath(QString::fromUtf8(attr->value));
-            QFileInfo file_info(relative_path);
-            if (file_info.suffix().toLower() == "css") {
-                style_paths << relative_path;
+            QString relative_path = QString::fromUtf8(attr->value);
+            if (relative_path.indexOf(":") == -1) {
+                std::pair<QString, QString> parts = Utility::parseRelativeHREF(relative_path);
+                QFileInfo file_info(parts.first);
+                if (file_info.suffix().toLower() == "css") {
+                    style_paths << parts.first;
+                }
             }
         }
   }
@@ -639,8 +683,11 @@ QStringList XhtmlDoc::GetAllMediaPathsFromMediaChildren(const QString & source, 
             if (attr && attr->attr_namespace != GUMBO_ATTR_NAMESPACE_XLINK) attr = NULL;
         }
         if (attr) {
-            QString relative_path = Utility::URLDecodePath(QString::fromUtf8(attr->value));
-            media_paths << relative_path;
+            QString relative_path = QString::fromUtf8(attr->value);
+            if (relative_path.indexOf(":") == -1) {
+                std::pair<QString, QString> parts = Utility::parseRelativeHREF(relative_path);
+                media_paths << parts.first;
+            }
         }
     }
     return media_paths;
@@ -670,4 +717,37 @@ XhtmlDoc::XMLElement XhtmlDoc::CreateXMLElement(QXmlStreamReader &reader)
     element.text = reader.readElementText(QXmlStreamReader::IncludeChildElements);
 
     return element;
+}
+
+
+// Note for this routine to work the position must be inside the body tag someplace
+QStringList XhtmlDoc::GetUnmatchedTagsForPosition(int pos, TagLister& m_TagList)
+{
+    // Given the specified position within the body of the text, keep looking backwards finding
+    // any tags until we hit all open block tags within the body. Append all the opening tags
+    // that do not have closing tags together (ignoring self-closing tags)
+    // and return the opening tags list complete with their attributes contiguously.
+    // Note: this should *never* include the html, head, or the body opening tags
+    QStringList opening_tags;
+    QList<int> paired_tags;
+    const QString& text = m_TagList.getSource();
+    int i = m_TagList.findFirstTagOnOrAfter(pos);
+    // so start looking for unmatched tags starting at i - 1
+    i--;
+    if (i < 0) return opening_tags;
+    while((i >= 0) && (m_TagList.at(i).tname != "body")) {
+        TagLister::TagInfo ti = m_TagList.at(i);
+        if (ti.ttype == "end") {
+            paired_tags << ti.open_pos;
+        } else if (ti.ttype == "begin") {
+            if (paired_tags.contains(ti.pos)) {
+                paired_tags.removeOne(ti.pos);
+            } else {
+                opening_tags.prepend(text.mid(ti.pos, ti.len));
+            }
+        }
+        // ignore single, and all special tags like doctype, cdata, pi, xmlheaders, and comments
+        i--;
+    }
+    return opening_tags;
 }

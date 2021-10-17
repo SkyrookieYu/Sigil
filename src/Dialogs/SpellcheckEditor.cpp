@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2012-2013 John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012-2013 Dave Heiland
 **
@@ -33,6 +33,8 @@
 #include "Misc/SettingsStore.h"
 #include "Misc/SpellCheck.h"
 #include "Misc/Utility.h"
+#include "Misc/HTMLSpellCheckML.h"
+#include "Misc/Language.h"
 #include "ResourceObjects/Resource.h"
 
 static const QString SETTINGS_GROUP = "spellcheck_editor";
@@ -160,7 +162,7 @@ void SpellcheckEditor::Ignore()
 
     SpellCheck *sc = SpellCheck::instance();
     foreach (QStandardItem *item, GetSelectedItems()) {
-        sc->ignoreWord(item->text());
+        sc->ignoreWord(HTMLSpellCheckML::textOf(item->text()));
         MarkSpelledOkay(item->row());
     }
 
@@ -252,24 +254,26 @@ void SpellcheckEditor::CreateModel(int sort_column, Qt::SortOrder sort_order)
     QStringList header;
     header.append(tr("Word"));
     header.append(tr("Count"));
+    header.append(tr("Language"));
     header.append(tr("Misspelled?"));
     m_SpellcheckEditorModel->setHorizontalHeaderLabels(header);
     ui.SpellcheckEditorTree->header()->setSectionResizeMode(0, QHeaderView::Stretch);
-    ui.SpellcheckEditorTree->resizeColumnToContents(1);
-    ui.SpellcheckEditorTree->resizeColumnToContents(2);
 
     QHash<QString, int> unique_words = m_Book->GetUniqueWordsInHTMLFiles();
 
     int total_misspelled_words = 0;
     SpellCheck *sc = SpellCheck::instance();
+    Language *lp = Language::instance();
 
     QHashIterator<QString, int> i(unique_words);
     while (i.hasNext()) {
         i.next();
-        QString word = i.key();
-        int count = unique_words.value(word);
-
-        bool misspelled = !sc->spell(word);
+        QString lcword = i.key();
+        QString code = HTMLSpellCheckML::langOf(lcword);
+        QString lang = lp->GetLanguageName(code, code);
+        QString word = HTMLSpellCheckML::textOf(lcword);
+        int count = unique_words.value(lcword);
+        bool misspelled = !sc->spell(lcword);
         if (misspelled) {
             total_misspelled_words++;
         }
@@ -282,17 +286,22 @@ void SpellcheckEditor::CreateModel(int sort_column, Qt::SortOrder sort_order)
 
         if (ui.CaseInsensitiveSort->checkState() == Qt::Unchecked) {
             QStandardItem *word_item = new QStandardItem(word);
+            word_item->setData(code);
             word_item->setEditable(false);
             row_items << word_item;
         } else {
             CaseInsensitiveItem *word_item = new CaseInsensitiveItem();
             word_item->setText(word);
+            word_item->setData(code);
             word_item->setEditable(false);
             row_items << word_item;
         }
         NumericItem *count_item = new NumericItem();
         count_item->setText(QString::number(count));
         row_items << count_item;
+
+        QStandardItem *lang_item = new QStandardItem(lang);
+        row_items << lang_item;
 
         QStandardItem *misspelled_item = new QStandardItem();
         misspelled_item->setEditable(false);
@@ -306,6 +315,11 @@ void SpellcheckEditor::CreateModel(int sort_column, Qt::SortOrder sort_order)
         m_SpellcheckEditorModel->invisibleRootItem()->appendRow(row_items);
     }
 
+    ui.SpellcheckEditorTree->resizeColumnToContents(0);
+    ui.SpellcheckEditorTree->resizeColumnToContents(1);
+    ui.SpellcheckEditorTree->resizeColumnToContents(2);
+    ui.SpellcheckEditorTree->resizeColumnToContents(3);
+
     // Changing the sortIndicator order should not cause the entire wordlist to be regenerated
     // disconnect(ui.SpellcheckEditorTree->header(), SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)), this, SLOT(Sort(int, Qt::SortOrder)));
 
@@ -315,7 +329,7 @@ void SpellcheckEditor::CreateModel(int sort_column, Qt::SortOrder sort_order)
     // connect(ui.SpellcheckEditorTree->header(), SIGNAL(sortIndicatorChanged(int, Qt::SortOrder)), this, SLOT(Sort(int, Qt::SortOrder)));
 
 
-    ui.SpellcheckEditorTree->header()->setToolTip("<table><tr><td>" % tr("Misspelled Words") % ":</td><td>" % QString::number(total_misspelled_words) % "</td></tr><tr><td>" % tr("Total Unique Words") % ":</td><td>" % QString::number(unique_words.count()) % "</td></tr></table>");
+    ui.SpellcheckEditorTree->header()->setToolTip("<table><tr><td>" % tr("Misspelled Words") % ":</td><td style=\"text-align:right;\">" % QString::number(total_misspelled_words) % "</td></tr><tr><td>" % tr("Total Unique Words") % ":</td><td style=\"text-align:right;\">" % QString::number(unique_words.count()) % "</td></tr></table>");
 }
 
 void SpellcheckEditor::Refresh(int sort_column, Qt::SortOrder sort_order)
@@ -371,7 +385,9 @@ QString SpellcheckEditor::GetSelectedWord()
     }
 
     QModelIndex index = ui.SpellcheckEditorTree->selectionModel()->selectedRows(0).first();
-    word = m_SpellcheckEditorModel->itemFromIndex(index)->text();
+    // word = m_SpellcheckEditorModel->itemFromIndex(index)->text();
+    word = m_SpellcheckEditorModel->itemFromIndex(index)->data().toString() + ": " +
+        m_SpellcheckEditorModel->itemFromIndex(index)->text();
     return word;
 }
 
@@ -428,7 +444,8 @@ void SpellcheckEditor::FindSelectedWord()
 void SpellcheckEditor::SelectionChanged(const QItemSelection &selected, const QItemSelection &deselected)
 {
     UpdateSuggestions();
-    FindSelectedWord();
+    // do not do a FindSelectedWord() here just because selection changed, wait for user to double-click
+    // so that paging up and down in the wordlist is not painfully slow in larger epubs
 }
 
 void SpellcheckEditor::FilterEditTextChangedSlot(const QString &text)
@@ -555,12 +572,14 @@ void SpellcheckEditor::OpenContextMenu(const QPoint &point)
 {
     SetupContextMenu(point);
     m_ContextMenu->exec(ui.SpellcheckEditorTree->viewport()->mapToGlobal(point));
-    m_ContextMenu->clear();
-    // Make sure every action is enabled - in case shortcut is used after context menu disables some.
-    m_Ignore->setEnabled(true);
-    m_Add->setEnabled(true);
-    m_Find->setEnabled(true);
-    m_SelectAll->setEnabled(true);
+    if (!m_ContextMenu.isNull()) {
+        m_ContextMenu->clear();
+        // Make sure every action is enabled - in case shortcut is used after context menu disables some.
+        m_Ignore->setEnabled(true);
+        m_Add->setEnabled(true);
+        m_Find->setEnabled(true);
+        m_SelectAll->setEnabled(true);
+    }
 }
 
 void SpellcheckEditor::SetupContextMenu(const QPoint &point)

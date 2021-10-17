@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  Copyright (C) 2020 Kevin B. Hendricks, Stratford Ontario Canada
+ **  Copyright (C) 2020-2021 Kevin B. Hendricks, Stratford Ontario Canada
  **
  **  This file is part of Sigil.
  **
@@ -28,7 +28,7 @@
 #include <QLabel>
 #include <QDialog>
 
-#include "Misc/DiffRec.h"
+#include "EmbedPython/DiffRec.h"
 
 class Navigator;
 class TextView;
@@ -42,7 +42,7 @@ class ChgViewer : public QDialog
 public:
 
     ChgViewer(const QList<DiffRecord::DiffRec>& diffinfo, const QString& file1,
-	      const QString& file2, QWidget *parent);
+              const QString& file2, QWidget *parent);
     ~ChgViewer();
 
     void insert_with_background(QTextCursor&  tc, const QString& sval, const QString& cval);
@@ -70,9 +70,9 @@ private:
     QString       m_filepath2;
     TextView*     m_view1;
     TextView*     m_view2;
-    Navigator*    m_nav;
     QLabel*       m_lbl1;
     QLabel*       m_lbl2;
+    Navigator*    m_nav;
     QVBoxLayout*  m_layout;
 
     QStringList    m_leftno;

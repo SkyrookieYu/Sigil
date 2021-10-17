@@ -26,12 +26,13 @@
 
 #include <memory>
 
-#include "Misc/GumboInterface.h"
+#include "Parsers/GumboInterface.h"
 #include "ViewEditors/ViewEditor.h"
 
 class QString;
 class QStringList;
 class QXmlStreamReader;
+class TagLister;
 
 const QList<GumboTag> GIMAGE_TAGS = QList<GumboTag>() << GUMBO_TAG_IMG << GUMBO_TAG_IMAGE;
 const QList<GumboTag> GVIDEO_TAGS = QList<GumboTag>() << GUMBO_TAG_VIDEO;
@@ -122,6 +123,8 @@ public:
     // Return a list of all linked CSS stylesheets
     static QStringList GetLinkedStylesheets(const QString &source);
 
+    static QStringList GetLinkedJavascripts(const QString &source);
+
     // Returns a list of all the "visible" text nodes that are descendants
     // of the specified node. "Visible" means we ignore style tags, script tags etc...
     static QList<GumboNode *> GetVisibleTextNodes(GumboInterface &gi, GumboNode *node);
@@ -147,6 +150,7 @@ public:
 
     static QStringList GetAllMediaPathsFromMediaChildren(const QString &source, QList<GumboTag> tags);
 
+    static QStringList GetUnmatchedTagsForPosition(int split_position, TagLister& m_TagList);
 
 private:
 

@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford, ON
+**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford, ON
 **  Copyright (C) 2012      Dave Heiland
 **  Copyright (C) 2012      John Schember <john@nachtimwald.com>
 **
@@ -103,7 +103,7 @@ void CSSFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         QStandardItem *name_item = new QStandardItem();
         name_item->setText(css_resource->ShortPathName());
         name_item->setToolTip(filepath);
-	name_item->setData(filepath);
+        name_item->setData(filepath);
         rowItems << name_item;
         // File Size
         double ffsize = QFile(path).size() / 1024.0;
@@ -111,6 +111,7 @@ void CSSFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
         QString fsize = QString::number(ffsize, 'f', 2);
         NumericItem *size_item = new NumericItem();
         size_item->setText(fsize);
+        size_item->setTextAlignment(Qt::AlignRight);
         rowItems << size_item;
         // Times Used
         int count = 0;
@@ -144,7 +145,8 @@ void CSSFilesWidget::SetupTable(int sort_column, Qt::SortOrder sort_order)
     rowItems << nitem;
     // File size
     nitem = new NumericItem();
-    nitem->setText(QLocale().toString(total_size, 'f', 2) % tr("KB"));
+    nitem->setText(QLocale().toString(total_size, 'f', 2));
+    nitem->setTextAlignment(Qt::AlignRight);
     rowItems << nitem;
     // Links - leave blank
     nitem = new NumericItem();
@@ -206,7 +208,7 @@ void CSSFilesWidget::DoubleClick()
 
     if (index.row() != m_ItemModel->rowCount() - 1) {
         QString filepath = m_ItemModel->itemFromIndex(index)->data().toString();
-        emit OpenFileRequest(filepath, 1);
+        emit OpenFileRequest(filepath, 1, -1);
     }
 }
 
@@ -216,8 +218,8 @@ void CSSFilesWidget::Delete()
 
     if (ui.fileTree->selectionModel()->hasSelection()) {
         foreach(QModelIndex index, ui.fileTree->selectionModel()->selectedRows(0)) {
-	    QString bookpath = m_ItemModel->itemFromIndex(index)->data().toString();
-	    files_to_delete.append(bookpath);
+            QString bookpath = m_ItemModel->itemFromIndex(index)->data().toString();
+            files_to_delete.append(bookpath);
         }
     }
 
@@ -227,8 +229,8 @@ void CSSFilesWidget::Delete()
 
 void CSSFilesWidget::Save()
 {
-    QString report_info;
-    QString row_text;
+    QStringList report_info;
+    QStringList heading_row;
 
     // Get headings
     for (int col = 0; col < ui.fileTree->header()->count(); col++) {
@@ -237,35 +239,25 @@ void CSSFilesWidget::Save()
         if (item) {
             text = item->text();
         }
-        if (col == 0) {
-            row_text.append(text);
-        } else {
-            row_text.append("," % text);
-        }
+        heading_row << text;
     }
-
-    report_info.append(row_text % "\n");
+    report_info << Utility::createCSVLine(heading_row);
 
     // Get data from table
     for (int row = 0; row < m_ItemModel->rowCount(); row++) {
-        row_text = "";
-
+        QStringList data_row;
         for (int col = 0; col < ui.fileTree->header()->count(); col++) {
             QStandardItem *item = m_ItemModel->item(row, col);
             QString text = "";
             if (item) {
                 text = item->text();
             }
-            if (col == 0) {
-                row_text.append(text);
-            } else {
-                row_text.append("," % text);
-            }
+            data_row << text;
         }
-
-        report_info.append(row_text % "\n");
+        report_info << Utility::createCSVLine(data_row);
     }
 
+    QString data = report_info.join('\n') + '\n';
     // Save the file
     ReadSettings();
     QString filter_string = "*.csv;;*.txt;;*.*";
@@ -277,20 +269,19 @@ void CSSFilesWidget::Save()
 #endif
 
     QString destination = QFileDialog::getSaveFileName(this,
-                          tr("Save Report As Comma Separated File"),
-                          save_path,
-                          filter_string,
-			  &default_filter,
-                          options
-                                                      );
+                                                       tr("Save Report As Comma Separated File"),
+                                                       save_path,
+                                                       filter_string,
+                                                       &default_filter,
+                                                       options);
 
     if (destination.isEmpty()) {
         return;
     }
 
     try {
-        Utility::WriteUnicodeTextFile(report_info, destination);
-    } catch (CannotOpenFile) {
+        Utility::WriteUnicodeTextFile(data, destination);
+    } catch (CannotOpenFile&) {
         QMessageBox::warning(this, tr("Sigil"), tr("Cannot save report file."));
     }
 
@@ -298,7 +289,6 @@ void CSSFilesWidget::Save()
     m_LastFileSaved = QFileInfo(destination).fileName();
     WriteSettings();
 }
-
 
 void CSSFilesWidget::CreateContextMenuActions()
 {
@@ -312,7 +302,9 @@ void CSSFilesWidget::OpenContextMenu(const QPoint &point)
 {
     SetupContextMenu(point);
     m_ContextMenu->exec(ui.fileTree->viewport()->mapToGlobal(point));
-    m_ContextMenu->clear();
+    if (!m_ContextMenu.isNull()) {
+        m_ContextMenu->clear();
+    }
 }
 
 void CSSFilesWidget::SetupContextMenu(const QPoint &point)

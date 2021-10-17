@@ -27,6 +27,7 @@
 #include <QtGui/QContextMenuEvent>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QMenu>
+#include <QPointer>
 
 #include "BookManipulation/FolderKeeper.h"
 #include "MainUI/TableOfContents.h"
@@ -109,9 +110,9 @@ void TableOfContents::ItemClickedHandler(const QModelIndex &index)
 {
     QString bookpath = m_TOCModel->GetBookPathForIndex(index);
     QStringList pieces = bookpath.split('#', QString::KeepEmptyParts);
-    QString dest_bkpath = pieces.at(0);
+    QString dest_bkpath = Utility::URLDecodePath(pieces.at(0));
     QString fragment = "";
-    if (pieces.size() > 1) fragment = pieces.at(1);
+    if (pieces.size() > 1) fragment = Utility::URLDecodePath(pieces.at(1));
     int line = -1;
 
     // If no id, go to the top of the page
@@ -122,7 +123,7 @@ void TableOfContents::ItemClickedHandler(const QModelIndex &index)
     try {
         Resource *resource = m_Book->GetFolderKeeper()->GetResourceByBookPath(dest_bkpath);
         emit OpenResourceRequest(resource, line, -1, QString(), fragment);
-    } catch (ResourceDoesNotExist) {
+    } catch (ResourceDoesNotExist&) {
         Utility::DisplayStdErrorDialog(
             tr("The file \"%1\" does not exist.")
             .arg(dest_bkpath)
@@ -139,7 +140,7 @@ void TableOfContents::SetupTreeView()
 {
     m_TreeView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_TreeView->setSortingEnabled(false);
-    m_TreeView->sortByColumn(-1);
+    m_TreeView->sortByColumn(-1, Qt::AscendingOrder);
     m_TreeView->setUniformRowHeights(true);
     m_TreeView->setDragEnabled(false);
     m_TreeView->setAcceptDrops(false);
@@ -153,7 +154,7 @@ void TableOfContents::SetupTreeView()
 
 void TableOfContents::contextMenuEvent(QContextMenuEvent *event)
 {
-    QMenu *menu = new QMenu(this);
+    QPointer<QMenu> menu = new QMenu(this);
     // Add menu options
     QAction *collapseAction = new QAction(tr("Collapse All"), menu);
     QAction *expandAction = new QAction(tr("Expand All"), menu);
@@ -162,4 +163,7 @@ void TableOfContents::contextMenuEvent(QContextMenuEvent *event)
     menu->addAction(expandAction);
     connect(expandAction, SIGNAL(triggered()), m_TreeView, SLOT(expandAll()));
     menu->exec(mapToGlobal(event->pos()));
+    if (!menu.isNull()) {
+        delete menu.data();
+    }
 }

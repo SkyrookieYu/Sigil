@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2016-2020 Kevin B. Hendricks, Stratford Ontario
+**  Copyright (C) 2016-2021 Kevin B. Hendricks, Stratford Ontario
 **
 **  This file is part of Sigil.
 **
@@ -29,7 +29,6 @@
 
 #include "Misc/Utility.h"
 #include "Misc/SettingsStore.h"
-#include "Misc/GumboInterface.h"
 #include "Misc/Landmarks.h"
 #include "BookManipulation/FolderKeeper.h"
 #include "ResourceObjects/Resource.h"
@@ -60,7 +59,7 @@ NavProcessor::NavProcessor(HTMLResource * nav_resource)
             "  </style>\n"
             "</head>\n"
             "<body epub:type=\"frontmatter\">\n"
-            "  <nav epub:type=\"toc\" id=\"toc\">\n"
+            "  <nav epub:type=\"toc\" id=\"toc\" role=\"doc-toc\">\n"
             "  </nav>\n"
             "  <nav epub:type=\"landmarks\" id=\"landmarks\" hidden=\"\">\n"
             "  </nav>\n"
@@ -81,10 +80,10 @@ NavProcessor::NavProcessor(HTMLResource * nav_resource)
         GumboAttribute* attr = gumbo_get_attribute(&node->v.element.attributes, "lang");
         if (attr) {
             lang = QString::fromUtf8(attr->value);
-	} else {
+        } else {
             attr = gumbo_get_attribute(&node->v.element.attributes, "xml:lang");
             if (attr) lang = QString::fromUtf8(attr->value);
-	}
+        }
     }
     m_language = lang;
 }
@@ -130,7 +129,7 @@ QList<NavLandmarkEntry> NavProcessor::GetLandmarks()
                 GumboAttribute* typeattr = gumbo_get_attribute(&ancnode->v.element.attributes, "epub:type");
                 GumboAttribute* hrefattr = gumbo_get_attribute(&ancnode->v.element.attributes, "href");
                 if (typeattr) le.etype = QString::fromUtf8(typeattr->value);
-                if (hrefattr) le.href = Utility::URLDecodePath(QString::fromUtf8(hrefattr->value));
+                if (hrefattr) le.href = QString::fromUtf8(hrefattr->value);
                 le.title = Utility::DecodeXML(gi.get_local_text_of_node(ancnode));
                 landlist.append(le);
             }
@@ -174,7 +173,7 @@ QList<NavPageListEntry> NavProcessor::GetPageList()
                 NavPageListEntry pe;
                 GumboNode* ancnode = anchor_nodes.at(j);
                 GumboAttribute* hrefattr = gumbo_get_attribute(&ancnode->v.element.attributes, "href");
-                if (hrefattr) pe.href = Utility::URLDecodePath(QString::fromUtf8(hrefattr->value));
+                if (hrefattr) pe.href = QString::fromUtf8(hrefattr->value);
                 pe.pagename = Utility::DecodeXML(gi.get_local_text_of_node(ancnode));
                 pagelist.append(pe);
             }
@@ -248,8 +247,8 @@ QList<NavTOCEntry> NavProcessor::GetNodeTOC(GumboInterface & gi, const GumboNode
                             te.lvl = lvl;
                             GumboAttribute* hrefattr = gumbo_get_attribute(&li_child->v.element.attributes, "href");
                             if (hrefattr) { 
-			        te.href = Utility::URLDecodePath(QString::fromUtf8(hrefattr->value));
-			    }
+                                te.href = QString::fromUtf8(hrefattr->value);
+                            }
                             te.title = Utility::DecodeXML(gi.get_local_text_of_node(li_child));
                             toclist.append(te);
                         } else if (li_child->v.element.tag == GUMBO_TAG_OL) {
@@ -271,12 +270,12 @@ QString NavProcessor::BuildTOC(const QList<NavTOCEntry> & toclist)
     bool initial = true;
     QString step = "  ";
     QString base = step.repeated(2);
-    res << "\n" + step + "<nav epub:type=\"toc\" id=\"toc\">\n";
+    res << "\n" + step + "<nav epub:type=\"toc\" id=\"toc\" role=\"doc-toc\">\n";
     res << base + "<h1>" + Landmarks::instance()->GetTitle("toc", m_language) + "</h1>\n";
     res << base + "<ol>\n";
     foreach(NavTOCEntry te, toclist) {
         int lvl = te.lvl;
-        QString href = Utility::URLEncodePath(te.href);
+        QString href = te.href;  // already urlencoded as it is kept in that form
         QString title = Utility::EncodeXML(te.title);
         if (lvl > curlvl) {
             while(lvl > curlvl) {
@@ -329,7 +328,7 @@ QString NavProcessor::BuildLandmarks(const QList<NavLandmarkEntry> & landlist)
     res << base + "<ol>\n";
     foreach(NavLandmarkEntry le, landlist) {
         QString etype = le.etype;
-        QString href = Utility::URLEncodePath(le.href);
+        QString href = le.href; // already URLEncoded because kept in that form
         QString title = Utility::EncodeXML(le.title);
         res << base + step + "<li>\n";
         res << base + step.repeated(2) + "<a epub:type=\"" + etype + "\" href=\"" + href + "\">" + title + "</a>\n";
@@ -346,12 +345,12 @@ QString NavProcessor::BuildPageList(const QList<NavPageListEntry> & pagelist)
     QStringList res;
     QString step = "  ";
     QString base = step.repeated(3);
-    res << "\n" + step + "<nav epub:type=\"page-list\" id=\"page-list\" hidden=\"\">\n";
+    res << "\n" + step + "<nav epub:type=\"page-list\" id=\"page-list\" role=\"doc-pagelist\" hidden=\"\">\n";
     res << base + "<h1>" + Landmarks::instance()->GetTitle("page-list", m_language) + "</h1>\n";
     res << "\n" + base + "<ol>\n";
     foreach(NavPageListEntry pe, pagelist) {
         QString pagename = Utility::EncodeXML(pe.pagename);
-        QString href = Utility::URLEncodePath(pe.href);
+        QString href = pe.href; // already URLEncoded since kept in that form
         res << base + step + "<li><a href=\"" + href + "\">" + pagename + "</a></li>\n";
     }
     res << base + "</ol>\n";
@@ -514,9 +513,9 @@ void NavProcessor::AddLandmarkCode(const Resource *resource, QString new_code, b
             le.title = title;
             le.href = ConvertBookPathToNavRelative(resource->GetRelativePath());
             // special case the nav setting the toc semantic on itself
-	    if ((resource == m_NavResource) && (new_code == "toc")) {
+            if ((resource == m_NavResource) && (new_code == "toc")) {
                 le.href = "#toc";
-	    }
+            }
             landlist.append(le);
         }
     } else {
@@ -531,10 +530,11 @@ void NavProcessor::RemoveLandmarkForResource(const Resource * resource)
     QList<NavLandmarkEntry> landlist = GetLandmarks();
     QWriteLocker locker(&m_NavResource->GetLock());
     int pos = GetResourceLandmarkPos(resource, landlist);
-    if (pos > -1) {
+    while((pos > -1) && !landlist.isEmpty()) {
         landlist.removeAt(pos);
-        SetLandmarks(landlist);
+        pos = GetResourceLandmarkPos(resource, landlist);
     }
+    SetLandmarks(landlist);
 }
 
 int NavProcessor::GetResourceLandmarkPos(const Resource *resource, const QList<NavLandmarkEntry> & landlist)
@@ -754,38 +754,41 @@ QList<NavTOCEntry> NavProcessor::AddEditTOCEntry(TOCModel::TOCEntry & entry, int
 
 
 // Utility Routines to convert hrefs between Book Relative and Nav Relative 
-
+// Note all hrefs are stored in URLEncoded forms because fragments may be used
 QString NavProcessor::ConvertHREFToBookPath(const QString & nav_rel_href) 
 {
     QString bookpath;
     if (nav_rel_href.indexOf(":") != -1) return nav_rel_href;
     // split off any fragment
     QStringList pieces = nav_rel_href.split('#', QString::KeepEmptyParts);
-    QString basepath = pieces.at(0);
+    QString basepath = Utility::URLDecodePath(pieces.at(0));
     QString fragment = "";
     if (pieces.size() > 1) fragment = pieces.at(1);
     // handle special cases first
     if (basepath == "./" || basepath.isEmpty()) {
         // this link ends in the nav itself
-        bookpath = m_NavResource->GetRelativePath();
+        bookpath = Utility::URLEncodePath(m_NavResource->GetRelativePath());
         if (!fragment.isEmpty()) bookpath = bookpath + "#" + fragment; 
-	return bookpath;
+        return bookpath;
     }
     bookpath = Utility::buildBookPath(basepath, m_NavResource->GetFolder());
+    bookpath = Utility::URLEncodePath(bookpath);
     if (!fragment.isEmpty()) bookpath = bookpath + "#" + fragment; 
     return bookpath;
 }
 
+// note bookpaths on entry must be full URLEncoded since they may contain fragments
 // convert BookPaths (epub folder relative paths) to be relative to the Nav
 QString NavProcessor::ConvertBookPathToNavRelative(const QString & bookpath) 
 {
     QString nav_bkpath = m_NavResource->GetRelativePath();
     // split off any fragment added to bookpath destination
     QStringList pieces = bookpath.split('#', QString::KeepEmptyParts);
-    QString dest_bkpath = pieces.at(0);
+    QString dest_bkpath = Utility::URLDecodePath(pieces.at(0));
     QString fragment = "";
     if (pieces.size() > 1) fragment = pieces.at(1);
     QString new_href = Utility::buildRelativePath(nav_bkpath, dest_bkpath);
+    new_href = Utility::URLEncodePath(new_href);
     if (!fragment.isEmpty()) {
         new_href = new_href + "#" + fragment;
     }

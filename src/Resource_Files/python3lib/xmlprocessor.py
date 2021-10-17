@@ -11,13 +11,8 @@ from lxml import etree
 from io import BytesIO
 from opf_newparser import Opf_Parser
 from hrefutils import startingDir, buildBookPath, buildRelativePath
+from hrefutils import urldecodepart, urlencodepart
 from collections import OrderedDict
-
-ASCII_CHARS   = set(chr(x) for x in range(128))
-URL_SAFE      = set('ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-                    'abcdefghijklmnopqrstuvwxyz'
-                    '0123456789' '#' '_.-/~')
-IRI_UNSAFE = ASCII_CHARS - URL_SAFE
 
 TEXT_FOLDER_NAME = "Text"
 ebook_xml_empty_tags = ["meta", "item", "itemref", "reference", "content"]
@@ -36,30 +31,6 @@ def get_void_tags(mtype):
         voidtags = ebook_xml_empty_tags
     return voidtags
 
-
-# returns a quoted IRI (not a URI)
-def quoteurl(href):
-    if isinstance(href,bytes):
-        href = href.decode('utf-8')
-    (scheme, netloc, path, query, fragment) = urlsplit(href, scheme="", allow_fragments=True)
-    if scheme != "":
-        scheme += "://"
-        href = href[len(scheme):]
-    result = []
-    for char in href:
-        if char in IRI_UNSAFE:
-            char = "%%%02x" % ord(char)
-        result.append(char)
-    return scheme + ''.join(result)
-
-# unquotes url/iri
-def unquoteurl(href):
-    if isinstance(href,bytes):
-        href = href.decode('utf-8')
-    href = unquote(href)
-    return href
-
-
 def _remove_xml_header(data):
     newdata = data
     return re.sub(r'<\s*\?xml\s*[^\?>]*\?*>\s*','',newdata, count=1,flags=re.I)
@@ -70,7 +41,7 @@ def _well_formed(data):
     if isinstance(newdata, str):
         newdata = newdata.encode('utf-8')
     try:
-        parser = etree.XMLParser(encoding='utf-8', recover=False, resolve_entities=False)
+        parser = etree.XMLParser(encoding='utf-8', recover=False, resolve_entities=True)
         tree = etree.parse(BytesIO(newdata), parser)
     except Exception:
         result = False
@@ -82,7 +53,7 @@ def _reformat(data):
     if isinstance(newdata, str):
         newdata = newdata.encode('utf-8')
     parser = etree.XMLParser(encoding='utf-8', recover=True, ns_clean=True,
-                             remove_comments=True, remove_pis=True, strip_cdata=True, resolve_entities=False)
+                             remove_comments=True, remove_pis=True, strip_cdata=True, resolve_entities=True)
     tree = etree.parse(BytesIO(newdata), parser)
     newdata = etree.tostring(tree.getroot(),encoding='UTF-8', xml_declaration=False)
     return newdata 
@@ -154,7 +125,7 @@ def WellFormedXMLErrorCheck(data, mtype=""):
     column = "-1"
     message = "well-formed"
     try:
-        parser = etree.XMLParser(encoding='utf-8', recover=False, resolve_entities=False)
+        parser = etree.XMLParser(encoding='utf-8', recover=False, resolve_entities=True)
         tree = etree.parse(BytesIO(newdata), parser)
     except Exception:
         line = "0"
@@ -182,15 +153,14 @@ def IsWellFormedXML(data, mtype=""):
 # note: bs4 with lxml for xml strips whitespace so always prettyprint xml
 def repairXML(data, mtype="", indent_chars="  "):
     newdata = _remove_xml_header(data)
-    # if well-formed - don't mess with it
-    if _well_formed(newdata):
-        return data
-    newdata = _make_it_sane(newdata)
+    okay = _well_formed(newdata)
+    if okay:
+        if not mtype == "application/oebps-package+xml":
+            return data
+    if not okay:
+        newdata = _make_it_sane(newdata)
     if not _well_formed(newdata):
         newdata = _reformat(newdata)
-        if mtype == "application/oebps-package+xml":
-            newdata = newdata.decode('utf-8')
-            newdata = Opf_Parser(newdata).rebuild_opfxml()
     # lxml requires utf-8 on Mac, won't work with unicode
     if isinstance(newdata, str):
         newdata = newdata.encode('utf-8')
@@ -198,6 +168,10 @@ def repairXML(data, mtype="", indent_chars="  "):
     xmlbuilder = LXMLTreeBuilderForXML(parser=None, empty_element_tags=voidtags)
     soup = BeautifulSoup(newdata, features=None, from_encoding="utf-8", builder=xmlbuilder)
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars=indent_chars)
+    if mtype == "application/oebps-package+xml":
+        if isinstance(newdata, bytes):
+            newdata = newdata.decode('utf-8')
+        newdata = Opf_Parser(newdata).rebuild_opfxml()
     return newdata
 
 
@@ -218,15 +192,16 @@ def anchorNCXUpdates(data, ncx_bookpath, originating_bookpath, keylist, valuelis
             src = tag["src"]
             if src.find(":") == -1:
                 parts = src.split('#')
-                ahref = unquoteurl(parts[0])
-                # convert this href to its target bookpath
-                target_bookpath = buildBookPath(ahref,startdir)
+                apath = urldecodepart(parts[0])
+                # convert this path to its target bookpath
+                target_bookpath = buildBookPath(apath, startdir)
                 if (parts is not None) and (len(parts) > 1) and (target_bookpath == originating_bookpath) and (parts[1] != ""):
-                    fragment_id = parts[1]
+                    fragment_id = urldecodepart(parts[1])
                     if fragment_id in id_dict:
                         target_bookpath = id_dict[fragment_id]
-                        attribute_value = buildRelativePath(ncx_bookpath, target_bookpath) + "#" + fragment_id
-                        tag["src"] = quoteurl(attribute_value)
+                        attribute_value = urlencodepart(buildRelativePath(ncx_bookpath, target_bookpath))
+                        attribute_value = attribute_value + "#" + urlencodepart(fragment_id)
+                        tag["src"] = attribute_value;
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
 
@@ -244,13 +219,14 @@ def anchorNCXUpdatesAfterMerge(data, ncx_bookpath, sink_bookpath, merged_bookpat
             if src.find(":") == -1:
                 parts = src.split('#')
                 if parts is not None:
-                    ahref = unquoteurl(parts[0])
-                    target_bookpath = buildBookPath(ahref, startdir)
+                    apath = urldecodepart(parts[0])
+                    target_bookpath = buildBookPath(apath, startdir)
                     if target_bookpath in merged_bookpaths:
-                        attribute_value = buildRelativePath(ncx_bookpath, sink_bookpath)
+                        attribute_value = urlencodepart(buildRelativePath(ncx_bookpath, sink_bookpath))
                         if len(parts) > 1 and parts[1] != "":
-                            attribute_value += "#" + parts[1]
-                        tag["src"] = quoteurl(attribute_value)
+                            fragment = urldecodepart(parts[1])
+                            attribute_value += "#" + urlencodepart(parts[1])
+                        tag["src"] = attribute_value
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
 
@@ -270,16 +246,15 @@ def performNCXSourceUpdates(data, newbkpath, oldbkpath, keylist, valuelist):
             src = tag["src"]
             if src.find(":") == -1:
                 parts = src.split('#')
-                ahref = unquoteurl(parts[0])
+                apath = urldecodepart(parts[0])
                 fragment = ""
                 if len(parts) > 1:
-                    fragment = parts[1]
-                oldtarget = buildBookPath(ahref, startingDir(oldbkpath))
+                    fragment = urldecodepart(parts[1])
+                oldtarget = buildBookPath(apath, startingDir(oldbkpath))
                 newtarget = updates.get(oldtarget, oldtarget)
-                attribute_value = buildRelativePath(newbkpath, newtarget)
+                attribute_value = urlencodepart(buildRelativePath(newbkpath, newtarget))
                 if fragment != "":
-                    attribute_value = attribute_value + "#" + fragment
-                attribute_value = quoteurl(attribute_value)
+                    attribute_value = attribute_value + "#" + urlencodepart(fragment)
                 tag["src"] = attribute_value
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
@@ -300,16 +275,15 @@ def performOPFSourceUpdates(data, newbkpath, oldbkpath, keylist, valuelist):
             href = tag["href"]
             if href.find(":") == -1 :
                 parts = href.split('#')
-                ahref = unquoteurl(parts[0])
+                apath = urldecodepart(parts[0])
                 fragment = ""
                 if len(parts) > 1:
-                    fragment = parts[1]
-                oldtarget = buildBookPath(ahref, startingDir(oldbkpath))
+                    fragment = urldecodepart(parts[1])
+                oldtarget = buildBookPath(apath, startingDir(oldbkpath))
                 newtarget = updates.get(oldtarget, oldtarget)
-                attribute_value = buildRelativePath(newbkpath, newtarget)
+                attribute_value = urlencodepart(buildRelativePath(newbkpath, newtarget))
                 if fragment != "":
-                    attribute_value = attribute_value + "#" + fragment
-                attribute_value = quoteurl(attribute_value)
+                    attribute_value = attribute_value + "#" + urlencodepart(fragment)
                 tag["href"] = attribute_value
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
@@ -335,16 +309,15 @@ def performSMILUpdates(data, newbkpath, oldbkpath, keylist, valuelist):
                 ref = tag[att]
                 if ref.find(":") == -1 :
                     parts = ref.split('#')
-                    ahref = unquoteurl(parts[0])
+                    apath = urldecodepart(parts[0])
                     fragment = ""
                     if len(parts) > 1:
-                        fragment = parts[1]
-                    oldtarget = buildBookPath(ahref, startingDir(oldbkpath))
+                        fragment = urldecode(parts[1])
+                    oldtarget = buildBookPath(apath, startingDir(oldbkpath))
                     newtarget = updates.get(oldtarget, oldtarget)
-                    attribute_value = buildRelativePath(newbkpath, newtarget)
+                    attribute_value = urlencodepart(buildRelativePath(newbkpath, newtarget))
                     if fragment != "":
-                        attribute_value = attribute_value + "#" + fragment
-                    attribute_value = quoteurl(attribute_value)
+                        attribute_value = attribute_value + "#" + urlencodepart(fragment)
                     tag[att] = attribute_value
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
@@ -369,16 +342,15 @@ def performPageMapUpdates(data, newbkpath, oldbkpath, keylist, valuelist):
                 ref = tag[att]
                 if ref.find(":") == -1 :
                     parts = ref.split('#')
-                    ahref = unquoteurl(parts[0])
+                    apath = urldecodepart(parts[0])
                     fragment = ""
                     if len(parts) > 1:
-                        fragment = parts[1]
-                    oldtarget = buildBookPath(ahref, startingDir(oldbkpath))
+                        fragment = urldecodepart(parts[1])
+                    oldtarget = buildBookPath(apath, startingDir(oldbkpath))
                     newtarget = updates.get(oldtarget, oldtarget)
-                    attribute_value = buildRelativePath(newbkpath, newtarget)
+                    attribute_value = urlencodepart(buildRelativePath(newbkpath, newtarget))
                     if fragment != "":
-                        attribute_value = attribute_value + "#" + fragment
-                    attribute_value = quoteurl(attribute_value)
+                        attribute_value = attribute_value + "#" + urlencodepart(fragment)
                     tag[att] = attribute_value
     newdata = soup.decodexml(indent_level=0, formatter='minimal', indent_chars="  ")
     return newdata
