@@ -22,21 +22,25 @@
 
 #include <QApplication>
 #include <QGuiApplication>
-#include <QtCore/QDateTime>
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
-#include <QtCore/QLocale>
-#include <QtCore/QSignalMapper>
-#include <QtCore/QString>
-#include <QtCore/QUrl>
-#include <QtGui/QClipboard>
-#include <QtWidgets/QLayout>
-#include <QtWidgets/QMenu>
-#include <QtWebEngineWidgets/QWebEngineView>
-#include <QtWebEngineWidgets/QWebEngineProfile>
-#include <QtPrintSupport/QPrinter>
-#include <QtPrintSupport/QPrintDialog>
-#include <QtPrintSupport/QPrintPreviewDialog>
+#include <QDateTime>
+#include <QFile>
+#include <QFileInfo>
+#include <QLocale>
+#include <QSignalMapper>
+#include <QString>
+#include <QUrl>
+#include <QClipboard>
+#include <QLayout>
+#include <QMenu>
+#include <QtWebEngineWidgets>
+#include <QtWebEngineCore>
+#include <QWebEngineView>
+#include <QWebEngineProfile>
+#include <QtPrintSupport>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPrintPreviewDialog>
+#include <QVariant>
 #include <QDebug>
 
 #include "MainUI/MainWindow.h"
@@ -47,6 +51,15 @@
 #include "ResourceObjects/ImageResource.h"
 #include "sigil_constants.h"
 #include "Tabs/ImageTab.h"
+
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    static const QVariant QVINVALID = QVariant(QVariant::Invalid);
+#else 
+    #include <QMetaType>
+    static const QVariant QVINVALID = QVariant(QMetaType(QMetaType::UnknownType));
+#endif
+
 
 const QString IMAGE_HTML_BASE =
     "<html>"
@@ -301,11 +314,11 @@ bool ImageTab::SuccessfullySetupContextMenu(const QPoint &point)
         QStringList editor_names = OpenExternally::editorDescriptionsForResourceType(imageType);
 
         if (editors.isEmpty()) {
-            m_OpenWithEditor0->setData(QVariant::Invalid);
-            m_OpenWithEditor1->setData(QVariant::Invalid);
-            m_OpenWithEditor2->setData(QVariant::Invalid);
-            m_OpenWithEditor3->setData(QVariant::Invalid);
-            m_OpenWithEditor4->setData(QVariant::Invalid);
+            m_OpenWithEditor0->setData(QVINVALID);
+            m_OpenWithEditor1->setData(QVINVALID);
+            m_OpenWithEditor2->setData(QVINVALID);
+            m_OpenWithEditor3->setData(QVINVALID);
+            m_OpenWithEditor4->setData(QVINVALID);
             m_OpenWith->setText(tr("Open With") + "...");
             m_OpenWith->setData(imageUrl);
             m_ContextMenu->addAction(m_OpenWith);
@@ -319,7 +332,7 @@ bool ImageTab::SuccessfullySetupContextMenu(const QPoint &point)
                 if (k==3) oeaction = m_OpenWithEditor3;
                 if (k==4) oeaction = m_OpenWithEditor4;
                 if (oeaction) {
-                    oeaction->setData(QVariant::Invalid);
+                    oeaction->setData(QVINVALID);
                     oeaction->setText("");
                     oeaction->setEnabled(false);
                     oeaction->setVisible(false);
@@ -399,7 +412,11 @@ void ImageTab::ConnectSignalsToSlots()
     connect(m_OpenWithEditor4, SIGNAL(triggered()),  m_openWithMapper, SLOT(map()));
     m_openWithMapper->setMapping(m_OpenWithEditor4, 4);
 
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     connect(m_openWithMapper, SIGNAL(mapped(int)),   this, SLOT(openWithEditor(int)));
+#else
+    connect(m_openWithMapper, SIGNAL(mappedInt(int)),   this, SLOT(openWithEditor(int)));
+#endif
     connect(m_SaveAs,         SIGNAL(triggered()),   this, SLOT(saveAs()));
     connect(m_CopyImage,      SIGNAL(triggered()),   this, SLOT(copyImage()));
 }

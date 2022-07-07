@@ -26,7 +26,7 @@
 #include <QtCore/QTimer>
 #include <QtCore/QUrl>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QAction>
+#include <QAction>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QLayout>
 #include <QtPrintSupport/QPrinter>
@@ -154,7 +154,7 @@ void FlowTab::DelayedInitialization()
 
     CodeView();
 
-    if (m_PositionToScrollTo > 0) {
+    if (m_PositionToScrollTo >= 0) {
         m_wCodeView->ScrollToPosition(m_PositionToScrollTo);
     } else if (m_LineToScrollTo > 0) {
         m_wCodeView->ScrollToLine(m_LineToScrollTo);
@@ -201,7 +201,10 @@ void FlowTab::CodeView()
     QApplication::setOverrideCursor(Qt::WaitCursor);
     CreateCodeViewIfRequired();
     m_wCodeView->SetDelayedCursorScreenCenteringRequired();
+#if 0
+    // This is uneeded since handled in constructor
     setFocusProxy(m_wCodeView);
+#endif
 
     // We will usually want focus in the tab, except when splitting opens this as a preceding tab.
     if (m_grabFocus) {

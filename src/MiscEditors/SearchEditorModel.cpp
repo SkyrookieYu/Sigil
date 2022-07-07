@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford, Ontario, Canada
+**  Copyright (C) 2015-2022 Kevin B. Hendricks, Stratford, Ontario, Canada
 **  Copyright (C) 2012 John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012 Dave Heiland
 **  Copyright (C) 2012 Grant Drake
@@ -36,8 +36,19 @@
 #include "sigil_constants.h"
 #include "sigil_exception.h"
 
-static const QString SETTINGS_FILE          = "sigil_searches_v2.ini";
-static const QString OLD_SETTINGS_FILE      = "sigil_searches.ini";
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    #define QT_ENUM_SKIPEMPTYPARTS Qt::SkipEmptyParts
+    #define QT_ENUM_KEEPEMPTYPARTS Qt::KeepEmptyParts
+#else
+    #define QT_ENUM_SKIPEMPTYPARTS QString::SkipEmptyParts
+    #define QT_ENUM_KEEPEMPTYPARTS QString::KeepEmptyParts
+#endif
+
+#if QT_VERSION < QT_VERSION_CHECK(6,0,0)
+static const QString SETTINGS_FILE = SEARCHES_V2_SETTINGS_FILE;
+#else
+static const QString SETTINGS_FILE = SEARCHES_V6_SETTINGS_FILE;
+#endif
 
 static const QString SETTINGS_GROUP         = "search_entries";
 static const QString ENTRY_NAME             = "Name";
@@ -69,18 +80,6 @@ SearchEditorModel::SearchEditorModel(QObject *parent)
       m_IsDataModified(false)
 {
     m_SettingsPath = Utility::DefinePrefsDir() + "/" + SETTINGS_FILE;
-    QString OldSettingsPath = Utility::DefinePrefsDir() + "/" + OLD_SETTINGS_FILE;
-    QFileInfo fi(m_SettingsPath);
-    if (!fi.exists()) {
-        QFileInfo oldfi(OldSettingsPath);
-        if (oldfi.exists() && oldfi.isFile()) {
-            // create v2 settings file from old one
-            bool success = QFile::copy(oldfi.absoluteFilePath(), m_SettingsPath);
-            if (!success) {
-                qDebug() << "Failed to create v2 saved searches from old";
-            }
-        }
-    }
     QStringList header;
     header.append(tr("Name"));
     header.append(tr("Find"));
@@ -414,7 +413,7 @@ void SearchEditorModel::AddFullNameEntry(SearchEditorModel::searchEntry *entry, 
     QString entry_name = entry->name;
 
     if (entry->name.contains("/")) {
-        QStringList group_names = entry->name.split("/", QString::SkipEmptyParts);
+        QStringList group_names = entry->name.split("/", QT_ENUM_SKIPEMPTYPARTS);
         entry_name = group_names.last();
 
         if (!entry->is_group) {
@@ -538,6 +537,7 @@ QString SearchEditorModel::BuildControlsToolTip(const QString & controls)
 
 QStandardItem *SearchEditorModel::AddEntryToModel(SearchEditorModel::searchEntry *entry, bool is_group, QStandardItem *parent_item, int row)
 {
+    bool clean_up_needed = false;
     // parent_item must be a group item
     if (!parent_item) {
         parent_item = invisibleRootItem();
@@ -546,6 +546,7 @@ QStandardItem *SearchEditorModel::AddEntryToModel(SearchEditorModel::searchEntry
     // Create an empty entry if none supplied
     if (!entry) {
         entry = new SearchEditorModel::searchEntry();
+        clean_up_needed = true;
         entry->is_group = is_group;
 
         if (!is_group) {
@@ -607,6 +608,7 @@ QStandardItem *SearchEditorModel::AddEntryToModel(SearchEditorModel::searchEntry
         new_item = parent_item->child(row, 0);
     }
 
+    if (clean_up_needed) delete entry;
     SetDataModified(true);
     return new_item;
 }

@@ -27,8 +27,10 @@
 #include <QUrl>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QtWebEngineWidgets/QWebEngineProfile>
-#include <QtWebEngineWidgets/QWebEngineView>
+#include <QtWebEngineWidgets>
+#include <QtWebEngineCore>
+#include <QWebEngineProfile>
+#include <QWebEngineView>
 #include <QGuiApplication>
 #include <QApplication>
 #include "ViewEditors/SimplePage.h"
@@ -46,6 +48,7 @@ ViewAV::ViewAV(QWidget *parent)
       m_bp(new QToolButton(this)),
       m_layout(new QVBoxLayout(this))
 {
+    setAttribute(Qt::WA_DeleteOnClose, true);
     m_layout->addWidget(m_av);
     m_bp->setToolTip(tr("Close this window"));
     m_bp->setText(tr("Done"));

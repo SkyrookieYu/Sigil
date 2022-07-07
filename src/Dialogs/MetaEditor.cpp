@@ -1,6 +1,6 @@
 /****************************************************************************
 **
-**  Copyright (C) 2016-2021 Kevin B. Hendricks, Stratford, ON Canada
+**  Copyright (C) 2016-2022 Kevin B. Hendricks, Stratford, ON Canada
 **
 **  This file is part of Sigil.
 **
@@ -51,7 +51,7 @@ static const QString _US = QString(QChar(31)); // Ascii Unit Separator
 MetaEditor::MetaEditor(QWidget *parent)
   : QDialog(parent),
     m_mainWindow(qobject_cast<MainWindow *>(parent)),
-    m_RemoveRow(new QShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_Delete),this, 0, 0, Qt::WidgetWithChildrenShortcut)),
+    m_RemoveRow(new QShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_Delete),this, 0, 0, Qt::WidgetWithChildrenShortcut)),
     m_cbDelegate(new MetaEditorItemDelegate())
 {
     setupUi(this);
@@ -539,7 +539,7 @@ void MetaEditor::selectE2Element()
             code = "dc:creator";
             QString content = tr("[Author name here]");
             insertRow(EName(code), code, content, "");
-            insertChild(PName("opf:role"),"opf:role", LName("aut"), "aut");
+            insertChild(PName("opf:role"),"opf:role", RName("aut"), "aut");
         } else if (code == "dc:creator") {
             code = "dc:creator";
             QString content = tr("[Creator name here]");

@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2021 Kevin B. Hendricks  Stratford, ON Canada
+**  Copyright (C) 2015-2022 Kevin B. Hendricks  Stratford, ON Canada
 **  Copyright (C) 2013      John Schember <john@nachtimwald.com>
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
@@ -45,10 +45,17 @@
 #include "ResourceObjects/ImageResource.h"
 #include "ResourceObjects/NCXResource.h"
 #include "ResourceObjects/OPFResource.h"
-#include "ResourceObjects/OPFParser.h"
 #include "ResourceObjects/NavProcessor.h"
 #include "sigil_constants.h"
 #include "sigil_exception.h"
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    #define QT_ENUM_SKIPEMPTYPARTS Qt::SkipEmptyParts
+    #define QT_ENUM_KEEPEMPTYPARTS Qt::KeepEmptyParts
+#else
+    #define QT_ENUM_SKIPEMPTYPARTS QString::SkipEmptyParts
+    #define QT_ENUM_KEEPEMPTYPARTS QString::KeepEmptyParts
+#endif
 
 static const QString SIGIL_VERSION_META_NAME  = "Sigil version";
 static const QString OPF_XML_NAMESPACE        = "http://www.idpf.org/2007/opf";
@@ -247,6 +254,41 @@ int OPFResource::GetReadingOrder(const HTMLResource *html_resource) const
     }
     return -1;
 }
+
+void OPFResource::MoveReadingOrder(const HTMLResource* from_resource, const HTMLResource* after_resource)
+{
+    QWriteLocker locker(&GetLock());
+    const Resource *from_res = static_cast<const Resource *>(from_resource);
+    const Resource *after_res = static_cast<const Resource *>(after_resource);
+    if (from_res == NULL || after_res == NULL) return;
+
+    QString source = CleanSource::ProcessXML(GetText(),"application/oebps-package+xml");
+    OPFParser p;
+    p.parse(source);
+    QString from_id = GetResourceManifestID(from_res, p);
+    QString after_id = GetResourceManifestID(after_res, p);
+
+    int from_pos = -1;
+    int after_pos = -1;
+    int spine_count = p.m_spine.count();
+    for (int i = 0; i < spine_count; i++) {
+        QString aref = p.m_spine.at(i).m_idref;
+        if (aref == from_id) from_pos = i;
+        if (aref == after_id) after_pos = i;
+    }
+
+    if ((from_pos < 0) || (after_pos < 0)) return;
+    if (from_pos >= spine_count || after_pos >= spine_count) return;
+    // a move is equivalent to the sequence insert(after, takeAt(from))
+    // if takeAt pos <  after pos, it effectively increases the after position by one
+    // if takeAt pos > after pos, you need to increment after pos by 1
+    if (from_pos != after_pos + 1) {
+        if (from_pos > after_pos) after_pos += 1;
+        p.m_spine.move(from_pos, after_pos);
+    }
+    UpdateText(p);
+}
+
 
 QString OPFResource::GetMainIdentifierValue() const
 {
@@ -472,8 +514,31 @@ bool OPFResource::CoverImageExists() const
 void OPFResource::AutoFixWellFormedErrors()
 {
     QWriteLocker locker(&GetLock());
+    const QStringList TEXT_EXTS = QStringList() << "htm" << "html" << "xhtml";
     QString source = CleanSource::ProcessXML(GetText(),"application/oebps-package+xml");
-    SetText(source);
+    OPFParser p;
+    p.parse(source);
+    // auto fill in spine from manifest if completely empty
+    if (p.m_spine.count() == 0) {
+        std::vector< std::pair< QString, QString > > txts;
+        for (int i=0; i < p.m_manifest.count(); i++) {
+            ManifestEntry me = p.m_manifest.at(i);
+            QString ahref = Utility::URLDecodePath(me.m_href);
+            QString aid = me.m_id;
+            QString ext = QFileInfo(ahref).suffix();
+            if ((me.m_mtype == "application/xhtml+xml") || TEXT_EXTS.contains(ext.toLower())) {
+                txts.push_back(std::make_pair(ahref, aid));
+            }
+        }
+        std::sort(txts.begin(), txts.end(), Utility::sort_string_pairs_by_first);
+        for (int j=0; j < txts.size(); j++) {
+            QString idref = txts.at(j).second;
+            SpineEntry sp;
+            sp.m_idref = idref;
+            p.m_spine << sp;
+        }
+    }
+    UpdateText(p);
 }
 
 
@@ -575,15 +640,6 @@ void OPFResource::AddResource(const Resource *resource)
     me.m_mtype = GetResourceMimetype(resource);
     // Argh! If this is an new blank resource - it will have no content yet
     // so trying to parse it here to check for manifest properties is a mistake
-    // if (resource->Type() == Resource::HTMLResourceType) {
-    //     if (p.m_package.m_version == "3.0") {
-    //         const HTMLResource * html_resource = qobject_cast<const HTMLResource *>(resource);
-    //         QStringList properties = html_resource->GetManifestProperties();
-    //         if (properties.count() > 0) {
-    //             me.m_atts["properties"] = properties.join(QString(" "));
-    //         }
-    //     }
-    // }
     int n = p.m_manifest.count();
     p.m_manifest.append(me);
     p.m_idpos[me.m_id] = n;
@@ -674,7 +730,6 @@ void OPFResource::AddCoverMetaForImage(const Resource *resource, OPFParser &p)
 void OPFResource::BulkRemoveResources(const QList<Resource *>resources)
 {
     QWriteLocker locker(&GetLock());
-    qDebug() << "OPF Bulk Remove Resource";
     QString source = CleanSource::ProcessXML(GetText(),"application/oebps-package+xml");
     OPFParser p;
     p.parse(source);
@@ -725,7 +780,6 @@ void OPFResource::BulkRemoveResources(const QList<Resource *>resources)
 void OPFResource::RemoveResource(const Resource *resource)
 {
     QWriteLocker locker(&GetLock());
-    qDebug() << "OPF Remove Resource";
     QString source = CleanSource::ProcessXML(GetText(),"application/oebps-package+xml");
     OPFParser p;
     p.parse(source);
@@ -821,7 +875,7 @@ int OPFResource::GetGuideReferenceForResourcePos(const Resource *resource, const
     for (int i=0; i < p.m_guide.count(); ++i) {
         GuideEntry ge = p.m_guide.at(i);
         QString href = ge.m_href;
-        QStringList parts = href.split('#', QString::KeepEmptyParts);
+        QStringList parts = href.split('#', QT_ENUM_KEEPEMPTYPARTS);
         if (parts.at(0) == href_to_resource_from_opf) {
             return i;
         }
@@ -975,7 +1029,7 @@ QHash <QString, QString>  OPFResource::GetSemanticCodeForPaths()
     QHash <QString, QString> semantic_types;
     foreach(GuideEntry ge, p.m_guide) {
         QString href = ge.m_href;
-        QStringList parts = href.split('#', QString::KeepEmptyParts);
+        QStringList parts = href.split('#', QT_ENUM_KEEPEMPTYPARTS);
         QString apath = Utility::URLDecodePath(parts.at(0));
         QString bkpath = Utility::buildBookPath(apath, GetFolder());
         QString gtype = ge.m_type;
@@ -995,7 +1049,7 @@ QHash <QString, QString>  OPFResource::GetGuideSemanticNameForPaths()
     QHash <QString, QString> semantic_types;
     foreach(GuideEntry ge, p.m_guide) {
         QString href = ge.m_href;
-        QStringList parts = href.split('#', QString::KeepEmptyParts);
+        QStringList parts = href.split('#', QT_ENUM_KEEPEMPTYPARTS);
         QString gtype = ge.m_type;
         QString apath = Utility::URLDecodePath(parts.at(0));
         QString bkpath = Utility::buildBookPath(apath, GetFolder());

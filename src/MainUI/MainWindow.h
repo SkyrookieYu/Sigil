@@ -48,6 +48,7 @@
 #include "MiscEditors/SearchEditorModel.h"
 #include "Tabs/ContentTab.h"
 #include "ViewEditors/ElementIndex.h"
+#include "Dialogs/SearchEditor.h"
 
 const int MAX_RECENT_FILES = 5;
 const int STATUSBAR_MSG_DISPLAY_TIME = 7000;
@@ -110,6 +111,10 @@ public:
 
     ~MainWindow();
 
+    // routines to help Find and Replace exchange info with the SearchEditor
+    QList<SearchEditorModel::searchEntry*> SearchEditorGetCurrentEntries();
+    void SearchEditorRecordEntryAsCompleted(SearchEditorModel::searchEntry* entry);
+
     void maybe_fixup_dockwidget_geometry(QDockWidget * widget);
 
     // returns true if MainWindow is Maximized or is FullScreen
@@ -145,11 +150,14 @@ public:
      *
      * @return List of valid selected HTML resources
      */
+    QList <Resource *> GetBookBrowserSelectedResources();
     QList <Resource *> GetValidSelectedHTMLResources();
     QList <Resource *> GetValidSelectedCSSResources();
 
     QList <Resource *> GetTabbedHTMLResources();
     QList <Resource *> GetTabbedCSSResources();
+
+    bool RenameClassInHtml(const QString& oldname, const QString& newname);
 
     /**
      * Returns a list of all HTML resources in book browser order
@@ -215,6 +223,9 @@ public:
 
     QString GetMathJaxFolder() { return m_mathjaxfolder; };
 
+    bool UsingAutomate() { return m_UsingAutomate; }
+
+    QString AutomatePluginParameter() { return m_AutomatePluginParameter; }
 
 public slots:
 
@@ -1059,6 +1070,7 @@ private:
 
     bool m_UsingAutomate;
     QStringList m_AutomateLog;
+    QString m_AutomatePluginParameter;
     
     /**
      * Holds all the widgets Qt Designer created for us.

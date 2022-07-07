@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2018-2021  Kevin B. Hendricks, Stratford Ontario Canada
-**  Copyright (C) 2019-2021  Doug Massay
+**  Copyright (C) 2018-2022  Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2019-2022  Doug Massay
 **  Copyright (C) 2009-2011  Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -24,23 +24,24 @@
 #include "EmbedPython/EmbeddedPython.h"
 #include <iostream>
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDir>
-#include <QtCore/QLibraryInfo>
+#include <QCoreApplication>
+#include <QDir>
+#include <QLibraryInfo>
 #include <QStyleFactory>
-#include <QtCore/QTextCodec>
-#include <QtCore/QThreadPool>
-#include <QtCore/QTranslator>
-#include <QtCore/QStandardPaths>
-#include <QtWidgets/QApplication>
-#include <QtWidgets/QMessageBox>
-#include <QXmlStreamReader>
+#include <QTextCodec>
+#include <QThreadPool>
+#include <QTranslator>
+#include <QStandardPaths>
+#include <QApplication>
+#include <QMessageBox>
 #include <QResource>
 #include <QFile>
 #include <QFileInfo>
 #include <QTextStream>
 #include <QFontMetrics>
-#include <QtWebEngineWidgets/QWebEngineProfile>
+#include <QtWebEngineWidgets>
+#include <QtWebEngineCore>
+#include <QWebEngineProfile>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
 #include <QWebEngineUrlScheme>
@@ -260,7 +261,7 @@ void VerifyPlugins()
     pdb->load_plugins_from_disk();
 }
 
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 void setupHighDPI()
 {
     bool has_env_setting = false;
@@ -289,15 +290,29 @@ void setupHighDPI()
         }
     }
 }
+#endif
+
+
+// utility routine for performing centralized ini versioning based on Qt version
+void update_ini_file_if_needed(const QString oldfile, const QString newfile)
+{
+    QFileInfo nf(newfile);
+    if (!nf.exists()) {
+        QFileInfo of(oldfile);
+        if (of.exists() && of.isFile()) QFile::copy(oldfile, newfile);
+    }
+}
 
 
 // Application entry point
 int main(int argc, char *argv[])
 {
-#if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
-    QT_REQUIRE_VERSION(argc, argv, "5.9.0");
-#else
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+  #if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
+    QT_REQUIRE_VERSION(argc, argv, "5.10.0");
+  #else
     QT_REQUIRE_VERSION(argc, argv, "5.12.3");
+  #endif
 #endif
 
 #if !defined(Q_OS_WIN32) && !defined(Q_OS_MAC)
@@ -323,6 +338,27 @@ int main(int argc, char *argv[])
     QCoreApplication::setApplicationName("sigil");
     QCoreApplication::setApplicationVersion(SIGIL_VERSION);
 
+    // handle all non-backwards compatible ini file changes
+    update_ini_file_if_needed(Utility::DefinePrefsDir() + "/" + SEARCHES_SETTINGS_FILE,
+                              Utility::DefinePrefsDir() + "/" + SEARCHES_V2_SETTINGS_FILE);
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    // Qt6 forced move to utf-8 settings values but Qt5 settings are broken for utf-8 codec
+    // See QTBUG-40796 and QTBUG-54510 which never got fixed
+    update_ini_file_if_needed(Utility::DefinePrefsDir() + "/" + SIGIL_SETTINGS_FILE,
+                              Utility::DefinePrefsDir() + "/" + SIGIL_V6_SETTINGS_FILE);
+
+    update_ini_file_if_needed(Utility::DefinePrefsDir() + "/" + CLIPS_SETTINGS_FILE,
+                              Utility::DefinePrefsDir() + "/" + CLIPS_V6_SETTINGS_FILE);
+
+    update_ini_file_if_needed(Utility::DefinePrefsDir() + "/" + INDEX_SETTINGS_FILE,
+                              Utility::DefinePrefsDir() + "/" + INDEX_V6_SETTINGS_FILE);
+
+    update_ini_file_if_needed(Utility::DefinePrefsDir() + "/" + SEARCHES_V2_SETTINGS_FILE,
+                              Utility::DefinePrefsDir() + "/" + SEARCHES_V6_SETTINGS_FILE);
+#endif
+
+
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     // register the our own url scheme (this is required since Qt 5.12)
     QWebEngineUrlScheme sigilScheme("sigil");
@@ -335,10 +371,12 @@ int main(int argc, char *argv[])
     QWebEngineUrlScheme::registerScheme(sigilScheme);
 #endif
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #ifndef Q_OS_MAC
     setupHighDPI();
 #endif
     QCoreApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
 
     // many qtbugs related to mixing 32 and 64 bit qt apps when shader disk cache is used
     // Only use if using Qt5.9.0 or higher
@@ -347,7 +385,7 @@ int main(int argc, char *argv[])
 #endif
 
     // Disable ? as Sigil does not use QWhatsThis
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_DisableWindowContextHelpButton);
 #endif
 
@@ -366,6 +404,20 @@ int main(int argc, char *argv[])
         qputenv("QT_QPA_PLATFORM", "windows:altgr");
     }
 #endif
+
+    // enable disabling of gpu acceleration for QtWebEngine.
+    // append to current environment variable contents as numerous chromium 
+    // switches exist that may be useful
+    SettingsStore nss;
+    if (nss.disableGPU()) {
+        QString current_flags = Utility::GetEnvironmentVar("QTWEBENGINE_CHROMIUM_FLAGS");
+        if (current_flags.isEmpty()) {
+            current_flags = "--disable-gpu";
+        } else if (!current_flags.contains("--disable-gpu")) {
+            current_flags += " --disable-gpu";
+        }
+        qputenv("QTWEBENGINE_CHROMIUM_FLAGS", current_flags.toUtf8());
+    }
 
     MainApplication app(argc, argv);
 
@@ -443,7 +495,9 @@ int main(int argc, char *argv[])
         if (Utility::WindowsShouldUseDarkMode()) {
             // Apply custom dark style
             app.setStyle(new SigilDarkStyle);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             app.setPalette(QApplication::style()->standardPalette());
+#endif
         }
 #endif
 #endif

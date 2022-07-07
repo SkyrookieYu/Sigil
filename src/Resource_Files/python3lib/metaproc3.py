@@ -131,7 +131,19 @@ class MetadataProcessor(object):
                 continue
 
             if mname in _recognized_dc:
-                self.rec.append(mentry)
+                # strip out extraneous dc namespace defintions on dc tags
+                if "xmlns:dc" in mattr:
+                    del mattr["xmlns:dc"]
+                # fix improperly case language entries
+                if mname == "dc:language":
+                    if not "-" in mcontent:
+                        mcontent = mcontent.lower()
+                    else:
+                        lang, region = mcontent.split("-")
+                        lang = lang.lower()
+                        region = region.upper()
+                        mcontent = lang + "-" + region;
+                self.rec.append((mname, mcontent, mattr))
                 id = mattr.get("id",None)
                 if id is not None:
                     self.id2rec[id] = numrec
@@ -267,10 +279,10 @@ def set_new_metadata(data, other, idlst, metatag, opfdata):
             (name, value) = line.split(_US)
             name = name.strip()
             value = value.strip()
-            attrlist = ["id", "xml:lang", "dir"]
+            attrlist = ["id", "xml:lang", "dir", "xmlns"]
             if mname == "meta":
                 attrlist.append("property")
-            if name in attrlist:
+            if name in attrlist or name.startswith("xmlns:"):
                 if name == "id":
                     id = valid_id(value, idlst)
                     mattr["id"] = id
@@ -321,7 +333,11 @@ def set_new_metadata(data, other, idlst, metatag, opfdata):
     res.append(other)
     res.append('</metadata>\n')
     newmetadata = "".join(res)
-    newopfdata = _metadata_pattern.sub(newmetadata,opfdata)
+    mo = _metadata_pattern.search(opfdata)
+    if mo:
+        newopfdata = opfdata[0:mo.start()] + newmetadata + opfdata[mo.end():]
+    else:
+        newopfdata = opfdata
     return newopfdata
 
 

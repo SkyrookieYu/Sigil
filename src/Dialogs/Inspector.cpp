@@ -21,10 +21,12 @@
 
 #include <QByteArray>
 #include <QKeySequence>
-#include <QtWebEngineWidgets/QWebEngineView>
-#include <QtWebEngineWidgets/QWebEnginePage>
-#include <QtWebEngineWidgets/QWebEngineSettings>
-#include <QtWebEngineWidgets/QWebEngineProfile>
+#include <QtWebEngineWidgets>
+#include <QtWebEngineCore>
+#include <QWebEngineView>
+#include <QWebEnginePage>
+#include <QWebEngineSettings>
+#include <QWebEngineProfile>
 #include <QApplication>
 #include <QDir>
 
@@ -46,9 +48,9 @@ Inspector::Inspector(QWidget *parent, Qt::WindowFlags flags) :
     m_view(nullptr),
     m_LoadingFinished(false),
     m_LoadOkay(false),
-    m_ZoomIn(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Plus), this)),
-    m_ZoomOut(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_Minus), this)),
-    m_ZoomReset(new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_0), this))
+    m_ZoomIn(new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Plus), this)),
+    m_ZoomOut(new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_Minus), this)),
+    m_ZoomReset(new QShortcut(QKeySequence(Qt::CTRL | Qt::Key_0), this))
 {
     setAttribute(Qt::WA_DeleteOnClose, false);
     setWindowTitle(tr("Inspect Page or Element"));

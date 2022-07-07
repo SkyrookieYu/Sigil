@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2019 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2022 Kevin B. Hendricks, Stratford Ontario Canada
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -275,9 +275,10 @@ void TextTab::DelayedInitialization()
 {
     m_wCodeView->CustomSetDocument(m_TextResource->GetTextDocumentForWriting());
     m_wCodeView->Zoom();
-    if (m_PositionToScrollTo > 0) {
+    if (m_PositionToScrollTo >= 0) {
         m_wCodeView->ScrollToPosition(m_PositionToScrollTo);
     } else {
+        if (m_LineToScrollTo < 1) m_LineToScrollTo = 1;
         m_wCodeView->ScrollToLine(m_LineToScrollTo);
     }
 }

@@ -1,6 +1,6 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford, Ontario Canada
+**  Copyright (C) 2015-2022 Kevin B. Hendricks, Stratford, Ontario Canada
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
 **
 **  This file is part of Sigil.
@@ -20,14 +20,16 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFileInfo>
-#include <QtCore/QSignalMapper>
-#include <QtWidgets/QFileDialog>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QTreeView>
-#include <QtWidgets/QProgressDialog>
-#include <QtWidgets/QScrollBar>
+#include <QFileInfo>
+#include <QSignalMapper>
+#include <QFileDialog>
+#include <QMenu>
+#include <QMessageBox>
+#include <QTreeView>
+#include <QProgressDialog>
+#include <QScrollBar>
+#include <QVariant>
+#include <QTimer>
 #include <QDebug>
 
 #include "BookManipulation/Book.h"
@@ -57,8 +59,15 @@
 #include "sigil_constants.h"
 #include "sigil_exception.h"
 
-
 #define DBG if(0)
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    static const QVariant QVINVALID = QVariant(QVariant::Invalid);
+#else 
+    #include <QMetaType>
+    static const QVariant QVINVALID = QVariant(QMetaType(QMetaType::UnknownType));
+#endif
+
 
 static const QString SETTINGS_GROUP = "bookbrowser";
 static const QString OPF_NCX_EDIT_WARNING_KEY = SETTINGS_GROUP + "-opfncx-warning";
@@ -181,9 +190,11 @@ void BookBrowser::SelectRenamedResource()
 
     // Set the selection to the resource that was being renamed
     UpdateSelection(m_RenamedResource);
-    // Make sure Book Browser has focus so keyboard navigation works as expected
-    qobject_cast<QWidget *>(m_TreeView)->setFocus();
     m_RenamedResource = NULL;
+
+    // Make sure Book Browser has focus so keyboard navigation works as expected
+    // Delay so that setting focus happens last, *after* all other events
+    QTimer::singleShot(100, this, SLOT(FocusOnBookBrowser()));
 }
 
 void BookBrowser::SelectMovedResource()
@@ -194,9 +205,15 @@ void BookBrowser::SelectMovedResource()
 
     // Set the selection to the resource that was being renamed
     UpdateSelection(m_MovedResource);
-    // Make sure Book Browser has focus so keyboard navigation works as expected
-    qobject_cast<QWidget *>(m_TreeView)->setFocus();
     m_MovedResource = NULL;
+    // Make sure Book Browser has focus so keyboard navigation works as expected
+    // Delay so that setting focus happens last, *after* all other events
+    QTimer::singleShot(100, this, SLOT(FocusOnBookBrowser()));
+}
+
+void BookBrowser::FocusOnBookBrowser()
+{
+    qobject_cast<QWidget *>(m_TreeView)->setFocus();
 }
 
 void BookBrowser::UpdateSelection(Resource *resource)
@@ -363,7 +380,7 @@ QList <Resource *> BookBrowser::AllCSSResources()
 
 QList <Resource *> BookBrowser::AllJSResources()
 {
-    QStringList mtypes = QStringList() << "text/javascript" << "application/javascript";
+    QStringList mtypes = QStringList() << "text/javascript" << "application/javascript" << "application/ecmascript";
     return m_Book->GetFolderKeeper()->GetResourceListByMediaTypes(mtypes);
 }
 
@@ -392,7 +409,7 @@ int BookBrowser::AllSelectedItemCount()
     const QString &identifier = item->data().toString();
 
     // If folder item included, multiple selection is invalid                                                                              
-    if (identifier == NULL) {
+    if (identifier.isEmpty()) {
       return -1;
     }
 
@@ -488,7 +505,7 @@ int BookBrowser::ValidSelectedItemCount()
         const QString &identifier = item->data().toString();
 
         // If folder item included, multiple selection is invalid
-        if (identifier == NULL) {
+        if (identifier.isEmpty()) {
             return -1;
         }
 
@@ -545,7 +562,7 @@ void BookBrowser::CopyHTML()
 
     HTMLResource *current_html_resource = qobject_cast<HTMLResource *>(current_resource);
     // Create an empty file
-    HTMLResource *new_html_resource = m_Book->CreateEmptyHTMLFile(current_html_resource, destfolder);
+    HTMLResource *new_html_resource = m_Book->CreateEmptyHTMLFile(destfolder);
     m_Book->MoveResourceAfter(new_html_resource, current_html_resource);
     // Copy the text from the current file
     new_html_resource->SetText(current_html_resource->GetText());
@@ -561,11 +578,12 @@ void BookBrowser::AddNewHTML()
 {
     Resource *current_resource = GetCurrentResource();
     HTMLResource *current_html_resource = qobject_cast<HTMLResource *>(current_resource);
+
     QString destfolder = "\\";
     if (current_html_resource) {
         destfolder = Utility::startingDir(current_html_resource->GetRelativePath());
     }
-    HTMLResource *new_html_resource = m_Book->CreateEmptyHTMLFile(current_html_resource, destfolder);
+    HTMLResource *new_html_resource = m_Book->CreateEmptyHTMLFile(destfolder);
 
     if ((current_resource != NULL) && (current_html_resource != NULL)) {
         m_Book->MoveResourceAfter(new_html_resource, current_html_resource);
@@ -1802,18 +1820,18 @@ void BookBrowser::CreateContextMenuActions()
     m_NoObfuscationMethod    ->setCheckable(true);
     m_AdobesObfuscationMethod->setCheckable(true);
     m_IdpfsObfuscationMethod ->setCheckable(true);
-    m_CopyHTML->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_Y));
+    m_CopyHTML->setShortcut(QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_Y));
     sm->registerAction(this, m_CopyHTML, "MainWindow.BookBrowser.CopyHTML");
     m_Delete->setShortcut(QKeySequence::Delete);
-    m_Merge->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_M));
+    m_Merge->setShortcut(QKeySequence(Qt::CTRL | Qt::Key_M));
     m_Merge->setToolTip(tr("Merge with previous file, or merge multiple files into one."));
     sm->registerAction(this, m_Merge, "MainWindow.BookBrowser.Merge");
-    m_Rename->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_R));
+    m_Rename->setShortcut(QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_R));
     m_Rename->setToolTip(tr("Rename selected file(s)"));
     sm->registerAction(this, m_Rename, "MainWindow.BookBrowser.Rename");
     m_RERename->setToolTip(tr("Use Regular Expressions to Rename selected file(s)"));
     sm->registerAction(this, m_RERename, "MainWindow.BookBrowser.RERename");
-    // m_Move->setShortcut(QKeySequence(Qt::CTRL + Qt::ALT + Qt::Key_R));
+    // m_Move->setShortcut(QKeySequence(Qt::CTRL | Qt::ALT | Qt::Key_R));
     m_Move->setToolTip(tr("Move selected file(s) to a new folder"));
     sm->registerAction(this, m_Move, "MainWindow.BookBrowser.Move");
     m_LinkStylesheets->setToolTip(tr("Link Stylesheets to selected file(s)."));
@@ -1913,11 +1931,11 @@ bool BookBrowser::SuccessfullySetupContextMenu(const QPoint &point)
             const QStringList editor_paths = OpenExternally::editorsForResourceType(resource->Type());
             const QStringList editor_names = OpenExternally::editorDescriptionsForResourceType(resource->Type());
             if (editor_paths.isEmpty()) {
-                m_OpenWithEditor0->setData(QVariant::Invalid);
-                m_OpenWithEditor1->setData(QVariant::Invalid);
-                m_OpenWithEditor2->setData(QVariant::Invalid);
-                m_OpenWithEditor3->setData(QVariant::Invalid);
-                m_OpenWithEditor4->setData(QVariant::Invalid);
+                m_OpenWithEditor0->setData(QVINVALID);
+                m_OpenWithEditor1->setData(QVINVALID);
+                m_OpenWithEditor2->setData(QVINVALID);
+                m_OpenWithEditor3->setData(QVINVALID);
+                m_OpenWithEditor4->setData(QVINVALID);
                 m_OpenWith->setText(tr("Open With") + "...");
                 m_ContextMenu->addAction(m_OpenWith);
             } else {
@@ -1930,7 +1948,7 @@ bool BookBrowser::SuccessfullySetupContextMenu(const QPoint &point)
                     if (k==3) oeaction = m_OpenWithEditor3;
                     if (k==4) oeaction = m_OpenWithEditor4;
                     if (oeaction) {
-                        oeaction->setData(QVariant::Invalid);
+                        oeaction->setData(QVINVALID);
                         oeaction->setText("");
                         oeaction->setEnabled(false);
                         oeaction->setVisible(false);
@@ -2093,7 +2111,11 @@ void BookBrowser::ConnectSignalsToSlots()
     m_openWithMapper->setMapping(m_OpenWithEditor3, 3);
     connect(m_OpenWithEditor4, SIGNAL(triggered()),  m_openWithMapper, SLOT(map()));
     m_openWithMapper->setMapping(m_OpenWithEditor4, 4);
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     connect(m_openWithMapper, SIGNAL(mapped(int)), this, SLOT(OpenWithEditor(int)));
+#else
+    connect(m_openWithMapper, SIGNAL(mappedInt(int)), this, SLOT(OpenWithEditor(int)));
+#endif
     connect(m_AdobesObfuscationMethod, SIGNAL(triggered()), this, SLOT(AdobesObfuscationMethod()));
     connect(m_IdpfsObfuscationMethod,  SIGNAL(triggered()), this, SLOT(IdpfsObfuscationMethod()));
     connect(m_NoObfuscationMethod,     SIGNAL(triggered()), this, SLOT(NoObfuscationMethod()));

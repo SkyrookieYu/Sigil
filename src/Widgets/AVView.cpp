@@ -1,6 +1,6 @@
 /************************************************************************
  **
- **  Copyright (C) 2020 Kevin B. Hendricks
+ **  Copyright (C) 2020-2021 Kevin B. Hendricks
  **
  **  This file is part of Sigil.
  **
@@ -25,8 +25,10 @@
 #include <QGuiApplication>
 #include <QUrl>
 #include <QVBoxLayout>
-#include <QtWebEngineWidgets/QWebEngineProfile>
-#include <QtWebEngineWidgets/QWebEngineView>
+#include <QtWebEngineWidgets>
+#include <QtWebEngineCore>
+#include <QWebEngineProfile>
+#include <QWebEngineView>
 #include <QGuiApplication>
 #include <QApplication>
 #include "ViewEditors/SimplePage.h"
@@ -75,7 +77,9 @@ AVView::AVView(QWidget *parent)
     m_WebView->setContextMenuPolicy(Qt::NoContextMenu);
     m_WebView->setFocusPolicy(Qt::NoFocus);
     m_WebView->setAcceptDrops(false);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     m_WebView->setUrl(QUrl("about:blank"));
+#endif
     m_layout->addWidget(m_WebView);
 }
 

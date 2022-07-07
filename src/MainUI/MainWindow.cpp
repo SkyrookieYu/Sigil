@@ -1,7 +1,7 @@
 /************************************************************************
 **
-**  Copyright (C) 2015-2021 Kevin B. Hendricks, Stratford Ontario Canada
-**  Copyright (C) 2015-2021 Doug Massay
+**  Copyright (C) 2015-2022 Kevin B. Hendricks, Stratford Ontario Canada
+**  Copyright (C) 2015-2022 Doug Massay
 **  Copyright (C) 2012-2015 John Schember <john@nachtimwald.com>
 **  Copyright (C) 2012-2013 Dave Heiland
 **  Copyright (C) 2009-2011 Strahinja Markovic  <strahinja.markovic@gmail.com>
@@ -23,26 +23,29 @@
 **
 *************************************************************************/
 
-#include <QtCore/QFileInfo>
-#include <QtCore/QThread>
-#include <QtCore/QTimer>
+#include <QFileInfo>
+#include <QThread>
+#include <QTimer>
 #include <QtConcurrent>
 #include <QFuture>
-#include <QtGui/QDesktopServices>
-#include <QtGui/QImage>
-#include <QDesktopWidget>
+#include <QDesktopServices>
+#include <QImage>
 #include <QGuiApplication>
 #include <QScreen>
-#include <QtWidgets/QFileDialog>
-#include <QtWidgets/QInputDialog>
-#include <QtWidgets/QMessageBox>
-#include <QtWidgets/QProgressDialog>
-#include <QtWidgets/QToolBar>
-#include <QtWebEngineWidgets/QWebEngineSettings>
+#include <QFileDialog>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QProgressDialog>
+#include <QToolBar>
+#include <QtWebEngineWidgets>
+#include <QtWebEngineCore>
+#include <QWebEngineSettings>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #ifdef Q_OS_WIN32
 #include <QtWinExtras>
+#endif
 #endif
 #include <QString>
 #include <QStringList>
@@ -53,6 +56,10 @@
 #include <QStyleFactory>
 #include <QStyle>
 #include <QDebug>
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QDesktopWidget>
+#endif
 
 #include "BookManipulation/CleanSource.h"
 #include "BookManipulation/Index.h"
@@ -167,6 +174,7 @@ static const QStringList SUPPORTED_SAVE_TYPE = QStringList() << "epub";
 
 static const QString DEFAULT_FILENAME = "untitled.epub";
 static const QString CUSTOM_PREVIEW_STYLE_FILENAME = "custom_preview_style.css";
+static const QString CUSTOM_PREVIEW_STYLE_ALT_FILENAME = "custom_preview_style_alt.css";
 
 QStringList MainWindow::s_RecentFiles = QStringList();
 
@@ -190,6 +198,7 @@ static const QStringList AUTOMATE_TOOLS = QStringList() <<
     "SetBookBrowserToAllHTML" <<
     "SetBookBrowserToAllImages" <<
     "SetBookBrowserToInitialSelection" <<
+    "SetPluginParameter" <<
     "SplitOnSGFSectionMarkers" <<
     "StandardizeEpub" <<
     "UpdateManifestProperties" <<
@@ -228,7 +237,7 @@ MainWindow::MainWindow(const QString &openfilepath,
     m_IndexEditor(new IndexEditor(this)),
     m_SpellcheckEditor(new SpellcheckEditor(this)),
     m_SelectCharacter(new SelectCharacter(this)),
-    m_ViewImage(new ViewImage(this)),
+    m_ViewImage(new ViewImage(this, false)),
     m_Reports(new Reports(this)),
     m_preserveHeadingAttributes(true),
     m_LinkOrStyleBookmark(new LocationBookmark()),
@@ -315,9 +324,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::createJumpList()
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #ifdef Q_OS_WIN32
     QWinJumpList jumplist;
     jumplist.recent()->setVisible(true);
+#endif
 #endif
 }
 
@@ -390,6 +401,7 @@ void MainWindow::RunAutomate(const QString &automatefile)
     if (!commands.isEmpty()) Automate(commands);
     m_UsingAutomate = false;
     m_AutomateLog.clear();
+    m_AutomatePluginParameter = "";
 }
 
 
@@ -419,6 +431,9 @@ bool MainWindow::Automate(const QStringList &commands)
 
             success = prunner.getResult() == "success";
             plugin_type = prunner.getPluginType();
+            // plugin done rubnning clear any set plugin parameter
+            m_AutomatePluginParameter = "";
+            
         } else if (AUTOMATE_TOOLS.contains(cmd)) {
             if (cmd == "Save")                            success = Save();
             else if (cmd == "WellFormedCheckEpub")        success = WellFormedCheckEpub();
@@ -468,16 +483,23 @@ bool MainWindow::Automate(const QStringList &commands)
                     success = true;
                 }
             }
+
+        // Allow Automate to set a Plugin Parameter
+        } else if (cmd.startsWith("SetPluginParameter")) {
+            m_AutomatePluginParameter  = cmd.mid(19, -1).trimmed();
+            success = true;
+
         // handle saved search and its full name parameter     
         } else if (cmd.startsWith("RunSavedSearchReplaceAll")) {
             QString fullname = cmd.mid(25, -1).trimmed();
-            QList<SearchEditorModel::searchEntry*> search_entries = m_SearchEditor->GetEntriesFromFullName(fullname);
-            if (!search_entries.isEmpty()) {
+            m_SearchEditor->SetCurrentEntriesFromFullName(fullname);
+
+            if (m_SearchEditor->GetCurrentEntriesCount() > 0) {
                 // m_FindReplace handles deleting each searchEntry that was created with new
                 // Temporarily reroute FindReplace Messages to the Status Bar so they are logged
                 connect(m_FindReplace, SIGNAL(ShowMessageRequest(const QString &)),
                         this, SLOT(ShowMessageOnStatusBar(const QString &)));
-                m_FindReplace->ReplaceAllSearch(search_entries);
+                m_FindReplace->ReplaceAllSearch();
                 disconnect(m_FindReplace, SIGNAL(ShowMessageRequest(const QString &)),
                            this, SLOT(ShowMessageOnStatusBar(const QString &)));
                 success = true;
@@ -772,6 +794,14 @@ bool MainWindow::StandardizeEpub()
     m_BookBrowser->Refresh();
     m_Book->SetModified();
     QApplication::restoreOverrideCursor();
+
+    // Update the titlebar
+    QString epubversion = m_Book->GetConstOPF()->GetEpubVersion();
+    if (m_Book->GetFolderKeeper()->EpubInSigilStandardForm()) {
+        setWindowTitle(tr("%1[*] - epub%2 - %3").arg(m_CurrentFileName).arg(epubversion).arg(tr("Sigil [std]")));
+    } else {
+        setWindowTitle(tr("%1[*] - epub%2 - %3").arg(m_CurrentFileName).arg(epubversion).arg(tr("Sigil")));
+    }
     ShowMessageOnStatusBar(tr("Restructure completed."));
     return true;
 }
@@ -874,8 +904,13 @@ bool MainWindow::RepoCommit()
     // now perform the commit using python in a separate thread since this
     // may take a while depending on the speed of the filesystem
     PythonRoutines pr;
-    QFuture<QString> future = QtConcurrent::run(&pr, &PythonRoutines::PerformRepoCommitInPython, 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    QFuture<QString> future = QtConcurrent::run(&pr, &PythonRoutines::PerformRepoCommitInPython,
                                                 localRepo, bookid, bookinfo, bookroot, bookfiles);
+#else
+    QFuture<QString> future = QtConcurrent::run(&PythonRoutines::PerformRepoCommitInPython, &pr,
+                                                localRepo, bookid, bookinfo, bookroot, bookfiles);
+#endif
     future.waitForFinished();
     QString commit_result = future.result();
 
@@ -918,8 +953,13 @@ void MainWindow::RepoCheckout(QString bookid, QString destdir, QString filename,
     // now perform the operation using python in a separate thread since this
     // may take a while depending on the speed of the filesystem
     PythonRoutines pr;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QFuture<QStringList> future = QtConcurrent::run(&pr, &PythonRoutines::GetRepoTagsInPython, 
                                                          localRepo, bookid);
+#else
+    QFuture<QStringList> future = QtConcurrent::run(&PythonRoutines::GetRepoTagsInPython, &pr,
+                                                         localRepo, bookid);
+#endif   
     future.waitForFinished();
     QStringList tag_results = future.result();
     if (tag_results.isEmpty()) {
@@ -959,9 +999,13 @@ void MainWindow::RepoCheckout(QString bookid, QString destdir, QString filename,
     open_tab_positions << m_TabManager->GetCurrentContentTab()->GetCursorPosition();
     
     QApplication::setOverrideCursor(Qt::WaitCursor);
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QFuture<QString> afuture = QtConcurrent::run(&pr, &PythonRoutines::GenerateEpubFromTagInPython, 
                                                  localRepo, bookid, tagname, filename, destdir);
+#else
+    QFuture<QString> afuture = QtConcurrent::run(&PythonRoutines::GenerateEpubFromTagInPython, &pr,
+                                                 localRepo, bookid, tagname, filename, destdir);
+#endif
     afuture.waitForFinished();
     QString epub_result = afuture.result();
     if (epub_result.isEmpty()) {
@@ -1028,8 +1072,13 @@ void MainWindow::RepoDiff(QString bookid)
     // Get tags using python in a separate thread since this
     // may take a while depending on the speed of the filesystem
     PythonRoutines pr;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)    
     QFuture<QStringList> future = QtConcurrent::run(&pr, &PythonRoutines::GetRepoTagsInPython, 
                                                           localRepo, bookid);
+#else
+    QFuture<QStringList> future = QtConcurrent::run(&PythonRoutines::GetRepoTagsInPython, &pr,
+                                                          localRepo, bookid);
+#endif
     future.waitForFinished();
     QStringList tag_results = future.result();
     if (tag_results.isEmpty()) {
@@ -1056,8 +1105,13 @@ void MainWindow::RepoDiff(QString bookid)
     // checkout this tag version and copy it to a tempfolder
     TempFolder destdir;
     QApplication::setOverrideCursor(Qt::WaitCursor);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)    
     QFuture<QString> cfuture = QtConcurrent::run(&pr, &PythonRoutines::CopyTagToDestDirInPython, 
                                                  localRepo, bookid, chkpoint1, destdir.GetPath() );
+#else
+    QFuture<QString> cfuture = QtConcurrent::run(&PythonRoutines::CopyTagToDestDirInPython, &pr,
+                                                 localRepo, bookid, chkpoint1, destdir.GetPath() );
+#endif
     cfuture.waitForFinished();
     QString copied = cfuture.result();
     QApplication::restoreOverrideCursor();
@@ -1068,9 +1122,15 @@ void MainWindow::RepoDiff(QString bookid)
     bookfiles << "META-INF/container.xml";
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
+    
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)    
     QFuture<QList<QStringList> > dfuture = QtConcurrent::run(&pr, 
                                              &PythonRoutines::GetCurrentStatusVsDestDirInPython, 
                                              bookroot, bookfiles, destdir.GetPath());
+#else
+    QFuture<QList<QStringList> > dfuture = QtConcurrent::run(&PythonRoutines::GetCurrentStatusVsDestDirInPython,
+                                             &pr, bookroot, bookfiles, destdir.GetPath());
+#endif
     dfuture.waitForFinished();
     QList<QStringList> sres = dfuture.result();
     QApplication::restoreOverrideCursor();
@@ -1219,6 +1279,10 @@ void MainWindow::runPlugin(QAction *action)
         prunner.exec(pname);
     }
     qApp->processEvents();
+}
+
+QList<Resource*>  MainWindow::GetBookBrowserSelectedResources() {
+    return m_BookBrowser->AllSelectedResources();
 }
 
 void MainWindow::SelectResources(QList<Resource *> resources)
@@ -2380,8 +2444,13 @@ bool MainWindow::GenerateNCXGuideFromNav()
 
     // Now build the ncx in python in a separate thread since may be an long job
     PythonRoutines pr;
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)    
     QFuture<QString> future = QtConcurrent::run(&pr, &PythonRoutines::GenerateNcxInPython, navdata, 
                                                 navbkpath, ncxdir, doctitle, mainid);
+#else
+    QFuture<QString> future = QtConcurrent::run(&PythonRoutines::GenerateNcxInPython, &pr, navdata, 
+                                             navbkpath, ncxdir, doctitle, mainid);
+#endif
     future.waitForFinished();
     QString ncxdata = future.result();
 
@@ -3193,7 +3262,7 @@ void MainWindow::MergeResources(QList <Resource *> resources)
             UsedIds.insert(id);
         }
     }
-    QStringList Dups = Duplicates.toList();
+    QStringList Dups = Duplicates.values();
     if (!Dups.isEmpty()) {
         // if duplicates exist, run the SourceUpdates/FragmentUpdates
         QHash<QString, QString> Updates;
@@ -3503,7 +3572,7 @@ h->ShortPathName()));
 QList<std::pair<QString, bool>> MainWindow::GetJavascriptsMap(QList<Resource *> resources)
 {
     QList<std::pair<QString, bool>> javascript_map;
-    QStringList mtypes = QStringList() << "application/javascript" << "text/javascript";
+    QStringList mtypes = QStringList() << "application/javascript" << "application/ecmascript" << "text/javascript";
     QList<Resource *> js_resources = m_Book->GetFolderKeeper()->GetResourceListByMediaTypes(mtypes);
     // Use the first resource to get a list of known linked javascripts in order.                                   
     QStringList checked_linked_bookpaths = GetJavascriptsAlreadyLinked(resources.at(0));
@@ -3537,7 +3606,7 @@ QStringList MainWindow::GetJavascriptsAlreadyLinked(Resource *resource)
     HTMLResource *html_resource = qobject_cast<HTMLResource *>(resource);
     QStringList linked_javascripts;
     QStringList existing_javascripts;
-    QStringList mtypes = QStringList() << "application/javascript" << "text/javascript";
+    QStringList mtypes = QStringList() << "application/javascript" << "application/ecmascript" << "text/javascript";
     foreach(Resource * js_resource, m_Book->GetFolderKeeper()->GetResourceListByMediaTypes(mtypes)) {
         existing_javascripts.append(js_resource->GetRelativePath());
     }
@@ -4006,6 +4075,19 @@ bool MainWindow::ValidateStylesheetsWithW3C()
 }
 
 
+bool MainWindow::RenameClassInHtml(const QString& oldname, const QString& newname)
+{
+    ContentTab *tab = GetCurrentContentTab();
+    CSSResource* css_resource = NULL;
+    if (tab != NULL) {
+        css_resource = qobject_cast<CSSResource *>(tab->GetLoadedResource());
+    }
+    if (css_resource == NULL) return false;
+    QString css_bookpath = css_resource->GetRelativePath();
+    SaveTabData();
+    return m_Book->RenameClassInHTML(css_bookpath, oldname, newname);
+}
+
 bool MainWindow::ReformatAllStylesheets(bool multiple_line_format)
 {
     SaveTabData();
@@ -4187,6 +4269,8 @@ void MainWindow::SetStateActionsCodeView()
     ui.actionReplacePrevious->setEnabled(true);
     ui.actionReplaceAll->setEnabled(true);
     ui.actionCount->setEnabled(true);
+    ui.actionDryRun->setEnabled(true);
+    ui.actionFilterReplaceAll->setEnabled(true);
     ui.actionMarkSelection->setEnabled(true);
     ui.menuSearchCurrentFile->setEnabled(true);
     ui.actionFindNextInFile->setEnabled(true);
@@ -4272,6 +4356,8 @@ void MainWindow::SetStateActionsRawView()
     ui.actionReplacePrevious->setEnabled(true);
     ui.actionReplaceAll->setEnabled(true);
     ui.actionCount->setEnabled(true);
+    ui.actionDryRun->setEnabled(true);
+    ui.actionFilterReplaceAll->setEnabled(true);
     ui.actionMarkSelection->setEnabled(true);
     ui.menuSearchCurrentFile->setEnabled(true);
     ui.actionFindNextInFile->setEnabled(true);
@@ -4340,6 +4426,8 @@ void MainWindow::SetStateActionsStaticView()
     ui.actionReplacePrevious->setEnabled(false);
     ui.actionReplaceAll->setEnabled(false);
     ui.actionCount->setEnabled(false);
+    ui.actionDryRun->setEnabled(false);
+    ui.actionFilterReplaceAll->setEnabled(false);
     ui.actionMarkSelection->setEnabled(false);
     ui.menuSearchCurrentFile->setEnabled(false);
     ui.actionFindNextInFile->setEnabled(false);
@@ -4588,20 +4676,6 @@ void MainWindow::CreateSectionBreakOldTab(QString content, HTMLResource *origina
     // originating tab. Since this comes from a FlowTab assume that it is 
     // an xhtml file even if called .xml to avoid doing damage.
 
-#if 0
-    // XXX: This should be using the mime type not the extension.
-    if (!TEXT_EXTENSIONS.contains(QFileInfo(originating_resource->Filename()).suffix().toLower())) {
-        QMessageBox::warning(this, tr("Sigil"), tr("Cannot split since it may not be an HTML file."));
-        return;
-    }
-
-    HTMLResource * nav_resource = m_Book->GetConstOPF()->GetNavResource();
-    if (nav_resource && nav_resource == originating_resource) {
-        QMessageBox::warning(this, tr("Sigil"), tr("The Nav file cannot be split."));
-        return;
-    }
-#endif
-
     HTMLResource *html_resource = m_Book->CreateSectionBreakOriginalResource(content, originating_resource);
     m_BookBrowser->Refresh();
     // Open the old shortened content in a new tab preceding the current one.
@@ -4732,11 +4806,22 @@ void MainWindow::ReadSettings()
     } 
 
     if (MaximizedState) {
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QRect maxsize = settings.value("max_mw_geometry", QApplication::desktop()->availableGeometry(this)).toRect();
+#else
+        QRect maxsize = settings.value("max_mw_geometry", QGuiApplication::primaryScreen()->availableGeometry()).toRect();
+#endif
         setGeometry(maxsize);
         setWindowState(windowState() | Qt::WindowMaximized);
+
     } else if (FullScreenState) {
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         QRect maxsize = settings.value("max_mw_geometry", QApplication::desktop()->screenGeometry(this)).toRect();
+#else
+        QRect maxsize = settings.value("max_mw_geometry", QGuiApplication::primaryScreen()->availableGeometry()).toRect();
+#endif
         setGeometry(maxsize);
         setWindowState(windowState() | Qt::WindowFullScreen);
     }
@@ -4771,7 +4856,11 @@ void MainWindow::ReadSettings()
 
     // Our default fonts for Preview
     SettingsStore::PreviewAppearance PVAppearance = settings.previewAppearance();
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QWebEngineSettings *web_settings = QWebEngineSettings::defaultSettings();
+#else
+    QWebEngineSettings *web_settings = QWebEngineProfile::defaultProfile()->settings();
+#endif
 
     // Default QWebEngine security settings to help prevent rogue epub3 javascripts
     // User preferences control if javascript is allowed (on) or not for Preview
@@ -4808,47 +4897,58 @@ void MainWindow::ReadSettings()
     web_settings->setFontFamily(QWebEngineSettings::SerifFont, PVAppearance.font_family_serif);
     web_settings->setFontFamily(QWebEngineSettings::SansSerifFont, PVAppearance.font_family_sans_serif);
 
-    // Check for existing custom Preview stylesheet in Prefs dir and tell Preview about it
+    // Check for existing custom Preview stylesheets in Prefs dir and tell Preview about them
+    QStringList usercssurls;
     QFileInfo CustomPreviewStylesheetInfo(QDir(Utility::DefinePrefsDir()).filePath(CUSTOM_PREVIEW_STYLE_FILENAME));
     if (CustomPreviewStylesheetInfo.exists() && 
         CustomPreviewStylesheetInfo.isFile() && 
         CustomPreviewStylesheetInfo.isReadable()) {
-        QString usercssurl = QUrl::fromLocalFile(CustomPreviewStylesheetInfo.absoluteFilePath()).toString();
-        m_PreviewWindow->setUserCSSURL(usercssurl);
+        usercssurls << QUrl::fromLocalFile(CustomPreviewStylesheetInfo.absoluteFilePath()).toString();
     }
+    QFileInfo CustomPreviewAltStylesheetInfo(QDir(Utility::DefinePrefsDir()).filePath(CUSTOM_PREVIEW_STYLE_ALT_FILENAME));
+    if (CustomPreviewAltStylesheetInfo.exists() && 
+        CustomPreviewAltStylesheetInfo.isFile() && 
+        CustomPreviewAltStylesheetInfo.isReadable()) {
+        usercssurls << QUrl::fromLocalFile(CustomPreviewAltStylesheetInfo.absoluteFilePath()).toString();
+    }
+    m_PreviewWindow->setUserCSSURLs(usercssurls);
 
-    // Determine MathJax location and tell Preview about it
-    // The path to MathJax.js is platform dependent
+    // Determine MathJax location (>= version 3.2.2)  and tell Preview about it
+    // The path to our custom MathJax 3.2.2+ build is platform dependent
     QString mathjaxurl;
+    QString mathjaxscript;
 #ifdef Q_OS_MAC
     // On Mac OS X QCoreApplication::applicationDirPath() points to Sigil.app/Contents/MacOS/ 
     QDir execdir(QCoreApplication::applicationDirPath());
     execdir.cdUp();
-    mathjaxurl = execdir.absolutePath() + "/polyfills/MJ/";
+    mathjaxurl = execdir.absolutePath() + "/polyfills/";
+    mathjaxscript = "custom-mathjax.min.js";
 #elif defined(Q_OS_WIN32)
-    mathjaxurl = QCoreApplication::applicationDirPath() + "/polyfills/MJ/";
+    mathjaxurl = QCoreApplication::applicationDirPath() + "/polyfills/";
+    mathjaxscript = "custom-mathjax.min.js";
 #else
     // all flavours of linux / unix
     // First check if system MathJax was configured to be used at compile time
-    if (!mathjax_dir.isEmpty()) {
-        mathjaxurl = mathjax_dir;
+    if (!mathjax3_dir.isEmpty()) {
+        mathjaxurl = mathjax3_dir;
         if (!mathjaxurl.endsWith('/')) {
             mathjaxurl.append('/');
         }
+        mathjaxscript = "startup.js";
     } else {
         // otherwise user supplied environment variable to 'share/sigil'
         // takes precedence over Sigil's usual share location.
+        mathjaxscript = "custom-mathjax.min.js";
         if (!sigil_extra_root.isEmpty()) {
-            mathjaxurl = sigil_extra_root + "/polyfills/MJ/";
+            mathjaxurl = sigil_extra_root + "/polyfills/";
         } else {
-            mathjaxurl = sigil_share_root + "/polyfills/MJ/";
+            mathjaxurl = sigil_share_root + "/polyfills/";
         }
     }
 #endif
     m_mathjaxfolder = mathjaxurl;
-    mathjaxurl = mathjaxurl + "MathJax.js";
+    mathjaxurl = mathjaxurl + mathjaxscript;
     mathjaxurl = QUrl::fromLocalFile(mathjaxurl).toString();
-    mathjaxurl = mathjaxurl + "?config=local/SIGIL_EBOOK_MML_SVG";
     m_PreviewWindow->setMathJaxURL(mathjaxurl);
 }
 
@@ -4981,6 +5081,15 @@ void MainWindow::ResourcesAddedOrDeletedOrMoved()
     if (flow_tab) {
         flow_tab->LoadTabContent();
     }
+
+    // Update the titlebar
+    QString epubversion = m_Book->GetConstOPF()->GetEpubVersion();
+    if (m_Book->GetFolderKeeper()->EpubInSigilStandardForm()) {
+        setWindowTitle(tr("%1[*] - epub%2 - %3").arg(m_CurrentFileName).arg(epubversion).arg(tr("Sigil [std]")));
+    } else {
+        setWindowTitle(tr("%1[*] - epub%2 - %3").arg(m_CurrentFileName).arg(epubversion).arg(tr("Sigil")));
+    }
+
 }
 
 
@@ -5448,8 +5557,11 @@ void MainWindow::UpdateUiWithCurrentFile(const QString &fullfilepath, bool just_
     QString epubversion = m_Book->GetConstOPF()->GetEpubVersion();
 
     // Update the titlebar
-    setWindowTitle(tr("%1[*] - epub%2 - %3").arg(m_CurrentFileName).arg(epubversion).arg(tr("Sigil")));
-
+    if (m_Book->GetFolderKeeper()->EpubInSigilStandardForm()) {
+        setWindowTitle(tr("%1[*] - epub%2 - %3").arg(m_CurrentFileName).arg(epubversion).arg(tr("Sigil [std]")));
+    } else {
+        setWindowTitle(tr("%1[*] - epub%2 - %3").arg(m_CurrentFileName).arg(epubversion).arg(tr("Sigil")));
+    }
     if (m_CurrentFilePath.isEmpty()) {
         return;
     }
@@ -5586,6 +5698,9 @@ void MainWindow::sizeMenuIcons() {
     QList<QToolBar *> all_toolbars = findChildren<QToolBar *>();
     foreach(QToolBar * toolbar, all_toolbars) {
         toolbar->setIconSize(QSize(iconsize,iconsize));
+        // Kvantum themes on Linux will only show QToolBar "handles" when the movable
+        // property is explicitly set to true (even though true is the Qt default).
+        toolbar->setMovable(true);
     }
 }
 
@@ -5703,14 +5818,14 @@ void MainWindow::ExtendUI()
 
     ui.menuView->addSeparator();
     ui.menuView->addAction(m_BookBrowser->toggleViewAction());
-    m_BookBrowser->toggleViewAction()->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F1));
+    m_BookBrowser->toggleViewAction()->setShortcut(QKeySequence(Qt::ALT | Qt::Key_F1));
     ui.menuView->addAction(m_Clips->toggleViewAction());
     ui.menuView->addAction(m_PreviewWindow->toggleViewAction());
     m_PreviewWindow->toggleViewAction()->setShortcut(QKeySequence(Qt::Key_F10));
     ui.menuView->addAction(m_TableOfContents->toggleViewAction());
-    m_TableOfContents->toggleViewAction()->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F3));
+    m_TableOfContents->toggleViewAction()->setShortcut(QKeySequence(Qt::ALT | Qt::Key_F3));
     ui.menuView->addAction(m_ValidationResultsView->toggleViewAction());
-    m_ValidationResultsView->toggleViewAction()->setShortcut(QKeySequence(Qt::ALT + Qt::Key_F2));
+    m_ValidationResultsView->toggleViewAction()->setShortcut(QKeySequence(Qt::ALT | Qt::Key_F2));
 
     // Create the view menu to hide and show toolbars.
     ui.menuToolbars->addAction(ui.toolBarNewActions->toggleViewAction());
@@ -5761,6 +5876,9 @@ void MainWindow::ExtendUI()
     statusBar()->addPermanentWidget(zoom_out);
     statusBar()->addPermanentWidget(m_slZoomSlider);
     statusBar()->addPermanentWidget(zoom_in);
+#if 0
+    // This was only needed for Bookview which is now gone
+
     // We override the default color for highlighted text
     // so we can actually *see* the text that the FindReplace
     // dialog finds in Book View... sadly, QWebView ignores a custom
@@ -5769,6 +5887,7 @@ void MainWindow::ExtendUI()
     palette.setColor(QPalette::Inactive, QPalette::Highlight, Qt::darkGreen);
     palette.setColor(QPalette::Inactive, QPalette::HighlightedText, Qt::white);
     qApp->setPalette(palette);
+#endif
     // Setup userdefined keyboard shortcuts for actions.
     KeyboardShortcutManager *sm = KeyboardShortcutManager::instance();
     // Note: shortcut action Ids should not be translated.
@@ -5823,6 +5942,8 @@ void MainWindow::ExtendUI()
     sm->registerAction(this, ui.actionReplacePrevious, "MainWindow.ReplacePrevious");
     sm->registerAction(this, ui.actionReplaceAll, "MainWindow.ReplaceAll");
     sm->registerAction(this, ui.actionCount, "MainWindow.Count");
+    sm->registerAction(this, ui.actionDryRun, "MainWindow.DryRunReplaceAll");
+    sm->registerAction(this, ui.actionFilterReplaceAll, "MainWindow.FilterReplaceAll");
     sm->registerAction(this, ui.actionMarkSelection, "MainWindow.MarkSelection");
     sm->registerAction(this, ui.actionFindNextInFile, "MainWindow.FindNextInFile");
     sm->registerAction(this, ui.actionReplaceNextInFile, "MainWindow.ReplaceNextInFile");
@@ -6080,16 +6201,25 @@ void MainWindow::changeEvent(QEvent *e)
                 }
 
                 DWINGEO {
-                    int numscreens = qApp->desktop()->numScreens();
+                    QScreen * srn = qApp->primaryScreen();
+                    qDebug() << "Primary Screen";
+                    qDebug() << "    geo        : " << srn->geometry();
+                    qDebug() << "    avail   geo: " << srn->availableGeometry();
+                    qDebug() << "    devideRatio: " << srn->devicePixelRatio();
+                    qDebug() << "    logical dpi: " << srn->logicalDotsPerInchX() << srn->logicalDotsPerInchY();
+                    qDebug() << "    physic  dpi: " << srn->physicalDotsPerInchX() << srn->physicalDotsPerInchY();
+
+                    qDebug() << "\n\nAll Screens";
+                    QList<QScreen*>screenlist = QGuiApplication::screens();
+                    int numscreens = screenlist.count();
                     for (int i = 0; i < numscreens; i++) {
                         qDebug() << "Screen: " << i;
-                        qDebug() << "    screen  geo: " << qApp->desktop()->screenGeometry(i);
-                        QScreen *srn = QApplication::screens().at(i);
-                        qDebug() << "    avail   geo: " << srn->availableGeometry();
-                        qDebug() << "    geo        : " << srn->geometry();
-                        qDebug() << "    devideRatio: " << srn->devicePixelRatio();
-                        qDebug() << "    logical dpi: " << srn->logicalDotsPerInchX() << srn->logicalDotsPerInchY();
-                        qDebug() << "    physic  dpi: " << srn->physicalDotsPerInchX() << srn->physicalDotsPerInchY();
+                        QScreen *asrn = screenlist.at(i);
+                        qDebug() << "    geo        : " << asrn->geometry();
+                        qDebug() << "    avail   geo: " << asrn->availableGeometry();
+                        qDebug() << "    devideRatio: " << asrn->devicePixelRatio();
+                        qDebug() << "    logical dpi: " << asrn->logicalDotsPerInchX() << srn->logicalDotsPerInchY();
+                        qDebug() << "    physic  dpi: " << asrn->physicalDotsPerInchX() << srn->physicalDotsPerInchY();
                     }
                 }
 
@@ -6171,20 +6301,24 @@ void MainWindow::ConnectSignalsToSlots()
     connect(ui.actionInsertHyperlink, SIGNAL(triggered()),  this,   SLOT(InsertHyperlink()));
     connect(ui.actionPreferences,     SIGNAL(triggered()), this, SLOT(PreferencesDialog()));
     // Search
-    connect(ui.actionFind,             SIGNAL(triggered()), this, SLOT(Find()));
-    connect(ui.actionFindNext,         SIGNAL(triggered()), m_FindReplace, SLOT(FindNext()));
-    connect(ui.actionFindPrevious,     SIGNAL(triggered()), m_FindReplace, SLOT(FindPrevious()));
-    connect(ui.actionReplaceCurrent,   SIGNAL(triggered()), m_FindReplace, SLOT(ReplaceCurrent()));
-    connect(ui.actionReplaceNext,      SIGNAL(triggered()), m_FindReplace, SLOT(ReplaceNext()));
-    connect(ui.actionReplacePrevious,  SIGNAL(triggered()), m_FindReplace, SLOT(ReplacePrevious()));
-    connect(ui.actionReplaceAll,       SIGNAL(triggered()), m_FindReplace, SLOT(ReplaceAll()));
-    connect(ui.actionCount,            SIGNAL(triggered()), m_FindReplace, SLOT(Count()));
-    connect(ui.actionFindNextInFile,   SIGNAL(triggered()), m_FindReplace, SLOT(FindNextInFile()));
+    connect(ui.actionFind,              SIGNAL(triggered()), this, SLOT(Find()));
+    connect(ui.actionFindNext,          SIGNAL(triggered()), m_FindReplace, SLOT(DoFindNext()));
+    connect(ui.actionFindPrevious,      SIGNAL(triggered()), m_FindReplace, SLOT(DoFindPrevious()));
+    connect(ui.actionReplaceNext,       SIGNAL(triggered()), m_FindReplace, SLOT(DoReplaceNext()));
+    connect(ui.actionReplacePrevious,   SIGNAL(triggered()), m_FindReplace, SLOT(DoReplacePrevious()));
+    connect(ui.actionReplaceCurrent,    SIGNAL(triggered()), m_FindReplace, SLOT(ReplaceCurrent()));
+    connect(ui.actionReplaceAll,        SIGNAL(triggered()), m_FindReplace, SLOT(ReplaceAll()));
+    connect(ui.actionCount,             SIGNAL(triggered()), m_FindReplace, SLOT(Count()));
+    connect(ui.actionDryRun,            SIGNAL(triggered()), m_FindReplace, SLOT(PerformDryRunReplace()));
+    connect(ui.actionFilterReplaceAll,  SIGNAL(triggered()), m_FindReplace, SLOT(ChooseReplacements()));
+    connect(ui.actionFindNextInFile,    SIGNAL(triggered()), m_FindReplace, SLOT(FindNextInFile()));
     connect(ui.actionReplaceNextInFile, SIGNAL(triggered()), m_FindReplace, SLOT(ReplaceNextInFile()));
-    connect(ui.actionReplaceAllInFile, SIGNAL(triggered()), m_FindReplace, SLOT(ReplaceAllInFile()));
+    connect(ui.actionReplaceAllInFile,  SIGNAL(triggered()), m_FindReplace, SLOT(ReplaceAllInFile()));
+    connect(ui.actionCountInFile,       SIGNAL(triggered()), m_FindReplace, SLOT(CountInFile()));
+
     connect(ui.actionMarkSelection,    SIGNAL(triggered()), this, SLOT(MarkSelection()));
-    connect(ui.actionCountInFile,      SIGNAL(triggered()), m_FindReplace, SLOT(CountInFile()));
     connect(ui.actionGoToLine,         SIGNAL(triggered()), this, SLOT(GoToLine()));
+
     // About
     connect(ui.actionUserGuide,     SIGNAL(triggered()), this, SLOT(UserGuide()));
     connect(ui.actionDonate,        SIGNAL(triggered()), this, SLOT(Donate()));
@@ -6286,23 +6420,25 @@ void MainWindow::ConnectSignalsToSlots()
             this,          SLOT(CreateSectionBreakOldTab(QString, HTMLResource *)));
     connect(m_FindReplace, SIGNAL(OpenSearchEditorRequest(SearchEditorModel::searchEntry *)),
             this,          SLOT(SearchEditorDialog(SearchEditorModel::searchEntry *)));
+    connect(m_FindReplace, SIGNAL(FROpenFileRequest(QString, int, int)), this, SLOT(OpenFile(QString, int, int)));
     connect(m_TabManager, SIGNAL(ShowStatusMessageRequest(const QString &, int)), this, SLOT(ShowMessageOnStatusBar(const QString &, int)));
+
     connect(m_FindReplace, SIGNAL(ShowMessageRequest(const QString &)),
             m_SearchEditor, SLOT(ShowMessage(const QString &)));
     connect(m_FindReplace,   SIGNAL(ClipboardSaveRequest()),     m_ClipboardHistorySelector,  SLOT(SaveClipboardState()));
     connect(m_FindReplace,   SIGNAL(ClipboardRestoreRequest()),  m_ClipboardHistorySelector,  SLOT(RestoreClipboardState()));
+
+    connect(m_SearchEditor, SIGNAL(FindSelectedSearchRequest()), m_FindReplace,   SLOT(FindSearch()));
+    connect(m_SearchEditor, SIGNAL(ReplaceCurrentSelectedSearchRequest()), m_FindReplace,   SLOT(ReplaceCurrentSearch()));
+    connect(m_SearchEditor, SIGNAL(ReplaceSelectedSearchRequest()), m_FindReplace,   SLOT(ReplaceSearch()));
+    connect(m_SearchEditor, SIGNAL(CountAllSelectedSearchRequest()), m_FindReplace,   SLOT(CountAllSearch()));
+    connect(m_SearchEditor, SIGNAL(ReplaceAllSelectedSearchRequest()), m_FindReplace,   SLOT(ReplaceAllSearch()));
     connect(m_SearchEditor, SIGNAL(LoadSelectedSearchRequest(SearchEditorModel::searchEntry *)),
             m_FindReplace,   SLOT(LoadSearch(SearchEditorModel::searchEntry *)));
-    connect(m_SearchEditor, SIGNAL(FindSelectedSearchRequest(QList<SearchEditorModel::searchEntry *>)),
-            m_FindReplace,   SLOT(FindSearch(QList<SearchEditorModel::searchEntry *>)));
-    connect(m_SearchEditor, SIGNAL(ReplaceCurrentSelectedSearchRequest(QList<SearchEditorModel::searchEntry *>)),
-            m_FindReplace,   SLOT(ReplaceCurrentSearch(QList<SearchEditorModel::searchEntry *>)));
-    connect(m_SearchEditor, SIGNAL(ReplaceSelectedSearchRequest(QList<SearchEditorModel::searchEntry *>)),
-            m_FindReplace,   SLOT(ReplaceSearch(QList<SearchEditorModel::searchEntry *>)));
-    connect(m_SearchEditor, SIGNAL(CountAllSelectedSearchRequest(QList<SearchEditorModel::searchEntry *>)),
-            m_FindReplace,   SLOT(CountAllSearch(QList<SearchEditorModel::searchEntry *>)));
-    connect(m_SearchEditor, SIGNAL(ReplaceAllSelectedSearchRequest(QList<SearchEditorModel::searchEntry *>)),
-            m_FindReplace,   SLOT(ReplaceAllSearch(QList<SearchEditorModel::searchEntry *>)));
+    connect(m_SearchEditor, SIGNAL(RestartSearch()), m_FindReplace, SLOT(DoRestart()));
+    connect(m_SearchEditor, SIGNAL(CountsReportCountRequest(SearchEditorModel::searchEntry*, int&)),
+            m_FindReplace, SLOT(CountsReportCount(SearchEditorModel::searchEntry*, int&)));
+
     connect(m_ClipboardHistorySelector, SIGNAL(PasteRequest(const QString &)), this, SLOT(PasteTextIntoCurrentTarget(const QString &)));
     connect(m_SelectCharacter, SIGNAL(SelectedCharacter(const QString &)), this, SLOT(PasteTextIntoCurrentTarget(const QString &)));
     connect(m_ClipEditor, SIGNAL(PasteSelectedClipRequest(QList<ClipEditorModel::clipEntry *>)),
@@ -6330,8 +6466,8 @@ void MainWindow::ConnectSignalsToSlots()
     connect(m_Reports,       SIGNAL(OpenFileRequest(QString, int, int)), this, SLOT(OpenFile(QString, int, int)));
     connect(m_Reports,       SIGNAL(DeleteFilesRequest(QStringList)), this, SLOT(DeleteFilenames(QStringList)));
     connect(m_Reports,       SIGNAL(DeleteStylesRequest(QList<BookReports::StyleData *>)), this, SLOT(DeleteReportsStyles(QList<BookReports::StyleData *>)));
-    connect(m_Reports,       SIGNAL(FindText(QString)), m_FindReplace, SLOT(FindAnyText(QString)));
-    connect(m_Reports,       SIGNAL(FindTextInTags(QString)), m_FindReplace, SLOT(FindAnyTextInTags(QString)));
+    connect(m_Reports,       SIGNAL(RPFindText(QString)), m_FindReplace, SLOT(FindAnyText(QString)));
+    connect(m_Reports,       SIGNAL(RPFindTextInTags(QString)), m_FindReplace, SLOT(FindAnyTextInTags(QString)));
 
     // Plugins
     PluginDB *pdb = PluginDB::instance();
@@ -6499,4 +6635,17 @@ void MainWindow::BreakTabConnections(ContentTab *tab)
     disconnect(ui.actionPrint,                     0, tab, 0);
     disconnect(ui.actionAddToIndex,                0, tab, 0);
     disconnect(ui.actionMarkForIndex,              0, tab, 0);
+}
+
+
+// Utility routines to help Find and Replace exchange info with the SearchEditor
+
+QList<SearchEditorModel::searchEntry*> MainWindow::SearchEditorGetCurrentEntries()
+{
+    return m_SearchEditor->GetCurrentEntries();
+}
+
+void MainWindow::SearchEditorRecordEntryAsCompleted(SearchEditorModel::searchEntry* entry)
+{
+    m_SearchEditor->RecordEntryAsCompleted(entry);
 }

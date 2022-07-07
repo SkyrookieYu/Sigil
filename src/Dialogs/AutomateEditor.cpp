@@ -49,7 +49,7 @@ static const QString _US = QString(QChar(31)); // Ascii Unit Separator
 AutomateEditor::AutomateEditor(const QString& automate_path, QWidget *parent)
   : QDialog(parent),
     m_mainWindow(qobject_cast<MainWindow *>(parent)),
-    m_RemoveRow(new QShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_Delete),this, 0, 0, Qt::WidgetWithChildrenShortcut)),
+    m_RemoveRow(new QShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_Delete),this, 0, 0, Qt::WidgetWithChildrenShortcut)),
     m_automate_path(automate_path)
 {
     setupUi(this);
@@ -117,6 +117,9 @@ QString AutomateEditor::GetAutomateList()
             if (cmd.startsWith("RunSavedSearchReplaceAll")) {
                 value = cmd.mid(25,-1).trimmed();
                 cmd = "RunSavedSearchReplaceAll";
+            } else if (cmd.startsWith("SetPluginParameter")) {
+                value = cmd.mid(19,-1).trimmed();
+                cmd = "SetPluginParameter";
             }
             autodata << cmd + _GS + "" + _US + value + _GS + "" + _RS;
         }
@@ -159,6 +162,9 @@ void AutomateEditor::selectTool()
     foreach(QString code, codes) {
         if (code == "RunSavedSearchReplaceAll") {
             QString content = tr("[SavedSearch full name here]");
+            insertRow(code, code, content, "");
+        } else if (code == "SetPluginParameter") {
+            QString content = tr("[String parameter for next Plugin run here]");
             insertRow(code, code, content, "");
         } else {
             insertRow(code, code, "", "");
@@ -309,11 +315,13 @@ void AutomateEditor::loadToolElements()
          "SetBookBrowserToAllHTML" << "SetBookBrowserToAllHTML" << tr("Select all HTML Files in BookBrowser") << 
          "SetBookBrowserToAllImages" << "SetBookBrowserToAllImages" << tr("Select all Image Files in BookBrowser") << 
          "SetBookBrowserToInitialSelection" << "SetBookBrowserToInitialSelection" << tr("Reset BookBrowser to its initial selection") <<
+         "SetPluginParameter" << "SetPluginParameter" << tr("set a string parameter to be passed to the next plugin.") <<
+
          "SplitOnSGFSectionMarkers" << "SplitOnSGFSectionMarkers" << tr("Split XHtml files on Sigil Section Markers") <<
          "StandardizeEpub" << "StandardizeEpub" << tr("Convert Epub layout to Sigil's historic Standard form.") <<
          "UpdateManifestProperties" << "UpdateManifestProperties" << tr("Update Epub3 OPF Manifest properties.") <<
          "ValidateStylesheetsWithW3C" << "ValidateStylesheetsWithW3C" << tr("Validate All Stylesheets with W3C in external browser.") <<
-         "WellFormedCheckEpub" << "WellFormedCheckEpub" << tr("Perform a basic Well-Fromed Check on Epub XHtml files.");
+         "WellFormedCheckEpub" << "WellFormedCheckEpub" << tr("Perform a basic Well-Formed Check on Epub XHtml files.");
     for (int i = 0; i < data.count(); i++) {
         QString name = data.at(i++);
         QString code = data.at(i++);

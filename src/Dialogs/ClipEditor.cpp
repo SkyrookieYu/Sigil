@@ -23,7 +23,7 @@
 *************************************************************************/
 
 #include <QtCore/QSignalMapper>
-#include <QtWidgets/QAction>
+#include <QAction>
 #include <QtGui/QContextMenuEvent>
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMenu>
@@ -191,8 +191,10 @@ bool ClipEditor::ItemsAreUnique(QList<QStandardItem *> items)
 {
     // Although saving a group and a sub item works, it could be confusing to users to
     // have and entry appear twice so its more predictable just to prevent it and warn the user
-    if (items.toSet().count() != items.count()) {
-    // In Qt 5.15 if (QSet<QStandardItem *>(items.begin(), items.end()).count() != items.count()) {
+    QList<QStandardItem *> nodupitems = items;
+    std::sort(nodupitems.begin(), nodupitems.end());
+    nodupitems.erase(std::unique(nodupitems.begin(), nodupitems.end()), nodupitems.end());
+    if (nodupitems.count() != items.count()) {
         Utility::DisplayStdErrorDialog(tr("You cannot select an entry and a group containing the entry."));
         return false;
     }
@@ -659,12 +661,12 @@ void ClipEditor::CreateContextMenuActions()
     m_CollapseAll = new QAction(tr("Collapse All"),       this);
     m_ExpandAll =   new QAction(tr("Expand All"),         this);
     m_AutoFill  =   new QAction(tr("Autofill"),           this);
-    m_AddEntry->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_E));
-    m_AddGroup->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_G));
+    m_AddEntry->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_E));
+    m_AddGroup->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_G));
     m_Edit->setShortcut(QKeySequence(Qt::Key_F2));
-    m_Cut->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_X));
-    m_Copy->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_C));
-    m_Paste->setShortcut(QKeySequence(Qt::ControlModifier + Qt::Key_V));
+    m_Cut->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_X));
+    m_Copy->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_C));
+    m_Paste->setShortcut(QKeySequence(Qt::ControlModifier | Qt::Key_V));
     m_Delete->setShortcut(QKeySequence::Delete);
     // Has to be added to the dialog itself for the keyboard shortcut to work.
     addAction(m_AddEntry);
